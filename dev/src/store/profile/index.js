@@ -6,7 +6,8 @@ import axios from 'axios';
 export default {
   namespaced: true,
   state: {
-    profile: defaultProfile
+    profile: defaultProfile,
+    roles: ['admin', 'manager', 'courier']
   },
   mutations: {
     set(state, payload) {
@@ -25,7 +26,7 @@ export default {
     async create({
       commit
     }, payload) {
-      const data = requestDataHandler('POST', 'http://localhost:3000/profile/create', payload);
+      const data = requestDataHandler('POST', '/profile/create', payload);
 
       const result = await axios(data);
 
@@ -83,6 +84,9 @@ export default {
   getters: {
     get(state) {
       return state.profile;
+    },
+    getRoles(state) {
+      return state.roles;
     }
   }
 };

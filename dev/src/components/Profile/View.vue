@@ -147,17 +147,10 @@
 				v-card(v-if="adminAccess")
 					v-card-text
 						v-select(
-							:items="['admin', 'manager']"
+							:items="roles"
 							item-text="title"
 							label="Роль:"
 							v-model="profile.role"
-							required
-						)
-						v-select(
-							:items="[9999, 1]"
-							item-text="title"
-							label="Ранг:"
-							v-model="profile.rang"
 							required
 						)
 		v-dialog(
@@ -240,6 +233,9 @@ export default {
   },
 
   computed: {
+    roles() {
+      return this.$store.getters["profile/getRoles"];
+    },
     slugErrors() {
       const errors = [];
       if (!this.$v.profile.slug.$dirty) return errors;

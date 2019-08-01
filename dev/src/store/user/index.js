@@ -40,7 +40,7 @@ export default {
         }
       }
 
-      const data = requestDataHandler('GET', 'http://localhost:3000/user/queryAll', undefined, params);
+      const data = requestDataHandler('GET', '/user/queryAll', undefined, params);
       const result = await axios(data);
 
       if (result !== undefined) {
