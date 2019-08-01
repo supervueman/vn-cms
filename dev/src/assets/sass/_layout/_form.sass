@@ -1,0 +1,40 @@
+.form
+	@extend %base-layout
+	border-radius: $border-radius
+	border: 1px solid $dark-color
+	background-color: $light-color
+	&--wrapper
+		@extend %base-layout--wrapper
+	&--inner
+		@extend %base-layout--inner
+	&--header
+		@extend %base-layout--header
+		padding: $gap / 2 $gap
+	&--content
+		@extend %base-layout--content
+		padding: $gap / 2 0
+	&--group
+		display: flex
+		width: 100%
+		align-items: center
+	&--element
+		padding: $gap / 2 $gap
+		flex: 1
+	&--actions
+		@extend %base-layout--actions
+		justify-content: flex-end
+		padding: $gap
+		margin-top: $gap / 2
+	&--button
+		@extend %base-layout--button
+		@include button-colorize($dark-color, $light-color, $dark-color, $dark-color, $dark-color, $light-color)
+	&--title
+		@extend %base-layout--title
+		font-size: 1.2em
+		margin: $gap / 2 0 $gap / 2 0
+		color: $dark-color
+	&--subtitle
+		@extend %base-layout--subtitle
+		color: $dark-color
+		font-size: 0.9em
+		margin: 0

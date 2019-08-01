@@ -1,0 +1,22 @@
+%button
+	font-size: 1em
+	cursor: pointer
+	text-align: center
+	display: flex
+	align-items: center
+	justify-content: center
+	height: 40px
+	padding: 0 $gap
+	border-width: 1px
+	border-style: solid
+	border-radius: $border-radius
+	transition: border-color 0.5s ease, color 0.5s ease, background-color 0.5s ease
+
+.button
+	@extend %button
+	@include button-colorize($light-color, $dark-color, $light-color, $light-color, $light-color, $dark-color)
+
+	@include respond-to(medium)
+		font-size: 0.8em
+	@include respond-to(small)
+		font-size: 0.6em

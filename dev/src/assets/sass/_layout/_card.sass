@@ -1,0 +1,52 @@
+.card
+	@extend %base-layout
+	border-radius: $border-radius
+	border: 1px solid $dark-color
+	background-color: $light-color
+	&--wrapper
+		@extend %base-layout--wrapper
+	&--inner
+		@extend %base-layout--inner
+	&--media
+		@extend %base-layout--media
+		margin-bottom: $gap / 2
+	&--header
+		@extend %base-layout--header
+		padding: $gap / 2 $gap
+	&--content
+		@extend %base-layout--content
+		padding: $gap / 2 $gap
+	&--icons
+		@extend %base-layout--icons
+		padding: $gap / 2 $gap
+	&--icon
+		@extend %base-layout--icon
+	&--actions
+		@extend %base-layout--actions
+		border-top: 1px solid $dark-color
+		margin-top: $gap / 2
+	&--button
+		@extend %base-layout--button
+		@include button-colorize($light-color, $dark-color, $light-color, $dark-color, $light-color, $dark-color)
+		flex: 1
+		border-radius: 0
+	&--title
+		@extend %base-layout--title
+		font-size: 1.2em
+		margin: 0 0 $gap / 2 0
+		color: $dark-color
+	&--subtitle
+		@extend %base-layout--subtitle
+		color: $dark-color
+		font-size: 0.9em
+		margin: 0
+
+a.card
+	cursor: pointer
+	.card--media
+		img
+			transition: transform 0.5s ease
+	@include on-event
+		.card--media
+			img
+				transform: scale(1.2)

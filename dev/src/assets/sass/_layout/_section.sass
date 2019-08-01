@@ -1,0 +1,81 @@
+.section
+	@extend %base-layout
+	padding: $gap * 5 0
+	width: 100%
+	background-color: $light-color
+	&--wrapper
+		@extend %base-layout--wrapper
+		align-items: flex-start
+		z-index: z(content)
+	&--inner
+		@extend %base-layout--inner
+		flex-direction: row
+	&--item
+		width: 50%
+		display: flex
+		align-items: center
+		&-gap
+			padding: 0 $gap * 5
+		&-gap_right
+			padding-right: $gap * 5
+		&-gap_left
+			padding-left: $gap * 5
+	&--media
+		@extend %base-layout--media
+		margin-bottom: $gap / 2
+		height: auto
+		border-radius: $border-radius
+		display: flex
+		align-items: center
+		justify-content: center
+		&_absolute
+			@include absolute-location
+			width: 100%
+			height: 100%
+			overflow: hidden
+			z-index: z(media-absolute)
+			border-radius: 0
+	&--header
+		@extend %base-layout--header
+		padding: $gap / 2 0 $gap * 2 0
+	&--content
+		@extend %base-layout--content
+		padding: 0
+	&--icons
+		@extend %base-layout--icons
+		padding: $gap / 2 0
+	&--icon
+		@extend %base-layout--icon
+	&--actions
+		@extend %base-layout--actions
+		margin-top: $gap * 3
+		justify-content: center
+	&--button
+		@extend %base-layout--button
+		@include button-colorize($dark-color, $dark-color, $light-color, $dark-color, $light-color, $dark-color)
+	&--link
+		@extend %base-layout--link
+		margin: $gap 0
+		@include link-colorize($dark-color, $dark-color)
+		&-active
+			@include link-colorize($dark-color, $dark-color)
+	&--title
+		@extend %base-layout--title
+		font-size: 2.1em
+		margin: 0 0 $gap / 2 0
+		color: $dark-color
+	&--subtitle
+		@extend %base-layout--subtitle
+		color: $dark-color
+		font-size: 1.2em
+		margin: 0 0 $gap 0
+
+	// Производные
+	&--full-screen
+		height: 100vh
+		display: flex
+		align-items: center
+	&--background
+		background-size: cover
+		background-position: center
+		background-repeat: no-repeat

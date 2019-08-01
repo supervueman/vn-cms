@@ -1,0 +1,22 @@
+{
+  "name": "dashboard-admin-panel-blog",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "client:dev": "cd dev && npm run serve",
+    "server:dev": "cd server && npm start",
+    "start:dev": "npm run client:dev & npm run server:dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@gitlab.com/multicms/platform-cms.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/multicms/platform-cms/issues"
+  },
+  "homepage": "https://gitlab.com/multicms/platform-cms#readme"
+}
