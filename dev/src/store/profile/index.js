@@ -55,8 +55,6 @@ export default {
 
       const result = await axios(data);
 
-      console.log(result)
-
       if (result !== undefined) {
         this.dispatch('profile/set', result.data);
         this.dispatch("notification/fetch", {

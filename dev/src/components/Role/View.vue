@@ -10,7 +10,6 @@
                 v-text-field(
                   v-model="role.slug"
                   label="Псевдоним:"
-                  required
                   @input="$v.role.slug.$touch()"
                   @blur="$v.role.slug.$touch()"
                   :error-messages="slugErrors"
@@ -18,7 +17,6 @@
                 v-text-field(
                   v-model="role.title"
                   label="Наименование:"
-                  required
                   @input="$v.role.title.$touch()"
                   @blur="$v.role.title.$touch()"
                   :error-messages="titleErrors"
@@ -26,7 +24,6 @@
                 v-text-field(
                   v-model="role.rang"
                   label="Ранг:"
-                  required
                 )
 
     v-card(v-if="adminAccess")
