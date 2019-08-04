@@ -40,15 +40,6 @@ export default {
     }
   },
 
-  data() {
-    return {
-      panelName: "panel-layout-base-data",
-      menu: false,
-      isRemoveDialog: false,
-      tab: null
-    };
-  },
-
   computed: {
     layout() {
       return this.$store.getters["layout/get"];

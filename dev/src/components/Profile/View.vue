@@ -78,14 +78,14 @@
 									required
 								)
 				//- Ключи
-				v-expansion-panel(expand v-if="(adminAccess || managerAccess) && operationType === 'update'")
+				v-expansion-panel(expand v-if="operationType === 'update'")
 					v-expansion-panel-content
 						template(v-slot:header)
 							div Ключи
 						v-card
 							v-card-text
 								v-flex.md12
-									div Api key: sdfew45frs4e3qwvfdrt5e4rt354tvfds
+									div Api key: {{profile.token}}
 				//- Изменение пароля
 				password-change(v-if="operationType === 'update'")
 				//- Создание пароля
@@ -150,6 +150,8 @@
 							:items="roles"
 							item-text="title"
 							label="Роль:"
+							return-object
+							@change="profile.roleId = $event.id"
 							v-model="profile.role"
 							required
 						)
@@ -234,7 +236,7 @@ export default {
 
   computed: {
     roles() {
-      return this.$store.getters["profile/getRoles"];
+      return this.$store.getters["role/getAll"];
     },
     slugErrors() {
       const errors = [];

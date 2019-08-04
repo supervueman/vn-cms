@@ -2,6 +2,9 @@ const Sequelize = require('sequelize');
 const SequelizeTokenify = require('sequelize-tokenify');
 const sequelize = require('../util/database');
 
+// Models
+const Role = require('./role');
+
 const User = sequelize.define('user', {
   id: {
     type: Sequelize.INTEGER,
@@ -20,8 +23,6 @@ const User = sequelize.define('user', {
     isEmail: true,
     notEmpty: true
   },
-  role: Sequelize.STRING,
-  rang: Sequelize.INTEGER,
   phone: Sequelize.STRING,
   firstname: Sequelize.STRING,
   lastname: Sequelize.STRING,
@@ -41,5 +42,7 @@ const User = sequelize.define('user', {
 });
 
 SequelizeTokenify.tokenify(User);
+
+User.belongsTo(Role);
 
 module.exports = User;

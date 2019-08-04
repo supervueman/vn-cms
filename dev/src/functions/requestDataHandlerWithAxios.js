@@ -23,7 +23,8 @@ export default (method, url, data, params) => {
     method,
     url,
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'x-access-token': access_token
     }
   }
 
@@ -38,7 +39,7 @@ export default (method, url, data, params) => {
     requestData.params = params;
   }
   if (isAccessToken) {
-    requestData.headers.Authorization = access_token;
+    requestData.headers.Authorization = `Basic ${new Buffer('multikey.studio' + ':' + 'multikeypassword').toString('base64')}`;
   }
 
   return requestData;

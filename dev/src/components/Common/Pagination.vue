@@ -15,6 +15,10 @@ export default {
     itemsLength: {
       type: Number,
       default: 0
+    },
+    limit: {
+      type: Number,
+      default: 5
     }
   },
   data() {
@@ -22,7 +26,6 @@ export default {
       pagination: {
         page: this.$route.query.skip / this.$route.query.limit || 1
       },
-      limit: 5,
       skip: 5
     };
   },

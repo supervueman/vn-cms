@@ -89,11 +89,13 @@ export default {
       if (this.$v.$error) {
         return;
       }
+
       const data = {
         email: this.email,
         password: this.password
       };
-      await this.$store.dispatch("authenticate/signin", data);
+
+      await this.$store.dispatch("authenticate/login", data);
 
       this.$router.push("/profile");
     }

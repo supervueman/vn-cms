@@ -1,5 +1,5 @@
 <template lang="pug">
-  v-layout(v-if="adminAccess")
+  v-layout(v-if="adminAccess || managerAccess")
     v-flex
       .body-2.mb-5 Пользователи
         v-layout.wrap.pt-5

@@ -11,6 +11,7 @@ import filesystem from './filesystem';
 import layout from './layout';
 import field from './field';
 import user from './user';
+import role from './role';
 
 export const store = new Vuex.Store({
   modules: {
@@ -21,6 +22,7 @@ export const store = new Vuex.Store({
     filesystem,
     layout,
     field,
-    user
+    user,
+    role
   }
 });

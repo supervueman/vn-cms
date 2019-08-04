@@ -7,7 +7,6 @@ export default {
   namespaced: true,
   state: {
     profile: defaultProfile,
-    roles: ['admin', 'manager', 'courier']
   },
   mutations: {
     set(state, payload) {
@@ -18,9 +17,13 @@ export default {
     async fetch({
       commit
     }) {
-      await setTimeout(() => {
-        commit('set', profile);
-      }, 1500);
+      const data = requestDataHandler('GET', '/profile/fetch');
+
+      const result = await axios(data);
+
+      if (result !== undefined) {
+        commit('set', result.data);
+      }
     },
 
     async create({
@@ -48,13 +51,26 @@ export default {
     async update({
       commit
     }, payload) {
-      await setTimeout(() => {
+      const data = requestDataHandler('PUT', '/profile/update', payload);
+
+      const result = await axios(data);
+
+      console.log(result)
+
+      if (result !== undefined) {
+        this.dispatch('profile/set', result.data);
         this.dispatch("notification/fetch", {
           type: "success",
-          message: `Успешно сохранено!`,
+          message: 'Успешно сохранено!',
           isActive: true
         });
-      }, 1500);
+      } else {
+        this.dispatch("notification/fetch", {
+          type: "error",
+          message: 'Произошла ошибка при сохранении!',
+          isActive: true
+        });
+      }
     },
 
     async remove({
@@ -72,7 +88,7 @@ export default {
     set({
       commit
     }, payload) {
-      commit('set', profile);
+      commit('set', payload);
     },
 
     clear({
@@ -85,8 +101,5 @@ export default {
     get(state) {
       return state.profile;
     },
-    getRoles(state) {
-      return state.roles;
-    }
   }
 };

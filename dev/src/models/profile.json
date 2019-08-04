@@ -1,8 +1,8 @@
 {
-  "id": "",
+  "id": 0,
   "slug": "",
   "email": "",
-  "role": "",
+  "role": {},
   "phone": "",
   "firstname": "",
   "lastname": "",
@@ -11,5 +11,6 @@
   "facebook": "",
   "vkontakte": "",
   "instagram": "",
-  "password": ""
+  "password": "",
+  "token": ""
 }

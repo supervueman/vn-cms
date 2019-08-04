@@ -7,7 +7,7 @@
 				:message="notification.message"
 			)
 		toolbar(
-			:profileId="profile.id"
+			:profileId="String(profile.id)"
 			:firstname="profile.firstname"
 			:lastname="profile.lastname"
 			:image="profile.image"
@@ -33,6 +33,7 @@ export default {
   },
   async beforeCreate() {
     await this.$store.dispatch("profile/fetch");
+    await this.$store.dispatch("role/findAll");
     if (this.adminAccess || this.managerAccess) {
       if (this.$route.fullPath === "/login") {
         this.$router.back();
