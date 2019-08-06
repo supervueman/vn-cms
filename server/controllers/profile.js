@@ -1,10 +1,8 @@
 const bcrypt = require('bcrypt');
 const validator = require('validator');
-const jwt = require('jsonwebtoken');
 
 // Models
 const User = require('../models/user');
-const Role = require('../models/role');
 
 module.exports = {
   async findByAccessToken(req, res) {
@@ -24,13 +22,13 @@ module.exports = {
       });
     }
 
-    const existingUser = await User.findOne({
+    const existUser = await User.findOne({
       where: {
         email: req.body.email
       }
     });
 
-    if (existingUser) {
+    if (existUser) {
       res.status(401).send({
         message: 'User is exist!'
       });
@@ -60,7 +58,7 @@ module.exports = {
       });
 
       if (createdUser) {
-        res.status(201).send(createdUser);
+        res.status(200).send(createdUser);
       }
     } catch (err) {
       res.status(401).send({

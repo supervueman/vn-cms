@@ -9,7 +9,7 @@ const access = require('../middleware/access');
 const profileByAccessToken = require('../middleware/profileByAccessToken');
 const profileByApiKey = require('../middleware/profileByApiKey');
 
-router.get('/', access, profileByAccessToken, profileController.findByAccessToken);
+router.get('/', profileByAccessToken, profileController.findByAccessToken);
 
 router.post('/create', profileByApiKey, profileController.create);
 
