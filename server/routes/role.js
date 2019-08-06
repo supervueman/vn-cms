@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-// Models
+// Controllers
 const roleController = require('../controllers/role');
 
 // Middleware

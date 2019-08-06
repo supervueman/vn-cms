@@ -55,7 +55,11 @@ async function connect() {
     res.status(500);
   }
 
-  let adminRole = await Role.findbyPk(1);
+  let adminRole = await Role.findOne({
+    where: {
+      slug: process.env.ADMIN_SLUG
+    }
+  });
 
   if (!adminRole) {
     adminRole = await Role.create({
@@ -65,7 +69,11 @@ async function connect() {
     });
   }
 
-  let admin = await User.findByPk(1);
+  let admin = await User.findOne({
+    where: {
+      slug: process.env.ADMIN_SLUG
+    }
+  });
 
   if (!admin) {
     let passwordHw = await bcrypt.hash(process.env.ADMIN_PASSWORD, 12);
@@ -84,5 +92,3 @@ async function connect() {
 }
 
 connect();
-
-// .sync({ force: true })

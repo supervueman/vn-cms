@@ -75,7 +75,6 @@ module.exports = {
 
   async update(req, res) {
     const updateProfileData = req.body;
-
     delete updateProfileData.password;
     delete updateProfileData.token;
     delete updateProfileData.id;

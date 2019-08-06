@@ -1,9 +1,14 @@
+// Handlers
+const accessHandler = require('../handlers/access');
+
 // Models
 const User = require('../models/user');
 const Role = require('../models/Role');
 
 module.exports = async (req, res, next) => {
-  if (req.headers['x-api-key'] === 'null' || req.headers['x-api-key'] === '') {
+  const apiKey = req.headers['x-api-key'];
+  const isApiKey = apiKey !== null && apiKey !== undefined && apiKey !== '' && apiKey !== 'null';
+  if (!isApiKey) {
     return next();
   }
 
@@ -21,13 +26,8 @@ module.exports = async (req, res, next) => {
   }
 
   req.profile = profile;
-  if (profile.role.slug === 'admin') {
-    req.adminAccess = true;
-  } else if (profile.role.slug === 'manager') {
-    req.managerAccess = true;
-  } else {
-    req.otherAccess = true;
-  }
+
+  accessHandler(req, profile.role.slug);
 
   next();
 }
