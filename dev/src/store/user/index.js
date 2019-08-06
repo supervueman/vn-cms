@@ -1,12 +1,27 @@
-import user from '@/fakers/manager';
-import defaultUser from '@/models/profile';
 import requestDataHandler from '@/functions/requestDataHandlerWithAxios';
 import axios from 'axios';
 
 export default {
   namespaced: true,
   state: {
-    user: defaultUser,
+    user: {
+      id: 0,
+      slug: '',
+      email: '',
+      role: {},
+      roleId: 0,
+      phone: '',
+      firstname: '',
+      lastname: '',
+      middlename: '',
+      image: '',
+      facebook: '',
+      vkontakte: '',
+      instagram: '',
+      password: '',
+      token: '',
+      userId: ''
+    },
     users: [],
     count: 0
   },
@@ -22,15 +37,85 @@ export default {
     }
   },
   actions: {
-    async fetch({
+    async findByPk({
       commit
     }, payload) {
-      setTimeout(() => {
-        commit('set', user);
-      }, 1500);
+      const data = requestDataHandler('GET', `/users/user/${payload}`);
+
+      const result = await axios(data);
+
+      if (result !== undefined) {
+        commit('set', result.data);
+      }
     },
 
-    async fetchAll({
+    // Test
+    async findOne({
+      commit
+    }, payload) {
+      const data = requestDataHandler('GET', '/users/findone', undefined, {
+        filter: {
+          where: {
+            email: 'ahmed@gmail.com'
+          }
+        }
+      });
+
+      const result = await axios(data);
+
+      if (result !== undefined) {
+        console.log(result)
+      }
+    },
+
+    async update({
+      commit
+    }, payload) {
+      const data = requestDataHandler('PUT', '/users/update', payload);
+
+      const result = await axios(data);
+
+      if (result !== undefined) {
+        this.dispatch("notification/fetch", {
+          type: "success",
+          message: 'Успешно сохранено!',
+          isActive: true
+        });
+        commit('set', result.data);
+      } else {
+        this.dispatch("notification/fetch", {
+          type: "error",
+          message: 'Произошла ошибка при сохранении!',
+          isActive: true
+        });
+      }
+    },
+
+    async remove({
+      commit
+    }, payload) {
+      const data = requestDataHandler('DELETE', '/users/remove', {
+        id: payload
+      });
+
+      const result = await axios(data);
+
+      if (result !== undefined) {
+        this.dispatch("notification/fetch", {
+          type: "success",
+          message: 'Успешно удалено!',
+          isActive: true
+        });
+      } else {
+        this.dispatch("notification/fetch", {
+          type: "error",
+          message: 'Произошла ошибка при удалении!',
+          isActive: true
+        });
+      }
+    },
+
+    async findAll({
       commit
     }, payload) {
       const params = {
@@ -40,7 +125,7 @@ export default {
         }
       }
 
-      const data = requestDataHandler('GET', '/user/queryAll', undefined, params);
+      const data = requestDataHandler('GET', '/users', undefined, params);
       const result = await axios(data);
 
       if (result !== undefined) {
@@ -52,13 +137,30 @@ export default {
     set({
       commit
     }, payload) {
-      commit('set', user);
+      commit('set', payload);
     },
 
     clear({
       commit
     }) {
-      commit('set', defaultUser)
+      commit('set', {
+        id: 0,
+        slug: '',
+        email: '',
+        role: {},
+        roleId: 0,
+        phone: '',
+        firstname: '',
+        lastname: '',
+        middlename: '',
+        image: '',
+        facebook: '',
+        vkontakte: '',
+        instagram: '',
+        password: '',
+        token: '',
+        userId: ''
+      })
     }
   },
   getters: {

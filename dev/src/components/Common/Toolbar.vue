@@ -12,7 +12,7 @@
 				div.body-1.mr-3 {{ firstname }} {{lastname}}
 				v-avatar.mr-3(size="40" color="grey lighten-4")
 					img(:src="`${imgFolderBasePath}/${image}`")
-			v-menu(offset-y v-if="adminAccess")
+			v-menu(offset-y v-if="isAuth")
 				v-btn(
 					flat
 					icon
@@ -20,7 +20,7 @@
 				)
 					v-icon settings
 				v-list
-					v-list-tile(to="/roles")
+					v-list-tile(to="/roles" v-if="adminAccess")
 						v-list-tile-title Политики доступа
 					v-list-tile(@click="logout")
 						v-list-tile-title Выход

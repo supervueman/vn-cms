@@ -1,30 +1,32 @@
+// Helpers
+const filterHandler = require('../handlers/filterHandler');
+
+// Models
 const User = require('../models/user');
-const jwt = require('jsonwebtoken');
+const Role = require('../models/role');
 
 module.exports = {
-  async queryAll(req, res) {
-    if (req.headers['x-access-token'] === 'null' || req.headers['x-access-token'] === '') {
+  async findAll(req, res) {
+    if (!req.profile) {
       res.status(401).send({
-        message: 'Access token is not valid!'
-      });
-    }
-    const decoded = await jwt.verify(req.headers['x-access-token'], process.env.SECRET_KEY_FOR_JWT);
-
-    if (!decoded) {
-      res.status(401).send({
-        message: 'Not authorized!'
+        message: 'Пользователь не найден!'
       });
     }
 
-    const profile = await User.findByPk(decoded.uid);
+    const filter = filterHandler(req.query.filter);
 
-    const filter = JSON.parse(req.query.filter);
-
-    if (profile.role !== 'admin') {
-      filter.where = {
-        parentId: profile.id
+    if (req.managerAccess) {
+      if (filter.where) {
+        filter.where.userId = req.profile.id;
+      } else {
+        filter.where = {
+          userId: req.profile.id
+        }
       }
     }
+    filter.include = [{
+      model: Role
+    }];
 
     const users = await User.findAll(filter);
 
@@ -33,11 +35,136 @@ module.exports = {
       el.token = '';
     });
 
-    const count = await User.count();
+    const count = await User.count(filter);
 
     res.send({
       users,
       count
     });
+  },
+
+  async findByPk(req, res) {
+    if (!req.profile) {
+      res.status(401).send({
+        message: 'Пользователь не найден!'
+      });
+    }
+
+    const user = await User.findByPk(req.params.id, {
+      include: [{
+        model: Role
+      }]
+    });
+    user.password = '';
+
+    if (!user) {
+      res.status(404).send({
+        message: 'Пользователь не найден!'
+      });
+    }
+
+    if (req.managerAccess && user.userId === req.profile.id || req.adminAccess) {
+      res.status(200).send(user);
+    } else {
+      res.status(401).send({
+        message: 'Данные не доступны!'
+      });
+    }
+  },
+
+  async findone(req, res) {
+    if (!req.profile) {
+      res.status(401).send({
+        message: 'Пользователь не найден!'
+      });
+    }
+
+    const filter = filterHandler(req.query.filter);
+
+    const user = await User.findOne(filter);
+    user.password = '';
+
+    if (!user) {
+      res.status(404).send({
+        message: 'Пользователь не найден!'
+      });
+    }
+
+    if (req.managerAccess && user.userId === req.profile.id || req.adminAccess) {
+      res.status(200).send(user);
+    } else {
+      res.status(401).send({
+        message: 'Данные не доступны!'
+      });
+    }
+  },
+
+  async update(req, res) {
+    if (!(req.adminAccess || req.managerAccess)) {
+      res.status(401).send({
+        message: 'Нет доступа для редактирования!'
+      });
+    }
+
+    const existUser = await User.findByPk(req.body.id);
+
+    if (!existUser) {
+      res.status(401).send({
+        message: 'Не найдено!'
+      });
+    }
+
+    const reqUser = req.body;
+    delete reqUser.id;
+    delete reqUser.password;
+    delete reqUser.token;
+
+    if (req.managerAccess && existUser.userId === req.profile.id || req.adminAccess) {
+      const updatedUser = await existUser.update(reqUser);
+      const user = await User.findByPk(updatedUser.id, {
+        include: [{
+          model: Role
+        }]
+      });
+      delete user.password;
+
+      res.status(200).send(user);
+    } else {
+      res.status(401).send({
+        message: 'Не найдено!'
+      });
+    }
+  },
+
+  async remove(req, res) {
+    if (!(req.adminAccess || req.managerAccess)) {
+      res.status(401).send({
+        message: 'Нет доступа для редактирования!'
+      });
+    }
+
+    const existUser = await User.findByPk(req.body.id);
+
+    if (!existUser) {
+      res.status(401).send({
+        message: 'Не найдено!'
+      });
+    }
+
+    if (req.managerAccess && existUser.userId === req.profile.id || req.adminAccess) {
+      await existUser.destroy({
+        where: {
+          id: req.body.id
+        }
+      });
+
+      res.status(200).send({
+        message: 'Пользователь успешно удален!'
+      });
+    } else {
+      res.status(401).send({
+        message: 'Не найдено!'
+      });
+    }
   }
 }

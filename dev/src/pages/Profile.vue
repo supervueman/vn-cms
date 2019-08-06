@@ -25,6 +25,10 @@ export default {
     profile() {
       return this.$store.getters["profile/get"];
     }
+  },
+
+  async mounted() {
+    await this.$store.dispatch("role/findAll");
   }
 };
 </script>

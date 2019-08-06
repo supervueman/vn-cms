@@ -7,11 +7,27 @@ const User = require('../models/user');
 const Role = require('../models/role');
 
 module.exports = {
+  async findByAccessToken(req, res) {
+    if (!req.profile) {
+      res.status(401).send({
+        message: 'Пользователь не найден!'
+      });
+    }
+
+    res.status(200).send(req.profile);
+  },
+
   async create(req, res) {
+    if (!(req.adminAccess || req.managerAccess)) {
+      res.status(401).send({
+        message: 'Нет доступа для создания пользователя!'
+      });
+    }
+
     const existingUser = await User.findOne({
       where: {
         email: req.body.email
-      },
+      }
     });
 
     if (existingUser) {
@@ -39,13 +55,12 @@ module.exports = {
     try {
       const createdUser = await User.create({
         ...req.body,
-        password: hashedPw
+        password: hashedPw,
+        userId: req.profile.id
       });
 
       if (createdUser) {
-        res.status(201).send({
-          message: 'User create success!'
-        });
+        res.status(201).send(createdUser);
       }
     } catch (err) {
       res.status(401).send({
@@ -58,62 +73,41 @@ module.exports = {
     });
   },
 
-  async fetch(req, res) {
-    if (req.headers['x-access-token'] === 'null' || req.headers['x-access-token'] === '') {
-      res.status(401).send({
-        message: 'Access token is not valid!'
-      });
-    }
-
-    const decoded = await jwt.verify(req.headers['x-access-token'], process.env.SECRET_KEY_FOR_JWT);
-
-    if (!decoded) {
-      res.status(401).send({
-        message: 'Not authorized!'
-      });
-    }
-
-    const profile = await User.findByPk(decoded.uid, {
-      include: [{
-        model: Role
-      }]
-    });
-    profile.password = '';
-
-    res.status(200).send(profile);
-  },
-
   async update(req, res) {
-    if (req.headers['x-access-token'] === 'null' || req.headers['x-access-token'] === '') {
-      res.status(401).send({
-        message: 'Access token is not valid!'
-      });
-    }
-
-    const decoded = await jwt.verify(req.headers['x-access-token'], process.env.SECRET_KEY_FOR_JWT);
-
-    if (!decoded) {
-      res.status(401).send({
-        message: 'Not authorized!'
-      });
-    }
-
-    const updateProfileData = req.body
+    const updateProfileData = req.body;
 
     delete updateProfileData.password;
     delete updateProfileData.token;
     delete updateProfileData.id;
     delete updateProfileData.role;
 
-    const profile = await User.findByPk(decoded.uid, {
-      include: [{
-        model: Role
-      }]
+    if (!req.profile) {
+      res.status(401).send({
+        message: 'Пользователь не найден!'
+      });
+    }
+
+    req.profile.update(updateProfileData);
+    req.profile.password = '';
+
+    res.status(200).send(req.profile);
+  },
+
+  async remove(req, res) {
+    if (!req.profile) {
+      res.status(401).send({
+        message: 'Пользователь не найден!'
+      });
+    }
+
+    await User.destroy({
+      where: {
+        id: req.profile.id
+      }
     });
 
-    profile.update(updateProfileData);
-    profile.password = '';
-
-    res.status(200).send(profile);
+    res.status(204).send({
+      message: 'Успешно удалено!'
+    });
   }
 }

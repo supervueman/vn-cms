@@ -7,7 +7,7 @@ const roleController = require('../controllers/role');
 // Middleware
 const access = require('../middleware/access');
 
-router.get('/', roleController.findAll);
+router.get('/', access, roleController.findAll);
 
 router.get('/role/:id', roleController.findByPk);
 

@@ -124,10 +124,6 @@ export default {
      * @async
      * Функция для создания роли
      * вызывает action {@link store/role/create}
-     * TODO: после удачного создания роли
-     * делать редирект на саму роль получая ее
-     * данные через {@link store/role/fetch} для
-     * дальнейшего редактирования
      */
     async create() {
       this.$v.$touch();

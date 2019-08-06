@@ -80,6 +80,10 @@ export default {
     }
   },
 
+  async mounted() {
+    await this.$store.dispatch("role/findAll");
+  },
+
   methods: {
     async remove() {
       await this.$store.dispatch("role/remove", this.removeItem.id);

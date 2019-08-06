@@ -1,12 +1,48 @@
-import profile from '@/fakers/admin';
-import defaultProfile from '@/models/profile';
 import requestDataHandler from '@/functions/requestDataHandlerWithAxios';
 import axios from 'axios';
+
+const profile = {
+  id: 0,
+  slug: '',
+  email: '',
+  role: {},
+  roleId: 0,
+  phone: '',
+  firstname: '',
+  lastname: '',
+  middlename: '',
+  image: '',
+  facebook: '',
+  vkontakte: '',
+  instagram: '',
+  password: '',
+  token: '',
+  userId: ''
+};
+
+const clearProfile = {
+  id: 0,
+  slug: '',
+  email: '',
+  role: {},
+  roleId: 0,
+  phone: '',
+  firstname: '',
+  lastname: '',
+  middlename: '',
+  image: '',
+  facebook: '',
+  vkontakte: '',
+  instagram: '',
+  password: '',
+  token: '',
+  userId: ''
+};
 
 export default {
   namespaced: true,
   state: {
-    profile: defaultProfile,
+    profile
   },
   mutations: {
     set(state, payload) {
@@ -14,14 +50,15 @@ export default {
     }
   },
   actions: {
-    async fetch({
+    async findByAccessToken({
       commit
     }) {
-      const data = requestDataHandler('GET', '/profile/fetch');
+      const data = requestDataHandler('GET', '/profile');
 
       const result = await axios(data);
 
       if (result !== undefined) {
+        localStorage.setItem('x-api-key', result.data.token);
         commit('set', result.data);
       }
     },
@@ -34,15 +71,16 @@ export default {
       const result = await axios(data);
 
       if (result !== undefined) {
+        this.dispatch('user/set', result.data);
         this.dispatch("notification/fetch", {
           type: "success",
-          message: `Успешно сохранено!`,
+          message: 'Успешно сохранено!',
           isActive: true
         });
       } else {
         this.dispatch("notification/fetch", {
           type: "error",
-          message: `Ошибка при создании!`,
+          message: 'Ошибка при создании!',
           isActive: true
         });
       }
@@ -73,14 +111,14 @@ export default {
 
     async remove({
       commit
-    }, payload) {
-      await setTimeout(() => {
-        if (this.getters['profile/get'].id === payload) {
-          this.dispatch('profile/clear');
-        } else {
-          this.dispatch('user/clear');
-        }
-      }, 1500);
+    }) {
+      const data = requestDataHandler('DELETE', '/profile/remove');
+
+      const result = await axios(data);
+
+      if (result !== undefined) {
+        this.dispatch('authenticate/logout');
+      }
     },
 
     set({
@@ -92,7 +130,7 @@ export default {
     clear({
       commit
     }) {
-      commit('set', defaultProfile)
+      commit('set', clearProfile)
     }
   },
   getters: {

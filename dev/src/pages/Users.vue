@@ -9,7 +9,7 @@
               v-btn(
                 color="primary"
                 dark
-                v-if="adminAccess"
+                v-if="adminAccess || managerAccess"
                 to="/profile-create"
               ) Создать пользователя
             v-data-table(
@@ -33,7 +33,7 @@
                     a(:href="`mailto:${props.item.email}`") {{props.item.email}}
                   div
                     a(:href="`tel:${props.item.phone}`") {{props.item.phone}}
-                td.text-xs-left {{props.item.role}}
+                td.text-xs-left {{props.item.role.slug}}
                 td.text-xs-right
                   v-btn(
                     flat
@@ -47,6 +47,7 @@
               pagination(
                 :itemsLength="count"
                 @getPage="getPage"
+                :limit="5"
               )
         v-dialog(
           v-model="isRemoveDialog"
@@ -85,7 +86,8 @@ export default {
       ],
       isRemoveDialog: false,
       removeItem: {},
-      imgFolderBasePath
+      imgFolderBasePath,
+      limit: 5
     };
   },
 
@@ -99,22 +101,27 @@ export default {
   },
 
   async mounted() {
-    await this.$store.dispatch("user/fetchAll", {
+    await this.$store.dispatch("user/findAll", {
       skip: this.$route.query.skip || 0,
-      limit: this.$route.query.limit || 5
+      limit: this.$route.query.limit || this.limit
     });
   },
 
   methods: {
     async getPage({ skip, limit }) {
-      await this.$store.dispatch("user/fetchAll", {
+      await this.$store.dispatch("user/findAll", {
         skip,
         limit
       });
     },
 
     async remove() {
-      await this.$store.dispatch("profile/remove", this.removeItem.id);
+      if (this.removeItem.id === this.$store.getters["profile/get"].id) {
+        await this.$store.dispatch("profile/remove", this.removeItem.id);
+        this.$router.push("/");
+      } else {
+        await this.$store.dispatch("user/remove", this.removeItem.id);
+      }
     },
 
     removeDialogOpen(user) {

@@ -15,16 +15,17 @@
  */
 export default (method, url, data, params) => {
   const access_token = localStorage.getItem('access_token');
+  const apiKey = localStorage.getItem('x-api-key')
   const isData = data !== '' && data !== undefined;
   const isParams = params !== '' && params !== undefined;
-  const isAccessToken = access_token !== '' && access_token !== undefined;
 
   const requestData = {
     method,
     url,
     headers: {
       'Content-Type': 'application/json',
-      'x-access-token': access_token
+      'x-access-token': access_token,
+      'x-api-key': apiKey
     }
   }
 
@@ -38,9 +39,7 @@ export default (method, url, data, params) => {
   if (isParams) {
     requestData.params = params;
   }
-  if (isAccessToken) {
-    requestData.headers.Authorization = `Basic ${new Buffer('multikey.studio' + ':' + 'multikeypassword').toString('base64')}`;
-  }
+  requestData.headers.Authorization = `Basic ${new Buffer('multikey.studio' + ':' + 'multikeypassword').toString('base64')}`;
 
   return requestData;
 }

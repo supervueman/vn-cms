@@ -44,5 +44,8 @@ const User = sequelize.define('user', {
 SequelizeTokenify.tokenify(User);
 
 User.belongsTo(Role);
+User.belongsTo(User, {
+  onDelete: 'cascade'
+});
 
 module.exports = User;

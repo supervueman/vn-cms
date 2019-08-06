@@ -134,7 +134,7 @@
 				v-card-title.text-md-center.justify-center.mt-4.pb-0 Аватар
 				v-card-title.title.font-weight-bold.text-md-center.justify-center {{profile.lastname}} {{profile.firstname}}
 			//- Роль и ранг
-			v-card(v-if="adminAccess")
+			v-card(v-if="adminAccess || managerAccess")
 				v-card-text
 					v-select(
 						:items="roles"
@@ -142,7 +142,7 @@
 						label="Роль:"
 						return-object
 						@change="profile.roleId = $event.id"
-						v-model="profile.role"
+						:value="profileRole"
 					)
 		v-dialog(
 			v-model="isRemoveDialog"
@@ -171,6 +171,7 @@ import {
   email
 } from "vuelidate/lib/validators";
 const alpha = helpers.regex("alpha", /^[a-zA-Z0-9_-]*$/);
+
 // Config
 import { imgFolderBasePath } from "@/config";
 
@@ -227,6 +228,9 @@ export default {
     roles() {
       return this.$store.getters["role/getAll"];
     },
+    profileRole() {
+      return this.profile.role;
+    },
     slugErrors() {
       const errors = [];
       if (!this.$v.profile.slug.$dirty) return errors;
@@ -270,16 +274,13 @@ export default {
      * @async
      * Функция для создания профиля
      * вызывает action {@link store/profile/create}
-     * TODO: после удачного создания пользователя
-     * делать редирект на его профиль получая его
-     * данные через {@link store/user/fetch} для
-     * дальнейшего редактирования
      */
-    create() {
+    async create() {
       this.$v.$touch();
       if (!this.$v.$error) {
         this.profile.password = this.password;
-        this.$store.dispatch("profile/create", this.profile);
+        await this.$store.dispatch("profile/create", this.profile);
+        this.$router.push(`/users/${this.$store.getters["user/get"].id}`);
       }
     },
 
@@ -292,7 +293,11 @@ export default {
     async update() {
       this.$v.profile.$touch();
       if (!this.$v.profile.$error) {
-        await this.$store.dispatch("profile/update", this.profile);
+        if (this.profile.id === this.$store.getters["profile/get"].id) {
+          await this.$store.dispatch("profile/update", this.profile);
+        } else {
+          await this.$store.dispatch("user/update", this.profile);
+        }
       }
     },
 
@@ -309,15 +314,12 @@ export default {
      * @else редирект на главную
      */
     async remove() {
-      await this.$store.dispatch("profile/remove", this.profile.id);
-      if (this.$route.params.id) {
-        if (this.$route.params.id === this.$store.getters["profile/get"].id) {
-          this.$router.push("/");
-        } else {
-          this.$router.push("/users");
-        }
-      } else {
+      if (this.profile.id === this.$store.getters["profile/get"].id) {
+        await this.$store.dispatch("profile/remove", this.profile.id);
         this.$router.push("/");
+      } else {
+        await this.$store.dispatch("user/remove", this.profile.id);
+        this.$router.push("/users");
       }
     }
   }

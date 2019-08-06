@@ -1,12 +1,33 @@
 // Helpers
 const filterHandler = require('../handlers/filterHandler');
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
 
 // Models
 const Role = require('../models/role');
 
 module.exports = {
   async findAll(req, res) {
+    if (!(req.adminAccess || req.managerAccess)) {
+      res.status(401).send({
+        message: 'Нет доступа!'
+      })
+    }
     const filter = filterHandler(req.query.filter);
+
+    if (req.managerAccess) {
+      if (!filter.where) {
+        filter.where = {
+          slug: {
+            [Op.ne]: 'admin'
+          }
+        }
+      } else {
+        filter.where.slug = {
+          [Op.ne]: 'admin'
+        }
+      }
+    }
 
     const roles = await Role.findAll(filter);
 

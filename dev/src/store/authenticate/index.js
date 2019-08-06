@@ -17,7 +17,7 @@ export default {
         localStorage.setItem('access_token', result.data.access_token);
         localStorage.setItem('uid', result.data.uid);
 
-        this.dispatch('profile/fetch');
+        this.dispatch('profile/findByAccessToken');
       }
     },
     async logout({
@@ -25,6 +25,7 @@ export default {
     }) {
       localStorage.removeItem('access_token');
       localStorage.removeItem('uid');
+      localStorage.removeItem('x-api-key');
       this.dispatch('profile/clear');
     }
   },

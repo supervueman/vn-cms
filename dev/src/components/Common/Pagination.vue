@@ -4,7 +4,7 @@
     :length="pages"
     @input="getPage"
     :value="0"
-    :total-visible="2"
+    :total-visible="3"
   )
 </template>
 
@@ -19,14 +19,17 @@ export default {
     limit: {
       type: Number,
       default: 5
+    },
+    skip: {
+      type: Number,
+      default: 5
     }
   },
   data() {
     return {
       pagination: {
-        page: this.$route.query.skip / this.$route.query.limit || 1
-      },
-      skip: 5
+        page: this.$route.query.skip / this.$route.query.limit + 1 || 1
+      }
     };
   },
 

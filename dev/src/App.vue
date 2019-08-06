@@ -32,8 +32,7 @@ export default {
     }
   },
   async beforeCreate() {
-    await this.$store.dispatch("profile/fetch");
-    await this.$store.dispatch("role/findAll");
+    await this.$store.dispatch("profile/findByAccessToken");
     if (this.adminAccess || this.managerAccess) {
       if (this.$route.fullPath === "/login") {
         this.$router.back();
