@@ -134,7 +134,7 @@
 				v-card-title.text-md-center.justify-center.mt-4.pb-0 Аватар
 				v-card-title.title.font-weight-bold.text-md-center.justify-center {{profile.lastname}} {{profile.firstname}}
 			//- Роль и ранг
-			v-card(v-if="!isAuth")
+			v-card(v-if="this.$route.name !== 'profile'")
 				v-card-text
 					v-select(
 						:items="roles"

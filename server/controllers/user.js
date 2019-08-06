@@ -7,7 +7,7 @@ const Role = require('../models/role');
 
 module.exports = {
   async findAll(req, res) {
-    if (!req.profile) {
+    if (!(req.adminAccess || req.managerAccess)) {
       res.status(401).send({
         message: 'Пользователь не найден!'
       });
@@ -44,7 +44,7 @@ module.exports = {
   },
 
   async findByPk(req, res) {
-    if (!req.profile) {
+    if (!(req.adminAccess || req.managerAccess)) {
       res.status(401).send({
         message: 'Пользователь не найден!'
       });
@@ -73,7 +73,7 @@ module.exports = {
   },
 
   async findone(req, res) {
-    if (!req.profile) {
+    if (!(req.adminAccess || req.managerAccess)) {
       res.status(401).send({
         message: 'Пользователь не найден!'
       });
