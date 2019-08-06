@@ -6,12 +6,13 @@ const roleController = require('../controllers/role');
 
 // Middleware
 const access = require('../middleware/access');
+const profileByApiKey = require('../middleware/profileByApiKey');
 
-router.get('/', access, roleController.findAll);
+router.get('/', profileByApiKey, roleController.findAll);
 
-router.get('/role/:id', roleController.findByPk);
+router.get('/role/:id', profileByApiKey, roleController.findByPk);
 
-router.get('/findone', roleController.findOne);
+router.get('/findone', profileByApiKey, roleController.findOne);
 
 router.post('/create', access, roleController.create);
 

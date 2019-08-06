@@ -1,7 +1,5 @@
 // Helpers
 const filterHandler = require('../handlers/filterHandler');
-const Sequelize = require('sequelize');
-const Op = Sequelize.Op;
 
 // Models
 const Role = require('../models/role');
@@ -13,19 +11,19 @@ module.exports = {
         message: 'Нет доступа!'
       })
     }
+
     const filter = filterHandler(req.query.filter);
 
     if (req.managerAccess) {
       if (!filter.where) {
-        filter.where = {
-          slug: {
-            [Op.ne]: 'admin'
-          }
-        }
-      } else {
-        filter.where.slug = {
-          [Op.ne]: 'admin'
-        }
+        filter.where = {};
+      }
+      filter.where.slug = {
+        $and: [{
+          $ne: 'admin'
+        }, {
+          $ne: 'manager'
+        }]
       }
     }
 

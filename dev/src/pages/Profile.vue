@@ -1,5 +1,5 @@
 <template lang="pug">
-	v-flex
+	v-flex(v-if="isAuth")
 		.body-2.mb-5 Ваш профиль: {{profile.slug}}
 		v-flex
 			profile-view(:profile="profile" operationType="update")
