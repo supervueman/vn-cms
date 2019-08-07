@@ -9,7 +9,8 @@ module.exports = {
     if (!(req.adminAccess || req.managerAccess)) {
       res.status(401).send({
         message: 'Нет доступа!'
-      })
+      });
+      return;
     }
 
     const filter = filterHandler(req.query.filter);
@@ -40,7 +41,8 @@ module.exports = {
     if (!role) {
       res.status(401).send({
         message: 'Политика доступа не найдена!'
-      })
+      });
+      return;
     }
     res.status(200).send(role);
   },
@@ -53,9 +55,9 @@ module.exports = {
     if (!role) {
       res.status(404).send({
         message: 'Политика доступа не найдена!'
-      })
+      });
+      return;
     }
-
     res.status(200).send(role);
   },
 
@@ -64,10 +66,9 @@ module.exports = {
       res.status(401).send({
         message: 'Нет доступа к созданию политики доступа!'
       });
+      return;
     }
-
     const createdRole = await Role.create(req.body);
-
     res.status(200).send(createdRole);
   },
 
@@ -76,18 +77,17 @@ module.exports = {
       res.status(401).send({
         message: 'Нет доступа для редактирования!'
       });
+      return;
     }
 
-    const id = req.body.id;
-
-    const role = await Role.findByPk(id);
+    const role = await Role.findByPk(req.body.id);
 
     if (!role) {
       res.status(401).send({
         message: 'Не найдено!'
       });
+      return;
     }
-
     const updateRole = req.body;
     delete updateRole.id;
 
@@ -101,6 +101,7 @@ module.exports = {
       res.status(401).send({
         message: 'Нет доступа для удаления политики доступа!'
       });
+      return;
     }
 
     await Role.destroy({

@@ -13,22 +13,17 @@ module.exports = {
       res.status(401).send({
         message: 'Пользователь не найден!'
       });
+      return;
     }
 
     const filter = filterHandler(req.query.filter);
 
     if (req.managerAccess) {
-      if (filter.where) {
-        filter.where.userId = req.profile.id;
-      } else {
-        filter.where = {
-          userId: req.profile.id
-        }
+      if (!filter.where) {
+        filter.where = {};
       }
+      filter.where.userId = req.profile.id;
     }
-    filter.include = [{
-      model: Role
-    }];
 
     const users = await User.findAll(filter);
 
@@ -52,11 +47,9 @@ module.exports = {
       });
     }
 
-    const user = await User.findByPk(req.params.id, {
-      include: [{
-        model: Role
-      }]
-    });
+    const filter = filterHandler(req.query.filter);
+
+    const user = await User.findByPk(req.params.id, filter);
     user.password = '';
 
     if (!user) {
@@ -123,11 +116,10 @@ module.exports = {
 
     if (req.managerAccess && existUser.userId === req.profile.id || req.adminAccess) {
       const updatedUser = await existUser.update(reqUser);
-      const user = await User.findByPk(updatedUser.id, {
-        include: [{
-          model: Role
-        }]
-      });
+
+      const filter = filterHandler(req.query.filter);
+
+      const user = await User.findByPk(updatedUser.id, filter);
       delete user.password;
 
       res.status(200).send(user);

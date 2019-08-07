@@ -297,9 +297,23 @@ export default {
       this.$v.profile.$touch();
       if (!this.$v.profile.$error) {
         if (this.profile.id === this.$store.getters["profile/get"].id) {
-          await this.$store.dispatch("profile/update", this.profile);
+          await this.$store.dispatch("profile/update", {
+            profile: this.profile,
+            filter: {
+              filter: {
+                include: [{ model: "$role" }]
+              }
+            }
+          });
         } else {
-          await this.$store.dispatch("user/update", this.profile);
+          await this.$store.dispatch("user/update", {
+            profile: this.profile,
+            filter: {
+              filter: {
+                include: [{ model: "$role" }]
+              }
+            }
+          });
         }
       }
     },

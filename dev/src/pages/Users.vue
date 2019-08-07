@@ -102,8 +102,15 @@ export default {
 
   async mounted() {
     await this.$store.dispatch("user/findAll", {
-      skip: this.$route.query.skip || 0,
-      limit: this.$route.query.limit || this.limit
+      filter: {
+        skip: this.$route.query.skip || 0,
+        limit: this.$route.query.limit || this.limit,
+        include: [
+          {
+            model: "$role"
+          }
+        ]
+      }
     });
   },
 

@@ -40,7 +40,7 @@ export default {
     async findByPk({
       commit
     }, payload) {
-      const data = requestDataHandler('GET', `/users/user/${payload}`);
+      const data = requestDataHandler('GET', `/users/user/${payload.id}`, undefined, payload.filter);
 
       const result = await axios(data);
 
@@ -71,7 +71,7 @@ export default {
     async update({
       commit
     }, payload) {
-      const data = requestDataHandler('PUT', '/users/update', payload);
+      const data = requestDataHandler('PUT', '/users/update', payload.profile, payload.filter);
 
       const result = await axios(data);
 
@@ -140,14 +140,7 @@ export default {
     async findAll({
       commit
     }, payload) {
-      const params = {
-        filter: {
-          limit: payload.limit,
-          offset: payload.skip
-        }
-      }
-
-      const data = requestDataHandler('GET', '/users', undefined, params);
+      const data = requestDataHandler('GET', '/users', undefined, payload);
       const result = await axios(data);
 
       if (result !== undefined) {

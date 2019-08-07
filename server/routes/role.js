@@ -10,9 +10,9 @@ const profileByApiKey = require('../middleware/profileByApiKey');
 
 router.get('/', profileByApiKey, roleController.findAll);
 
-router.get('/role/:id', profileByApiKey, roleController.findByPk);
+router.get('/role/:id', roleController.findByPk);
 
-router.get('/findone', profileByApiKey, roleController.findOne);
+router.get('/findone', roleController.findOne);
 
 router.post('/create', access, roleController.create);
 

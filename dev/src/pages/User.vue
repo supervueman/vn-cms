@@ -26,7 +26,14 @@ export default {
   },
 
   async mounted() {
-    await this.$store.dispatch("user/findByPk", this.$route.params.id);
+    await this.$store.dispatch("user/findByPk", {
+      id: this.$route.params.id,
+      filter: {
+        filter: {
+          include: [{ model: "$role" }]
+        }
+      }
+    });
     await this.$store.dispatch("role/findAll");
   },
 
