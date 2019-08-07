@@ -24,6 +24,7 @@ module.exports = async (req, res, next) => {
     return next();
   }
 
+  req.isAuth = true;
   req.profile = profile;
 
   accessHandler(req, profile.role.slug);

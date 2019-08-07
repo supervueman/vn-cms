@@ -1,3 +1,5 @@
+const bcrypt = require('bcrypt');
+
 // Helpers
 const filterHandler = require('../handlers/filterHandler');
 
@@ -129,6 +131,46 @@ module.exports = {
       delete user.password;
 
       res.status(200).send(user);
+    } else {
+      res.status(401).send({
+        message: 'Не найдено!'
+      });
+    }
+  },
+
+  async changePassword(req, res) {
+    if (!(req.managerAccess || req.adminAccess)) {
+      res.status(401).send({
+        message: 'Нет доступа!'
+      });
+    }
+
+    const user = await User.findByPk(req.body.userId);
+
+    if (!user) {
+      res.status(401).send({
+        message: 'Пользователь не найден!'
+      });
+    }
+
+    if (req.managerAccess && user.userId === req.profile.id || req.adminAccess) {
+      const isCompare = await bcrypt.compare(req.body.oldPassword, user.password);
+
+      if (!isCompare) {
+        res.status(401).send({
+          message: 'Пароли не совпадают!'
+        });
+      } else {
+        const hashPw = await bcrypt.hash(req.body.newPassword, 12);
+
+        await user.update({
+          password: hashPw
+        });
+
+        res.status(200).send({
+          message: 'Пароль успешно обновлен!'
+        });
+      }
     } else {
       res.status(401).send({
         message: 'Не найдено!'

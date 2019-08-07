@@ -15,6 +15,8 @@ router.post('/create', profileByApiKey, profileController.create);
 
 router.put('/update', profileByAccessToken, profileController.update);
 
+router.put('/password-change', profileByAccessToken, profileController.changePassword);
+
 router.delete('/remove', profileByAccessToken, profileController.remove);
 
 module.exports = router;

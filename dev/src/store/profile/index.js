@@ -109,6 +109,28 @@ export default {
       }
     },
 
+    async changePassword({
+      commit
+    }, payload) {
+      const data = requestDataHandler('PUT', '/profile/password-change', payload);
+
+      const result = await axios(data);
+
+      if (result !== undefined) {
+        this.dispatch("notification/fetch", {
+          type: "success",
+          message: 'Успешно сохранено!',
+          isActive: true
+        });
+      } else {
+        this.dispatch("notification/fetch", {
+          type: "error",
+          message: 'Произошла ошибка при сохранении!',
+          isActive: true
+        });
+      }
+    },
+
     async remove({
       commit
     }) {

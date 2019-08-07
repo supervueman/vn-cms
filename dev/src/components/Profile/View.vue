@@ -77,7 +77,10 @@
 							v-flex.md12
 								div Api key: {{profile.token}}
 			//- Изменение пароля
-			password-change(v-if="operationType === 'update'")
+			password-change(
+				v-if="operationType === 'update'"
+				:userId="profile.id"
+			)
 			//- Создание пароля
 			v-card(v-if="operationType === 'create'" tag="form")
 				v-card-text

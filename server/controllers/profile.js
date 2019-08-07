@@ -90,6 +90,32 @@ module.exports = {
     res.status(200).send(req.profile);
   },
 
+  async changePassword(req, res) {
+    if (!req.isAuth) {
+      res.status(401).send({
+        message: 'Нет доступа!'
+      });
+    }
+
+    const isCompare = await bcrypt.compare(req.body.oldPassword, req.profile.password);
+
+    if (!isCompare) {
+      res.status(401).send({
+        message: 'Пароли не совпадают!'
+      });
+    } else {
+      const hashPw = await bcrypt.hash(req.body.newPassword, 12);
+
+      await req.profile.update({
+        password: hashPw
+      });
+
+      res.status(200).send({
+        message: 'Пароль успешно обновлен!'
+      });
+    }
+  },
+
   async remove(req, res) {
     if (!req.profile) {
       res.status(401).send({

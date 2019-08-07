@@ -16,6 +16,8 @@ router.get('/findone', profileByApiKey, userController.findone);
 
 router.put('/update', access, userController.update);
 
+router.put('/password-change', access, userController.changePassword);
+
 router.delete('/remove', access, userController.remove);
 
 module.exports = router;

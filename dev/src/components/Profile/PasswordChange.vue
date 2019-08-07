@@ -53,6 +53,13 @@ export default {
 
   mixins: [validationMixin],
 
+  props: {
+    userId: {
+      type: Number,
+      default: 0
+    }
+  },
+
   validations: {
     oldPassword: {
       required,
@@ -119,15 +126,24 @@ export default {
      */
     async changePassword() {
       this.$v.$touch();
+
       if (this.$v.$error) {
         return;
       }
 
       const data = {
+        userId: this.userId,
         oldPassword: this.oldPassword,
         newPassword: this.newPassword
       };
-      // await this.$store.dispatch("changePassword", data);
+
+      if (this.userId === this.$store.getters["profile/get"].id) {
+        console.log(1);
+        await this.$store.dispatch("profile/changePassword", data);
+      } else {
+        console.log(2);
+        await this.$store.dispatch("user/changePassword", data);
+      }
 
       this.clearPassword();
     },
