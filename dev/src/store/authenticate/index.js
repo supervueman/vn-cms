@@ -11,11 +11,17 @@ export default {
     }, payload) {
       const data = requestDataHandler('POST', '/authenticate/login', payload);
 
-      const result = await axios(data);
+      const response = await axios(data).catch(err => {
+        this.dispatch("notification/fetch", {
+          type: "error",
+          message: 'Ошибка авторизации!',
+          isActive: true
+        });
+      });
 
-      if (result !== undefined) {
-        localStorage.setItem('access_token', result.data.access_token);
-        localStorage.setItem('uid', result.data.uid);
+      if (response !== undefined && response.status === 200) {
+        localStorage.setItem('access_token', response.data.access_token);
+        localStorage.setItem('uid', response.data.uid);
 
         this.dispatch('profile/findByAccessToken');
       }

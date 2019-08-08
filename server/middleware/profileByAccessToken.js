@@ -8,6 +8,13 @@ const User = require('../models/user');
 const Role = require('../models/Role');
 
 module.exports = async (req, res, next) => {
+  const accessToken = req.headers['x-access-token'];
+  const isAccessToken = accessToken !== null && accessToken !== undefined && accessToken !== '' && accessToken !== 'null' && accessToken !== 'undefined';
+
+  if (!isAccessToken) {
+    return next();
+  }
+
   const decoded = await jwt.verify(req.headers['x-access-token'], process.env.SECRET_KEY_FOR_JWT);
 
   if (!decoded) {

@@ -96,8 +96,6 @@ export default {
       };
 
       await this.$store.dispatch("authenticate/login", data);
-
-      this.$router.push("/profile");
     }
   }
 };

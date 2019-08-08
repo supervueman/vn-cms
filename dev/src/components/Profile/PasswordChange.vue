@@ -138,10 +138,8 @@ export default {
       };
 
       if (this.userId === this.$store.getters["profile/get"].id) {
-        console.log(1);
         await this.$store.dispatch("profile/changePassword", data);
       } else {
-        console.log(2);
         await this.$store.dispatch("user/changePassword", data);
       }
 

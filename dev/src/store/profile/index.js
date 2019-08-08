@@ -1,5 +1,6 @@
 import requestDataHandler from '@/functions/requestDataHandlerWithAxios';
 import axios from 'axios';
+import router from '@/routers';
 
 const profile = {
   id: 0,
@@ -55,11 +56,19 @@ export default {
     }) {
       const data = requestDataHandler('GET', '/profile');
 
-      const result = await axios(data);
+      const response = await axios(data).catch(err => {
+        this.dispatch("notification/fetch", {
+          type: "error",
+          message: 'Ошибка авторизации!',
+          isActive: true
+        });
+        router.push('/login');
+      });
 
-      if (result !== undefined) {
-        localStorage.setItem('x-api-key', result.data.token);
-        commit('set', result.data);
+      if (response !== undefined && response.status === 200) {
+        localStorage.setItem('x-api-key', response.data.token);
+        commit('set', response.data);
+        router.push('/profile');
       }
     },
 
@@ -68,19 +77,20 @@ export default {
     }, payload) {
       const data = requestDataHandler('POST', '/profile/create', payload);
 
-      const result = await axios(data);
-
-      if (result !== undefined) {
-        this.dispatch('user/set', result.data);
-        this.dispatch("notification/fetch", {
-          type: "success",
-          message: 'Успешно сохранено!',
-          isActive: true
-        });
-      } else {
+      const response = await axios(data).catch(err => {
         this.dispatch("notification/fetch", {
           type: "error",
           message: 'Ошибка при создании!',
+          isActive: true
+        });
+      });
+
+      if (response !== undefined && response.status === 200) {
+        this.dispatch('user/set', response.data);
+        router.push(`/users/${response.data.id}`)
+        this.dispatch("notification/fetch", {
+          type: "success",
+          message: 'Успешно сохранено!',
           isActive: true
         });
       }
@@ -91,19 +101,19 @@ export default {
     }, payload) {
       const data = requestDataHandler('PUT', '/profile/update', payload);
 
-      const result = await axios(data);
+      const response = await axios(data).catch(err => {
+        this.dispatch("notification/fetch", {
+          type: "error",
+          message: 'Ошибка при сохранении!',
+          isActive: true
+        });
+      });
 
-      if (result !== undefined) {
-        this.dispatch('profile/set', result.data);
+      if (response !== undefined && response.status === 200) {
+        this.dispatch('profile/set', response.data);
         this.dispatch("notification/fetch", {
           type: "success",
           message: 'Успешно сохранено!',
-          isActive: true
-        });
-      } else {
-        this.dispatch("notification/fetch", {
-          type: "error",
-          message: 'Произошла ошибка при сохранении!',
           isActive: true
         });
       }
@@ -114,18 +124,18 @@ export default {
     }, payload) {
       const data = requestDataHandler('PUT', '/profile/password-change', payload);
 
-      const result = await axios(data);
+      const response = await axios(data).catch(err => {
+        this.dispatch("notification/fetch", {
+          type: "error",
+          message: 'Ошибка при сохранении!',
+          isActive: true
+        });
+      });
 
-      if (result !== undefined) {
+      if (response !== undefined && response.status === 200) {
         this.dispatch("notification/fetch", {
           type: "success",
           message: 'Успешно сохранено!',
-          isActive: true
-        });
-      } else {
-        this.dispatch("notification/fetch", {
-          type: "error",
-          message: 'Произошла ошибка при сохранении!',
           isActive: true
         });
       }

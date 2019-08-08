@@ -117,8 +117,15 @@ export default {
   methods: {
     async getPage({ skip, limit }) {
       await this.$store.dispatch("user/findAll", {
-        skip,
-        limit
+        filter: {
+          skip,
+          limit,
+          include: [
+            {
+              model: "$role"
+            }
+          ]
+        }
       });
     },
 

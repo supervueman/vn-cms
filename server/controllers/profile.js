@@ -8,8 +8,9 @@ module.exports = {
   async findByAccessToken(req, res) {
     if (!req.profile) {
       res.status(401).send({
-        message: 'Пользователь не найден!'
+        message: 'User not found!'
       });
+      return;
     }
 
     res.status(200).send(req.profile);
@@ -18,7 +19,7 @@ module.exports = {
   async create(req, res) {
     if (!(req.adminAccess || req.managerAccess)) {
       res.status(401).send({
-        message: 'Нет доступа для создания пользователя!'
+        message: 'Access denied!'
       });
     }
 
@@ -36,7 +37,7 @@ module.exports = {
 
     if (!validator.isEmail(req.body.email)) {
       res.status(401).send({
-        message: 'E-mail in invalid!'
+        message: 'E-mail is invalid!'
       });
     }
 
@@ -44,35 +45,31 @@ module.exports = {
         min: 6
       })) {
       res.status(401).send({
-        message: 'Password short!'
+        message: 'Password is short!'
+      });
+    }
+
+    if (validator.isEmpty(req.body.slug) || !validator.isLength(req.body.slug, {
+        min: 3
+      })) {
+      res.status(401).send({
+        message: 'Slug is short!'
       });
     }
 
     const hashedPw = await bcrypt.hash(req.body.password, 12);
 
-    try {
-      const createdUser = await User.create({
-        ...req.body,
-        password: hashedPw,
-        userId: req.profile.id
-      });
-
-      if (createdUser) {
-        res.status(200).send(createdUser);
-      }
-    } catch (err) {
-      res.status(401).send({
-        message: err.errors[0].message
-      });
-    }
-
-    res.status(500).send({
-      message: 'Server error!'
+    const createdUser = await User.create({
+      ...req.body,
+      password: hashedPw,
+      userId: req.profile.id
     });
+
+    res.status(200).send(createdUser);
   },
 
   async update(req, res) {
-    const updateProfileData = req.body;
+    const updateProfileData = req.body.profile;
     delete updateProfileData.password;
     delete updateProfileData.token;
     delete updateProfileData.id;
@@ -80,14 +77,14 @@ module.exports = {
 
     if (!req.profile) {
       res.status(401).send({
-        message: 'Пользователь не найден!'
+        message: 'User not found!'
       });
     }
 
-    req.profile.update(updateProfileData);
-    req.profile.password = '';
+    const newProfile = await req.profile.update(updateProfileData);
+    newProfile.password = '';
 
-    res.status(200).send(req.profile);
+    res.status(200).send(newProfile);
   },
 
   async changePassword(req, res) {

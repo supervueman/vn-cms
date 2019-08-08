@@ -283,7 +283,6 @@ export default {
       if (!this.$v.$error) {
         this.profile.password = this.password;
         await this.$store.dispatch("profile/create", this.profile);
-        this.$router.push(`/users/${this.$store.getters["user/get"].id}`);
       }
     },
 
