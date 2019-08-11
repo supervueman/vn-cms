@@ -103,28 +103,30 @@ export default {
   async mounted() {
     await this.$store.dispatch("user/findAll", {
       filter: {
-        skip: this.$route.query.skip || 0,
+        offset: this.$route.query.offset || 0,
         limit: this.$route.query.limit || this.limit,
         include: [
           {
             model: "$role"
           }
-        ]
+        ],
+        order: [["createdAt", "DESC"]]
       }
     });
   },
 
   methods: {
-    async getPage({ skip, limit }) {
+    async getPage({ offset, limit }) {
       await this.$store.dispatch("user/findAll", {
         filter: {
-          skip,
+          offset,
           limit,
           include: [
             {
               model: "$role"
             }
-          ]
+          ],
+          order: [["createdAt", "DESC"]]
         }
       });
     },

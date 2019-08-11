@@ -1,124 +1,116 @@
 <template lang="pug">
-  v-flex {{resources}}
-    v-toolbar(flat color="white")
-      v-spacer
-      v-btn(
-        color="primary"
-        dark
-        fab
-        icon
-        small
-        @click="isResourceCreateDialog = true"
-        v-if="managerAccess"
+  v-layout.wrap
+    v-flex
+      v-toolbar(flat color="white")
+        v-spacer
+        v-btn(
+          color="primary"
+          to="/resource-create"
+          dark
+          v-if="managerAccess"
+        ) Создать ресурс
+      v-data-table(
+        :headers="headers"
+        :items="resources"
+        :rows-per-page-items="[5]"
+        hide-actions
       )
-        v-icon(size="24px") add
-    v-data-table(
-      :headers="headers"
-      :items="resources"
-      :rows-per-page-items="[5]"
-      hide-actions
-    )
-      template(v-slot:items="props")
-        td.text-xs-left
-          router-link(:to="`/resources/${props.item.id}`") {{ props.item.title }}
-        td.text-xs-left 
-          div(v-if="props.item.published") Опубликован
-          div(v-else) Не опубликован
-        //- td.text-xs-left {{ props.item.layout.title }}
-        td.text-xs-left {{ props.item.createdAt }}
-        td.text-xs-right
-          v-btn(flat fab color="primary" @click="removeDialogOpen(props.item)")
-            v-icon delete
-    div.text-xs-center.pt-2
-      pagination(
-        :itemsLength="resources.length"
-        @getPage="getPage"
-      )
+        template(v-slot:items="props")
+          td.text-xs-left
+            router-link(
+              :to="`/resources/${props.item.id}`"
+            ) {{ props.item.title }} ({{props.item.id}})
+          td.text-xs-left {{props.item.slug}}
+          td.text-xs-left {{props.item.createdAt}}
+          td.text-xs-right
+            v-btn(
+              flat
+              fab
+              color="primary"
+              @click="removeDialogOpen(props.item)"
+              v-if="managerAccess || adminAccess" 
+            )
+              v-icon delete
+      div.text-xs-center.pt-2
+        pagination(
+          :itemsLength="count"
+          @getPage="getPage"
+          :limit="5"
+        )
     v-dialog(
-        v-model="isRemoveDialog"
-        max-width="500px"
-      )
+      v-model="isRemoveDialog"
+      max-width="500px"
+    )
       remove-confirm(
         @remove="remove"
         :isActive.sync="isRemoveDialog"
-        :name="removeResource.title"
+        :name="removeItem.title"
       )
-    v-dialog(
-      v-model="isResourceCreateDialog"
-    )
-      v-card
-        v-card-text
-          resource-create(
-            @close="isResourceCreateDialog = false"
-          )
 </template>
 
 <script>
-// Components
-import ResourceCreate from "./ResourceCreate";
-
 // Mixins
 import accessMixin from "@/mixins/accessMixin";
 
 export default {
-  name: "Resources",
-
-  components: {
-    ResourceCreate
-  },
+  name: "ResourcesPage",
 
   mixins: [accessMixin],
 
   data() {
     return {
       headers: [
-        {
-          text: "Наименование",
-          value: "title"
-        },
-        { text: "Статус", value: "published" },
-        // { text: "Шаблон", value: "layout.title" },
+        { text: "Наименование", value: "title" },
+        { text: "Псевдоним", value: "slug" },
         { text: "Дата создания", value: "createdAt" },
         { text: "", sortable: false }
       ],
       isRemoveDialog: false,
-      isResourceCreateDialog: false,
-      removeResource: {}
+      removeItem: {},
+      limit: 5
     };
   },
 
   computed: {
-    pages() {
-      if (this.resources.length === 0) return 0;
-      return Math.ceil(this.resources.length / this.limit);
-    },
     resources() {
       return this.$store.getters["resource/getAll"];
+    },
+    count() {
+      return this.$store.getters["resource/getCount"];
     }
   },
 
   async mounted() {
-    await this.$store.dispatch("resource/fetchAll", {
-      id: this.$route.params.id,
-      skip: this.$route.query.skip,
-      limit: this.$route.query.limit
+    await this.$store.dispatch("resource/findAll", {
+      filter: {
+        offset: this.$route.query.offset || 0,
+        limit: this.$route.query.limit || this.limit
+      }
     });
   },
 
   methods: {
-    async getPage({ skip, limit }) {
-      await this.$store.dispatch("resource/fetchAll", {
-        skip,
-        limit
+    async getPage({ offset, limit }) {
+      await this.$store.dispatch("resource/findAll", {
+        filter: {
+          offset,
+          limit
+        }
       });
     },
 
     async remove() {
-      await this.$store.dispatch("resource/remove", this.removeResource.id);
+      await this.$store.dispatch("resource/remove", this.removeItem.id);
+      const resources = this.resources.filter(el => {
+        if (el.id !== this.removeItem.id) {
+          return el;
+        }
+      });
+      this.$store.dispatch("resource/setAll", resources);
     },
 
     removeDialogOpen(resource) {
-      this.removeResource = resource;
+      this.removeItem = resource;
       this.isRemoveDialog = true;
     }
   }

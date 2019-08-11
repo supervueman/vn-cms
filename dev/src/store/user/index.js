@@ -51,7 +51,7 @@ export default {
       });
 
       if (response !== undefined && response.status === 200) {
-        commit('set', result.data);
+        commit('set', response.data);
       }
     },
 
@@ -76,7 +76,7 @@ export default {
       });
 
       if (response !== undefined && response.status === 200) {
-        console.log(result)
+        console.log(response)
       }
     },
 
@@ -99,7 +99,7 @@ export default {
           message: 'Успешно сохранено!',
           isActive: true
         });
-        commit('set', result.data);
+        commit('set', response.data);
       }
     },
 
@@ -132,9 +132,9 @@ export default {
         id: payload
       });
 
-      const result = await axios(data);
+      const response = await axios(data);
 
-      if (result !== undefined) {
+      if (response !== undefined) {
         this.dispatch("notification/fetch", {
           type: "success",
           message: 'Успешно удалено!',
@@ -163,8 +163,8 @@ export default {
       });
 
       if (response !== undefined && response.status === 200) {
-        commit('setAll', result.data.users);
-        commit('setCount', result.data.count);
+        commit('setAll', response.data.users);
+        commit('setCount', response.data.count);
       }
     },
 

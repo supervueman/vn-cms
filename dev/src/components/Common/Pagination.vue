@@ -20,7 +20,7 @@ export default {
       type: Number,
       default: 5
     },
-    skip: {
+    offset: {
       type: Number,
       default: 5
     }
@@ -28,7 +28,7 @@ export default {
   data() {
     return {
       pagination: {
-        page: this.$route.query.skip / this.$route.query.limit + 1 || 1
+        page: this.$route.query.offset / this.$route.query.limit + 1 || 1
       }
     };
   },
@@ -43,12 +43,12 @@ export default {
   methods: {
     getPage(page) {
       this.$router.push(
-        `${this.$route.path}?skip=${page * this.skip - this.skip}&limit=${
+        `${this.$route.path}?offset=${page * this.offset - this.offset}&limit=${
           this.limit
         }`
       );
       this.$emit("getPage", {
-        skip: Number(this.$route.query.skip),
+        offset: Number(this.$route.query.offset),
         limit: Number(this.$route.query.limit)
       });
     }

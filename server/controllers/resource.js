@@ -19,7 +19,7 @@ module.exports = {
       if (!filter.where) {
         filter.where = {};
       }
-      // filter.where.userId = req.profile.id
+      filter.where.userId = req.profile.id
     }
 
     const resources = await Resource.findAll(filter);
@@ -33,6 +33,12 @@ module.exports = {
   },
 
   async findByPk(req, res) {
+    if (!(req.managerAccess || req.adminAccess)) {
+      res.status(401).send({
+        message: 'Нет доступа!'
+      });
+    }
+
     const id = req.params.id;
 
     const resource = await Resource.findByPk(id);
@@ -44,16 +50,22 @@ module.exports = {
       return;
     }
 
-    if (resource.userId === req.profile.id) {
+    if (req.managerAccess && resource.userId === req.profile.id || req.adminAccess) {
       res.status(200).send(resource);
     } else {
       res.status(401).send({
         mesasge: 'Нет доступа!'
-      })
+      });
     }
   },
 
   async findOne(req, res) {
+    if (!(req.managerAccess || req.adminAccess)) {
+      res.status(401).send({
+        message: 'Не доступно!'
+      });
+    }
+
     const filter = filterHandler(req.query.filter);
 
     const resource = await Resource.findOne(filter);
@@ -64,6 +76,15 @@ module.exports = {
       });
       return;
     }
+
+    if (req.managerAccess && resource.userId === req.profile.id || req.adminAccess) {
+      res.status(200).send(resource);
+    } else {
+      res.status(401).send({
+        mesasge: 'Нет доступа!'
+      })
+    }
+
     res.status(200).send(resource);
   },
 

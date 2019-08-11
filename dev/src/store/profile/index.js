@@ -59,7 +59,7 @@ export default {
       const response = await axios(data).catch(err => {
         this.dispatch("notification/fetch", {
           type: "error",
-          message: 'Ошибка авторизации!',
+          message: `${err}`,
           isActive: true
         });
         router.push('/login');
@@ -79,7 +79,7 @@ export default {
       const response = await axios(data).catch(err => {
         this.dispatch("notification/fetch", {
           type: "error",
-          message: 'Ошибка при создании!',
+          message: `${err}`,
           isActive: true
         });
       });
@@ -103,7 +103,7 @@ export default {
       const response = await axios(data).catch(err => {
         this.dispatch("notification/fetch", {
           type: "error",
-          message: 'Ошибка при сохранении!',
+          message: `${err}`,
           isActive: true
         });
       });
@@ -126,7 +126,7 @@ export default {
       const response = await axios(data).catch(err => {
         this.dispatch("notification/fetch", {
           type: "error",
-          message: 'Ошибка при сохранении!',
+          message: `${err}`,
           isActive: true
         });
       });
@@ -148,7 +148,7 @@ export default {
       const response = await axios(data).catch(err => {
         this.dispatch("notification/fetch", {
           type: "error",
-          message: 'Ошибка при удалении!',
+          message: `${err}`,
           isActive: true
         });
       });
