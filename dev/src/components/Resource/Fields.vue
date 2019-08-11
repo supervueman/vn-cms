@@ -151,17 +151,13 @@ export default {
   name: "ResourceFields",
 
   components: {
-    ContextMenuList,
-    CreateFolder,
-    TreeviewControls
+    MigxField
   },
 
   computed: {
     fields() {
       return this.$store.getters["resource/getFields"];
     }
-  },
-
-  x
+  }
 };
 </script>

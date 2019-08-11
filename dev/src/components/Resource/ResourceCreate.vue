@@ -8,6 +8,7 @@
               template.px-2(v-slot:header)
                 div Общие данные
               v-card.mb-3
+                v-card-title Общие данные
                 v-card-text
                   v-layout.wrap
                     v-flex.md12
@@ -160,24 +161,14 @@ export default {
     return {
       panelDescription: [true],
       panelName: "panel-resource-create",
-      menu: false,
-      resource: {
-        slug: "",
-        title: "",
-        description: "",
-        content: "",
-        published: false,
-        createdAt: "",
-        fields: [],
-        children: [],
-        parentId: this.$route.params.id || "",
-        layout: "",
-        managerId: ""
-      }
+      menu: false
     };
   },
 
   computed: {
+    resource() {
+      return this.$store.getters["resource/get"];
+    },
     slugErrors() {
       const errors = [];
       if (!this.$v.resource.slug.$dirty) return errors;

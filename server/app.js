@@ -9,6 +9,7 @@ const authenticateRoute = require('./routes/authenticate');
 const profileRoutes = require('./routes/profile');
 const userRoutes = require('./routes/user');
 const roleRoutes = require('./routes/role');
+const resourceRoutes = require('./routes/resource');
 
 // Models
 const User = require('./models/user');
@@ -47,6 +48,7 @@ app.use('/authenticate', authenticateRoute);
 app.use('/profile', profileRoutes);
 app.use('/users', userRoutes);
 app.use('/roles', roleRoutes);
+app.use('/resources', resourceRoutes);
 
 async function connect() {
   const connect = await sequelize.sync();

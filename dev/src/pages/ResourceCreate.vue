@@ -15,9 +15,6 @@ import ResourceView from "@/components/Resource/View";
 // Mixins
 import accessMixin from "@/mixins/accessMixin";
 
-// Models
-import resource from "@/models/resource";
-
 export default {
   name: "ResourceCreatePage",
 
@@ -27,10 +24,15 @@ export default {
 
   mixins: [accessMixin],
 
-  data() {
-    return {
-      resource
-    };
+  computed: {
+    resource() {
+      return this.$store.getters["resource/get"];
+    }
+  },
+
+  beforeRouteLeave(to, from, next) {
+    this.$store.dispatch("resource/clear");
+    next();
   }
 };
 </script>

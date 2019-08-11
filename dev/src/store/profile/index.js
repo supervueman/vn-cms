@@ -145,9 +145,15 @@ export default {
     }) {
       const data = requestDataHandler('DELETE', '/profile/remove');
 
-      const result = await axios(data);
+      const response = await axios(data).catch(err => {
+        this.dispatch("notification/fetch", {
+          type: "error",
+          message: 'Ошибка при удалении!',
+          isActive: true
+        });
+      });
 
-      if (result !== undefined) {
+      if (response !== undefined && response.status === 200) {
         this.dispatch('authenticate/logout');
       }
     },

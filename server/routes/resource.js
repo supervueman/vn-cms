@@ -9,7 +9,7 @@ const access = require('../middleware/access');
 const profileByAccessToken = require('../middleware/profileByAccessToken');
 const profileByApiKey = require('../middleware/profileByApiKey');
 
-router.get('/', profileByApiKey, resourceController.findByAccessToken);
+router.get('/', profileByApiKey, resourceController.findAll);
 
 router.get('/resource/:id', profileByApiKey, resourceController.findByPk);
 

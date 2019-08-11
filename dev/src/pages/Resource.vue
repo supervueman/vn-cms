@@ -61,7 +61,12 @@ export default {
   },
 
   async mounted() {
-    await this.$store.dispatch("resource/fetch", this.$route.params.id);
+    await this.$store.dispatch("resource/findByPk", this.$route.params.id);
+  },
+
+  beforeRouteLeave(to, from, next) {
+    this.$store.dispatch("resource/clear");
+    next();
   }
 };
 </script>

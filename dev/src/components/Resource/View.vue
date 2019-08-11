@@ -107,7 +107,7 @@
         v-layout.wrap
           v-flex.md12
             editor(
-              v-if="resource.content !== undefined"
+              v-if="resource.content"
               :content="resource.content"
               @update="resource.content = $event()"
             )
@@ -212,21 +212,20 @@ export default {
   },
 
   methods: {
-    create() {
+    async create() {
       this.$v.$touch();
       if (!this.$v.$error) {
-        this.$store.dispatch("resource/create", this.resource);
+        await this.$store.dispatch("resource/create", this.resource);
       }
     },
-    update() {
+    async update() {
       this.$v.$touch();
       if (!this.$v.$error) {
-        this.$store.dispatch("resource/update", this.resource);
+        await this.$store.dispatch("resource/update", this.resource);
       }
     },
-    remove() {
-      this.$store.dispatch("resource/remove", this.resource.id);
-      this.$router.push("/");
+    async remove() {
+      await this.$store.dispatch("resource/remove", this.resource.id);
     }
   }
 };

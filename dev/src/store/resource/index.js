@@ -1,10 +1,17 @@
-import resource from '@/fakers/resource';
-import defaultResource from '@/models/resource';
+import requestDataHandler from '@/functions/requestDataHandlerWithAxios';
+import axios from 'axios';
+import router from '@/routers';
 
 export default {
   namespaced: true,
   state: {
-    resource: defaultResource,
+    resource: {
+      slug: '',
+      title: '',
+      desctiption: '',
+      content: '',
+      published: false
+    },
     layout: {},
     fields: {
       text: {
@@ -185,6 +192,7 @@ export default {
       }
     },
     resources: [],
+    count: 0
   },
   mutations: {
     set(state, payload) {
@@ -192,6 +200,9 @@ export default {
     },
     setAll(state, payload) {
       state.resources = payload;
+    },
+    setCount(state, payload) {
+      state.count = payload;
     },
     setLayout(state, payload) {
       state.layout = payload;
@@ -201,70 +212,145 @@ export default {
     }
   },
   actions: {
-    async fetch({
+    async findByPk({
       commit
-    }) {
-      setTimeout(() => {
-        commit('set', resource);
-      }, 1500);
+    }, payload) {
+      const data = requestDataHandler('GET', `/resources/resource/${payload}`);
+
+      const response = await axios(data).catch(err => {
+        this.dispatch("notification/fetch", {
+          type: "error",
+          message: `${err}`,
+          isActive: true
+        });
+      });
+
+      if (response !== undefined && response.status === 200) {
+        commit('set', response.data);
+      }
+    },
+
+    async findOne({
+      commit
+    }, payload) {
+
     },
 
     async create({
       commit
     }, payload) {
-      setTimeout(() => {
+      const data = requestDataHandler('POST', '/resources/create', payload);
+
+      const response = await axios(data).catch(err => {
         this.dispatch("notification/fetch", {
-          type: "success",
-          message: `Успешно сохранено!`,
+          type: "error",
+          message: 'Ошибка при создании!',
           isActive: true
         });
-      }, 1500);
+      });
+
+      if (response !== undefined && response.status === 200) {
+        commit('set', response.data);
+        this.dispatch("notification/fetch", {
+          type: "success",
+          message: 'Успешно сохранено!',
+          isActive: true
+        });
+        router.push(`/resources/${response.data.id}`);
+      }
     },
 
     async update({
       commit
     }, payload) {
-      setTimeout(() => {
-        commit('set', payload);
+      const data = requestDataHandler('PUT', '/resources/update', payload);
+
+      const response = await axios(data).catch(err => {
         this.dispatch("notification/fetch", {
           type: "success",
-          message: `Успешно сохранено!`,
+          message: 'Ошибка при сохранении!',
           isActive: true
         });
-      }, 1500);
+      });
+
+      if (response !== undefined && response.status === 200) {
+        commit('set', response.data);
+        this.dispatch("notification/fetch", {
+          type: "success",
+          message: 'Успешно сохранено!',
+          isActive: true
+        });
+      }
     },
 
     async remove({
       commit
     }, payload) {
-      setTimeout(() => {
+      const data = requestDataHandler('DELETE', '/resources/remove', {
+        id: payload
+      });
+
+      const response = await axios(data).catch(err => {
+        this.dispatch("notification/fetch", {
+          type: "error",
+          message: `${err}`,
+          isActive: true
+        });
+        router.push('/resources');
+      });
+
+      if (response !== undefined && response.status === 200) {
         this.dispatch('resource/clear');
         this.dispatch("notification/fetch", {
           type: "success",
-          message: `Успешно удалено!`,
+          message: 'Успешно удалено!',
           isActive: true
         });
-      }, 1500);
+      }
     },
 
-    async fetchAll({
+    async findAll({
       commit
     }, payload) {
-      setTimeout(() => {
-        commit('setAll', [resource]);
-      }, 1500);
+      const data = requestDataHandler('GET', '/resources', undefined, payload.filter);
+
+      const response = await axios(data).catch(err => {
+        this.dispatch("notification/fetch", {
+          type: "error",
+          message: `${err}`,
+          isActive: true
+        });
+      });
+
+      if (response !== undefined && response.status === 200) {
+        commit('setAll', response.data.resources);
+        commit('setCount', response.data.count);
+      }
     },
 
     set({
       commit
     }, payload) {
-      commit('set', resource);
+      commit('set', payload);
+    },
+
+    setAll({
+      commit
+    }, payload) {
+      commit('setAll', payload);
+      commit('setCount', payload.length);
     },
 
     clear({
       commit
     }) {
-      commit('set', defaultResource)
+      commit('set', {
+        slug: '',
+        title: '',
+        desctiption: '',
+        content: '',
+        published: false
+      });
     }
   },
   getters: {
@@ -273,6 +359,9 @@ export default {
     },
     getAll(state) {
       return state.resources;
+    },
+    getCount(state) {
+      return state.count;
     },
     getLayout(state) {
       return state.layout;

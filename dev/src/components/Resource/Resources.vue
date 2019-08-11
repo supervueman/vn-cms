@@ -1,5 +1,5 @@
 <template lang="pug">
-  v-flex
+  v-flex {{resources}}
     v-toolbar(flat color="white")
       v-spacer
       v-btn(
@@ -24,7 +24,7 @@
         td.text-xs-left 
           div(v-if="props.item.published") Опубликован
           div(v-else) Не опубликован
-        td.text-xs-left {{ props.item.layout.title }}
+        //- td.text-xs-left {{ props.item.layout.title }}
         td.text-xs-left {{ props.item.createdAt }}
         td.text-xs-right
           v-btn(flat fab color="primary" @click="removeDialogOpen(props.item)")
@@ -77,7 +77,7 @@ export default {
           value: "title"
         },
         { text: "Статус", value: "published" },
-        { text: "Шаблон", value: "lyout.title" },
+        // { text: "Шаблон", value: "layout.title" },
         { text: "Дата создания", value: "createdAt" },
         { text: "", sortable: false }
       ],
