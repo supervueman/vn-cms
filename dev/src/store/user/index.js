@@ -42,9 +42,15 @@ export default {
     }, payload) {
       const data = requestDataHandler('GET', `/users/user/${payload.id}`, undefined, payload.filter);
 
-      const result = await axios(data);
+      const response = await axios(data).catch(err => {
+        this.dispatch("notification/fetch", {
+          type: "error",
+          message: `${err}`,
+          isActive: true
+        });
+      });
 
-      if (result !== undefined) {
+      if (response !== undefined && response.status === 200) {
         commit('set', result.data);
       }
     },
@@ -61,9 +67,15 @@ export default {
         }
       });
 
-      const result = await axios(data);
+      const response = await axios(data).catch(err => {
+        this.dispatch("notification/fetch", {
+          type: "error",
+          message: `${err}`,
+          isActive: true
+        });
+      });
 
-      if (result !== undefined) {
+      if (response !== undefined && response.status === 200) {
         console.log(result)
       }
     },
@@ -73,21 +85,21 @@ export default {
     }, payload) {
       const data = requestDataHandler('PUT', '/users/update', payload.profile, payload.filter);
 
-      const result = await axios(data);
+      const response = await axios(data).catch(err => {
+        this.dispatch("notification/fetch", {
+          type: "error",
+          message: `${err}`,
+          isActive: true
+        });
+      });
 
-      if (result !== undefined) {
+      if (response !== undefined && response.status === 200) {
         this.dispatch("notification/fetch", {
           type: "success",
           message: 'Успешно сохранено!',
           isActive: true
         });
         commit('set', result.data);
-      } else {
-        this.dispatch("notification/fetch", {
-          type: "error",
-          message: 'Произошла ошибка при сохранении!',
-          isActive: true
-        });
       }
     },
 
@@ -96,18 +108,18 @@ export default {
     }, payload) {
       const data = requestDataHandler('PUT', '/users/password-change', payload);
 
-      const result = await axios(data);
+      const response = await axios(data).catch(err => {
+        this.dispatch("notification/fetch", {
+          type: "error",
+          message: `${err}`,
+          isActive: true
+        });
+      });
 
-      if (result !== undefined) {
+      if (response !== undefined && response.status === 200) {
         this.dispatch("notification/fetch", {
           type: "success",
           message: 'Успешно сохранено!',
-          isActive: true
-        });
-      } else {
-        this.dispatch("notification/fetch", {
-          type: "error",
-          message: 'Произошла ошибка при сохранении!',
           isActive: true
         });
       }
@@ -141,9 +153,16 @@ export default {
       commit
     }, payload) {
       const data = requestDataHandler('GET', '/users', undefined, payload);
-      const result = await axios(data);
 
-      if (result !== undefined) {
+      const response = await axios(data).catch(err => {
+        this.dispatch("notification/fetch", {
+          type: "error",
+          message: `${err}`,
+          isActive: true
+        });
+      });
+
+      if (response !== undefined && response.status === 200) {
         commit('setAll', result.data.users);
         commit('setCount', result.data.count);
       }

@@ -1,21 +1,14 @@
 import requestDataHandler from '@/functions/requestDataHandlerWithAxios';
 import axios from 'axios';
 
-const role = {
-  slug: '',
-  title: '',
-  rang: ''
-};
-const clearRole = {
-  slug: '',
-  title: '',
-  rang: ''
-}
-
 export default {
   namespaced: true,
   state: {
-    role,
+    role: {
+      slug: '',
+      title: '',
+      rang: ''
+    },
     roles: []
   },
   mutations: {
@@ -161,7 +154,11 @@ export default {
     clear({
       commit
     }) {
-      commit('set', clearRole);
+      commit('set', {
+        slug: '',
+        title: '',
+        rang: ''
+      });
     }
   },
   getters: {
