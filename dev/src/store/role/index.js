@@ -32,9 +32,15 @@ export default {
     }, payload) {
       const data = requestDataHandler('GET', `/roles/role/${payload}`)
 
-      const result = await axios(data);
+      const result = await axios(data).catch(err => {
+        this.dispatch("notification/fetch", {
+          type: "error",
+          message: 'Не найдено!',
+          isActive: true
+        });
+      });
 
-      if (result !== undefined) {
+      if (result !== undefined && result.status === 200) {
         commit('set', result.data);
       }
     },
@@ -44,10 +50,16 @@ export default {
     }, payload) {
       const data = requestDataHandler('GET', '/roles/findone', undefined, payload);
 
-      const result = await axios(data);
+      const result = await axios(data).catch(err => {
+        this.dispatch("notification/fetch", {
+          type: "error",
+          message: 'Не найдено!',
+          isActive: true
+        });
+      });
 
-      if (result !== undefined) {
-        commit('set', result.data)
+      if (result !== undefined && result.status === 200) {
+        commit('set', result.data);
       }
     },
 
@@ -56,19 +68,19 @@ export default {
     }, payload) {
       const data = requestDataHandler('POST', '/roles/create', payload);
 
-      const result = await axios(data);
+      const result = await axios(data).catch(err => {
+        this.dispatch("notification/fetch", {
+          type: "error",
+          message: 'Ошибка при создании!',
+          isActive: true
+        });
+      });
 
-      if (result !== undefined) {
+      if (result !== undefined && result.status === 200) {
         commit('set', result.data);
         this.dispatch("notification/fetch", {
           type: "success",
           message: 'Успешно сохранено!',
-          isActive: true
-        });
-      } else {
-        this.dispatch("notification/fetch", {
-          type: "error",
-          message: 'Ошибка при создании!',
           isActive: true
         });
       }
@@ -79,9 +91,15 @@ export default {
     }, payload) {
       const data = requestDataHandler('PUT', `/roles/update`, payload);
 
-      const result = await axios(data);
+      const result = await axios(data).catch(err => {
+        this.dispatch("notification/fetch", {
+          type: "error",
+          message: 'Ошибка при сохранении!',
+          isActive: true
+        });
+      });
 
-      if (result !== undefined) {
+      if (result !== undefined && result.status === 200) {
         commit('set', result.data);
         this.dispatch("notification/fetch", {
           type: "success",
@@ -98,9 +116,15 @@ export default {
         id: payload
       });
 
-      const result = await axios(data);
+      const result = await axios(data).catch(err => {
+        this.dispatch("notification/fetch", {
+          type: "error",
+          message: 'Ошибка при удалени!',
+          isActive: true
+        });
+      });
 
-      if (result !== undefined) {
+      if (result !== undefined && result.status === 200) {
         this.dispatch('role/clear');
         this.dispatch("notification/fetch", {
           type: "success",
@@ -117,7 +141,7 @@ export default {
 
       const result = await axios(data);
 
-      if (result !== undefined) {
+      if (result !== undefined && result.status === 200) {
         commit('setAll', result.data);
       }
     },

@@ -11,11 +11,16 @@
 			:firstname="profile.firstname"
 			:lastname="profile.lastname"
 			:image="profile.image"
+			@openLoginDialog="isLoginDialog = true"
 		)
 		sidebar(v-if="adminAccess || managerAccess")
 		v-content
 			v-container(fluid)
 				router-view
+		v-dialog(v-model="isLoginDialog" max-width="500px" min-width="320px")
+			login(
+				@closeLoginDialog="isLoginDialog = false"
+			)
 </template>
 
 <script>
@@ -23,6 +28,11 @@ import accessMixin from "@/mixins/accessMixin";
 export default {
   name: "App",
   mixins: [accessMixin],
+  data() {
+    return {
+      isLoginDialog: false
+    };
+  },
   computed: {
     profile() {
       return this.$store.getters["profile/get"];

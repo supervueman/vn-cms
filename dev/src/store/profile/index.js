@@ -68,7 +68,6 @@ export default {
       if (response !== undefined && response.status === 200) {
         localStorage.setItem('x-api-key', response.data.token);
         commit('set', response.data);
-        router.push('/profile');
       }
     },
 

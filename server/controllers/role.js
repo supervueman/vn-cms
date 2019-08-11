@@ -64,7 +64,7 @@ module.exports = {
   async create(req, res) {
     if (!req.adminAccess) {
       res.status(401).send({
-        message: 'Нет доступа к созданию политики доступа!'
+        message: 'Нет доступа!'
       });
       return;
     }
@@ -75,7 +75,7 @@ module.exports = {
   async update(req, res) {
     if (!req.adminAccess) {
       res.status(401).send({
-        message: 'Нет доступа для редактирования!'
+        message: 'Нет доступа!'
       });
       return;
     }
@@ -99,7 +99,7 @@ module.exports = {
   async remove(req, res) {
     if (!req.adminAccess) {
       res.status(401).send({
-        message: 'Нет доступа для удаления политики доступа!'
+        message: 'Нет доступа!'
       });
       return;
     }
@@ -110,7 +110,7 @@ module.exports = {
       }
     });
 
-    res.status(204).send({
+    res.status(200).send({
       message: 'Успешно удалено!'
     });
   },

@@ -6,7 +6,7 @@
 			v-btn(flat to="/users" v-if="adminAccess || managerAccess") Пользователи
 		v-spacer
 		v-toolbar-items.hidden-xs-and-down
-			v-btn(flat to="/login" v-if="!isAuth") Войти
+			v-btn(flat v-if="!isAuth" @click="$emit('openLoginDialog')") Войти
 		v-toolbar-items.hidden-xs-and-down
 			v-btn(flat slot="activator" to="/profile" v-if="profileId !== '0'")
 				div.body-1.mr-3 {{ firstname }} {{lastname}}

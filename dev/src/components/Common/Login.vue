@@ -1,37 +1,35 @@
 <template lang="pug">
-  v-flex(class="mt-5")
-    v-card(
-      class="mx-auto"
-      max-width="500"
-      tag="form"
-    )
-      v-card-title
-        h1(class="title") Войти
-      v-card-text
-        v-text-field(
-          v-model="email"
-          label="E-mail:"
-          :error-messages="emailErrors"
-          required
-          @input="$v.email.$touch()"
-          @blur="$v.email.$touch()"
-        )
-        v-text-field(
-          v-model="password"
-          label="Пароль:"
-          :error-messages="passErrors"
-          type="password"
-          required
-          @input="$v.password.$touch()"
-          @blur="$v.password.$touch()"
-        )
-      v-card-actions
-        router-link(to="/reset-password" class="ml-2") Забыли пароль?
-        v-btn(
-          @click="submit"
-          color="primary"
-          class="ml-auto mr-2 mb-2"
-        ) Войти
+  v-card(
+    class="mx-auto"
+    tag="form"
+  )
+    v-card-title
+      h1(class="title") Войти
+    v-card-text
+      v-text-field(
+        v-model="email"
+        label="E-mail:"
+        :error-messages="emailErrors"
+        required
+        @input="$v.email.$touch()"
+        @blur="$v.email.$touch()"
+      )
+      v-text-field(
+        v-model="password"
+        label="Пароль:"
+        :error-messages="passErrors"
+        type="password"
+        required
+        @input="$v.password.$touch()"
+        @blur="$v.password.$touch()"
+      )
+    v-card-actions
+      router-link(to="/reset-password" class="ml-2") Забыли пароль?
+      v-btn(
+        @click="submit"
+        color="primary"
+        class="ml-auto mr-2 mb-2"
+      ) Войти
 </template>
 
 <script>
@@ -96,6 +94,8 @@ export default {
       };
 
       await this.$store.dispatch("authenticate/login", data);
+
+      this.$emit("closeLoginDialog");
     }
   }
 };
