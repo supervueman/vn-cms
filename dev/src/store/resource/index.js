@@ -10,7 +10,8 @@ export default {
       title: '',
       desctiption: '',
       content: '',
-      published: false
+      published: false,
+      level: 1
     },
     layout: {},
     fields: {
@@ -296,7 +297,6 @@ export default {
           message: `${err}`,
           isActive: true
         });
-        router.push('/resources');
       });
 
       if (response !== undefined && response.status === 200) {
@@ -306,13 +306,14 @@ export default {
           message: 'Успешно удалено!',
           isActive: true
         });
+        router.push('/resources');
       }
     },
 
     async findAll({
       commit
     }, payload) {
-      const data = requestDataHandler('GET', '/resources', undefined, payload.filter);
+      const data = requestDataHandler('GET', '/resources', undefined, payload);
 
       const response = await axios(data).catch(err => {
         this.dispatch("notification/fetch", {
@@ -349,7 +350,8 @@ export default {
         title: '',
         desctiption: '',
         content: '',
-        published: false
+        published: false,
+        level: 1
       });
     }
   },

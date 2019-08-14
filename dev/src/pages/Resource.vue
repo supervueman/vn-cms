@@ -24,7 +24,9 @@
               v-flex
                 v-card
                   v-card-text
-                    resources
+                    resources(
+                      :level="resource.level"
+                    )
 </template>
 
 <script>

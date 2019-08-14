@@ -5,7 +5,7 @@
         v-spacer
         v-btn(
           color="primary"
-          to="/resource-create"
+          :to="`/resource-create?level=${level}`"
           dark
           v-if="managerAccess"
         ) Создать ресурс
@@ -19,7 +19,7 @@
           td.text-xs-left
             router-link(
               :to="`/resources/${props.item.id}`"
-            ) {{ props.item.title }} ({{props.item.id}})
+            ) {{ props.item.title }} ({{props.item.id}}) {{props.item.level}}
           td.text-xs-left {{props.item.slug}}
           td.text-xs-left {{props.item.createdAt}}
           td.text-xs-right
@@ -57,6 +57,13 @@ export default {
 
   mixins: [accessMixin],
 
+  props: {
+    level: {
+      type: Number,
+      default: 0
+    }
+  },
+
   data() {
     return {
       headers: [
@@ -84,7 +91,8 @@ export default {
     await this.$store.dispatch("resource/findAll", {
       filter: {
         offset: this.$route.query.offset || 0,
-        limit: this.$route.query.limit || this.limit
+        limit: this.$route.query.limit || this.limit,
+        order: [["createdAt", "DESC"]]
       }
     });
   },
@@ -94,7 +102,8 @@ export default {
       await this.$store.dispatch("resource/findAll", {
         filter: {
           offset,
-          limit
+          limit,
+          order: [["createdAt", "DESC"]]
         }
       });
     },

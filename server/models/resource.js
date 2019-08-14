@@ -18,7 +18,8 @@ const Resource = sequelize.define('resource', {
   title: Sequelize.STRING,
   description: Sequelize.STRING,
   content: Sequelize.STRING,
-  published: Sequelize.BOOLEAN
+  published: Sequelize.BOOLEAN,
+  level: Sequelize.INTEGER
 });
 
 Resource.belongsTo(User, {

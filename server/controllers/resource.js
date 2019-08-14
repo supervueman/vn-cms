@@ -15,12 +15,16 @@ module.exports = {
 
     const filter = filterHandler(req.query.filter);
 
+    console.log(req.query)
+
     if (req.managerAccess) {
       if (!filter.where) {
         filter.where = {};
       }
       filter.where.userId = req.profile.id
     }
+
+    // console.log(filter)
 
     const resources = await Resource.findAll(filter);
 

@@ -15,6 +15,8 @@ module.exports = {
 			return;
 		}
 
+		// console.log(req.query)
+
 		const filter = filterHandler(req.query.filter);
 
 		if (req.managerAccess) {

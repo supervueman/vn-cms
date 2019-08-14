@@ -215,6 +215,11 @@ export default {
     async create() {
       this.$v.$touch();
       if (!this.$v.$error) {
+        if (this.$route.query.level) {
+          this.resource.level = Number(this.$route.query.level) + 1;
+        } else {
+          this.resource.level = 1;
+        }
         await this.$store.dispatch("resource/create", this.resource);
       }
     },
