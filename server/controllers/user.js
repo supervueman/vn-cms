@@ -15,9 +15,11 @@ module.exports = {
 			return;
 		}
 
-		// console.log(req.query)
+		console.log(req.query)
 
 		const filter = filterHandler(req.query.filter);
+
+		console.log(filter)
 
 		if (req.managerAccess) {
 			if (!filter.where) {

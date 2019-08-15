@@ -53,7 +53,7 @@
 import accessMixin from "@/mixins/accessMixin";
 
 export default {
-  name: "ResourcesPage",
+  name: "Resources",
 
   mixins: [accessMixin],
 

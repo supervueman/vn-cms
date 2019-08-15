@@ -18,28 +18,6 @@ export default {
     Resources
   },
 
-  mixins: [accessMixin],
-
-  async mounted() {
-    await this.$store.dispatch("resource/findAll", {
-      filter: {
-        offset: this.$route.query.offset || 0,
-        limit: this.$route.query.limit || this.limit,
-        order: [["createdAt", "DESC"]]
-      }
-    });
-  },
-
-  methods: {
-    async getPage({ offset, limit }) {
-      await this.$store.dispatch("resource/findAll", {
-        filter: {
-          offset,
-          limit,
-          order: [["createdAt", "DESC"]]
-        }
-      });
-    }
-  }
+  mixins: [accessMixin]
 };
 </script>
