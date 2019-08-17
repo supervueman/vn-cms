@@ -46,7 +46,24 @@
                 v-list-tile-action
                   v-icon(color="primary") library_books
                 v-list-tile-content
-                  v-list-tile-title {{resource.title}}
+                  v-list-tile-title {{resource.title}} ({{resource.id}})
+
+        v-expansion-panel(
+          v-model="panel"
+          expand
+          v-if="adminAccess"
+        )
+          v-expansion-panel-content
+            template(v-slot:header)
+              div {{slug}}
+            v-list
+              v-list-tile(
+                to="/resources"
+              )
+                v-list-tile-action
+                  v-icon(color="primary") folder
+                v-list-tile-content
+                  v-list-tile-title Все ресурсы
 
       v-tab(v-if="adminAccess") Элементы
       v-tab-item(v-if="adminAccess")

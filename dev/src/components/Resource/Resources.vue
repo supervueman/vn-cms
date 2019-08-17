@@ -5,7 +5,7 @@
         v-spacer
         v-btn(
           color="primary"
-          :to="`/resource-create?level=${level}`"
+          :to="`/resource-create?level=${level}&parentId=${parentId}`"
           dark
           v-if="managerAccess"
         ) Создать ресурс
@@ -19,7 +19,7 @@
           td.text-xs-left
             router-link(
               :to="`/resources/${props.item.id}`"
-            ) {{ props.item.title }} ({{props.item.id}}) {{props.item.level}}
+            ) {{ props.item.title }} ({{props.item.id}})
           td.text-xs-left {{props.item.slug}}
           td.text-xs-left {{props.item.createdAt}}
           td.text-xs-right
@@ -58,6 +58,10 @@ export default {
   mixins: [accessMixin],
 
   props: {
+    parentId: {
+      type: Number,
+      default: null
+    },
     level: {
       type: Number,
       default: 0
@@ -94,8 +98,8 @@ export default {
         limit: this.$route.query.limit || this.limit,
         order: [["createdAt", "DESC"]],
         where: {
-          level: this.level + 1
-          // parentId: this.$route.params.id
+          level: this.level + 1,
+          parentId: this.$route.params.id
         }
       }
     });
@@ -109,8 +113,8 @@ export default {
           limit,
           order: [["createdAt", "DESC"]],
           where: {
-            level: this.level + 1
-            // parentId: this.$route.params.id
+            level: this.level + 1,
+            parentId: this.$route.params.id
           }
         }
       });

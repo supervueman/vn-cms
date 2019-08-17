@@ -26,6 +26,7 @@
                   v-card-text
                     resources(
                       :level="resource.level"
+                      :parentId="resource.id"
                     )
 </template>
 

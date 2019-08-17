@@ -26,4 +26,9 @@ Resource.belongsTo(User, {
   onDelete: 'cascade'
 });
 
+Resource.belongsTo(Resource, {
+  onDelete: 'cascade',
+  as: 'parent'
+})
+
 module.exports = Resource;

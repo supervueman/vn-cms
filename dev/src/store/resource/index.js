@@ -11,7 +11,8 @@ export default {
       desctiption: '',
       content: '',
       published: false,
-      level: 1
+      level: 1,
+      parentId: null
     },
     layout: {},
     fields: {
@@ -237,8 +238,8 @@ export default {
               ["createdAt", "DESC"]
             ],
             where: {
-              level: response.data.level + 1
-              // parentId: this.$route.params.id
+              level: response.data.level + 1,
+              parentId: response.data.id
             }
           }
         });
@@ -365,7 +366,8 @@ export default {
         desctiption: '',
         content: '',
         published: false,
-        level: 1
+        level: 1,
+        parentId: null
       });
     }
   },

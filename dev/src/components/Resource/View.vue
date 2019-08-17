@@ -219,6 +219,8 @@ export default {
         } else {
           this.resource.level = 1;
         }
+
+        this.resource.parentId = this.$route.query.parentId;
         await this.$store.dispatch("resource/create", this.resource);
       }
     },
