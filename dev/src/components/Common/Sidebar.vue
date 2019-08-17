@@ -28,28 +28,25 @@
             )
               v-icon add_circle_outline
             span Создать ресурс
-        v-expansion-panel(v-model="panel" expand)
+
+        v-expansion-panel(
+          v-model="panel"
+          expand
+          v-if="managerAccess"
+        )
           v-expansion-panel-content
             template(v-slot:header)
-              div Manager_1
+              div {{slug}}
             v-list
-              v-list-tile(to="/resources/1")
+              v-list-tile(
+                v-for="resource in resources"
+                :key="resource.id"
+                :to="`/resources/${resource.id}`"
+              )
                 v-list-tile-action
                   v-icon(color="primary") library_books
                 v-list-tile-content
-                  v-list-tile-title Новости
-
-              v-list-tile(to="/resources/2")
-                v-list-tile-action
-                  v-icon(color="primary") library_books
-                v-list-tile-content
-                  v-list-tile-title Товары
-
-              v-list-tile(to="/resources/3")
-                v-list-tile-action
-                  v-icon(color="primary") library_books
-                v-list-tile-content
-                  v-list-tile-title О нас
+                  v-list-tile-title {{resource.title}}
 
       v-tab(v-if="adminAccess") Элементы
       v-tab-item(v-if="adminAccess")
@@ -83,6 +80,13 @@ export default {
 
   mixins: [panelMixin, accessMixin],
 
+  props: {
+    slug: {
+      type: String,
+      default: ""
+    }
+  },
+
   data() {
     return {
       active: null,
@@ -92,6 +96,12 @@ export default {
       hide_overlay: true,
       panelName: "panel-resource"
     };
+  },
+
+  computed: {
+    resources() {
+      return this.$store.getters["profile/getProfileResources"];
+    }
   }
 };
 </script>

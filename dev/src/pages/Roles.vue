@@ -14,7 +14,7 @@
         v-data-table(
           :headers="headers"
           :items="roles"
-          :rows-per-page-items="[5]"
+          :rows-per-page-items="[limit]"
           hide-actions
         )
           template(v-slot:items="props")
@@ -70,7 +70,7 @@ export default {
       ],
       isRemoveDialog: false,
       removeItem: {},
-      limit: 5
+      limit: 10
     };
   },
 

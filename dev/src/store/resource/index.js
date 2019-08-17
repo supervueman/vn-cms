@@ -228,6 +228,20 @@ export default {
 
       if (response !== undefined && response.status === 200) {
         commit('set', response.data);
+
+        await this.dispatch("resource/findAll", {
+          filter: {
+            offset: 0,
+            limit: 10,
+            order: [
+              ["createdAt", "DESC"]
+            ],
+            where: {
+              level: response.data.level + 1
+              // parentId: this.$route.params.id
+            }
+          }
+        });
       }
     },
 

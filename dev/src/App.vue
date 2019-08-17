@@ -13,7 +13,10 @@
 			:image="profile.image"
 			@openLoginDialog="isLoginDialog = true"
 		)
-		sidebar(v-if="adminAccess || managerAccess")
+		sidebar(
+			v-if="adminAccess || managerAccess"
+			:slug="profile.slug"
+		)
 		v-content
 			v-container(fluid)
 				router-view
@@ -43,11 +46,6 @@ export default {
   },
   async beforeCreate() {
     await this.$store.dispatch("profile/findByAccessToken");
-    if (this.adminAccess || this.managerAccess) {
-      if (this.$route.fullPath === "/login") {
-        this.$router.back();
-      }
-    }
   }
 };
 </script>

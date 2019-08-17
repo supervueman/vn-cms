@@ -107,7 +107,6 @@
         v-layout.wrap
           v-flex.md12
             editor(
-              v-if="resource.content"
               :content="resource.content"
               @update="resource.content = $event()"
             )

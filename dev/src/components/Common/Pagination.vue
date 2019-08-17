@@ -18,11 +18,11 @@ export default {
     },
     limit: {
       type: Number,
-      default: 5
+      default: 10
     },
     offset: {
       type: Number,
-      default: 5
+      default: 10
     }
   },
   data() {

@@ -15,7 +15,7 @@
             v-data-table(
               :headers="headers"
               :items="users"
-              :rows-per-page-items="[5]"
+              :rows-per-page-items="[limit]"
               hide-actions
             )
               template(v-slot:items="props")
@@ -47,7 +47,7 @@
               pagination(
                 :itemsLength="count"
                 @getPage="getPage"
-                :limit="5"
+                :limit="limit"
               )
         v-dialog(
           v-model="isRemoveDialog"
@@ -87,7 +87,7 @@ export default {
       isRemoveDialog: false,
       removeItem: {},
       imgFolderBasePath,
-      limit: 5
+      limit: 10
     };
   },
 

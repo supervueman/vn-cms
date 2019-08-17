@@ -13,11 +13,7 @@ module.exports = {
       return;
     }
 
-    console.log(req.query)
-
     const filter = filterHandler(req.query.filter);
-
-    console.log(filter)
 
     if (req.managerAccess) {
       if (!filter.where) {
@@ -25,8 +21,6 @@ module.exports = {
       }
       filter.where.userId = req.profile.id
     }
-
-    // console.log(filter)
 
     const resources = await Resource.findAll(filter);
 

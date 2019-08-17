@@ -2,52 +2,36 @@ import requestDataHandler from '@/functions/requestDataHandlerWithAxios';
 import axios from 'axios';
 import router from '@/routers';
 
-const profile = {
-  id: 0,
-  slug: '',
-  email: '',
-  role: {},
-  roleId: 0,
-  phone: '',
-  firstname: '',
-  lastname: '',
-  middlename: '',
-  image: '',
-  facebook: '',
-  vkontakte: '',
-  instagram: '',
-  password: '',
-  token: '',
-  userId: ''
-};
-
-const clearProfile = {
-  id: 0,
-  slug: '',
-  email: '',
-  role: {},
-  roleId: 0,
-  phone: '',
-  firstname: '',
-  lastname: '',
-  middlename: '',
-  image: '',
-  facebook: '',
-  vkontakte: '',
-  instagram: '',
-  password: '',
-  token: '',
-  userId: ''
-};
-
 export default {
   namespaced: true,
   state: {
-    profile
+    profile: {
+      id: 0,
+      slug: '',
+      email: '',
+      role: {},
+      roleId: 0,
+      phone: '',
+      firstname: '',
+      lastname: '',
+      middlename: '',
+      image: '',
+      facebook: '',
+      vkontakte: '',
+      instagram: '',
+      password: '',
+      token: '',
+      userId: ''
+    },
+    profileResources: []
   },
   mutations: {
     set(state, payload) {
       state.profile = payload;
+    },
+
+    setProfileResources(state, payload) {
+      state.profileResources = payload;
     }
   },
   actions: {
@@ -62,12 +46,34 @@ export default {
           message: `${err}`,
           isActive: true
         });
-        router.push('/login');
+        router.push('/');
       });
 
       if (response !== undefined && response.status === 200) {
         localStorage.setItem('x-api-key', response.data.token);
+
+        const dataResources = requestDataHandler('GET', '/resources', undefined, {
+          filter: {
+            where: {
+              level: 1,
+              userId: response.data.id
+            }
+          }
+        });
+
+        const responseResources = await axios(dataResources).catch(err => {
+          this.dispatch("notification/fetch", {
+            type: "error",
+            message: `${err}`,
+            isActive: true
+          });
+        });
+
         commit('set', response.data);
+
+        if (responseResources !== undefined && responseResources.status === 200) {
+          commit('setProfileResources', responseResources.data.resources);
+        }
       }
     },
 
@@ -167,12 +173,32 @@ export default {
     clear({
       commit
     }) {
-      commit('set', clearProfile)
+      commit('set', {
+        id: 0,
+        slug: '',
+        email: '',
+        role: {},
+        roleId: 0,
+        phone: '',
+        firstname: '',
+        lastname: '',
+        middlename: '',
+        image: '',
+        facebook: '',
+        vkontakte: '',
+        instagram: '',
+        password: '',
+        token: '',
+        userId: ''
+      })
     }
   },
   getters: {
     get(state) {
       return state.profile;
     },
+    getProfileResources(state) {
+      return state.profileResources;
+    }
   }
 };

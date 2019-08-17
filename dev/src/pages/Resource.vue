@@ -69,6 +69,11 @@ export default {
   beforeRouteLeave(to, from, next) {
     this.$store.dispatch("resource/clear");
     next();
+  },
+
+  async beforeRouteUpdate(to, from, next) {
+    await this.$store.dispatch("resource/findByPk", to.params.id);
+    next();
   }
 };
 </script>

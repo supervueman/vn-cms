@@ -23,7 +23,13 @@ export default {
         localStorage.setItem('access_token', response.data.access_token);
         localStorage.setItem('uid', response.data.uid);
 
-        this.dispatch('profile/findByAccessToken');
+        await this.dispatch('profile/findByAccessToken', {
+          filter: {
+            include: [{
+              model: '$resource'
+            }]
+          }
+        });
       }
     },
     async logout({

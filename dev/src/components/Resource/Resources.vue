@@ -12,7 +12,7 @@
       v-data-table(
         :headers="headers"
         :items="resources"
-        :rows-per-page-items="[5]"
+        :rows-per-page-items="[limit]"
         hide-actions
       )
         template(v-slot:items="props")
@@ -35,7 +35,7 @@
         pagination(
           :itemsLength="count"
           @getPage="getPage"
-          :limit="5"
+          :limit="limit"
         )
     v-dialog(
       v-model="isRemoveDialog"
@@ -74,7 +74,7 @@ export default {
       ],
       isRemoveDialog: false,
       removeItem: {},
-      limit: 5
+      limit: 10
     };
   },
 
@@ -92,7 +92,11 @@ export default {
       filter: {
         offset: this.$route.query.offset || 0,
         limit: this.$route.query.limit || this.limit,
-        order: [["createdAt", "DESC"]]
+        order: [["createdAt", "DESC"]],
+        where: {
+          level: this.level + 1
+          // parentId: this.$route.params.id
+        }
       }
     });
   },
@@ -103,7 +107,11 @@ export default {
         filter: {
           offset,
           limit,
-          order: [["createdAt", "DESC"]]
+          order: [["createdAt", "DESC"]],
+          where: {
+            level: this.level + 1
+            // parentId: this.$route.params.id
+          }
         }
       });
     },
