@@ -170,6 +170,12 @@ export default {
       commit('set', payload);
     },
 
+    setProfileResources({
+      commit
+    }, payload) {
+      commit('setProfileResources', payload);
+    },
+
     clear({
       commit
     }) {

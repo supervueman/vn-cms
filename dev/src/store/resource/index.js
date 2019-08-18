@@ -273,6 +273,10 @@ export default {
           isActive: true
         });
         router.push(`/resources/${response.data.id}`);
+
+        if (response.data.level === 1) {
+          this.getters['profile/getProfileResources'].push(response.data)
+        }
       }
     },
 

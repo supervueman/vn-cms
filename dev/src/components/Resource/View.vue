@@ -231,6 +231,20 @@ export default {
       }
     },
     async remove() {
+      const resources = this.$store.getters["resource/getAll"].filter(el => {
+        if (el.id !== this.removeItem.id) {
+          return el;
+        }
+      });
+      const profileResources = this.$store.getters[
+        "profile/getProfileResources"
+      ].filter(el => {
+        if (el.id !== this.resource.id) {
+          return el;
+        }
+      });
+      this.$store.dispatch("profile/setProfileResources", profileResources);
+      this.$store.dispatch("resource/setAll", resources);
       await this.$store.dispatch("resource/remove", this.resource.id);
     }
   }

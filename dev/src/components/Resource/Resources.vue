@@ -127,7 +127,15 @@ export default {
           return el;
         }
       });
+      const profileResources = this.$store.getters[
+        "profile/getProfileResources"
+      ].filter(el => {
+        if (el.id !== this.removeItem.id) {
+          return el;
+        }
+      });
       this.$store.dispatch("resource/setAll", resources);
+      this.$store.dispatch("profile/setProfileResources", profileResources);
     },
 
     removeDialogOpen(resource) {
