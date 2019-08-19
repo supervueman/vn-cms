@@ -32,7 +32,9 @@ module.exports = {
       });
     }
 
-    const layout = await Layout.findByPk(req.params.id);
+    const filter = filterHandler(req.query.filter);
+
+    const layout = await Layout.findByPk(req.params.id, filter);
 
     if (!layout) {
       res.status(404).send({

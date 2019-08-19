@@ -214,7 +214,7 @@ export default {
     async findByPk({
       commit
     }, payload) {
-      const data = requestDataHandler('GET', `/resources/resource/${payload}`);
+      const data = requestDataHandler('GET', `/resources/resource/${payload.id}`, undefined, payload.filter);
 
       const response = await axios(data).catch(err => {
         this.dispatch("notification/fetch", {
@@ -280,7 +280,7 @@ export default {
     async update({
       commit
     }, payload) {
-      const data = requestDataHandler('PUT', '/resources/update', payload);
+      const data = requestDataHandler('PUT', '/resources/update', payload.data, payload.filter);
 
       const response = await axios(data).catch(err => {
         this.dispatch("notification/fetch", {

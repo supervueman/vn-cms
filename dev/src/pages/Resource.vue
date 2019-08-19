@@ -64,7 +64,18 @@ export default {
   },
 
   async mounted() {
-    await this.$store.dispatch("resource/findByPk", this.$route.params.id);
+    await this.$store.dispatch("resource/findByPk", {
+      id: this.$route.params.id,
+      filter: {
+        filter: {
+          include: [
+            {
+              model: "$layout"
+            }
+          ]
+        }
+      }
+    });
   },
 
   beforeRouteLeave(to, from, next) {
@@ -73,7 +84,18 @@ export default {
   },
 
   async beforeRouteUpdate(to, from, next) {
-    await this.$store.dispatch("resource/findByPk", to.params.id);
+    await this.$store.dispatch("resource/findByPk", {
+      id: to.params.id,
+      filter: {
+        filter: {
+          include: [
+            {
+              model: "$layout"
+            }
+          ]
+        }
+      }
+    });
     next();
   }
 };

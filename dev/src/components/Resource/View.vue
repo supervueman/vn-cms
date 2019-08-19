@@ -87,6 +87,7 @@
                       return-object
                       label="Шаблон:"
                       v-model="resource.layout"
+                      @change="resource.layoutId = $event.id"
                       v-on="on"
                       required
                     )
@@ -207,7 +208,7 @@ export default {
   },
 
   async mounted() {
-    await this.$store.dispatch("layout/fetchAll");
+    await this.$store.dispatch("layout/findAll");
   },
 
   methods: {
@@ -228,7 +229,18 @@ export default {
     async update() {
       this.$v.$touch();
       if (!this.$v.$error) {
-        await this.$store.dispatch("resource/update", this.resource);
+        await this.$store.dispatch("resource/update", {
+          data: this.resource,
+          filter: {
+            filter: {
+              include: [
+                {
+                  model: "$layout"
+                }
+              ]
+            }
+          }
+        });
       }
     },
 

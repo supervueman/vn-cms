@@ -41,7 +41,9 @@ module.exports = {
 
     const id = req.params.id;
 
-    const resource = await Resource.findByPk(id);
+    const filter = filterHandler(req.query.filter);
+
+    const resource = await Resource.findByPk(id, filter);
 
     if (!resource) {
       res.status(404).send({
@@ -110,7 +112,9 @@ module.exports = {
       return;
     }
 
-    const resource = await Resource.findByPk(req.body.id);
+    const filter = filterHandler(req.query.filter);
+
+    const resource = await Resource.findByPk(req.body.id, filter);
 
     if (!resource) {
       res.status(401).send({
