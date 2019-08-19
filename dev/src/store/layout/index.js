@@ -1,10 +1,16 @@
-import layout from '@/fakers/layout';
 import defaultLayout from '@/models/layout';
+
+const layout = {
+  slug: '',
+  title: '',
+}
 
 export default {
   namespaced: true,
   state: {
-    layout: defaultLayout,
+    layout: {
+      ...layout
+    },
     layouts: []
   },
   mutations: {
@@ -80,7 +86,9 @@ export default {
     clear({
       commit
     }) {
-      commit('set', defaultLayout);
+      commit('set', {
+        ...layout
+      });
     }
   },
   getters: {
