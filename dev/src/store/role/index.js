@@ -10,7 +10,8 @@ export default {
     role: {
       ...role
     },
-    roles: []
+    roles: [],
+    count: 0
   },
   mutations: {
     set(state, payload) {
@@ -18,6 +19,9 @@ export default {
     },
     setAll(state, payload) {
       state.roles = payload;
+    },
+    setCount(state, payload) {
+      state.count = payload;
     }
   },
   actions: {
@@ -131,7 +135,7 @@ export default {
     async findAll({
       commit
     }, payload) {
-      const data = requestDataHandler('GET', '/roles', undefined, payload);
+      const data = requestDataHandler('GET', '/roles', undefined, payload.query);
 
       const response = await axios(data).catch(err => {
         this.dispatch("notification/fetch", {
@@ -143,6 +147,24 @@ export default {
 
       if (response !== undefined && response.status === 200) {
         commit('setAll', response.data);
+      }
+    },
+
+    async count({
+      commit
+    }, payload) {
+      const data = requestDataHandler('GET', '/roles/count', undefined, payload.query);
+
+      const response = await axios(data).catch(err => {
+        this.dispatch("notification/fetch", {
+          type: "error",
+          message: `${err}`,
+          isActive: true
+        });
+      });
+
+      if (response !== undefined && response.status === 200) {
+        commit('setCount', response.data.count);
       }
     },
 
@@ -172,6 +194,9 @@ export default {
     },
     getAll(state) {
       return state.roles;
+    },
+    getCount(state) {
+      return state.count;
     }
   }
 };

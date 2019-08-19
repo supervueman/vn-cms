@@ -46,6 +46,9 @@
 // Mixins
 import accessMixin from "@/mixins/accessMixin";
 
+// Query
+import { queryRoles } from "@/query/role";
+
 export default {
   name: "RolesPage",
 
@@ -81,7 +84,11 @@ export default {
   },
 
   async mounted() {
-    await this.$store.dispatch("role/findAll");
+    const data = {
+      query: queryRoles()
+    };
+    await this.$store.dispatch("role/findAll", data);
+    await this.$store.dispatch("role/count", data);
   },
 
   methods: {

@@ -20,4 +20,6 @@ router.put('/update', access, roleController.update);
 
 router.delete('/remove', access, roleController.remove);
 
+router.get('/count', profileByApiKey, roleController.count);
+
 module.exports = router;

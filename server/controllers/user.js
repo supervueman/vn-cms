@@ -31,12 +31,7 @@ module.exports = {
 			el.token = '';
 		});
 
-		const count = await User.count(filter);
-
-		res.send({
-			users,
-			count
-		});
+		res.status(200).send(users);
 	},
 
 	async findByPk(req, res) {
@@ -217,5 +212,28 @@ module.exports = {
 				message: 'Не найдено!'
 			});
 		}
+	},
+
+	async count(req, res) {
+		if (!(req.adminAccess || req.managerAccess)) {
+			res.status(401).send({
+				message: 'Пользователь не найден!'
+			});
+			return;
+		}
+
+		const filter = filterHandler(req.query.filter);
+
+		if (req.managerAccess) {
+			if (!filter.where) {
+				filter.where = {};
+			}
+			filter.where.userId = req.profile.id;
+		}
+		const count = await User.count(filter);
+
+		res.status(200).send({
+			count
+		});
 	}
 };

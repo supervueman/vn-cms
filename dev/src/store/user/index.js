@@ -140,7 +140,7 @@ export default {
     async findAll({
       commit
     }, payload) {
-      const data = requestDataHandler('GET', '/users', undefined, payload);
+      const data = requestDataHandler('GET', '/users', undefined, payload.query);
 
       const response = await axios(data).catch(err => {
         this.dispatch("notification/fetch", {
@@ -151,7 +151,24 @@ export default {
       });
 
       if (response !== undefined && response.status === 200) {
-        commit('setAll', response.data.users);
+        commit('setAll', response.data);
+      }
+    },
+
+    async count({
+      commit
+    }, payload) {
+      const data = requestDataHandler('GET', '/users/count', undefined, payload.query);
+
+      const response = await axios(data).catch(err => {
+        this.dispatch("notification/fetch", {
+          type: "error",
+          message: `${err}`,
+          isActive: true
+        });
+      });
+
+      if (response !== undefined && response.status === 200) {
         commit('setCount', response.data.count);
       }
     },

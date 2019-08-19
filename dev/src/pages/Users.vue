@@ -67,6 +67,9 @@ import accessMixin from "@/mixins/accessMixin";
 // Config
 import { imgFolderBasePath } from "@/config";
 
+// Query
+import { queryUsers } from "@/query/user";
+
 export default {
   name: "Users",
 
@@ -101,34 +104,22 @@ export default {
   },
 
   async mounted() {
-    await this.$store.dispatch("user/findAll", {
-      filter: {
-        offset: this.$route.query.offset || 0,
-        limit: this.$route.query.limit || this.limit,
-        include: [
-          {
-            model: "$role"
-          }
-        ],
-        order: [["createdAt", "DESC"]]
-      }
-    });
+    const data = {
+      query: queryUsers(
+        this.$route.query.offset || 0,
+        this.$route.query.limit || this.limit
+      )
+    };
+    await this.$store.dispatch("user/findAll", data);
+    await this.$store.dispatch("user/count", data);
   },
 
   methods: {
     async getPage({ offset, limit }) {
-      await this.$store.dispatch("user/findAll", {
-        filter: {
-          offset,
-          limit,
-          include: [
-            {
-              model: "$role"
-            }
-          ],
-          order: [["createdAt", "DESC"]]
-        }
-      });
+      const data = {
+        query: queryUsers(offset, limit)
+      };
+      await this.$store.dispatch("user/findAll", data);
     },
 
     async remove() {

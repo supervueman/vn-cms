@@ -20,4 +20,6 @@ router.put('/password-change', access, userController.changePassword);
 
 router.delete('/remove', access, userController.remove);
 
+router.get('/count', profileByApiKey, userController.count);
+
 module.exports = router;

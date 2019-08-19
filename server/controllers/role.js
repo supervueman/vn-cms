@@ -114,4 +114,34 @@ module.exports = {
       message: 'Успешно удалено!'
     });
   },
+
+  async count(req, res) {
+    if (!(req.adminAccess || req.managerAccess)) {
+      res.status(401).send({
+        message: 'Нет доступа!'
+      });
+      return;
+    }
+
+    const filter = filterHandler(req.query.filter);
+
+    if (req.managerAccess) {
+      if (!filter.where) {
+        filter.where = {};
+      }
+      filter.where.slug = {
+        $and: [{
+          $ne: 'admin'
+        }, {
+          $ne: 'manager'
+        }]
+      }
+    }
+
+    const count = await Role.count(filter);
+
+    res.status(200).send({
+      count
+    });
+  }
 }
