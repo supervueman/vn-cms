@@ -2,36 +2,23 @@ import requestDataHandler from '@/functions/requestDataHandlerWithAxios';
 import axios from 'axios';
 import router from '@/routers';
 
+import profile from '@/models/user';
+
 export default {
   namespaced: true,
   state: {
     profile: {
-      id: 0,
-      slug: '',
-      email: '',
-      role: {},
-      roleId: 0,
-      phone: '',
-      firstname: '',
-      lastname: '',
-      middlename: '',
-      image: '',
-      facebook: '',
-      vkontakte: '',
-      instagram: '',
-      password: '',
-      token: '',
-      userId: ''
+      ...profile
     },
-    profileResources: []
+    resources: []
   },
   mutations: {
     set(state, payload) {
       state.profile = payload;
     },
 
-    setProfileResources(state, payload) {
-      state.profileResources = payload;
+    setResources(state, payload) {
+      state.resources = payload;
     }
   },
   actions: {
@@ -72,7 +59,7 @@ export default {
         commit('set', response.data);
 
         if (responseResources !== undefined && responseResources.status === 200) {
-          commit('setProfileResources', responseResources.data.resources);
+          commit('setResources', responseResources.data.resources);
         }
       }
     },
@@ -170,32 +157,17 @@ export default {
       commit('set', payload);
     },
 
-    setProfileResources({
+    setResources({
       commit
     }, payload) {
-      commit('setProfileResources', payload);
+      commit('setResources', payload);
     },
 
     clear({
       commit
     }) {
       commit('set', {
-        id: 0,
-        slug: '',
-        email: '',
-        role: {},
-        roleId: 0,
-        phone: '',
-        firstname: '',
-        lastname: '',
-        middlename: '',
-        image: '',
-        facebook: '',
-        vkontakte: '',
-        instagram: '',
-        password: '',
-        token: '',
-        userId: ''
+        ...profile
       })
     }
   },
@@ -203,8 +175,8 @@ export default {
     get(state) {
       return state.profile;
     },
-    getProfileResources(state) {
-      return state.profileResources;
+    getResources(state) {
+      return state.resources;
     }
   }
 };

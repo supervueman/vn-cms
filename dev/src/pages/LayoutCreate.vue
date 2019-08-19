@@ -15,9 +15,6 @@ import LayoutView from "@/components/Layout/View";
 // Mixins
 import accessMixin from "@/mixins/accessMixin";
 
-// Models
-import layout from "@/models/layout";
-
 export default {
   name: "LayoutCreatePage",
 
@@ -27,10 +24,15 @@ export default {
 
   mixins: [accessMixin],
 
-  data() {
-    return {
-      layout
-    };
+  computed: {
+    layout() {
+      return this.$store.getters["layout/get"];
+    }
+  },
+
+  beforeRouteLeave(to, from, next) {
+    this.$store.dispatch("layout/clear");
+    next();
   }
 };
 </script>

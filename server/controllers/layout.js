@@ -32,9 +32,7 @@ module.exports = {
       });
     }
 
-    const id = req.params.id;
-
-    const layout = await Layout.findByPk(id);
+    const layout = await Layout.findByPk(req.params.id);
 
     if (!layout) {
       res.status(404).send({
@@ -74,8 +72,6 @@ module.exports = {
       });
       return;
     }
-
-    req.body.userId = req.profile.id;
 
     const createdLayout = await Layout.create(req.body);
 

@@ -172,7 +172,6 @@ export default {
      */
     async remove() {
       await this.$store.dispatch("layout/remove", this.layout.id);
-      this.$router.push("/layouts");
     }
   }
 };

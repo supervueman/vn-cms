@@ -2,17 +2,14 @@ import requestDataHandler from '@/functions/requestDataHandlerWithAxios';
 import axios from 'axios';
 import router from '@/routers';
 
+// Models
+import resource from '@/models/resource';
+
 export default {
   namespaced: true,
   state: {
     resource: {
-      slug: '',
-      title: '',
-      desctiption: '',
-      content: '',
-      published: false,
-      level: 1,
-      parentId: null
+      ...resource
     },
     layout: {},
     fields: {
@@ -275,7 +272,7 @@ export default {
         router.push(`/resources/${response.data.id}`);
 
         if (response.data.level === 1) {
-          this.getters['profile/getProfileResources'].push(response.data)
+          this.getters['profile/getResources'].push(response.data)
         }
       }
     },
@@ -365,13 +362,7 @@ export default {
       commit
     }) {
       commit('set', {
-        slug: '',
-        title: '',
-        desctiption: '',
-        content: '',
-        published: false,
-        level: 1,
-        parentId: null
+        ...resource
       });
     }
   },

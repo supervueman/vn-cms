@@ -19,6 +19,5 @@ const Layout = sequelize.define('layout', {
   title: Sequelize.STRING,
 });
 
-Layout.belongsTo(Resource);
 
 module.exports = Layout;

@@ -128,14 +128,14 @@ export default {
         }
       });
       const profileResources = this.$store.getters[
-        "profile/getProfileResources"
+        "profile/getResources"
       ].filter(el => {
         if (el.id !== this.removeItem.id) {
           return el;
         }
       });
       this.$store.dispatch("resource/setAll", resources);
-      this.$store.dispatch("profile/setProfileResources", profileResources);
+      this.$store.dispatch("profile/setResources", profileResources);
     },
 
     removeDialogOpen(resource) {

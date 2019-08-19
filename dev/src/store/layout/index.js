@@ -1,9 +1,9 @@
-import defaultLayout from '@/models/layout';
+import requestDataHandler from '@/functions/requestDataHandlerWithAxios';
+import axios from 'axios';
+import router from '@/routers';
 
-const layout = {
-  slug: '',
-  title: '',
-}
+// Models
+import layout from '@/models/layout';
 
 export default {
   namespaced: true,
@@ -11,7 +11,8 @@ export default {
     layout: {
       ...layout
     },
-    layouts: []
+    layouts: [],
+    count: 0
   },
   mutations: {
     set(state, payload) {
@@ -19,68 +20,140 @@ export default {
     },
     setAll(state, payload) {
       state.layouts = payload;
+    },
+    setCount(state, payload) {
+      state.count = payload;
     }
   },
   actions: {
-    async fetch({
+    async findByPk({
       commit
     }, payload) {
-      await setTimeout(() => {
-        commit('set', layout);
-      }, 1500);
+      const data = requestDataHandler('GET', `/layouts/layout/${payload}`);
+
+      const response = await axios(data).catch(err => {
+        this.dispatch("notification/fetch", {
+          type: "error",
+          message: `${err}`,
+          isActive: true
+        });
+      });
+
+      if (response !== undefined && response.status === 200) {
+        commit('set', response.data);
+      }
+    },
+
+    async findOne({
+      commit
+    }, payload) {
+      commit('set', layout);
     },
 
     async create({
       commit
     }, payload) {
-      await setTimeout(() => {
+
+      const data = requestDataHandler('POST', '/layouts/create', payload);
+
+      const response = await axios(data).catch(err => {
+        this.dispatch("notification/fetch", {
+          type: "error",
+          message: `${err}`,
+          isActive: true
+        });
+      });
+
+      if (response !== undefined && response.status === 200) {
         commit('set', payload);
         this.dispatch("notification/fetch", {
           type: "success",
-          message: `Успешно сохранено!`,
+          message: 'Успешно сохранено!',
           isActive: true
         });
-      }, 1500);
+        router.push(`/layouts/${response.data.id}`);
+      }
     },
 
     async update({
       commit
     }, payload) {
-      await setTimeout(() => {
+      const data = requestDataHandler('PUT', '/layouts/update', payload);
+
+      const response = await axios(data).catch(err => {
+        this.dispatch("notification/fetch", {
+          type: "error",
+          message: `${err}`,
+          isActive: true
+        });
+      });
+
+      if (response !== undefined && response.status === 200) {
         commit('set', payload);
         this.dispatch("notification/fetch", {
           type: "success",
-          message: `Успешно сохранено!`,
+          message: 'Успешно сохранено!',
           isActive: true
         });
-      }, 1500);
+      }
     },
 
     async remove({
       commit
     }, payload) {
-      await setTimeout(() => {
+      const data = requestDataHandler('DELETE', '/layouts/remove', {
+        id: payload
+      });
+
+      const response = await axios(data).catch(err => {
+        this.dispatch("notification/fetch", {
+          type: "error",
+          message: `${err}`,
+          isActive: true
+        });
+      });
+
+      if (response !== undefined && response.status === 200) {
         this.dispatch('layout/clear');
         this.dispatch("notification/fetch", {
           type: "success",
           message: `Успешно удалено!`,
           isActive: true
         });
-      }, 1500);
+        router.push('/layouts');
+      }
     },
 
-    async fetchAll({
+    async findAll({
       commit
     }, payload) {
-      await setTimeout(() => {
-        commit('setAll', [layout]);
-      }, 1500);
+      const data = requestDataHandler('GET', '/layouts', undefined, payload);
+
+      const response = await axios(data).catch(err => {
+        this.dispatch("notification/fetch", {
+          type: "error",
+          message: `${err}`,
+          isActive: true
+        });
+      });
+
+      if (response !== undefined && response.status === 200) {
+        commit('setAll', response.data.layouts);
+        commit('setCount', response.data.count);
+      }
     },
 
     set({
       commit
     }, payload) {
       commit('set', layout);
+    },
+
+    setAll({
+      commit
+    }, payload) {
+      commit('setAll', payload);
+      commit('setCount', payload.length);
     },
 
     clear({
@@ -97,6 +170,9 @@ export default {
     },
     getAll(state) {
       return state.layouts;
+    },
+    getCount(state) {
+      return state.count;
     }
   }
 };

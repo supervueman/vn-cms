@@ -1,13 +1,14 @@
 import requestDataHandler from '@/functions/requestDataHandlerWithAxios';
 import axios from 'axios';
 
+// Models
+import role from '@/models/role'
+
 export default {
   namespaced: true,
   state: {
     role: {
-      slug: '',
-      title: '',
-      rang: ''
+      ...role
     },
     roles: []
   },
@@ -161,9 +162,7 @@ export default {
       commit
     }) {
       commit('set', {
-        slug: '',
-        title: '',
-        rang: ''
+        ...role
       });
     }
   },

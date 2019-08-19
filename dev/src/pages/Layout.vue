@@ -65,7 +65,12 @@ export default {
   },
 
   async mounted() {
-    await this.$store.dispatch("layout/fetch");
+    await this.$store.dispatch("layout/findByPk", this.$route.params.id);
+  },
+
+  beforeRouteLeave(to, from, next) {
+    this.$store.dispatch("layout/clear");
+    next();
   }
 };
 </script>

@@ -1,26 +1,14 @@
 import requestDataHandler from '@/functions/requestDataHandlerWithAxios';
 import axios from 'axios';
 
+// Models
+import user from '@/models/user';
+
 export default {
   namespaced: true,
   state: {
     user: {
-      id: 0,
-      slug: '',
-      email: '',
-      role: {},
-      roleId: 0,
-      phone: '',
-      firstname: '',
-      lastname: '',
-      middlename: '',
-      image: '',
-      facebook: '',
-      vkontakte: '',
-      instagram: '',
-      password: '',
-      token: '',
-      userId: ''
+      ...user
     },
     users: [],
     count: 0
@@ -178,23 +166,8 @@ export default {
       commit
     }) {
       commit('set', {
-        id: 0,
-        slug: '',
-        email: '',
-        role: {},
-        roleId: 0,
-        phone: '',
-        firstname: '',
-        lastname: '',
-        middlename: '',
-        image: '',
-        facebook: '',
-        vkontakte: '',
-        instagram: '',
-        password: '',
-        token: '',
-        userId: ''
-      })
+        ...user
+      });
     }
   },
   getters: {

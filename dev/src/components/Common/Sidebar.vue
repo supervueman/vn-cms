@@ -117,7 +117,7 @@ export default {
 
   computed: {
     resources() {
-      return this.$store.getters["profile/getProfileResources"];
+      return this.$store.getters["profile/getResources"];
     }
   }
 };
