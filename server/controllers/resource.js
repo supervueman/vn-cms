@@ -24,12 +24,7 @@ module.exports = {
 
     const resources = await Resource.findAll(filter);
 
-    const count = await Resource.count(filter);
-
-    res.status(200).send({
-      resources,
-      count
-    });
+    res.status(200).send(resources);
   },
 
   async findByPk(req, res) {
@@ -168,5 +163,29 @@ module.exports = {
         message: 'Нет доступа!'
       });
     }
+  },
+
+  async count(req, res) {
+    if (!(req.adminAccess || req.managerAccess)) {
+      res.status(401).send({
+        message: 'Нет доступа!'
+      });
+      return;
+    }
+
+    const filter = filterHandler(req.query.filter);
+
+    if (req.managerAccess) {
+      if (!filter.where) {
+        filter.where = {};
+      }
+      filter.where.userId = req.profile.id
+    }
+
+    const count = await Resource.count(filter);
+
+    res.status(200).send({
+      count
+    });
   },
 }

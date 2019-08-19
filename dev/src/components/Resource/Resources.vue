@@ -52,6 +52,9 @@
 // Mixins
 import accessMixin from "@/mixins/accessMixin";
 
+// Query
+import { queryResources } from "@/query/resource";
+
 export default {
   name: "Resources",
 
@@ -92,17 +95,18 @@ export default {
   },
 
   async mounted() {
-    await this.$store.dispatch("resource/findAll", {
-      filter: {
-        offset: this.$route.query.offset || 0,
-        limit: this.$route.query.limit || this.limit,
-        order: [["createdAt", "DESC"]],
-        where: {
+    const data = {
+      query: queryResources(
+        this.$route.query.offset || 0,
+        this.$route.query.limit || this.limit,
+        {
           level: this.level + 1,
           parentId: this.$route.params.id
         }
-      }
-    });
+      )
+    };
+    await this.$store.dispatch("resource/findAll", data);
+    await this.$store.dispatch("resource/count", data);
   },
 
   methods: {

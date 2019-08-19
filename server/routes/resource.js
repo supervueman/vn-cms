@@ -20,4 +20,6 @@ router.put('/update', profileByAccessToken, resourceController.update);
 
 router.delete('/remove', profileByAccessToken, resourceController.remove);
 
+router.get('/count', profileByApiKey, resourceController.count);
+
 module.exports = router;
