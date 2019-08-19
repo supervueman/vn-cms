@@ -11,7 +11,6 @@ export default {
     resource: {
       ...resource
     },
-    layout: {},
     fields: {
       text: {
         value: 'Text field',
@@ -203,9 +202,6 @@ export default {
     setCount(state, payload) {
       state.count = payload;
     },
-    setLayout(state, payload) {
-      state.layout = payload;
-    },
     setFields(state, payload) {
       state.fields = payload;
     }
@@ -375,9 +371,6 @@ export default {
     },
     getCount(state) {
       return state.count;
-    },
-    getLayout(state) {
-      return state.layout;
     },
     getFields(state) {
       return state.fields;
