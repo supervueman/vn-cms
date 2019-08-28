@@ -6,7 +6,6 @@ const layoutController = require('../controllers/layout');
 
 // Middleware
 const access = require('../middleware/access');
-const profileByAccessToken = require('../middleware/profileByAccessToken');
 
 router.get('/', access, layoutController.findAll);
 
@@ -19,5 +18,7 @@ router.post('/create', access, layoutController.create);
 router.put('/update', access, layoutController.update);
 
 router.delete('/remove', access, layoutController.remove);
+
+router.get('/count', access, layoutController.count);
 
 module.exports = router;

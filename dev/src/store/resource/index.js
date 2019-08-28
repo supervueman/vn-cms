@@ -5,6 +5,11 @@ import router from '@/routers';
 // Models
 import resource from '@/models/resource';
 
+// Query
+import {
+  queryResources
+} from '@/query/resource';
+
 export default {
   namespaced: true,
   state: {
@@ -223,19 +228,16 @@ export default {
       if (response !== undefined && response.status === 200) {
         commit('set', response.data);
 
-        await this.dispatch("resource/findAll", {
-          filter: {
-            offset: 0,
-            limit: 10,
-            order: [
-              ["createdAt", "DESC"]
-            ],
-            where: {
-              level: response.data.level + 1,
-              parentId: response.data.id
-            }
-          }
-        });
+        const params = {
+          query: queryResources(0, 10, {
+            level: response.data.level + 1,
+            parentId: response.data.id
+          })
+        }
+
+        await this.dispatch("resource/findAll", params);
+        await this.dispatch('resource/count', params);
+
       }
     },
 
@@ -378,7 +380,13 @@ export default {
       commit('set', {
         ...resource
       });
-    }
+    },
+
+    clearAll({
+      commit
+    }) {
+      commit('setAll', []);
+    },
   },
   getters: {
     get(state) {

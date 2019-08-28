@@ -50,6 +50,9 @@
 // Mixins
 import accessMixin from "@/mixins/accessMixin";
 
+// Query
+import { queryLayouts } from "@/query/layout";
+
 export default {
   name: "LayoutsPage",
 
@@ -80,13 +83,14 @@ export default {
   },
 
   async mounted() {
-    await this.$store.dispatch("layout/findAll", {
-      filter: {
-        offset: this.$route.query.offset || 0,
-        limit: this.$route.query.limit || this.limit,
-        order: [["createdAt", "DESC"]]
-      }
-    });
+    const data = {
+      query: queryLayouts(
+        this.$route.query.offset || 0,
+        this.$route.query.limit || this.limit
+      )
+    };
+    await this.$store.dispatch("layout/findAll", data);
+    await this.$store.dispatch("layout/count", data);
   },
 
   methods: {

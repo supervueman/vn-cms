@@ -59,7 +59,7 @@ export default {
         commit('set', response.data);
 
         if (responseResources !== undefined && responseResources.status === 200) {
-          commit('setResources', responseResources.data.resources);
+          commit('setResources', responseResources.data);
         }
       }
     },
@@ -169,7 +169,13 @@ export default {
       commit('set', {
         ...profile
       })
-    }
+    },
+
+    clearResources({
+      commit
+    }) {
+      commit('setResources', []);
+    },
   },
   getters: {
     get(state) {

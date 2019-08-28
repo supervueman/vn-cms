@@ -185,7 +185,13 @@ export default {
       commit('set', {
         ...user
       });
-    }
+    },
+
+    clearAll({
+      commit
+    }) {
+      commit('setAll', []);
+    },
   },
   getters: {
     get(state) {

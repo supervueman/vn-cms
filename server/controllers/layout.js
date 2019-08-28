@@ -17,12 +17,7 @@ module.exports = {
 
     const layouts = await Layout.findAll(filter);
 
-    const count = await Layout.count(filter);
-
-    res.status(200).send({
-      layouts,
-      count
-    });
+    res.status(200).send(layouts);
   },
 
   async findByPk(req, res) {
@@ -130,4 +125,21 @@ module.exports = {
       message: 'Успешно удалено!'
     });
   },
+
+  async count(req, res) {
+    if (!(req.adminAccess || req.managerAccess)) {
+      res.status(401).send({
+        message: 'Нет доступа!'
+      });
+      return;
+    }
+
+    const filter = filterHandler(req.query.filter);
+
+    const count = await Layout.count(filter);
+
+    res.status(200).send({
+      count
+    });
+  }
 }

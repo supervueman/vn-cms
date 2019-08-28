@@ -186,7 +186,13 @@ export default {
       commit('set', {
         ...role
       });
-    }
+    },
+
+    clearAll({
+      commit
+    }) {
+      commit('setAll', []);
+    },
   },
   getters: {
     get(state) {

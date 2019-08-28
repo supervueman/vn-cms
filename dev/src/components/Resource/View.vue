@@ -149,6 +149,9 @@ import Resources from "@/components/Resource/Resources";
 // Libs
 import { required, minLength, helpers } from "vuelidate/lib/validators";
 
+// Query
+import { queryLayouts } from "@/query/layout";
+
 const alpha = helpers.regex("alpha", /^[a-zA-Z0-9_-]*$/);
 
 export default {
@@ -208,7 +211,10 @@ export default {
   },
 
   async mounted() {
-    await this.$store.dispatch("layout/findAll");
+    const data = {
+      query: queryLayouts()
+    };
+    await this.$store.dispatch("layout/findAll", data);
   },
 
   methods: {
