@@ -13,6 +13,7 @@ import accessMixin from "@/mixins/accessMixin";
 
 // Components
 import FieldView from "@/components/Field/View";
+
 export default {
   name: "FieldPage",
 
@@ -22,13 +23,6 @@ export default {
 
   mixins: [accessMixin],
 
-  data() {
-    return {
-      menu: false,
-      isRemoveDialog: false
-    };
-  },
-
   computed: {
     field() {
       return this.$store.getters["field/get"];
@@ -36,19 +30,7 @@ export default {
   },
 
   async mounted() {
-    await this.$store.dispatch("field/fetch");
-  },
-
-  methods: {
-    async update() {
-      this.$v.$touch();
-      if (!this.$v.$error) {
-        await this.$store.dispatch("field/update", this.field);
-      }
-    },
-    async remove() {
-      await this.$store.dispatch("field/remove", this.field.id);
-    }
+    await this.$store.dispatch("field/findByPk", this.$route.params.id);
   }
 };
 </script>

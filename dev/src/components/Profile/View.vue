@@ -272,12 +272,6 @@ export default {
   },
 
   methods: {
-    /**
-     * @function create
-     * @async
-     * Функция для создания профиля
-     * вызывает action {@link store/profile/create}
-     */
     async create() {
       this.$v.$touch();
       if (!this.$v.$error) {
@@ -286,12 +280,6 @@ export default {
       }
     },
 
-    /**
-     * @function update
-     * @async
-     * Функция обновления профиля
-     * вызывает action {@link store/profile/update}
-     */
     async update() {
       this.$v.profile.$touch();
       if (!this.$v.profile.$error) {
@@ -317,18 +305,6 @@ export default {
       }
     },
 
-    /**
-     * @function remove
-     * @async
-     * Удаление пользователя через
-     * action {@link store/profile/remove}
-     * @if Если параметр id у роутинга существует,
-     * то @if Если параметр id роутинга равен id
-     * {@link store/profile/get} текущего пользователя,
-     * то редирект на главную @else иначе редирект
-     * на страницу пользователей
-     * @else редирект на главную
-     */
     async remove() {
       if (this.profile.id === this.$store.getters["profile/get"].id) {
         await this.$store.dispatch("profile/remove", this.profile.id);

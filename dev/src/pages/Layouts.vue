@@ -95,13 +95,10 @@ export default {
 
   methods: {
     async getPage({ offset, limit }) {
-      await this.$store.dispatch("layout/findAll", {
-        filter: {
-          offset,
-          limit,
-          order: [["createdAt", "DESC"]]
-        }
-      });
+      const data = {
+        query: queryLayouts(offset, limit)
+      };
+      await this.$store.dispatch("layout/findAll", data);
     },
 
     async remove() {

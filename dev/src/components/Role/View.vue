@@ -119,12 +119,6 @@ export default {
   },
 
   methods: {
-    /**
-     * @function create
-     * @async
-     * Функция для создания роли
-     * вызывает action {@link store/role/create}
-     */
     async create() {
       this.$v.$touch();
       if (!this.$v.$error) {
@@ -134,12 +128,6 @@ export default {
       }
     },
 
-    /**
-     * @function update
-     * @async
-     * Функция обновления роли
-     * вызывает action {@link store/role/update}
-     */
     async update() {
       this.$v.$touch();
       if (!this.$v.$error) {
@@ -147,12 +135,6 @@ export default {
       }
     },
 
-    /**
-     * @function remove
-     * @async
-     * Удаление роли через
-     * action {@link store/role/remove}
-     */
     async remove() {
       await this.$store.dispatch("role/remove", this.role.id);
       this.$router.push("/roles");

@@ -97,6 +97,9 @@ import { validationMixin } from "vuelidate";
 // Libs
 import { required, minLength, helpers } from "vuelidate/lib/validators";
 
+// Query
+import { queryLayouts } from "@/query/layout";
+
 const alpha = helpers.regex("alpha", /^[a-zA-Z0-9_-]*$/);
 
 export default {
@@ -167,20 +170,16 @@ export default {
   },
 
   async mounted() {
-    await this.$store.dispatch("layout/fetchAll");
+    const data = {
+      query: queryLayouts(
+        this.$route.query.offset || 0,
+        this.$route.query.limit || this.limit
+      )
+    };
+    await this.$store.dispatch("layout/findAll", data);
   },
 
   methods: {
-    /**
-     * @function create
-     * @async
-     * Функция для создания поля
-     * вызывает action {@link store/field/create}
-     * TODO: после удачного создания поля
-     * делать редирект на само поле получая его
-     * данные через {@link store/field/fetch} для
-     * дальнейшего редактирования
-     */
     async create() {
       this.$v.$touch();
       if (!this.$v.$error) {
@@ -188,12 +187,6 @@ export default {
       }
     },
 
-    /**
-     * @function update
-     * @async
-     * Функция обновления поля
-     * вызывает action {@link store/field/update}
-     */
     async update() {
       this.$v.$touch();
       if (!this.$v.$error) {
@@ -201,12 +194,6 @@ export default {
       }
     },
 
-    /**
-     * @function remove
-     * @async
-     * Удаление поля через
-     * action {@link store/field/remove}
-     */
     async remove() {
       await this.$store.dispatch("field/remove", this.field.id);
       this.$router.push("/fields");

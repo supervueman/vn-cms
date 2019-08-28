@@ -11,9 +11,6 @@
 // Mixins
 import accessMixin from "@/mixins/accessMixin";
 
-// Models
-import field from "@/models/field";
-
 // Comnponents
 import FieldView from "@/components/Field/View";
 
@@ -26,10 +23,15 @@ export default {
 
   mixins: [accessMixin],
 
-  data() {
-    return {
-      field
-    };
+  computed: {
+    field() {
+      return this.$store.getters["field/get"];
+    }
+  },
+
+  beforeRouteLeave(to, from, next) {
+    this.$store.dispatch("field/clear");
+    next();
   }
 };
 </script>

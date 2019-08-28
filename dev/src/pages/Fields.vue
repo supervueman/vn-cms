@@ -40,8 +40,9 @@
                 v-icon delete
         div.text-xs-center.pt-2
           pagination(
-            :itemsLength="fields.length"
+            :itemsLength="count"
             @getPage="getPage"
+            :limit="limit"
           )
     v-dialog(
       v-model="isRemoveDialog"
@@ -57,6 +58,9 @@
 <script>
 // Mixins
 import accessMixin from "@/mixins/accessMixin";
+
+// Query
+import { queryFields } from "@/query/field";
 
 export default {
   name: "Fields",
@@ -76,8 +80,7 @@ export default {
       pagination: {
         page: this.$route.query.skip / this.$route.query.limit || 1
       },
-      limit: 5,
-      skip: 5,
+      limit: 10,
       isRemoveDialog: false,
       removeItem: {}
     };
@@ -86,15 +89,29 @@ export default {
   computed: {
     fields() {
       return this.$store.getters["field/getAll"];
+    },
+    count() {
+      return this.$store.getters["field/getCount"];
     }
+  },
+
+  async mounted() {
+    const data = {
+      query: queryFields(
+        this.$route.query.offset || 0,
+        this.$route.query.limit || this.limit
+      )
+    };
+    await this.$store.dispatch("field/findAll", data);
+    await this.$store.dispatch("field/count", data);
   },
 
   methods: {
     async getPage({ skip, limit }) {
-      await this.$store.dispatch("user/fetchAll", {
-        skip,
-        limit
-      });
+      const data = {
+        query: queryFields(offset, limit)
+      };
+      await this.$store.dispatch("field/findAll", data);
     },
 
     remove() {
@@ -105,14 +122,6 @@ export default {
       this.removeItem = field;
       this.isRemoveDialog = true;
     }
-  },
-
-  async mounted() {
-    await this.$store.dispatch("field/fetchAll", {
-      id: this.$route.params.id,
-      skip: this.$route.query.skip,
-      limit: this.$route.query.limit
-    });
   }
 };
 </script>

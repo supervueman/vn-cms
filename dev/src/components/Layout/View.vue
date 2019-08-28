@@ -134,16 +134,6 @@ export default {
   },
 
   methods: {
-    /**
-     * @function create
-     * @async
-     * Функция для создания шаблона
-     * вызывает action {@link store/layout/create}
-     * TODO: после удачного создания шаблона
-     * делать редирект на сам шаблон получая его
-     * данные через {@link store/layout/fetch} для
-     * дальнейшего редактирования
-     */
     async create() {
       this.$v.$touch();
       if (!this.$v.$error) {
@@ -151,12 +141,6 @@ export default {
       }
     },
 
-    /**
-     * @function update
-     * @async
-     * Функция обновления шаблона
-     * вызывает action {@link store/layout/update}
-     */
     async update() {
       this.$v.$touch();
       if (!this.$v.$error) {
@@ -164,12 +148,6 @@ export default {
       }
     },
 
-    /**
-     * @function remove
-     * @async
-     * Удаление шаблона через
-     * action {@link store/layout/remove}
-     */
     async remove() {
       await this.$store.dispatch("layout/remove", this.layout.id);
     }

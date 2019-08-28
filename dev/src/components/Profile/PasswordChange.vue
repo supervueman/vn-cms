@@ -45,7 +45,10 @@
 </template>
 
 <script>
+// Mixins
 import { validationMixin } from "vuelidate";
+
+// Libs
 import { helpers, required, sameAs, minLength } from "vuelidate/lib/validators";
 
 export default {
@@ -117,13 +120,6 @@ export default {
   },
 
   methods: {
-    /**
-     * @function
-     * @async
-     * @var {object} data {oldPassword, newPassword}
-     * Функция вызывает action {@link store/profileOwner/changePassword}
-     * после удачного сохранения поля очищаются через функцию {@link clearPassword}
-     */
     async changePassword() {
       this.$v.$touch();
 
@@ -146,10 +142,6 @@ export default {
       this.clearPassword();
     },
 
-    /**
-     * @function clearPassword
-     * Функция для сброса изменений
-     */
     clearPassword() {
       this.oldPassword = "";
       this.newPassword = "";
