@@ -5,12 +5,13 @@ const bcrypt = require('bcrypt');
 require('dotenv').config();
 
 // Routes
-const authenticateRoute = require('./routes/authenticate');
+const authenticateRoutes = require('./routes/authenticate');
 const profileRoutes = require('./routes/profile');
 const userRoutes = require('./routes/user');
 const roleRoutes = require('./routes/role');
 const resourceRoutes = require('./routes/resource');
 const layoutRoutes = require('./routes/layout');
+const fieldRoutes = require('./routes/field');
 
 // Models
 const User = require('./models/user');
@@ -45,12 +46,13 @@ app.use((req, res, next) => {
 });
 
 // Routes use
-app.use('/authenticate', authenticateRoute);
+app.use('/authenticate', authenticateRoutes);
 app.use('/profile', profileRoutes);
 app.use('/users', userRoutes);
 app.use('/roles', roleRoutes);
 app.use('/resources', resourceRoutes);
 app.use('/layouts', layoutRoutes);
+app.use('/fields', fieldRoutes);
 
 async function connect() {
   const connect = await sequelize.sync();

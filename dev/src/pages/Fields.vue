@@ -114,8 +114,14 @@ export default {
       await this.$store.dispatch("field/findAll", data);
     },
 
-    remove() {
-      this.$store.dispatch("field/remove", this.removeItem.id);
+    async remove() {
+      await this.$store.dispatch("field/remove", this.removeItem.id);
+      const fields = this.fields.filter(el => {
+        if (el.id !== this.removeItem.id) {
+          return el;
+        }
+      });
+      this.$store.dispatch("field/setAll", fields);
     },
 
     removeDialogOpen(field) {
