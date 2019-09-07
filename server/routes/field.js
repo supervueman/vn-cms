@@ -22,4 +22,6 @@ router.delete('/remove', access, fieldController.remove);
 
 router.get('/count', profileByApiKey, fieldController.count);
 
+router.put('/add-layout', access, fieldController.addLayout);
+
 module.exports = router;

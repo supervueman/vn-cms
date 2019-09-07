@@ -3,7 +3,7 @@
     v-layout.wrap
       v-flex.xs12.md7.pr-2
         v-card
-          v-card-title Общие данные
+          v-card-title Общие данные {{field}}
           v-card-text
             v-layout.wrap
               v-flex.md12
@@ -191,6 +191,7 @@ export default {
       this.$v.$touch();
       if (!this.$v.$error) {
         await this.$store.dispatch("field/update", this.field);
+        await this.$store.dispatch("field/addLayout", this.field);
       }
     },
 

@@ -2,7 +2,6 @@ const Sequelize = require('sequelize');
 const sequelize = require('../util/database');
 
 // Models
-const Resource = require('../models/resource');
 
 const Layout = sequelize.define('layout', {
   id: {
@@ -18,6 +17,5 @@ const Layout = sequelize.define('layout', {
   },
   title: Sequelize.STRING,
 });
-
 
 module.exports = Layout;

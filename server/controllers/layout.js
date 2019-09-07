@@ -76,6 +76,7 @@ module.exports = {
   },
 
   async update(req, res) {
+    console.log(req.body)
     if (!req.adminAccess) {
       res.status(401).send({
         message: 'Нет доступа!'
@@ -96,6 +97,8 @@ module.exports = {
     delete updateLayout.id;
 
     const updatedLayout = await layout.update(updateLayout);
+
+    const addFields = await layout.addField(2);
 
     res.status(200).send(updatedLayout);
   },

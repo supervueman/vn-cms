@@ -16,6 +16,21 @@ const fieldRoutes = require('./routes/field');
 // Models
 const User = require('./models/user');
 const Role = require('./models/role');
+const Layout = require('./models/layout');
+const Field = require('./models/field');
+
+// Association
+Layout.belongsToMany(Field, {
+  through: 'LayoutField',
+  constraints: false
+});
+
+Field.belongsToMany(Layout, {
+  through: 'LayoutField',
+  constraints: false
+});
+
+
 
 const app = express();
 

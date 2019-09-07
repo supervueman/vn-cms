@@ -30,7 +30,7 @@ export default {
     async findByPk({
       commit
     }, payload) {
-      const data = requestDataHandler('GET', `/fields/field/${payload}`);
+      const data = requestDataHandler('GET', `/fields/field/${payload.id}`, undefined, payload.query);
 
       const response = await axios(data).catch(err => {
         this.dispatch('notification/fetch', {
@@ -167,6 +167,29 @@ export default {
 
       if (response !== undefined && response.status === 200) {
         commit('setCount', response.data.count);
+      }
+    },
+
+    async addLayout({
+      commit
+    }, payload) {
+      const data = requestDataHandler('PUT', '/fields/add-layout', payload);
+
+      const response = await axios(data).catch(err => {
+        this.dispatch('notification/fetch', {
+          type: 'error',
+          message: `${err}`,
+          isActive: true
+        });
+      });
+
+      if (response !== undefined && response.status === 200) {
+        commit('set', response.data);
+        this.dispatch('notification/fetch', {
+          type: 'success',
+          message: 'Успешно сохранено!',
+          isActive: true
+        });
       }
     },
 

@@ -5,7 +5,7 @@
         v-tabs(slot="extension" v-model="tab" grow)
           v-tabs-slider(color="primary")
           v-tab Общие данные
-          v-tab Дополнительные поля
+          //- v-tab Дополнительные поля
           v-tabs-items
             v-tab-item
               v-flex.xs12.md12.pt-4
@@ -30,10 +30,10 @@
                           @blur="$v.layout.title.$touch()"
                           :error-messages="titleErrors"
                         )
-            v-tab-item
-              v-flex.pt-4
-                v-card
-                  fields
+            //- v-tab-item
+            //-   v-flex.pt-4
+            //-     v-card
+                  //- fields
     v-card(v-if="adminAccess")
       v-card-actions
         v-btn.ml-2(
