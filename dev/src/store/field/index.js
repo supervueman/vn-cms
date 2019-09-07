@@ -13,6 +13,7 @@ export default {
     },
     fields: [],
     count: 0,
+    layouts: [],
     types: ['text', 'textarea', 'editor', 'image', 'select', 'migx', 'radio', 'date', 'time', 'colorpicker', 'checkbox']
   },
   mutations: {
@@ -24,6 +25,9 @@ export default {
     },
     setCount(state, payload) {
       state.count = payload;
+    },
+    setLayouts(state, payload) {
+      state.layouts = payload;
     }
   },
   actions: {
@@ -41,7 +45,9 @@ export default {
       });
 
       if (response !== undefined && response.status === 200) {
+        response.data.layouts = response.data.layouts.map(el => el.id);
         commit('set', response.data);
+        commit('setLayouts', response.data.layouts);
       }
     },
 
@@ -89,6 +95,7 @@ export default {
       });
 
       if (response !== undefined && response.status === 200) {
+        // response.data.layouts = response.data.layouts.map(el => el.id);
         commit('set', payload);
         this.dispatch('notification/fetch', {
           type: 'success',
@@ -184,7 +191,34 @@ export default {
       });
 
       if (response !== undefined && response.status === 200) {
+        response.data.layouts = response.data.layouts.map(el => el.id);
         commit('set', response.data);
+        commit('setLayouts', response.data.layouts);
+        this.dispatch('notification/fetch', {
+          type: 'success',
+          message: 'Успешно сохранено!',
+          isActive: true
+        });
+      }
+    },
+
+    async removeLayout({
+      commit
+    }, payload) {
+      const data = requestDataHandler('PUT', '/fields/remove-layout', payload);
+
+      const response = await axios(data).catch(err => {
+        this.dispatch('notification/fetch', {
+          type: 'error',
+          message: `${err}`,
+          isActive: true
+        });
+      });
+
+      if (response !== undefined && response.status === 200) {
+        response.data.layouts = response.data.layouts.map(el => el.id);
+        commit('set', response.data);
+        commit('setLayouts', response.data.layouts);
         this.dispatch('notification/fetch', {
           type: 'success',
           message: 'Успешно сохранено!',
@@ -217,6 +251,12 @@ export default {
       commit
     }) {
       commit('setAll', []);
+    },
+
+    clearLayouts({
+      commit
+    }) {
+      commit('setLayouts', []);
     }
   },
   getters: {
@@ -228,6 +268,9 @@ export default {
     },
     getCount(state) {
       return state.count;
+    },
+    getLayouts(state) {
+      return state.layouts;
     },
     getTypes(state) {
       return state.types;

@@ -3,7 +3,7 @@
     v-layout.wrap
       v-flex.xs12.md7.pr-2
         v-card
-          v-card-title Общие данные {{field}}
+          v-card-title Общие данные
           v-card-text
             v-layout.wrap
               v-flex.md12
@@ -130,7 +130,6 @@ export default {
 
   data() {
     return {
-      panelName: "panel-field-base-data",
       menu: false,
       isRemoveDialog: false
     };
@@ -139,6 +138,9 @@ export default {
   computed: {
     layouts() {
       return this.$store.getters["layout/getAll"];
+    },
+    oldLayouts() {
+      return this.$store.getters["field/getLayouts"];
     },
     types() {
       return this.$store.getters["field/getTypes"];
@@ -190,8 +192,30 @@ export default {
     async update() {
       this.$v.$touch();
       if (!this.$v.$error) {
+        const that = this;
+        const addedLayouts = this.field.layouts.filter(function(i) {
+          return that.oldLayouts.indexOf(i) < 0;
+        });
+
+        const removedLayouts = this.oldLayouts.filter(function(i) {
+          return that.field.layouts.indexOf(i) < 0;
+        });
+
         await this.$store.dispatch("field/update", this.field);
-        await this.$store.dispatch("field/addLayout", this.field);
+
+        if (addedLayouts.length > 0) {
+          await this.$store.dispatch("field/addLayout", {
+            ...this.field,
+            layouts: addedLayouts
+          });
+        }
+
+        if (removedLayouts.length > 0) {
+          await this.$store.dispatch("field/removeLayout", {
+            ...this.field,
+            layouts: removedLayouts
+          });
+        }
       }
     },
 

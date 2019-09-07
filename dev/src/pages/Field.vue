@@ -38,6 +38,12 @@ export default {
         }
       }
     });
+  },
+
+  beforeRouteLeave(to, from, next) {
+    this.$store.dispatch("field/clear");
+    this.$store.dispatch("field/clearLayouts");
+    next();
   }
 };
 </script>

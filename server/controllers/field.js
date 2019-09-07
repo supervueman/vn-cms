@@ -64,7 +64,6 @@ module.exports = {
   },
 
   async create(req, res) {
-    // console.log(req.body)
     if (!req.adminAccess) {
       res.status(401).send({
         message: 'Нет доступа!'
@@ -74,8 +73,9 @@ module.exports = {
 
     const createdField = await Field.create(req.body);
 
-    // const addLayouts = await createdField.addLayout_field([1, 2]);
-    // console.log(addLayouts)
+    for await (layout of req.body.layouts) {
+      await createdField.addLayout(layout);
+    }
 
     res.status(200).send(createdField);
   },
@@ -167,6 +167,36 @@ module.exports = {
 
     for await (layout of req.body.layouts) {
       await field.addLayout(layout);
+    }
+
+    const updatedField = await Field.findByPk(req.body.id, {
+      include: [{
+        model: Layout
+      }]
+    });
+
+    res.status(200).send(updatedField);
+  },
+
+  async removeLayout(req, res) {
+    if (!req.adminAccess) {
+      res.status(401).send({
+        message: 'Нет доступа!'
+      });
+      return;
+    }
+
+    const field = await Field.findByPk(req.body.id);
+
+    if (!field) {
+      res.status(401).send({
+        message: 'Not found!'
+      });
+      return;
+    }
+
+    for await (layout of req.body.layouts) {
+      await field.removeLayout(layout);
     }
 
     const updatedField = await Field.findByPk(req.body.id, {
