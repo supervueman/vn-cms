@@ -18,7 +18,7 @@ const Resource = sequelize.define('resource', {
   },
   title: Sequelize.STRING,
   description: Sequelize.STRING,
-  content: Sequelize.STRING,
+  content: Sequelize.TEXT,
   published: Sequelize.BOOLEAN,
   level: Sequelize.INTEGER
 });

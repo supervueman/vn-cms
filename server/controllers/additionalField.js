@@ -2,7 +2,7 @@
 const filterHandler = require('../handlers/filterHandler');
 
 // Models
-const Layout = require('../models/layout');
+const AdditionalField = require('../models/additionalField');
 
 module.exports = {
   async findAll(req, res) {
@@ -15,9 +15,9 @@ module.exports = {
 
     const filter = filterHandler(req.query.filter);
 
-    const layouts = await Layout.findAll(filter);
+    const additionalFields = await AdditionalField.findAll(filter);
 
-    res.status(200).send(layouts);
+    res.status(200).send(additionalFields);
   },
 
   async findByPk(req, res) {
@@ -29,16 +29,16 @@ module.exports = {
 
     const filter = filterHandler(req.query.filter);
 
-    const layout = await Layout.findByPk(req.params.id, filter);
+    const additionalField = await AdditionalField.findByPk(req.params.id, filter);
 
-    if (!layout) {
+    if (!additionalField) {
       res.status(404).send({
-        message: 'Шаблон не найден!'
+        message: 'Поле не найдено!'
       });
       return;
     }
 
-    res.status(200).send(layout);
+    res.status(200).send(additionalField);
   },
 
   async findOne(req, res) {
@@ -50,86 +50,19 @@ module.exports = {
 
     const filter = filterHandler(req.query.filter);
 
-    const layout = await Layout.findOne(filter);
+    const additionalField = await AdditionalField.findOne(filter);
 
-    if (!layout) {
+    if (!additionalField) {
       res.status(404).send({
-        message: 'Шаблон не найден!'
+        message: 'Поле не найдено!'
       });
       return;
     }
 
-    res.status(200).send(layout);
+    res.status(200).send(additionalField);
   },
 
   async create(req, res) {
-    if (!req.adminAccess) {
-      res.status(401).send({
-        message: 'Нет доступа!'
-      });
-      return;
-    }
-
-    const createdLayout = await Layout.create(req.body);
-
-    res.status(200).send(createdLayout);
-  },
-
-  async update(req, res) {
-    console.log(req.body)
-    if (!req.adminAccess) {
-      res.status(401).send({
-        message: 'Нет доступа!'
-      });
-      return;
-    }
-
-    const layout = await Layout.findByPk(req.body.id);
-
-    if (!layout) {
-      res.status(401).send({
-        message: 'Не найдено!'
-      });
-      return;
-    }
-
-    const updateLayout = req.body;
-    delete updateLayout.id;
-
-    const updatedLayout = await layout.update(updateLayout);
-
-    const addFields = await layout.addField(2);
-
-    res.status(200).send(updatedLayout);
-  },
-
-  async remove(req, res) {
-    if (!req.adminAccess) {
-      res.status(401).send({
-        message: 'Нет доступа!'
-      });
-      return;
-    }
-
-    const layout = await Layout.findByPk(req.body.id);
-
-    if (!layout) {
-      res.status(404).send({
-        message: 'Шаблон не найден!'
-      });
-    }
-
-    await Layout.destroy({
-      where: {
-        id: req.body.id
-      }
-    });
-    res.status(200).send({
-      message: 'Успешно удалено!'
-    });
-  },
-
-  async count(req, res) {
     if (!(req.adminAccess || req.managerAccess)) {
       res.status(401).send({
         message: 'Нет доступа!'
@@ -137,12 +70,59 @@ module.exports = {
       return;
     }
 
-    const filter = filterHandler(req.query.filter);
+    const createdAdditionalField = await AdditionalField.create(req.body);
 
-    const count = await Layout.count(filter);
+    res.status(200).send(createdAdditionalField);
+  },
 
+  async update(req, res) {
+    if (!(req.adminAccess || req.managerAccess)) {
+      res.status(401).send({
+        message: 'Нет доступа!'
+      });
+      return;
+    }
+
+    const additionalField = await AdditionalField.findByPk(req.body.id);
+
+    if (!additionalField) {
+      res.status(401).send({
+        message: 'Не найдено!'
+      });
+      return;
+    }
+
+    const updateAdditionalField = req.body;
+    delete updateAdditionalField.id;
+
+    const updatedAdditionalField = await additionalField.update(updateAdditionalField);
+
+    res.status(200).send(updatedAdditionalField);
+  },
+
+  async remove(req, res) {
+    if (!(req.adminAccess || req.managerAccess)) {
+      res.status(401).send({
+        message: 'Нет доступа!'
+      });
+      return;
+    }
+
+    const additionalField = await AdditionalField.findByPk(req.body.id);
+
+    if (!additionalField) {
+      res.status(404).send({
+        message: 'Поле не найдено!'
+      });
+    }
+
+    await AdditionalField.destroy({
+      where: {
+        id: req.body.id
+      }
+    });
     res.status(200).send({
-      count
+      message: 'Успешно удалено!'
     });
   }
 }

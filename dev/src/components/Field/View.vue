@@ -193,13 +193,13 @@ export default {
       this.$v.$touch();
       if (!this.$v.$error) {
         const that = this;
-        const addedLayouts = this.field.layouts.filter(function(i) {
-          return that.oldLayouts.indexOf(i) < 0;
-        });
+        const addedLayouts = this.field.layouts.filter(
+          i => that.oldLayouts.indexOf(i) < 0
+        );
 
-        const removedLayouts = this.oldLayouts.filter(function(i) {
-          return that.field.layouts.indexOf(i) < 0;
-        });
+        const removedLayouts = this.oldLayouts.filter(
+          i => that.field.layouts.indexOf(i) < 0
+        );
 
         await this.$store.dispatch("field/update", this.field);
 

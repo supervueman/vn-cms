@@ -16,9 +16,10 @@
               )
           v-tab-item
             v-layout.wrap.pt-4
-              v-card
-                v-card-text
-                  fields
+              v-flex
+                v-card
+                  v-card-text
+                    fields
           v-tab-item
             v-layout.wrap.pt-4
               v-flex
@@ -65,13 +66,9 @@ export default {
   async mounted() {
     await this.$store.dispatch("resource/findByPk", {
       id: this.$route.params.id,
-      filter: {
+      query: {
         filter: {
-          include: [
-            {
-              model: "$layout"
-            }
-          ]
+          include: [{ model: "$layout" }, { model: "$additionalfield" }]
         }
       }
     });
@@ -85,13 +82,9 @@ export default {
   async beforeRouteUpdate(to, from, next) {
     await this.$store.dispatch("resource/findByPk", {
       id: to.params.id,
-      filter: {
+      query: {
         filter: {
-          include: [
-            {
-              model: "$layout"
-            }
-          ]
+          include: [{ model: "$layout" }, { model: "$additionalfield" }]
         }
       }
     });

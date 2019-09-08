@@ -55,7 +55,7 @@
                     div(v-on="on") {{field.interface.title}}
                   span {{field.interface.slug}}
                 v-select(
-                  :items="field.interface.defaultValue"
+                  :items="JSON.parse(field.interface.defaultValue)"
                   v-model="field.value"
                 )
 

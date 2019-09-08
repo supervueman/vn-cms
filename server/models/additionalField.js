@@ -16,7 +16,7 @@ const AdditionalField = sequelize.define('additionalfield', {
     type: Sequelize.STRING,
     notEmpty: true,
   },
-  value: Sequelize.STRING
+  value: Sequelize.TEXT
 });
 
 AdditionalField.belongsTo(Field, {
@@ -25,5 +25,9 @@ AdditionalField.belongsTo(Field, {
 AdditionalField.belongsTo(Resource, {
   onDelete: 'cascade'
 });
+Resource.hasMany(AdditionalField, {
+  onDelete: 'cascade'
+});
+
 
 module.exports = AdditionalField;

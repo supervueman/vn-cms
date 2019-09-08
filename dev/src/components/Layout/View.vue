@@ -68,7 +68,7 @@ import accessMixin from "@/mixins/accessMixin";
 import { validationMixin } from "vuelidate";
 
 // Comnponents
-import Fields from "@/components/Layout/Fields";
+// import Fields from "@/components/Layout/Fields";
 
 // Libs
 import { required, minLength, helpers } from "vuelidate/lib/validators";
@@ -78,9 +78,9 @@ const alpha = helpers.regex("alpha", /^[a-zA-Z0-9_-]*$/);
 export default {
   name: "LayoutView",
 
-  components: {
-    Fields
-  },
+  // components: {
+  // Fields
+  // },
 
   mixins: [accessMixin, validationMixin],
 

@@ -1,6 +1,7 @@
 <template lang="pug">
   v-flex
     v-layout.wrap
+      v-flex.mb-4
       v-flex.md12(v-for="(field, i) in fields" :key="i")
         v-layout.mb-4
           //- Text field
@@ -141,6 +142,8 @@
               color="primary"
               v-model="field.value"
             )
+    v-card-actions
+      v-btn(color="primary" @click="saveAdditionalFields") Сохранить
 </template>
 
 <script>
@@ -155,8 +158,42 @@ export default {
   },
 
   computed: {
+    additionalFields() {
+      return this.$store.getters["resource/getAdditionalFields"];
+    },
     fields() {
-      return this.$store.getters["resource/getFields"];
+      return this.$store.getters["resource/getSerializedFields"];
+    }
+  },
+
+  methods: {
+    async saveAdditionalFields() {
+      for (let el in this.fields) {
+        if (this.fields[el].id) {
+          const updateField = {
+            id: this.fields[el].id,
+            slug: el,
+            value: this.fields[el].value,
+            resourceId: this.fields[el].resourceId,
+            fieldId: this.fields[el].interface.id
+          };
+          if (this.fields[el].interface.fieldType === "migx") {
+            updateField.value = JSON.stringify(this.fields[el].value);
+          }
+          await this.$store.dispatch("additionalField/update", updateField);
+        } else {
+          const createField = {
+            slug: el,
+            value: this.fields[el].value,
+            resourceId: this.fields[el].resourceId,
+            fieldId: this.fields[el].interface.id
+          };
+          if (this.fields[el].interface.fieldType === "migx") {
+            createField.value = JSON.stringify(this.fields[el].value);
+          }
+          await this.$store.dispatch("additionalField/create", createField);
+        }
+      }
     }
   }
 };

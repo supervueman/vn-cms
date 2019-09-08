@@ -29,7 +29,7 @@ export default {
 		async findByPk({
 			commit
 		}, payload) {
-			const data = requestDataHandler('GET', `/layouts/layout/${payload}`);
+			const data = requestDataHandler('GET', `/layouts/layout/${payload}`, undefined);
 
 			const response = await axios(data).catch(err => {
 				this.dispatch('notification/fetch', {
