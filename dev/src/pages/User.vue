@@ -11,6 +11,9 @@ import accessMixin from "@/mixins/accessMixin";
 // Components
 import ProfileView from "@/components/Profile/View";
 
+// Query
+import { queryRoles } from "@/query/role";
+
 export default {
   name: "UserPage",
 
@@ -19,6 +22,7 @@ export default {
   },
 
   mixins: [accessMixin],
+
   computed: {
     user() {
       return this.$store.getters["user/get"];
@@ -28,13 +32,16 @@ export default {
   async mounted() {
     await this.$store.dispatch("user/findByPk", {
       id: this.$route.params.id,
-      filter: {
+      query: {
         filter: {
           include: [{ model: "$role" }]
         }
       }
     });
-    await this.$store.dispatch("role/findAll");
+    const data = {
+      query: queryRoles()
+    };
+    await this.$store.dispatch("role/findAll", data);
   },
 
   beforeRouteLeave(to, from, next) {

@@ -3,7 +3,7 @@
     v-layout.wrap
       v-flex.xs12.md7.pr-2
         v-card.mb-3
-          v-card-title Общие данные
+          v-card-title Общие данные {{resource}}
           v-card-text
             v-layout.wrap
               v-flex.md12
@@ -86,8 +86,8 @@
                       item-text="title"
                       return-object
                       label="Шаблон:"
-                      v-model="resource.layout"
-                      @change="resource.layoutId = $event.id"
+                      :value="resource.layout"
+                      @change="changeLayoutConfirm($event)"
                       v-on="on"
                       required
                     )
@@ -136,6 +136,16 @@
         :isActive.sync="isRemoveDialog"
         :name="resource.title"
       )
+    v-dialog(
+        v-model="isChangeLayout"
+        max-width="500px"
+      )
+      v-flex
+        v-card
+          v-card-title.title Вы уверены что хотите сменить шаблон?
+          v-card-actions
+            v-btn.ml-2(color="primary" @click="changeLayout") Сменить
+            v-btn(color="primary" @click="cancelLayout") Отмена
 </template>
 
 <script>
@@ -182,7 +192,10 @@ export default {
   data() {
     return {
       menu: false,
-      isRemoveDialog: false
+      isRemoveDialog: false,
+      isChangeLayout: false,
+      changeLayoutId: 0,
+      changeLayoutData: {}
     };
   },
 
@@ -221,6 +234,8 @@ export default {
     async create() {
       this.$v.$touch();
       if (!this.$v.$error) {
+        this.resource.layout = this.changeLayoutData;
+        this.resource.layoutId = this.changeLayoutId;
         if (this.$route.query.level) {
           this.resource.level = Number(this.$route.query.level) + 1;
         } else {
@@ -266,6 +281,49 @@ export default {
       this.$store.dispatch("profile/setResources", profileResources);
       this.$store.dispatch("resource/setAll", resources);
       await this.$store.dispatch("resource/remove", this.resource.id);
+    },
+
+    changeLayoutConfirm(event) {
+      this.changeLayoutId = event.id;
+      this.changeLayoutData = event;
+      if (this.operationType === "update") {
+        this.isChangeLayout = true;
+      } else {
+      }
+      console.log(event);
+      console.log(this.resource.layout);
+    },
+
+    async changeLayout() {
+      this.resource.layout = this.changeLayoutData;
+      this.resource.layoutId = this.changeLayoutId;
+      for await (let el of this.$store.getters[
+        "resource/getAdditionalFields"
+      ]) {
+        await this.$store.dispatch("additionalField/remove", el.id);
+      }
+      await this.update();
+      await this.$store.dispatch("resource/findByPk", {
+        id: this.$route.params.id,
+        query: {
+          filter: {
+            include: [{ model: "$layout" }, { model: "$additionalfield" }]
+          }
+        }
+      });
+      this.isChangeLayout = false;
+    },
+
+    async cancelLayout() {
+      await this.$store.dispatch("resource/findByPk", {
+        id: this.$route.params.id,
+        query: {
+          filter: {
+            include: [{ model: "$layout" }, { model: "$additionalfield" }]
+          }
+        }
+      });
+      this.isChangeLayout = false;
     }
   }
 };

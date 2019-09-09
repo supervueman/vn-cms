@@ -28,7 +28,7 @@ export default {
     async findByPk({
       commit
     }, payload) {
-      const data = requestDataHandler('GET', `/users/user/${payload.id}`, undefined, payload.filter);
+      const data = requestDataHandler('GET', `/users/user/${payload.id}`, undefined, payload.query);
 
       const response = await axios(data).catch(err => {
         this.dispatch("notification/fetch", {

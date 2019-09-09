@@ -17,21 +17,6 @@ const additionalFieldRoutes = require('./routes/addittionalField');
 // Models
 const User = require('./models/user');
 const Role = require('./models/role');
-const Layout = require('./models/layout');
-const Field = require('./models/field');
-
-// Association
-Layout.belongsToMany(Field, {
-  through: 'LayoutField',
-  constraints: false
-});
-
-Field.belongsToMany(Layout, {
-  through: 'LayoutField',
-  constraints: false
-});
-
-
 
 const app = express();
 
@@ -80,7 +65,7 @@ async function connect() {
 
   let adminRole = await Role.findOne({
     where: {
-      slug: process.env.ADMIN_SLUG
+      slug: 'admin'
     }
   });
 
@@ -92,16 +77,30 @@ async function connect() {
     });
   }
 
+  let managerRole = await Role.findOne({
+    where: {
+      slug: 'manager'
+    }
+  });
+
+  if (!managerRole) {
+    managerRole = await Role.create({
+      slug: 'manager',
+      title: 'Менеджер',
+      rang: 9000
+    });
+  }
+
   let admin = await User.findOne({
     where: {
-      slug: process.env.ADMIN_SLUG
+      slug: 'admin'
     }
   });
 
   if (!admin) {
     let passwordHw = await bcrypt.hash(process.env.ADMIN_PASSWORD, 12);
     admin = await User.create({
-      slug: process.env.ADMIN_SLUG,
+      slug: 'admin',
       email: process.env.ADMIN_EMAIL,
       password: passwordHw,
       roleId: adminRole.id

@@ -168,6 +168,7 @@ export default {
 
   methods: {
     async saveAdditionalFields() {
+      const fields = [];
       for (let el in this.fields) {
         if (this.fields[el].id) {
           const updateField = {
@@ -180,7 +181,7 @@ export default {
           if (this.fields[el].interface.fieldType === "migx") {
             updateField.value = JSON.stringify(this.fields[el].value);
           }
-          await this.$store.dispatch("additionalField/update", updateField);
+          fields.push(updateField);
         } else {
           const createField = {
             slug: el,
@@ -191,9 +192,26 @@ export default {
           if (this.fields[el].interface.fieldType === "migx") {
             createField.value = JSON.stringify(this.fields[el].value);
           }
-          await this.$store.dispatch("additionalField/create", createField);
+          fields.push(createField);
         }
       }
+
+      for await (let el of fields) {
+        if (el.id) {
+          await this.$store.dispatch("additionalField/update", el);
+        } else {
+          await this.$store.dispatch("additionalField/create", el);
+        }
+      }
+
+      await this.$store.dispatch("resource/findByPk", {
+        id: this.$route.params.id,
+        query: {
+          filter: {
+            include: [{ model: "$layout" }, { model: "$additionalfield" }]
+          }
+        }
+      });
     }
   }
 };
