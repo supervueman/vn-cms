@@ -3,7 +3,7 @@
     v-layout.wrap
       v-flex.xs12.md7.pr-2
         v-card.mb-3
-          v-card-title Общие данные {{resource}}
+          v-card-title Общие данные
           v-card-text
             v-layout.wrap
               v-flex.md12

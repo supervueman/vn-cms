@@ -62,7 +62,7 @@
                   )
                   v-flex.px-2.file-name(
                     :class="{'active-card-file': currentFullPath === file.path}"
-                  ) {{file.path}}
+                  ) {{file.path}} {{imgFolderBasePath}}
       v-menu(
         v-model="isContext"
         :position-x="x"
@@ -101,6 +101,9 @@
 import ContextMenuList from "./ContextMenuList";
 import CreateFolder from "./CreateFolder";
 import TreeviewControls from "./TreeviewControls";
+
+// Config
+import { imgFolderBasePath } from "@/config";
 
 export default {
   name: "FilesystemComponent",
@@ -148,7 +151,8 @@ export default {
       path: "/",
       ext: "",
       name: ""
-    }
+    },
+    imgFolderBasePath
   }),
 
   computed: {

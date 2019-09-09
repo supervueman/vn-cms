@@ -21,9 +21,6 @@
 // Components
 import Filesystem from "@/components/Filesystem/Filesystem";
 
-// Config
-import { imgFolderBasePath } from "@/config";
-
 export default {
   name: "ImageField",
 
@@ -42,14 +39,12 @@ export default {
     return {
       isActiveDialog: false,
       file: "",
-      filePath: "",
-      imgFolderBasePath
+      filePath: ""
     };
   },
 
   methods: {
     selectFile(file) {
-      console.log(file);
       this.$emit("selectFile", file.path);
     }
   }
