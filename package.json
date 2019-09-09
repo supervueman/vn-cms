@@ -5,11 +5,11 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "client:dev:create:symlink": "cd dev/public/static && ln -s ../../../public/files",
-    "client:dev:remove:symlink": "cd dev/public/static && rm -r static",
-    "client:dev": "cd dev && npm run serve",
+    "manager:dev:create:symlink": "cd manager_dev/public/static && ln -s ../../../public/files",
+    "manager:dev:remove:symlink": "cd manager_dev/public/static && rm -r files",
+    "manager:dev": "cd manager_dev && npm run serve",
     "server:dev": "cd server && npm start",
-    "start:dev": "npm run client:dev & npm run server:dev"
+    "start:dev": "npm run manager_dev:dev & npm run server:dev"
   },
   "repository": {
     "type": "git",

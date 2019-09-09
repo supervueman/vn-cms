@@ -8,5 +8,5 @@ module.exports = {
   devServer: {
     clientLogLevel: 'debug'
   },
-  outputDir: path.resolve(__dirname, "../client"),
+  outputDir: path.resolve(__dirname, "../manager"),
 };
