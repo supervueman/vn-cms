@@ -1,9 +1,12 @@
 const bcrypt = require('bcrypt');
 const validator = require('validator');
-const fs = require('fs');
 
 // Models
 const User = require('../models/user');
+
+// Handlers
+const createDir = require('../handlers/createDir');
+const removeDir = require('../handlers/removeDir');
 
 module.exports = {
   async findByAccessToken(req, res) {
@@ -66,6 +69,8 @@ module.exports = {
       userId: req.profile.id
     });
 
+    await createDir(createdUser.slug);
+
     res.status(200).send(createdUser);
   },
 
@@ -120,6 +125,8 @@ module.exports = {
         message: 'Пользователь не найден!'
       });
     }
+
+    removeDir(existUser.req.profile.slug);
 
     await User.destroy({
       where: {

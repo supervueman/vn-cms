@@ -2,6 +2,7 @@ const bcrypt = require('bcrypt');
 
 // Helpers
 const filterHandler = require('../handlers/filterHandler');
+const removeDir = require('../handlers/removeDir');
 
 // Models
 const User = require('../models/user');
@@ -198,6 +199,7 @@ module.exports = {
 			(req.managerAccess && existUser.userId === req.profile.id) ||
 			req.adminAccess
 		) {
+			removeDir(existUser.slug);
 			await existUser.destroy({
 				where: {
 					id: req.body.id

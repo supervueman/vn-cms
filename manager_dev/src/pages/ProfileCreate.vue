@@ -11,6 +11,9 @@ import accessMixin from "@/mixins/accessMixin";
 // Components
 import ProfileView from "@/components/Profile/View";
 
+// Query
+import { queryRoles } from "@/query/role";
+
 export default {
   name: "ProfileCreatePage",
 
@@ -27,7 +30,10 @@ export default {
   },
 
   async mounted() {
-    await this.$store.dispatch("role/findAll");
+    const data = {
+      query: queryRoles()
+    };
+    await this.$store.dispatch("role/findAll", data);
   },
 
   beforeRouteLeave(to, from, next) {

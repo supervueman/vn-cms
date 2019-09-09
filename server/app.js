@@ -4,6 +4,9 @@ const sequelize = require('./util/database');
 const bcrypt = require('bcrypt');
 require('dotenv').config();
 
+// Handlers
+const createDir = require('./handlers/createDir');
+
 // Routes
 const authenticateRoutes = require('./routes/authenticate');
 const profileRoutes = require('./routes/profile');
@@ -96,6 +99,9 @@ async function connect() {
       slug: 'admin'
     }
   });
+
+  await createDir('');
+  await createDir('admin');
 
   if (!admin) {
     let passwordHw = await bcrypt.hash(process.env.ADMIN_PASSWORD, 12);
