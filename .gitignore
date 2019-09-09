@@ -3,6 +3,7 @@ node_modules
 /dist
 /client
 /manager
+/files
 
 # local env files
 .env
