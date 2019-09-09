@@ -8,6 +8,8 @@
     "manager:dev:create:symlink": "cd manager_dev/public/static && ln -s ../../../public/files",
     "manager:dev:remove:symlink": "cd manager_dev/public/static && rm -r files",
     "manager:dev": "cd manager_dev && npm run serve",
+    "manager:build": "cd manager_dev && npm run build",
+    "manager:start:local": "serve -s manager",
     "server:dev": "cd server && npm start",
     "start:dev": "npm run manager_dev:dev & npm run server:dev"
   },

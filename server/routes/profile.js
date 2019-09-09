@@ -5,7 +5,6 @@ const router = express.Router();
 const profileController = require('../controllers/profile');
 
 // Middleware
-const access = require('../middleware/access');
 const profileByAccessToken = require('../middleware/profileByAccessToken');
 const profileByApiKey = require('../middleware/profileByApiKey');
 
