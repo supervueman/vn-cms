@@ -288,10 +288,7 @@ export default {
       this.changeLayoutData = event;
       if (this.operationType === "update") {
         this.isChangeLayout = true;
-      } else {
       }
-      console.log(event);
-      console.log(this.resource.layout);
     },
 
     async changeLayout() {
