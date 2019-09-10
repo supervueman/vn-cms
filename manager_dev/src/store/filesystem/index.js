@@ -1,43 +1,6 @@
 import requestDataHandler from '@/functions/requestDataHandlerWithAxios';
 import axios from 'axios';
 
-const filesystem = [{
-  type: 'directory',
-  name: 'files',
-  path: '/',
-  children: [{
-      type: 'file',
-      name: 'image-1.jpg',
-      ext: 'jpg',
-      path: 'files/image-1.jpg'
-    },
-    {
-      type: 'file',
-      name: 'image-2.jpg',
-      ext: 'jpg',
-      path: 'files/image-2.jpg'
-    },
-    {
-      type: 'directory',
-      name: 'images',
-      path: '/images',
-      children: [{
-          type: 'file',
-          name: 'image-3.jpg',
-          ext: 'jpg',
-          path: 'files/images/image-3.jpg'
-        },
-        {
-          type: 'file',
-          name: 'image-4.jpg',
-          ext: 'jpg',
-          path: 'files/images/image-4.jpg'
-        }
-      ]
-    }
-  ]
-}]
-
 export default {
   namespaced: true,
   state: {
