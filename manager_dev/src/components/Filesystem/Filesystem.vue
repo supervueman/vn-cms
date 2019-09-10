@@ -140,7 +140,7 @@ export default {
     isCreateFolderDialog: false,
 
     folderData: {
-      type: "dir",
+      type: "directory",
       path: "/",
       name: "",
       extension: "",
@@ -180,7 +180,11 @@ export default {
      */
     fetchFolderContent(item) {
       if (item.type === "file") {
-        const directoriesArr = item.path.split("/").slice(this.length, -1);
+        let directoriesArr = item.path.split("/").slice(this.length, -1);
+
+        if (this.filesystem[0].path !== "files") {
+          directoriesArr = directoriesArr.splice(1, directoriesArr.length);
+        }
 
         let dir = {};
         let filesystem = this.filesystem;
