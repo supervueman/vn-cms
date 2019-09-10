@@ -51,6 +51,9 @@ export default {
       function recursiveFilesystem(files) {
         files.forEach(el => {
           el.path = el.path.substr(3, el.path.length);
+          if (el.path.slice(-1) === '/') {
+            el.path = el.path.slice(0, el.path.length - 1)
+          }
           if (el.type === 'directory') {
             recursiveFilesystem(el.children);
             return;
@@ -61,8 +64,6 @@ export default {
       }
 
       recursiveFilesystem(filesystem);
-
-      console.log(filesystem)
 
       state.filesystem = filesystem;
     },

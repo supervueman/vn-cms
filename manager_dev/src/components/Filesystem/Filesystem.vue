@@ -182,8 +182,13 @@ export default {
       if (item.type === "file") {
         let directoriesArr = item.path.split("/").slice(this.length, -1);
 
-        if (this.filesystem[0].path !== "files") {
-          directoriesArr = directoriesArr.splice(1, directoriesArr.length);
+        const firstItemPathSplit = this.filesystem[0].path.split("/");
+
+        if (firstItemPathSplit.length > 1) {
+          directoriesArr = directoriesArr.splice(
+            firstItemPathSplit.length - 1,
+            directoriesArr.length
+          );
         }
 
         let dir = {};
