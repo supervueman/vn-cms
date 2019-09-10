@@ -69,7 +69,7 @@ module.exports = {
       userId: req.profile.id
     });
 
-    await createDir(createdUser.slug);
+    await createDir(createdUser.id);
 
     res.status(200).send(createdUser);
   },
@@ -126,7 +126,7 @@ module.exports = {
       });
     }
 
-    removeDir(existUser.req.profile.slug);
+    removeDir(existUser.req.profile.id);
 
     await User.destroy({
       where: {

@@ -199,7 +199,7 @@ module.exports = {
 			(req.managerAccess && existUser.userId === req.profile.id) ||
 			req.adminAccess
 		) {
-			removeDir(existUser.slug);
+			removeDir(existUser.id);
 			await existUser.destroy({
 				where: {
 					id: req.body.id

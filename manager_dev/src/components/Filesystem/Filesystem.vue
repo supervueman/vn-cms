@@ -37,12 +37,12 @@
                         @contextmenu.prevent="fetchContextMenu($event, item)"
                       )
                       v-icon(
-                        v-if="item.type === 'dir'"
+                        v-if="item.type === 'directory'"
                         :color="open ? 'primary' : ''"
                       ) {{ open ? 'mdi-folder-open' : 'mdi-folder' }}
                       v-icon(
                         v-else :color="open ? 'primary' : ''"
-                      ) {{ files[item.ext] }}
+                      ) {{ files[item.extension] }}
             v-divider.mx-2(vertical)
             v-layout.row.wrap(fill-height align-start justify-start)
               v-flex.py-2.px-2(
@@ -118,16 +118,16 @@ export default {
     open: [],
     tree: [],
     files: {
-      html: "mdi-language-html5",
-      js: "mdi-nodejs",
-      json: "mdi-json",
-      md: "mdi-markdown",
-      pdf: "mdi-file-pdf",
-      png: "mdi-file-image",
-      jpg: "mdi-file-image",
-      jpeg: "mdi-file-image",
-      txt: "mdi-file-document-outline",
-      xls: "mdi-file-excel"
+      ".html": "mdi-language-html5",
+      ".js": "mdi-nodejs",
+      ".json": "mdi-json",
+      ".md": "mdi-markdown",
+      ".pdf": "mdi-file-pdf",
+      ".png": "mdi-file-image",
+      ".jpg": "mdi-file-image",
+      ".jpeg": "mdi-file-image",
+      ".txt": "mdi-file-document-outline",
+      ".xls": "mdi-file-excel"
     },
     currentFolder: {},
     currentFile: {},
@@ -143,13 +143,13 @@ export default {
       type: "dir",
       path: "/",
       name: "",
-      ext: "",
+      extension: "",
       children: []
     },
     fileData: {
       type: "file",
       path: "/",
-      ext: "",
+      extension: "",
       name: ""
     },
     imgFolderBasePath
@@ -188,7 +188,7 @@ export default {
         function searchDirectory() {
           if (directoriesArr.length > 0) {
             filesystem.forEach((item, i) => {
-              if (item.type === "dir") {
+              if (item.type === "directory") {
                 directoriesArr.forEach((el, j) => {
                   if (item.name === el) {
                     filesystem = item.children;

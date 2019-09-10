@@ -22,5 +22,6 @@
   "bugs": {
     "url": "https://gitlab.com/multicms/platform-cms/issues"
   },
-  "homepage": "https://gitlab.com/multicms/platform-cms#readme"
+  "homepage": "https://gitlab.com/multicms/platform-cms#readme",
+  "devDependencies": {}
 }

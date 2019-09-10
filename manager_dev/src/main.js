@@ -3,6 +3,7 @@ import './plugins/vuetify'
 import commonComponentsRequire from '@/functions/commonComponentsRequire';
 import App from './App.vue';
 import router from './routers';
+import '@mdi/font/css/materialdesignicons.css';
 import {
   store
 } from './store';

@@ -16,6 +16,7 @@ const resourceRoutes = require('./routes/resource');
 const layoutRoutes = require('./routes/layout');
 const fieldRoutes = require('./routes/field');
 const additionalFieldRoutes = require('./routes/addittionalField');
+const filesystemRoutes = require('./routes/filesystem');
 
 // Models
 const User = require('./models/user');
@@ -58,6 +59,7 @@ app.use('/resources', resourceRoutes);
 app.use('/layouts', layoutRoutes);
 app.use('/fields', fieldRoutes);
 app.use('/additionalfields', additionalFieldRoutes);
+app.use('/filesystem', filesystemRoutes);
 
 async function connect() {
   const connect = await sequelize.sync();
@@ -101,7 +103,7 @@ async function connect() {
   });
 
   await createDir('');
-  await createDir('admin');
+  await createDir(admin.id);
 
   if (!admin) {
     let passwordHw = await bcrypt.hash(process.env.ADMIN_PASSWORD, 12);

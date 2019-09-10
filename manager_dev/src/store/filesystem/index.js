@@ -1,39 +1,5 @@
-const filesystem = [{
-  type: 'dir',
-  name: 'files',
-  path: '/',
-  children: [{
-      type: 'file',
-      name: 'image-1.jpg',
-      ext: 'jpg',
-      path: 'files/image-1.jpg'
-    },
-    {
-      type: 'file',
-      name: 'image-2.jpg',
-      ext: 'jpg',
-      path: 'files/image-2.jpg'
-    },
-    {
-      type: 'dir',
-      name: 'images',
-      path: '/images',
-      children: [{
-          type: 'file',
-          name: 'image-3.jpg',
-          ext: 'jpg',
-          path: 'files/images/image-3.jpg'
-        },
-        {
-          type: 'file',
-          name: 'image-4.jpg',
-          ext: 'jpg',
-          path: 'files/images/image-4.jpg'
-        }
-      ]
-    }
-  ]
-}]
+import requestDataHandler from '@/functions/requestDataHandlerWithAxios';
+import axios from 'axios';
 
 export default {
   namespaced: true,
@@ -43,7 +9,23 @@ export default {
   },
   mutations: {
     setFilesystem(state, payload) {
-      state.filesystem = payload;
+      const filesystem = [payload];
+
+      function recursiveFilesystem(files) {
+        files.forEach(el => {
+          el.path = el.path.substr(3, el.path.length);
+          if (el.type === 'directory') {
+            recursiveFilesystem(el.children);
+            return;
+          } else {
+            return;
+          }
+        });
+      }
+
+      recursiveFilesystem(filesystem);
+
+      state.filesystem = filesystem;
     },
     setFolderContent(state, payload) {
       state.folderContent = payload;
@@ -61,8 +43,20 @@ export default {
     async fetchFilesystem({
       commit
     }) {
-      commit('setFilesystem', filesystem);
-      commit('setFolderContent');
+      const data = requestDataHandler('GET', '/filesystem', undefined);
+
+      const response = await axios(data).catch(err => {
+        this.dispatch('notification/fetch', {
+          type: 'error',
+          message: `${err}`,
+          isActive: true
+        });
+      });
+
+      if (response !== undefined && response.status === 200) {
+        commit('setFilesystem', response.data);
+        commit('setFolderContent');
+      }
     },
 
     /**
@@ -79,7 +73,6 @@ export default {
 
   getters: {
     getFilesystem(state) {
-      console.log(state.filesystem)
       return state.filesystem;
     },
     getFolderContent(state) {
