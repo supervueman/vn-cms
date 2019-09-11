@@ -6,9 +6,9 @@
           v-layout.column
             div.mb-2 Текущий путь: {{currentFullPath}}
         v-card-text
-          v-layout
+          v-layout.filesystem--window
             v-flex.xl3.lg3.md3
-              v-layout.column
+              v-layout.column.filesystem--tree
                 v-flex.mb-4
                   treeview-controls(
                     :currentFileType="currentFile.type"
@@ -17,7 +17,7 @@
                     @triggerForUploadFile="triggerForUploadFile"
                     @filesystemReload="filesystemReload"
                   )
-                v-flex.xl3.lg3.md3
+                v-flex.xl3.lg3.md3.filesystem--tree-list
                   v-treeview(
                     v-model="tree"
                     :open.sync="open"
@@ -288,6 +288,16 @@ export default {
 </script>
 
 <style lang="sass">
+.filesystem
+  &--window
+    max-height: 100vh
+  &--tree
+    height: 100%
+    .flex
+      flex: auto
+    &-list
+      height: 94%
+      overflow: auto
 .v-treeview-node__root
   position: relative
 .treeview-node-overlay
@@ -296,6 +306,8 @@ export default {
   left: 0
   width: 100%
   height: 100%
+.tree
+  overflow-x: auto
 .file-name
   white-space: nowrap
   overflow: hidden
