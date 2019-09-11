@@ -231,6 +231,29 @@ export default {
       }
     },
 
+    async updateAll({
+      commit
+    }, payload) {
+      const data = requestDataHandler('PUT', '/additionalfields/update-all', payload);
+
+      const response = await axios(data).catch(err => {
+        this.dispatch('notification/fetch', {
+          type: 'error',
+          message: `${err}`,
+          isActive: true
+        });
+      });
+
+      if (response !== undefined && response.status === 200) {
+        this.dispatch('notification/fetch', {
+          type: 'success',
+          message: 'Успешно сохранено!',
+          isActive: true
+        });
+      }
+    },
+
+
     async remove({
       commit
     }, payload) {

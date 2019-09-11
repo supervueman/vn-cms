@@ -18,6 +18,8 @@ router.post('/create', access, additionalFieldController.create);
 
 router.put('/update', access, additionalFieldController.update);
 
+router.put('/update-all', access, additionalFieldController.updateAll);
+
 router.delete('/remove', access, additionalFieldController.remove);
 
 module.exports = router;

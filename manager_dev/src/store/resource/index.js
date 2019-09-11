@@ -48,42 +48,54 @@ export default {
     setSerializedFields(state, payload) {
       const serializedFields = {};
 
-      const existFields = state.fields.filter(el1 => state.additionalFields.some(el2 => el1.slug === el2.slug));
+      const fields = state.fields;
+      const additionalFields = state.additionalFields;
 
-      existFields.forEach((el, i) => {
-        serializedFields[el.slug] = {
-          ...state.additionalFields[i],
-          slug: el.slug,
-          interface: {
-            ...el
-          }
-        };
-        if (el.fieldType === 'select') {
-          serializedFields[el.slug].interface.defaultValue = JSON.parse(el.defaultValue);
-        }
-        if (el.fieldType === 'migx') {
-          serializedFields[el.slug].interface.defaultValue = JSON.parse(el.defaultValue);
-          serializedFields[el.slug].value = JSON.parse(serializedFields[el.slug].value);
-        }
-      });
+      function serializedFieldsFunc(fields, additionalFields) {
+        fields.forEach((el1, i) => {
+          additionalFields.forEach((el2, j) => {
+            if (el1.slug === el2.slug) {
+              serializedFields[el1.slug] = {
+                ...el2,
+                interface: {
+                  ...el1
+                }
+              }
 
-      state.fields.forEach(el => {
-        if (!serializedFields[el.slug]) {
-          serializedFields[el.slug] = {
-            slug: el.slug,
-            value: el.defaultValue,
-            fieldId: el.id,
-            resourceId: state.resource.id,
-            interface: {
-              ...el
+              if (el1.fieldType === 'migx') {
+                serializedFields[el1.slug].interface.defaultValue = JSON.parse(el1.defaultValue);
+                serializedFields[el1.slug].value = JSON.parse(serializedFields[el2.slug].value);
+              }
+              if (el1.fieldType === 'select') {
+                serializedFields[el1.slug].interface.defaultValue = JSON.parse(el1.defaultValue);
+              }
+              fields.splice(i, 1);
+              additionalFields.splice(j, 1);
+              serializedFieldsFunc(fields, additionalFields)
+              return;
             }
-          }
-          if (el.fieldType === 'select' || el.fieldType === 'migx') {
-            serializedFields[el.slug].interface.defaultValue = JSON.parse(el.defaultValue);
-            serializedFields[el.slug].value = JSON.parse(el.defaultValue);
-          }
+          })
+        })
+        if (fields.length > 0) {
+          fields.forEach(el => {
+            serializedFields[el.slug] = {
+              slug: el.slug,
+              value: el.defaultValue,
+              fieldId: el.id,
+              resourceId: state.resource.id,
+              interface: {
+                ...el
+              }
+            }
+            if (el.fieldType === 'migx') {
+              serializedFields[el.slug].interface.defaultValue = JSON.parse(el.defaultValue);
+              serializedFields[el.slug].value = JSON.parse(el.defaultValue);
+            }
+          })
         }
-      });
+      }
+
+      serializedFieldsFunc(fields, additionalFields);
 
       state.serializedFields = serializedFields;
     }
@@ -104,6 +116,7 @@ export default {
 
       if (response !== undefined && response.status === 200) {
         commit('set', response.data);
+        // console.log(response.data.additionalfields)
         commit('setAdditionalFields', response.data.additionalfields);
 
         const params = {

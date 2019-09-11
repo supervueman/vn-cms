@@ -85,6 +85,8 @@ module.exports = {
 
     const additionalField = await AdditionalField.findByPk(req.body.id);
 
+    console.log(additionalField.id)
+
     if (!additionalField) {
       res.status(401).send({
         message: 'Не найдено!'
@@ -98,6 +100,39 @@ module.exports = {
     const updatedAdditionalField = await additionalField.update(updateAdditionalField);
 
     res.status(200).send(updatedAdditionalField);
+  },
+
+  async updateAll(req, res) {
+    if (!(req.adminAccess || req.managerAccess)) {
+      res.status(401).send({
+        message: 'Нет доступа!'
+      });
+      return;
+    }
+
+    // console.log(req.body.fields)
+
+    for (let field of req.body.fields) {
+      const additionalField = await AdditionalField.findByPk(field.id);
+      console.log(field.id, field.value, '___1')
+      console.log(additionalField.id, additionalField.value, '____2')
+
+      if (!additionalField) {
+        res.status(401).send({
+          message: 'Не найдено!'
+        });
+        return;
+      }
+      // delete updateAdditionalField.id;
+
+      const updatedAdditionalField = await additionalField.update(field);
+
+      console.log(updatedAdditionalField.id, updatedAdditionalField.value, '____3')
+    }
+
+    res.status(200).send({
+      message: 'All fields updated!'
+    });
   },
 
   async remove(req, res) {

@@ -17,9 +17,7 @@
           v-tab-item
             v-layout.wrap.pt-4
               v-flex
-                v-card
-                  v-card-text
-                    fields
+                fields
           v-tab-item
             v-layout.wrap.pt-4
               v-flex
