@@ -1,5 +1,8 @@
 // Handlers
 const readDir = require('../handlers/readDir');
+const createDir = require('../handlers/createDir');
+const removeFile = require('../handlers/removeFile');
+const removeDir = require('../handlers/removeDir');
 
 module.exports = {
   async getFilesystem(req, res) {
@@ -22,13 +25,17 @@ module.exports = {
   },
 
   async createDir(req, res) {
-    if (!(req.adminAccess || req.managerAccess)) {
+    if (!req.isAuth) {
       res.status(401).send({
         message: 'Нет доступа!'
       });
     }
 
-    res.status(200);
+    await createDir(req.body.path);
+
+    res.status(200).send({
+      message: 'Success!'
+    });
   },
 
   async createFile(req, res) {
@@ -42,18 +49,20 @@ module.exports = {
   },
 
   async upload(req, res) {
-    if (!req.adminAccess) {
+    if (!req.isAuth) {
       res.status(401).send({
         message: 'Нет доступа!'
       });
       return;
     }
 
-    res.status(200);
+    res.status(200).send({
+      message: 'Success!'
+    });
   },
 
   async renameDir(req, res) {
-    if (!req.adminAccess) {
+    if (!req.isAuth) {
       res.status(401).send({
         message: 'Нет доступа!'
       });
@@ -64,7 +73,7 @@ module.exports = {
   },
 
   async renameFile(req, res) {
-    if (!req.adminAccess) {
+    if (!req.isAuth) {
       res.status(401).send({
         message: 'Нет доступа!'
       });
@@ -75,24 +84,32 @@ module.exports = {
   },
 
   async removeDir(req, res) {
-    if (!(req.adminAccess || req.managerAccess)) {
+    if (!req.isAuth) {
       res.status(401).send({
         message: 'Нет доступа!'
       });
       return;
     }
 
-    res.status(200);
+    await removeDir(req.body.path);
+
+    res.status(200).send({
+      message: 'Success!'
+    });
   },
 
   async removeFile(req, res) {
-    if (!req.adminAccess) {
+    if (!req.isAuth) {
       res.status(401).send({
         message: 'Нет доступа!'
       });
       return;
     }
 
-    res.status(200);
+    await removeFile(req.body.path);
+
+    res.status(200).send({
+      message: 'Success!'
+    });
   },
 }

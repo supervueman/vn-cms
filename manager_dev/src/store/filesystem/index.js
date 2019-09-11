@@ -1,5 +1,8 @@
 import requestDataHandler from '@/functions/requestDataHandlerWithAxios';
 import axios from 'axios';
+import {
+  create
+} from 'domain';
 
 export default {
   namespaced: true,
@@ -71,6 +74,93 @@ export default {
       commit
     }, payload) {
       commit('setFolderContent', payload);
+    },
+
+    async createDir({
+      commit
+    }, payload) {
+      const data = requestDataHandler('POST', '/filesystem/create-dir', payload);
+      const response = await axios(data).catch(err => {
+        this.dispatch('notification/fetch', {
+          type: 'error',
+          message: `${err}`,
+          isActive: true
+        });
+      });
+
+      if (response !== undefined && response.status === 200) {
+        this.dispatch('notification/fetch', {
+          type: 'success',
+          message: 'Директория успешно создана!',
+          isActive: true
+        });
+      }
+    },
+
+    async upload({
+      commit
+    }, payload) {
+      const data = requestDataHandler('POST', '/filesystem/upload', payload.formData, payload.query);
+
+      const response = await axios(data).catch(err => {
+        this.dispatch('notification/fetch', {
+          type: 'error',
+          message: `${err}`,
+          isActive: true
+        });
+      });
+
+      if (response !== undefined && response.status === 200) {
+        this.dispatch('notification/fetch', {
+          type: 'success',
+          message: 'Файлы успешно загружены!',
+          isActive: true
+        });
+      }
+    },
+
+    async removeFile({
+      commit
+    }, payload) {
+      const data = requestDataHandler('DELETE', '/filesystem/remove-file', payload);
+
+      const response = await axios(data).catch(err => {
+        this.dispatch('notification/fetch', {
+          type: 'error',
+          message: `${err}`,
+          isActive: true
+        });
+      });
+
+      if (response !== undefined && response.status === 200) {
+        this.dispatch('notification/fetch', {
+          type: 'success',
+          message: 'Файл успешно удален!',
+          isActive: true
+        });
+      }
+    },
+
+    async removeDir({
+      commit
+    }, payload) {
+      const data = requestDataHandler('DELETE', '/filesystem/remove-dir', payload);
+
+      const response = await axios(data).catch(err => {
+        this.dispatch('notification/fetch', {
+          type: 'error',
+          message: `${err}`,
+          isActive: true
+        });
+      });
+
+      if (response !== undefined && response.status === 200) {
+        this.dispatch('notification/fetch', {
+          type: 'success',
+          message: 'Директория успешно удалена!',
+          isActive: true
+        });
+      }
     }
   },
 

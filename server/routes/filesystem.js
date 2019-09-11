@@ -6,12 +6,13 @@ const filesystemController = require('../controllers/filesystem');
 
 // Middleware
 const profileByAccessToken = require('../middleware/profileByAccessToken');
+const upload = require('../middleware/uploadFiles');
 
 router.get('/', profileByAccessToken, filesystemController.getFilesystem);
 
 router.post('/create-dir', profileByAccessToken, filesystemController.createDir);
 
-router.post('/upload', profileByAccessToken, filesystemController.upload);
+router.post('/upload', profileByAccessToken, upload.array('file'), filesystemController.upload);
 
 router.put('/rename-dir', profileByAccessToken, filesystemController.renameDir);
 

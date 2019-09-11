@@ -102,8 +102,8 @@ async function connect() {
     }
   });
 
-  await createDir('');
-  await createDir(admin.id);
+  await createDir('../files');
+  await createDir(`../files/${admin.id}`);
 
   if (!admin) {
     let passwordHw = await bcrypt.hash(process.env.ADMIN_PASSWORD, 12);

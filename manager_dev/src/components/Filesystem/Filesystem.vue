@@ -91,8 +91,9 @@
       class="input-file"
       type="file"
       ref="file"
+      name="filesystemImages"
       multiple
-      v-on:change="uploadFiles"
+      v-on:change="upload"
     )
 </template>
 
@@ -131,6 +132,7 @@ export default {
     },
     currentFolder: {},
     currentFile: {},
+    currentElem: {},
     currentFullPath: "/",
     currentFolderPath: "/",
     isContext: false,
@@ -224,6 +226,7 @@ export default {
         this.currentFile = {};
         this.currentFolderPath = item.path;
       }
+      this.currentElem = item;
       this.currentFullPath = item.path;
     },
 
@@ -231,36 +234,69 @@ export default {
       this.x = event.clientX;
       this.y = event.clientY;
       this.isContext = true;
+      this.currentElem = item;
       this.fetchFolderContent(item);
     },
 
     selectFile(file) {
-      console.log(file);
+      // console.log(file);
       this.$emit("selectFile", file);
     },
 
-    uploadFiles() {
-      console.log(this.currentFolderPath);
+    async upload() {
+      // console.log(this.currentFolderPath);
       const files = this.$refs.file.files;
       const formData = new FormData();
+
       for (let i = 0; i < files.length; i++) {
         formData.append("file", files[i]);
       }
-    },
 
-    createFolder(folderName) {
-      console.log(folderName);
-      console.log(this.currentFolderPath);
-      this.isCreateFolderDialog = false;
+      await this.$store.dispatch("filesystem/upload", {
+        formData,
+        query: {
+          path:
+            this.currentFolderPath === "/"
+              ? `../${this.filesystem[0].path}`
+              : `../${this.currentFolderPath}`
+        }
+      });
       this.$store.dispatch("filesystem/fetchFilesystem");
-      this.fetchFolderContent(this.currentFolder);
     },
 
-    removeFileOrFolder() {
-      console.log(this.curentFolderPath);
-      console.log(this.currentFullPath);
-      console.log(this.currentFile);
-      console.log(this.currentFolder);
+    async createFolder(folderName) {
+      // console.log(folderName);
+      // console.log(this.currentFolderPath);
+      this.isCreateFolderDialog = false;
+      this.$store.dispatch("filesystem/createDir", {
+        path:
+          this.currentFolderPath === "/"
+            ? `../${this.filesystem[0].path}/${folderName}`
+            : `../${this.currentFolderPath}/${folderName}`
+      });
+      await this.$store.dispatch("filesystem/fetchFilesystem");
+      await this.fetchFolderContent(this.currentFolder);
+    },
+
+    async removeFileOrFolder() {
+      if (this.currentFullPath === this.filesystem[0].path) {
+        this.$store.dispatch("notification/fetch", {
+          type: "error",
+          message: "Нельзя удалять корневую директорию!",
+          isActive: true
+        });
+        return;
+      }
+      if (this.currentElem.type === "file") {
+        await this.$store.dispatch("filesystem/removeFile", {
+          path: `../${this.currentFullPath}`
+        });
+      } else {
+        await this.$store.dispatch("filesystem/removeDir", {
+          path: `../${this.currentFullPath}`
+        });
+      }
+      await this.$store.dispatch("filesystem/fetchFilesystem");
     },
 
     filesystemReload() {
