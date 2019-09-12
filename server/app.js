@@ -42,14 +42,20 @@ app.use((req, res, next) => {
     return res.sendStatus(200);
   }
 
-  if (req.headers.authorization === `Basic ${Buffer.from(process.env.AUTHORIZATION_LOGIN + ':' + process.env.AUTHORIZATION_PASSWORD).toString('base64')}`) {
-    next();
+  if (req.url.indexOf('files') <= 0) {
+    if (req.headers.authorization === `Basic ${Buffer.from(process.env.AUTHORIZATION_LOGIN + ':' + process.env.AUTHORIZATION_PASSWORD).toString('base64')}`) {
+      next();
+    } else {
+      res.status(401).send({
+        message: 'Not authorization!'
+      });
+    }
   } else {
-    res.status(401).send({
-      message: 'Not authorization!'
-    });
+    next();
   }
 });
+
+app.use('/files', express.static('../files'));
 
 // Routes use
 app.use('/authenticate', authenticateRoutes);
