@@ -31,11 +31,18 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', process.env.CORS_ACCESS_URL);
+  const allowedOrigins = process.env.CORS_ACCESS_URL.split(', ');
+  const origin = req.headers.origin;
+
+  if (allowedOrigins.indexOf(origin) > -1) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+  }
+
   res.setHeader(
     'Access-Control-Allow-Methods',
     'OPTIONS, GET, POST, PUT, PATCH, DELETE'
   );
+
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, x-access-token, x-api-key');
 
   if (req.method === 'OPTIONS') {
