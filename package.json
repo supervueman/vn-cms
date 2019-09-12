@@ -10,6 +10,9 @@
     "manager:dev": "cd manager_dev && npm run serve",
     "manager:build": "cd manager_dev && npm run build",
     "manager:start:local": "serve -s manager",
+    "client:dev": "cd client_dev && npm run dev",
+    "client:build": "cd client_dev && npm run build",
+    "client:start": "cd client_dev && npm run start",
     "server:dev": "cd server && npm start",
     "start:dev": "npm run manager_dev:dev & npm run server:dev"
   },

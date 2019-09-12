@@ -1,0 +1,68 @@
+.footer
+	@extend %base-layout
+	background-color: $light-color
+	width: 100%
+	padding: $gap * 3 0 0 0
+	&--wrapper
+		@extend %base-layout--wrapper
+	&--inner
+		@extend %base-layout--inner
+		display: flex
+		flex-direction: row
+		align-items: center
+		justify-content: flex-start
+	&--logo
+		width: 100px
+		margin-right: $gap
+		img
+			width: 100%
+	&--group
+		display: flex
+		width: 100%
+		align-items: center
+	&--item
+		padding: $gap / 2 0
+		display: flex
+		flex-direction: column
+		align-items: flex-start
+		justify-content: center
+	&--link
+		@extend %base-layout--link
+		@include link-colorize($dark-color, $dark-color)
+		margin-bottom: $gap / 2
+		font-size: 0.8em
+		&-active
+			@include link-colorize($dark-color, $dark-color)
+	&--bottom
+		@extend %base-layout--actions
+		justify-content: flex-end
+		padding: $gap
+		margin-top: $gap / 2
+	&--button
+		@extend %base-layout--button
+		@include button-colorize($dark-color, $light-color, $dark-color, $dark-color, $dark-color, $light-color)
+	&--title
+		@extend %base-layout--title
+		font-size: 1.2em
+		margin: $gap / 2 0 $gap / 2 0
+		color: $dark-color
+
+.developer
+	font-size: 0.9em
+	color: $dark-color
+	&--link
+		@extend %link
+		@include link-colorize($dark-color, $dark-color)
+		font-weight: bold
+		letter-spacing: 1px
+
+.policy
+	font-size: 0.9em
+	&--link
+		@extend %link
+		@include link-colorize($dark-color, $dark-color)
+		&-active
+			@extend %link-active
+			@include link-colorize($dark-color, $dark-color)
+		font-size: 1em
+

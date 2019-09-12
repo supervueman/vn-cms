@@ -39,7 +39,7 @@ export default (method, url, data, params) => {
   if (isParams) {
     requestData.params = params;
   }
-  requestData.headers.Authorization = `Basic ${new Buffer('multikey.studio' + ':' + 'multikeypassword').toString('base64')}`;
+  requestData.headers.Authorization = `Basic ${Buffer.from('multikey.studio' + ':' + 'multikeypassword').toString('base64')}`;
 
   return requestData;
 }

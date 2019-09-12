@@ -42,7 +42,7 @@ app.use((req, res, next) => {
     return res.sendStatus(200);
   }
 
-  if (req.headers.authorization === `Basic ${new Buffer(process.env.AUTHORIZATION_LOGIN + ':' + process.env.AUTHORIZATION_PASSWORD).toString('base64')}`) {
+  if (req.headers.authorization === `Basic ${Buffer.from(process.env.AUTHORIZATION_LOGIN + ':' + process.env.AUTHORIZATION_PASSWORD).toString('base64')}`) {
     next();
   } else {
     res.status(401).send({

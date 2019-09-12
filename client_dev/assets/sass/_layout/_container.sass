@@ -1,0 +1,20 @@
+.container
+	max-width: $max-width
+	width: 100%
+	padding: 0 $gap
+	margin: auto
+	@include respond-to(medium)
+		max-width: 768px
+	@include respond-to(small)
+		max-width: 100%
+	&--wrapper
+		width: 100%
+		display: flex
+		flex-wrap: wrap
+		display: grid
+		grid-gap: $gap
+		grid-template-rows: auto
+	&--large-3
+		grid-template-columns: repeat(auto-fill,minmax(30%, 1fr))
+	&--large-4
+		grid-template-columns: repeat(auto-fill,minmax(20%, 1fr))
