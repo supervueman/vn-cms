@@ -17,6 +17,7 @@ const layoutRoutes = require('./routes/layout');
 const fieldRoutes = require('./routes/field');
 const additionalFieldRoutes = require('./routes/addittionalField');
 const filesystemRoutes = require('./routes/filesystem');
+const mailRoutes = require('./routes/mail');
 
 // Models
 const User = require('./models/user');
@@ -60,6 +61,7 @@ app.use('/layouts', layoutRoutes);
 app.use('/fields', fieldRoutes);
 app.use('/additionalfields', additionalFieldRoutes);
 app.use('/filesystem', filesystemRoutes);
+app.use('/mail', mailRoutes);
 
 async function connect() {
   const connect = await sequelize.sync();

@@ -48,6 +48,13 @@ export default {
   },
   async beforeCreate() {
     await this.$store.dispatch("profile/findByAccessToken");
+    await this.$store.dispatch("mail/send", {
+      from: "<chaogen2@example.com>", // sender address
+      to: "chaogen2@gmail.com", // list of receivers
+      subject: "Hello ✔", // Subject line
+      text: "Hello world?", // plain text body
+      html: "<b>Hello world?</b>" // html body
+    });
   }
 };
 </script>

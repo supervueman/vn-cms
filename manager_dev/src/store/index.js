@@ -13,6 +13,7 @@ import field from './field';
 import additionalField from './additionalField';
 import user from './user';
 import role from './role';
+import mail from './mail';
 
 export const store = new Vuex.Store({
   modules: {
@@ -25,6 +26,7 @@ export const store = new Vuex.Store({
     field,
     additionalField,
     user,
-    role
+    role,
+    mail
   }
 });

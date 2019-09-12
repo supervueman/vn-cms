@@ -48,8 +48,8 @@ export default {
     setSerializedFields(state, payload) {
       const serializedFields = {};
 
-      const fields = state.fields;
-      const additionalFields = state.additionalFields;
+      const fields = state.fields.map(el => el);
+      const additionalFields = state.additionalFields.map(el => el);
 
       function serializedFieldsFunc(fields, additionalFields) {
         fields.forEach((el1, i) => {
@@ -71,28 +71,29 @@ export default {
               }
               fields.splice(i, 1);
               additionalFields.splice(j, 1);
-              serializedFieldsFunc(fields, additionalFields)
+              serializedFieldsFunc(fields, additionalFields);
               return;
             }
-          })
-        })
-        if (fields.length > 0) {
-          fields.forEach(el => {
-            serializedFields[el.slug] = {
-              slug: el.slug,
-              value: el.defaultValue,
-              fieldId: el.id,
-              resourceId: state.resource.id,
-              interface: {
-                ...el
-              }
+          });
+        });
+      }
+
+      if (fields.length > 0) {
+        fields.forEach(el => {
+          serializedFields[el.slug] = {
+            slug: el.slug,
+            value: el.defaultValue,
+            fieldId: el.id,
+            resourceId: state.resource.id,
+            interface: {
+              ...el
             }
-            if (el.fieldType === 'migx') {
-              serializedFields[el.slug].interface.defaultValue = JSON.parse(el.defaultValue);
-              serializedFields[el.slug].value = JSON.parse(el.defaultValue);
-            }
-          })
-        }
+          }
+          if (el.fieldType === 'migx') {
+            serializedFields[el.slug].interface.defaultValue = JSON.parse(el.defaultValue);
+            serializedFields[el.slug].value = JSON.parse(el.defaultValue);
+          }
+        });
       }
 
       serializedFieldsFunc(fields, additionalFields);
