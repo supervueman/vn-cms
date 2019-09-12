@@ -10,6 +10,8 @@
     "manager:dev": "cd manager_dev && npm run serve",
     "manager:build": "cd manager_dev && npm run build",
     "manager:start:local": "serve -s manager",
+    "client:dev:create:symlink": "cd client_dev/static && ln -s ../../files",
+    "client:dev:remove:symlink": "cd client_dev/static && rm -r files",
     "client:dev": "cd client_dev && npm run dev",
     "client:build": "cd client_dev && npm run build",
     "client:start": "cd client_dev && npm run start",

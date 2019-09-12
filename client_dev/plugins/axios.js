@@ -14,5 +14,5 @@ export default function ({
     if (code === 400) {
       redirect('/400')
     }
-  })
+  });
 }

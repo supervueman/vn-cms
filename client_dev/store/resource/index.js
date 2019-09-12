@@ -13,7 +13,19 @@ export default {
     async findAll({
       commit
     }, payload) {
-      const response = await this.$axios.$get('/resources');
+      const response = await this.$axios.$get('/resources', {
+        params: {
+          filter: {
+            where: {
+              parentId: 9
+            },
+            include: [{
+              model: '$additionalfield'
+            }]
+          }
+        }
+
+      });
       commit('setAll', response);
     }
   },
