@@ -14,7 +14,7 @@ export default {
     fields: [],
     count: 0,
     layouts: [],
-    types: ['text', 'textarea', 'editor', 'image', 'select', 'migx', 'radio', 'date', 'time', 'colorpicker', 'checkbox']
+    types: ['text', 'textarea', 'editor', 'image', 'select', 'multiselect', 'migx', 'radio', 'date', 'time', 'colorpicker', 'checkbox']
   },
   mutations: {
     set(state, payload) {

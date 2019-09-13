@@ -66,6 +66,22 @@
                   :items="field.interface.defaultValue"
                   v-model="field.value"
                 )
+              
+              //- Multiple select
+              v-flex(v-else-if="field.interface.fieldType === 'multiselect'")
+                v-tooltip(left)
+                  template(v-slot:activator="{ on }")
+                    div(v-on="on") {{field.interface.title}}
+                  span {{field.interface.slug}}
+                v-select(
+                  v-model="field.value"
+                  :items="field.interface.defaultValue"
+                  label="Select"
+                  multiple
+                  chips
+                  hint="What are the target regions"
+                  persistent-hint
+                )
 
               //- Migx field
               v-flex(v-else-if="field.interface.fieldType === 'migx'")
@@ -91,10 +107,8 @@
                   ref="menu"
                   :close-on-content-click="false"
                   :nudge-right="40"
-                  lazy
                   transition="scale-transition"
                   offset-y
-                  full-width
                   max-width="290px"
                   min-width="290px"
                 )
@@ -122,10 +136,8 @@
                   ref="menu"
                   :close-on-content-click="false"
                   :nudge-right="40"
-                  lazy
                   transition="scale-transition"
                   offset-y
-                  full-width
                   max-width="290px"
                   min-width="290px"
                 )
@@ -151,6 +163,33 @@
                   color="primary"
                   v-model="field.value"
                 )
+              
+              //- Colorpicker field
+              v-flex(v-else-if="field.interface.fieldType === 'colorpicker'")
+                v-tooltip(left)
+                  template(v-slot:activator="{ on }")
+                    div(v-on="on") {{field.interface.title}}
+                  span {{field.interface.slug}}
+                v-color-picker(
+                  v-model="field.value"
+                )
+              
+              //- Radio field
+              v-flex(v-else-if="field.interface.fieldType === 'radio'") {{field.inteface}}
+                v-tooltip(left)
+                  template(v-slot:activator="{ on }")
+                    div(v-on="on") {{field.interface.title}}
+                  span {{field.interface.slug}}
+                v-radio-group(
+                  v-model="field.value"
+                  :mandatory="false"
+                )
+                  v-radio(
+                    v-for="item in field.interface.defaultValue"
+                    :key="item"
+                    :label="item"
+                    :value="item"
+                  )
     v-card-actions
       v-btn.ml-2(color="primary" @click="saveAdditionalFields") Сохранить
 </template>
@@ -191,6 +230,9 @@ export default {
           if (this.fields[el].interface.fieldType === "migx") {
             updateField.value = JSON.stringify(this.fields[el].value);
           }
+          if (this.fields[el].interface.fieldType === "multiselect") {
+            updateField.value = JSON.stringify(this.fields[el].value);
+          }
           fields.push(updateField);
         } else {
           const createField = {
@@ -200,6 +242,9 @@ export default {
             fieldId: this.fields[el].interface.id
           };
           if (this.fields[el].interface.fieldType === "migx") {
+            createField.value = JSON.stringify(this.fields[el].value);
+          }
+          if (this.fields[el].interface.fieldType === "multiselect") {
             createField.value = JSON.stringify(this.fields[el].value);
           }
           fields.push(createField);

@@ -69,6 +69,13 @@ export default {
               if (el1.fieldType === 'select') {
                 serializedFields[el1.slug].interface.defaultValue = JSON.parse(el1.defaultValue);
               }
+              if (el1.fieldType === 'multiselect') {
+                serializedFields[el1.slug].interface.defaultValue = JSON.parse(el1.defaultValue);
+                serializedFields[el1.slug].value = JSON.parse(serializedFields[el2.slug].value);
+              }
+              if (el1.fieldType === 'radio') {
+                serializedFields[el1.slug].interface.defaultValue = JSON.parse(el1.defaultValue);
+              }
               fields.splice(i, 1);
               additionalFields.splice(j, 1);
               serializedFieldsFunc(fields, additionalFields);
@@ -89,9 +96,19 @@ export default {
               ...el
             }
           }
+          if (el.fieldType === 'select') {
+            serializedFields[el.slug].interface.defaultValue = JSON.parse(el.defaultValue);
+          }
           if (el.fieldType === 'migx') {
             serializedFields[el.slug].interface.defaultValue = JSON.parse(el.defaultValue);
             serializedFields[el.slug].value = JSON.parse(el.defaultValue);
+          }
+          if (el.fieldType === 'multiselect') {
+            serializedFields[el.slug].value = [];
+            serializedFields[el.slug].interface.defaultValue = JSON.parse(el.defaultValue);
+          }
+          if (el.fieldType === 'radio') {
+            serializedFields[el.slug].interface.defaultValue = JSON.parse(el.defaultValue);
           }
         });
       }

@@ -106,23 +106,22 @@
 								@blur="$v.confirmPassword.$touch()"
 							)
 
-			v-card
-				v-card-actions
-					v-btn.ml-2(
-						color="primary"
-						@click="create"
-						v-if="operationType === 'create'"
-					) Создать
-					v-btn.ml-2(
-						color="primary"
-						@click="update"
-						v-if="operationType === 'update'"
-					) Сохранить
-					v-btn(
-						color="error"
-						@click="isRemoveDialog = true"
-						v-if="operationType === 'update'"
-					) Удалить
+			v-layout.pt-2
+				v-btn.mr-2(
+					color="primary"
+					@click="create"
+					v-if="operationType === 'create'"
+				) Создать
+				v-btn.mr-2(
+					color="primary"
+					@click="update"
+					v-if="operationType === 'update'"
+				) Сохранить
+				v-btn(
+					color="error"
+					@click="isRemoveDialog = true"
+					v-if="operationType === 'update'"
+				) Удалить
 		//- Аватар
 		v-flex.xs12.md5.pl-2
 			v-card.pt-3.mb-3(v-if="operationType === 'update'")

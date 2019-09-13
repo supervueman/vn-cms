@@ -68,10 +68,8 @@
                   ref="menu"
                   :close-on-content-click="false"
                   :nudge-right="40"
-                  lazy
                   transition="scale-transition"
                   offset-y
-                  full-width
                   max-width="290px"
                   min-width="290px"
                 )
@@ -99,10 +97,8 @@
                   ref="menu"
                   :close-on-content-click="false"
                   :nudge-right="40"
-                  lazy
                   transition="scale-transition"
                   offset-y
-                  full-width
                   max-width="290px"
                   min-width="290px"
                 )
@@ -126,6 +122,16 @@
                   span {{field.interface.slug}}
                 v-checkbox(
                   color="primary"
+                  v-model="field.value"
+                )
+              
+              //- Colorpicker field
+              v-flex(v-else-if="field.interface.fieldType === 'colorpicker'")
+                v-tooltip(left)
+                  template(v-slot:activator="{ on }")
+                    div(v-on="on") {{field.interface.title}}
+                  span {{field.interface.slug}}
+                v-color-picker(
                   v-model="field.value"
                 )
     v-card-actions
