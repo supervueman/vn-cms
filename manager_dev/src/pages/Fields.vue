@@ -31,7 +31,7 @@
                       :to="`/layouts/${layout.id}`"
                     ) {{layout.title}}
                 td.text-xs-left {{item.fieldType}}
-                td.text-xs-right
+                td.text-end
                   v-btn(
                     text
                     fab

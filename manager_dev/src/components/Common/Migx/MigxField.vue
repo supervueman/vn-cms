@@ -9,29 +9,30 @@
     v-data-table(
       :headers="headers"
       :items="field"
-      hide-actions
+      hide-default-footer
     )
-      template(v-slot:items="props")
-        tr
-          td(v-for="(item, i) in props.item" :key="i")
-            v-flex(v-if="item.interface.fieldType === 'image'")
-              v-img(:src="`/static/${item.value}`" max-width="60px" alt="alt")
-            v-flex(v-else) {{ item.value }}
-          td.text-xs-right
-            v-btn(
-              color="primary"
-              fab
-              flat
-              @click="openUpdateDialog(props.item, props.index)"
-            )
-              v-icon edit
-            v-btn(
-              color="primary"
-              fab
-              flat
-              @click="openRemoveDialog(props.item, props.index)"
-            )
-              v-icon delete
+      template(v-slot:body="{items}")
+        tbody
+          tr(v-for="item in items" :key="item.id")
+            td(v-for="(item, i) in item" :key="i")
+              v-flex(v-if="item.interface.fieldType === 'image'")
+                v-img(:src="`/static/${item.value}`" max-width="60px" alt="alt")
+              v-flex(v-else) {{ item.value }}
+            td.text-end
+              v-btn(
+                color="primary"
+                fab
+                text
+                @click="openUpdateDialog(item, index)"
+              )
+                v-icon edit
+              v-btn(
+                color="primary"
+                fab
+                text
+                @click="openRemoveDialog(item, index)"
+              )
+                v-icon delete
     v-dialog(
       v-model="isCreateDialog"
     )

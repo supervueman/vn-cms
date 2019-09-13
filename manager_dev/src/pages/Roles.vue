@@ -24,7 +24,7 @@
                   router-link(:to="`/roles/${item.id}`") {{ item.title }}
                 td.text-xs-left {{ item.slug }}
                 td.text-xs-left {{ item.rang }}
-                td.text-xs-right
+                td.text-end
                   v-btn(
                     text
                     fab

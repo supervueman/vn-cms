@@ -24,7 +24,7 @@
                 ) {{ item.title }} ({{item.id}})
               td.text-xs-left {{item.slug}}
               td.text-xs-left {{item.createdAt}}
-              td.text-xs-right
+              td.text-end
                 v-btn(
                   text
                   fab

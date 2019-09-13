@@ -36,7 +36,7 @@
                       div
                         a(:href="`tel:${item.phone}`") {{item.phone}}
                     td.text-xs-left {{item.role.slug}}
-                    td.text-xs-right
+                    td.text-end
                       v-btn(
                         text
                         fab
