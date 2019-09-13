@@ -35,7 +35,7 @@ module.exports = {
       email: user.email,
       role: user.role
     }, process.env.SECRET_KEY_FOR_JWT, {
-      expiresIn: '1h'
+      expiresIn: '360h'
     });
 
     res.status(200).send({
