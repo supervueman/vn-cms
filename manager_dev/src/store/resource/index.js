@@ -122,9 +122,11 @@ export default {
     async findByPk({
       commit
     }, payload) {
+      this.dispatch('preloader/fetch', true);
       const data = requestDataHandler('GET', `/resources/resource/${payload.id}`, undefined, payload.query);
 
       const response = await axios(data).catch(err => {
+        this.dispatch('preloader/fetch', false);
         this.dispatch("notification/fetch", {
           type: "error",
           message: `${err}`,
@@ -135,6 +137,8 @@ export default {
       if (response !== undefined && response.status === 200) {
         commit('set', response.data);
         commit('setAdditionalFields', response.data.additionalfields);
+
+        this.dispatch('preloader/fetch', false);
 
         const params = {
           query: queryResources(0, 10, {
@@ -168,9 +172,11 @@ export default {
     async create({
       commit
     }, payload) {
+      this.dispatch('preloader/fetch', true);
       const data = requestDataHandler('POST', '/resources/create', payload);
 
       const response = await axios(data).catch(err => {
+        this.dispatch('preloader/fetch', false);
         this.dispatch("notification/fetch", {
           type: "error",
           message: 'Ошибка при создании!',
@@ -179,6 +185,7 @@ export default {
       });
 
       if (response !== undefined && response.status === 200) {
+        this.dispatch('preloader/fetch', false);
         commit('set', response.data);
         this.dispatch("notification/fetch", {
           type: "success",
@@ -196,9 +203,11 @@ export default {
     async update({
       commit
     }, payload) {
+      this.dispatch('preloader/fetch', true);
       const data = requestDataHandler('PUT', '/resources/update', payload.data, payload.filter);
 
       const response = await axios(data).catch(err => {
+        this.dispatch('preloader/fetch', false);
         this.dispatch("notification/fetch", {
           type: "success",
           message: 'Ошибка при сохранении!',
@@ -207,6 +216,7 @@ export default {
       });
 
       if (response !== undefined && response.status === 200) {
+        this.dispatch('preloader/fetch', false);
         commit('set', response.data);
         this.dispatch("notification/fetch", {
           type: "success",
@@ -219,11 +229,13 @@ export default {
     async remove({
       commit
     }, payload) {
+      this.dispatch('preloader/fetch', true);
       const data = requestDataHandler('DELETE', '/resources/remove', {
         id: payload
       });
 
       const response = await axios(data).catch(err => {
+        this.dispatch('preloader/fetch', false);
         this.dispatch("notification/fetch", {
           type: "error",
           message: `${err}`,
@@ -232,6 +244,7 @@ export default {
       });
 
       if (response !== undefined && response.status === 200) {
+        this.dispatch('preloader/fetch', false);
         this.dispatch('resource/clear');
         this.dispatch("notification/fetch", {
           type: "success",
@@ -245,9 +258,11 @@ export default {
     async findLayout({
       commit
     }, payload) {
+      this.dispatch('preloader/fetch', true);
       const data = requestDataHandler('GET', `/layouts/layout/${payload.id}`, undefined, payload.query);
 
       const response = await axios(data).catch(err => {
+        this.dispatch('preloader/fetch', false);
         this.dispatch('notification/fetch', {
           type: 'error',
           message: `${err}`,
@@ -256,6 +271,7 @@ export default {
       });
 
       if (response !== undefined && response.status === 200) {
+        this.dispatch('preloader/fetch', false);
         commit('setLayout', response.data);
         commit('setFields', response.data.fields);
         commit('setSerializedFields');
@@ -265,9 +281,11 @@ export default {
     async findAll({
       commit
     }, payload) {
+      this.dispatch('preloader/fetch', true);
       const data = requestDataHandler('GET', '/resources', undefined, payload.query);
 
       const response = await axios(data).catch(err => {
+        this.dispatch('preloader/fetch', false);
         this.dispatch("notification/fetch", {
           type: "error",
           message: `${err}`,
@@ -276,6 +294,7 @@ export default {
       });
 
       if (response !== undefined && response.status === 200) {
+        this.dispatch('preloader/fetch', false);
         commit('setAll', response.data);
         commit('setCount', response.data.count);
       }
@@ -284,9 +303,11 @@ export default {
     async count({
       commit
     }, payload) {
+      this.dispatch('preloader/fetch', true);
       const data = requestDataHandler('GET', '/resources/count', undefined, payload.query);
 
       const response = await axios(data).catch(err => {
+        this.dispatch('preloader/fetch', false);
         this.dispatch("notification/fetch", {
           type: "error",
           message: `${err}`,
@@ -295,6 +316,7 @@ export default {
       });
 
       if (response !== undefined && response.status === 200) {
+        this.dispatch('preloader/fetch', false);
         commit('setCount', response.data.count);
       }
     },

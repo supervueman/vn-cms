@@ -1,6 +1,5 @@
 <template lang="pug">
 	v-app(light)
-		
 		transition(name="fade")
 			notification(
 				v-if="notification.isActive"
@@ -25,6 +24,17 @@
 			login(
 				@closeLoginDialog="isLoginDialog = false"
 			)
+		v-overlay(
+			:opacity="0.15"
+			color="primary"
+			:value="preloader"
+			:z-index="9998"
+		)
+			v-progress-circular(
+				indeterminate
+				size="64"
+				color="primary"
+			)
 </template>
 
 <script>
@@ -45,6 +55,9 @@ export default {
     },
     notification() {
       return this.$store.getters["notification/get"];
+    },
+    preloader() {
+      return this.$store.getters["preloader/get"];
     }
   },
   async beforeCreate() {

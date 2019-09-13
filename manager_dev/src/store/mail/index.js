@@ -9,9 +9,11 @@ export default {
     async send({
       commit
     }, payload) {
+      this.dispatch('preloader/fetch', true);
       const data = requestDataHandler('POST', '/mail', payload);
 
       const response = await axios(data).catch(err => {
+        this.dispatch('preloader/fetch', false);
         this.dispatch('notification/fetch', {
           type: 'error',
           message: `${err}`,
@@ -20,6 +22,7 @@ export default {
       });
 
       if (response !== undefined && response.status === 200) {
+        this.dispatch('preloader/fetch', false);
         this.dispatch('notification/fetch', {
           type: 'success',
           message: 'Сообщение успешно отправлено!',

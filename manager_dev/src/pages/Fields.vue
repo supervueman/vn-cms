@@ -109,7 +109,7 @@ export default {
   },
 
   methods: {
-    async getPage({ skip, limit }) {
+    async getPage({ offset, limit }) {
       const data = {
         query: queryFields(offset, limit)
       };

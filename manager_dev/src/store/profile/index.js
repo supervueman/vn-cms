@@ -25,9 +25,11 @@ export default {
     async findByAccessToken({
       commit
     }) {
+      this.dispatch('preloader/fetch', true);
       const data = requestDataHandler('GET', '/profile');
 
       const response = await axios(data).catch(err => {
+        this.dispatch('preloader/fetch', false);
         this.dispatch("notification/fetch", {
           type: "error",
           message: `${err}`,
@@ -37,6 +39,7 @@ export default {
       });
 
       if (response !== undefined && response.status === 200) {
+        this.dispatch('preloader/fetch', false);
         localStorage.setItem('x-api-key', response.data.token);
 
         const dataResources = requestDataHandler('GET', '/resources', undefined, {
@@ -49,6 +52,7 @@ export default {
         });
 
         const responseResources = await axios(dataResources).catch(err => {
+          this.dispatch('preloader/fetch', true);
           this.dispatch("notification/fetch", {
             type: "error",
             message: `${err}`,
@@ -59,6 +63,7 @@ export default {
         commit('set', response.data);
 
         if (responseResources !== undefined && responseResources.status === 200) {
+          this.dispatch('preloader/fetch', false);
           commit('setResources', responseResources.data);
         }
       }
@@ -67,9 +72,11 @@ export default {
     async create({
       commit
     }, payload) {
+      this.dispatch('preloader/fetch', true);
       const data = requestDataHandler('POST', '/profile/create', payload);
 
       const response = await axios(data).catch(err => {
+        this.dispatch('preloader/fetch', false);
         this.dispatch("notification/fetch", {
           type: "error",
           message: `${err}`,
@@ -78,6 +85,7 @@ export default {
       });
 
       if (response !== undefined && response.status === 200) {
+        this.dispatch('preloader/fetch', false);
         this.dispatch('user/set', response.data);
         router.push(`/users/${response.data.id}`)
         this.dispatch("notification/fetch", {
@@ -91,9 +99,11 @@ export default {
     async update({
       commit
     }, payload) {
+      this.dispatch('preloader/fetch', true);
       const data = requestDataHandler('PUT', '/profile/update', payload);
 
       const response = await axios(data).catch(err => {
+        this.dispatch('preloader/fetch', false);
         this.dispatch("notification/fetch", {
           type: "error",
           message: `${err}`,
@@ -102,6 +112,7 @@ export default {
       });
 
       if (response !== undefined && response.status === 200) {
+        this.dispatch('preloader/fetch', false);
         this.dispatch('profile/set', response.data);
         this.dispatch("notification/fetch", {
           type: "success",
@@ -114,9 +125,11 @@ export default {
     async changePassword({
       commit
     }, payload) {
+      this.dispatch('preloader/fetch', true);
       const data = requestDataHandler('PUT', '/profile/password-change', payload);
 
       const response = await axios(data).catch(err => {
+        this.dispatch('preloader/fetch', false);
         this.dispatch("notification/fetch", {
           type: "error",
           message: `${err}`,
@@ -125,6 +138,7 @@ export default {
       });
 
       if (response !== undefined && response.status === 200) {
+        this.dispatch('preloader/fetch', false);
         this.dispatch("notification/fetch", {
           type: "success",
           message: 'Успешно сохранено!',
@@ -136,9 +150,11 @@ export default {
     async remove({
       commit
     }) {
+      this.dispatch('preloader/fetch', true);
       const data = requestDataHandler('DELETE', '/profile/remove');
 
       const response = await axios(data).catch(err => {
+        this.dispatch('preloader/fetch', false);
         this.dispatch("notification/fetch", {
           type: "error",
           message: `${err}`,
@@ -147,6 +163,7 @@ export default {
       });
 
       if (response !== undefined && response.status === 200) {
+        this.dispatch('preloader/fetch', false);
         this.dispatch('authenticate/logout');
       }
     },

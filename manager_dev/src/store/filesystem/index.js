@@ -46,9 +46,11 @@ export default {
     async fetchFilesystem({
       commit
     }) {
+      this.dispatch('preloader/fetch', true);
       const data = requestDataHandler('GET', '/filesystem', undefined);
 
       const response = await axios(data).catch(err => {
+        this.dispatch('preloader/fetch', false);
         this.dispatch('notification/fetch', {
           type: 'error',
           message: `${err}`,
@@ -57,6 +59,7 @@ export default {
       });
 
       if (response !== undefined && response.status === 200) {
+        this.dispatch('preloader/fetch', false);
         commit('setFilesystem', response.data);
         commit('setFolderContent');
       }
@@ -76,8 +79,10 @@ export default {
     async createDir({
       commit
     }, payload) {
+      this.dispatch('preloader/fetch', true);
       const data = requestDataHandler('POST', '/filesystem/create-dir', payload);
       const response = await axios(data).catch(err => {
+        this.dispatch('preloader/fetch', false);
         this.dispatch('notification/fetch', {
           type: 'error',
           message: `${err}`,
@@ -86,6 +91,7 @@ export default {
       });
 
       if (response !== undefined && response.status === 200) {
+        this.dispatch('preloader/fetch', false);
         this.dispatch('notification/fetch', {
           type: 'success',
           message: 'Директория успешно создана!',
@@ -97,9 +103,11 @@ export default {
     async upload({
       commit
     }, payload) {
+      this.dispatch('preloader/fetch', true);
       const data = requestDataHandler('POST', '/filesystem/upload', payload.formData, payload.query);
 
       const response = await axios(data).catch(err => {
+        this.dispatch('preloader/fetch', false);
         this.dispatch('notification/fetch', {
           type: 'error',
           message: `${err}`,
@@ -108,6 +116,7 @@ export default {
       });
 
       if (response !== undefined && response.status === 200) {
+        this.dispatch('preloader/fetch', false);
         this.dispatch('notification/fetch', {
           type: 'success',
           message: 'Файлы успешно загружены!',
@@ -119,9 +128,11 @@ export default {
     async removeFile({
       commit
     }, payload) {
+      this.dispatch('preloader/fetch', true);
       const data = requestDataHandler('DELETE', '/filesystem/remove-file', payload);
 
       const response = await axios(data).catch(err => {
+        this.dispatch('preloader/fetch', false);
         this.dispatch('notification/fetch', {
           type: 'error',
           message: `${err}`,
@@ -130,6 +141,7 @@ export default {
       });
 
       if (response !== undefined && response.status === 200) {
+        this.dispatch('preloader/fetch', false);
         this.dispatch('notification/fetch', {
           type: 'success',
           message: 'Файл успешно удален!',
@@ -141,9 +153,11 @@ export default {
     async removeDir({
       commit
     }, payload) {
+      this.dispatch('preloader/fetch', true);
       const data = requestDataHandler('DELETE', '/filesystem/remove-dir', payload);
 
       const response = await axios(data).catch(err => {
+        this.dispatch('preloader/fetch', false);
         this.dispatch('notification/fetch', {
           type: 'error',
           message: `${err}`,
@@ -152,6 +166,7 @@ export default {
       });
 
       if (response !== undefined && response.status === 200) {
+        this.dispatch('preloader/fetch', false);
         this.dispatch('notification/fetch', {
           type: 'success',
           message: 'Директория успешно удалена!',

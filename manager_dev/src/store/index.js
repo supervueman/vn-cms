@@ -4,6 +4,7 @@ import Vuex from 'vuex';
 Vue.use(Vuex);
 
 import notification from './common/notification';
+import preloader from './common/preloader';
 import profile from './profile';
 import authenticate from './authenticate';
 import resource from './resource';
@@ -18,6 +19,7 @@ import mail from './mail';
 export const store = new Vuex.Store({
   modules: {
     notification,
+    preloader,
     authenticate,
     profile,
     resource,

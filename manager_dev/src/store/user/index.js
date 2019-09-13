@@ -28,9 +28,11 @@ export default {
     async findByPk({
       commit
     }, payload) {
+      this.dispatch('preloader/fetch', true);
       const data = requestDataHandler('GET', `/users/user/${payload.id}`, undefined, payload.query);
 
       const response = await axios(data).catch(err => {
+        this.dispatch('preloader/fetch', false);
         this.dispatch("notification/fetch", {
           type: "error",
           message: `${err}`,
@@ -39,6 +41,7 @@ export default {
       });
 
       if (response !== undefined && response.status === 200) {
+        this.dispatch('preloader/fetch', false);
         commit('set', response.data);
       }
     },
@@ -47,6 +50,7 @@ export default {
     async findOne({
       commit
     }, payload) {
+      this.dispatch('preloader/fetch', true);
       const data = requestDataHandler('GET', '/users/findone', undefined, {
         filter: {
           where: {
@@ -56,6 +60,7 @@ export default {
       });
 
       const response = await axios(data).catch(err => {
+        this.dispatch('preloader/fetch', false);
         this.dispatch("notification/fetch", {
           type: "error",
           message: `${err}`,
@@ -64,6 +69,7 @@ export default {
       });
 
       if (response !== undefined && response.status === 200) {
+        this.dispatch('preloader/fetch', false);
         console.log(response)
       }
     },
@@ -71,9 +77,11 @@ export default {
     async update({
       commit
     }, payload) {
+      this.dispatch('preloader/fetch', true);
       const data = requestDataHandler('PUT', '/users/update', payload.profile, payload.filter);
 
       const response = await axios(data).catch(err => {
+        this.dispatch('preloader/fetch', false);
         this.dispatch("notification/fetch", {
           type: "error",
           message: `${err}`,
@@ -82,6 +90,7 @@ export default {
       });
 
       if (response !== undefined && response.status === 200) {
+        this.dispatch('preloader/fetch', false);
         this.dispatch("notification/fetch", {
           type: "success",
           message: 'Успешно сохранено!',
@@ -94,9 +103,11 @@ export default {
     async changePassword({
       commit
     }, payload) {
+      this.dispatch('preloader/fetch', true);
       const data = requestDataHandler('PUT', '/users/password-change', payload);
 
       const response = await axios(data).catch(err => {
+        this.dispatch('preloader/fetch', false);
         this.dispatch("notification/fetch", {
           type: "error",
           message: `${err}`,
@@ -105,6 +116,7 @@ export default {
       });
 
       if (response !== undefined && response.status === 200) {
+        this.dispatch('preloader/fetch', false);
         this.dispatch("notification/fetch", {
           type: "success",
           message: 'Успешно сохранено!',
@@ -116,6 +128,7 @@ export default {
     async remove({
       commit
     }, payload) {
+      this.dispatch('preloader/fetch', true);
       const data = requestDataHandler('DELETE', '/users/remove', {
         id: payload
       });
@@ -123,12 +136,14 @@ export default {
       const response = await axios(data);
 
       if (response !== undefined) {
+        this.dispatch('preloader/fetch', false);
         this.dispatch("notification/fetch", {
           type: "success",
           message: 'Успешно удалено!',
           isActive: true
         });
       } else {
+        this.dispatch('preloader/fetch', false);
         this.dispatch("notification/fetch", {
           type: "error",
           message: 'Произошла ошибка при удалении!',
@@ -140,9 +155,11 @@ export default {
     async findAll({
       commit
     }, payload) {
+      this.dispatch('preloader/fetch', true);
       const data = requestDataHandler('GET', '/users', undefined, payload.query);
 
       const response = await axios(data).catch(err => {
+        this.dispatch('preloader/fetch', false);
         this.dispatch("notification/fetch", {
           type: "error",
           message: `${err}`,
@@ -151,6 +168,7 @@ export default {
       });
 
       if (response !== undefined && response.status === 200) {
+        this.dispatch('preloader/fetch', false);
         commit('setAll', response.data);
       }
     },
@@ -158,9 +176,11 @@ export default {
     async count({
       commit
     }, payload) {
+      this.dispatch('preloader/fetch', true);
       const data = requestDataHandler('GET', '/users/count', undefined, payload.query);
 
       const response = await axios(data).catch(err => {
+        this.dispatch('preloader/fetch', false);
         this.dispatch("notification/fetch", {
           type: "error",
           message: `${err}`,
@@ -169,6 +189,7 @@ export default {
       });
 
       if (response !== undefined && response.status === 200) {
+        this.dispatch('preloader/fetch', false);
         commit('setCount', response.data.count);
       }
     },

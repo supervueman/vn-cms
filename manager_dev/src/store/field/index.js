@@ -34,9 +34,11 @@ export default {
     async findByPk({
       commit
     }, payload) {
+      this.dispatch('preloader/fetch', true);
       const data = requestDataHandler('GET', `/fields/field/${payload.id}`, undefined, payload.query);
 
       const response = await axios(data).catch(err => {
+        this.dispatch('preloader/fetch', false);
         this.dispatch('notification/fetch', {
           type: 'error',
           message: `${err}`,
@@ -45,6 +47,7 @@ export default {
       });
 
       if (response !== undefined && response.status === 200) {
+        this.dispatch('preloader/fetch', false);
         response.data.layouts = response.data.layouts.map(el => el.id);
         commit('set', response.data);
         commit('setLayouts', response.data.layouts);
@@ -60,9 +63,11 @@ export default {
     async create({
       commit
     }, payload) {
+      this.dispatch('preloader/fetch', true);
       const data = requestDataHandler('POST', '/fields/create', payload);
 
       const response = await axios(data).catch(err => {
+        this.dispatch('preloader/fetch', false);
         this.dispatch('notification/fetch', {
           type: 'error',
           message: `${err}`,
@@ -72,6 +77,7 @@ export default {
 
       if (response !== undefined && response.status === 200) {
         commit('set', payload);
+        this.dispatch('preloader/fetch', false);
         this.dispatch('notification/fetch', {
           type: 'success',
           message: 'Успешно сохранено!',
@@ -84,9 +90,11 @@ export default {
     async update({
       commit
     }, payload) {
+      this.dispatch('preloader/fetch', true);
       const data = requestDataHandler('PUT', '/fields/update', payload);
 
       const response = await axios(data).catch(err => {
+        this.dispatch('preloader/fetch', false);
         this.dispatch('notification/fetch', {
           type: 'error',
           message: `${err}`,
@@ -95,8 +103,8 @@ export default {
       });
 
       if (response !== undefined && response.status === 200) {
-        // response.data.layouts = response.data.layouts.map(el => el.id);
         commit('set', payload);
+        this.dispatch('preloader/fetch', false);
         this.dispatch('notification/fetch', {
           type: 'success',
           message: 'Успешно сохранено!',
@@ -108,11 +116,13 @@ export default {
     async remove({
       commit
     }, payload) {
+      this.dispatch('preloader/fetch', true);
       const data = requestDataHandler('DELETE', '/fields/remove', {
         id: payload
       });
 
       const response = await axios(data).catch(err => {
+        this.dispatch('preloader/fetch', false);
         this.dispatch('notification/fetch', {
           type: 'error',
           message: `${err}`,
@@ -121,6 +131,7 @@ export default {
       });
 
       if (response !== undefined && response.status === 200) {
+        this.dispatch('preloader/fetch', false);
         this.dispatch('layout/clear');
         this.dispatch('notification/fetch', {
           type: 'success',
@@ -134,6 +145,7 @@ export default {
     async findAll({
       commit
     }, payload) {
+      this.dispatch('preloader/fetch', true);
       const data = requestDataHandler(
         'GET',
         '/fields',
@@ -142,6 +154,7 @@ export default {
       );
 
       const response = await axios(data).catch(err => {
+        this.dispatch('preloader/fetch', false);
         this.dispatch('notification/fetch', {
           type: 'error',
           message: `${err}`,
@@ -150,6 +163,7 @@ export default {
       });
 
       if (response !== undefined && response.status === 200) {
+        this.dispatch('preloader/fetch', false);
         commit('setAll', response.data);
       }
     },
@@ -157,6 +171,7 @@ export default {
     async count({
       commit
     }, payload) {
+      this.dispatch('preloader/fetch', true);
       const data = requestDataHandler(
         'GET',
         '/fields/count',
@@ -165,6 +180,7 @@ export default {
       );
 
       const response = await axios(data).catch(err => {
+        this.dispatch('preloader/fetch', false);
         this.dispatch('notification/fetch', {
           type: 'error',
           message: `${err}`,
@@ -173,6 +189,7 @@ export default {
       });
 
       if (response !== undefined && response.status === 200) {
+        this.dispatch('preloader/fetch', false);
         commit('setCount', response.data.count);
       }
     },
@@ -180,9 +197,11 @@ export default {
     async addLayout({
       commit
     }, payload) {
+      this.dispatch('preloader/fetch', true);
       const data = requestDataHandler('PUT', '/fields/add-layout', payload);
 
       const response = await axios(data).catch(err => {
+        this.dispatch('preloader/fetch', false);
         this.dispatch('notification/fetch', {
           type: 'error',
           message: `${err}`,
@@ -194,6 +213,7 @@ export default {
         response.data.layouts = response.data.layouts.map(el => el.id);
         commit('set', response.data);
         commit('setLayouts', response.data.layouts);
+        this.dispatch('preloader/fetch', false);
         this.dispatch('notification/fetch', {
           type: 'success',
           message: 'Успешно сохранено!',
@@ -205,9 +225,11 @@ export default {
     async removeLayout({
       commit
     }, payload) {
+      this.dispatch('preloader/fetch', true);
       const data = requestDataHandler('PUT', '/fields/remove-layout', payload);
 
       const response = await axios(data).catch(err => {
+        this.dispatch('preloader/fetch', false);
         this.dispatch('notification/fetch', {
           type: 'error',
           message: `${err}`,
@@ -216,6 +238,7 @@ export default {
       });
 
       if (response !== undefined && response.status === 200) {
+        this.dispatch('preloader/fetch', false);
         response.data.layouts = response.data.layouts.map(el => el.id);
         commit('set', response.data);
         commit('setLayouts', response.data.layouts);

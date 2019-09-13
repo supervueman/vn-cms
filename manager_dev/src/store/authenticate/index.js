@@ -9,6 +9,7 @@ export default {
     async login({
       commit
     }, payload) {
+      this.dispatch('preloader/fetch', true);
       const data = requestDataHandler('POST', '/authenticate/login', payload);
 
       const response = await axios(data).catch(err => {
@@ -20,6 +21,7 @@ export default {
       });
 
       if (response !== undefined && response.status === 200) {
+        this.dispatch('preloader/fetch', false);
         localStorage.setItem('access_token', response.data.access_token);
         localStorage.setItem('uid', response.data.uid);
 
