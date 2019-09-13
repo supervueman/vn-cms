@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 const accessHandler = require('../handlers/access');
 
 module.exports = async (req, res, next) => {
-  await jwt.verify(req.headers['x-access-token'], process.env.SECRET_KEY_FOR_JWT, (err, decoded => {
+  await jwt.verify(req.headers['x-access-token'], process.env.SECRET_KEY_FOR_JWT, (err, decoded) => {
     if (err) {
       return next();
     }
@@ -19,5 +19,5 @@ module.exports = async (req, res, next) => {
     accessHandler(req, decoded.role.slug);
 
     next();
-  }));
+  });
 }

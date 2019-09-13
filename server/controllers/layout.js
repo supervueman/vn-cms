@@ -13,6 +13,8 @@ module.exports = {
       return;
     }
 
+    console.log('hi')
+
     const filter = filterHandler(req.query.filter);
 
     const layouts = await Layout.findAll(filter);
