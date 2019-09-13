@@ -1,7 +1,7 @@
 <template lang="pug">
 	v-flex
 		v-layout.justify-space-between.align-center.mb-5
-			.body-2 Filesystem
+			.body-2.mt-2.mb-12 Filesystem
 		filesystem
 </template>
 

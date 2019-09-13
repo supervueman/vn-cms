@@ -85,8 +85,6 @@ module.exports = {
 
     const additionalField = await AdditionalField.findByPk(req.body.id);
 
-    console.log(additionalField.id)
-
     if (!additionalField) {
       res.status(401).send({
         message: 'Не найдено!'
