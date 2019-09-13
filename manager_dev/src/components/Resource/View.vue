@@ -41,10 +41,8 @@
                   :close-on-content-click="false"
                   :nudge-right="40"
                   :return-value.sync="resource.createdAt"
-                  lazy
                   transition="scale-transition"
                   offset-y
-                  full-width
                   max-width="290px"
                   min-width="290px"
                 )

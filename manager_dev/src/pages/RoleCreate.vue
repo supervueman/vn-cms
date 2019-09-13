@@ -1,6 +1,6 @@
 <template lang="pug">
   v-flex(v-if="adminAccess")
-    .body-2.mb-5 Создание политики
+    .body-2.mb-12.mt-2 Создание политики
     v-layout.wrap
       role-view(
         :role="role"

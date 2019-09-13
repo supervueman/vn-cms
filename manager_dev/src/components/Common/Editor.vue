@@ -95,7 +95,26 @@
 					:color="!isActive.image() ? 'black' : 'primary'"
 					@click="showImage(commands.image, filePath)"
 				) image
-		editor-content(:editor="editor" :setContent="content")
+
+				v-icon.mr-2(
+					color="black"
+					:class="{ 'v-btn--active': isActive.paragraph({ textAlign: 'left' }) }" 
+					@click="commands.paragraph({ textAlign: 'left' })"
+				) format_align_left
+
+				v-icon.mr-2(
+					color="black"
+					:class="{ 'v-btn--active': isActive.paragraph({ textAlign: 'center' }) }"
+					@click="commands.paragraph({ textAlign: 'center' })"
+				) format_align_center
+
+				v-icon.mr-2(
+					color="black"
+					:class="{ 'v-btn--active': isActive.paragraph({ textAlign: 'right' }) }"
+					@click="commands.paragraph({ textAlign: 'right' })"
+				) format_align_right
+
+		editor-content(:editor="editor")
 
 		v-flex
 			div(class="export")
@@ -115,6 +134,9 @@ import { Editor, EditorContent, EditorMenuBar } from "tiptap";
 
 // Config
 import { imgFolderBasePath } from "@/config";
+
+// Functions
+import Paragraph from "@/functions/paragraph";
 
 // Libs extensions
 import {
@@ -175,10 +197,11 @@ export default {
           new Strike(),
           new Underline(),
           new History(),
-          new Image()
+          new Image(),
+          new Paragraph()
         ],
         content: this.content,
-        onUpdate: ({ getHTML, content }) => {
+        onUpdate: ({ getHTML }) => {
           this.$emit("update", getHTML);
         }
       }),
@@ -188,6 +211,12 @@ export default {
       filePath: null,
       command: null
     };
+  },
+
+  watch: {
+    content() {
+      this.editor.setContent(this.content);
+    }
   },
 
   beforeDestroy() {

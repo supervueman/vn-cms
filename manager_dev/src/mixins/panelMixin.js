@@ -1,7 +1,7 @@
 const mixin = {
   data() {
     return {
-      panel: [true]
+      panel: [0]
     }
   },
   watch: {

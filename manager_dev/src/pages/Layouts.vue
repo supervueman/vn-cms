@@ -1,6 +1,6 @@
 <template lang="pug">
   v-flex(v-if="adminAccess")
-    .body-2.mb-5 Шаблоны
+    .body-2.mb-12.mt-2 Шаблоны
     v-layout.wrap
       v-flex
         v-toolbar(flat color="white")
@@ -14,21 +14,23 @@
         v-data-table(
           :headers="headers"
           :items="layouts"
-          :rows-per-page-items="[limit]"
-          hide-actions
+          :items-per-page-options="[limit]"
+          hide-default-footer
         )
-          template(v-slot:items="props")
-            td.text-xs-left
-              router-link(:to="`/layouts/${props.item.id}`") {{ props.item.title }}
-            td.text-xs-right
-              v-btn(
-                flat
-                fab
-                color="primary"
-                @click="removeDialogOpen(props.item)"
-                v-if="adminAccess"
-              )
-                v-icon delete
+          template(v-slot:body="{items}")
+            tbody
+              tr(v-for="item in items" :key="item.id")
+                td.text-xs-left
+                  router-link(:to="`/layouts/${item.id}`") {{ item.title }}
+                td.text-xs-right
+                  v-btn(
+                    text
+                    fab
+                    color="primary"
+                    @click="removeDialogOpen(item)"
+                    v-if="adminAccess"
+                  )
+                    v-icon delete
         div.text-xs-center.pt-2
           pagination(
             :itemsLength="count"

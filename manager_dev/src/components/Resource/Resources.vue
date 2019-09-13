@@ -12,25 +12,27 @@
       v-data-table(
         :headers="headers"
         :items="resources"
-        :rows-per-page-items="[limit]"
-        hide-actions
+        :items-per-page-options="[limit]"
+        hide-default-footer
       )
-        template(v-slot:items="props")
-          td.text-xs-left
-            router-link(
-              :to="`/resources/${props.item.id}`"
-            ) {{ props.item.title }} ({{props.item.id}})
-          td.text-xs-left {{props.item.slug}}
-          td.text-xs-left {{props.item.createdAt}}
-          td.text-xs-right
-            v-btn(
-              flat
-              fab
-              color="primary"
-              @click="removeDialogOpen(props.item)"
-              v-if="managerAccess || adminAccess" 
-            )
-              v-icon delete
+        template(v-slot:body="{items}")
+          tbody
+            tr(v-for="item in items" :key="item.id")
+              td.text-xs-left
+                router-link(
+                  :to="`/resources/${item.id}`"
+                ) {{ item.title }} ({{item.id}})
+              td.text-xs-left {{item.slug}}
+              td.text-xs-left {{item.createdAt}}
+              td.text-xs-right
+                v-btn(
+                  text
+                  fab
+                  color="primary"
+                  @click="removeDialogOpen(item)"
+                  v-if="managerAccess || adminAccess" 
+                )
+                  v-icon delete
       div.text-xs-center.pt-2
         pagination(
           :itemsLength="count"

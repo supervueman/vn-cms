@@ -41,7 +41,6 @@
                     div.mb-3(v-on="on") {{field.interface.title}}
                   span {{field.interface.slug}}
                 editor(
-                  v-if="field.value"
                   :content="field.value"
                   @update="field.value = $event()"
                 )

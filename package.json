@@ -28,5 +28,8 @@
     "url": "https://gitlab.com/multicms/platform-cms/issues"
   },
   "homepage": "https://gitlab.com/multicms/platform-cms#readme",
-  "devDependencies": {}
+  "devDependencies": {},
+  "dependencies": {
+    "sass": "^1.22.12"
+  }
 }

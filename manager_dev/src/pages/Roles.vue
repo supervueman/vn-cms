@@ -1,6 +1,6 @@
 <template lang="pug">
   v-flex(v-if="adminAccess")
-    .body-2.mb-5 Политики доступа
+    .body-2.mb-12.mt-2 Политики доступа
     v-layout.wrap
       v-flex
         v-toolbar(flat color="white")
@@ -14,23 +14,25 @@
         v-data-table(
           :headers="headers"
           :items="roles"
-          :rows-per-page-items="[limit]"
-          hide-actions
+          :items-per-page-options="[limit]"
+          hide-default-footer
         )
-          template(v-slot:items="props")
-            td.text-xs-left
-              router-link(:to="`/roles/${props.item.id}`") {{ props.item.title }}
-            td.text-xs-left {{ props.item.slug }}
-            td.text-xs-left {{ props.item.rang }}
-            td.text-xs-right
-              v-btn(
-                flat
-                fab
-                color="primary"
-                @click="removeDialogOpen(props.item)"
-                v-if="adminAccess"
-              )
-                v-icon delete
+          template(v-slot:body="{items}")
+            tbody
+              tr(v-for="item in items" :key="item.id")
+                td.text-xs-left
+                  router-link(:to="`/roles/${item.id}`") {{ item.title }}
+                td.text-xs-left {{ item.slug }}
+                td.text-xs-left {{ item.rang }}
+                td.text-xs-right
+                  v-btn(
+                    text
+                    fab
+                    color="primary"
+                    @click="removeDialogOpen(item)"
+                    v-if="adminAccess"
+                  )
+                    v-icon delete
     v-dialog(
       v-model="isRemoveDialog"
       max-width="500px"

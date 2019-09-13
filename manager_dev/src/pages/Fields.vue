@@ -1,6 +1,6 @@
 <template lang="pug">
   v-flex(v-if="adminAccess")
-    .body-2.mb-5 Дополнительные поля
+    .body-2.mb-12.mt-2 Дополнительные поля
     v-layout.wrap
       v-flex
         v-toolbar(flat color="white")
@@ -14,30 +14,32 @@
         v-data-table(
           :headers="headers"
           :items="fields"
-          :rows-per-page-items="[5]"
-          hide-actions
+          :items-per-page-options="[limit]"
+          hide-default-footer
         )
-          template(v-slot:items="props")
-            td.text-xs-left
-              router-link(:to="`/fields/${props.item.id}`") {{ props.item.title }}
-            td.text-xs-left 
-              div(
-                v-for="layout in props.item.layouts"
-                :key="layout.id"
-              )
-                router-link(
-                  :to="`/layouts/${layout.id}`"
-                ) {{layout.title}}
-            td.text-xs-left {{props.item.fieldType}}
-            td.text-xs-right
-              v-btn(
-                flat
-                fab
-                color="primary"
-                @click="removeDialogOpen(props.item)"
-                v-if="adminAccess"
-              )
-                v-icon delete
+          template(v-slot:body="{items}")
+            tbody
+              tr(v-for="item in items" :key="item.id")
+                td.text-xs-left
+                  router-link(:to="`/fields/${item.id}`") {{ item.title }}
+                td.text-xs-left 
+                  div(
+                    v-for="layout in item.layouts"
+                    :key="layout.id"
+                  )
+                    router-link(
+                      :to="`/layouts/${layout.id}`"
+                    ) {{layout.title}}
+                td.text-xs-left {{item.fieldType}}
+                td.text-xs-right
+                  v-btn(
+                    text
+                    fab
+                    color="primary"
+                    @click="removeDialogOpen(item)"
+                    v-if="adminAccess"
+                  )
+                    v-icon delete
         div.text-xs-center.pt-2
           pagination(
             :itemsLength="count"

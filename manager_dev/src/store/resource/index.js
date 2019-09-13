@@ -117,7 +117,6 @@ export default {
 
       if (response !== undefined && response.status === 200) {
         commit('set', response.data);
-        // console.log(response.data.additionalfields)
         commit('setAdditionalFields', response.data.additionalfields);
 
         const params = {

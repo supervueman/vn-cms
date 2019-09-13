@@ -8,6 +8,7 @@ import {
   store
 } from './store';
 import axios from 'axios';
+import vuetify from './plugins/vuetify';
 
 commonComponentsRequire();
 
@@ -18,5 +19,6 @@ axios.defaults.baseURL = process.env.VUE_APP_API_BASE_URL;
 new Vue({
   router,
   store,
-  render: h => h(App),
+  vuetify,
+  render: h => h(App)
 }).$mount('#app')

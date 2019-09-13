@@ -1,6 +1,6 @@
 <template lang="pug">
 	v-flex(v-if="isAuth")
-		.body-2.mb-5 Ваш профиль: {{profile.slug}}
+		.body-2.mb-12.mt-2 Ваш профиль: {{profile.slug}}
 		v-flex
 			profile-view(:profile="profile" operationType="update")
 </template>

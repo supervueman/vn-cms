@@ -1,5 +1,6 @@
 <template lang="pug">
 	v-app(light)
+		
 		transition(name="fade")
 			notification(
 				v-if="notification.isActive"
@@ -47,8 +48,8 @@ export default {
     }
   },
   async beforeCreate() {
-		await this.$store.dispatch("profile/findByAccessToken");
-		// Тестовая функция на отправку почты
+    await this.$store.dispatch("profile/findByAccessToken");
+    // Тестовая функция на отправку почты
     // await this.$store.dispatch("mail/send", {
     //   from: "<chaogen2@example.com>", // sender address
     //   to: "chaogen2@gmail.com", // list of receivers
@@ -69,4 +70,3 @@ export default {
 .v-expansion-panel__header
 	padding: 16px
 </style>
-

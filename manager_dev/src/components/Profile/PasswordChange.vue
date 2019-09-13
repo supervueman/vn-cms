@@ -1,46 +1,44 @@
 <template lang="pug">
-  v-expansion-panel
-    v-expansion-panel-content
-      template.px-2(v-slot:header)
-        div Изменить пароль
-      v-card(tag="form")
-        v-card-text
-          v-layout.wrap
-            v-flex.md6.pr-3
-              v-text-field(
-                v-model="oldPassword"
-                label="Введите старый пароль:"
-                :type="showOldPassword ? 'text' : 'password'"
-                :append-icon="showOldPassword ? 'visibility' : 'visibility_off'"
-                @click:append="showOldPassword = !showOldPassword"
-                :error-messages="oldPasswordErrors"
-                @input="$v.oldPassword.$touch()"
-                @blur="$v.oldPassword.$touch()"
-              )
-            v-flex.md6
-              v-text-field(
-                v-model="newPassword"
-                label="Введите новый пароль:"
-                :type="showNewPassword ? 'text' : 'password'"
-                :append-icon="showNewPassword ? 'visibility' : 'visibility_off'"
-                @click:append="showNewPassword = !showNewPassword"
-                :error-messages="newPasswordErrors"
-                @input="$v.newPassword.$touch()"
-                @blur="$v.newPassword.$touch()"
-              )
-            v-flex.md6.pr-3
-              v-text-field(
-                v-model="confirmNewPassword"
-                label="Повторите пароль:"
-                :type="showConfirmNewPassword ? 'text' : 'password'"
-                :append-icon="showConfirmNewPassword ? 'visibility' : 'visibility_off'"
-                @click:append="showConfirmNewPassword = !showConfirmNewPassword"
-                :error-messages="confirmNewPasswordErrors"
-                @input="$v.confirmNewPassword.$touch()"
-                @blur="$v.confirmNewPassword.$touch()"
-              )
-        v-card-actions
-          v-btn.ml-2(color="primary" @click="changePassword") Изменить
+  v-expansion-panels
+    v-expansion-panel
+      v-expansion-panel-header Изменить пароль
+      v-expansion-panel-content
+        v-layout.wrap
+          v-flex.md6.pr-3
+            v-text-field(
+              v-model="oldPassword"
+              label="Введите старый пароль:"
+              :type="showOldPassword ? 'text' : 'password'"
+              :append-icon="showOldPassword ? 'visibility' : 'visibility_off'"
+              @click:append="showOldPassword = !showOldPassword"
+              :error-messages="oldPasswordErrors"
+              @input="$v.oldPassword.$touch()"
+              @blur="$v.oldPassword.$touch()"
+            )
+          v-flex.md6
+            v-text-field(
+              v-model="newPassword"
+              label="Введите новый пароль:"
+              :type="showNewPassword ? 'text' : 'password'"
+              :append-icon="showNewPassword ? 'visibility' : 'visibility_off'"
+              @click:append="showNewPassword = !showNewPassword"
+              :error-messages="newPasswordErrors"
+              @input="$v.newPassword.$touch()"
+              @blur="$v.newPassword.$touch()"
+            )
+          v-flex.md6.pr-3
+            v-text-field(
+              v-model="confirmNewPassword"
+              label="Повторите пароль:"
+              :type="showConfirmNewPassword ? 'text' : 'password'"
+              :append-icon="showConfirmNewPassword ? 'visibility' : 'visibility_off'"
+              @click:append="showConfirmNewPassword = !showConfirmNewPassword"
+              :error-messages="confirmNewPasswordErrors"
+              @input="$v.confirmNewPassword.$touch()"
+              @blur="$v.confirmNewPassword.$touch()"
+            )
+        v-layout
+          v-btn.mr-2(color="primary" @click="changePassword") Изменить
           v-btn(color="primary" @click="clearPassword") Сбросить
 </template>
 

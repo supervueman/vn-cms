@@ -1,8 +1,8 @@
 <template lang="pug">
   v-layout(v-if="adminAccess || managerAccess")
     v-flex
-      .body-2.mb-5 Пользователи
-        v-layout.wrap.pt-5
+      .body-2.mt-2 Пользователи
+        v-layout.wrap.pt-12
           v-flex
             v-toolbar(flat color="white")
               v-spacer
@@ -15,34 +15,36 @@
             v-data-table(
               :headers="headers"
               :items="users"
-              :rows-per-page-items="[limit]"
-              hide-actions
+              :items-per-page-options="[limit]"
+              hide-default-footer
             )
-              template(v-slot:items="props")
-                td.text-xs-left
-                  router-link(:to="`/users/${props.item.id}`")
-                    v-avatar(
-                      :size="40"
-                      color="grey lighten-4"
-                    )
-                      img(:src="`${imgFolderBasePath}/${props.item.image}`" alt="avatar")
-                td.text-xs-left
-                  router-link(:to="`/users/${props.item.id}`") {{ props.item.lastname }} {{ props.item.firstname }}
-                td.text-xs-left
-                  div
-                    a(:href="`mailto:${props.item.email}`") {{props.item.email}}
-                  div
-                    a(:href="`tel:${props.item.phone}`") {{props.item.phone}}
-                td.text-xs-left {{props.item.role.slug}}
-                td.text-xs-right
-                  v-btn(
-                    flat
-                    fab
-                    color="primary"
-                    @click="removeDialogOpen(props.item)"
-                    v-if="adminAccess"
-                  )
-                    v-icon delete
+              template(v-slot:body="{items}")
+                tbody
+                  tr(v-for="item in items" :key="item.id")
+                    td.text-xs-left
+                      router-link(:to="`/users/${item.id}`")
+                        v-avatar(
+                          :size="40"
+                          color="grey lighten-4"
+                        )
+                          img(:src="`${imgFolderBasePath}/${item.image}`" alt="avatar")
+                    td.text-xs-left
+                      router-link(:to="`/users/${item.id}`") {{ item.lastname }} {{ item.firstname }}
+                    td.text-xs-left
+                      div
+                        a(:href="`mailto:${item.email}`") {{item.email}}
+                      div
+                        a(:href="`tel:${item.phone}`") {{item.phone}}
+                    td.text-xs-left {{item.role.slug}}
+                    td.text-xs-right
+                      v-btn(
+                        text
+                        fab
+                        color="primary"
+                        @click="removeDialogOpen(item)"
+                        v-if="adminAccess"
+                      )
+                        v-icon delete
             div.text-xs-center.pt-2
               pagination(
                 :itemsLength="count"
@@ -84,7 +86,7 @@ export default {
         },
         { text: "Имя", sortable: true, value: "lastname" },
         { text: "Контакты", sortable: false },
-        { text: "Роль", sortable: true, value: "role" },
+        { text: "Роль", sortable: true, value: "role.slug" },
         { text: "", sortable: false }
       ],
       isRemoveDialog: false,

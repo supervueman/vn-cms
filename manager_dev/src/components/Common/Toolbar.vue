@@ -1,29 +1,30 @@
 <template lang="pug">
-	v-toolbar.primary(app dark)
+	v-app-bar.primary(app dark)
 		v-toolbar-title
 			//- img(:src="`${imgFolderBasePath}/logo.svg`" class="toolbar-logo")
 		v-toolbar-items.hidden-xs-and-down
-			v-btn(flat to="/users" v-if="adminAccess || managerAccess") Пользователи
+			v-btn(text to="/users" v-if="adminAccess || managerAccess") Пользователи
 		v-spacer
 		v-toolbar-items.hidden-xs-and-down
-			v-btn(flat v-if="!isAuth" @click="$emit('openLoginDialog')") Войти
+			v-btn(text v-if="!isAuth" @click="$emit('openLoginDialog')") Войти
 		v-toolbar-items.hidden-xs-and-down
-			v-btn(flat slot="activator" to="/profile" v-if="profileId !== '0'")
+			v-btn(text slot="activator" to="/profile" v-if="profileId !== '0'")
 				div.body-1.mr-3 {{ firstname }} {{lastname}}
 				v-avatar.mr-3(size="40" color="grey lighten-4")
 					img(:src="`${imgFolderBasePath}/${image}`")
 			v-menu(offset-y v-if="isAuth")
-				v-btn(
-					flat
-					icon
-					slot="activator"
-				)
-					v-icon settings
+				template(v-slot:activator="{ on }")
+					v-btn(
+						text
+						icon
+						v-on="on"
+					)
+						v-icon settings
 				v-list
-					v-list-tile(to="/roles" v-if="adminAccess")
-						v-list-tile-title Политики доступа
-					v-list-tile(@click="logout")
-						v-list-tile-title Выход
+					v-list-item(to="/roles" v-if="adminAccess")
+						v-list-item-title Политики доступа
+					v-list-item(@click="logout")
+						v-list-item-title Выход
 </template>
 
 <script>

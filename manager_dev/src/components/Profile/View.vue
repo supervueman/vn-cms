@@ -45,7 +45,7 @@
 						v-flex.md6
 							v-text-field(
 								v-model="profile.phone"
-								mask="+7 (###) ###-##-##"
+								v-mask="'7 (###) ###-##-##'"
 								:value="profile.phone"
 								label="Телефон:"
 							)
@@ -68,14 +68,12 @@
 								label="Instagram:"
 							)
 			//- Ключи
-			v-expansion-panel(expand v-if="operationType === 'update'")
-				v-expansion-panel-content
-					template(v-slot:header)
-						div Ключи
-					v-card
-						v-card-text
-							v-flex.md12
-								div Api key: {{profile.token}}
+			v-expansion-panels(v-if="operationType === 'update'")
+				v-expansion-panel
+					v-expansion-panel-header Ключи
+					v-expansion-panel-content
+						v-flex.md12
+							div Api key: {{profile.token}}
 			//- Изменение пароля
 			password-change(
 				v-if="operationType === 'update'"
@@ -165,6 +163,7 @@ import { validationMixin } from "vuelidate";
 import panelMixin from "@/mixins/panelMixin";
 // Components
 import PasswordChange from "@/components/Profile/PasswordChange";
+import { mask } from "vue-the-mask";
 // Libs
 import {
   required,
@@ -180,7 +179,9 @@ import { imgFolderBasePath } from "@/config";
 
 export default {
   name: "ProfileView",
-
+  directives: {
+    mask
+  },
   components: {
     PasswordChange
   },

@@ -1,7 +1,7 @@
 <template lang="pug">
   v-flex(v-if="managerAccess")
-    .body-2.mb-5 Создание ресурса
-      v-layout.wrap.pt-5
+    .body-2.mt-2 Создание ресурса
+      v-layout.wrap.pt-12
         resource-view(
           :resource="resource"
           operationType="create"
