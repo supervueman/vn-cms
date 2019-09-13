@@ -257,7 +257,7 @@ export default {
       commit
     }) {
       commit('setLayouts', []);
-    }
+    },
   },
   getters: {
     get(state) {

@@ -309,6 +309,26 @@ export default {
     }) {
       commit('setAll', []);
     },
+
+    clearLayout({
+      commit
+    }) {
+      commit('setLayout', {
+        ...layout
+      })
+    },
+
+    clearFields({
+      commit
+    }) {
+      commit('setFields', [])
+    },
+
+    clearAdditionalFields({
+      commit
+    }) {
+      commit('setAdditionalFields', []);
+    }
   },
   getters: {
     get(state) {

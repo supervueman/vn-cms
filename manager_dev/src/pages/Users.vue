@@ -125,9 +125,16 @@ export default {
     async remove() {
       if (this.removeItem.id === this.$store.getters["profile/get"].id) {
         await this.$store.dispatch("profile/remove", this.removeItem.id);
+        await this.$store.dispatch("authenticate/logout");
         this.$router.push("/");
       } else {
         await this.$store.dispatch("user/remove", this.removeItem.id);
+        const users = this.users.filter(el => {
+          if (el.id !== this.removeItem.id) {
+            return el;
+          }
+        });
+        this.$store.dispatch("user/setAll", users);
       }
     },
 

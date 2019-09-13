@@ -47,7 +47,8 @@ export default {
     }
   },
   async beforeCreate() {
-    await this.$store.dispatch("profile/findByAccessToken");
+		await this.$store.dispatch("profile/findByAccessToken");
+		// Тестовая функция на отправку почты
     // await this.$store.dispatch("mail/send", {
     //   from: "<chaogen2@example.com>", // sender address
     //   to: "chaogen2@gmail.com", // list of receivers

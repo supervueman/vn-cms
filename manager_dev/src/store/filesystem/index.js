@@ -1,8 +1,5 @@
 import requestDataHandler from '@/functions/requestDataHandlerWithAxios';
 import axios from 'axios';
-import {
-  create
-} from 'domain';
 
 export default {
   namespaced: true,

@@ -179,6 +179,12 @@ export default {
       commit('set', payload);
     },
 
+    setAll({
+      commit
+    }, payload) {
+      commit('setAll', payload);
+    },
+
     clear({
       commit
     }) {

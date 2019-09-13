@@ -279,7 +279,5 @@ export default {
       }
     },
   },
-  getters: {
-
-  }
+  getters: {}
 };

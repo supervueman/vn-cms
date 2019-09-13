@@ -62,8 +62,6 @@ app.use((req, res, next) => {
   }
 });
 
-app.use('/files', express.static('../files'));
-
 // Routes use
 app.use('/authenticate', authenticateRoutes);
 app.use('/profile', profileRoutes);
@@ -75,6 +73,7 @@ app.use('/fields', fieldRoutes);
 app.use('/additionalfields', additionalFieldRoutes);
 app.use('/filesystem', filesystemRoutes);
 app.use('/mail', mailRoutes);
+app.use('/files', express.static('../files'));
 
 async function connect() {
   const connect = await sequelize.sync();
