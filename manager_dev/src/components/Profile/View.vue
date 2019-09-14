@@ -128,8 +128,8 @@
 				v-card-text.py-0.justify-center.d-flex
 					v-layout.justify-center
 						v-avatar(size="150" color="#fff" class="avatar")
-							img(:src="`${imgFolderBasePath}/${profile.image}`")
-							div.avatar-mask
+							img(:src="`/static/${profile.image}`")
+							div.avatar-mask(@click="isActiveDialog = true")
 								v-icon(color="#fff") add_circle_outline
 				v-card-title.text-md-center.justify-center.mt-4.pb-0 Аватар
 				v-card-title.title.font-weight-bold.text-md-center.justify-center {{profile.lastname}} {{profile.firstname}}
@@ -153,6 +153,8 @@
 				:isActive.sync="isRemoveDialog"
 				:name="`${profile.lastname} ${profile.firstname}`"
 			)
+		v-dialog(v-model="isActiveDialog")
+			filesystem(@selectFile="selectFile")
 </template>
 
 <script>
@@ -163,6 +165,8 @@ import panelMixin from "@/mixins/panelMixin";
 // Components
 import PasswordChange from "@/components/Profile/PasswordChange";
 import { mask } from "vue-the-mask";
+import Filesystem from "@/components/Filesystem/Filesystem";
+
 // Libs
 import {
   required,
@@ -182,7 +186,8 @@ export default {
     mask
   },
   components: {
-    PasswordChange
+    PasswordChange,
+    Filesystem
   },
 
   mixins: [validationMixin, accessMixin, panelMixin],
@@ -223,7 +228,8 @@ export default {
       showConfirmPassword: false,
       password: "",
       confirmPassword: "",
-      isRemoveDialog: false
+      isRemoveDialog: false,
+      isActiveDialog: false
     };
   },
 
@@ -313,6 +319,10 @@ export default {
         await this.$store.dispatch("user/remove", this.profile.id);
         this.$router.push("/users");
       }
+    },
+
+    selectFile(file) {
+      this.profile.image = file.path;
     }
   }
 };

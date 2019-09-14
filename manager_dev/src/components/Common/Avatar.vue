@@ -1,12 +1,23 @@
 <template lang="pug">
-  div.avatar
+  div.avatar(@click="isActiveDialog = true")
     img(:src="imagePath", alt="Avatar")
+    v-dialog(v-model="isActiveDialog")
+      filesystem(@selectFile="selectFile")
 </template>
 
 <script>
+// Config
 import config from "@/config";
+
+// Components
+import Filesystem from "@/components/Filesystem/Filesystem";
+
 export default {
   name: "Avatar",
+
+  components: {
+    Filesystem
+  },
 
   props: {
     imagePath: {
@@ -17,8 +28,15 @@ export default {
 
   data() {
     return {
-      staticFolderBasePath: config.staticFolderBasePath
+      staticFolderBasePath: config.staticFolderBasePath,
+      isActiveDialog: false
     };
+  },
+
+  methods: {
+    selectFile(file) {
+      this.$emit("selectFile", file.path);
+    }
   }
 };
 </script>
