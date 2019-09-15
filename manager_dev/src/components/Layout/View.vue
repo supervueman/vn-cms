@@ -12,7 +12,7 @@
           v-tab-item
             v-flex.xs12.md12.pt-4
               v-card
-                v-card-title Общие данные
+                v-card-text Общие данные
                 v-card-text
                   v-layout.wrap
                     v-flex.md12

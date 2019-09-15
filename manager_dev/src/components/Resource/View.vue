@@ -3,7 +3,7 @@
     v-layout.wrap
       v-flex.xs12.md7.pr-2
         v-card.mb-3
-          v-card-title Общие данные
+          v-card-text Общие данные
           v-card-text
             v-layout.wrap
               v-flex.md12
@@ -99,7 +99,7 @@
                     )
                   span published
     v-card
-      v-card-title Контент
+      v-card-text Контент
       v-card-text
         v-layout.wrap
           v-flex.md12

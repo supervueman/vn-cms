@@ -2,7 +2,7 @@
   v-layout.wrap
     v-flex.xl12.lg12.md12
       v-card.xl12.lg12.md12
-        v-card-title.pb-0
+        v-card-text.pb-0
           v-layout.column
             div.mb-2 Текущий путь: {{currentFullPath}}
         v-card-text

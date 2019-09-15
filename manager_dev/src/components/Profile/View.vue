@@ -3,7 +3,7 @@
 		v-flex.xs12.md7.pr-2
 			v-card.mb-3
 				//- Общие данные
-				v-card-title Общие данные
+				v-card-text Общие данные
 				v-card-text
 					v-layout.wrap
 						v-flex.md6.pr-3
@@ -31,7 +31,7 @@
 							)
 			//- Контакты
 			v-card.mb-3
-				v-card-title Контакты
+				v-card-text Контакты
 				v-card-text
 					v-layout.wrap
 						v-flex.md6.pr-3
@@ -131,7 +131,7 @@
 							img(:src="`/static/${profile.image}`")
 							div.avatar-mask(@click="isActiveDialog = true")
 								v-icon(color="#fff") add_circle_outline
-				v-card-title.text-md-center.justify-center.mt-4.pb-0 Аватар
+				v-card-text.text-md-center.justify-center.mt-4.pb-0 Аватар
 				v-card-title.title.font-weight-bold.text-md-center.justify-center {{profile.lastname}} {{profile.firstname}}
 			//- Роль и ранг
 			v-card(v-if="this.$route.name !== 'profile'")
