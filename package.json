@@ -9,6 +9,7 @@
     "manager:dev:remove:symlink": "cd manager_dev/public/static && rm -r files",
     "manager:dev": "cd manager_dev && npm run serve",
     "manager:build": "cd manager_dev && npm run build",
+    "manager:prod:create:symlink": "cd manager && mkdir static && cd static && ln -s ../../files",
     "manager:start:local": "serve -s manager",
     "client:dev:create:symlink": "cd client_dev/static && ln -s ../../files",
     "client:dev:remove:symlink": "cd client_dev/static && rm -r files",

@@ -74,6 +74,7 @@ module.exports = {
   /*
    ** Build configuration
    */
+  // buildDir: '../client',
   build: {
     /*
      ** You can extend webpack config here
