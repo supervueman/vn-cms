@@ -2,7 +2,9 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const sequelize = require('./util/database');
 const bcrypt = require('bcrypt');
-require('dotenv').config();
+require('dotenv').config({
+  path: __dirname + '/../.env'
+});
 
 // Handlers
 const createDir = require('./handlers/createDir');

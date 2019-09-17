@@ -1,5 +1,7 @@
 const Sequelize = require('sequelize');
-require('dotenv').config();
+require('dotenv').config({
+  path: __dirname + '/../../.env'
+});
 
 // Handlers
 const operatorsAliases = require('../handlers/operatorsAliases');
