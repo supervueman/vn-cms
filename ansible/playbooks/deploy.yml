@@ -3,7 +3,7 @@
   become: yes
 
   vars_files:
-    - ../group_vars/global_vars.ymla
+    - ../group_vars/global_vars.yml
 
   tasks:
     - name: Create APP Directory
