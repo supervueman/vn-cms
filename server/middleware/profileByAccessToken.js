@@ -5,7 +5,7 @@ const accessHandler = require('../handlers/access');
 
 // Models
 const User = require('../models/user');
-const Role = require('../models/Role');
+const Role = require('../models/role');
 
 module.exports = async (req, res, next) => {
   const accessToken = req.headers['x-access-token'];
