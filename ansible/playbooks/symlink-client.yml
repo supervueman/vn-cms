@@ -1,0 +1,10 @@
+---
+- hosts: all
+  become: yes
+
+  vars_files:
+    - ../group_vars/global_vars.yml
+
+  tasks:
+    - name: Running NPM create symlink client
+      command: npm run client:dev:create:symlink chdir={{homeDir}}/{{appDir}}

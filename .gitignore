@@ -97,3 +97,6 @@ typings/
 
 # Serverless directories
 .serverless
+
+/ansible/hosts.txt
+/ansible/group_vars

@@ -1,0 +1,83 @@
+---
+- hosts: all
+  gather_facts: yes
+  become: yes
+
+  vars_files:
+    - ../group_vars/global_vars.yml
+
+  tasks:
+    - name: Install the gpg key for nodejs LTS
+      apt_key:
+        url: 'https://deb.nodesource.com/gpgkey/nodesource.gpg.key'
+        state: present
+
+    - name: Install the nodejs LTS repos
+      apt_repository:
+        repo: 'deb https://deb.nodesource.com/node_{{ NODEJS_VERSION }}.x {{ ansible_distribution_release }} main'
+        state: present
+        update_cache: yes
+
+    - name: Install the nodejs
+      apt:
+        name: nodejs
+        state: present
+
+    - name: Install pm2
+      npm: name=pm2 global=yes production=yes
+
+    - name: Install serve server
+      npm: name=serve global=yes production=yes
+
+    - name: Ensure bash, OpenSSl, and libssl are the latest versions
+      apt: name={{ item }} update_cache=true state=latest
+      with_items:
+        - bash
+        - openssl
+        - libssl-dev
+        - libssl-doc
+        # Postgres packages
+        - postgresql
+        - postgresql-contrib
+        - libpq-dev
+        - python-psycopg2
+        # Deploy packages
+        - build-essential
+        - git
+        - mcrypt
+        - curl
+      tags: packages
+
+    - name: Ensure the PostgreSQL service is running
+      service: name=postgresql state=started enabled=yes
+
+    - name: Ensure database is created
+      sudo_user: postgres
+      postgresql_db: name={{ db_name }}
+        encoding='UTF-8'
+        lc_collate='en_US.UTF-8'
+        lc_ctype='en_US.UTF-8'
+        template='template0'
+        state=present
+
+    - name: Ensure user has access to the database
+      sudo_user: postgres
+      postgresql_user: db={{ db_name }}
+        name={{ db_user }}
+        password={{ db_password }}
+        priv=ALL
+        state=present
+
+    - name: Ensure user does not have unnecessary privileges
+      sudo_user: postgres
+      postgresql_user: name={{ db_user }}
+        role_attr_flags=NOSUPERUSER,NOCREATEDB
+        state=present
+
+    - name: Ensure nginx is at the latest version
+      apt: name=nginx state=latest
+
+    - name: Start nginx
+      service:
+        name: nginx
+        state: started

@@ -1,0 +1,11 @@
+---
+- hosts: all
+  become: yes
+
+  vars_files:
+    - ../group_vars/global_vars.yml
+
+  tasks:
+    - name: Start APP
+      command: npm run app:start:pm2 chdir={{homeDir}}/{{appDir}}
+      ignore_errors: yes
