@@ -119,7 +119,6 @@ async function connect() {
   });
 
   await createDir('../files');
-  await createDir(`../files/${admin.id}`);
 
   if (!admin) {
     let passwordHw = await bcrypt.hash(process.env.ADMIN_PASSWORD, 12);
@@ -129,6 +128,7 @@ async function connect() {
       password: passwordHw,
       roleId: adminRole.id
     });
+    await createDir(`../files/${admin.id}`);
     res.status(200).send('Admin is created!');
   }
 
