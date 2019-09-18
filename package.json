@@ -26,7 +26,9 @@
     "server:start:pm2": "cd server && npm run start:pm2",
     "server:restart:pm2": "cd server && npm run restart:pm2",
     "server:stop:pm2": "cd server && npm run stop:pm2",
-    "app:start:pm2": "(npm run server:start:pm2) && (npm run manager:start:pm2) && (npm run client:start:pm2)"
+    "app:start:pm2": "(npm run server:start:pm2) && (npm run manager:start:pm2) && (npm run client:start:pm2)",
+    "app:restart:pm2": "(npm run server:restart:pm2) && (npm run manager:restart:pm2) && (npm run client:restart:pm2)",
+    "app:stop:pm2": "(npm run server:stop:pm2) && (npm run manager:stop:pm2) && (npm run client:stop:pm2)"
   },
   "repository": {
     "type": "git",
