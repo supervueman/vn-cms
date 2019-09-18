@@ -11,13 +11,22 @@
     "manager:build": "cd manager_dev && npm run build",
     "manager:prod:create:symlink": "cd manager && mkdir static && cd static && ln -s ../../files",
     "manager:start:local": "serve -s manager",
+    "manager:start:pm2": "cd manager && pm2 serve --spa --name manager",
+    "manager:restart:pm2": "cd manager && pm2 restart manager",
+    "manager:stop:pm2": "cd manager && pm2 stop manager",
     "client:dev:create:symlink": "cd client/static && ln -s ../../files",
     "client:dev:remove:symlink": "cd client/static && rm -r files",
     "client:dev": "cd client && npm run dev",
     "client:build": "cd client && npm run build",
     "client:start": "cd client && npm run start",
+    "client:start:pm2": "cd client && npm run start:pm2",
+    "client:restart:pm2": "cd client && npm run restart:pm2",
+    "client:stop:pm2": "cd client && npm run stop:pm2",
     "server:dev": "cd server && npm start",
-    "start:dev": "npm run manager_dev:dev & npm run server:dev"
+    "server:start:pm2": "cd server && npm run start:pm2",
+    "server:restart:pm2": "cd server && npm run restart:pm2",
+    "server:stop:pm2": "cd server && npm run stop:pm2",
+    "app:start:pm2": "(npm run server:start:pm2) && (npm run manager:start:pm2) && (npm run client:start:pm2)"
   },
   "repository": {
     "type": "git",

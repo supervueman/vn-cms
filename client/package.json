@@ -10,7 +10,10 @@
     "start": "nuxt start",
     "generate": "nuxt generate",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
-    "precommit": "npm run lint"
+    "precommit": "npm run lint",
+    "start:pm2": "pm2 start ecosystem.config.js",
+    "restart:pm2": "pm2 restart ecosystem.config.js",
+    "stop:pm2": "pm2 stop ecosystem.config.js"
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.3.6",
