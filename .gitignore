@@ -4,8 +4,11 @@ node_modules
 /manager
 /files
 /server/files
+/static
 /manager_dev/public/static/files
 /client/static/files
+/manager_dev/public/static
+/client/static
 
 # local env files
 .env
