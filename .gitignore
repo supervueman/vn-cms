@@ -3,7 +3,6 @@ node_modules
 /dist
 /manager
 /files
-/static
 /server/files
 /manager_dev/public/static/files
 /client/static/files
