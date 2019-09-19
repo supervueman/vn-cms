@@ -2,28 +2,28 @@ const express = require('express');
 const router = express.Router();
 
 // Controllers
-const fieldController = require('../controllers/field');
+const controller = require('../controllers/field');
 
 // Middleware
 const access = require('../middleware/access');
 const profileByApiKey = require('../middleware/profileByApiKey');
 
-router.get('/', profileByApiKey, fieldController.findAll);
+router.get('/', profileByApiKey, controller.findAll);
 
-router.get('/field/:id', profileByApiKey, fieldController.findByPk);
+router.get('/field/:id', profileByApiKey, controller.findByPk);
 
-router.get('/field/findOne', profileByApiKey, fieldController.findOne);
+router.get('/field/findOne', profileByApiKey, controller.findOne);
 
-router.post('/create', access, fieldController.create);
+router.post('/create', access, controller.create);
 
-router.put('/update', access, fieldController.update);
+router.put('/update', access, controller.update);
 
-router.delete('/remove', access, fieldController.remove);
+router.delete('/remove', access, controller.remove);
 
-router.get('/count', profileByApiKey, fieldController.count);
+router.get('/count', profileByApiKey, controller.count);
 
-router.put('/add-layout', access, fieldController.addLayout);
+router.put('/add-layout', access, controller.addLayout);
 
-router.put('/remove-layout', access, fieldController.removeLayout);
+router.put('/remove-layout', access, controller.removeLayout);
 
 module.exports = router;

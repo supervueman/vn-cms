@@ -2,24 +2,26 @@ const express = require('express');
 const router = express.Router();
 
 // Controllers
-const resourceController = require('../controllers/resource');
+const controller = require('../controllers/resource');
 
 // Middleware
 const profileByAccessToken = require('../middleware/profileByAccessToken');
 const profileByApiKey = require('../middleware/profileByApiKey');
 
-router.get('/', profileByApiKey, resourceController.findAll);
+router.get('/', profileByApiKey, controller.findAllByApiKey);
 
-router.get('/resource/:id', profileByApiKey, resourceController.findByPk);
+router.get('/findAll', controller.findAll);
 
-router.get('/resource/findOne', profileByApiKey, resourceController.findOne);
+router.get('/resource/:id', profileByApiKey, controller.findByPk);
 
-router.post('/create', profileByAccessToken, resourceController.create);
+router.get('/resource/findOne', profileByApiKey, controller.findOne);
 
-router.put('/update', profileByAccessToken, resourceController.update);
+router.post('/create', profileByAccessToken, controller.create);
 
-router.delete('/remove', profileByAccessToken, resourceController.remove);
+router.put('/update', profileByAccessToken, controller.update);
 
-router.get('/count', profileByApiKey, resourceController.count);
+router.delete('/remove', profileByAccessToken, controller.remove);
+
+router.get('/count', profileByApiKey, controller.count);
 
 module.exports = router;

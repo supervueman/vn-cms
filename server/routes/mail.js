@@ -2,11 +2,11 @@ const express = require('express');
 const router = express.Router();
 
 // Controllers
-const mailController = require('../controllers/mail');
+const controller = require('../controllers/mail');
 
 // Middleware
 const profileByApiKey = require('../middleware/profileByApiKey');
 
-router.post('/', profileByApiKey, mailController.send);
+router.post('/', profileByApiKey, controller.send);
 
 module.exports = router;
