@@ -12,7 +12,8 @@ module.exports = async () => {
     is_id_in_slug = await SystemSetting.create({
       slug: 'is_id_in_slug',
       title: 'Использовать id ресурсов в псевдонимах',
-      value: false
+      value: false,
+      component: 'base'
     });
   }
 }

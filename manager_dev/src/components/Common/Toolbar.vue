@@ -23,6 +23,8 @@
 				v-list
 					v-list-item(to="/roles" v-if="adminAccess")
 						v-list-item-title Политики доступа
+					v-list-item(to="/system-settings" v-if="adminAccess")
+						v-list-item-title Системные настройки
 					v-list-item(@click="logout")
 						v-list-item-title Выход
 </template>

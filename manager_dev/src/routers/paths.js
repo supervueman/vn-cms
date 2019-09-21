@@ -70,4 +70,8 @@ export default [{
   path: '/roles/:id',
   name: 'role',
   component: 'Role'
+}, {
+  path: '/system-settings',
+  name: 'system-settings',
+  component: 'SystemSettings'
 }]

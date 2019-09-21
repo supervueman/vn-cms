@@ -6,7 +6,7 @@ const SystemSetting = require('../models/systemSetting');
 
 module.exports = {
   async findAll(req, res) {
-    if (req.adminAccess) {
+    if (!req.adminAccess) {
       res.status(401).send({
         message: 'Нет доступа!'
       });
@@ -21,7 +21,7 @@ module.exports = {
   },
 
   async update(req, res) {
-    if (req.adminAccess) {
+    if (!req.adminAccess) {
       res.status(401).send({
         message: 'Нет доступа!'
       });
@@ -45,7 +45,7 @@ module.exports = {
   },
 
   async count(req, res) {
-    if (req.adminAccess) {
+    if (!req.adminAccess) {
       res.status(401).send({
         message: 'Нет доступа!'
       });

@@ -14,6 +14,7 @@ import field from './field';
 import additionalField from './additionalField';
 import user from './user';
 import role from './role';
+import systemSetting from './systemSettings';
 import mail from './mail';
 
 export const store = new Vuex.Store({
@@ -29,6 +30,7 @@ export const store = new Vuex.Store({
     additionalField,
     user,
     role,
+    systemSetting,
     mail
   }
 });
