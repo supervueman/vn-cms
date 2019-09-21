@@ -8,9 +8,7 @@ const controller = require('../controllers/resource');
 const profileByAccessToken = require('../middleware/profileByAccessToken');
 const profileByApiKey = require('../middleware/profileByApiKey');
 
-router.get('/', profileByApiKey, controller.findAllByApiKey);
-
-router.get('/findAll', controller.findAll);
+router.get('/', profileByApiKey, controller.findAll);
 
 router.get('/resource/:id', profileByApiKey, controller.findByPk);
 

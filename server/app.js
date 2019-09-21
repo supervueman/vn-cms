@@ -1,10 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const sequelize = require('./util/database');
-const bcrypt = require('bcrypt');
-require('dotenv').config({
-  path: __dirname + '/../.env'
-});
+require('dotenv').config();
 
 // Handlers
 const createDir = require('./handlers/createDir');
@@ -21,9 +18,9 @@ const additionalFieldRoutes = require('./routes/addittionalField');
 const filesystemRoutes = require('./routes/filesystem');
 const mailRoutes = require('./routes/mail');
 
-// Models
-const User = require('./models/user');
-const Role = require('./models/role');
+// Components init
+const roleInit = require('./components/role');
+const userInit = require('./components/user');
 
 const app = express();
 
@@ -81,56 +78,15 @@ async function connect() {
   const connect = await sequelize.sync();
 
   if (!connect) {
-    res.status(500);
+    console.log('Not connect!');
+    return;
   }
 
-  let adminRole = await Role.findOne({
-    where: {
-      slug: 'admin'
-    }
-  });
-
-  if (!adminRole) {
-    adminRole = await Role.create({
-      slug: 'admin',
-      title: 'Администратор',
-      rang: 9999
-    });
-  }
-
-  let managerRole = await Role.findOne({
-    where: {
-      slug: 'manager'
-    }
-  });
-
-  if (!managerRole) {
-    managerRole = await Role.create({
-      slug: 'manager',
-      title: 'Менеджер',
-      rang: 9000
-    });
-  }
-
-  let admin = await User.findOne({
-    where: {
-      slug: 'admin'
-    }
-  });
+  await roleInit();
 
   await createDir('../files');
 
-  if (!admin) {
-    let passwordHw = await bcrypt.hash(process.env.ADMIN_PASSWORD, 12);
-    admin = await User.create({
-      slug: 'admin',
-      email: process.env.ADMIN_EMAIL,
-      password: passwordHw,
-      roleId: adminRole.id
-    });
-    await createDir(`../files/${admin.id}`);
-    res.status(200).send('Admin is created!');
-  }
+  await userInit();
 
   app.listen(process.env.SERVER_PORT, () => {
     console.log(`Server listen on http://localhost:${process.env.SERVER_PORT}`);

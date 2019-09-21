@@ -21,10 +21,6 @@
                   @blur="$v.role.title.$touch()"
                   :error-messages="titleErrors"
                 )
-                v-text-field(
-                  v-model="role.rang"
-                  label="Ранг:"
-                )
 
     v-card(v-if="adminAccess")
       v-card-actions

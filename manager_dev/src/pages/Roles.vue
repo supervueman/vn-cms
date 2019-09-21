@@ -23,7 +23,6 @@
                 td.text-xs-left
                   router-link(:to="`/roles/${item.id}`") {{ item.title }}
                 td.text-xs-left {{ item.slug }}
-                td.text-xs-left {{ item.rang }}
                 td.text-end
                   v-btn(
                     text
@@ -66,10 +65,6 @@ export default {
         {
           text: "Псевдоним",
           value: "slug"
-        },
-        {
-          text: "Ранг",
-          value: "rang"
         },
         { text: "", sortable: false }
       ],

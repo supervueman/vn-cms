@@ -15,26 +15,6 @@ module.exports = {
 
     const filter = filterHandler(req.query.filter);
 
-    const resources = await Resource.findAll(filter).map(el => {
-      if (el.user) {
-        el.user.password = '';
-      }
-      return el;
-    });
-
-    res.status(200).send(resources);
-  },
-
-  async findAllByApiKey(req, res) {
-    if (!(req.adminAccess || req.managerAccess)) {
-      res.status(401).send({
-        message: 'Нет доступа!'
-      });
-      return;
-    }
-
-    const filter = filterHandler(req.query.filter);
-
     if (req.managerAccess) {
       if (!filter.where) {
         filter.where = {};
@@ -76,7 +56,13 @@ module.exports = {
       resource.dataValues.user.password = '';
     }
 
-    res.status(200).send(resource);
+    if (req.managerAccess && resource.userId === req.profile.id || req.adminAccess) {
+      res.status(200).send(resource);
+    } else {
+      res.status(401).send({
+        mesasge: 'Нет доступа!'
+      });
+    }
   },
 
   async findOne(req, res) {
@@ -99,6 +85,14 @@ module.exports = {
 
     if (resource.dataValues.user) {
       resource.dataValues.user.password = '';
+    }
+
+    if (req.managerAccess && resource.userId === req.profile.id || req.adminAccess) {
+      res.status(200).send(resource);
+    } else {
+      res.status(401).send({
+        mesasge: 'Нет доступа!'
+      })
     }
 
     res.status(200).send(resource);

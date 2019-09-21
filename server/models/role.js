@@ -14,7 +14,6 @@ const Role = sequelize.define('role', {
     notEmpty: true
   },
   title: Sequelize.STRING,
-  rang: Sequelize.INTEGER
 });
 
 module.exports = Role;
