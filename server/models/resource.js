@@ -23,6 +23,16 @@ const Resource = sequelize.define('resource', {
   level: Sequelize.INTEGER
 });
 
+Resource.prototype.toJSON = function () {
+  const values = Object.assign({}, this.get());
+
+  if (values.user) {
+    delete values.user.dataValues.password;
+  }
+
+  return values;
+}
+
 Resource.belongsTo(User, {
   onDelete: 'cascade'
 });

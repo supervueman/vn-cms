@@ -28,7 +28,6 @@ module.exports = {
 		const users = await User.findAll(filter);
 
 		users.forEach(el => {
-			el.password = '';
 			el.token = '';
 		});
 
@@ -45,7 +44,6 @@ module.exports = {
 		const filter = filterHandler(req.query.filter);
 
 		const user = await User.findByPk(req.params.id, filter);
-		user.password = '';
 
 		if (!user) {
 			res.status(404).send({

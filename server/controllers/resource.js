@@ -3,6 +3,7 @@ const filterHandler = require('../handlers/filterHandler');
 
 // Models
 const Resource = require('../models/resource');
+const SystemSetting = require('../models/systemSetting');
 
 module.exports = {
   async findAll(req, res) {
@@ -22,12 +23,7 @@ module.exports = {
       filter.where.userId = req.profile.id
     }
 
-    const resources = await Resource.findAll(filter).map(el => {
-      if (el.dataValues.user) {
-        el.dataValues.user.password = '';
-      }
-      return el;
-    });
+    const resources = await Resource.findAll(filter);
 
     res.status(200).send(resources);
   },
@@ -50,10 +46,6 @@ module.exports = {
         message: 'Ресурс не найден!'
       });
       return;
-    }
-
-    if (resource.dataValues.user) {
-      resource.dataValues.user.password = '';
     }
 
     if (req.managerAccess && resource.userId === req.profile.id || req.adminAccess) {
@@ -83,10 +75,6 @@ module.exports = {
       return;
     }
 
-    if (resource.dataValues.user) {
-      resource.dataValues.user.password = '';
-    }
-
     if (req.managerAccess && resource.userId === req.profile.id || req.adminAccess) {
       res.status(200).send(resource);
     } else {
@@ -109,6 +97,21 @@ module.exports = {
     req.body.userId = req.profile.id;
 
     const createdResource = await Resource.create(req.body);
+
+    const is_id_in_slug = await SystemSetting.findOne({
+      where: {
+        slug: 'is_id_in_slug'
+      }
+    });
+
+    if (is_id_in_slug.value) {
+      createdResource.slug = `${req.body.slug}-${createdResource.id}`;
+
+      await createdResource.update({
+        slug: createdResource.slug
+      });
+    }
+
     res.status(200).send(createdResource);
   },
 
@@ -133,7 +136,20 @@ module.exports = {
 
     if (req.managerAccess && resource.userId === req.profile.id || req.adminAccess) {
       const updateResource = req.body;
-      delete updateResource.id;
+
+      const is_id_in_slug = await SystemSetting.findOne({
+        where: {
+          slug: 'is_id_in_slug'
+        }
+      });
+
+      if (is_id_in_slug.value) {
+        const slugId = updateResource.slug.substring(updateResource.slug.length - `${updateResource.id}`.length);
+
+        if (`-${slugId}` !== `-${updateResource.id}`) {
+          updateResource.slug = `${req.body.slug}-${updateResource.id}`;
+        }
+      }
 
       const updatedResource = await resource.update(updateResource);
 
@@ -143,7 +159,6 @@ module.exports = {
         message: 'Нет доступа!'
       })
     }
-
   },
 
   async remove(req, res) {

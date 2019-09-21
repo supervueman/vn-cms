@@ -6,7 +6,10 @@ export function queryResources(offset, limit, where = {}) {
       order: [
         ["createdAt", "DESC"]
       ],
-      where
+      where,
+      // include: [{
+      //   model: '$user'
+      // }]
     }
   }
 }
