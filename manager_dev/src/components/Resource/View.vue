@@ -155,9 +155,6 @@ import Resources from "@/components/Resource/Resources";
 // Libs
 import { required, minLength, helpers } from "vuelidate/lib/validators";
 
-// Query
-import { queryLayouts } from "@/query/layout";
-
 const alpha = helpers.regex("alpha", /^[a-zA-Z0-9_-]*$/);
 
 export default {
@@ -220,10 +217,13 @@ export default {
   },
 
   async mounted() {
-    const data = {
-      query: queryLayouts()
-    };
-    await this.$store.dispatch("layout/findAll", data);
+    await this.$store.dispatch("layout/findAll", {
+      query: {
+        filter: {
+          order: [["createdAt", "DESC"]]
+        }
+      }
+    });
   },
 
   methods: {
@@ -239,7 +239,7 @@ export default {
         }
 
         this.resource.parentId = this.$route.query.parentId;
-        await this.$store.dispatch("resource/create", this.resource);
+        await this.$store.dispatch("resource/create", { body: this.resource });
       }
     },
 
@@ -247,14 +247,10 @@ export default {
       this.$v.$touch();
       if (!this.$v.$error) {
         await this.$store.dispatch("resource/update", {
-          data: this.resource,
-          filter: {
+          body: this.resource,
+          query: {
             filter: {
-              include: [
-                {
-                  model: "$layout"
-                }
-              ]
+              include: ["layout"]
             }
           }
         });
@@ -276,7 +272,9 @@ export default {
       });
       this.$store.dispatch("profile/setResources", profileResources);
       this.$store.dispatch("resource/setAll", resources);
-      await this.$store.dispatch("resource/remove", this.resource.id);
+      await this.$store.dispatch("resource/remove", {
+        body: { id: this.resource.id }
+      });
     },
 
     changeLayoutConfirm(event) {
@@ -293,14 +291,24 @@ export default {
       for await (let el of this.$store.getters[
         "resource/getAdditionalFields"
       ]) {
-        await this.$store.dispatch("additionalField/remove", el.id);
+        await this.$store.dispatch("additionalField/remove", {
+          body: { id: el.id }
+        });
       }
       await this.update();
       await this.$store.dispatch("resource/findByPk", {
-        id: this.$route.params.id,
+        params: {
+          id: this.$route.params.id
+        },
         query: {
           filter: {
-            include: [{ model: "$layout" }, { model: "$additionalfield" }]
+            include: [
+              {
+                association: "layout",
+                include: ["fields"]
+              },
+              "additionalfields"
+            ]
           }
         }
       });
@@ -309,10 +317,18 @@ export default {
 
     async cancelLayout() {
       await this.$store.dispatch("resource/findByPk", {
-        id: this.$route.params.id,
+        params: {
+          id: this.$route.params.id
+        },
         query: {
           filter: {
-            include: [{ model: "$layout" }, { model: "$additionalfield" }]
+            include: [
+              {
+                association: "layout",
+                include: ["fields"]
+              },
+              "additionalfields"
+            ]
           }
         }
       });

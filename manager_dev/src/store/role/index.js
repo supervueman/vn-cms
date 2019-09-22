@@ -29,7 +29,7 @@ export default {
       commit
     }, payload) {
       this.dispatch('preloader/fetch', true);
-      const data = requestDataHandler('GET', `/roles/role/${payload}`)
+      const data = requestDataHandler('GET', `/roles/role/${payload.params.id}`)
 
       const response = await axios(data).catch(err => {
         this.dispatch('preloader/fetch', false);
@@ -50,7 +50,7 @@ export default {
       commit
     }, payload) {
       this.dispatch('preloader/fetch', true);
-      const data = requestDataHandler('GET', '/roles/findone', undefined, payload);
+      const data = requestDataHandler('GET', '/roles/findone', undefined, payload.query);
 
       const response = await axios(data).catch(err => {
         this.dispatch('preloader/fetch', false);
@@ -71,7 +71,7 @@ export default {
       commit
     }, payload) {
       this.dispatch('preloader/fetch', true);
-      const data = requestDataHandler('POST', '/roles/create', payload);
+      const data = requestDataHandler('POST', '/roles/create', payload.body);
 
       const response = await axios(data).catch(err => {
         this.dispatch('preloader/fetch', false);
@@ -97,7 +97,7 @@ export default {
       commit
     }, payload) {
       this.dispatch('preloader/fetch', true);
-      const data = requestDataHandler('PUT', `/roles/update`, payload);
+      const data = requestDataHandler('PUT', `/roles/update`, payload.body);
 
       const response = await axios(data).catch(err => {
         this.dispatch('preloader/fetch', false);
@@ -123,9 +123,7 @@ export default {
       commit
     }, payload) {
       this.dispatch('preloader/fetch', true);
-      const data = requestDataHandler('DELETE', '/roles/remove', {
-        id: payload
-      });
+      const data = requestDataHandler('DELETE', '/roles/remove', payload.body);
 
       const response = await axios(data).catch(err => {
         this.dispatch('preloader/fetch', false);

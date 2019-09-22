@@ -35,7 +35,7 @@ export default {
       commit
     }, payload) {
       this.dispatch('preloader/fetch', true);
-      const data = requestDataHandler('GET', `/fields/field/${payload.id}`, undefined, payload.query);
+      const data = requestDataHandler('GET', `/fields/field/${payload.params.id}`, undefined, payload.query);
 
       const response = await axios(data).catch(err => {
         this.dispatch('preloader/fetch', false);
@@ -64,7 +64,7 @@ export default {
       commit
     }, payload) {
       this.dispatch('preloader/fetch', true);
-      const data = requestDataHandler('POST', '/fields/create', payload);
+      const data = requestDataHandler('POST', '/fields/create', payload.body);
 
       const response = await axios(data).catch(err => {
         this.dispatch('preloader/fetch', false);
@@ -76,7 +76,6 @@ export default {
       });
 
       if (response !== undefined && response.status === 200) {
-        commit('set', payload);
         this.dispatch('preloader/fetch', false);
         this.dispatch('notification/fetch', {
           type: 'success',
@@ -91,7 +90,7 @@ export default {
       commit
     }, payload) {
       this.dispatch('preloader/fetch', true);
-      const data = requestDataHandler('PUT', '/fields/update', payload);
+      const data = requestDataHandler('PUT', '/fields/update', payload.body);
 
       const response = await axios(data).catch(err => {
         this.dispatch('preloader/fetch', false);
@@ -103,7 +102,6 @@ export default {
       });
 
       if (response !== undefined && response.status === 200) {
-        commit('set', payload);
         this.dispatch('preloader/fetch', false);
         this.dispatch('notification/fetch', {
           type: 'success',
@@ -117,9 +115,7 @@ export default {
       commit
     }, payload) {
       this.dispatch('preloader/fetch', true);
-      const data = requestDataHandler('DELETE', '/fields/remove', {
-        id: payload
-      });
+      const data = requestDataHandler('DELETE', '/fields/remove', payload.body);
 
       const response = await axios(data).catch(err => {
         this.dispatch('preloader/fetch', false);
@@ -146,12 +142,7 @@ export default {
       commit
     }, payload) {
       this.dispatch('preloader/fetch', true);
-      const data = requestDataHandler(
-        'GET',
-        '/fields',
-        undefined,
-        payload.query
-      );
+      const data = requestDataHandler('GET', '/fields', undefined, payload.query);
 
       const response = await axios(data).catch(err => {
         this.dispatch('preloader/fetch', false);
@@ -172,12 +163,7 @@ export default {
       commit
     }, payload) {
       this.dispatch('preloader/fetch', true);
-      const data = requestDataHandler(
-        'GET',
-        '/fields/count',
-        undefined,
-        payload.query
-      );
+      const data = requestDataHandler('GET', '/fields/count', undefined, payload.query);
 
       const response = await axios(data).catch(err => {
         this.dispatch('preloader/fetch', false);
@@ -198,7 +184,7 @@ export default {
       commit
     }, payload) {
       this.dispatch('preloader/fetch', true);
-      const data = requestDataHandler('PUT', '/fields/add-layout', payload);
+      const data = requestDataHandler('PUT', '/fields/add-layout', payload.body);
 
       const response = await axios(data).catch(err => {
         this.dispatch('preloader/fetch', false);
@@ -226,7 +212,7 @@ export default {
       commit
     }, payload) {
       this.dispatch('preloader/fetch', true);
-      const data = requestDataHandler('PUT', '/fields/remove-layout', payload);
+      const data = requestDataHandler('PUT', '/fields/remove-layout', payload.body);
 
       const response = await axios(data).catch(err => {
         this.dispatch('preloader/fetch', false);

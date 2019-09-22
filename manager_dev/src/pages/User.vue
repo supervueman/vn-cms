@@ -34,7 +34,7 @@ export default {
       id: this.$route.params.id,
       query: {
         filter: {
-          include: [{ model: "$role" }]
+          include: ["role"]
         }
       }
     });

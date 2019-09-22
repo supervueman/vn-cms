@@ -1,7 +1,6 @@
 const bcrypt = require('bcrypt');
 
 // Helpers
-const filterHandler = require('../handlers/filterHandler');
 const removeDir = require('../handlers/removeDir');
 
 // Models
@@ -16,7 +15,7 @@ module.exports = {
 			return;
 		}
 
-		const filter = filterHandler(req.query.filter);
+		const filter = JSON.parse(req.query.filter || "{}");
 
 		if (req.managerAccess) {
 			if (!filter.where) {
@@ -41,7 +40,7 @@ module.exports = {
 			});
 		}
 
-		const filter = filterHandler(req.query.filter);
+		const filter = JSON.parse(req.query.filter || "{}");
 
 		const user = await User.findByPk(req.params.id, filter);
 
@@ -70,10 +69,9 @@ module.exports = {
 			});
 		}
 
-		const filter = filterHandler(req.query.filter);
+		const filter = JSON.parse(req.query.filter || "{}");
 
 		const user = await User.findOne(filter);
-		user.password = '';
 
 		if (!user) {
 			res.status(404).send({
@@ -100,10 +98,11 @@ module.exports = {
 			});
 		}
 
+
 		const existUser = await User.findByPk(req.body.id);
 
 		if (!existUser) {
-			res.status(401).send({
+			res.status(404).send({
 				message: 'Не найдено!'
 			});
 		}
@@ -114,19 +113,19 @@ module.exports = {
 		delete reqUser.token;
 
 		if (
-			(req.managerAccess && existUser.userId === req.profile.id) ||
+			(req.managerAccess && `${existUser.userId}` === `${req.profile.uid}`) ||
 			req.adminAccess
 		) {
 			const updatedUser = await existUser.update(reqUser);
 
-			const filter = filterHandler(req.query.filter);
+			const filter = JSON.parse(req.query.filter || "{}");
 
 			const user = await User.findByPk(updatedUser.id, filter);
 			delete user.password;
 
 			res.status(200).send(user);
 		} else {
-			res.status(401).send({
+			res.status(404).send({
 				message: 'Не найдено!'
 			});
 		}
@@ -134,7 +133,7 @@ module.exports = {
 
 	async changePassword(req, res) {
 		if (!(req.managerAccess || req.adminAccess)) {
-			res.status(401).send({
+			res.status(403).send({
 				message: 'Нет доступа!'
 			});
 		}
@@ -142,13 +141,13 @@ module.exports = {
 		const user = await User.findByPk(req.body.userId);
 
 		if (!user) {
-			res.status(401).send({
+			res.status(404).send({
 				message: 'Пользователь не найден!'
 			});
 		}
 
 		if (
-			(req.managerAccess && user.userId === req.profile.id) ||
+			(req.managerAccess && `${user.userId}` === `${req.profile.uid}`) ||
 			req.adminAccess
 		) {
 			const isCompare = await bcrypt.compare(
@@ -172,7 +171,7 @@ module.exports = {
 				});
 			}
 		} else {
-			res.status(401).send({
+			res.status(404).send({
 				message: 'Не найдено!'
 			});
 		}
@@ -188,7 +187,7 @@ module.exports = {
 		const existUser = await User.findByPk(req.body.id);
 
 		if (!existUser) {
-			res.status(401).send({
+			res.status(404).send({
 				message: 'Не найдено!'
 			});
 		}
@@ -208,7 +207,7 @@ module.exports = {
 				message: 'Пользователь успешно удален!'
 			});
 		} else {
-			res.status(401).send({
+			res.status(404).send({
 				message: 'Не найдено!'
 			});
 		}
@@ -216,13 +215,13 @@ module.exports = {
 
 	async count(req, res) {
 		if (!(req.adminAccess || req.managerAccess)) {
-			res.status(401).send({
+			res.status(404).send({
 				message: 'Пользователь не найден!'
 			});
 			return;
 		}
 
-		const filter = filterHandler(req.query.filter);
+		const filter = JSON.parse(req.query.filter || "{}");
 
 		if (req.managerAccess) {
 			if (!filter.where) {

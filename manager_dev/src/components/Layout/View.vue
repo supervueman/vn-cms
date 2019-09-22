@@ -139,19 +139,21 @@ export default {
     async create() {
       this.$v.$touch();
       if (!this.$v.$error) {
-        await this.$store.dispatch("layout/create", this.layout);
+        await this.$store.dispatch("layout/create", { body: this.layout });
       }
     },
 
     async update() {
       this.$v.$touch();
       if (!this.$v.$error) {
-        await this.$store.dispatch("layout/update", this.layout);
+        await this.$store.dispatch("layout/update", { body: this.layout });
       }
     },
 
     async remove() {
-      await this.$store.dispatch("layout/remove", this.layout.id);
+      await this.$store.dispatch("layout/remove", {
+        body: { id: this.layout.id }
+      });
     }
   }
 };

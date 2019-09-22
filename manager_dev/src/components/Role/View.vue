@@ -118,7 +118,9 @@ export default {
     async create() {
       this.$v.$touch();
       if (!this.$v.$error) {
-        await this.$store.dispatch("role/create", this.role);
+        await this.$store.dispatch("role/create", {
+          body: this.role
+        });
         this.$router.push(`/roles/${this.$store.getters["role/get"].id}`);
         this.$store.dispatch("role/clear");
       }
@@ -127,12 +129,18 @@ export default {
     async update() {
       this.$v.$touch();
       if (!this.$v.$error) {
-        await this.$store.dispatch("role/update", this.role);
+        await this.$store.dispatch("role/update", {
+          body: this.role
+        });
       }
     },
 
     async remove() {
-      await this.$store.dispatch("role/remove", this.role.id);
+      await this.$store.dispatch("role/remove", {
+        body: {
+          id: this.role.id
+        }
+      });
       this.$router.push("/roles");
     }
   }

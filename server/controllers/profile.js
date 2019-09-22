@@ -75,7 +75,13 @@ module.exports = {
   },
 
   async update(req, res) {
-    const updateProfileData = req.body.profile;
+    if (!req.isAuth) {
+      res.status(401).send({
+        message: 'Нет доступа!'
+      });
+    }
+
+    const updateProfileData = req.body;
     delete updateProfileData.password;
     delete updateProfileData.token;
     delete updateProfileData.id;
@@ -88,7 +94,6 @@ module.exports = {
     }
 
     const newProfile = await req.profile.update(updateProfileData);
-    newProfile.password = '';
 
     res.status(200).send(newProfile);
   },
@@ -121,12 +126,12 @@ module.exports = {
 
   async remove(req, res) {
     if (!req.profile) {
-      res.status(401).send({
+      res.status(404).send({
         message: 'Пользователь не найден!'
       });
     }
 
-    removeDir(`../files/${existUser.req.profile.id}`);
+    removeDir(`../files/${req.profile.id}`);
 
     await User.destroy({
       where: {
@@ -134,7 +139,7 @@ module.exports = {
       }
     });
 
-    res.status(204).send({
+    res.status(200).send({
       message: 'Успешно удалено!'
     });
   }

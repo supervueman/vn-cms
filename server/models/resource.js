@@ -33,15 +33,4 @@ Resource.prototype.toJSON = function () {
   return values;
 }
 
-Resource.belongsTo(User, {
-  onDelete: 'cascade'
-});
-
-Resource.belongsTo(Resource, {
-  onDelete: 'cascade',
-  as: 'parent'
-});
-
-Resource.belongsTo(Layout);
-
 module.exports = Resource;

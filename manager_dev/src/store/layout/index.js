@@ -30,7 +30,7 @@ export default {
 			commit
 		}, payload) {
 			this.dispatch('preloader/fetch', true);
-			const data = requestDataHandler('GET', `/layouts/layout/${payload}`, undefined);
+			const data = requestDataHandler('GET', `/layouts/layout/${payload.params.id}`, undefined);
 
 			const response = await axios(data).catch(err => {
 				this.dispatch('preloader/fetch', false);
@@ -57,7 +57,7 @@ export default {
 			commit
 		}, payload) {
 			this.dispatch('preloader/fetch', true);
-			const data = requestDataHandler('POST', '/layouts/create', payload);
+			const data = requestDataHandler('POST', '/layouts/create', payload.body);
 
 			const response = await axios(data).catch(err => {
 				this.dispatch('preloader/fetch', false);
@@ -69,7 +69,6 @@ export default {
 			});
 
 			if (response !== undefined && response.status === 200) {
-				commit('set', payload);
 				this.dispatch('preloader/fetch', false);
 				this.dispatch('notification/fetch', {
 					type: 'success',
@@ -84,7 +83,7 @@ export default {
 			commit
 		}, payload) {
 			this.dispatch('preloader/fetch', true);
-			const data = requestDataHandler('PUT', '/layouts/update', payload);
+			const data = requestDataHandler('PUT', '/layouts/update', payload.body);
 
 			const response = await axios(data).catch(err => {
 				this.dispatch('preloader/fetch', false);
@@ -96,7 +95,6 @@ export default {
 			});
 
 			if (response !== undefined && response.status === 200) {
-				commit('set', payload);
 				this.dispatch('preloader/fetch', false);
 				this.dispatch('notification/fetch', {
 					type: 'success',
@@ -110,9 +108,7 @@ export default {
 			commit
 		}, payload) {
 			this.dispatch('preloader/fetch', true);
-			const data = requestDataHandler('DELETE', '/layouts/remove', {
-				id: payload
-			});
+			const data = requestDataHandler('DELETE', '/layouts/remove', payload.body);
 
 			const response = await axios(data).catch(err => {
 				this.dispatch('preloader/fetch', false);

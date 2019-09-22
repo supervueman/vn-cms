@@ -31,10 +31,12 @@ export default {
 
   async mounted() {
     await this.$store.dispatch("field/findByPk", {
-      id: this.$route.params.id,
+      params: {
+        id: this.$route.params.id
+      },
       query: {
         filter: {
-          include: [{ model: "$layout" }]
+          include: ["layouts"]
         }
       }
     });

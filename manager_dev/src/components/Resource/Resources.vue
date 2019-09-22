@@ -54,9 +54,6 @@
 // Mixins
 import accessMixin from "@/mixins/accessMixin";
 
-// Query
-import { queryResources } from "@/query/resource";
-
 export default {
   name: "Resources",
 
@@ -98,14 +95,17 @@ export default {
 
   async mounted() {
     const data = {
-      query: queryResources(
-        this.$route.query.offset || 0,
-        this.$route.query.limit || this.limit,
-        {
-          level: this.level + 1,
-          parentId: this.$route.params.id
+      query: {
+        filter: {
+          offset: this.$route.query.offset || 0,
+          limit: this.$route.query.limit || this.limit,
+          order: [["createdAt", "DESC"]],
+          where: {
+            level: this.level + 1,
+            parentId: this.$route.params.id
+          }
         }
-      )
+      }
     };
     await this.$store.dispatch("resource/findAll", data);
     await this.$store.dispatch("resource/count", data);
@@ -114,20 +114,24 @@ export default {
   methods: {
     async getPage({ offset, limit }) {
       await this.$store.dispatch("resource/findAll", {
-        filter: {
-          offset,
-          limit,
-          order: [["createdAt", "DESC"]],
-          where: {
-            level: this.level + 1,
-            parentId: this.$route.params.id
+        query: {
+          filter: {
+            offset,
+            limit,
+            order: [["createdAt", "DESC"]],
+            where: {
+              level: this.level + 1,
+              parentId: this.$route.params.id
+            }
           }
         }
       });
     },
 
     async remove() {
-      await this.$store.dispatch("resource/remove", this.removeItem.id);
+      await this.$store.dispatch("resource/remove", {
+        body: { id: this.removeItem.id }
+      });
       const resources = this.resources.filter(el => {
         if (el.id !== this.removeItem.id) {
           return el;

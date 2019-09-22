@@ -47,9 +47,6 @@
 // Mixins
 import accessMixin from "@/mixins/accessMixin";
 
-// Query
-import { queryRoles } from "@/query/role";
-
 export default {
   name: "RolesPage",
 
@@ -82,7 +79,11 @@ export default {
 
   async mounted() {
     const data = {
-      query: queryRoles()
+      query: {
+        filter: {
+          order: [["createdAt", "DESC"]]
+        }
+      }
     };
     await this.$store.dispatch("role/findAll", data);
     await this.$store.dispatch("role/count", data);
@@ -90,7 +91,9 @@ export default {
 
   methods: {
     async remove() {
-      await this.$store.dispatch("role/remove", this.removeItem.id);
+      await this.$store.dispatch("role/remove", {
+        body: { id: this.removeItem.id }
+      });
       const roles = this.roles.filter(el => {
         if (el.id !== this.removeItem.id) {
           return el;

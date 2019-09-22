@@ -3,7 +3,6 @@ const accessHandler = require('../handlers/access');
 
 // Models
 const User = require('../models/user');
-const Role = require('../models/role');
 
 module.exports = async (req, res, next) => {
   const apiKey = req.headers['x-api-key'];
@@ -16,9 +15,7 @@ module.exports = async (req, res, next) => {
     where: {
       token: req.headers['x-api-key']
     },
-    include: [{
-      model: Role
-    }]
+    include: ['role']
   });
 
   if (!profile) {

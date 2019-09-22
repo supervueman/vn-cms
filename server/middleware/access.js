@@ -15,6 +15,7 @@ module.exports = async (req, res, next) => {
     }
 
     req.isAuth = true;
+    req.profile = decoded
 
     accessHandler(req, decoded.role.slug);
 

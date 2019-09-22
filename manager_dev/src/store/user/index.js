@@ -41,7 +41,6 @@ export default {
       });
 
       if (response !== undefined && response.status === 200) {
-        console.log(response.data)
         this.dispatch('preloader/fetch', false);
         commit('set', response.data);
       }
@@ -79,7 +78,7 @@ export default {
       commit
     }, payload) {
       this.dispatch('preloader/fetch', true);
-      const data = requestDataHandler('PUT', '/users/update', payload.profile, payload.filter);
+      const data = requestDataHandler('PUT', '/users/update', payload.body, payload.query);
 
       const response = await axios(data).catch(err => {
         this.dispatch('preloader/fetch', false);
@@ -105,7 +104,7 @@ export default {
       commit
     }, payload) {
       this.dispatch('preloader/fetch', true);
-      const data = requestDataHandler('PUT', '/users/password-change', payload);
+      const data = requestDataHandler('PUT', '/users/password-change', payload.body);
 
       const response = await axios(data).catch(err => {
         this.dispatch('preloader/fetch', false);
@@ -130,9 +129,7 @@ export default {
       commit
     }, payload) {
       this.dispatch('preloader/fetch', true);
-      const data = requestDataHandler('DELETE', '/users/remove', {
-        id: payload
-      });
+      const data = requestDataHandler('DELETE', '/users/remove', payload.body);
 
       const response = await axios(data);
 

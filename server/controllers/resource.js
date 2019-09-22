@@ -1,6 +1,3 @@
-// Helpers
-const filterHandler = require('../handlers/filterHandler');
-
 // Models
 const Resource = require('../models/resource');
 const SystemSetting = require('../models/systemSetting');
@@ -14,7 +11,7 @@ module.exports = {
       return;
     }
 
-    const filter = filterHandler(req.query.filter);
+    const filter = JSON.parse(req.query.filter || "{}");
 
     if (req.managerAccess) {
       if (!filter.where) {
@@ -37,7 +34,7 @@ module.exports = {
 
     const id = req.params.id;
 
-    const filter = filterHandler(req.query.filter);
+    const filter = JSON.parse(req.query.filter || "{}");
 
     const resource = await Resource.findByPk(id, filter);
 
@@ -64,7 +61,7 @@ module.exports = {
       });
     }
 
-    const filter = filterHandler(req.query.filter);
+    const filter = JSON.parse(req.query.filter || "{}");
 
     const resource = await Resource.findOne(filter);
 
@@ -123,7 +120,7 @@ module.exports = {
       return;
     }
 
-    const filter = filterHandler(req.query.filter);
+    const filter = JSON.parse(req.query.filter || "{}");
 
     const resource = await Resource.findByPk(req.body.id, filter);
 
@@ -201,7 +198,7 @@ module.exports = {
       return;
     }
 
-    const filter = filterHandler(req.query.filter);
+    const filter = JSON.parse(req.query.filter || "{}");
 
     if (req.managerAccess) {
       if (!filter.where) {

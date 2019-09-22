@@ -11,9 +11,7 @@ module.exports = {
       where: {
         email: req.body.email
       },
-      include: [{
-        model: Role
-      }]
+      include: ['role']
     });
 
     if (!user) {

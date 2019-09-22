@@ -282,41 +282,37 @@ export default {
       this.$v.$touch();
       if (!this.$v.$error) {
         this.profile.password = this.password;
-        await this.$store.dispatch("profile/create", this.profile);
+        await this.$store.dispatch("profile/create", { body: this.profile });
       }
     },
 
     async update() {
       this.$v.profile.$touch();
+      const data = {
+        body: this.profile,
+        query: {
+          filter: {
+            include: ["role"]
+          }
+        }
+      };
       if (!this.$v.profile.$error) {
         if (this.profile.id === this.$store.getters["profile/get"].id) {
-          await this.$store.dispatch("profile/update", {
-            profile: this.profile,
-            filter: {
-              filter: {
-                include: [{ model: "$role" }]
-              }
-            }
-          });
+          await this.$store.dispatch("profile/update", data);
         } else {
-          await this.$store.dispatch("user/update", {
-            profile: this.profile,
-            filter: {
-              filter: {
-                include: [{ model: "$role" }]
-              }
-            }
-          });
+          await this.$store.dispatch("user/update", data);
         }
       }
     },
 
     async remove() {
       if (this.profile.id === this.$store.getters["profile/get"].id) {
-        await this.$store.dispatch("profile/remove", this.profile.id);
+        await this.$store.dispatch("profile/remove");
         this.$router.push("/");
       } else {
-        await this.$store.dispatch("user/remove", this.profile.id);
+        await this.$store.dispatch("user/remove", {
+          body: { id: this.profile.id }
+        });
         this.$router.push("/users");
       }
     },

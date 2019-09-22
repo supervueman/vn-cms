@@ -24,6 +24,10 @@ const roleInit = require('./components/role');
 const userInit = require('./components/user');
 const systemSettingInit = require('./components/systemSetting');
 
+// Association init
+const associationInit = require('./associations');
+associationInit();
+
 const app = express();
 
 app.use(bodyParser.urlencoded({

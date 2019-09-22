@@ -20,7 +20,7 @@ export default {
       commit
     }, payload) {
       this.dispatch('preloader/fetch', true);
-      const data = requestDataHandler('PUT', '/system-settings/update', payload);
+      const data = requestDataHandler('PUT', '/system-settings/update', payload.body);
 
       const response = await axios(data).catch(err => {
         this.dispatch('preloader/fetch', false);
@@ -40,7 +40,6 @@ export default {
         });
       }
     },
-
 
     async findAll({
       commit

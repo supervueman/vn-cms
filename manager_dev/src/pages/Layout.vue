@@ -34,7 +34,9 @@ export default {
   },
 
   async mounted() {
-    await this.$store.dispatch("layout/findByPk", this.$route.params.id);
+    await this.$store.dispatch("layout/findByPk", {
+      params: { id: this.$route.params.id }
+    });
   },
 
   beforeRouteLeave(to, from, next) {

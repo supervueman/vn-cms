@@ -5,7 +5,6 @@ const accessHandler = require('../handlers/access');
 
 // Models
 const User = require('../models/user');
-const Role = require('../models/role');
 
 module.exports = async (req, res, next) => {
   const accessToken = req.headers['x-access-token'];
@@ -25,9 +24,7 @@ module.exports = async (req, res, next) => {
     }
 
     const profile = await User.findByPk(decoded.uid, {
-      include: [{
-        model: Role
-      }]
+      include: ['role']
     });
 
     if (!profile) {

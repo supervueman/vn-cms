@@ -22,15 +22,4 @@ const Field = sequelize.define('field', {
   defaultValue: Sequelize.STRING
 });
 
-Layout.belongsToMany(Field, {
-  through: 'LayoutField',
-  constraints: false
-});
-
-Field.belongsToMany(Layout, {
-  through: 'LayoutField',
-  constraints: false
-});
-
-
 module.exports = Field;

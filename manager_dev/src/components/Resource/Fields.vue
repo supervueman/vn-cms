@@ -260,10 +260,18 @@ export default {
       }
 
       await this.$store.dispatch("resource/findByPk", {
-        id: this.$route.params.id,
+        params: {
+          id: this.$route.params.id
+        },
         query: {
           filter: {
-            include: [{ model: "$layout" }, { model: "$additionalfield" }]
+            include: [
+              {
+                association: "layout",
+                include: ["fields"]
+              },
+              "additionalfields"
+            ]
           }
         }
       });

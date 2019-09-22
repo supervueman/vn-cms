@@ -3,9 +3,7 @@ export function queryUsers(offset = 0, limit = 10, where = {}) {
     filter: {
       offset,
       limit,
-      include: [{
-        model: "$role"
-      }],
+      include: ["role"],
       order: [
         ["createdAt", "DESC"]
       ],

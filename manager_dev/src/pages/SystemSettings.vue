@@ -31,9 +31,6 @@
 // Mixins
 import accessMixin from "@/mixins/accessMixin";
 
-// Query
-import { querySystemSettings } from "@/query/systemSetting";
-
 export default {
   name: "SystemSettingsPage",
 
@@ -67,7 +64,13 @@ export default {
 
   async mounted() {
     const data = {
-      query: querySystemSettings()
+      query: {
+        filter: {
+          offset: this.$route.query.offset || 0,
+          limit: this.$route.query.limit || this.limit,
+          order: [["createdAt", "DESC"]]
+        }
+      }
     };
     await this.$store.dispatch("systemSetting/findAll", data);
     await this.$store.dispatch("systemSetting/count", data);
@@ -76,13 +79,19 @@ export default {
   methods: {
     async getPage({ offset, limit }) {
       const data = {
-        query: querySystemSettings(offset, limit)
+        query: {
+          filter: {
+            offset,
+            limit,
+            order: [["createdAt", "DESC"]]
+          }
+        }
       };
       await this.$store.dispatch("systemSetting/findAll", data);
     },
 
     async update(item) {
-      await this.$store.dispatch("systemSetting/update", item);
+      await this.$store.dispatch("systemSetting/update", { body: item });
     }
   }
 };

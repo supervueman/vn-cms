@@ -1,19 +1,16 @@
-// Helpers
-const filterHandler = require('../handlers/filterHandler');
-
 // Models
 const AdditionalField = require('../models/additionalField');
 
 module.exports = {
   async findAll(req, res) {
     if (!(req.adminAccess || req.managerAccess)) {
-      res.status(401).send({
+      res.status(403).send({
         message: 'Нет доступа!'
       });
       return;
     }
 
-    const filter = filterHandler(req.query.filter);
+    const filter = JSON.parse(req.query.filter || "{}");
 
     const additionalFields = await AdditionalField.findAll(filter);
 
@@ -22,12 +19,12 @@ module.exports = {
 
   async findByPk(req, res) {
     if (!(req.adminAccess || req.managerAccess)) {
-      res.status(401).send({
+      res.status(403).send({
         message: 'Нет доступа!'
       });
     }
 
-    const filter = filterHandler(req.query.filter);
+    const filter = JSON.parse(req.query.filter || "{}");
 
     const additionalField = await AdditionalField.findByPk(req.params.id, filter);
 
@@ -43,12 +40,12 @@ module.exports = {
 
   async findOne(req, res) {
     if (!(req.adminAccess || req.managerAccess)) {
-      res.status(401).send({
+      res.status(403).send({
         message: 'Не доступно!'
       });
     }
 
-    const filter = filterHandler(req.query.filter);
+    const filter = JSON.parse(req.query.filter || "{}");
 
     const additionalField = await AdditionalField.findOne(filter);
 
@@ -64,7 +61,7 @@ module.exports = {
 
   async create(req, res) {
     if (!(req.adminAccess || req.managerAccess)) {
-      res.status(401).send({
+      res.status(403).send({
         message: 'Нет доступа!'
       });
       return;
@@ -77,7 +74,7 @@ module.exports = {
 
   async update(req, res) {
     if (!(req.adminAccess || req.managerAccess)) {
-      res.status(401).send({
+      res.status(403).send({
         message: 'Нет доступа!'
       });
       return;
@@ -86,7 +83,7 @@ module.exports = {
     const additionalField = await AdditionalField.findByPk(req.body.id);
 
     if (!additionalField) {
-      res.status(401).send({
+      res.status(404).send({
         message: 'Не найдено!'
       });
       return;
@@ -102,30 +99,23 @@ module.exports = {
 
   async updateAll(req, res) {
     if (!(req.adminAccess || req.managerAccess)) {
-      res.status(401).send({
+      res.status(403).send({
         message: 'Нет доступа!'
       });
       return;
     }
 
-    // console.log(req.body.fields)
-
     for (let field of req.body.fields) {
       const additionalField = await AdditionalField.findByPk(field.id);
-      console.log(field.id, field.value, '___1')
-      console.log(additionalField.id, additionalField.value, '____2')
 
       if (!additionalField) {
-        res.status(401).send({
+        res.status(404).send({
           message: 'Не найдено!'
         });
         return;
       }
-      // delete updateAdditionalField.id;
 
-      const updatedAdditionalField = await additionalField.update(field);
-
-      console.log(updatedAdditionalField.id, updatedAdditionalField.value, '____3')
+      await additionalField.update(field);
     }
 
     res.status(200).send({
@@ -135,7 +125,7 @@ module.exports = {
 
   async remove(req, res) {
     if (!(req.adminAccess || req.managerAccess)) {
-      res.status(401).send({
+      res.status(403).send({
         message: 'Нет доступа!'
       });
       return;

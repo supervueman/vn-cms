@@ -4,6 +4,7 @@ const sequelize = require('../util/database');
 
 // Models
 const Role = require('./role');
+const Resource = require('./resource');
 
 const User = sequelize.define('user', {
   id: {
@@ -50,10 +51,5 @@ User.prototype.toJSON = function () {
 }
 
 SequelizeTokenify.tokenify(User);
-
-User.belongsTo(Role);
-User.belongsTo(User, {
-  onDelete: 'cascade'
-});
 
 module.exports = User;

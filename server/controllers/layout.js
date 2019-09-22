@@ -1,6 +1,3 @@
-// Helpers
-const filterHandler = require('../handlers/filterHandler');
-
 // Models
 const Layout = require('../models/layout');
 
@@ -13,7 +10,7 @@ module.exports = {
       return;
     }
 
-    const filter = filterHandler(req.query.filter);
+    const filter = JSON.parse(req.query.filter || "{}");
 
     const layouts = await Layout.findAll(filter);
 
@@ -27,7 +24,7 @@ module.exports = {
       });
     }
 
-    const filter = filterHandler(req.query.filter);
+    const filter = JSON.parse(req.query.filter || "{}");
 
     const layout = await Layout.findByPk(req.params.id, filter);
 
@@ -48,7 +45,7 @@ module.exports = {
       });
     }
 
-    const filter = filterHandler(req.query.filter);
+    const filter = JSON.parse(req.query.filter || "{}");
 
     const layout = await Layout.findOne(filter);
 
@@ -76,7 +73,6 @@ module.exports = {
   },
 
   async update(req, res) {
-    console.log(req.body)
     if (!req.adminAccess) {
       res.status(401).send({
         message: 'Нет доступа!'
@@ -97,8 +93,6 @@ module.exports = {
     delete updateLayout.id;
 
     const updatedLayout = await layout.update(updateLayout);
-
-    const addFields = await layout.addField(2);
 
     res.status(200).send(updatedLayout);
   },
@@ -137,7 +131,7 @@ module.exports = {
       return;
     }
 
-    const filter = filterHandler(req.query.filter);
+    const filter = JSON.parse(req.query.filter || "{}");
 
     const count = await Layout.count(filter);
 

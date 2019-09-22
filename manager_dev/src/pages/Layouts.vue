@@ -52,9 +52,6 @@
 // Mixins
 import accessMixin from "@/mixins/accessMixin";
 
-// Query
-import { queryLayouts } from "@/query/layout";
-
 export default {
   name: "LayoutsPage",
 
@@ -86,10 +83,13 @@ export default {
 
   async mounted() {
     const data = {
-      query: queryLayouts(
-        this.$route.query.offset || 0,
-        this.$route.query.limit || this.limit
-      )
+      query: {
+        filter: {
+          offset: this.$route.query.offset || 0,
+          limit: this.$route.query.limit || this.limit,
+          order: [["createdAt", "DESC"]]
+        }
+      }
     };
     await this.$store.dispatch("layout/findAll", data);
     await this.$store.dispatch("layout/count", data);
@@ -98,13 +98,21 @@ export default {
   methods: {
     async getPage({ offset, limit }) {
       const data = {
-        query: queryLayouts(offset, limit)
+        query: {
+          filter: {
+            offset,
+            limit,
+            order: [["createdAt", "DESC"]]
+          }
+        }
       };
       await this.$store.dispatch("layout/findAll", data);
     },
 
     async remove() {
-      await this.$store.dispatch("layout/remove", this.removeItem.id);
+      await this.$store.dispatch("layout/remove", {
+        body: { id: this.removeItem.id }
+      });
       const layouts = this.layouts.filter(el => {
         if (el.id !== this.removeItem.id) {
           return el;

@@ -73,7 +73,7 @@ export default {
       commit
     }, payload) {
       this.dispatch('preloader/fetch', true);
-      const data = requestDataHandler('POST', '/profile/create', payload);
+      const data = requestDataHandler('POST', '/profile/create', payload.body);
 
       const response = await axios(data).catch(err => {
         this.dispatch('preloader/fetch', false);
@@ -100,7 +100,7 @@ export default {
       commit
     }, payload) {
       this.dispatch('preloader/fetch', true);
-      const data = requestDataHandler('PUT', '/profile/update', payload);
+      const data = requestDataHandler('PUT', '/profile/update', payload.body);
 
       const response = await axios(data).catch(err => {
         this.dispatch('preloader/fetch', false);
@@ -126,7 +126,7 @@ export default {
       commit
     }, payload) {
       this.dispatch('preloader/fetch', true);
-      const data = requestDataHandler('PUT', '/profile/password-change', payload);
+      const data = requestDataHandler('PUT', '/profile/password-change', payload.body);
 
       const response = await axios(data).catch(err => {
         this.dispatch('preloader/fetch', false);

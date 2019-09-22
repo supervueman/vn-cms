@@ -65,10 +65,18 @@ export default {
 
   async mounted() {
     await this.$store.dispatch("resource/findByPk", {
-      id: this.$route.params.id,
+      params: {
+        id: this.$route.params.id
+      },
       query: {
         filter: {
-          include: [{ model: "$layout" }, { model: "$additionalfield" }]
+          include: [
+            {
+              association: "layout",
+              include: ["fields"]
+            },
+            "additionalfields"
+          ]
         }
       }
     });
@@ -81,10 +89,18 @@ export default {
 
   async beforeRouteUpdate(to, from, next) {
     await this.$store.dispatch("resource/findByPk", {
-      id: to.params.id,
+      params: {
+        id: to.params.id
+      },
       query: {
         filter: {
-          include: [{ model: "$layout" }, { model: "$additionalfield" }]
+          include: [
+            {
+              association: "layout",
+              include: ["fields"]
+            },
+            "additionalfields"
+          ]
         }
       }
     });

@@ -6,11 +6,6 @@ import router from '@/routers';
 import resource from '@/models/resource';
 import layout from '@/models/layout';
 
-// Query
-import {
-  queryResources
-} from '@/query/resource';
-
 export default {
   namespaced: true,
   state: {
@@ -123,7 +118,7 @@ export default {
       commit
     }, payload) {
       this.dispatch('preloader/fetch', true);
-      const data = requestDataHandler('GET', `/resources/resource/${payload.id}`, undefined, payload.query);
+      const data = requestDataHandler('GET', `/resources/resource/${payload.params.id}`, undefined, payload.query);
 
       const response = await axios(data).catch(err => {
         this.dispatch('preloader/fetch', false);
@@ -137,29 +132,30 @@ export default {
       if (response !== undefined && response.status === 200) {
         commit('set', response.data);
         commit('setAdditionalFields', response.data.additionalfields);
+        commit('setLayout', response.data.layout);
+        commit('setFields', response.data.layout.fields);
+        commit('setSerializedFields');
 
         this.dispatch('preloader/fetch', false);
 
         const params = {
-          query: queryResources(0, 10, {
-            level: response.data.level + 1,
-            parentId: response.data.id
-          })
+          query: {
+            filter: {
+              offset: 0,
+              limit: 10,
+              order: [
+                ["createdAt", "DESC"]
+              ],
+              where: {
+                level: response.data.level + 1,
+                parentId: response.data.id
+              },
+            }
+          }
         };
 
         await this.dispatch("resource/findAll", params);
         await this.dispatch('resource/count', params);
-
-        await this.dispatch('resource/findLayout', {
-          id: response.data.layoutId,
-          query: {
-            filter: {
-              include: [{
-                model: '$field',
-              }]
-            }
-          }
-        })
       }
     },
 
@@ -173,13 +169,13 @@ export default {
       commit
     }, payload) {
       this.dispatch('preloader/fetch', true);
-      const data = requestDataHandler('POST', '/resources/create', payload);
+      const data = requestDataHandler('POST', '/resources/create', payload.body);
 
       const response = await axios(data).catch(err => {
         this.dispatch('preloader/fetch', false);
         this.dispatch("notification/fetch", {
           type: "error",
-          message: 'Ошибка при создании!',
+          message: `${err}`,
           isActive: true
         });
       });
@@ -204,7 +200,7 @@ export default {
       commit
     }, payload) {
       this.dispatch('preloader/fetch', true);
-      const data = requestDataHandler('PUT', '/resources/update', payload.data, payload.filter);
+      const data = requestDataHandler('PUT', '/resources/update', payload.body, payload.query);
 
       const response = await axios(data).catch(err => {
         this.dispatch('preloader/fetch', false);
@@ -230,9 +226,7 @@ export default {
       commit
     }, payload) {
       this.dispatch('preloader/fetch', true);
-      const data = requestDataHandler('DELETE', '/resources/remove', {
-        id: payload
-      });
+      const data = requestDataHandler('DELETE', '/resources/remove', payload.body);
 
       const response = await axios(data).catch(err => {
         this.dispatch('preloader/fetch', false);
@@ -252,29 +246,6 @@ export default {
           isActive: true
         });
         router.push('/resources');
-      }
-    },
-
-    async findLayout({
-      commit
-    }, payload) {
-      this.dispatch('preloader/fetch', true);
-      const data = requestDataHandler('GET', `/layouts/layout/${payload.id}`, undefined, payload.query);
-
-      const response = await axios(data).catch(err => {
-        this.dispatch('preloader/fetch', false);
-        this.dispatch('notification/fetch', {
-          type: 'error',
-          message: `${err}`,
-          isActive: true
-        });
-      });
-
-      if (response !== undefined && response.status === 200) {
-        this.dispatch('preloader/fetch', false);
-        commit('setLayout', response.data);
-        commit('setFields', response.data.fields);
-        commit('setSerializedFields');
       }
     },
 

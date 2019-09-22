@@ -1,6 +1,3 @@
-// Helpers
-const filterHandler = require('../handlers/filterHandler');
-
 // Models
 const Role = require('../models/role');
 
@@ -13,7 +10,7 @@ module.exports = {
       return;
     }
 
-    const filter = filterHandler(req.query.filter);
+    const filter = JSON.parse(req.query.filter || "{}");
 
     if (req.managerAccess) {
       if (!filter.where) {
@@ -48,7 +45,7 @@ module.exports = {
   },
 
   async findOne(req, res) {
-    const filter = filterHandler(req.query.filter);
+    const filter = JSON.parse(req.query.filter || "{}");
 
     const role = await Role.findOne(filter);
 
@@ -123,7 +120,7 @@ module.exports = {
       return;
     }
 
-    const filter = filterHandler(req.query.filter);
+    const filter = JSON.parse(req.query.filter || "{}");
 
     if (req.managerAccess) {
       if (!filter.where) {

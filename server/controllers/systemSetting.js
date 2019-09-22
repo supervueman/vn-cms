@@ -1,6 +1,3 @@
-// Helpers
-const filterHandler = require('../handlers/filterHandler');
-
 // Models
 const SystemSetting = require('../models/systemSetting');
 
@@ -13,7 +10,7 @@ module.exports = {
       return;
     }
 
-    const filter = filterHandler(req.query.filter);
+    const filter = JSON.parse(req.query.filter || "{}");
 
     const roles = await SystemSetting.findAll(filter);
 
@@ -52,7 +49,7 @@ module.exports = {
       return;
     }
 
-    const filter = filterHandler(req.query.filter);
+    const filter = JSON.parse(req.query.filter || "{}");
 
     const count = await SystemSetting.count(filter);
 

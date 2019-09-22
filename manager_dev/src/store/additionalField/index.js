@@ -262,7 +262,6 @@ export default {
       }
     },
 
-
     async remove({
       commit
     }, payload) {

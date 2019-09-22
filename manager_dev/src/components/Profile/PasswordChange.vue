@@ -132,9 +132,9 @@ export default {
       };
 
       if (this.userId === this.$store.getters["profile/get"].id) {
-        await this.$store.dispatch("profile/changePassword", data);
+        await this.$store.dispatch("profile/changePassword", { body: data });
       } else {
-        await this.$store.dispatch("user/changePassword", data);
+        await this.$store.dispatch("user/changePassword", { body: data });
       }
 
       this.clearPassword();

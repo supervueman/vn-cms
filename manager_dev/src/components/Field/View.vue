@@ -97,9 +97,6 @@ import { validationMixin } from "vuelidate";
 // Libs
 import { required, minLength, helpers } from "vuelidate/lib/validators";
 
-// Query
-import { queryLayouts } from "@/query/layout";
-
 const alpha = helpers.regex("alpha", /^[a-zA-Z0-9_-]*$/);
 
 export default {
@@ -172,20 +169,20 @@ export default {
   },
 
   async mounted() {
-    const data = {
-      query: queryLayouts(
-        this.$route.query.offset || 0,
-        this.$route.query.limit || this.limit
-      )
-    };
-    await this.$store.dispatch("layout/findAll", data);
+    await this.$store.dispatch("layout/findAll", {
+      query: {
+        filter: {
+          order: [["createdAt", "DESC"]]
+        }
+      }
+    });
   },
 
   methods: {
     async create() {
       this.$v.$touch();
       if (!this.$v.$error) {
-        await this.$store.dispatch("field/create", this.field);
+        await this.$store.dispatch("field/create", { body: this.field });
       }
     },
 
@@ -201,26 +198,32 @@ export default {
           i => that.field.layouts.indexOf(i) < 0
         );
 
-        await this.$store.dispatch("field/update", this.field);
+        await this.$store.dispatch("field/update", { body: this.field });
 
         if (addedLayouts.length > 0) {
           await this.$store.dispatch("field/addLayout", {
-            ...this.field,
-            layouts: addedLayouts
+            body: {
+              ...this.field,
+              layouts: addedLayouts
+            }
           });
         }
 
         if (removedLayouts.length > 0) {
           await this.$store.dispatch("field/removeLayout", {
-            ...this.field,
-            layouts: removedLayouts
+            body: {
+              ...this.field,
+              layouts: removedLayouts
+            }
           });
         }
       }
     },
 
     async remove() {
-      await this.$store.dispatch("field/remove", this.field.id);
+      await this.$store.dispatch("field/remove", {
+        body: { id: this.field.id }
+      });
       this.$router.push("/fields");
     }
   }

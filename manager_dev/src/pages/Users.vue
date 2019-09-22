@@ -69,9 +69,6 @@ import accessMixin from "@/mixins/accessMixin";
 // Config
 import { imgFolderBasePath } from "@/config";
 
-// Query
-import { queryUsers } from "@/query/user";
-
 export default {
   name: "Users",
 
@@ -107,10 +104,14 @@ export default {
 
   async mounted() {
     const data = {
-      query: queryUsers(
-        this.$route.query.offset || 0,
-        this.$route.query.limit || this.limit
-      )
+      query: {
+        filter: {
+          offset: this.$route.query.offset || 0,
+          limit: this.$route.query.limit || this.limit,
+          include: ["role"],
+          order: [["createdAt", "DESC"]]
+        }
+      }
     };
     await this.$store.dispatch("user/findAll", data);
     await this.$store.dispatch("user/count", data);
@@ -119,18 +120,29 @@ export default {
   methods: {
     async getPage({ offset, limit }) {
       const data = {
-        query: queryUsers(offset, limit)
+        query: {
+          filter: {
+            offset,
+            limit,
+            include: ["role"],
+            order: [["createdAt", "DESC"]]
+          }
+        }
       };
       await this.$store.dispatch("user/findAll", data);
     },
 
     async remove() {
       if (this.removeItem.id === this.$store.getters["profile/get"].id) {
-        await this.$store.dispatch("profile/remove", this.removeItem.id);
+        await this.$store.dispatch("profile/remove", {
+          body: { id: this.removeItem.id }
+        });
         await this.$store.dispatch("authenticate/logout");
         this.$router.push("/");
       } else {
-        await this.$store.dispatch("user/remove", this.removeItem.id);
+        await this.$store.dispatch("user/remove", {
+          body: { id: this.removeItem.id }
+        });
         const users = this.users.filter(el => {
           if (el.id !== this.removeItem.id) {
             return el;

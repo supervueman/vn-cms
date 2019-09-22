@@ -1,6 +1,3 @@
-// Helpers
-const filterHandler = require('../handlers/filterHandler');
-
 // Models
 const Field = require('../models/field');
 const Layout = require('../models/layout');
@@ -14,7 +11,7 @@ module.exports = {
       return;
     }
 
-    const filter = filterHandler(req.query.filter);
+    const filter = JSON.parse(req.query.filter || "{}");
 
     const fields = await Field.findAll(filter);
 
@@ -28,7 +25,7 @@ module.exports = {
       });
     }
 
-    const filter = filterHandler(req.query.filter);
+    const filter = JSON.parse(req.query.filter || "{}");
 
     const field = await Field.findByPk(req.params.id, filter);
 
@@ -49,7 +46,7 @@ module.exports = {
       });
     }
 
-    const filter = filterHandler(req.query.filter);
+    const filter = JSON.parse(req.query.filter || "{}");
 
     const field = await Field.findOne(filter);
 
@@ -91,7 +88,7 @@ module.exports = {
     const field = await Field.findByPk(req.body.id);
 
     if (!field) {
-      res.status(401).send({
+      res.status(404).send({
         message: 'Не найдено!'
       });
       return;
@@ -139,7 +136,7 @@ module.exports = {
       return;
     }
 
-    const filter = filterHandler(req.query.filter);
+    const filter = JSON.parse(req.query.filter || "{}");
 
     const count = await Field.count(filter);
 
@@ -170,9 +167,7 @@ module.exports = {
     }
 
     const updatedField = await Field.findByPk(req.body.id, {
-      include: [{
-        model: Layout
-      }]
+      include: ['layouts']
     });
 
     res.status(200).send(updatedField);
@@ -200,9 +195,7 @@ module.exports = {
     }
 
     const updatedField = await Field.findByPk(req.body.id, {
-      include: [{
-        model: Layout
-      }]
+      include: ['layouts']
     });
 
     res.status(200).send(updatedField);

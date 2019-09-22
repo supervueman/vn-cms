@@ -99,10 +99,14 @@ export default {
 
   async mounted() {
     const data = {
-      query: queryFields(
-        this.$route.query.offset || 0,
-        this.$route.query.limit || this.limit
-      )
+      query: {
+        filter: {
+          offset: this.$route.query.offset || 0,
+          limit: this.$route.query.limit || this.limit,
+          order: [["createdAt", "DESC"]],
+          include: ["layouts"]
+        }
+      }
     };
     await this.$store.dispatch("field/findAll", data);
     await this.$store.dispatch("field/count", data);
@@ -117,7 +121,9 @@ export default {
     },
 
     async remove() {
-      await this.$store.dispatch("field/remove", this.removeItem.id);
+      await this.$store.dispatch("field/remove", {
+        body: { id: this.removeItem.id }
+      });
       const fields = this.fields.filter(el => {
         if (el.id !== this.removeItem.id) {
           return el;
