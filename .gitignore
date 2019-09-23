@@ -6,9 +6,8 @@ node_modules
 /server/files
 /static
 /manager_dev/public/static/files
-/client/static/files
+/client
 /manager_dev/public/static
-/client/static
 
 # local env files
 .env
