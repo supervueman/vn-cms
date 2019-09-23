@@ -93,7 +93,7 @@ export default {
         password: this.password
       };
 
-      await this.$store.dispatch("authenticate/login", data);
+      await this.$store.dispatch("authenticate/loginByEmail", data);
 
       (this.email = ""), (this.password = "");
 

@@ -61,9 +61,6 @@
 // Mixins
 import accessMixin from "@/mixins/accessMixin";
 
-// Query
-import { queryFields } from "@/query/field";
-
 export default {
   name: "Fields",
   mixins: [accessMixin],

@@ -98,7 +98,6 @@ module.exports = {
 			});
 		}
 
-
 		const existUser = await User.findByPk(req.body.id);
 
 		if (!existUser) {

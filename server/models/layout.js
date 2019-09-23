@@ -1,8 +1,6 @@
 const Sequelize = require('sequelize');
 const sequelize = require('../util/database');
 
-// Models
-
 const Layout = sequelize.define('layout', {
   id: {
     type: Sequelize.INTEGER,

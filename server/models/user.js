@@ -2,10 +2,6 @@ const Sequelize = require('sequelize');
 const SequelizeTokenify = require('sequelize-tokenify');
 const sequelize = require('../util/database');
 
-// Models
-const Role = require('./role');
-const Resource = require('./resource');
-
 const User = sequelize.define('user', {
   id: {
     type: Sequelize.INTEGER,
@@ -21,11 +17,12 @@ const User = sequelize.define('user', {
   email: {
     type: Sequelize.STRING,
     unique: true,
-    isEmail: true,
-    notEmpty: true,
-    allowNull: false,
+    isEmail: true
   },
-  phone: Sequelize.STRING,
+  phone: {
+    type: Sequelize.STRING,
+    unique: true
+  },
   firstname: Sequelize.STRING,
   lastname: Sequelize.STRING,
   middlename: Sequelize.STRING,

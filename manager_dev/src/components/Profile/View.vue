@@ -45,7 +45,7 @@
 						v-flex.md6
 							v-text-field(
 								v-model="profile.phone"
-								v-mask="'7 (###) ###-##-##'"
+								v-mask="'+7 (###) ###-##-##'"
 								:value="profile.phone"
 								label="Телефон:"
 							)
@@ -162,6 +162,7 @@
 import accessMixin from "@/mixins/accessMixin";
 import { validationMixin } from "vuelidate";
 import panelMixin from "@/mixins/panelMixin";
+
 // Components
 import PasswordChange from "@/components/Profile/PasswordChange";
 import { mask } from "vue-the-mask";
@@ -176,9 +177,6 @@ import {
   email
 } from "vuelidate/lib/validators";
 const alpha = helpers.regex("alpha", /^[a-zA-Z0-9_-]*$/);
-
-// Config
-import { imgFolderBasePath } from "@/config";
 
 export default {
   name: "ProfileView",
@@ -223,7 +221,6 @@ export default {
 
   data() {
     return {
-      imgFolderBasePath,
       showPassword: false,
       showConfirmPassword: false,
       password: "",
@@ -282,7 +279,9 @@ export default {
       this.$v.$touch();
       if (!this.$v.$error) {
         this.profile.password = this.password;
-        await this.$store.dispatch("profile/create", { body: this.profile });
+        await this.$store.dispatch("profile/createByEmail", {
+          body: this.profile
+        });
       }
     },
 

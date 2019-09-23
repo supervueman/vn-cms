@@ -20,7 +20,7 @@ module.exports = {
     res.status(200).send(req.profile);
   },
 
-  async create(req, res) {
+  async createByEmail(req, res) {
     if (!(req.adminAccess || req.managerAccess)) {
       res.status(401).send({
         message: 'Access denied!'
@@ -42,6 +42,60 @@ module.exports = {
     if (!validator.isEmail(req.body.email)) {
       res.status(401).send({
         message: 'E-mail is invalid!'
+      });
+    }
+
+    if (validator.isEmpty(req.body.password) || !validator.isLength(req.body.password, {
+        min: 6
+      })) {
+      res.status(401).send({
+        message: 'Password is short!'
+      });
+    }
+
+    if (validator.isEmpty(req.body.slug) || !validator.isLength(req.body.slug, {
+        min: 3
+      })) {
+      res.status(401).send({
+        message: 'Slug is short!'
+      });
+    }
+
+    const hashedPw = await bcrypt.hash(req.body.password, 12);
+
+    const createdUser = await User.create({
+      ...req.body,
+      password: hashedPw,
+      userId: req.profile.id
+    });
+
+    await createDir(`../files/${createdUser.id}`);
+
+    res.status(200).send(createdUser);
+  },
+
+  async createByPhone(req, res) {
+    if (!(req.adminAccess || req.managerAccess)) {
+      res.status(401).send({
+        message: 'Access denied!'
+      });
+    }
+
+    const existUser = await User.findOne({
+      where: {
+        phone: req.body.phone
+      }
+    });
+
+    if (existUser) {
+      res.status(401).send({
+        message: 'User is exist!'
+      });
+    }
+
+    if (!validator.isMobilePhone(req.body.phone, ['ru-RU', 'us-US'])) {
+      res.status(401).send({
+        message: 'Phone is invalid!'
       });
     }
 

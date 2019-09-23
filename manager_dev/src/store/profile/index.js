@@ -69,11 +69,11 @@ export default {
       }
     },
 
-    async create({
+    async createByEmail({
       commit
     }, payload) {
       this.dispatch('preloader/fetch', true);
-      const data = requestDataHandler('POST', '/profile/create', payload.body);
+      const data = requestDataHandler('POST', '/profile/create-by-email', payload.body);
 
       const response = await axios(data).catch(err => {
         this.dispatch('preloader/fetch', false);

@@ -10,7 +10,7 @@ const profileByApiKey = require('../middleware/profileByApiKey');
 
 router.get('/', profileByAccessToken, controller.findByAccessToken);
 
-router.post('/create', profileByApiKey, controller.create);
+router.post('/create-by-email', profileByApiKey, controller.createByEmail);
 
 router.put('/update', profileByAccessToken, controller.update);
 

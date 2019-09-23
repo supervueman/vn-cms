@@ -11,9 +11,6 @@ import accessMixin from "@/mixins/accessMixin";
 // Components
 import ProfileView from "@/components/Profile/View";
 
-// Query
-import { queryRoles } from "@/query/role";
-
 export default {
   name: "UserPage",
 
@@ -38,10 +35,14 @@ export default {
         }
       }
     });
-    const data = {
-      query: queryRoles()
-    };
-    await this.$store.dispatch("role/findAll", data);
+
+    await this.$store.dispatch("role/findAll", {
+      query: {
+        filter: {
+          order: [["createdAt", "DESC"]]
+        }
+      }
+    });
   },
 
   beforeRouteLeave(to, from, next) {

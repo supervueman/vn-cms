@@ -4,6 +4,8 @@ const controller = require('../controllers/authenticate');
 
 const router = express.Router();
 
-router.post('/login', controller.login);
+router.post('/login-by-email', controller.loginByEmail);
+
+router.post('/login-by-phone', controller.loginByPhone);
 
 module.exports = router;
