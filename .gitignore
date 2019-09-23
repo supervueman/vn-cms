@@ -5,9 +5,9 @@ node_modules
 /files
 /server/files
 /static
-/manager_dev/public/static/files
 /client
 /manager_dev/public/static
+/ansible
 
 # local env files
 .env
