@@ -1,6 +1,5 @@
 // Models
 const Field = require('../models/field');
-const Layout = require('../models/layout');
 
 module.exports = {
   async findAll(req, res) {

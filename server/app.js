@@ -18,11 +18,13 @@ const additionalFieldRoutes = require('./routes/addittionalField');
 const filesystemRoutes = require('./routes/filesystem');
 const mailRoutes = require('./routes/mail');
 const systemSettingRoutes = require('./routes/systemSetting');
+const dictionaryRoutes = require('./routes/dictionary');
 
 // Components init
 const roleInit = require('./components/role');
 const userInit = require('./components/user');
 const systemSettingInit = require('./components/systemSetting');
+const dictionariesInit = require('./components/dictionary');
 
 // Association init
 const associationInit = require('./associations');
@@ -79,6 +81,7 @@ app.use('/additionalfields', additionalFieldRoutes);
 app.use('/filesystem', filesystemRoutes);
 app.use('/mail', mailRoutes);
 app.use('/system-settings', systemSettingRoutes);
+app.use('/dictionaries', dictionaryRoutes);
 app.use('/files', express.static('../files'));
 
 async function connect() {
@@ -96,6 +99,8 @@ async function connect() {
   await userInit();
 
   await systemSettingInit();
+
+  await dictionariesInit();
 
   app.listen(process.env.SERVER_PORT, () => {
     console.log(`Server listen on http://localhost:${process.env.SERVER_PORT}`);
