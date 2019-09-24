@@ -1,6 +1,6 @@
 <template lang="pug">
   v-flex(v-if="adminAccess || managerAccess")
-    .body-2.mb-12.mt-2 {{resources}}
+    .body-2.mb-12.mt-2 {{d.resources}}
     resources
 </template>
 

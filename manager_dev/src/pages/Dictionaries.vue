@@ -20,7 +20,7 @@
 			v-flex.px-2.dictionary--list-text
 				v-flex
 					v-text-field(
-						label="Псевдоним"
+						:label="d.slug"
 						v-model="createSlug"
 						append-icon="add"
 						@click:append="addItem"
@@ -31,7 +31,7 @@
 				)
 					v-text-field(
 						:value="key"
-						label="Псевдоним"
+						:label="d.slug"
 						append-icon="remove"
 						@click:append="isRemoveItem = true; removeItemSlug = key"
 					)
@@ -91,14 +91,14 @@
 				v-card-title.px-4 {{d.create_dictionary}}
 				v-card-text.px-4
 					v-text-field(
-						label="Псевдоним"
+						:label="d.slug"
 						v-model="createDictionary.lang"
 						:error-messages="langErrors"
 						@input="$v.createDictionary.lang.$touch()"
 						@blur="$v.createDictionary.lang.$touch()"
 					)
 					v-text-field(
-						label="Название"
+						:label="d.name"
 						v-model="createDictionary.title"
 						:error-messages="titleErrors"
 						@input="$v.createDictionary.title.$touch()"

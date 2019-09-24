@@ -14,12 +14,12 @@
             v-on="on"
             @click="$emit('triggerForUploadFile')"
           ) vertical_align_top
-        span {{d.download}}
+        span {{d.upload}}
       v-tooltip(top v-if="currentFileType")
         template(v-slot:activator="{ on }")
           a.file-download(:href="currentFilePath" download v-on="on")
             v-icon.storage-control vertical_align_bottom
-        span {{d.upload}}
+        span {{d.download}}
     div
       v-tooltip(top)
         template(v-slot:activator="{ on }")

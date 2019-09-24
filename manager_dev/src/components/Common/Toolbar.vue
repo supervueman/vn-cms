@@ -6,7 +6,7 @@
 			v-btn(text to="/users" v-if="adminAccess || managerAccess") {{d.users}}
 		v-spacer
 		v-toolbar-items.hidden-xs-and-down
-			v-btn(text v-if="!isAuth" @click="$emit('openLoginDialog')") {{d.users}}
+			v-btn(text v-if="!isAuth" @click="$emit('openLoginDialog')") {{d.login}}
 		v-toolbar-items.hidden-xs-and-down
 			v-menu(offset-y v-if="isAuth")
 				template(v-slot:activator="{ on }")

@@ -90,7 +90,7 @@ export default {
           text: "",
           sortable: false
         },
-        { text: this.d.firstname, sortable: true, value: "lastname" },
+        { text: this.d.name, sortable: true, value: "lastname" },
         { text: this.d.contacts, sortable: false },
         { text: this.d.role, sortable: true, value: "role.slug" },
         { text: "", sortable: false }

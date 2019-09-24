@@ -3,208 +3,244 @@
   "title": "Английский",
   "value": {
     "save": {
-      "text": "Сохранить"
+      "text": "Save"
     },
     "create": {
-      "text": "Создать"
+      "text": "Create"
     },
     "update": {
-      "text": "Обновить"
+      "text": "Update"
     },
     "remove": {
-      "text": "Удалить"
+      "text": "Remove"
     },
     "change": {
-      "text": "Изменить"
+      "text": "Change"
     },
     "cancel": {
-      "text": "Отмена"
+      "text": "Cancel"
     },
     "login": {
-      "text": "Войти"
+      "text": "Login"
     },
     "logout": {
-      "text": "Выйти"
+      "text": "Logout"
     },
     "password": {
-      "text": "Пароль"
+      "text": "Password"
     },
     "forgot_password": {
-      "text": "Забыли пароль?"
+      "text": "Forgot your password?"
     },
     "resources": {
-      "text": "Ресурсы"
+      "text": "Resources"
     },
     "resource": {
-      "text": "Ресурс"
+      "text": "Resource"
     },
     "elements": {
-      "text": "Элементы"
+      "text": "Elements"
     },
     "files": {
-      "text": "Файлы"
+      "text": "Files"
     },
     "all_resources": {
-      "text": "Все ресурсы"
+      "text": "All resources"
     },
     "users": {
-      "text": "Пользователи"
+      "text": "Users"
     },
     "layouts": {
-      "text": "Шаблоны"
+      "text": "Layouts"
     },
     "additional_fields": {
-      "text": "Дополнительные поля"
+      "text": "Additional fields"
     },
     "filesystem": {
-      "text": "Файловая система"
+      "text": "Filesystem"
     },
     "roles_politics": {
-      "text": "Политики доступа"
+      "text": "Roles"
+    },
+    "role_politic": {
+      "text": "Role"
     },
     "system_settings": {
-      "text": "Системные настройки"
+      "text": "System settings"
     },
     "common_data": {
-      "text": "Общие данные"
+      "text": "Common data"
     },
     "lastname": {
-      "text": "Фамилия"
+      "text": "Lastname"
     },
     "firstname": {
-      "text": "Имя"
+      "text": "Firstname"
     },
     "middlename": {
-      "text": "Отчество"
+      "text": "Middlename"
     },
     "slug": {
-      "text": "Псевдоним"
+      "text": "Slug"
     },
     "avatar": {
-      "text": "Аватар"
+      "text": "Avatar"
     },
     "contacts": {
-      "text": "Контакты"
+      "text": "Contacts"
     },
     "phone": {
-      "text": "Телефон"
+      "text": "Phone"
     },
     "keys": {
-      "text": "Ключи"
+      "text": "Keys"
     },
     "change_password": {
-      "text": "Изменить пароль"
+      "text": "Change password"
     },
     "enter_old_password": {
-      "text": "Введите старый пароль"
+      "text": "Enter old password"
     },
     "enter_new_password": {
-      "text": "Введите новый пароль"
+      "text": "Enter new password"
     },
     "confirm_password": {
-      "text": "Повторите пароль"
+      "text": "Confirm password"
     },
     "your_profile": {
-      "text": "Ваш профиль"
+      "text": "Your profile"
     },
     "role": {
-      "text": "Роль"
+      "text": "Role"
     },
     "create_user": {
-      "text": "Создать пользователя"
+      "text": "Create user"
     },
     "create_role": {
-      "text": "Создать политику"
+      "text": "Create role"
     },
     "create_layout": {
-      "text": "Создать шаблон"
+      "text": "Create layout"
     },
     "create_field": {
-      "text": "Создать поле"
+      "text": "Create field"
     },
     "type": {
-      "text": "Тип"
+      "text": "Type"
     },
     "layout": {
-      "text": "Шаблон"
+      "text": "Layout"
     },
     "name": {
-      "text": "Наименование"
+      "text": "Name"
     },
     "default_value": {
-      "text": "Значение по умолчанию"
+      "text": "Default value"
     },
     "field_type": {
-      "text": "Тип поля"
+      "text": "Field type"
     },
     "schema": {
-      "text": "Схема"
+      "text": "Schema"
     },
     "role_creation": {
-      "text": "Создание политики"
+      "text": "Role creation"
     },
     "profile_creation": {
-      "text": "Создание профиля"
+      "text": "Profile creation"
     },
     "profile": {
-      "text": "Профиль"
+      "text": "Profile"
     },
     "layout_creation": {
-      "text": "Создание шаблона"
+      "text": "Layout creation"
     },
     "additiopnal_fileds": {
-      "text": "Дополнительные поля"
+      "text": "Addtional fields"
     },
     "field_creation": {
-      "text": "Создание поля"
+      "text": "Field creation"
     },
     "fields": {
-      "text": "Поля"
+      "text": "Fields"
     },
     "filde": {
-      "text": "Поле"
+      "text": "Field"
     },
     "current_path": {
-      "text": "Текщий путь"
+      "text": "Current path"
     },
     "create_directory": {
-      "text": "Создать папку"
+      "text": "Create folder"
     },
     "download": {
-      "text": "Загрузить"
+      "text": "Download"
     },
     "reload": {
-      "text": "Обновить"
+      "text": "Reload"
     },
     "date_creation": {
-      "text": "Дата создания"
+      "text": "Date creation"
     },
     "create_resource": {
-      "text": "Создать ресурс"
+      "text": "Create resource"
     },
     "resource_creation": {
-      "text": "Создание ресурса"
+      "text": "Resource creation"
     },
     "published": {
-      "text": "Опубликовать"
+      "text": "Published"
     },
     "content": {
-      "text": "Контент"
+      "text": "Content"
     },
     "ru": {
-      "text": "Русский"
+      "text": "Russion"
     },
     "en": {
-      "text": "Английский"
+      "text": "English"
     },
     "dictionaries": {
-      "text": "Словари"
+      "text": "Dictionaries"
     },
     "dictionary": {
-      "text": "Словарь"
+      "text": "Dictionary"
     },
     "create_dictionary": {
-      "text": "Создать словарь"
+      "text": "Create dictionary"
+    },
+    "close": {
+      "text": "Close"
+    },
+    "remove_confirm": {
+      "text": "Are you sure you want to delete"
+    },
+    "add_element": {
+      "text": "Add element"
+    },
+    "cancel_confirm": {
+      "text": "Are you sure you want to discard the changes? Unsaved data will be lost."
+    },
+    "string_or_json": {
+      "text": "String or JSON"
+    },
+    "upload": {
+      "text": "Upload"
+    },
+    "directory": {
+      "text": "Directory"
+    },
+    "enter_dir_name": {
+      "text": "Enter directory name"
+    },
+    "enter_password": {
+      "text": "Enter password"
+    },
+    "description": {
+      "text": "Description"
+    },
+    "confirm_layout_change": {
+      "text": "Are you sure you want to change the template?"
     }
   }
 }
