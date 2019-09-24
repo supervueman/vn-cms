@@ -12,16 +12,19 @@
 				template(v-slot:activator="{ on }")
 					v-btn(
 						text
-						icon
 						v-on="on"
 					)
-						v-icon settings
+						v-img(
+							:src="`/images/flags/${dictionary.lang || 'ru'}.svg`"
+							width="30"
+						)
 				v-list
 					v-list-item(
 						v-for="dictionary in dictionaries"
 						:key="dictionary.lang"
 						@click="changeLang(dictionary.lang)"
 					)
+						v-img.mr-2(:src="`/images/flags/${dictionary.lang || 'ru'}.svg`", alt="alt" width="30")
 						v-list-item-title {{dictionary.lang}}
 			v-btn(text slot="activator" to="/profile" v-if="profileId !== '0'")
 				div.body-1.mr-3 {{ firstname }} {{lastname}}
@@ -82,6 +85,10 @@ export default {
   computed: {
     profile() {
       return this.$store.getters["profile/getProfile"];
+    },
+
+    dictionary() {
+      return this.$store.getters["dictionary/get"];
     },
 
     dictionaries() {

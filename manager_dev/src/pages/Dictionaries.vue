@@ -242,9 +242,13 @@ export default {
     },
 
     addItem() {
-      this.dictionary.value[this.createSlug] = "";
+      this.dictionary.value[this.createSlug] = {
+        text: ""
+      };
       this.dictionaries.forEach(el => {
-        el.value[this.createSlug] = "";
+        el.value[this.createSlug] = {
+          text: ""
+        };
       });
       this.$store.dispatch("dictionary/setAll", this.dictionaries);
       this.$store.dispatch("dictionary/set", this.dictionary);
