@@ -5,7 +5,7 @@ module.exports = {
   async findAll(req, res) {
     const filter = JSON.parse(req.query.filter || "{}");
 
-    const dictionaries = await Dictionaries.findAll(filter);
+    const dictionaries = await Dictionary.findAll(filter);
 
     res.status(200).send(dictionaries);
   },

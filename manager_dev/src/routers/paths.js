@@ -74,4 +74,8 @@ export default [{
   path: '/system-settings',
   name: 'system-settings',
   component: 'SystemSettings'
+}, {
+  path: '/dictionaries',
+  name: 'dictionaries',
+  component: 'Dictionaries'
 }]

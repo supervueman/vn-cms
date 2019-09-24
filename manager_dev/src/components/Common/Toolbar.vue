@@ -8,6 +8,21 @@
 		v-toolbar-items.hidden-xs-and-down
 			v-btn(text v-if="!isAuth" @click="$emit('openLoginDialog')") Войти
 		v-toolbar-items.hidden-xs-and-down
+			v-menu(offset-y v-if="isAuth")
+				template(v-slot:activator="{ on }")
+					v-btn(
+						text
+						icon
+						v-on="on"
+					)
+						v-icon settings
+				v-list
+					v-list-item(
+						v-for="dictionary in dictionaries"
+						:key="dictionary.lang"
+						@click="changeLang(dictionary.lang)"
+					)
+						v-list-item-title {{dictionary.lang}}
 			v-btn(text slot="activator" to="/profile" v-if="profileId !== '0'")
 				div.body-1.mr-3 {{ firstname }} {{lastname}}
 				v-avatar.mr-3(size="40" color="grey lighten-4")
@@ -25,6 +40,8 @@
 						v-list-item-title Политики доступа
 					v-list-item(to="/system-settings" v-if="adminAccess")
 						v-list-item-title Системные настройки
+					v-list-item(to="/dictionaries" v-if="adminAccess")
+						v-list-item-title Словари
 					v-list-item(@click="logout")
 						v-list-item-title Выход
 </template>
@@ -65,10 +82,26 @@ export default {
   computed: {
     profile() {
       return this.$store.getters["profile/getProfile"];
+    },
+
+    dictionaries() {
+      return this.$store.getters["dictionary/getAll"];
     }
   },
 
   methods: {
+    async changeLang(lang) {
+      localStorage.setItem("admin-panel-lang", lang);
+      await this.$store.dispatch("dictionary/findOne", {
+        query: {
+          filter: {
+            where: {
+              lang
+            }
+          }
+        }
+      });
+    },
     async logout() {
       await this.$store.dispatch("authenticate/logout");
       this.$store.dispatch("field/clear");

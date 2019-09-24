@@ -180,9 +180,11 @@ const alpha = helpers.regex("alpha", /^[a-zA-Z0-9_-]*$/);
 
 export default {
   name: "ProfileView",
+
   directives: {
     mask
   },
+
   components: {
     PasswordChange,
     Filesystem
