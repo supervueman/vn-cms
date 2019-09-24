@@ -57,14 +57,6 @@ export default {
 
   data() {
     return {
-      headers: [
-        {
-          text: "Наименование",
-          value: "title"
-        },
-        { text: "Шаблон", sortable: false },
-        { text: "Тип", value: "fieldType", sortable: true }
-      ],
       pagination: {
         page: this.$route.query.skip / this.$route.query.limit || 1
       },
@@ -73,6 +65,16 @@ export default {
   },
 
   computed: {
+    headers() {
+      return [
+        {
+          text: this.d.name,
+          value: "title"
+        },
+        { text: this.d.layout, sortable: false },
+        { text: this.d.type, value: "fieldType", sortable: true }
+      ];
+    },
     fields() {
       return this.$store.getters["field/getAll"];
     }

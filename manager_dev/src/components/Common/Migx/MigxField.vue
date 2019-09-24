@@ -5,7 +5,7 @@
       v-btn(
         color="primary"
         @click="openCreateDialog"
-      ) Добавить элемент
+      ) {{this.d.add_element}}
     v-data-table(
       :headers="headers"
       :items="field"

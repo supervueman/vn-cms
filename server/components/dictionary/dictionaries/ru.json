@@ -62,6 +62,9 @@
     "roles_politics": {
       "text": "Политики доступа"
     },
+    "role_politic": {
+      "text": "Политика доступа"
+    },
     "system_settings": {
       "text": "Системные настройки"
     },
@@ -205,6 +208,39 @@
     },
     "create_dictionary": {
       "text": "Создать словарь"
+    },
+    "close": {
+      "text": "Закрыть"
+    },
+    "remove_confirm": {
+      "text": "Вы уверены что хотите удалить"
+    },
+    "add_element": {
+      "text": "Добавить эелемент"
+    },
+    "cancel_confirm": {
+      "text": "Вы действительно хотите сбросить изменения? Несохраненные данные будут утеряны."
+    },
+    "string_or_json": {
+      "text": "Строка или JSON"
+    },
+    "upload": {
+      "text": "Скачать"
+    },
+    "directory": {
+      "text": "Директория"
+    },
+    "enter_dir_name": {
+      "text": "Введите название директории"
+    },
+    "enter_password": {
+      "text": "Введите пароль"
+    },
+    "description": {
+      "text": "Описание"
+    },
+    "confirm_layout_change": {
+      "text": "Вы уверены что хотите сменить шаблон?"
     }
   }
 }

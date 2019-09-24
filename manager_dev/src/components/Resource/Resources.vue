@@ -8,7 +8,7 @@
           :to="`/resource-create?level=${level}&parentId=${parentId}`"
           dark
           v-if="managerAccess"
-        ) Создать ресурс
+        ) {{d.create_resource}}
       v-data-table(
         :headers="headers"
         :items="resources"
@@ -72,12 +72,6 @@ export default {
 
   data() {
     return {
-      headers: [
-        { text: "Наименование", value: "title" },
-        { text: "Псевдоним", value: "slug" },
-        { text: "Дата создания", value: "createdAt" },
-        { text: "", sortable: false }
-      ],
       isRemoveDialog: false,
       removeItem: {},
       limit: 10
@@ -85,6 +79,14 @@ export default {
   },
 
   computed: {
+    headers() {
+      return [
+        { text: this.d.name, value: "title" },
+        { text: this.d.slug, value: "slug" },
+        { text: this.d.date_creation, value: "createdAt" },
+        { text: "", sortable: false }
+      ];
+    },
     resources() {
       return this.$store.getters["resource/getAll"];
     },

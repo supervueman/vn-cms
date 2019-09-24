@@ -3,7 +3,7 @@
     v-layout.wrap
       v-flex.xs12.md7.pr-2
         v-card.mb-3
-          v-card-text Общие данные
+          v-card-text {{d.common_data}}
           v-card-text
             v-layout.wrap
               v-flex.md12
@@ -11,7 +11,7 @@
                   template(v-slot:activator="{ on }")
                     v-text-field(
                       v-model="resource.title"
-                      label="Наименование:"
+                      :label="`${d.name}:`"
                       v-on="on"
                       required
                       @input="$v.resource.title.$touch()"
@@ -25,7 +25,7 @@
                   template(v-slot:activator="{ on }")
                     v-textarea(
                       v-model="resource.description"
-                      label="Описание:"
+                      :label="`${d.description}:`"
                       v-on="on"
                       no-resize
                     )
@@ -47,7 +47,7 @@
                   template(v-slot:activator="{ on }")
                     v-text-field(
                       v-model="resource.createdAt"
-                      label="Дата публикации:"
+                      :label="`${d.date_creation}:`"
                       prepend-icon="event"
                       readonly
                       v-on="on"
@@ -63,7 +63,7 @@
                   template(v-slot:activator="{ on }")
                     v-text-field(
                       v-model="resource.slug"
-                      label="Псевдоним:"
+                      :label="`${d.slug}:`"
                       v-on="on"
                       @input="$v.resource.slug.$touch()"
                       @blur="$v.resource.slug.$touch()"
@@ -81,7 +81,7 @@
                       :items="layouts"
                       item-text="title"
                       return-object
-                      label="Шаблон:"
+                      :label="`${d.layout}:`"
                       :value="resource.layout"
                       @change="changeLayoutConfirm($event)"
                       v-on="on"
@@ -93,13 +93,13 @@
                   template(v-slot:activator="{ on }")
                     v-checkbox(
                       v-model="resource.published"
-                      label="Опубликовать"
+                      :label="`${d.published}`"
                       color="primary"
                       v-on="on"
                     )
                   span published
     v-card
-      v-card-text Контент
+      v-card-text {{d.content}}
       v-card-text
         v-layout.wrap
           v-flex.md12
@@ -112,17 +112,17 @@
           color="primary"
           @click="create"
           v-if="operationType === 'create'"
-        ) Создать
+        ) {{d.create}}
         v-btn.ml-2(
           color="primary"
           @click="update"
           v-if="operationType === 'update'"
-        ) Сохранить
+        ) {{d.save}}
         v-btn.ml-2(
           color="error"
           @click="isRemoveDialog = true"
           v-if="operationType === 'update'"
-        ) Удалить
+        ) {{d.remove}}
     v-dialog(
         v-model="isRemoveDialog"
         max-width="500px"
@@ -138,10 +138,10 @@
       )
       v-flex
         v-card
-          v-card-title.title Вы уверены что хотите сменить шаблон?
+          v-card-title.title {{d.confirm_layout_change}}
           v-card-actions
-            v-btn.ml-2(color="primary" @click="changeLayout") Сменить
-            v-btn(color="primary" @click="cancelLayout") Отмена
+            v-btn.ml-2(color="primary" @click="changeLayout") {{d.change}}
+            v-btn(color="primary" @click="cancelLayout") {{d.cancel}}
 </template>
 
 <script>

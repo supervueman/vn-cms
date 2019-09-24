@@ -1,6 +1,6 @@
 <template lang="pug">
 	v-flex(v-if="adminAccess")
-		.body-2.mb-12.mt-2 Системные настройки
+		.body-2.mb-12.mt-2 {{d.system_settings}}
 		v-layout.wrap
 			v-flex
 				v-data-table(
@@ -38,22 +38,24 @@ export default {
 
   data() {
     return {
-      headers: [
-        {
-          text: "Наименование",
-          value: "title"
-        },
-        {
-          text: "Псевдоним",
-          value: "slug"
-        },
-        { text: "", value: "value", sortable: false }
-      ],
       limit: 10
     };
   },
 
   computed: {
+    headers() {
+      return [
+        {
+          text: this.d.name,
+          value: "title"
+        },
+        {
+          text: this.d.slug,
+          value: "slug"
+        },
+        { text: "", value: "value", sortable: false }
+      ];
+    },
     systemSettings() {
       return this.$store.getters["systemSetting/getAll"];
     },

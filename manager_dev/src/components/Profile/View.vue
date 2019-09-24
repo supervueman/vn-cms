@@ -3,35 +3,35 @@
 		v-flex.xs12.md7.pr-2
 			v-card.mb-3
 				//- Общие данные
-				v-card-text Общие данные
+				v-card-text {{d.common_data}}
 				v-card-text
 					v-layout.wrap
 						v-flex.md6.pr-3
 							v-text-field(
 								v-model="profile.lastname"
-								label="Фамилия:"
+								:label="`${d.lastname}:`"
 							)
 						v-flex.md6
 							v-text-field(
 								v-model="profile.firstname"
-								label="Имя:"
+								:label="`${d.firstname}:`"
 							)
 						v-flex.md6.pr-3
 							v-text-field(
 								v-model="profile.middlename"
-								label="Отчество:"
+								:label="`${d.middlename}:`"
 							)
 						v-flex.md6
 							v-text-field(
 								v-model="profile.slug"
-								label="Псевдоним:"
+								:label="`${d.slug}:`"
 								@input="$v.profile.slug.$touch()"
 								@blur="$v.profile.slug.$touch()"
 								:error-messages="slugErrors"
 							)
 			//- Контакты
 			v-card.mb-3
-				v-card-text Контакты
+				v-card-text {{d.contacts}}
 				v-card-text
 					v-layout.wrap
 						v-flex.md6.pr-3
@@ -47,7 +47,7 @@
 								v-model="profile.phone"
 								v-mask="'+7 (###) ###-##-##'"
 								:value="profile.phone"
-								label="Телефон:"
+								:label="`${d.phone}:`"
 							)
 						v-flex.md6.pr-3
 							v-text-field(
@@ -70,7 +70,7 @@
 			//- Ключи
 			v-expansion-panels(v-if="operationType === 'update'")
 				v-expansion-panel
-					v-expansion-panel-header Ключи
+					v-expansion-panel-header {{d.keys}}
 					v-expansion-panel-content
 						v-flex.md12
 							div Api key: {{profile.token}}
@@ -86,7 +86,7 @@
 						v-flex.md6.pr-3
 							v-text-field(
 								v-model="password"
-								label="Введите пароль:"
+								:label="`${d.enter_password}:`"
 								:type="showPassword ? 'text' : 'password'"
 								:append-icon="showPassword ? 'visibility' : 'visibility_off'"
 								@click:append="showPassword = !showPassword"
@@ -97,7 +97,7 @@
 						v-flex.md6.pr-3
 							v-text-field(
 								v-model="confirmPassword"
-								label="Повторите пароль:"
+								:label="`${d.confirm_password}:`"
 								:type="showConfirmPassword ? 'text' : 'password'"
 								:append-icon="showConfirmPassword ? 'visibility' : 'visibility_off'"
 								@click:append="showConfirmPassword = !showConfirmPassword"
@@ -111,17 +111,17 @@
 					color="primary"
 					@click="create"
 					v-if="operationType === 'create'"
-				) Создать
+				) {{d.create}}
 				v-btn.mr-2(
 					color="primary"
 					@click="update"
 					v-if="operationType === 'update'"
-				) Сохранить
+				) {{d.save}}
 				v-btn(
 					color="error"
 					@click="isRemoveDialog = true"
 					v-if="operationType === 'update'"
-				) Удалить
+				) {{d.remove}}
 		//- Аватар
 		v-flex.xs12.md5.pl-2
 			v-card.pt-3.mb-3(v-if="operationType === 'update'")
@@ -131,7 +131,7 @@
 							img(:src="`/static/${profile.image}`")
 							div.avatar-mask(@click="isActiveDialog = true")
 								v-icon(color="#fff") add_circle_outline
-				v-card-text.text-md-center.justify-center.mt-4.pb-0 Аватар
+				v-card-text.text-md-center.justify-center.mt-4.pb-0 {{d.avatar}}
 				v-card-title.title.font-weight-bold.text-md-center.justify-center {{profile.lastname}} {{profile.firstname}}
 			//- Роль и ранг
 			v-card(v-if="this.$route.name !== 'profile'")
@@ -139,7 +139,7 @@
 					v-select(
 						:items="roles"
 						item-text="title"
-						label="Роль:"
+						:label="`${d.role}:`"
 						return-object
 						@change="profile.roleId = $event.id"
 						:value="profileRole"

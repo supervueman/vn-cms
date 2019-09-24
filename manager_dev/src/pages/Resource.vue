@@ -1,15 +1,15 @@
 <template lang="pug">
   v-layout
     v-flex
-      .body-2.mb-12.mt-2 Ресурс: {{resource.title}}
+      .body-2.mb-12.mt-2 {{d.resource}}: {{resource.title}}
       v-tabs(
         v-model="tab"
         slider-color="primary"
         grow
       )
-        v-tab Общие данные
-        v-tab Дополнительные поля
-        v-tab Ресурсы
+        v-tab {{d.common_data}}
+        v-tab {{d.additional_fields}}
+        v-tab {{d.resources}}
         v-tab-item
           v-layout.pt-4
             resource-view(

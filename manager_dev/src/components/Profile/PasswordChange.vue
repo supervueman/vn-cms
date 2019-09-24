@@ -1,13 +1,13 @@
 <template lang="pug">
   v-expansion-panels
     v-expansion-panel
-      v-expansion-panel-header Изменить пароль
+      v-expansion-panel-header {{d.change_password}}
       v-expansion-panel-content
         v-layout.wrap
           v-flex.md6.pr-3
             v-text-field(
               v-model="oldPassword"
-              label="Введите старый пароль:"
+              :label="`${d.enter_old_password}:`"
               :type="showOldPassword ? 'text' : 'password'"
               :append-icon="showOldPassword ? 'visibility' : 'visibility_off'"
               @click:append="showOldPassword = !showOldPassword"
@@ -18,7 +18,7 @@
           v-flex.md6
             v-text-field(
               v-model="newPassword"
-              label="Введите новый пароль:"
+              :label="`${d.enter_new_password}:`"
               :type="showNewPassword ? 'text' : 'password'"
               :append-icon="showNewPassword ? 'visibility' : 'visibility_off'"
               @click:append="showNewPassword = !showNewPassword"
@@ -29,7 +29,7 @@
           v-flex.md6.pr-3
             v-text-field(
               v-model="confirmNewPassword"
-              label="Повторите пароль:"
+              :label="`${d.confirm_password}:`"
               :type="showConfirmNewPassword ? 'text' : 'password'"
               :append-icon="showConfirmNewPassword ? 'visibility' : 'visibility_off'"
               @click:append="showConfirmNewPassword = !showConfirmNewPassword"
@@ -38,8 +38,8 @@
               @blur="$v.confirmNewPassword.$touch()"
             )
         v-layout
-          v-btn.mr-2(color="primary" @click="changePassword") Изменить
-          v-btn(color="primary" @click="clearPassword") Сбросить
+          v-btn.mr-2(color="primary" @click="changePassword") {{d.change}}
+          v-btn(color="primary" @click="clearPassword") {{d.cancel}}
 </template>
 
 <script>

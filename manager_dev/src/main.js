@@ -9,8 +9,11 @@ import {
 } from './store';
 import axios from 'axios';
 import vuetify from './plugins/vuetify';
+import dictionaryMixin from './mixins/dictionaryMixin';
 
 commonComponentsRequire();
+
+Vue.mixin(dictionaryMixin);
 
 Vue.config.productionTip = false;
 

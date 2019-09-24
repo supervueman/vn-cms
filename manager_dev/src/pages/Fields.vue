@@ -1,6 +1,6 @@
 <template lang="pug">
   v-flex(v-if="adminAccess")
-    .body-2.mb-12.mt-2 Дополнительные поля
+    .body-2.mb-12.mt-2 {{d.additional_fields}}
     v-layout.wrap
       v-flex
         v-toolbar(flat color="white")
@@ -10,7 +10,7 @@
             to="/field-create"
             dark
             v-if="adminAccess"
-          ) Создать  поле
+          ) {{d.create_field}}
         v-data-table(
           :headers="headers"
           :items="fields"
@@ -67,15 +67,6 @@ export default {
 
   data() {
     return {
-      headers: [
-        {
-          text: "Наименование",
-          value: "title"
-        },
-        { text: "Шаблон", sortable: false },
-        { text: "Тип", value: "fieldType", sortable: true },
-        { text: "", sortable: false }
-      ],
       pagination: {
         page: this.$route.query.skip / this.$route.query.limit || 1
       },
@@ -86,6 +77,17 @@ export default {
   },
 
   computed: {
+    headers() {
+      return [
+        {
+          text: this.d.name,
+          value: "title"
+        },
+        { text: this.d.layout, sortable: false },
+        { text: this.d.type, value: "fieldType", sortable: true },
+        { text: "", sortable: false }
+      ];
+    },
     fields() {
       return this.$store.getters["field/getAll"];
     },

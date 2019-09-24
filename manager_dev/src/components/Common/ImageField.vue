@@ -14,7 +14,7 @@
       filesystem(@selectFile="selectFile")
       v-card
         v-card-actions
-          v-btn.ml-2(@click="isActiveDialog = false") Закрыть
+          v-btn.ml-2(@click="isActiveDialog = false") {{d.close}}
 </template>
 
 <script>

@@ -1,6 +1,6 @@
 <template lang="pug">
   v-flex(v-if="adminAccess")
-    .body-2.mb-12.mt-2 Политика доступа: {{role.title}}
+    .body-2.mb-12.mt-2 {{d.role_politic}}: {{role.title}}
     v-layout.wrap
       role-view(
         :role="role"

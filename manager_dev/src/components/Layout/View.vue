@@ -7,18 +7,18 @@
           slider-color="primary"
           v-model="tab"
         )
-          v-tab Общие данные
+          v-tab {{d.common_data}}
           //- v-tab Дополнительные поля
           v-tab-item
             v-flex.xs12.md12.pt-4
               v-card
-                v-card-text Общие данные
+                v-card-text {{d.common_data}}
                 v-card-text
                   v-layout.wrap
                     v-flex.md12
                       v-text-field(
                         v-model="layout.slug"
-                        label="Псевдоним:"
+                        :label="`${d.slug}:`"
                         required
                         @input="$v.layout.slug.$touch()"
                         @blur="$v.layout.slug.$touch()"
@@ -26,7 +26,7 @@
                       )
                       v-text-field(
                         v-model="layout.title"
-                        label="Наименование:"
+                        :label="`${d.name}:`"
                         required
                         @input="$v.layout.title.$touch()"
                         @blur="$v.layout.title.$touch()"
@@ -42,17 +42,17 @@
           color="primary"
           @click="create"
           v-if="operationType === 'create'"
-        ) Создать
+        ) {{d.create}}
         v-btn.ml-2(
           color="primary"
           @click="update"
           v-if="operationType === 'update'"
-        ) Сохранить
+        ) {{d.save}}
         v-btn.ml-2(
           color="error"
           @click="isRemoveDialog = true"
           v-if="operationType === 'update'"
-        ) Удалить
+        ) {{d.remove}}
     v-dialog(
       v-model="isRemoveDialog"
       max-width="500px"

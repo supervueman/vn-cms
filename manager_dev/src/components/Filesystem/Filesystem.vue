@@ -4,7 +4,7 @@
       v-card.xl12.lg12.md12
         v-card-text.pb-0
           v-layout.column
-            div.mb-2 Текущий путь: {{currentFullPath}}
+            div.mb-2 {{d.current_path}}: {{currentFullPath}}
         v-card-text
           v-layout.filesystem--window
             v-flex.xl3.lg3.md3

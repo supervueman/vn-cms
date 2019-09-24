@@ -6,9 +6,9 @@
           v-expansion-panel(v-model="panel" expand)
             v-expansion-panel-content
               template.px-2(v-slot:header)
-                div Общие данные
+                div {{d.common_data}}
               v-card.mb-3
-                v-card-title Общие данные
+                v-card-title {{d.common_data}}
                 v-card-text
                   v-layout.wrap
                     v-flex.md12
@@ -16,7 +16,7 @@
                         template(v-slot:activator="{ on }")
                           v-text-field(
                             v-model="resource.title"
-                            label="Наименование:"
+                            :label="`${d.name}:`"
                             v-on="on"
                             required
                             @input="$v.resource.title.$touch()"
@@ -30,7 +30,7 @@
                         template(v-slot:activator="{ on }")
                           v-textarea(
                             v-model="resource.description"
-                            label="Описание:"
+                            :label="`${d.description}:`"
                             v-on="on"
                             no-resize
                           )
@@ -56,7 +56,7 @@
                     template(v-slot:activator="{ on }")
                       v-text-field(
                         v-model="resource.createdAt"
-                        label="Дата публикации:"
+                        :label="`${d.date_creation}:`"
                         prepend-icon="event"
                         readonly
                         v-on="on"
@@ -72,7 +72,7 @@
                     template(v-slot:activator="{ on }")
                       v-text-field(
                         v-model="resource.slug"
-                        label="Псевдоним:"
+                        :label="`${d.slug}:`"
                         v-on="on"
                         @input="$v.resource.slug.$touch()"
                         @blur="$v.resource.slug.$touch()"
@@ -90,7 +90,7 @@
                         :items="[{id: '1' ,slug: 'base', title: 'Базовый шаблон'}, {id: '2', slug: 'custom', title: 'Кастомный шаблон'}]"
                         item-text="title"
                         return-object
-                        label="Шаблон:"
+                        :label="`${d.layout}:`"
                         v-model="resource.layout"
                         v-on="on"
                         required
@@ -101,7 +101,7 @@
                     template(v-slot:activator="{ on }")
                       v-checkbox(
                         v-model="resource.published"
-                        label="Опубликовать"
+                        :label="d.published"
                         color="primary"
                         v-on="on"
                       )
@@ -109,7 +109,7 @@
       v-expansion-panel(v-model="panelDescription" expand)
         v-expansion-panel-content
           template.px-2(v-slot:header)
-            div Контент
+            div {{d.content}}
           v-card.mb-3
             v-card-text
               v-layout.wrap
@@ -125,11 +125,11 @@
             color="primary"
             v-if="managerAccess"
             @click="create"
-          ) Создать
+          ) {{d.create}}
           v-btn.ml-2(
             @click="$emit('close')"
             v-if="resource.parentId !== '' && resource.parentId !== undefined"
-          ) Отмена
+          ) {{d.cancel}}
 </template>
 
 <script>

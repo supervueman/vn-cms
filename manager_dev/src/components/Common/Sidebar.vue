@@ -15,7 +15,7 @@
 			slider-color="primary"
 			grow
 		)
-			v-tab Ресурсы
+			v-tab {{d.resources}}
 			v-tab-item
 				v-app-bar(flat height="50")
 					v-tooltip(top v-if="managerAccess")
@@ -29,7 +29,7 @@
 								v-on="on"
 							)
 								v-icon add_circle_outline
-						span Создать ресурс
+						span {{d.create_resource}}
 
 				v-expansion-panels(
 					v-if="managerAccess"
@@ -61,30 +61,30 @@
 									v-list-item-action
 										v-icon(color="primary") folder
 									v-list-item-content
-										v-list-item-title Все ресурсы
+										v-list-item-title {{d.all_resources}}
 
-			v-tab(v-if="adminAccess") Элементы
+			v-tab(v-if="adminAccess") {{d.elements}}
 			v-tab-item(v-if="adminAccess")
 				v-list
 					v-list-item(to="/layouts")
 						v-list-item-action
 							v-icon(color="primary") layers
 						v-list-item-content
-							v-list-item-title Шаблоны
+							v-list-item-title {{d.layouts}}
 					v-list-item(to="/fields")
 						v-list-item-action
 							v-icon(color="primary") playlist_add
 						v-list-item-content
-							v-list-item-title Дополнительные поля
+							v-list-item-title {{d.additional_fields}}
 
-			v-tab Файлы
+			v-tab {{d.files}}
 			v-tab-item
 				v-list
 					v-list-item(to="/filesystem")
 						v-list-item-action
 							v-icon(color="primary") folder
 						v-list-item-content
-							v-list-item-title Файловая система
+							v-list-item-title {{d.filesystem}}
 </template>
 
 <script>

@@ -1,7 +1,7 @@
 <template lang="pug">
   v-layout(v-if="adminAccess || managerAccess")
     v-flex
-      .body-2.mt-2 Пользователи
+      .body-2.mt-2 {{d.users}}
         v-layout.wrap.pt-12
           v-flex
             v-toolbar(flat color="white")
@@ -11,7 +11,7 @@
                 dark
                 v-if="adminAccess || managerAccess"
                 to="/profile-create"
-              ) Создать пользователя
+              ) {{d.create_user}}
             v-data-table(
               :headers="headers"
               :items="users"
@@ -76,16 +76,6 @@ export default {
 
   data() {
     return {
-      headers: [
-        {
-          text: "",
-          sortable: false
-        },
-        { text: "Имя", sortable: true, value: "lastname" },
-        { text: "Контакты", sortable: false },
-        { text: "Роль", sortable: true, value: "role.slug" },
-        { text: "", sortable: false }
-      ],
       isRemoveDialog: false,
       removeItem: {},
       imgFolderBasePath,
@@ -94,6 +84,18 @@ export default {
   },
 
   computed: {
+    headers() {
+      return [
+        {
+          text: "",
+          sortable: false
+        },
+        { text: this.d.firstname, sortable: true, value: "lastname" },
+        { text: this.d.contacts, sortable: false },
+        { text: this.d.role, sortable: true, value: "role.slug" },
+        { text: "", sortable: false }
+      ];
+    },
     users() {
       return this.$store.getters["user/getAll"];
     },

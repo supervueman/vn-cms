@@ -3,20 +3,20 @@
     v-layout.wrap
       v-flex.xs12.md12
         v-card
-          v-card-title Общие данные
+          v-card-title {{d.common_data}}
           v-card-text
             v-layout.wrap
               v-flex.md12
                 v-text-field(
                   v-model="role.slug"
-                  label="Псевдоним:"
+                  :label="`${d.slug}:`"
                   @input="$v.role.slug.$touch()"
                   @blur="$v.role.slug.$touch()"
                   :error-messages="slugErrors"
                 )
                 v-text-field(
                   v-model="role.title"
-                  label="Наименование:"
+                  :label="`${d.name}:`"
                   @input="$v.role.title.$touch()"
                   @blur="$v.role.title.$touch()"
                   :error-messages="titleErrors"
@@ -28,17 +28,17 @@
           color="primary"
           @click="create"
           v-if="operationType === 'create'"
-        ) Создать
+        ) {{d.create}}
         v-btn.ml-2(
           color="primary"
           @click="update"
           v-if="operationType === 'update'"
-        ) Сохранить
+        ) {{d.save}}
         v-btn.ml-2(
           color="error"
           @click="isRemoveDialog = true"
           v-if="operationType === 'update'"
-        ) Удалить
+        ) {{d.remove}}
 
     v-dialog(
       v-model="isRemoveDialog"

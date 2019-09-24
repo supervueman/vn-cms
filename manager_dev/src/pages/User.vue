@@ -1,6 +1,6 @@
 <template lang="pug">
 	v-flex(v-if="adminAccess || managerAccess")
-		.body-2.mb-12.mt-2 Профиль: {{user.slug}}
+		.body-2.mb-12.mt-2 {{d.profile}}: {{user.slug}}
 		profile-view(:profile="user" operationType="update")
 </template>
 

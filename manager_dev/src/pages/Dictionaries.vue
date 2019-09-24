@@ -1,6 +1,6 @@
 <template lang="pug">
 	v-flex(v-if="adminAccess")
-		.body-2.mb-12.mt-2 Словари
+		.body-2.mb-12.mt-2 {{d.dictionaries}}
 		v-layout.wrap
 			v-flex
 				v-toolbar(flat color="white")
@@ -10,12 +10,12 @@
 						dark
 						v-if="dictionaries.length > 0"
 						@click="update"
-					) Сохранить
+					) {{d.save}}
 					v-btn(
 						color="primary"
 						dark
 						@click="isDictionaryCreate = true"
-					) Создать словарь
+					) {{d.create_dictionary}}
 		v-layout.dictionary
 			v-flex.px-2.dictionary--list-text
 				v-flex
@@ -70,7 +70,7 @@
 			remove-confirm(
 				@remove="remove"
 				:isActive.sync="isRemoveDictionary"
-				:name="`${removeDictionary.title} словарь`"
+				:name="`${removeDictionary.title} ${d.dictionary}`"
 			)
 		
 		v-dialog(
@@ -88,7 +88,7 @@
 			max-width="500px"
 		)
 			v-card
-				v-card-title.px-4 Создать словарь
+				v-card-title.px-4 {{d.create_dictionary}}
 				v-card-text.px-4
 					v-text-field(
 						label="Псевдоним"
@@ -108,11 +108,11 @@
 					v-btn.ml-2(
 						color="primary"
 						@click="create"
-					) Создать
+					) {{d.create}}
 					v-btn(
 						color="error"
 						@click="isDictionaryCreate = false"
-					) Отмена
+					) {{d.cancel}}
 </template>
 
 <script>
@@ -160,9 +160,6 @@ export default {
   computed: {
     dictionaries() {
       return this.$store.getters["dictionary/getAll"];
-    },
-    dictionary() {
-      return this.$store.getters["dictionary/get"];
     },
 
     langErrors() {

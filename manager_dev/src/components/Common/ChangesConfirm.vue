@@ -1,10 +1,10 @@
 <template lang="pug">
   v-flex
     v-card
-      v-card-title.title Вы действительно хотите сбросить изменения? Несохраненные данные будут утеряны.
+      v-card-title.title {{d.cancel_confirm}}
       v-card-actions
-        v-btn.ml-2(color="primary" @click="$emit('cancel')") Сбросить
-        v-btn(color="primary" @click="$emit('close')") Отмена
+        v-btn.ml-2(color="primary" @click="$emit('cancel')") {{d.cancel}}
+        v-btn(color="primary" @click="$emit('close')") {{d.close}}
 </template>
 
 <script>

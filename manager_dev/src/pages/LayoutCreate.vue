@@ -1,6 +1,6 @@
 <template lang="pug">
   v-flex(v-if="adminAccess")
-    .body-2.mb-12.mt-2 Создание шаблона
+    .body-2.mb-12.mt-2 {{d.layout_creation}}
     v-layout.wrap
       layout-view(
         :layout="layout"

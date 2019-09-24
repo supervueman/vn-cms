@@ -4,7 +4,7 @@
     tag="form"
   )
     v-card-title
-      h1(class="title") Войти
+      h1(class="title") {{d.login}}
     v-card-text
       v-text-field(
         v-model="email"
@@ -24,12 +24,12 @@
         @blur="$v.password.$touch()"
       )
     v-card-actions
-      router-link(to="/reset-password" class="ml-2") Забыли пароль?
+      router-link(to="/reset-password" class="ml-2") {{d.forgot_password}}
       v-btn(
         @click="submit"
         color="primary"
         class="ml-auto mr-2 mb-2"
-      ) Войти
+      ) {{d.login}}
 </template>
 
 <script>

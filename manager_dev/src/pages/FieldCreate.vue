@@ -1,6 +1,6 @@
 <template lang="pug">
   v-flex(v-if="adminAccess")
-    .body-2.mb-12.mt-2 Создание поля
+    .body-2.mb-12.mt-2 {{d.field_creation}}
     field-view(
       :field="field"
       operationType="create"

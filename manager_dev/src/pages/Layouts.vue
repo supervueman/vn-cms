@@ -1,6 +1,6 @@
 <template lang="pug">
   v-flex(v-if="adminAccess")
-    .body-2.mb-12.mt-2 Шаблоны
+    .body-2.mb-12.mt-2 {{d.layouts}}
     v-layout.wrap
       v-flex
         v-toolbar(flat color="white")
@@ -10,7 +10,7 @@
             to="/layout-create"
             dark
             v-if="adminAccess"
-          ) Создать шаблон
+          ) {{d.create_layout}}
         v-data-table(
           :headers="headers"
           :items="layouts"
@@ -59,13 +59,6 @@ export default {
 
   data() {
     return {
-      headers: [
-        {
-          text: "Наименование",
-          value: "title"
-        },
-        { text: "", sortable: false }
-      ],
       isRemoveDialog: false,
       removeItem: {},
       limit: 10
@@ -73,6 +66,15 @@ export default {
   },
 
   computed: {
+    headers() {
+      return [
+        {
+          text: this.d.name,
+          value: "title"
+        },
+        { text: "", sortable: false }
+      ];
+    },
     layouts() {
       return this.$store.getters["layout/getAll"];
     },

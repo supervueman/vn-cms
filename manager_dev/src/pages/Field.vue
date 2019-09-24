@@ -1,6 +1,6 @@
 <template lang="pug">
   v-flex(v-if="adminAccess")
-    .body-2.mb-12.mt-2 Дополнительное поле: {{field.title}}
+    .body-2.mb-12.mt-2 {{d.additional_field}}: {{field.title}}
     field-view(
       :field="field"
       operationType="update"

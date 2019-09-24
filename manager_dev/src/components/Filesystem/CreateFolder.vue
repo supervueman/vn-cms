@@ -1,17 +1,17 @@
 <template lang="pug">
   v-card
-    v-card-title Директория: {{folderName}}
+    v-card-title {{d.directory}}: {{folderName}}
     v-card-text
       v-text-field(
         v-model="folderName"
-        label="Введите название директории"
+        :label="d.enter_dir_name"
         :error-messages="folderNameErrors"
         @input="$v.folderName.$touch()"
         @blur="$v.folderName.$touch()"
       )
     v-card-actions
-      v-btn.ml-2(@click="createFolder" color="primary") Создать
-      v-btn(@click="cancel") Отмена
+      v-btn.ml-2(@click="createFolder" color="primary") {{d.create}}
+      v-btn(@click="cancel") {{d.cancel}}
 </template>
 
 <script>

@@ -3,13 +3,13 @@
     v-layout.wrap
       v-flex.xs12.md7.pr-2
         v-card
-          v-card-text Общие данные
+          v-card-text {{d.common_data}}
           v-card-text
             v-layout.wrap
               v-flex.md12
                 v-text-field(
                   v-model="field.title"
-                  label="Наименование:"
+                  :label="`${d.name}:`"
                   required
                   @input="$v.field.title.$touch()"
                   @blur="$v.field.title.$touch()"
@@ -17,16 +17,16 @@
                 )
                 v-textarea(
                   v-model="field.defaultValue"
-                  label="Значение по умолчанию:"
-                  placeholder="Строка или JSON"
+                  :label="`${d.default_value}:`"
+                  :placeholder="d.string_or_json"
                   no-resize
                   required
                 )
                 v-textarea(
                   v-if="field.fieldType === 'migx'"
                   v-model="field.schema"
-                  label="Схема:"
-                  placeholder="Строка или JSON"
+                  :label="`${d.schema}:`"
+                  :placeholder="d.string_or_json"
                   no-resize
                   required
                 )
@@ -37,24 +37,24 @@
               color="primary"
               @click="create"
               v-if="operationType === 'create'"
-            ) Создать
+            ) {{d.create}}
             v-btn.ml-2(
               color="primary"
               @click="update"
               v-if="operationType === 'update'"
-            ) Сохранить
+            ) {{d.save}}
             v-btn.ml-2(
               color="error"
               @click="isRemoveDialog = true"
               v-if="operationType === 'update'"
-            ) Удалить
+            ) {{d.remove}}
 
       v-flex.xs12.md5.pl-2
         v-card
           v-card-text
             v-text-field(
               v-model="field.slug"
-              label="Псевдоним:"
+              :label="`${d.slug}:`"
               required
               @input="$v.field.slug.$touch()"
               @blur="$v.field.slug.$touch()"
@@ -64,7 +64,7 @@
               :items="layouts"
               item-text="title"
               item-value="id"
-              label="Шаблон:"
+              :label="`${d.layout}:`"
               v-model="field.layouts"
               :error-messages="layoutErrors"
               @blur="$v.field.layouts.$touch()"
@@ -73,7 +73,7 @@
             )
             v-select(
               :items="types"
-              label="Тип поля:"
+              :label="`${d.field_type}:`"
               v-model="field.fieldType"
               required
             )

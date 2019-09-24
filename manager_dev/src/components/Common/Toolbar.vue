@@ -3,10 +3,10 @@
 		v-toolbar-title
 			//- img(:src="`${imgFolderBasePath}/logo.svg`" class="toolbar-logo")
 		v-toolbar-items.hidden-xs-and-down
-			v-btn(text to="/users" v-if="adminAccess || managerAccess") Пользователи
+			v-btn(text to="/users" v-if="adminAccess || managerAccess") {{d.users}}
 		v-spacer
 		v-toolbar-items.hidden-xs-and-down
-			v-btn(text v-if="!isAuth" @click="$emit('openLoginDialog')") Войти
+			v-btn(text v-if="!isAuth" @click="$emit('openLoginDialog')") {{d.users}}
 		v-toolbar-items.hidden-xs-and-down
 			v-menu(offset-y v-if="isAuth")
 				template(v-slot:activator="{ on }")
@@ -40,13 +40,13 @@
 						v-icon settings
 				v-list
 					v-list-item(to="/roles" v-if="adminAccess")
-						v-list-item-title Политики доступа
+						v-list-item-title {{d.roles_politics}}
 					v-list-item(to="/system-settings" v-if="adminAccess")
-						v-list-item-title Системные настройки
+						v-list-item-title {{d.system_settings}}
 					v-list-item(to="/dictionaries" v-if="adminAccess")
-						v-list-item-title Словари
+						v-list-item-title {{d.dictionaries}}
 					v-list-item(@click="logout")
-						v-list-item-title Выход
+						v-list-item-title {{d.logout}}
 </template>
 
 <script>

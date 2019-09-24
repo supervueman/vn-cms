@@ -1,6 +1,6 @@
 <template lang="pug">
   v-flex(v-if="adminAccess || managerAccess")
-    .body-2.mb-12.mt-2 Создание профиля
+    .body-2.mb-12.mt-2 {{d.profile_creation}}
     profile-view(:profile="profile" operationType="create")
 </template>
 

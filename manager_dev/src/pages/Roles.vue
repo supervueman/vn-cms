@@ -1,6 +1,6 @@
 <template lang="pug">
   v-flex(v-if="adminAccess")
-    .body-2.mb-12.mt-2 Политики доступа
+    .body-2.mb-12.mt-2 {{d.roles_politics}}
     v-layout.wrap
       v-flex
         v-toolbar(flat color="white")
@@ -10,7 +10,7 @@
             to="/role-create"
             dark
             v-if="adminAccess"
-          ) Создать политику
+          ) {{d.create_role}}
         v-data-table(
           :headers="headers"
           :items="roles"
@@ -54,17 +54,6 @@ export default {
 
   data() {
     return {
-      headers: [
-        {
-          text: "Наименование",
-          value: "title"
-        },
-        {
-          text: "Псевдоним",
-          value: "slug"
-        },
-        { text: "", sortable: false }
-      ],
       isRemoveDialog: false,
       removeItem: {},
       limit: 10
@@ -72,6 +61,19 @@ export default {
   },
 
   computed: {
+    headers() {
+      return [
+        {
+          text: this.d.name,
+          value: "title"
+        },
+        {
+          text: this.d.slug,
+          value: "slug"
+        },
+        { text: "", sortable: false }
+      ];
+    },
     roles() {
       return this.$store.getters["role/getAll"];
     }
