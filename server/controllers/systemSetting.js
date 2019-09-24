@@ -3,8 +3,8 @@ const SystemSetting = require('../models/systemSetting');
 
 module.exports = {
   async findAll(req, res) {
-    if (!req.adminAccess) {
-      res.status(401).send({
+    if (!(req.adminAccess || req.managerAccess)) {
+      res.status(403).send({
         message: 'Нет доступа!'
       });
       return;
@@ -12,14 +12,34 @@ module.exports = {
 
     const filter = JSON.parse(req.query.filter || "{}");
 
-    const roles = await SystemSetting.findAll(filter);
+    const systemSettings = await SystemSetting.findAll(filter);
 
-    res.status(200).send(roles);
+    res.status(200).send(systemSettings);
+  },
+
+  async findOne(req, res) {
+    if (!(req.adminAccess || req.managerAccess)) {
+      res.status(403).send({
+        message: 'Нет доступа!'
+      });
+    }
+
+    const filter = JSON.parse(req.query.filter || "{}");
+
+    const systemSetting = await SystemSetting.findOne(filter);
+
+    if (!systemSetting) {
+      res.status(404).send({
+        message: 'Не найдено!'
+      });
+    }
+
+    res.status(200).send(systemSetting);
   },
 
   async update(req, res) {
     if (!req.adminAccess) {
-      res.status(401).send({
+      res.status(403).send({
         message: 'Нет доступа!'
       });
       return;
@@ -28,7 +48,7 @@ module.exports = {
     const systemSetting = await SystemSetting.findByPk(req.body.id);
 
     if (!systemSetting) {
-      res.status(401).send({
+      res.status(404).send({
         message: 'Не найдено!'
       });
       return;
@@ -43,7 +63,7 @@ module.exports = {
 
   async count(req, res) {
     if (!req.adminAccess) {
-      res.status(401).send({
+      res.status(403).send({
         message: 'Нет доступа!'
       });
       return;

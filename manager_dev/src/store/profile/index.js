@@ -42,16 +42,15 @@ export default {
         this.dispatch('preloader/fetch', false);
         localStorage.setItem('x-api-key', response.data.token);
 
-        const dataResources = requestDataHandler('GET', '/resources', undefined, {
+        const dataSystemSetting = requestDataHandler('GET', '/system-settings/find-one', 'systemSetting/findAll', {
           filter: {
             where: {
-              level: 1,
-              userId: response.data.id
+              slug: 'main_lang'
             }
           }
         });
 
-        const responseResources = await axios(dataResources).catch(err => {
+        const responseSystemSetting = await axios(dataSystemSetting).catch(err => {
           this.dispatch('preloader/fetch', true);
           this.dispatch("notification/fetch", {
             type: "error",
@@ -60,12 +59,49 @@ export default {
           });
         });
 
-        commit('set', response.data);
+        if (responseSystemSetting !== undefined && responseSystemSetting.status === 200) {
+          this.dispatch('base/setMainLang', responseSystemSetting.data.value);
+          if (!localStorage.getItem('admin-panel-lang')) {
+            localStorage.setItem('admin-panel-lang', responseSystemSetting.data.value);
+          }
 
-        if (responseResources !== undefined && responseResources.status === 200) {
-          this.dispatch('preloader/fetch', false);
-          commit('setResources', responseResources.data);
+          await this.dispatch("dictionary/findOne", {
+            query: {
+              filter: {
+                where: {
+                  lang: localStorage.getItem("admin-panel-lang") || responseSystemSetting.data.value
+                }
+              }
+            }
+          });
+
+          const dataResources = requestDataHandler('GET', '/resources', undefined, {
+            filter: {
+              where: {
+                level: 1,
+                userId: response.data.id,
+                lang: responseSystemSetting.data.value
+              }
+            }
+          });
+
+          const responseResources = await axios(dataResources).catch(err => {
+            this.dispatch('preloader/fetch', true);
+            this.dispatch("notification/fetch", {
+              type: "error",
+              message: `${err}`,
+              isActive: true
+            });
+          });
+
+          commit('set', response.data);
+
+          if (responseResources !== undefined && responseResources.status === 200) {
+            this.dispatch('preloader/fetch', false);
+            commit('setResources', responseResources.data);
+          }
         }
+
       }
     },
 

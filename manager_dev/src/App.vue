@@ -61,22 +61,7 @@ export default {
   },
   async beforeCreate() {
     await this.$store.dispatch("profile/findByAccessToken");
-    await this.$store.dispatch("dictionary/findAll", {
-      query: {
-        filter: {
-          order: [["createdAt", "DESC"]]
-        }
-      }
-    });
-    await this.$store.dispatch("dictionary/findOne", {
-      query: {
-        filter: {
-          where: {
-            lang: localStorage.getItem("admin-panel-lang") || "ru"
-          }
-        }
-      }
-    });
+
     // Тестовая функция на отправку почты
     // await this.$store.dispatch("mail/send", {
     //   from: "<chaogen2@example.com>", // sender address
@@ -85,6 +70,16 @@ export default {
     //   text: "Hello world?", // plain text body
     //   html: "<b>Hello world?</b>" // html body
     // });
+  },
+
+  async mounted() {
+    await this.$store.dispatch("dictionary/findAll", {
+      query: {
+        filter: {
+          order: [["createdAt", "DESC"]]
+        }
+      }
+    });
   }
 };
 </script>

@@ -16,7 +16,8 @@ const Resource = sequelize.define('resource', {
   description: Sequelize.STRING,
   content: Sequelize.TEXT,
   published: Sequelize.BOOLEAN,
-  level: Sequelize.INTEGER
+  level: Sequelize.INTEGER,
+  lang: Sequelize.STRING
 });
 
 Resource.prototype.toJSON = function () {

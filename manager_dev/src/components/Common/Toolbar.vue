@@ -8,7 +8,7 @@
 		v-toolbar-items.hidden-xs-and-down
 			v-btn(text v-if="!isAuth" @click="$emit('openLoginDialog')") {{d.login}}
 		v-toolbar-items.hidden-xs-and-down
-			v-menu(offset-y v-if="isAuth")
+			v-menu(offset-y)
 				template(v-slot:activator="{ on }")
 					v-btn(
 						text

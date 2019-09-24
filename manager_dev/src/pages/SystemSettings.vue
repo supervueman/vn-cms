@@ -16,6 +16,12 @@
 								td.text-xs-left {{ item.slug }}
 								td.text-end
 									v-switch(
+										v-if="item.settingType === 'switcher'"
+										v-model="item.value === 'false' ? false : true"
+										@change="update(item)"
+									)
+									v-text-field(
+										v-if="item.settingType === 'text'"
 										v-model="item.value"
 										@change="update(item)"
 									)

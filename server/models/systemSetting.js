@@ -14,8 +14,9 @@ const SystemSetting = sequelize.define('systemSetting', {
     notEmpty: true
   },
   title: Sequelize.STRING,
-  value: Sequelize.BOOLEAN,
-  component: Sequelize.STRING
+  value: Sequelize.STRING(1234),
+  component: Sequelize.STRING,
+  settingType: Sequelize.STRING
 });
 
 module.exports = SystemSetting;
