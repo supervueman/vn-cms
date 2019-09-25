@@ -56,6 +56,9 @@
     "additional_fields": {
       "text": "Дополнительные поля"
     },
+    "additional_field": {
+      "text": "Дополнительное поле"
+    },
     "filesystem": {
       "text": "Файловая система"
     },
