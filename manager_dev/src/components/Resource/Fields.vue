@@ -270,7 +270,8 @@ export default {
                 association: "layout",
                 include: ["fields"]
               },
-              "additionalfields"
+              "additionalfields",
+              "translations"
             ]
           }
         }

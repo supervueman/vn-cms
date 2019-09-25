@@ -47,18 +47,9 @@ module.exports = async () => {
     onDelete: 'cascade',
     as: 'parent'
   });
-  Resource.belongsTo(Resource, {
-    onDelete: 'cascade',
-    as: 'translation'
-  });
   Resource.belongsTo(Layout, {
     as: 'layout'
   });
-  // Resource.hasMany(Resource, {
-  //   as: 'translations',
-  //   onDelete: 'cascade',
-  //   foreignKey: 'translationId'
-  // });
   Resource.belongsToMany(Resource, {
     as: 'translations',
     onDelete: 'cascade',
@@ -78,8 +69,4 @@ module.exports = async () => {
   AdditionalField.belongsTo(Resource, {
     onDelete: 'cascade'
   });
-
-  // const resource = await Resource.findByPk(1);
-  // console.log(resource)
-  // await resource.addTranslation(2);
 }

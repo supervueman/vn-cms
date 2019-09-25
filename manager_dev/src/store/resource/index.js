@@ -193,14 +193,11 @@ export default {
       });
 
       if (response !== undefined && response.status === 200) {
-        console.log(response)
         this.dispatch('preloader/fetch', false);
 
         commit('set', response.data);
         if (payload.body.translationId !== '' && payload.body.translationId !== null && payload.body.translationId !== undefined) {
           for await (let translation of this.getters['resource/getTranslations']) {
-            console.log(response.data.id)
-            console.log(translation.id)
             await this.dispatch('resource/addTranslation', {
               body: {
                 id: response.data.id,
