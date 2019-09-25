@@ -80,6 +80,18 @@ export default {
         }
       }
     });
+
+    if (!this.isAuth) {
+      await this.$store.dispatch("dictionary/findOne", {
+        query: {
+          filter: {
+            where: {
+              lang: localStorage.getItem("admin-panel-lang") || "en"
+            }
+          }
+        }
+      });
+    }
   }
 };
 </script>
