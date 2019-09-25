@@ -241,6 +241,15 @@
     },
     "confirm_layout_change": {
       "text": "Вы уверены что хотите сменить шаблон?"
+    },
+    "create_translation": {
+      "text": "Создать перевод"
+    },
+    "change_lang": {
+      "text": "Выберете язык"
+    },
+    "next": {
+      "text": "Следующий шаг"
     }
   }
 }

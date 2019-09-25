@@ -26,7 +26,7 @@
 					color="primary"
 					@click="isTranslationDialog = true"
 					v-if="mainLang === resource.lang && managerAccess"
-				) Создать перевод
+				) {{d.create_translation}}
 			v-tabs(
 				v-model="tab"
 				slider-color="primary"
@@ -61,7 +61,7 @@
 		)
 			v-flex
 				v-card
-					v-card-title.title Выберете язык
+					v-card-title.title {{d.change_lang}}
 					v-card-text
 						v-select(
 							:items="langs"
@@ -75,7 +75,7 @@
 						v-btn.ml-2(
 							color="primary"
 							@click="locateToTranslationCreate"
-						) Перейти к созданию
+						) {{d.next}}
 						v-btn(
 							color="primary"
 							@click="isTranslationDialog = false"

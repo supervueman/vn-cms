@@ -241,6 +241,15 @@
     },
     "confirm_layout_change": {
       "text": "Are you sure you want to change the template?"
+    },
+    "create_translation": {
+      "text": "Create translation"
+    },
+    "change_lang": {
+      "text": "Change lang"
+    },
+    "next": {
+      "text": "Next"
     }
   }
 }
