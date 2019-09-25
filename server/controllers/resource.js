@@ -85,7 +85,7 @@ module.exports = {
 
   async create(req, res) {
     if (!req.managerAccess) {
-      res.status(401).send({
+      res.status(403).send({
         message: 'Нет доступа!'
       });
       return;
@@ -101,11 +101,30 @@ module.exports = {
       }
     });
 
-    if (is_id_in_slug.value) {
-      createdResource.slug = `${req.body.slug}-${createdResource.id}`;
+    if (is_id_in_slug.dataValues.value === 'true') {
+      createdResource.dataValues.slug = `${req.body.slug}-${createdResource.dataValues.id}`;
 
       await createdResource.update({
-        slug: createdResource.slug
+        slug: createdResource.dataValues.slug
+      });
+    }
+
+    const main_lang = await SystemSetting.findOne({
+      where: {
+        slug: 'main_lang'
+      }
+    });
+
+    if (!main_lang) {
+      res.status(404).send({
+        message: 'Не найдено!'
+      });
+    }
+
+    if (main_lang.dataValues.value === createdResource.lang) {
+
+      await createdResource.update({
+        translationId: createdResource.dataValues.id
       });
     }
 
@@ -114,7 +133,7 @@ module.exports = {
 
   async update(req, res) {
     if (!(req.adminAccess || req.managerAccess)) {
-      res.status(401).send({
+      res.status(403).send({
         message: 'Нет доступа!'
       });
       return;
@@ -125,7 +144,7 @@ module.exports = {
     const resource = await Resource.findByPk(req.body.id, filter);
 
     if (!resource) {
-      res.status(401).send({
+      res.status(404).send({
         message: 'Не найдено!'
       });
       return;
@@ -152,7 +171,7 @@ module.exports = {
 
       res.status(200).send(updatedResource);
     } else {
-      res.status(401).send({
+      res.status(403).send({
         message: 'Нет доступа!'
       })
     }
@@ -160,7 +179,7 @@ module.exports = {
 
   async remove(req, res) {
     if (!(req.adminAccess || req.managerAccess)) {
-      res.status(401).send({
+      res.status(403).send({
         message: 'Нет доступа!'
       });
       return;
@@ -213,4 +232,29 @@ module.exports = {
       count
     });
   },
+
+  async addTranslation(req, res) {
+    // console.log(req.body)
+    if (!req.managerAccess) {
+      res.status(403).send({
+        message: 'Нет доступа!'
+      });
+    }
+
+    const resource = await Resource.findByPk(req.body.id);
+
+    if (!resource) {
+      res.status(404).send({
+        message: 'Не найдено!'
+      });
+    }
+
+    const newResource = await resource.addTranslation(req.body.translationId);
+
+    // console.log(newResource);
+
+    res.status(200).send({
+      newResource
+    });
+  }
 }

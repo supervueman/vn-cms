@@ -7,7 +7,7 @@
           color="primary"
           :to="`/resource-create?level=${level}&parentId=${parentId}`"
           dark
-          v-if="managerAccess"
+          v-if="managerAccess && mainLang === lang"
         ) {{d.create_resource}}
       v-data-table(
         :headers="headers"
@@ -67,6 +67,10 @@ export default {
     level: {
       type: Number,
       default: 0
+    },
+    lang: {
+      type: String,
+      default: ""
     }
   },
 
@@ -104,7 +108,8 @@ export default {
           order: [["createdAt", "DESC"]],
           where: {
             level: this.level + 1,
-            parentId: this.$route.params.id
+            parentId: this.$route.params.id,
+            lang: this.$store.getters["base/getMainLang"]
           }
         }
       }

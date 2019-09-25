@@ -22,4 +22,6 @@ router.delete('/remove', profileByAccessToken, controller.remove);
 
 router.get('/count', profileByApiKey, controller.count);
 
+router.put('/add-translation', profileByAccessToken, controller.addTranslation);
+
 module.exports = router;

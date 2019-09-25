@@ -238,8 +238,25 @@ export default {
           this.resource.level = 1;
         }
 
-        this.resource.parentId = this.$route.query.parentId;
-        await this.$store.dispatch("resource/create", { body: this.resource });
+        if (this.$route.query.lang) {
+          this.resource.lang = this.$route.query.lang;
+        } else {
+          this.resource.lang = this.mainLang;
+        }
+
+        if (this.$route.query.translationId) {
+          this.resource.translationId = Number(this.$route.query.translationId);
+        }
+
+        if (this.$route.query.parentId !== "") {
+          this.resource.parentId = Number(this.$route.query.parentId);
+        } else {
+          this.resource.parentId = null;
+        }
+
+        await this.$store.dispatch("resource/create", {
+          body: this.resource
+        });
       }
     },
 

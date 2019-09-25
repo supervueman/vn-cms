@@ -6,7 +6,7 @@ const Resource = require('../models/resource');
 const Role = require('../models/role');
 const User = require('../models/user');
 
-module.exports = () => {
+module.exports = async () => {
   // User
   User.belongsTo(Role, {
     as: 'role'
@@ -47,8 +47,28 @@ module.exports = () => {
     onDelete: 'cascade',
     as: 'parent'
   });
+  Resource.belongsTo(Resource, {
+    onDelete: 'cascade',
+    as: 'translation'
+  });
   Resource.belongsTo(Layout, {
     as: 'layout'
+  });
+  // Resource.hasMany(Resource, {
+  //   as: 'translations',
+  //   onDelete: 'cascade',
+  //   foreignKey: 'translationId'
+  // });
+  Resource.belongsToMany(Resource, {
+    as: 'translations',
+    onDelete: 'cascade',
+    through: 'ResourceTranslation',
+    constraints: false
+  });
+  Resource.hasMany(Resource, {
+    as: 'parents',
+    onDelete: 'cascade',
+    foreignKey: 'parentId'
   });
 
   // Additional field
@@ -59,11 +79,7 @@ module.exports = () => {
     onDelete: 'cascade'
   });
 
-
-
-
-
-
-
-
+  // const resource = await Resource.findByPk(1);
+  // console.log(resource)
+  // await resource.addTranslation(2);
 }

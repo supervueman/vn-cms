@@ -19,7 +19,8 @@ export default {
     additionalFields: [],
     serializedFields: {},
     resources: [],
-    count: 0
+    count: 0,
+    translations: []
   },
   mutations: {
     set(state, payload) {
@@ -111,6 +112,16 @@ export default {
       serializedFieldsFunc(fields, additionalFields);
 
       state.serializedFields = serializedFields;
+    },
+    setTranslations(state, payload) {
+      state.translations = [{
+        ...payload
+      }];
+      payload.translations.forEach(el => {
+        state.translations.push({
+          ...el
+        });
+      });
     }
   },
   actions: {
@@ -134,6 +145,7 @@ export default {
         commit('setAdditionalFields', response.data.additionalfields);
         commit('setLayout', response.data.layout);
         commit('setFields', response.data.layout.fields);
+        commit('setTranslations', response.data);
         commit('setSerializedFields');
 
         this.dispatch('preloader/fetch', false);
@@ -181,16 +193,38 @@ export default {
       });
 
       if (response !== undefined && response.status === 200) {
+        console.log(response)
         this.dispatch('preloader/fetch', false);
+
         commit('set', response.data);
+        if (payload.body.translationId !== '' && payload.body.translationId !== null && payload.body.translationId !== undefined) {
+          for await (let translation of this.getters['resource/getTranslations']) {
+            console.log(response.data.id)
+            console.log(translation.id)
+            await this.dispatch('resource/addTranslation', {
+              body: {
+                id: response.data.id,
+                translationId: translation.id
+              }
+            });
+            await this.dispatch('resource/addTranslation', {
+              body: {
+                id: translation.id,
+                translationId: response.data.id
+              }
+            });
+          }
+        }
+
         this.dispatch("notification/fetch", {
           type: "success",
           message: 'Успешно сохранено!',
           isActive: true
         });
+
         router.push(`/resources/${response.data.id}`);
 
-        if (response.data.level === 1) {
+        if (response.data.level === 1 && this.getters['base/mainLang'] === response.data.lang) {
           this.getters['profile/getResources'].push(response.data)
         }
       }
@@ -337,6 +371,32 @@ export default {
       commit
     }) {
       commit('setAdditionalFields', []);
+    },
+
+    async addTranslation({
+      commit
+    }, payload) {
+      this.dispatch('preloader/fetch', true);
+      const data = requestDataHandler('PUT', '/resources/add-translation', payload.body, payload.query);
+
+      const response = await axios(data).catch(err => {
+        this.dispatch('preloader/fetch', false);
+        this.dispatch("notification/fetch", {
+          type: "success",
+          message: 'Ошибка при сохранении!',
+          isActive: true
+        });
+      });
+
+      if (response !== undefined && response.status === 200) {
+        this.dispatch('preloader/fetch', false);
+        commit('set', response.data);
+        this.dispatch("notification/fetch", {
+          type: "success",
+          message: 'Успешно сохранено!',
+          isActive: true
+        });
+      }
     }
   },
   getters: {
@@ -361,5 +421,8 @@ export default {
     getSerializedFields(state) {
       return state.serializedFields;
     },
+    getTranslations(state) {
+      return state.translations;
+    }
   }
 };

@@ -9,11 +9,17 @@ import {
 } from './store';
 import axios from 'axios';
 import vuetify from './plugins/vuetify';
+
+// Mixins
 import dictionaryMixin from './mixins/dictionaryMixin';
+import baseMixin from './mixins/baseMixin';
+import accessMixin from './mixins/accessMixin';
 
 commonComponentsRequire();
 
 Vue.mixin(dictionaryMixin);
+Vue.mixin(baseMixin);
+Vue.mixin(accessMixin);
 
 Vue.config.productionTip = false;
 

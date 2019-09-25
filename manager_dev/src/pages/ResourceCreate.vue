@@ -1,5 +1,5 @@
 <template lang="pug">
-  v-flex(v-if="managerAccess")
+  v-flex(v-if="managerAccess") {{resource}}
     .body-2.mt-2 {{d.resource_creation}}
       v-layout.wrap.pt-12
         resource-view(
@@ -27,6 +27,37 @@ export default {
   computed: {
     resource() {
       return this.$store.getters["resource/get"];
+    }
+  },
+
+  async mounted() {
+    if (
+      this.$route.query.translationId !== "" &&
+      this.$route.query.translationId !== null &&
+      this.$route.query.translationId !== undefined
+    ) {
+      await this.$store.dispatch("resource/findByPk", {
+        params: {
+          id: this.$route.query.translationId
+        },
+        query: {
+          filter: {
+            include: [
+              {
+                association: "layout",
+                include: ["fields"]
+              },
+              "additionalfields",
+              {
+                association: "parent",
+                include: ["translations"]
+              },
+              "translations"
+            ]
+          }
+        }
+      });
+      this.$store.dispatch("resource/clear");
     }
   },
 
