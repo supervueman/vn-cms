@@ -15,8 +15,8 @@ const Field = sequelize.define('field', {
   },
   title: Sequelize.STRING,
   fieldType: Sequelize.STRING,
-  schema: Sequelize.STRING,
-  defaultValue: Sequelize.STRING
+  schema: Sequelize.TEXT,
+  defaultValue: Sequelize.TEXT
 });
 
 module.exports = Field;
