@@ -8,6 +8,7 @@ node_modules
 /client
 /manager_dev/public/static
 /ansible
+/project-info/*
 
 # local env files
 .env
