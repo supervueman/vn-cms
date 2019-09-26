@@ -13,24 +13,24 @@
     )
       template(v-slot:body="{items}")
         tbody
-          tr(v-for="item in items" :key="item.id")
-            td(v-for="(item, i) in item" :key="i")
-              v-flex(v-if="item.interface.fieldType === 'image'")
-                v-img(:src="`/static/${item.value}`" max-width="60px" alt="alt")
-              v-flex(v-else) {{ item.value }}
+          tr(v-for="(item, i) in items" :key="item.id")
+            td(v-for="(elem, i) in item" :key="i")
+              v-flex(v-if="elem.interface.fieldType === 'image'")
+                v-img(:src="`/static/${elem.value}`" max-width="60px" alt="alt")
+              v-flex(v-else) {{ elem.value }}
             td.text-end
               v-btn(
                 color="primary"
                 fab
                 text
-                @click="openUpdateDialog(item, index)"
+                @click="openUpdateDialog(item, i)"
               )
                 v-icon edit
               v-btn(
                 color="primary"
                 fab
                 text
-                @click="openRemoveDialog(item, index)"
+                @click="openRemoveDialog(item, i)"
               )
                 v-icon delete
     v-dialog(

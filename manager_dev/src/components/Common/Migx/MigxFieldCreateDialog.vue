@@ -5,6 +5,7 @@
         v-layout.wrap
           v-flex.md12(v-for="(field, i) in fields" :key="i")
             v-layout.mb-4
+              div {{fields}}
               //- Text field
               v-flex(v-if="field.interface.fieldType === 'text'")
                 v-tooltip(left)
@@ -165,12 +166,14 @@ export default {
 
   methods: {
     create() {
+      console.log(this.fields);
       this.$emit("create", this.fields);
       this.parseFields();
     },
     parseFields() {
       const fields = {};
       const schema = JSON.parse(this.schema);
+      console.log(schema);
       for (let key in schema) {
         fields[key] = {
           value: "",

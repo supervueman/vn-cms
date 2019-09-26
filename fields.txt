@@ -1,0 +1,6 @@
+[{"image": {"value": "", "interface": {"slug": "image", "title": "Изображение", "fieldType": "image"}}}]
+
+
+[{"slug": "title", "title": "Заголовок", "fieldType": "text", "defaultValue": ""}, {"slug": "text", "title": "Текст", "fieldType": "textarea", "defaultValue": ""}]
+
+{"image": {"title": "Изображение", "fieldType": "image"}}
