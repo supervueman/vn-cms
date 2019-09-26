@@ -127,6 +127,7 @@ export default {
       ".png": "mdi-file-image",
       ".jpg": "mdi-file-image",
       ".jpeg": "mdi-file-image",
+      ".svg": "mdi-file-image",
       ".txt": "mdi-file-document-outline",
       ".xls": "mdi-file-excel"
     },
