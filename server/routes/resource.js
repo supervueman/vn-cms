@@ -12,7 +12,7 @@ router.get('/', profileByApiKey, controller.findAll);
 
 router.get('/resource/:id', profileByApiKey, controller.findByPk);
 
-router.get('/resource/findOne', profileByApiKey, controller.findOne);
+router.get('/findone', profileByApiKey, controller.findOne);
 
 router.post('/create', profileByAccessToken, controller.create);
 

@@ -55,6 +55,7 @@ module.exports = {
   },
 
   async findOne(req, res) {
+    console.log(req.query)
     if (!(req.managerAccess || req.adminAccess)) {
       res.status(401).send({
         message: 'Не доступно!'

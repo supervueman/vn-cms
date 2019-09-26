@@ -11,7 +11,7 @@ router.get('/', access, controller.findAll);
 
 router.get('/layout/:id', access, controller.findByPk);
 
-router.get('/layout/findOne', access, controller.findOne);
+router.get('/findOne', access, controller.findOne);
 
 router.post('/create', access, controller.create);
 
