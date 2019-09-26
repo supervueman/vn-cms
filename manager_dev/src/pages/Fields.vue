@@ -114,7 +114,14 @@ export default {
   methods: {
     async getPage({ offset, limit }) {
       const data = {
-        query: queryFields(offset, limit)
+        query: {
+          filter: {
+            offset,
+            limit,
+            order: [["createdAt", "DESC"]],
+            include: ["layouts"]
+          }
+        }
       };
       await this.$store.dispatch("field/findAll", data);
     },
