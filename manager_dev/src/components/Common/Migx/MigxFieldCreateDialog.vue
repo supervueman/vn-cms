@@ -1,5 +1,5 @@
 <template lang="pug">
-  v-card
+  v-card.pt-4
     v-card-text
       v-flex
         v-layout.wrap
