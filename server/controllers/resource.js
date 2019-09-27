@@ -56,7 +56,7 @@ module.exports = {
 
   async findOne(req, res) {
     if (!(req.managerAccess || req.adminAccess)) {
-      res.status(401).send({
+      res.status(403).send({
         message: 'Не доступно!'
       });
     }
@@ -75,12 +75,10 @@ module.exports = {
     if (req.managerAccess && resource.userId === req.profile.id || req.adminAccess) {
       res.status(200).send(resource);
     } else {
-      res.status(401).send({
+      res.status(403).send({
         mesasge: 'Нет доступа!'
-      })
+      });
     }
-
-    res.status(200).send(resource);
   },
 
   async create(req, res) {
