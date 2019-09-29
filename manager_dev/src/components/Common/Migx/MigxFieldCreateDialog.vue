@@ -165,7 +165,6 @@ export default {
 
   methods: {
     create() {
-      console.log(this.fields);
       this.$emit("create", this.fields);
       this.parseFields();
     },

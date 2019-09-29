@@ -157,7 +157,7 @@ module.exports = {
         }
       });
 
-      if (is_id_in_slug.value) {
+      if (is_id_in_slug.value === 'true') {
         const slugId = updateResource.slug.substring(updateResource.slug.length - `${updateResource.id}`.length);
 
         if (`-${slugId}` !== `-${updateResource.id}`) {
