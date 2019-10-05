@@ -9,7 +9,8 @@
     "start:pm2": "pm2 start ecosystem.config.js",
     "restart:pm2": "pm2 restart ecosystem.config.js",
     "stop:pm2": "pm2 stop ecosystem.config.js",
-    "build:data": "nodemon serializator/build.js"
+    "build:data": "nodemon serializer/build.js",
+    "extract:data": "nodemon serializer/extract.js"
   },
   "author": "supervueman",
   "license": "ISC",

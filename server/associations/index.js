@@ -27,7 +27,7 @@ module.exports = async () => {
     constraints: false
   });
 
-  // Filed
+  // Field
   Field.belongsToMany(Layout, {
     as: 'layouts',
     through: 'LayoutField',
