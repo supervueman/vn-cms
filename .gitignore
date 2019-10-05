@@ -8,7 +8,8 @@ node_modules
 /client
 /manager_dev/public/static
 /ansible
-/server/data
+data
+serializer
 
 # local env files
 .env
