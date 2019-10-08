@@ -15,8 +15,6 @@ module.exports = async () => {
     });
   }
 
-  console.log(adminRole)
-
   let managerRole = await Role.findOne({
     where: {
       slug: 'manager'

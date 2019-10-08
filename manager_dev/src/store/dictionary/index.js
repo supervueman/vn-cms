@@ -78,7 +78,6 @@ export default {
       });
 
       if (response !== undefined && response.status === 200) {
-        console.log(response)
         this.dispatch('preloader/fetch', false);
         commit('set', response.data);
       }
