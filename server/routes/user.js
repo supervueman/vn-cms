@@ -10,7 +10,7 @@ const profileByApiKey = require('../middleware/profileByApiKey');
 
 router.get('/', profileByApiKey, controller.findAll);
 
-router.get('/user/:id', profileByApiKey, controller.findByPk);
+router.get('/find/:id', profileByApiKey, controller.findByPk);
 
 router.get('/findone', profileByApiKey, controller.findone);
 

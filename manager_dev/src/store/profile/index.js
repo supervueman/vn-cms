@@ -42,7 +42,7 @@ export default {
         this.dispatch('preloader/fetch', false);
         localStorage.setItem('x-api-key', response.data.token);
 
-        const dataSystemSetting = requestDataHandler('GET', '/system-settings/find-one', 'systemSetting/findAll', {
+        const dataSystemSetting = requestDataHandler('GET', '/system-settings/findone', 'systemSetting/findAll', {
           filter: {
             where: {
               slug: 'main_lang'

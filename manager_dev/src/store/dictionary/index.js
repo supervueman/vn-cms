@@ -45,7 +45,7 @@ export default {
       commit
     }, payload) {
       this.dispatch('preloader/fetch', true);
-      const data = requestDataHandler('GET', `/dictionaries/dictionary/${payload.params.id}`, undefined, payload.query);
+      const data = requestDataHandler('GET', `/dictionaries/find/${payload.params.id}`, undefined, payload.query);
 
       const response = await axios(data).catch(err => {
         this.dispatch('preloader/fetch', false);

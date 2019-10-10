@@ -129,7 +129,7 @@ export default {
       commit
     }, payload) {
       this.dispatch('preloader/fetch', true);
-      const data = requestDataHandler('GET', `/resources/resource/${payload.params.id}`, undefined, payload.query);
+      const data = requestDataHandler('GET', `/resources/find/${payload.params.id}`, undefined, payload.query);
 
       const response = await axios(data).catch(err => {
         this.dispatch('preloader/fetch', false);

@@ -10,9 +10,9 @@ const profileByApiKey = require('../middleware/profileByApiKey');
 
 router.get('/', profileByApiKey, controller.findAll);
 
-router.get('/additionalfield/:id', profileByApiKey, controller.findByPk);
+router.get('/find/:id', profileByApiKey, controller.findByPk);
 
-router.get('/findOne', profileByApiKey, controller.findOne);
+router.get('/findone', profileByApiKey, controller.findOne);
 
 router.post('/create', access, controller.create);
 

@@ -9,7 +9,7 @@ const access = require('../middleware/access');
 
 router.get('/', controller.findAll);
 
-router.get('/dictionary/:id', controller.findByPk);
+router.get('/find/:id', controller.findByPk);
 
 router.get('/findone', controller.findOne);
 
