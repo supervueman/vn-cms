@@ -57,7 +57,7 @@ module.exports = async () => {
     constraints: false
   });
   Resource.hasMany(Resource, {
-    as: 'parents',
+    as: 'children',
     onDelete: 'cascade',
     foreignKey: 'parentId'
   });
