@@ -15,7 +15,12 @@ module.exports = async (req, res, next) => {
     }
 
     req.isAuth = true;
-    req.profile = decoded
+    req.profile = decoded;
+    const rules = JSON.parse(decoded.role.rules);
+    for (const rule in rules) {
+      rules[rule] = rules[rule].value;
+    }
+    req.rules = rules;
 
     accessHandler(req, decoded.role.slug);
 

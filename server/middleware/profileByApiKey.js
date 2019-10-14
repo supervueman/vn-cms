@@ -23,6 +23,11 @@ module.exports = async (req, res, next) => {
   }
 
   req.profile = profile;
+  const rules = JSON.parse(profile.role.rules);
+  for (const rule in rules) {
+    rules[rule] = rules[rule].value;
+  }
+  req.rules = rules;
 
   accessHandler(req, profile.role.slug);
 

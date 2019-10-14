@@ -1,5 +1,5 @@
 <template lang="pug">
-  v-layout(v-if="managerAccess")
+  v-layout(v-if="r.is_resource_create")
     v-flex
       v-layout.wrap.pt-4
         v-flex.xs12.md7.pr-2
