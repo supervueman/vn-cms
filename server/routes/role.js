@@ -6,13 +6,12 @@ const controller = require('../controllers/role');
 
 // Middleware
 const access = require('../middleware/access');
-const profileByApiKey = require('../middleware/profileByApiKey');
 
-router.get('/', profileByApiKey, controller.findAll);
+router.get('/', access, controller.findAll);
 
-router.get('/find/:id', controller.findByPk);
+router.get('/find/:id', access, controller.findByPk);
 
-router.get('/findone', controller.findOne);
+router.get('/findone', access, controller.findOne);
 
 router.post('/create', access, controller.create);
 
@@ -20,6 +19,6 @@ router.put('/update', access, controller.update);
 
 router.delete('/remove', access, controller.remove);
 
-router.get('/count', profileByApiKey, controller.count);
+router.get('/count', access, controller.count);
 
 module.exports = router;

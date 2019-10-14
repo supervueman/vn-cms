@@ -3,9 +3,9 @@ const SystemSetting = require('../models/systemSetting');
 
 module.exports = {
   async findAll(req, res) {
-    if (!(req.adminAccess || req.managerAccess)) {
+    if (!req.rules.is_system_settings_read) {
       res.status(403).send({
-        message: 'Нет доступа!'
+        message: 'Access denied!'
       });
       return;
     }
@@ -18,10 +18,11 @@ module.exports = {
   },
 
   async findOne(req, res) {
-    if (!(req.adminAccess || req.managerAccess)) {
+    if (!req.rules.is_system_settings_read) {
       res.status(403).send({
-        message: 'Нет доступа!'
+        message: 'Access denied!'
       });
+      return;
     }
 
     const filter = JSON.parse(req.query.filter || "{}");
@@ -30,7 +31,7 @@ module.exports = {
 
     if (!systemSetting) {
       res.status(404).send({
-        message: 'Не найдено!'
+        message: 'Not found!'
       });
     }
 
@@ -38,9 +39,9 @@ module.exports = {
   },
 
   async update(req, res) {
-    if (!req.adminAccess) {
+    if (!req.rules.is_system_settings_update) {
       res.status(403).send({
-        message: 'Нет доступа!'
+        message: 'Access denied!'
       });
       return;
     }
@@ -49,7 +50,7 @@ module.exports = {
 
     if (!systemSetting) {
       res.status(404).send({
-        message: 'Не найдено!'
+        message: 'Not found!'
       });
       return;
     }
@@ -62,9 +63,9 @@ module.exports = {
   },
 
   async count(req, res) {
-    if (!req.adminAccess) {
+    if (!req.rules.is_system_settings_read) {
       res.status(403).send({
-        message: 'Нет доступа!'
+        message: 'Access denied!'
       });
       return;
     }

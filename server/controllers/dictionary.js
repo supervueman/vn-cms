@@ -17,7 +17,7 @@ module.exports = {
 
     if (!dictionary) {
       res.status(404).send({
-        message: 'Поле не найдено!'
+        message: 'Not found!'
       });
       return;
     }
@@ -32,7 +32,7 @@ module.exports = {
 
     if (!dictionary) {
       res.status(404).send({
-        message: 'Не найдено!'
+        message: 'Not found!'
       });
       return;
     }
@@ -41,9 +41,9 @@ module.exports = {
   },
 
   async create(req, res) {
-    if (!req.adminAccess) {
+    if (!req.rules.is_dictionary_create) {
       res.status(403).send({
-        message: 'Нет доступа!'
+        message: 'Access denied!'
       });
       return;
     }
@@ -66,9 +66,9 @@ module.exports = {
   },
 
   async update(req, res) {
-    if (!req.adminAccess) {
+    if (!req.rules.is_dictionary_update) {
       res.status(403).send({
-        message: 'Нет доступа!'
+        message: 'Access denied!'
       });
       return;
     }
@@ -77,7 +77,7 @@ module.exports = {
 
     if (!dictionary) {
       res.status(404).send({
-        message: 'Не найдено!'
+        message: 'Not found!'
       });
       return;
     }
@@ -91,9 +91,9 @@ module.exports = {
   },
 
   async remove(req, res) {
-    if (!req.adminAccess) {
+    if (!req.rules.is_dictionary_delete) {
       res.status(403).send({
-        message: 'Нет доступа!'
+        message: 'Access denied!'
       });
       return;
     }
@@ -102,7 +102,7 @@ module.exports = {
 
     if (!dictionary) {
       res.status(404).send({
-        message: 'Не найдено!'
+        message: 'Not found!'
       });
     }
 
@@ -112,7 +112,7 @@ module.exports = {
       }
     });
     res.status(200).send({
-      message: 'Успешно удалено!'
+      message: 'Success!'
     });
   },
 

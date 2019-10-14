@@ -8,9 +8,9 @@ const User = require('../models/user');
 
 module.exports = {
 	async findAll(req, res) {
-		if (!(req.adminAccess || req.managerAccess)) {
-			res.status(401).send({
-				message: 'Пользователь не найден!'
+		if (!req.rules.is_users_read) {
+			res.status(403).send({
+				message: 'Access denied!'
 			});
 			return;
 		}
@@ -34,10 +34,11 @@ module.exports = {
 	},
 
 	async findByPk(req, res) {
-		if (!(req.adminAccess || req.managerAccess)) {
-			res.status(401).send({
-				message: 'Пользователь не найден!'
+		if (!req.rules.is_users_read) {
+			res.status(403).send({
+				message: 'Access denied!'
 			});
+			return;
 		}
 
 		const filter = JSON.parse(req.query.filter || "{}");
@@ -46,7 +47,7 @@ module.exports = {
 
 		if (!user) {
 			res.status(404).send({
-				message: 'Пользователь не найден!'
+				message: 'Not found!'
 			});
 		}
 
@@ -56,17 +57,18 @@ module.exports = {
 		) {
 			res.status(200).send(user);
 		} else {
-			res.status(401).send({
-				message: 'Данные не доступны!'
+			res.status(403).send({
+				message: 'Access denied!'
 			});
 		}
 	},
 
 	async findone(req, res) {
-		if (!(req.adminAccess || req.managerAccess)) {
-			res.status(401).send({
-				message: 'Пользователь не найден!'
+		if (!req.rules.is_users_read) {
+			res.status(403).send({
+				message: 'Access denied!'
 			});
+			return;
 		}
 
 		const filter = JSON.parse(req.query.filter || "{}");
@@ -75,7 +77,7 @@ module.exports = {
 
 		if (!user) {
 			res.status(404).send({
-				message: 'Пользователь не найден!'
+				message: 'Not found!'
 			});
 		}
 
@@ -85,24 +87,25 @@ module.exports = {
 		) {
 			res.status(200).send(user);
 		} else {
-			res.status(401).send({
-				message: 'Данные не доступны!'
+			res.status(403).send({
+				message: 'Access denied!'
 			});
 		}
 	},
 
 	async update(req, res) {
-		if (!(req.adminAccess || req.managerAccess)) {
-			res.status(401).send({
-				message: 'Нет доступа для редактирования!'
+		if (!req.rules.is_user_update) {
+			res.status(403).send({
+				message: 'Access denied!'
 			});
+			return;
 		}
 
 		const existUser = await User.findByPk(req.body.id);
 
 		if (!existUser) {
 			res.status(404).send({
-				message: 'Не найдено!'
+				message: 'Not found!'
 			});
 		}
 
@@ -125,23 +128,24 @@ module.exports = {
 			res.status(200).send(user);
 		} else {
 			res.status(404).send({
-				message: 'Не найдено!'
+				message: 'Not found!'
 			});
 		}
 	},
 
 	async changePassword(req, res) {
-		if (!(req.managerAccess || req.adminAccess)) {
+		if (!req.rules.is_user_update) {
 			res.status(403).send({
-				message: 'Нет доступа!'
+				message: 'Access denied!'
 			});
+			return;
 		}
 
 		const user = await User.findByPk(req.body.userId);
 
 		if (!user) {
 			res.status(404).send({
-				message: 'Пользователь не найден!'
+				message: 'Not found!'
 			});
 		}
 
@@ -171,16 +175,17 @@ module.exports = {
 			}
 		} else {
 			res.status(404).send({
-				message: 'Не найдено!'
+				message: 'Not found!'
 			});
 		}
 	},
 
 	async remove(req, res) {
-		if (!(req.adminAccess || req.managerAccess)) {
-			res.status(401).send({
-				message: 'Нет доступа для редактирования!'
+		if (!req.rules.is_user_delete) {
+			res.status(403).send({
+				message: 'Access denied!'
 			});
+			return;
 		}
 
 		const existUser = await User.findByPk(req.body.id);
@@ -207,15 +212,15 @@ module.exports = {
 			});
 		} else {
 			res.status(404).send({
-				message: 'Не найдено!'
+				message: 'Not found!'
 			});
 		}
 	},
 
 	async count(req, res) {
-		if (!(req.adminAccess || req.managerAccess)) {
-			res.status(404).send({
-				message: 'Пользователь не найден!'
+		if (!req.rules.is_users_read) {
+			res.status(403).send({
+				message: 'Access denied!'
 			});
 			return;
 		}

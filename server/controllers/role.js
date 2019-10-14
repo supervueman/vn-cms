@@ -3,9 +3,9 @@ const Role = require('../models/role');
 
 module.exports = {
   async findAll(req, res) {
-    if (!(req.adminAccess || req.managerAccess)) {
-      res.status(401).send({
-        message: 'Нет доступа!'
+    if (!req.rules.is_roles_read) {
+      res.status(403).send({
+        message: 'Access denied!'
       });
       return;
     }
@@ -31,13 +31,19 @@ module.exports = {
   },
 
   async findByPk(req, res) {
+    if (!req.rules.is_roles_read) {
+      res.status(403).send({
+        message: 'Access denied!'
+      });
+      return;
+    }
     const id = req.params.id;
 
     const role = await Role.findByPk(id);
 
     if (!role) {
-      res.status(401).send({
-        message: 'Политика доступа не найдена!'
+      res.status(404).send({
+        message: 'Not found!'
       });
       return;
     }
@@ -45,13 +51,19 @@ module.exports = {
   },
 
   async findOne(req, res) {
+    if (!req.rules.is_roles_read) {
+      res.status(403).send({
+        message: 'Access denied!'
+      });
+      return;
+    }
     const filter = JSON.parse(req.query.filter || "{}");
 
     const role = await Role.findOne(filter);
 
     if (!role) {
       res.status(404).send({
-        message: 'Политика доступа не найдена!'
+        message: 'Not found!'
       });
       return;
     }
@@ -59,9 +71,9 @@ module.exports = {
   },
 
   async create(req, res) {
-    if (!req.adminAccess) {
-      res.status(401).send({
-        message: 'Нет доступа!'
+    if (!req.rules.is_roles_create) {
+      res.status(403).send({
+        message: 'Access denied!'
       });
       return;
     }
@@ -70,9 +82,9 @@ module.exports = {
   },
 
   async update(req, res) {
-    if (!req.adminAccess) {
-      res.status(401).send({
-        message: 'Нет доступа!'
+    if (!req.rules.is_roles_update) {
+      res.status(403).send({
+        message: 'Access denied!'
       });
       return;
     }
@@ -80,8 +92,8 @@ module.exports = {
     const role = await Role.findByPk(req.body.id);
 
     if (!role) {
-      res.status(401).send({
-        message: 'Не найдено!'
+      res.status(404).send({
+        message: 'Not found!'
       });
       return;
     }
@@ -94,9 +106,9 @@ module.exports = {
   },
 
   async remove(req, res) {
-    if (!req.adminAccess) {
-      res.status(401).send({
-        message: 'Нет доступа!'
+    if (!req.rules.is_roles_delete) {
+      res.status(403).send({
+        message: 'Access denied!'
       });
       return;
     }
@@ -108,14 +120,14 @@ module.exports = {
     });
 
     res.status(200).send({
-      message: 'Успешно удалено!'
+      message: 'Success remove!'
     });
   },
 
   async count(req, res) {
-    if (!(req.adminAccess || req.managerAccess)) {
-      res.status(401).send({
-        message: 'Нет доступа!'
+    if (!req.rules.is_roles_read) {
+      res.status(403).send({
+        message: 'Access denied!'
       });
       return;
     }

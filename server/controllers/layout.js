@@ -3,9 +3,9 @@ const Layout = require('../models/layout');
 
 module.exports = {
   async findAll(req, res) {
-    if (!(req.adminAccess || req.managerAccess)) {
-      res.status(401).send({
-        message: 'Нет доступа!'
+    if (!req.rules.is_layouts_read) {
+      res.status(403).send({
+        message: 'Access denied!'
       });
       return;
     }
@@ -18,10 +18,11 @@ module.exports = {
   },
 
   async findByPk(req, res) {
-    if (!(req.adminAccess || req.managerAccess)) {
-      res.status(401).send({
-        message: 'Нет доступа!'
+    if (!req.rules.is_layouts_read) {
+      res.status(403).send({
+        message: 'Access denied!'
       });
+      return;
     }
 
     const filter = JSON.parse(req.query.filter || "{}");
@@ -30,7 +31,7 @@ module.exports = {
 
     if (!layout) {
       res.status(404).send({
-        message: 'Шаблон не найден!'
+        message: 'Not found!'
       });
       return;
     }
@@ -39,10 +40,11 @@ module.exports = {
   },
 
   async findOne(req, res) {
-    if (!(req.adminAccess || req.managerAccess)) {
-      res.status(401).send({
-        message: 'Не доступно!'
+    if (!req.rules.is_layouts_read) {
+      res.status(403).send({
+        message: 'Access denied!'
       });
+      return;
     }
 
     const filter = JSON.parse(req.query.filter || "{}");
@@ -51,7 +53,7 @@ module.exports = {
 
     if (!layout) {
       res.status(404).send({
-        message: 'Шаблон не найден!'
+        message: 'Not found!'
       });
       return;
     }
@@ -60,9 +62,9 @@ module.exports = {
   },
 
   async create(req, res) {
-    if (!req.adminAccess) {
-      res.status(401).send({
-        message: 'Нет доступа!'
+    if (!req.rules.is_layout_create) {
+      res.status(403).send({
+        message: 'Access denied!'
       });
       return;
     }
@@ -73,9 +75,9 @@ module.exports = {
   },
 
   async update(req, res) {
-    if (!req.adminAccess) {
-      res.status(401).send({
-        message: 'Нет доступа!'
+    if (!req.rules.is_layout_update) {
+      res.status(403).send({
+        message: 'Access denied!'
       });
       return;
     }
@@ -83,8 +85,8 @@ module.exports = {
     const layout = await Layout.findByPk(req.body.id);
 
     if (!layout) {
-      res.status(401).send({
-        message: 'Не найдено!'
+      res.status(404).send({
+        message: 'Not found!'
       });
       return;
     }
@@ -98,9 +100,9 @@ module.exports = {
   },
 
   async remove(req, res) {
-    if (!req.adminAccess) {
-      res.status(401).send({
-        message: 'Нет доступа!'
+    if (!req.rules.is_layout_delete) {
+      res.status(403).send({
+        message: 'Access denied!'
       });
       return;
     }
@@ -109,7 +111,7 @@ module.exports = {
 
     if (!layout) {
       res.status(404).send({
-        message: 'Шаблон не найден!'
+        message: 'Not found!'
       });
     }
 
@@ -119,14 +121,14 @@ module.exports = {
       }
     });
     res.status(200).send({
-      message: 'Успешно удалено!'
+      message: 'Success!'
     });
   },
 
   async count(req, res) {
-    if (!(req.adminAccess || req.managerAccess)) {
-      res.status(401).send({
-        message: 'Нет доступа!'
+    if (!req.rules.is_layouts_read) {
+      res.status(403).send({
+        message: 'Access denied!'
       });
       return;
     }

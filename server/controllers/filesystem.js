@@ -6,9 +6,9 @@ const removeDir = require('../handlers/removeDir');
 
 module.exports = {
   async getFilesystem(req, res) {
-    if (!(req.adminAccess || req.managerAccess)) {
-      res.status(401).send({
-        message: 'Нет доступа!'
+    if (!req.rules.is_filesystem_access) {
+      res.status(403).send({
+        message: 'Access denied!'
       });
       return;
     }
@@ -25,10 +25,11 @@ module.exports = {
   },
 
   async createDir(req, res) {
-    if (!req.isAuth) {
-      res.status(401).send({
-        message: 'Нет доступа!'
+    if (!req.rules.is_filesystem_directory_create) {
+      res.status(403).send({
+        message: 'Access denied!'
       });
+      return;
     }
 
     await createDir(req.body.path);
@@ -39,19 +40,20 @@ module.exports = {
   },
 
   async createFile(req, res) {
-    if (!(req.adminAccess || req.managerAccess)) {
-      res.status(401).send({
-        message: 'Не доступно!'
+    if (!req.rules.is_filesystem_files_create) {
+      res.status(403).send({
+        message: 'Access denied!'
       });
+      return;
     }
 
     res.status(200);
   },
 
   async upload(req, res) {
-    if (!req.isAuth) {
-      res.status(401).send({
-        message: 'Нет доступа!'
+    if (!req.rules.is_filesystem_files_uploads) {
+      res.status(403).send({
+        message: 'Access denied!'
       });
       return;
     }
@@ -62,9 +64,9 @@ module.exports = {
   },
 
   async renameDir(req, res) {
-    if (!req.isAuth) {
-      res.status(401).send({
-        message: 'Нет доступа!'
+    if (!req.rules.is_filesystem_directory_rename) {
+      res.status(403).send({
+        message: 'Access denied!'
       });
       return;
     }
@@ -73,9 +75,9 @@ module.exports = {
   },
 
   async renameFile(req, res) {
-    if (!req.isAuth) {
-      res.status(401).send({
-        message: 'Нет доступа!'
+    if (!req.rules.is_filesystem_files_rename) {
+      res.status(403).send({
+        message: 'Access denied!'
       });
       return;
     }
@@ -84,9 +86,9 @@ module.exports = {
   },
 
   async removeDir(req, res) {
-    if (!req.isAuth) {
-      res.status(401).send({
-        message: 'Нет доступа!'
+    if (!req.rules.is_filesystem_directory_delete) {
+      res.status(403).send({
+        message: 'Access denied!'
       });
       return;
     }
@@ -99,9 +101,9 @@ module.exports = {
   },
 
   async removeFile(req, res) {
-    if (!req.isAuth) {
-      res.status(401).send({
-        message: 'Нет доступа!'
+    if (!req.rules.is_filesystem_files_delete) {
+      res.status(403).send({
+        message: 'Access denied!'
       });
       return;
     }

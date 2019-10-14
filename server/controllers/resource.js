@@ -4,9 +4,9 @@ const SystemSetting = require('../models/systemSetting');
 
 module.exports = {
   async findAll(req, res) {
-    if (!(req.adminAccess || req.managerAccess)) {
-      res.status(401).send({
-        message: 'Нет доступа!'
+    if (!req.rules.is_resources_read) {
+      res.status(403).send({
+        message: 'Access denied!'
       });
       return;
     }
@@ -26,10 +26,11 @@ module.exports = {
   },
 
   async findByPk(req, res) {
-    if (!(req.managerAccess || req.adminAccess)) {
-      res.status(401).send({
-        message: 'Нет доступа!'
+    if (!req.rules.is_resources_read) {
+      res.status(403).send({
+        message: 'Access denied!'
       });
+      return;
     }
 
     const id = req.params.id;
@@ -40,7 +41,7 @@ module.exports = {
 
     if (!resource) {
       res.status(404).send({
-        message: 'Ресурс не найден!'
+        message: 'Not found!'
       });
       return;
     }
@@ -48,17 +49,18 @@ module.exports = {
     if (req.managerAccess && resource.userId === req.profile.id || req.adminAccess) {
       res.status(200).send(resource);
     } else {
-      res.status(401).send({
-        mesasge: 'Нет доступа!'
+      res.status(403).send({
+        mesasge: 'Access denied!'
       });
     }
   },
 
   async findOne(req, res) {
-    if (!(req.managerAccess || req.adminAccess)) {
+    if (!req.rules.is_resources_read) {
       res.status(403).send({
-        message: 'Не доступно!'
+        message: 'Access denied!'
       });
+      return;
     }
 
     const filter = JSON.parse(req.query.filter || "{}");
@@ -67,7 +69,7 @@ module.exports = {
 
     if (!resource) {
       res.status(404).send({
-        message: 'Ресурс не найден!'
+        message: 'Not found!'
       });
       return;
     }
@@ -76,15 +78,15 @@ module.exports = {
       res.status(200).send(resource);
     } else {
       res.status(403).send({
-        mesasge: 'Нет доступа!'
+        mesasge: 'Access denied!'
       });
     }
   },
 
   async create(req, res) {
-    if (!req.managerAccess) {
+    if (!req.rules.is_resource_create) {
       res.status(403).send({
-        message: 'Нет доступа!'
+        message: 'Access denied!'
       });
       return;
     }
@@ -115,7 +117,7 @@ module.exports = {
 
     if (!main_lang) {
       res.status(404).send({
-        message: 'Не найдено!'
+        message: 'Not found!'
       });
     }
 
@@ -130,9 +132,9 @@ module.exports = {
   },
 
   async update(req, res) {
-    if (!(req.adminAccess || req.managerAccess)) {
+    if (!req.rules.is_resource_update) {
       res.status(403).send({
-        message: 'Нет доступа!'
+        message: 'Access denied!'
       });
       return;
     }
@@ -143,7 +145,7 @@ module.exports = {
 
     if (!resource) {
       res.status(404).send({
-        message: 'Не найдено!'
+        message: 'Not found!'
       });
       return;
     }
@@ -170,15 +172,15 @@ module.exports = {
       res.status(200).send(updatedResource);
     } else {
       res.status(403).send({
-        message: 'Нет доступа!'
+        message: 'Access denied!'
       })
     }
   },
 
   async remove(req, res) {
-    if (!(req.adminAccess || req.managerAccess)) {
+    if (!req.rules.is_resource_delete) {
       res.status(403).send({
-        message: 'Нет доступа!'
+        message: 'Access denied!'
       });
       return;
     }
@@ -187,7 +189,7 @@ module.exports = {
 
     if (!resource) {
       res.status(404).send({
-        message: 'Ресурс не найден!'
+        message: 'Not found!'
       });
     }
 
@@ -198,19 +200,19 @@ module.exports = {
         }
       });
       res.status(200).send({
-        message: 'Успешно удалено!'
+        message: 'Success!'
       });
     } else {
-      res.status(410).send({
-        message: 'Нет доступа!'
+      res.status(403).send({
+        message: 'Access denied!'
       });
     }
   },
 
   async count(req, res) {
-    if (!(req.adminAccess || req.managerAccess)) {
-      res.status(401).send({
-        message: 'Нет доступа!'
+    if (!req.rules.is_resources_read) {
+      res.status(403).send({
+        message: 'Access denied!'
       });
       return;
     }
@@ -232,24 +234,22 @@ module.exports = {
   },
 
   async addTranslation(req, res) {
-    // console.log(req.body)
-    if (!req.managerAccess) {
+    if (!req.rules.is_resource_create) {
       res.status(403).send({
-        message: 'Нет доступа!'
+        message: 'Access denied!'
       });
+      return;
     }
 
     const resource = await Resource.findByPk(req.body.id);
 
     if (!resource) {
       res.status(404).send({
-        message: 'Не найдено!'
+        message: 'Not found!'
       });
     }
 
     const newResource = await resource.addTranslation(req.body.translationId);
-
-    // console.log(newResource);
 
     res.status(200).send({
       newResource

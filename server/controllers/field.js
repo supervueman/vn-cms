@@ -3,9 +3,9 @@ const Field = require('../models/field');
 
 module.exports = {
   async findAll(req, res) {
-    if (!(req.adminAccess || req.managerAccess)) {
-      res.status(401).send({
-        message: 'Нет доступа!'
+    if (!req.rules.is_fields_read) {
+      res.status(403).send({
+        message: 'Access denied!'
       });
       return;
     }
@@ -18,10 +18,11 @@ module.exports = {
   },
 
   async findByPk(req, res) {
-    if (!(req.adminAccess || req.managerAccess)) {
-      res.status(401).send({
-        message: 'Нет доступа!'
+    if (!req.rules.is_fields_read) {
+      res.status(403).send({
+        message: 'Access denied!'
       });
+      return;
     }
 
     const filter = JSON.parse(req.query.filter || "{}");
@@ -30,7 +31,7 @@ module.exports = {
 
     if (!field) {
       res.status(404).send({
-        message: 'Поле не найдено!'
+        message: 'Not found!'
       });
       return;
     }
@@ -39,10 +40,11 @@ module.exports = {
   },
 
   async findOne(req, res) {
-    if (!(req.adminAccess || req.managerAccess)) {
-      res.status(401).send({
-        message: 'Не доступно!'
+    if (!req.rules.is_fields_read) {
+      res.status(403).send({
+        message: 'Access denied!'
       });
+      return;
     }
 
     const filter = JSON.parse(req.query.filter || "{}");
@@ -51,7 +53,7 @@ module.exports = {
 
     if (!field) {
       res.status(404).send({
-        message: 'Поле не найдено!'
+        message: 'Not found!'
       });
       return;
     }
@@ -60,9 +62,9 @@ module.exports = {
   },
 
   async create(req, res) {
-    if (!req.adminAccess) {
-      res.status(401).send({
-        message: 'Нет доступа!'
+    if (!req.rules.is_field_create) {
+      res.status(403).send({
+        message: 'Access denied!'
       });
       return;
     }
@@ -77,9 +79,9 @@ module.exports = {
   },
 
   async update(req, res) {
-    if (!req.adminAccess) {
-      res.status(401).send({
-        message: 'Нет доступа!'
+    if (!req.rules.is_field_update) {
+      res.status(403).send({
+        message: 'Access denied!'
       });
       return;
     }
@@ -88,7 +90,7 @@ module.exports = {
 
     if (!field) {
       res.status(404).send({
-        message: 'Не найдено!'
+        message: 'Not found!'
       });
       return;
     }
@@ -102,9 +104,9 @@ module.exports = {
   },
 
   async remove(req, res) {
-    if (!req.adminAccess) {
-      res.status(401).send({
-        message: 'Нет доступа!'
+    if (!req.rules.is_field_delete) {
+      res.status(403).send({
+        message: 'Access denied!'
       });
       return;
     }
@@ -113,7 +115,7 @@ module.exports = {
 
     if (!field) {
       res.status(404).send({
-        message: 'Поле не найдено!'
+        message: 'Not found!'
       });
     }
 
@@ -123,14 +125,14 @@ module.exports = {
       }
     });
     res.status(200).send({
-      message: 'Успешно удалено!'
+      message: 'Success!'
     });
   },
 
   async count(req, res) {
-    if (!(req.adminAccess || req.managerAccess)) {
-      res.status(401).send({
-        message: 'Нет доступа!'
+    if (!req.rules.is_fields_read) {
+      res.status(403).send({
+        message: 'Access denied!'
       });
       return;
     }
@@ -145,9 +147,9 @@ module.exports = {
   },
 
   async addLayout(req, res) {
-    if (!req.adminAccess) {
-      res.status(401).send({
-        message: 'Нет доступа!'
+    if (!req.rules.is_field_update) {
+      res.status(403).send({
+        message: 'Access denied!'
       });
       return;
     }
@@ -155,7 +157,7 @@ module.exports = {
     const field = await Field.findByPk(req.body.id);
 
     if (!field) {
-      res.status(401).send({
+      res.status(404).send({
         message: 'Not found!'
       });
       return;
@@ -173,9 +175,9 @@ module.exports = {
   },
 
   async removeLayout(req, res) {
-    if (!req.adminAccess) {
-      res.status(401).send({
-        message: 'Нет доступа!'
+    if (!req.rules.is_field_update) {
+      res.status(403).send({
+        message: 'Access denied!'
       });
       return;
     }
@@ -183,7 +185,7 @@ module.exports = {
     const field = await Field.findByPk(req.body.id);
 
     if (!field) {
-      res.status(401).send({
+      res.status(404).send({
         message: 'Not found!'
       });
       return;
