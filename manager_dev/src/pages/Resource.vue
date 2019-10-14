@@ -1,5 +1,5 @@
 <template lang="pug">
-	v-layout
+	v-layout(v-if="r.is_resources_read")
 		v-flex
 			v-layout
 				.body-2.mb-12.mt-2 {{d.resource}}: {{resource.title}} 
@@ -25,7 +25,7 @@
 				v-btn(
 					color="primary"
 					@click="isTranslationDialog = true"
-					v-if="mainLang === resource.lang && managerAccess"
+					v-if="mainLang === resource.lang && r.is_resource_create"
 				) {{d.create_translation}}
 			v-tabs(
 				v-model="tab"
@@ -204,6 +204,9 @@ export default {
     },
 
     locateToTranslationCreate() {
+      if (!this.r.is_resource_create) {
+        return;
+      }
       this.$v.$touch();
       if (!this.$v.$error) {
         if (

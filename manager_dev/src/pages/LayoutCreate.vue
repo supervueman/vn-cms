@@ -1,5 +1,5 @@
 <template lang="pug">
-  v-flex(v-if="adminAccess")
+  v-flex(v-if="r.is_layout_create")
     .body-2.mb-12.mt-2 {{d.layout_creation}}
     v-layout.wrap
       layout-view(

@@ -245,6 +245,9 @@ export default {
     },
 
     async upload() {
+      if (!this.r.is_filesystem_files_uploads) {
+        return;
+      }
       // console.log(this.currentFolderPath);
       const files = this.$refs.file.files;
       const formData = new FormData();
@@ -266,6 +269,9 @@ export default {
     },
 
     async createFolder(folderName) {
+      if (!this.r.is_filesystem_directory_create) {
+        return;
+      }
       // console.log(folderName);
       // console.log(this.currentFolderPath);
       this.isCreateFolderDialog = false;
@@ -289,10 +295,16 @@ export default {
         return;
       }
       if (this.currentElem.type === "file") {
+        if (!this.r.is_filesystem_files_delete) {
+          return;
+        }
         await this.$store.dispatch("filesystem/removeFile", {
           path: `../${this.currentFullPath}`
         });
       } else {
+        if (!this.r.is_filesystem_directory_delete) {
+          return;
+        }
         await this.$store.dispatch("filesystem/removeDir", {
           path: `../${this.currentFullPath}`
         });

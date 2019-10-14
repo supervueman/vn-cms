@@ -7,7 +7,7 @@
           color="primary"
           :to="`/resource-create?level=${level}&parentId=${parentId}`"
           dark
-          v-if="managerAccess && mainLang === lang"
+          v-if="r.is_resource_create && mainLang === lang"
         ) {{d.create_resource}}
       v-data-table(
         :headers="headers"
@@ -30,7 +30,7 @@
                   fab
                   color="primary"
                   @click="removeDialogOpen(item)"
-                  v-if="managerAccess || adminAccess" 
+                  v-if="r.is_resource_delete" 
                 )
                   v-icon delete
       div.text-xs-center.pt-2
@@ -136,6 +136,9 @@ export default {
     },
 
     async remove() {
+      if (!this.r.is_resource_delete) {
+        return;
+      }
       await this.$store.dispatch("resource/remove", {
         body: { id: this.removeItem.id }
       });

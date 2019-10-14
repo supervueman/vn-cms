@@ -1,14 +1,14 @@
 <template lang="pug">
   v-layout.justify-space-between
     div
-      v-tooltip(top)
+      v-tooltip(top v-if="r.is_filesystem_directory_create")
         template(v-slot:activator="{ on }")
           v-icon.mr-2.storage-control(
             @click="$emit('openDialogForCreateFolder', true)"
             v-on="on"
           ) create_new_folder
         span {{d.create_directory}}
-      v-tooltip(top)
+      v-tooltip(top v-if="r.is_filesystem_files_uploads")
         template(v-slot:activator="{ on }")
           v-icon.mr-2.storage-control(
             v-on="on"

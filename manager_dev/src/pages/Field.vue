@@ -1,5 +1,5 @@
 <template lang="pug">
-  v-flex(v-if="adminAccess")
+  v-flex(v-if="r.is_fields_read")
     .body-2.mb-12.mt-2 {{d.additional_field}}: {{field.title}}
     field-view(
       :field="field"

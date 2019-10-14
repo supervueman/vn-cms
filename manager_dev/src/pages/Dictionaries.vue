@@ -1,5 +1,5 @@
 <template lang="pug">
-	v-flex(v-if="adminAccess")
+	v-flex(v-if="r.is_dictionaries_read")
 		.body-2.mb-12.mt-2 {{d.dictionaries}}
 		v-layout.wrap
 			v-flex
@@ -8,13 +8,14 @@
 					v-btn.mr-2(
 						color="primary"
 						dark
-						v-if="dictionaries.length > 0"
+						v-if="r.is_dictionary_update && dictionaries.length > 0"
 						@click="update"
 					) {{d.save}}
 					v-btn(
 						color="primary"
 						dark
 						@click="isDictionaryCreate = true"
+						v-if="r.is_dictionary_create"
 					) {{d.create_dictionary}}
 		v-layout.dictionary
 			v-flex.px-2.dictionary--list-text
@@ -24,6 +25,7 @@
 						v-model="createSlug"
 						append-icon="add"
 						@click:append="addItem"
+						:disabled="!r.is_dictionary_update"
 					)
 				v-flex(
 					v-for="(item, key) in dictionary.value"
@@ -34,6 +36,7 @@
 						:label="d.slug"
 						append-icon="remove"
 						@click:append="isRemoveItem = true; removeItemSlug = key"
+						:disabled="!r.is_dictionary_update"
 					)
 			v-flex.px-2
 				v-tabs(
@@ -57,10 +60,12 @@
 							:key="`${item}-${dictionary.lang}-${i}`"
 							:label="key"
 							v-model="item.text"
+							:disabled="!r.is_dictionary_update"
 						)
 						v-btn.mb-4(
 							color="error"
 							@click="isRemoveDictionary = true; removeDictionary = dictionary"
+							v-if="r.is_dictionary_delete"
 						) Удалить
 
 		v-dialog(
@@ -214,6 +219,9 @@ export default {
     },
 
     async update() {
+      if (!this.r.is_dictionary_update) {
+        return;
+      }
       for await (let dictionary of this.dictionaries) {
         const newDictionary = {
           ...dictionary,
@@ -227,6 +235,9 @@ export default {
     },
 
     async remove() {
+      if (!this.r.is_dictionary_delete) {
+        return;
+      }
       await this.$store.dispatch("dictionary/remove", {
         body: { id: this.removeDictionary.id }
       });
@@ -239,6 +250,9 @@ export default {
     },
 
     addItem() {
+      if (!this.r.is_dictionary_update) {
+        return;
+      }
       this.dictionary.value[this.createSlug] = {
         text: ""
       };
@@ -253,6 +267,9 @@ export default {
     },
 
     removeItem() {
+      if (!this.r.is_dictionary_update) {
+        return;
+      }
       delete this.dictionary.value[this.removeItemSlug];
       this.dictionaries.forEach(el => {
         delete el.value[this.removeItemSlug];

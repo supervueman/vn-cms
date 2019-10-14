@@ -1,5 +1,5 @@
 <template lang="pug">
-  v-flex(v-if="adminAccess || managerAccess")
+  v-flex(v-if="r.is_user_create")
     .body-2.mb-12.mt-2 {{d.profile_creation}}
     profile-view(:profile="profile" operationType="create")
 </template>

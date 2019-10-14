@@ -15,10 +15,10 @@
 			slider-color="primary"
 			grow
 		)
-			v-tab {{d.resources}}
-			v-tab-item
+			v-tab(v-if="r.is_resources_read") {{d.resources}}
+			v-tab-item(v-if="r.is_resources_read")
 				v-app-bar(flat height="50")
-					v-tooltip(top v-if="managerAccess")
+					v-tooltip(top v-if="r.is_resource_create")
 						template(v-slot:activator="{ on }")
 							v-btn(
 								slot="activator"
@@ -63,22 +63,22 @@
 									v-list-item-content
 										v-list-item-title {{d.all_resources}}
 
-			v-tab(v-if="adminAccess") {{d.elements}}
-			v-tab-item(v-if="adminAccess")
+			v-tab(v-if="r.is_elements_access") {{d.elements}}
+			v-tab-item(v-if="r.is_elements_access")
 				v-list
-					v-list-item(to="/layouts")
+					v-list-item(to="/layouts" v-if="r.is_layouts_read")
 						v-list-item-action
 							v-icon(color="primary") layers
 						v-list-item-content
 							v-list-item-title {{d.layouts}}
-					v-list-item(to="/fields")
+					v-list-item(to="/fields" v-if="r.is_fields_read")
 						v-list-item-action
 							v-icon(color="primary") playlist_add
 						v-list-item-content
 							v-list-item-title {{d.additional_fields}}
 
-			v-tab {{d.files}}
-			v-tab-item
+			v-tab(v-if="r.is_filesystem_access") {{d.files}}
+			v-tab-item(v-if="r.is_filesystem_access")
 				v-list
 					v-list-item(to="/filesystem")
 						v-list-item-action

@@ -123,7 +123,7 @@
         v-card-actions
           v-btn.ml-2(
             color="primary"
-            v-if="managerAccess"
+            v-if="r.is_resource_create"
             @click="create"
           ) {{d.create}}
           v-btn.ml-2(
@@ -191,6 +191,9 @@ export default {
 
   methods: {
     create() {
+      if (!this.r.is_resource_create) {
+        return;
+      }
       this.$v.$touch();
       if (!this.$v.$error) {
         this.$store.dispatch("resource/createResource", this.resource);

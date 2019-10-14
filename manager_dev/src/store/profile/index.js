@@ -3,6 +3,7 @@ import axios from 'axios';
 import router from '@/routers';
 
 import profile from '@/models/user';
+import rules from '@/models/rules_default';
 
 export default {
   namespaced: true,
@@ -10,11 +11,22 @@ export default {
     profile: {
       ...profile
     },
-    resources: []
+    resources: [],
+    rules: {
+      ...rules
+    }
   },
   mutations: {
     set(state, payload) {
       state.profile = payload;
+    },
+
+    setRules(state, payload) {
+      const rules = JSON.parse(payload);
+      for (const rule in rules) {
+        rules[rule] = rules[rule].value;
+      }
+      state.rules = rules;
     },
 
     setResources(state, payload) {
@@ -39,6 +51,7 @@ export default {
       });
 
       if (response !== undefined && response.status === 200) {
+        commit('setRules', response.data.role.rules);
         this.dispatch('preloader/fetch', false);
         localStorage.setItem('x-api-key', response.data.token);
 
@@ -233,6 +246,9 @@ export default {
   getters: {
     get(state) {
       return state.profile;
+    },
+    getRules(state) {
+      return state.rules;
     },
     getResources(state) {
       return state.resources;

@@ -1,5 +1,5 @@
 <template lang="pug">
-  v-flex(v-if="adminAccess")
+  v-flex(v-if="r.is_layouts_read")
     .body-2.mb-12.mt-2 {{d.layouts}}
     v-layout.wrap
       v-flex
@@ -9,7 +9,7 @@
             color="primary"
             to="/layout-create"
             dark
-            v-if="adminAccess"
+            v-if="r.is_layout_create"
           ) {{d.create_layout}}
         v-data-table(
           :headers="headers"
@@ -28,7 +28,7 @@
                     fab
                     color="primary"
                     @click="removeDialogOpen(item)"
-                    v-if="adminAccess"
+                    v-if="r.is_layout_delete"
                   )
                     v-icon delete
         div.text-xs-center.pt-2
@@ -112,6 +112,9 @@ export default {
     },
 
     async remove() {
+      if (!this.r.is_layout_delete) {
+        return;
+      }
       await this.$store.dispatch("layout/remove", {
         body: { id: this.removeItem.id }
       });

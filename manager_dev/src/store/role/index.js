@@ -3,19 +3,27 @@ import axios from 'axios';
 
 // Models
 import role from '@/models/role'
+import rules from '@/models/rules_default';
 
 export default {
   namespaced: true,
   state: {
     role: {
-      ...role
+      ...role,
+      rules
     },
     roles: [],
     count: 0
   },
   mutations: {
     set(state, payload) {
-      state.role = payload;
+      let role = payload;
+      if (typeof payload.rules === 'string')
+        role = {
+          ...payload,
+          rules: JSON.parse(payload.rules)
+        };
+      state.role = role;
     },
     setAll(state, payload) {
       state.roles = payload;
@@ -29,7 +37,7 @@ export default {
       commit
     }, payload) {
       this.dispatch('preloader/fetch', true);
-      const data = requestDataHandler('GET', `/roles/role/${payload.params.id}`)
+      const data = requestDataHandler('GET', `/roles/find/${payload.params.id}`)
 
       const response = await axios(data).catch(err => {
         this.dispatch('preloader/fetch', false);
@@ -203,7 +211,8 @@ export default {
       commit
     }) {
       commit('set', {
-        ...role
+        ...role,
+        rules
       });
     },
 

@@ -1,5 +1,5 @@
 <template lang="pug">
-  v-flex(v-if="adminAccess")
+  v-flex(v-if="r.is_roles_read")
     .body-2.mb-12.mt-2 {{d.roles_politics}}
     v-layout.wrap
       v-flex
@@ -9,7 +9,7 @@
             color="primary"
             to="/role-create"
             dark
-            v-if="adminAccess"
+            v-if="r.is_roles_create"
           ) {{d.create_role}}
         v-data-table(
           :headers="headers"
@@ -29,7 +29,7 @@
                     fab
                     color="primary"
                     @click="removeDialogOpen(item)"
-                    v-if="adminAccess"
+                    v-if="r.is_roles_delete"
                   )
                     v-icon delete
     v-dialog(

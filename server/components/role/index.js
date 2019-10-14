@@ -1,6 +1,11 @@
 // Models
 const Role = require('../../models/role');
 
+// Base rules
+const rules_admin = require('./rules_admin.json');
+const rules_manager = require('./rules_manager.json');
+
+
 module.exports = async () => {
   let adminRole = await Role.findOne({
     where: {
@@ -12,6 +17,7 @@ module.exports = async () => {
     adminRole = await Role.create({
       slug: 'admin',
       title: 'Администратор',
+      rules: JSON.stringify(rules_admin)
     });
   }
 
@@ -25,19 +31,7 @@ module.exports = async () => {
     managerRole = await Role.create({
       slug: 'manager',
       title: 'Менеджер',
-    });
-  }
-
-  let userRole = await Role.findOne({
-    where: {
-      slug: 'user'
-    }
-  });
-
-  if (!userRole) {
-    userRole = await Role.create({
-      slug: 'user',
-      title: 'Пользователь',
+      rules: JSON.stringify(rules_manager)
     });
   }
 }

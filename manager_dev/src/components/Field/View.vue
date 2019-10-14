@@ -36,17 +36,17 @@
             v-btn.ml-2(
               color="primary"
               @click="create"
-              v-if="operationType === 'create'"
+              v-if="r.is_field_create && operationType === 'create'"
             ) {{d.create}}
             v-btn.ml-2(
               color="primary"
               @click="update"
-              v-if="operationType === 'update'"
+              v-if="r.is_field_update && operationType === 'update'"
             ) {{d.save}}
             v-btn.ml-2(
               color="error"
               @click="isRemoveDialog = true"
-              v-if="operationType === 'update'"
+              v-if="r.is_field_delete && operationType === 'update'"
             ) {{d.remove}}
 
       v-flex.xs12.md5.pl-2
@@ -180,6 +180,9 @@ export default {
 
   methods: {
     async create() {
+      if (!this.r.is_field_create) {
+        return;
+      }
       this.$v.$touch();
       if (!this.$v.$error) {
         await this.$store.dispatch("field/create", { body: this.field });
@@ -187,6 +190,9 @@ export default {
     },
 
     async update() {
+      if (!this.r.is_field_update) {
+        return;
+      }
       this.$v.$touch();
       if (!this.$v.$error) {
         const that = this;
@@ -221,6 +227,9 @@ export default {
     },
 
     async remove() {
+      if (!this.r.is_field_delete) {
+        return;
+      }
       await this.$store.dispatch("field/remove", {
         body: { id: this.field.id }
       });

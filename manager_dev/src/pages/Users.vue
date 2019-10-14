@@ -1,5 +1,5 @@
 <template lang="pug">
-  v-layout(v-if="adminAccess || managerAccess")
+  v-layout(v-if="r.is_users_read")
     v-flex
       .body-2.mt-2 {{d.users}}
         v-layout.wrap.pt-12
@@ -9,7 +9,7 @@
               v-btn(
                 color="primary"
                 dark
-                v-if="adminAccess || managerAccess"
+                v-if="r.is_user_create"
                 to="/profile-create"
               ) {{d.create_user}}
             v-data-table(
@@ -42,7 +42,7 @@
                         fab
                         color="primary"
                         @click="removeDialogOpen(item)"
-                        v-if="adminAccess"
+                        v-if="r.is_user_delete"
                       )
                         v-icon delete
             div.text-xs-center.pt-2
@@ -135,6 +135,9 @@ export default {
     },
 
     async remove() {
+      if (!this.r.is_user_delete) {
+        return;
+      }
       if (this.removeItem.id === this.$store.getters["profile/get"].id) {
         await this.$store.dispatch("profile/remove", {
           body: { id: this.removeItem.id }

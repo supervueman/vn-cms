@@ -3,7 +3,7 @@
 		v-toolbar-title
 			//- img(:src="`${imgFolderBasePath}/logo.svg`" class="toolbar-logo")
 		v-toolbar-items.hidden-xs-and-down
-			v-btn(text to="/users" v-if="adminAccess || managerAccess") {{d.users}}
+			v-btn(text to="/users" v-if="r.is_users_read") {{d.users}}
 		v-spacer
 		v-toolbar-items.hidden-xs-and-down
 			v-btn(text v-if="!isAuth" @click="$emit('openLoginDialog')") {{d.login}}
@@ -39,11 +39,11 @@
 					)
 						v-icon settings
 				v-list
-					v-list-item(to="/roles" v-if="adminAccess")
+					v-list-item(to="/roles" v-if="r.is_roles_read")
 						v-list-item-title {{d.roles_politics}}
-					v-list-item(to="/system-settings" v-if="adminAccess")
+					v-list-item(to="/system-settings" v-if="r.is_system_settings_read")
 						v-list-item-title {{d.system_settings}}
-					v-list-item(to="/dictionaries" v-if="adminAccess")
+					v-list-item(to="/dictionaries" v-if="r.is_dictionaries_read")
 						v-list-item-title {{d.dictionaries}}
 					v-list-item(@click="logout")
 						v-list-item-title {{d.logout}}

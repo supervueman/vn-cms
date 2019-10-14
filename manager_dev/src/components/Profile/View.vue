@@ -110,7 +110,7 @@
 				v-btn.mr-2(
 					color="primary"
 					@click="create"
-					v-if="operationType === 'create'"
+					v-if="r.is_user_create && operationType === 'create'"
 				) {{d.create}}
 				v-btn.mr-2(
 					color="primary"
@@ -278,6 +278,9 @@ export default {
 
   methods: {
     async create() {
+      if (!this.r.r.is_user_create) {
+        return;
+      }
       this.$v.$touch();
       if (!this.$v.$error) {
         this.profile.password = this.password;

@@ -111,17 +111,17 @@
         v-btn.ml-2(
           color="primary"
           @click="create"
-          v-if="operationType === 'create'"
+          v-if="r.is_resource_create && operationType === 'create'"
         ) {{d.create}}
         v-btn.ml-2(
           color="primary"
           @click="update"
-          v-if="operationType === 'update'"
+          v-if="r.is_resource_update && operationType === 'update'"
         ) {{d.save}}
         v-btn.ml-2(
           color="error"
           @click="isRemoveDialog = true"
-          v-if="operationType === 'update'"
+          v-if="r.is_resource_delete && operationType === 'update'"
         ) {{d.remove}}
     v-dialog(
         v-model="isRemoveDialog"
@@ -228,6 +228,9 @@ export default {
 
   methods: {
     async create() {
+      if (!this.r.is_resource_create) {
+        return;
+      }
       this.$v.$touch();
       if (!this.$v.$error) {
         this.resource.layout = this.changeLayoutData;
@@ -261,6 +264,9 @@ export default {
     },
 
     async update() {
+      if (!this.r.is_resource_update) {
+        return;
+      }
       this.$v.$touch();
       if (!this.$v.$error) {
         await this.$store.dispatch("resource/update", {
@@ -275,6 +281,9 @@ export default {
     },
 
     async remove() {
+      if (!this.r.is_resource_delete) {
+        return;
+      }
       const resources = this.$store.getters["resource/getAll"].filter(el => {
         if (el.id !== this.removeItem.id) {
           return el;
@@ -295,6 +304,9 @@ export default {
     },
 
     changeLayoutConfirm(event) {
+      if (!this.r.is_resource_update) {
+        return;
+      }
       this.changeLayoutId = event.id;
       this.changeLayoutData = event;
       if (this.operationType === "update") {
@@ -303,6 +315,9 @@ export default {
     },
 
     async changeLayout() {
+      if (!this.r.is_resource_update) {
+        return;
+      }
       this.resource.layout = this.changeLayoutData;
       this.resource.layoutId = this.changeLayoutId;
       for await (let el of this.$store.getters[

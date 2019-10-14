@@ -1,5 +1,5 @@
 <template lang="pug">
-  v-flex(v-if="adminAccess")
+  v-flex(v-if="r.is_fields_read")
     .body-2.mb-12.mt-2 {{d.additional_fields}}
     v-layout.wrap
       v-flex
@@ -9,7 +9,7 @@
             color="primary"
             to="/field-create"
             dark
-            v-if="adminAccess"
+            v-if="r.is_field_create"
           ) {{d.create_field}}
         v-data-table(
           :headers="headers"
@@ -37,7 +37,7 @@
                     fab
                     color="primary"
                     @click="removeDialogOpen(item)"
-                    v-if="adminAccess"
+                    v-if="r.is_field_delete"
                   )
                     v-icon delete
         div.text-xs-center.pt-2
@@ -127,6 +127,9 @@ export default {
     },
 
     async remove() {
+      if (!this.r.is_field_delete) {
+        return;
+      }
       await this.$store.dispatch("field/remove", {
         body: { id: this.removeItem.id }
       });

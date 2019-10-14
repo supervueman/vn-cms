@@ -191,7 +191,11 @@
                     :value="item"
                   )
     v-card-actions
-      v-btn.ml-2(color="primary" @click="saveAdditionalFields") {{d.save}}
+      v-btn.ml-2(
+        color="primary"
+        @click="saveAdditionalFields"
+        v-if="r.is_resource_update"
+      ) {{d.save}}
 </template>
 
 <script>
@@ -216,6 +220,9 @@ export default {
 
   methods: {
     async saveAdditionalFields() {
+      if (!thie.r.is_resource_update) {
+        return;
+      }
       const fields = [];
 
       for (let el in this.fields) {

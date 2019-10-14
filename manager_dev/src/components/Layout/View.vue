@@ -36,22 +36,22 @@
             //-   v-flex.pt-4
             //-     v-card
                   //- fields
-    v-card(v-if="adminAccess")
+    v-card
       v-card-actions
         v-btn.ml-2(
           color="primary"
           @click="create"
-          v-if="operationType === 'create'"
+          v-if="r.is_layout_create && operationType === 'create'"
         ) {{d.create}}
         v-btn.ml-2(
           color="primary"
           @click="update"
-          v-if="operationType === 'update'"
+          v-if="r.is_layout_update && operationType === 'update'"
         ) {{d.save}}
         v-btn.ml-2(
           color="error"
           @click="isRemoveDialog = true"
-          v-if="operationType === 'update'"
+          v-if="r.is_layout_delete && operationType === 'update'"
         ) {{d.remove}}
     v-dialog(
       v-model="isRemoveDialog"
@@ -137,6 +137,9 @@ export default {
 
   methods: {
     async create() {
+      if (!this.r.is_layout_create) {
+        return;
+      }
       this.$v.$touch();
       if (!this.$v.$error) {
         await this.$store.dispatch("layout/create", { body: this.layout });
@@ -144,6 +147,9 @@ export default {
     },
 
     async update() {
+      if (!this.r.is_layout_update) {
+        return;
+      }
       this.$v.$touch();
       if (!this.$v.$error) {
         await this.$store.dispatch("layout/update", { body: this.layout });
@@ -151,6 +157,9 @@ export default {
     },
 
     async remove() {
+      if (!this.r.is_layout_delete) {
+        return;
+      }
       await this.$store.dispatch("layout/remove", {
         body: { id: this.layout.id }
       });

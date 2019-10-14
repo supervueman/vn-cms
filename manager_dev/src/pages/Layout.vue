@@ -1,5 +1,5 @@
 <template lang="pug">
-  v-flex(v-if="adminAccess")
+  v-flex(v-if="r.is_layouts_read")
     .body-2.mb-12.mt-2 {{d.layout}}: {{layout.title}}
     v-layout.wrap
       layout-view(

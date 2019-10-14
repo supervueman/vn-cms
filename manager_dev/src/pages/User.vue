@@ -1,5 +1,5 @@
 <template lang="pug">
-	v-flex(v-if="adminAccess || managerAccess")
+	v-flex(v-if="r.is_users_read")
 		.body-2.mb-12.mt-2 {{d.profile}}: {{user.slug}}
 		profile-view(:profile="user" operationType="update")
 </template>

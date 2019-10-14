@@ -1,5 +1,5 @@
 <template lang="pug">
-  v-flex(v-if="managerAccess")
+  v-flex(v-if="r.is_resource_create")
     .body-2.mt-2 {{d.resource_creation}}
       v-layout.wrap.pt-12
         resource-view(

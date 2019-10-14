@@ -14,12 +14,14 @@ import vuetify from './plugins/vuetify';
 import dictionaryMixin from './mixins/dictionaryMixin';
 import baseMixin from './mixins/baseMixin';
 import accessMixin from './mixins/accessMixin';
+import rulesMixin from './mixins/rules';
 
 commonComponentsRequire();
 
 Vue.mixin(dictionaryMixin);
 Vue.mixin(baseMixin);
 Vue.mixin(accessMixin);
+Vue.mixin(rulesMixin);
 
 Vue.config.productionTip = false;
 

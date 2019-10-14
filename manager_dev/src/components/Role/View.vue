@@ -21,23 +21,31 @@
                   @blur="$v.role.title.$touch()"
                   :error-messages="titleErrors"
                 )
+              v-flex
+                v-list
+                  v-list-item(v-for="(rule, i) in role.rules" :key="i")
+                    v-list-item-content {{rule.title}}
+                    v-list-item-action
+                      v-checkbox(
+                        v-model="rule.value"
+                      )
 
-    v-card(v-if="adminAccess")
+    v-card
       v-card-actions
         v-btn.ml-2(
           color="primary"
           @click="create"
-          v-if="operationType === 'create'"
+          v-if="r.is_roles_create && operationType === 'create'"
         ) {{d.create}}
         v-btn.ml-2(
           color="primary"
           @click="update"
-          v-if="operationType === 'update'"
+          v-if="r.is_roles_update && operationType === 'update'"
         ) {{d.save}}
         v-btn.ml-2(
           color="error"
           @click="isRemoveDialog = true"
-          v-if="operationType === 'update'"
+          v-if="r.is_roles_delete && operationType === 'update'"
         ) {{d.remove}}
 
     v-dialog(
@@ -89,7 +97,15 @@ export default {
   data() {
     return {
       menu: false,
-      isRemoveDialog: false
+      isRemoveDialog: false,
+      headers: [
+        {
+          text: "Rule",
+          align: "left",
+          sortable: false
+        },
+        { text: "", value: "" }
+      ]
     };
   },
 
@@ -116,10 +132,16 @@ export default {
 
   methods: {
     async create() {
+      if (!this.r.is_roles_create) {
+        return;
+      }
       this.$v.$touch();
       if (!this.$v.$error) {
         await this.$store.dispatch("role/create", {
-          body: this.role
+          body: {
+            ...this.role,
+            rules: JSON.stringify(this.role.rules)
+          }
         });
         this.$router.push(`/roles/${this.$store.getters["role/get"].id}`);
         this.$store.dispatch("role/clear");
@@ -127,15 +149,24 @@ export default {
     },
 
     async update() {
+      if (!this.r.is_roles_update) {
+        return;
+      }
       this.$v.$touch();
       if (!this.$v.$error) {
         await this.$store.dispatch("role/update", {
-          body: this.role
+          body: {
+            ...this.role,
+            rules: JSON.stringify(this.role.rules)
+          }
         });
       }
     },
 
     async remove() {
+      if (!this.r.is_roles_delete) {
+        return;
+      }
       await this.$store.dispatch("role/remove", {
         body: {
           id: this.role.id

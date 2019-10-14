@@ -1,5 +1,5 @@
 <template lang="pug">
-  v-flex(v-if="adminAccess")
+  v-flex(v-if="r.is_role_create")
     .body-2.mb-12.mt-2 {{d.role_creation}}
     v-layout.wrap
       role-view(
@@ -26,7 +26,7 @@ export default {
 
   computed: {
     role() {
-      return this.$store.getters["get/role"];
+      return this.$store.getters["role/get"];
     }
   }
 };
