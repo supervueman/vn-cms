@@ -41,7 +41,7 @@
 				v-list
 					v-list-item(to="/roles" v-if="r.is_roles_read")
 						v-list-item-title {{d.roles_politics}}
-					v-list-item(to="/system-settings" v-if="r.is_system_settings_read")
+					v-list-item(to="/system-settings" v-if="r.is_system_settings_update")
 						v-list-item-title {{d.system_settings}}
 					v-list-item(to="/dictionaries" v-if="r.is_dictionaries_read")
 						v-list-item-title {{d.dictionaries}}
@@ -118,6 +118,7 @@ export default {
       this.$store.dispatch("layout/clearAll");
       this.$store.dispatch("profile/clear");
       this.$store.dispatch("profile/clearResources");
+      this.$store.dispatch("profile/clearRules");
       this.$store.dispatch("role/clear");
       this.$store.dispatch("role/clearAll");
       this.$store.dispatch("user/clear");

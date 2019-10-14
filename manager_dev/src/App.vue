@@ -14,7 +14,6 @@
 			@openLoginDialog="isLoginDialog = true"
 		)
 		sidebar(
-			v-if="adminAccess || managerAccess"
 			:slug="profile.slug"
 		)
 		v-content

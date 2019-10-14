@@ -278,7 +278,7 @@ export default {
 
   methods: {
     async create() {
-      if (!this.r.r.is_user_create) {
+      if (!this.r.is_user_create) {
         return;
       }
       this.$v.$touch();

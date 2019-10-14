@@ -1,5 +1,5 @@
 <template lang="pug">
-	v-flex(v-if="r.is_system_settings_read")
+	v-flex(v-if="r.is_system_settings_update")
 		.body-2.mb-12.mt-2 {{d.system_settings}}
 		v-layout.wrap
 			v-flex

@@ -21,7 +21,9 @@ export default {
       if (typeof payload.rules === 'string')
         role = {
           ...payload,
-          rules: JSON.parse(payload.rules)
+          rules: {
+            ...JSON.parse(payload.rules)
+          }
         };
       state.role = role;
     },

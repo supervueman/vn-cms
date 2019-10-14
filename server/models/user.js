@@ -21,7 +21,8 @@ const User = sequelize.define('user', {
   },
   phone: {
     type: Sequelize.STRING,
-    unique: true
+    allowNull: true,
+    notEmpty: false
   },
   firstname: Sequelize.STRING,
   lastname: Sequelize.STRING,
@@ -36,7 +37,7 @@ const User = sequelize.define('user', {
   },
   token: {
     type: Sequelize.STRING,
-    unique: true
+    // unique: true
   },
 });
 

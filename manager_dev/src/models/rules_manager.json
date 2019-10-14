@@ -1,7 +1,7 @@
 {
   "is_roles_read": {
     "title": "Доступ к просмотру политик доступа",
-    "value": false
+    "value": true
   },
   "is_roles_create": {
     "title": "Разрешить создавать политики доступа",
@@ -17,7 +17,7 @@
   },
   "is_system_settings_read": {
     "title": "Доступ к просмотру системных настроек",
-    "value": false
+    "value": true
   },
   "is_system_settings_update": {
     "title": "Разрешить изменять системные настройки",

@@ -5,17 +5,26 @@ import router from '@/routers';
 import profile from '@/models/user';
 import rules from '@/models/rules_default';
 
+const rulesParse = {
+  ...rules
+};
+for (const rule in rulesParse) {
+  rulesParse[rule] = rulesParse[rule].value;
+}
+
 export default {
   namespaced: true,
+
   state: {
     profile: {
       ...profile
     },
     resources: [],
     rules: {
-      ...rules
+      ...rulesParse
     }
   },
+
   mutations: {
     set(state, payload) {
       state.profile = payload;
@@ -33,6 +42,7 @@ export default {
       state.resources = payload;
     }
   },
+
   actions: {
     async findByAccessToken({
       commit
@@ -237,12 +247,21 @@ export default {
       })
     },
 
+    clearRules({
+      commit
+    }) {
+      commit('setRules', JSON.stringify({
+        ...rulesParse
+      }));
+    },
+
     clearResources({
       commit
     }) {
       commit('setResources', []);
     },
   },
+
   getters: {
     get(state) {
       return state.profile;

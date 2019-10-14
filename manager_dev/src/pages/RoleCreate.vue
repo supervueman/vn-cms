@@ -1,5 +1,5 @@
 <template lang="pug">
-  v-flex(v-if="r.is_role_create")
+  v-flex(v-if="r.is_roles_create")
     .body-2.mb-12.mt-2 {{d.role_creation}}
     v-layout.wrap
       role-view(

@@ -21,8 +21,8 @@ module.exports = {
   },
 
   async createByEmail(req, res) {
-    if (!(req.adminAccess || req.managerAccess)) {
-      res.status(401).send({
+    if (!req.rules.is_user_create) {
+      res.status(403).send({
         message: 'Access denied!'
       });
     }
@@ -67,7 +67,7 @@ module.exports = {
       ...req.body,
       password: hashedPw,
       userId: req.profile.id
-    });
+    }).catch(err => {});
 
     await createDir(`../files/${createdUser.id}`);
 
