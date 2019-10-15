@@ -26,7 +26,7 @@
 					)
 						v-img.mr-2(:src="`/images/flags/${dictionary.lang || 'ru'}.svg`", alt="alt" width="30")
 						v-list-item-title {{dictionary.lang}}
-			v-btn(text slot="activator" to="/profile" v-if="profileId !== '0'")
+			v-btn(text slot="activator" to="/profile" v-if="isAuth")
 				div.body-1.mr-3 {{ firstname }} {{lastname}}
 				v-avatar.mr-3(size="40" color="grey lighten-4")
 					img(:src="`${imgFolderBasePath}/${image}`")
