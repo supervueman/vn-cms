@@ -14,6 +14,7 @@
 			@openLoginDialog="isLoginDialog = true"
 		)
 		sidebar(
+			v-if="isAuth"
 			:slug="profile.slug"
 		)
 		v-content

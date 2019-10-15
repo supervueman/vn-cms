@@ -13,11 +13,15 @@ module.exports = {
 
     const filter = JSON.parse(req.query.filter || "{}");
 
-    if (req.managerAccess) {
-      if (!filter.where) {
-        filter.where = {};
-      }
-      filter.where.userId = req.profile.id
+    if (!filter.where) {
+      filter.where = {};
+    }
+
+    filter.where.userId = req.profile.id;
+    if (!(req.managerAccess || req.adminAccess)) {
+      filter.where.userId = req.profile.userId;
+    } else if (req.adminAccess) {
+      filter.where = {};
     }
 
     const resources = await Resource.findAll(filter);
@@ -46,7 +50,8 @@ module.exports = {
       return;
     }
 
-    if (req.managerAccess && resource.userId === req.profile.id || req.adminAccess) {
+    // (Если это менеджер и userId ресурса совпадает с id менеджера или это админ) или (userId ресурса совпадает с userId профиля)
+    if (((req.managerAccess && resource.userId === req.profile.id) || req.adminAccess) || resource.userId === req.profile.userId) {
       res.status(200).send(resource);
     } else {
       res.status(403).send({
@@ -74,7 +79,8 @@ module.exports = {
       return;
     }
 
-    if (req.managerAccess && resource.userId === req.profile.id || req.adminAccess) {
+    // (Если это менеджер и userId ресурса совпадает с id менеджера или это админ) или (userId ресурса совпадает с userId профиля)
+    if (((req.managerAccess && resource.userId === req.profile.id) || req.adminAccess) || resource.userId === req.profile.userId) {
       res.status(200).send(resource);
     } else {
       res.status(403).send({
@@ -92,6 +98,10 @@ module.exports = {
     }
 
     req.body.userId = req.profile.id;
+
+    if (req.profile.role.slug !== 'manager') {
+      req.body.userId = req.profile.userId;
+    }
 
     const createdResource = await Resource.create(req.body);
 
@@ -150,7 +160,8 @@ module.exports = {
       return;
     }
 
-    if (req.managerAccess && resource.userId === req.profile.id || req.adminAccess) {
+    // (Если это менеджер и userId ресурса совпадает с id менеджера или это админ) или (userId ресурса совпадает с userId профиля)
+    if (((req.managerAccess && resource.userId === req.profile.id) || req.adminAccess) || resource.userId === req.profile.userId) {
       const updateResource = req.body;
 
       const is_id_in_slug = await SystemSetting.findOne({
@@ -193,7 +204,8 @@ module.exports = {
       });
     }
 
-    if (req.managerAccess && resource.userId === req.profile.id || req.adminAccess) {
+    // (Если это менеджер и userId ресурса совпадает с id менеджера или это админ) или (userId ресурса совпадает с userId профиля)
+    if (((req.managerAccess && resource.userId === req.profile.id) || req.adminAccess) || resource.userId === req.profile.userId) {
       await Resource.destroy({
         where: {
           id: req.body.id

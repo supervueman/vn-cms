@@ -231,7 +231,9 @@ export default {
       if (!this.r.is_resource_create) {
         return;
       }
+
       this.$v.$touch();
+
       if (!this.$v.$error) {
         this.resource.layout = this.changeLayoutData;
         this.resource.layoutId = this.changeLayoutId;

@@ -45,7 +45,7 @@
   },
   "is_layouts_read": {
     "title": "Разрешить просматривать шаблоны",
-    "value": false
+    "value": true
   },
   "is_layout_create": {
     "title": "Разрешить создавать шаблоны",
@@ -61,7 +61,7 @@
   },
   "is_fields_read": {
     "title": "Доступ к просмотру полей",
-    "value": false
+    "value": true
   },
   "is_field_create": {
     "title": "Разрешить создавать поля",
@@ -125,7 +125,7 @@
   },
   "is_resource_create": {
     "title": "Разрешить создавать ресурсы",
-    "value": false
+    "value": true
   },
   "is_resource_update": {
     "title": "Разрешить редактировать ресурсы",
