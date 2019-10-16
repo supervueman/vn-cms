@@ -125,7 +125,7 @@
   },
   "is_resource_create": {
     "title": "Разрешить создавать ресурсы",
-    "value": false
+    "value": true
   },
   "is_resource_update": {
     "title": "Разрешить редактировать ресурсы",
