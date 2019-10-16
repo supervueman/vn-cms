@@ -7,7 +7,7 @@
           color="primary"
           :to="`/resource-create?level=${level}&parentId=${parentId}`"
           dark
-          v-if="r.is_resource_create && mainLang === lang && profile.id === userId"
+          v-if="r.is_resource_create && mainLang === lang && (profile.id === userId || profile.userId === userId)"
         ) {{d.create_resource}}
       v-data-table(
         :headers="headers"

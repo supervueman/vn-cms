@@ -25,7 +25,7 @@
 				v-btn(
 					color="primary"
 					@click="isTranslationDialog = true"
-					v-if="mainLang === resource.lang && r.is_resource_create && profile.id === resource.userId"
+					v-if="mainLang === resource.lang && r.is_resource_create && (profile.id === resource.userId ||profile.userId === resource.userId)"
 				) {{d.create_translation}}
 			v-tabs(
 				v-model="tab"
