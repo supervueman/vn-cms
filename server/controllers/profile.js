@@ -63,11 +63,16 @@ module.exports = {
 
     const hashedPw = await bcrypt.hash(req.body.password, 12);
 
-    const createdUser = await User.create({
+    const userCreated = {
       ...req.body,
       password: hashedPw,
       userId: req.profile.id
-    }).catch(err => {});
+    }
+    if (!req.managerAccess && !req.adminAccess) {
+      userCreated.userId = req.profile.userId;
+    }
+
+    const createdUser = await User.create(userCreated).catch(err => {});
 
     await createDir(`../files/${createdUser.id}`);
 

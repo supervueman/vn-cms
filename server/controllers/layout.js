@@ -3,7 +3,6 @@ const Layout = require('../models/layout');
 
 module.exports = {
   async findAll(req, res) {
-    console.log(req.rules.is_layouts_read)
     if (!req.rules.is_layouts_read) {
       res.status(403).send({
         message: 'Access denied!'
