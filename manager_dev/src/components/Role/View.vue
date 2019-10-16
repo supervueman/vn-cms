@@ -13,6 +13,7 @@
                   @input="$v.role.slug.$touch()"
                   @blur="$v.role.slug.$touch()"
                   :error-messages="slugErrors"
+                  :disabled="role.slug === 'admin' || role.slug === 'manager'"
                 )
                 v-text-field(
                   v-model="role.title"
@@ -28,7 +29,7 @@
                     v-list-item-action
                       v-checkbox(
                         v-model="rule.value"
-                        :disabled="role.slug === 'manager' || role.slug === 'admin'"
+                        :disabled="role.slug === 'admin'"
                       )
 
     v-card
@@ -41,7 +42,7 @@
         v-btn.ml-2(
           color="primary"
           @click="update"
-          v-if="r.is_roles_update && operationType === 'update' && role.slug !== 'manager' && role.slug !== 'admin'"
+          v-if="r.is_roles_update && operationType === 'update' && role.slug !== 'admin'"
         ) {{d.save}}
         v-btn.ml-2(
           color="error"

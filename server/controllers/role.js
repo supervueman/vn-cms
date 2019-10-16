@@ -121,8 +121,14 @@ module.exports = {
       });
       return;
     }
-
-    if (role.slug === 'admin' || role.slug === 'manager') {
+    // Если не админ и роль равна admin или manager и при этом роль не совпадает с обновленной
+    // Если же админ и роль равна admin или manager и при этом роль не совпадает с обновленной
+    if (!req.adminAccess && (role.slug === 'admin' || role.slug === 'manager') && role.slug !== req.body.slug) {
+      res.status(403).send({
+        message: 'Access denied!'
+      });
+      return;
+    } else if (req.adminAccess && (role.slug === 'admin' || role.slug === 'manager') && role.slug !== req.body.slug) {
       res.status(403).send({
         message: 'Access denied!'
       });
