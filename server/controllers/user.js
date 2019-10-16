@@ -51,6 +51,7 @@ module.exports = {
 			});
 		}
 
+		res.status(200).send(user);
 		if (
 			(req.managerAccess && user.userId === req.profile.id) ||
 			req.adminAccess
@@ -114,22 +115,19 @@ module.exports = {
 		delete reqUser.password;
 		delete reqUser.token;
 
-		if (
-			(req.managerAccess && `${existUser.userId}` === `${req.profile.uid}`) ||
-			req.adminAccess
-		) {
+		if ((req.managerAccess && String(existUser.userId) === String(req.profile.id)) || (!req.managerAccess && String(existUser.id) === String(req.profile.userId)) || req.adminAccess) {
 			const updatedUser = await existUser.update(reqUser);
 
 			const filter = JSON.parse(req.query.filter || "{}");
 
 			const user = await User.findByPk(updatedUser.id, filter);
-			delete user.password;
 
 			res.status(200).send(user);
 		} else {
-			res.status(404).send({
-				message: 'Not found!'
+			res.status(403).send({
+				message: 'Access denied!'
 			});
+			return;
 		}
 	},
 
