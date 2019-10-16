@@ -28,6 +28,7 @@
                     v-list-item-action
                       v-checkbox(
                         v-model="rule.value"
+                        :disabled="role.slug === 'manager' || role.slug === 'admin'"
                       )
 
     v-card
@@ -40,12 +41,12 @@
         v-btn.ml-2(
           color="primary"
           @click="update"
-          v-if="r.is_roles_update && operationType === 'update'"
+          v-if="r.is_roles_update && operationType === 'update' && role.slug !== 'manager' && role.slug !== 'admin'"
         ) {{d.save}}
         v-btn.ml-2(
           color="error"
           @click="isRemoveDialog = true"
-          v-if="r.is_roles_delete && operationType === 'update'"
+          v-if="r.is_roles_delete && operationType === 'update' && role.slug !== 'manager' && role.slug !== 'admin'"
         ) {{d.remove}}
 
     v-dialog(

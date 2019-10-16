@@ -12,7 +12,7 @@ module.exports = {
 
     const filter = JSON.parse(req.query.filter || "{}");
 
-    if (req.managerAccess) {
+    if (!req.adminAccess) {
       if (!filter.where) {
         filter.where = {};
       }
@@ -47,6 +47,14 @@ module.exports = {
       });
       return;
     }
+
+    if (!req.adminAccess && (role.slug === 'admin' || role.slug === 'manager')) {
+      res.status(403).send({
+        message: 'Access denied!'
+      });
+      return;
+    }
+
     res.status(200).send(role);
   },
 
@@ -67,6 +75,14 @@ module.exports = {
       });
       return;
     }
+
+    if (!req.adminAccess && (role.slug === 'admin' || role.slug === 'manager')) {
+      res.status(403).send({
+        message: 'Access denied!'
+      });
+      return;
+    }
+
     res.status(200).send(role);
   },
 
@@ -77,6 +93,14 @@ module.exports = {
       });
       return;
     }
+
+    if (req.body.slug === 'admin' || req.body.slug === 'manager') {
+      res.status(403).send({
+        message: 'Access denied!'
+      });
+      return;
+    }
+
     const createdRole = await Role.create(req.body);
     res.status(200).send(createdRole);
   },
@@ -97,6 +121,14 @@ module.exports = {
       });
       return;
     }
+
+    if (role.slug === 'admin' || role.slug === 'manager') {
+      res.status(403).send({
+        message: 'Access denied!'
+      });
+      return;
+    }
+
     const updateRole = req.body;
     delete updateRole.id;
 
@@ -107,6 +139,15 @@ module.exports = {
 
   async remove(req, res) {
     if (!req.rules.is_roles_delete) {
+      res.status(403).send({
+        message: 'Access denied!'
+      });
+      return;
+    }
+
+    const role = await Role.findByPk(req.body.id);
+
+    if (role.slug === 'admin' || role.slug === 'manager') {
       res.status(403).send({
         message: 'Access denied!'
       });

@@ -29,7 +29,7 @@
                     fab
                     color="primary"
                     @click="removeDialogOpen(item)"
-                    v-if="r.is_roles_delete"
+                    v-if="r.is_roles_delete && item.slug !== 'admin' && item.slug !== 'manager'"
                   )
                     v-icon delete
     v-dialog(
