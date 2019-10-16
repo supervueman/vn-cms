@@ -25,7 +25,7 @@
 				v-btn(
 					color="primary"
 					@click="isTranslationDialog = true"
-					v-if="mainLang === resource.lang && r.is_resource_create"
+					v-if="mainLang === resource.lang && r.is_resource_create && profile.id === resource.userId"
 				) {{d.create_translation}}
 			v-tabs(
 				v-model="tab"
@@ -54,6 +54,7 @@
 										:level="resource.level"
 										:parentId="resource.id"
 										:lang="resource.lang"
+										:userId="resource.userId"
 									)
 		v-dialog(
 			v-model="isTranslationDialog"
@@ -161,6 +162,10 @@ export default {
       if (!this.$v.translationLang.$dirty) return errors;
       !this.$v.translationLang.required && errors.push("Обязательное поле!");
       return errors;
+    },
+
+    profile() {
+      return this.$store.getters["profile/get"];
     }
   },
 

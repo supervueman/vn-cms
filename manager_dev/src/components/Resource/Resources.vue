@@ -7,7 +7,7 @@
           color="primary"
           :to="`/resource-create?level=${level}&parentId=${parentId}`"
           dark
-          v-if="r.is_resource_create && mainLang === lang"
+          v-if="r.is_resource_create && mainLang === lang && profile.id === userId"
         ) {{d.create_resource}}
       v-data-table(
         :headers="headers"
@@ -71,6 +71,10 @@ export default {
     lang: {
       type: String,
       default: ""
+    },
+    userId: {
+      type: Number,
+      default: null
     }
   },
 
@@ -96,6 +100,9 @@ export default {
     },
     count() {
       return this.$store.getters["resource/getCount"];
+    },
+    profile() {
+      return this.$store.getters["profile/get"];
     }
   },
 

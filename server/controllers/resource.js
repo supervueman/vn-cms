@@ -130,7 +130,6 @@ module.exports = {
     }
 
     if (main_lang.dataValues.value === createdResource.lang) {
-
       await createdResource.update({
         translationId: createdResource.dataValues.id
       });
@@ -230,10 +229,9 @@ module.exports = {
     const filter = JSON.parse(req.query.filter || "{}");
 
     if (req.managerAccess) {
-      if (!filter.where) {
-        filter.where = {};
-      }
-      filter.where.userId = req.profile.id
+      filter.where.userId = req.profile.id;
+    } else if (!req.managerAccess && !req.adminAccess) {
+      filter.where.userId = req.profile.userId;
     }
 
     const count = await Resource.count(filter);
