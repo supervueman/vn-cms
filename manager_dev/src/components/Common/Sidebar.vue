@@ -45,21 +45,11 @@
 										v-icon(color="primary") library_books
 									v-list-item-content
 										v-list-item-title {{resource.title}} ({{resource.id}})
-
-				//- v-expansion-panels(
-				//- 	v-if="adminAccess"
-				//- )
-				//- 	v-expansion-panel
-				//- 		v-expansion-panel-header {{slug}}
-				//- 		v-expansion-panel-content
-				//- 			v-list
-				//- 				v-list-item(
-				//- 					to="/resources"
-				//- 				)
-				//- 					v-list-item-action
-				//- 						v-icon(color="primary") folder
-				//- 					v-list-item-content
-				//- 						v-list-item-title {{d.all_resources}}
+								v-list-item.px-0.py-0(to="/resources" v-if="adminAccess")
+									v-list-item-action
+										v-icon(color="primary") library_books
+									v-list-item-content
+										v-list-item-title {{d.all_resources}}
 
 			v-tab(v-if="r.is_elements_access") {{d.elements}}
 			v-tab-item(v-if="r.is_elements_access")

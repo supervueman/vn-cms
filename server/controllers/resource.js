@@ -17,11 +17,10 @@ module.exports = {
       filter.where = {};
     }
 
-    filter.where.userId = req.profile.id;
-    if (!(req.managerAccess || req.adminAccess)) {
+    if (req.managerAccess) {
+      filter.where.userId = req.profile.id;
+    } else if (!req.managerAccess && !req.adminAccess) {
       filter.where.userId = req.profile.userId;
-    } else if (req.adminAccess) {
-      filter.where = {};
     }
 
     const resources = await Resource.findAll(filter);
@@ -98,8 +97,7 @@ module.exports = {
     }
 
     req.body.userId = req.profile.id;
-
-    if (req.profile.role.slug !== 'manager') {
+    if (!req.managerAccess && !req.adminAccess) {
       req.body.userId = req.profile.userId;
     }
 
