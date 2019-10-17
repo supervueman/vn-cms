@@ -18,9 +18,9 @@ module.exports = {
     if (req.adminAccess) {
       filesystem = readDir('');
     } else if (req.managerAccess) {
-      filesystem = readDir(`${req.profile.id}`);
+      filesystem = readDir(`user-${req.profile.id}`);
     } else {
-      filesystem = readDir(`${req.profile.userId}/${req.profile.id}`);
+      filesystem = readDir(`user-${req.profile.userId}/user-${req.profile.id}`);
     }
 
     res.status(200).send(filesystem);

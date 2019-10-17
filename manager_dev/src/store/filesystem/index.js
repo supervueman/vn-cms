@@ -25,7 +25,6 @@ export default {
           }
         });
       }
-
       recursiveFilesystem(filesystem);
 
       state.filesystem = filesystem;
