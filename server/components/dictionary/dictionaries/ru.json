@@ -38,6 +38,9 @@
     "resource": {
       "text": "Ресурс"
     },
+    "resource_type": {
+      "text": "Тип ресурса"
+    },
     "elements": {
       "text": "Элементы"
     },

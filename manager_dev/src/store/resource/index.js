@@ -15,6 +15,10 @@ export default {
     layout: {
       ...layout
     },
+    type: {
+      'document': 'Документ'
+    },
+    types: [],
     fields: [],
     additionalFields: [],
     serializedFields: {},
@@ -34,6 +38,14 @@ export default {
     },
     setLayout(state, payload) {
       state.layout = payload;
+    },
+    setType(state, payload) {
+      if (payload) {
+        state.types = payload;
+      }
+    },
+    setTypes(state, payload) {
+      state.types = payload;
     },
     setFields(state, payload) {
       state.fields = payload;
@@ -144,6 +156,7 @@ export default {
         commit('set', response.data);
         commit('setAdditionalFields', response.data.additionalfields);
         commit('setLayout', response.data.layout);
+        commit('setType', response.data.resourcetype);
         commit('setFields', response.data.layout.fields);
         commit('setTranslations', response.data);
         commit('setSerializedFields');
@@ -224,6 +237,27 @@ export default {
         if (response.data.level === 1 && this.getters['base/mainLang'] === response.data.lang) {
           this.getters['profile/getResources'].push(response.data)
         }
+      }
+    },
+
+    async findTypes({
+      commit
+    }) {
+      this.dispatch('preloader/fetch', true);
+      const data = requestDataHandler('GET', '/resources/types');
+
+      const response = await axios(data).catch(err => {
+        this.dispatch('preloader/fetch', false);
+        this.dispatch("notification/fetch", {
+          type: "error",
+          message: `${err}`,
+          isActive: true
+        });
+      });
+
+      if (response !== undefined && response.status === 200) {
+        commit('setTypes', response.data);
+        this.dispatch('preloader/fetch', false);
       }
     },
 
@@ -408,6 +442,12 @@ export default {
     },
     getLayout(state) {
       return state.layout;
+    },
+    getType(state) {
+      return state.type;
+    },
+    getTypes(state) {
+      return state.types;
     },
     getFields(state) {
       return state.fields;

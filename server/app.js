@@ -25,6 +25,7 @@ const roleInit = require('./components/role');
 const userInit = require('./components/user');
 const systemSettingInit = require('./components/systemSetting');
 const dictionariesInit = require('./components/dictionary');
+const resourceInit = require('./components/resource');
 
 // Association init
 const associationInit = require('./associations');
@@ -101,6 +102,8 @@ async function connect() {
   await systemSettingInit();
 
   await dictionariesInit();
+
+  await resourceInit();
 
   app.listen(process.env.SERVER_PORT, () => {
     console.log(`Server listen on http://localhost:${process.env.SERVER_PORT}`);

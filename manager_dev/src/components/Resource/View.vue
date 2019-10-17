@@ -75,19 +75,25 @@
           v-card-text
             v-layout.wrap
               v-flex.md12
-                v-tooltip(top)
-                  template(v-slot:activator="{ on }")
-                    v-select(
-                      :items="layouts"
-                      item-text="title"
-                      return-object
-                      :label="`${d.layout}:`"
-                      :value="resource.layout"
-                      @change="changeLayoutConfirm($event)"
-                      v-on="on"
-                      required
-                    )
-                  span layout
+                v-select(
+                  :items="layouts"
+                  item-text="title"
+                  return-object
+                  :label="`${d.layout}:`"
+                  :value="resource.layout"
+                  @change="changeLayoutConfirm($event)"
+                  required
+                )
+              v-flex.md12
+                v-select(
+                  :items="types"
+                  item-text="title"
+                  return-object
+                  :label="`${d.resource_type}:`"
+                  :value="resource.resourcetype"
+                  @change="changeType($event)"
+                  required
+                )
               v-flex.md12
                 v-tooltip(top)
                   template(v-slot:activator="{ on }")
@@ -196,6 +202,9 @@ export default {
     layouts() {
       return this.$store.getters["layout/getAll"];
     },
+    types() {
+      return this.$store.getters["resource/getTypes"];
+    },
     slugErrors() {
       const errors = [];
       if (!this.$v.resource.slug.$dirty) return errors;
@@ -224,6 +233,8 @@ export default {
         }
       }
     });
+
+    await this.$store.dispatch("resource/findTypes");
   },
 
   methods: {
@@ -341,12 +352,18 @@ export default {
                 association: "layout",
                 include: ["fields"]
               },
-              "additionalfields"
+              "additionalfields",
+              "type"
             ]
           }
         }
       });
       this.isChangeLayout = false;
+    },
+
+    changeType(event) {
+      this.resource.resourctype = event;
+      this.resource.resourcetypeId = event.id;
     },
 
     async cancelLayout() {
@@ -361,7 +378,8 @@ export default {
                 association: "layout",
                 include: ["fields"]
               },
-              "additionalfields"
+              "additionalfields",
+              "type"
             ]
           }
         }

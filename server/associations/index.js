@@ -3,6 +3,7 @@ const AdditionalField = require('../models/additionalField');
 const Field = require('../models/field');
 const Layout = require('../models/layout');
 const Resource = require('../models/resource');
+const ResourceType = require('../models/resourceType');
 const Role = require('../models/role');
 const User = require('../models/user');
 
@@ -49,6 +50,9 @@ module.exports = async () => {
   });
   Resource.belongsTo(Layout, {
     as: 'layout'
+  });
+  Resource.belongsTo(ResourceType, {
+    as: 'resourcetype'
   });
   Resource.belongsToMany(Resource, {
     as: 'translations',

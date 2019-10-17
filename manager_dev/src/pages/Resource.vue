@@ -186,7 +186,8 @@ export default {
               association: "parent",
               include: ["translations"]
             },
-            "translations"
+            "translations",
+            "resourcetype"
           ]
         }
       }
@@ -261,7 +262,8 @@ export default {
               association: "parent",
               include: ["translations"]
             },
-            "translations"
+            "translations",
+            "resourcetype"
           ]
         }
       }
