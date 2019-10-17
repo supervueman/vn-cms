@@ -1,6 +1,7 @@
 // Models
 const AdditionalField = require('../models/additionalField');
 const Field = require('../models/field');
+const FieldCategory = require('../models/fieldCategory');
 const Layout = require('../models/layout');
 const Resource = require('../models/resource');
 const ResourceType = require('../models/resourceType');
@@ -33,6 +34,9 @@ module.exports = async () => {
     as: 'layouts',
     through: 'LayoutField',
     constraints: false
+  });
+  Field.belongsTo(FieldCategory, {
+    as: 'category'
   });
 
   // Resource
@@ -72,5 +76,8 @@ module.exports = async () => {
   });
   AdditionalField.belongsTo(Resource, {
     onDelete: 'cascade'
+  });
+  AdditionalField.belongsTo(FieldCategory, {
+    as: 'category'
   });
 }

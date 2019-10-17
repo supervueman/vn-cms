@@ -131,6 +131,15 @@
     "create_field": {
       "text": "Create field"
     },
+    "field_categories": {
+      "text": "Fields categories"
+    },
+    "field_category": {
+      "text": "Field category"
+    },
+    "create_field_category": {
+      "text": "Create field category"
+    },
     "type": {
       "text": "Type"
     },

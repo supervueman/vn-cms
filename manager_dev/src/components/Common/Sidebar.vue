@@ -64,6 +64,11 @@
 							v-icon(color="primary") playlist_add
 						v-list-item-content
 							v-list-item-title {{d.additional_fields}}
+					v-list-item(to="/fieldcategories" v-if="r.is_field_categories_read")
+						v-list-item-action
+							v-icon(color="primary") folder
+						v-list-item-content
+							v-list-item-title {{d.field_categories}}
 
 			v-tab(v-if="r.is_filesystem_access") {{d.files}}
 			v-tab-item(v-if="r.is_filesystem_access")

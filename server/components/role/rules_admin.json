@@ -75,6 +75,22 @@
     "title": "Разрешить удалять поля",
     "value": true
   },
+  "is_field_categories_read": {
+    "title": "Разрешить просматривать категории полей",
+    "value": true
+  },
+  "is_field_category_create": {
+    "title": "Разрешить создавать категории полей",
+    "value": true
+  },
+  "is_field_category_update": {
+    "title": "Разрешить редактировать категории полей",
+    "value": true
+  },
+  "is_field_category_delete": {
+    "title": "Разрешить удалять категории полей",
+    "value": true
+  },
   "is_filesystem_access": {
     "title": "Разрешить доступ к файловой системе",
     "value": true

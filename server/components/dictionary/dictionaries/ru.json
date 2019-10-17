@@ -131,6 +131,15 @@
     "create_field": {
       "text": "Создать поле"
     },
+    "field_categories": {
+      "text": "Категории полей"
+    },
+    "field_category": {
+      "text": "Категория"
+    },
+    "create_field_category": {
+      "text": "Создать категорию"
+    },
     "type": {
       "text": "Тип"
     },
