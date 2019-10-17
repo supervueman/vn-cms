@@ -9,7 +9,10 @@ export default {
   },
   mutations: {
     setAll(state, payload) {
-      state.systemSettings = payload;
+      state.systemSettings = payload.map(el => {
+        el.setting = JSON.parse(el.setting);
+        return el;
+      });;
     },
     setCount(state, payload) {
       state.count = payload;
@@ -55,6 +58,7 @@ export default {
           isActive: true
         });
       });
+
       if (response !== undefined && response.status === 200) {
         this.dispatch('preloader/fetch', false);
         commit('setAll', response.data);

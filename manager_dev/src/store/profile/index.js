@@ -83,16 +83,16 @@ export default {
         });
 
         if (responseSystemSetting !== undefined && responseSystemSetting.status === 200) {
-          this.dispatch('base/setMainLang', responseSystemSetting.data.value);
+          this.dispatch('base/setMainLang', JSON.parse(responseSystemSetting.data.setting).value);
           if (!localStorage.getItem('admin-panel-lang')) {
-            localStorage.setItem('admin-panel-lang', responseSystemSetting.data.value);
+            localStorage.setItem('admin-panel-lang', JSON.parse(responseSystemSetting.data.setting).value);
           }
 
           await this.dispatch("dictionary/findOne", {
             query: {
               filter: {
                 where: {
-                  lang: localStorage.getItem("admin-panel-lang") || responseSystemSetting.data.value
+                  lang: localStorage.getItem("admin-panel-lang") || JSON.parse(responseSystemSetting.data.setting).value
                 }
               }
             }
@@ -103,7 +103,7 @@ export default {
               where: {
                 level: 1,
                 userId: response.data.id,
-                lang: responseSystemSetting.data.value
+                lang: JSON.parse(responseSystemSetting.data.setting).value
               }
             }
           });

@@ -17,12 +17,12 @@
 								td.text-end
 									v-switch(
 										v-if="item.settingType === 'switcher'"
-										v-model="item.value === 'false' ? false : true"
+										v-model="item.setting.value"
 										@change="update(item)"
 									)
 									v-text-field(
 										v-if="item.settingType === 'text'"
-										v-model="item.value"
+										v-model="item.setting.value"
 										@change="update(item)"
 									)
 				div.text-xs-center.pt-2
@@ -102,7 +102,10 @@ export default {
       if (!this.r.is_system_settings_update) {
         return;
       }
-      await this.$store.dispatch("systemSetting/update", { body: item });
+
+      await this.$store.dispatch("systemSetting/update", {
+        body: { ...item, setting: JSON.stringify(item.setting) }
+      });
     }
   }
 };

@@ -14,7 +14,7 @@ const SystemSetting = sequelize.define('systemSetting', {
     notEmpty: true
   },
   title: Sequelize.STRING,
-  value: Sequelize.STRING(1234),
+  setting: Sequelize.STRING(1234),
   component: Sequelize.STRING,
   settingType: Sequelize.STRING
 });

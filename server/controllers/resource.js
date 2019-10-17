@@ -101,7 +101,7 @@ module.exports = {
       req.body.userId = req.profile.userId;
     }
 
-    const createdResource = await Resource.create(req.body);
+    let createdResource = await Resource.create(req.body);
 
     const is_id_in_slug = await SystemSetting.findOne({
       where: {
@@ -109,11 +109,11 @@ module.exports = {
       }
     });
 
-    if (is_id_in_slug.dataValues.value === 'true') {
-      createdResource.dataValues.slug = `${req.body.slug}-${createdResource.dataValues.id}`;
+    if (JSON.parse(is_id_in_slug.setting).value) {
+      createdResource.slug = `${req.body.slug}-${createdResource.id}`;
 
-      await createdResource.update({
-        slug: createdResource.dataValues.slug
+      createdResource = await createdResource.update({
+        slug: createdResource.slug
       });
     }
 
@@ -129,8 +129,8 @@ module.exports = {
       });
     }
 
-    if (main_lang.dataValues.value === createdResource.lang) {
-      await createdResource.update({
+    if (JSON.parse(main_lang.dataValues.setting).value === createdResource.lang) {
+      createdResource = await createdResource.update({
         translationId: createdResource.dataValues.id
       });
     }
@@ -167,7 +167,7 @@ module.exports = {
         }
       });
 
-      if (is_id_in_slug.value === 'true') {
+      if (JSON.parse(is_id_in_slug.setting).value) {
         const slugId = updateResource.slug.substring(updateResource.slug.length - `${updateResource.id}`.length);
 
         if (`-${slugId}` !== `-${updateResource.id}`) {

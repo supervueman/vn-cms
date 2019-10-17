@@ -12,7 +12,7 @@ module.exports = async () => {
     is_id_in_slug = await SystemSetting.create({
       slug: 'is_id_in_slug',
       title: 'Использовать id ресурсов в псевдонимах',
-      value: 'false',
+      setting: '{"value": "false"}',
       component: 'base',
       settingType: 'switcher'
     });
@@ -28,7 +28,7 @@ module.exports = async () => {
     main_lang = await SystemSetting.create({
       slug: 'main_lang',
       title: 'Основной язык',
-      value: 'en',
+      setting: '{"value": "en"}',
       component: 'base',
       settingType: 'text'
     });
