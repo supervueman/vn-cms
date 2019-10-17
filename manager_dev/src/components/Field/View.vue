@@ -61,6 +61,13 @@
               :error-messages="slugErrors"
             )
             v-select(
+              :items="fieldCategories"
+              item-text="title"
+              item-value="id"
+              :label="`${d.field_category}:`"
+              v-model="field.categoryId"
+            )
+            v-select(
               :items="layouts"
               item-text="title"
               item-value="id"
@@ -133,6 +140,9 @@ export default {
   },
 
   computed: {
+    fieldCategories() {
+      return this.$store.getters["fieldCategory/getAll"];
+    },
     layouts() {
       return this.$store.getters["layout/getAll"];
     },
@@ -170,6 +180,13 @@ export default {
 
   async mounted() {
     await this.$store.dispatch("layout/findAll", {
+      query: {
+        filter: {
+          order: [["createdAt", "DESC"]]
+        }
+      }
+    });
+    await this.$store.dispatch("fieldCategory/findAll", {
       query: {
         filter: {
           order: [["createdAt", "DESC"]]

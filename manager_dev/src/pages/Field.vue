@@ -36,7 +36,7 @@ export default {
       },
       query: {
         filter: {
-          include: ["layouts"]
+          include: ["layouts", "category"]
         }
       }
     });
