@@ -3,14 +3,14 @@
     v-card-text
       v-flex
         v-layout.wrap 
-          //- div(v-for="(field, i) in fields" :key="i + 11") {{field}}
-          //-   br
-          //-   br
+          div(v-for="(field, i) in fields" :key="i + 11") {{field}}
+            br
+            br
 
-          //- div Additional fields
-          //- div(v-for="(field, i) in additionalFields" :key="i + 11") {{field}}
-          //-   br
-          //-   br
+          div Additional fields
+          div(v-for="(field, i) in additionalFields" :key="i + 11") {{field}}
+            br
+            br
           v-flex.mb-4
           v-flex.md12(v-for="(field, i) in fields" :key="i")
             v-layout.mb-4
@@ -220,7 +220,7 @@ export default {
 
   methods: {
     async saveAdditionalFields() {
-      if (!thie.r.is_resource_update) {
+      if (!this.r.is_resource_update) {
         return;
       }
       const fields = [];
@@ -232,7 +232,8 @@ export default {
             slug: el,
             value: this.fields[el].value,
             resourceId: this.fields[el].resourceId,
-            fieldId: this.fields[el].interface.id
+            fieldId: this.fields[el].interface.id,
+            categoryId: this.fields[el].interface.categoryId
           };
           if (this.fields[el].interface.fieldType === "migx") {
             updateField.value = JSON.stringify(this.fields[el].value);
@@ -246,8 +247,10 @@ export default {
             slug: el,
             value: this.fields[el].value,
             resourceId: this.fields[el].resourceId,
-            fieldId: this.fields[el].interface.id
+            fieldId: this.fields[el].interface.id,
+            categoryId: this.fields[el].interface.categoryId
           };
+
           if (this.fields[el].interface.fieldType === "migx") {
             createField.value = JSON.stringify(this.fields[el].value);
           }
@@ -278,7 +281,8 @@ export default {
                 include: ["fields"]
               },
               "additionalfields",
-              "translations"
+              "translations",
+              "resourcetype"
             ]
           }
         }
