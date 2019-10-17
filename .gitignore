@@ -4,12 +4,11 @@ node_modules
 /manager
 /files
 /server/files
-/static
 /client
-/manager_dev/public/static
 /ansible
 data
 serializer
+/manager_dev/public/static/files
 
 # local env files
 .env

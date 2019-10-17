@@ -1,5 +1,5 @@
 {
-  "name": "dashboard-admin-panel-blog",
+  "name": "platform",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,8 +8,8 @@
     "manager:dev:create:symlink": "cd manager_dev/public/static && ln -s ../../../files",
     "manager:dev:remove:symlink": "cd manager_dev/public/static && rm -r files",
     "manager:dev": "cd manager_dev && npm run serve",
-    "manager:build": "cd manager_dev && npm run build",
-    "manager:prod:create:symlink": "cd manager && mkdir static && cd static && ln -s ../../files",
+    "manager:build": "cd manager_dev && npm run build && cd ../ && npm run manager:prod:create:symlink",
+    "manager:prod:create:symlink": "cd manager && cd static && ln -s ../../files",
     "manager:start:local": "serve -s manager",
     "manager:start:pm2": "cd manager && pm2 serve --spa --name manager",
     "manager:restart:pm2": "cd manager && pm2 restart manager",
@@ -41,7 +41,5 @@
   },
   "homepage": "https://gitlab.com/multicms/platform-cms#readme",
   "devDependencies": {},
-  "dependencies": {
-    "sass": "^1.22.12"
-  }
+  "dependencies": {}
 }
