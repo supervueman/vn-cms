@@ -15,9 +15,6 @@ export default {
     layout: {
       ...layout
     },
-    type: {
-      'document': 'Документ'
-    },
     types: [],
     fields: [],
     additionalFields: [],
@@ -156,7 +153,6 @@ export default {
         commit('set', response.data);
         commit('setAdditionalFields', response.data.additionalfields);
         commit('setLayout', response.data.layout);
-        commit('setType', response.data.resourcetype);
         commit('setFields', response.data.layout.fields);
         commit('setTranslations', response.data);
         commit('setSerializedFields');
@@ -442,9 +438,6 @@ export default {
     },
     getLayout(state) {
       return state.layout;
-    },
-    getType(state) {
-      return state.type;
     },
     getTypes(state) {
       return state.types;

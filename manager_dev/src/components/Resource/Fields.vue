@@ -3,14 +3,14 @@
     v-card-text
       v-flex
         v-layout.wrap 
-          div(v-for="(field, i) in fields" :key="i + 11") {{field}}
-            br
-            br
+          //- div(v-for="(field, i) in fields" :key="i + 11") {{field}}
+          //-   br
+          //-   br
 
-          div Additional fields
-          div(v-for="(field, i) in additionalFields" :key="i + 11") {{field}}
-            br
-            br
+          //- div Additional fields
+          //- div(v-for="(field, i) in additionalFields" :key="i + 11") {{field}}
+          //-   br
+          //-   br
           v-flex.mb-4
           v-flex.md12(v-for="(field, i) in fields" :key="i")
             v-layout.mb-4

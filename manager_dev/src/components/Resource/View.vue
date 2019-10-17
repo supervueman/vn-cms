@@ -286,7 +286,7 @@ export default {
           body: this.resource,
           query: {
             filter: {
-              include: ["layout"]
+              include: ["layout", "resourcetype"]
             }
           }
         });
