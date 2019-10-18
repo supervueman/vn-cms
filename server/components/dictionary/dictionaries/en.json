@@ -265,6 +265,9 @@
     },
     "next": {
       "text": "Next"
+    },
+    "field": {
+      "text": "Field"
     }
   }
 }

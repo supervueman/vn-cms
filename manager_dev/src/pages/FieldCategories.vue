@@ -56,6 +56,12 @@ export default {
   name: "Fields",
   mixins: [accessMixin],
 
+  metaInfo() {
+    return {
+      title: `${this.d.field_categories || "Fields catagories"}`
+    };
+  },
+
   data() {
     return {
       pagination: {

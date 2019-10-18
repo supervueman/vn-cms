@@ -14,6 +14,12 @@ import ProfileView from "@/components/Profile/View";
 export default {
   name: "ProfileCreatePage",
 
+  metaInfo() {
+    return {
+      title: `${this.d.profile_create || "Profile create"}`
+    };
+  },
+
   components: {
     ProfileView
   },

@@ -41,5 +41,7 @@
   },
   "homepage": "https://gitlab.com/multicms/platform-cms#readme",
   "devDependencies": {},
-  "dependencies": {}
+  "dependencies": {
+    "vue-meta": "^2.3.1"
+  }
 }

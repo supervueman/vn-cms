@@ -14,11 +14,19 @@ import ProfileView from "@/components/Profile/View";
 export default {
   name: "UserPage",
 
+  mixins: [accessMixin],
+
   components: {
     ProfileView
   },
 
-  mixins: [accessMixin],
+  metaInfo() {
+    return {
+      title: `${this.d.profile || "Profile"}: ${this.profile.firstname} ${
+        this.profile.lastname
+      }`
+    };
+  },
 
   computed: {
     user() {

@@ -74,6 +74,12 @@ export default {
 
   mixins: [accessMixin],
 
+  metaInfo() {
+    return {
+      title: `${this.d.users || "Users"}`
+    };
+  },
+
   data() {
     return {
       isRemoveDialog: false,

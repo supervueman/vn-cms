@@ -57,6 +57,12 @@ export default {
 
   mixins: [accessMixin],
 
+  metaInfo() {
+    return {
+      title: `${this.d.layouts || "Layouts"}`
+    };
+  },
+
   data() {
     return {
       isRemoveDialog: false,

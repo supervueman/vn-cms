@@ -57,6 +57,12 @@ import { required, minLength, email, sameAs } from "vuelidate/lib/validators";
 export default {
   name: "ResetPassword",
 
+  metaInfo() {
+    return {
+      title: `${this.d.reset_password_create || "Password reset"}`
+    };
+  },
+
   mixins: [validationMixin],
 
   validations: {

@@ -25,6 +25,12 @@ const alpha = helpers.regex("alpha", /^[a-zA-Z0-9_-]*$/);
 export default {
   name: "RolePage",
 
+  metaInfo() {
+    return {
+      title: `${this.d.role || "Role"}: ${this.role.title}`
+    };
+  },
+
   components: {
     RoleView
   },

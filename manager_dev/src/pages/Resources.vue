@@ -14,6 +14,12 @@ import Resources from "@/components/Resource/Resources";
 export default {
   name: "ResourcesPage",
 
+  metaInfo() {
+    return {
+      title: `${this.d.resources || "Resources"}`
+    };
+  },
+
   components: {
     Resources
   },

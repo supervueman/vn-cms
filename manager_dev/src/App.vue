@@ -42,12 +42,21 @@ import accessMixin from "@/mixins/accessMixin";
 
 export default {
   name: "App",
+
   mixins: [accessMixin],
+
+  metaInfo() {
+    return {
+      title: "Multikey CMS"
+    };
+  },
+
   data() {
     return {
       isLoginDialog: false
     };
   },
+
   computed: {
     profile() {
       return this.$store.getters["profile/get"];

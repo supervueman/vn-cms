@@ -15,6 +15,14 @@ import ProfileView from "@/components/Profile/View";
 export default {
   name: "ProfilePage",
 
+  metaInfo() {
+    return {
+      title: `${this.d.profile || "Profile"}: ${this.profile.firstname} ${
+        this.profile.lastname
+      }`
+    };
+  },
+
   components: {
     ProfileView
   },

@@ -140,6 +140,12 @@ export default {
     }
   },
 
+  metaInfo() {
+    return {
+      title: `${this.d.dictionaries || "Dictionaries"}`
+    };
+  },
+
   data() {
     return {
       isRemoveDictionary: false,

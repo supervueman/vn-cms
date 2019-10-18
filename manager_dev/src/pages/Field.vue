@@ -17,6 +17,12 @@ import FieldView from "@/components/Field/View";
 export default {
   name: "FieldPage",
 
+  metaInfo() {
+    return {
+      title: `${this.d.field || "Field"}: ${this.field.title}`
+    };
+  },
+
   components: {
     FieldView
   },

@@ -99,6 +99,12 @@ import Resources from "@/components/Resource/Resources";
 export default {
   name: "Resource",
 
+  metaInfo() {
+    return {
+      title: `${this.d.resource || "Resource"}: ${this.resource.title}`
+    };
+  },
+
   components: {
     ResourceView,
     Resources,

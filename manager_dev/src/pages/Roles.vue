@@ -52,6 +52,12 @@ export default {
 
   mixins: [accessMixin],
 
+  metaInfo() {
+    return {
+      title: `${this.d.roles || "Roles"}`
+    };
+  },
+
   data() {
     return {
       isRemoveDialog: false,

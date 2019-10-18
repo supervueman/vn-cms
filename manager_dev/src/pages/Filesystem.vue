@@ -11,6 +11,12 @@ import Filesystem from "@/components/Filesystem/Filesystem";
 export default {
   name: "FilesystemPage",
 
+  metaInfo() {
+    return {
+      title: `${this.d.filesystem || "Filesystem"}`
+    };
+  },
+
   components: {
     Filesystem
   }

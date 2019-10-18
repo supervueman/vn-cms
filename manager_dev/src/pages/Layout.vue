@@ -20,6 +20,12 @@ import LayoutView from "@/components/Layout/View";
 export default {
   name: "LayoutPage",
 
+  metaInfo() {
+    return {
+      title: `${this.d.layout || "Layout"}: ${this.layout.title}`
+    };
+  },
+
   components: {
     Fields,
     LayoutView

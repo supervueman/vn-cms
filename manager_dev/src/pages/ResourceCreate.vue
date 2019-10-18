@@ -18,6 +18,12 @@ import accessMixin from "@/mixins/accessMixin";
 export default {
   name: "ResourceCreatePage",
 
+  metaInfo() {
+    return {
+      title: `${this.d.resource_create || "Resource create"}`
+    };
+  },
+
   components: {
     ResourceView
   },

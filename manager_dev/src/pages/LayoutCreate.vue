@@ -18,6 +18,12 @@ import accessMixin from "@/mixins/accessMixin";
 export default {
   name: "LayoutCreatePage",
 
+  metaInfo() {
+    return {
+      title: `${this.d.layout_create || "Layout create"}`
+    };
+  },
+
   components: {
     LayoutView
   },

@@ -17,6 +17,12 @@ import FieldCategoryView from "@/components/FieldCategory/View";
 export default {
   name: "FieldCategoryCreatePage",
 
+  metaInfo() {
+    return {
+      title: `${this.d.field_category_create || "Field category create"}`
+    };
+  },
+
   components: {
     FieldCategoryView
   },

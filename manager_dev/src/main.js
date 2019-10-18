@@ -9,6 +9,9 @@ import {
 } from './store';
 import axios from 'axios';
 import vuetify from './plugins/vuetify';
+import VueMeta from 'vue-meta'
+
+Vue.use(VueMeta);
 
 // Mixins
 import dictionaryMixin from './mixins/dictionaryMixin';

@@ -18,6 +18,12 @@ import accessMixin from "@/mixins/accessMixin";
 export default {
   name: "RoleCreatePage",
 
+  metaInfo() {
+    return {
+      title: `${this.d.role_create || "Role create"}`
+    };
+  },
+
   components: {
     RoleView
   },

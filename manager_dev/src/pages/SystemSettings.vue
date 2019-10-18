@@ -42,6 +42,12 @@ export default {
 
   mixins: [accessMixin],
 
+  metaInfo() {
+    return {
+      title: `${this.d.system_settings || "System settings"}`
+    };
+  },
+
   data() {
     return {
       limit: 10
