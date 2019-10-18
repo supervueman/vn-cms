@@ -13,7 +13,7 @@
  * @var {Boolean} isId
  * @return {Object}
  */
-export default (method, url, data, params) => {
+export default (method, url, data, params, headers) => {
   const access_token = localStorage.getItem('access_token');
   const apiKey = localStorage.getItem('x-api-key')
   const isData = data !== '' && data !== undefined;
@@ -25,7 +25,8 @@ export default (method, url, data, params) => {
     headers: {
       'Content-Type': 'application/json',
       'x-access-token': access_token,
-      'x-api-key': apiKey
+      'x-api-key': apiKey,
+      ...headers
     }
   }
 

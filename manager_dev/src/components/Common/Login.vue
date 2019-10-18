@@ -95,7 +95,8 @@ export default {
 
       await this.$store.dispatch("authenticate/loginByEmail", data);
 
-      (this.email = ""), (this.password = "");
+      this.email = "";
+      this.password = "";
 
       this.$emit("closeLoginDialog");
     }

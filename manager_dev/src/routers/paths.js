@@ -11,6 +11,10 @@ export default [{
   name: 'profile-create',
   component: 'ProfileCreate'
 }, {
+  path: '/reset-password',
+  name: 'reset-password',
+  component: 'ResetPassword'
+}, {
   path: '/users/:id',
   name: 'user',
   component: 'User'

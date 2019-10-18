@@ -16,6 +16,10 @@ router.put('/update', profileByAccessToken, controller.update);
 
 router.put('/password-change', profileByAccessToken, controller.changePassword);
 
+router.post('/password-reset-by-email-request', profileByAccessToken, controller.resetPasswordByEmailRequest);
+
+router.post('/password-reset-by-email', profileByAccessToken, controller.resetPasswordByEmail);
+
 router.delete('/remove', profileByAccessToken, controller.remove);
 
 module.exports = router;

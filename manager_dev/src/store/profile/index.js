@@ -57,7 +57,7 @@ export default {
           message: `${err}`,
           isActive: true
         });
-        router.push('/');
+        // router.push('/');
       });
 
       if (response !== undefined && response.status === 200) {
@@ -201,6 +201,56 @@ export default {
         this.dispatch("notification/fetch", {
           type: "success",
           message: 'Успешно сохранено!',
+          isActive: true
+        });
+      }
+    },
+
+    async resetPasswordByEmailRequest({
+      commit
+    }, payload) {
+      this.dispatch('preloader/fetch', true);
+      const data = requestDataHandler('POST', '/profile/password-reset-by-email-request', payload.body);
+
+      const response = await axios(data).catch(err => {
+        this.dispatch('preloader/fetch', false);
+        this.dispatch("notification/fetch", {
+          type: "error",
+          message: `${err}`,
+          isActive: true
+        });
+      });
+
+      if (response !== undefined && response.status === 200) {
+        this.dispatch('preloader/fetch', false);
+        this.dispatch("notification/fetch", {
+          type: "success",
+          message: 'Success',
+          isActive: true
+        });
+      }
+    },
+
+    async resetPasswordByEmail({
+      commit
+    }, payload) {
+      this.dispatch('preloader/fetch', true);
+      const data = requestDataHandler('POST', '/profile/password-reset-by-email', payload.body, undefined, payload.headers);
+
+      const response = await axios(data).catch(err => {
+        this.dispatch('preloader/fetch', false);
+        this.dispatch("notification/fetch", {
+          type: "error",
+          message: `${err}`,
+          isActive: true
+        });
+      });
+
+      if (response !== undefined && response.status === 200) {
+        this.dispatch('preloader/fetch', false);
+        this.dispatch("notification/fetch", {
+          type: "success",
+          message: 'Success',
           isActive: true
         });
       }

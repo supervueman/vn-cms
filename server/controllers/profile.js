@@ -1,5 +1,7 @@
 const bcrypt = require('bcrypt');
 const validator = require('validator');
+const nodemailer = require('nodemailer');
+const jwt = require('jsonwebtoken');
 
 // Models
 const User = require('../models/user');
@@ -187,6 +189,125 @@ module.exports = {
         message: 'Пароль успешно обновлен!'
       });
     }
+  },
+
+  async resetPasswordByEmailRequest(req, res) {
+    const user = await User.findOne({
+      where: {
+        email: req.body.email
+      }
+    });
+
+    if (!user) {
+      res.status(404).send({
+        message: 'Not found!'
+      });
+    }
+    delete user.password;
+
+    const token = jwt.sign({
+      uid: user.id.toString(),
+      email: user.email
+    }, process.env.SECRET_KEY_FOR_JWT, {
+      expiresIn: '1h'
+    });
+
+    const transporter = nodemailer.createTransport({
+      host: process.env.MAIL_HOST,
+      port: process.env.MAIL_PORT,
+      secure: false,
+      auth: {
+        user: process.env.MAIL_AUTH_USER,
+        pass: process.env.MAIL_AUTH_PASS
+      }
+    });
+
+    const info = await transporter.sendMail({
+      from: "<chaogen2@example.com>", // sender address
+      to: req.body.email, // list of receivers
+      subject: "Hello ✔", // Subject line
+      text: "Ваша ссылка на изменение пароля", // plain text body
+      html: `<a href="${req.headers.origin}/reset-password?token=${token}">${req.headers.origin}/reset-password?token=${token}</a>` // html body
+    }).catch(err => {
+      res.status(500);
+      res.send({
+        message: 'Not send!'
+      });
+    });
+
+    res.status(200).send({
+      message: 'Success!'
+    });
+  },
+
+  async resetPasswordByEmail(req, res) {
+    const resetToken = req.headers['x-reset-token'];
+    const isResetToken = resetToken !== null && resetToken !== undefined && resetToken !== '' && resetToken !== 'null' && resetToken !== 'undefined';
+
+    if (!isResetToken) {
+      res.status(404).send({
+        message: 'Not found!'
+      });
+    }
+
+    await jwt.verify(resetToken, process.env.SECRET_KEY_FOR_JWT, async (err, decoded) => {
+      if (err) {
+        res.status(404).send({
+          message: 'Not found!'
+        });
+      }
+
+      if (!decoded) {
+        res.status(404).send({
+          message: 'Not found!'
+        });
+      }
+
+      const user = await User.findOne({
+        where: {
+          email: decoded.email
+        }
+      });
+
+      if (!user) {
+        res.status(404).send({
+          message: 'Not found!'
+        });
+      }
+
+      const hashedPw = await bcrypt.hash(req.body.password, 12);
+
+      await user.update({
+        password: hashedPw
+      });
+
+      const transporter = nodemailer.createTransport({
+        host: process.env.MAIL_HOST,
+        port: process.env.MAIL_PORT,
+        secure: false,
+        auth: {
+          user: process.env.MAIL_AUTH_USER,
+          pass: process.env.MAIL_AUTH_PASS
+        }
+      });
+
+      const info = await transporter.sendMail({
+        from: "<chaogen2@example.com>", // sender address
+        to: decoded.email, // list of receivers
+        subject: "Hello ✔", // Subject line
+        text: "Ваша ссылка на изменение пароля", // plain text body
+        html: '<h2>Ваш пароль изменен</h2>' // html body
+      }).catch(err => {
+        res.status(500);
+        res.send({
+          message: 'Not send!'
+        });
+      });
+
+      res.status(200).send({
+        message: 'Success!'
+      });
+    });
   },
 
   async remove(req, res) {

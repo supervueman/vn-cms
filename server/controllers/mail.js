@@ -3,8 +3,8 @@ const nodemailer = require('nodemailer');
 module.exports = {
   async send(req, res) {
     if (!(req.profile)) {
-      res.status(401).send({
-        message: 'Нет доступа!'
+      res.status(403).send({
+        message: 'Access denied!'
       });
       return;
     }
