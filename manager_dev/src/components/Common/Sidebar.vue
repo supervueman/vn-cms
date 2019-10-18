@@ -10,6 +10,11 @@
 		manual-scroll
 	)
 		v-app-bar.primary(dark)
+			v-img.mr-4(
+				:src="logo" class="toolbar-logo"
+				max-width="40px"
+				@error="errorLogo($event)"
+			)
 		v-tabs(
 			v-model="active"
 			slider-color="primary"
@@ -116,19 +121,26 @@ export default {
       mini: true,
       right: null,
       hide_overlay: true,
-      panelName: "panel-resource"
+      panelName: "panel-resource",
+      isLogo: true
     };
   },
 
   computed: {
     resources() {
       return this.$store.getters["profile/getResources"];
+    },
+    logo() {
+      return this.isLogo ? "/static/logo.svg" : "/static/dev-logo.svg";
     }
   },
 
   methods: {
     async reloadResources() {
       await this.$store.dispatch("profile/findByAccessToken");
+    },
+    errorLogo(event) {
+      this.isLogo = false;
     }
   }
 };

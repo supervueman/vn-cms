@@ -1,7 +1,12 @@
 <template lang="pug">
 	v-app-bar.primary(app dark)
 		v-toolbar-title
-			//- img(:src="`${imgFolderBasePath}/logo.svg`" class="toolbar-logo")
+			v-img.mr-4.mobile-logo(
+				:src="logo" class="toolbar-logo"
+				max-width="40px"
+				aspect-ratio="1"
+				@error="errorLogo($event)"
+			)
 		v-toolbar-items.hidden-xs-and-down
 			v-btn(text to="/users" v-if="r.is_users_read") {{d.users}}
 		v-spacer
@@ -78,7 +83,8 @@ export default {
 
   data() {
     return {
-      imgFolderBasePath
+      imgFolderBasePath,
+      isLogo: true
     };
   },
 
@@ -93,6 +99,10 @@ export default {
 
     dictionaries() {
       return this.$store.getters["dictionary/getAll"];
+    },
+
+    logo() {
+      return this.isLogo ? "/static/logo.svg" : "/static/dev-logo.svg";
     }
   },
 
@@ -108,6 +118,9 @@ export default {
           }
         }
       });
+    },
+    errorLogo(event) {
+      this.isLogo = false;
     },
     async logout() {
       await this.$store.dispatch("authenticate/logout");
@@ -128,3 +141,8 @@ export default {
   }
 };
 </script>
+
+<style lang="sass">
+	.mobile-logo
+		display: none
+</style>
