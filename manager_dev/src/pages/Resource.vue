@@ -44,7 +44,9 @@
 				v-tab-item
 					v-layout.wrap.pt-4
 						v-flex
-							fields
+							fields(
+								:resource="resource"
+							)
 				v-tab-item
 					v-layout.wrap.pt-4
 						v-flex

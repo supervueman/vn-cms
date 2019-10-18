@@ -11,6 +11,20 @@
           //- div(v-for="(field, i) in additionalFields" :key="i + 11") {{field}}
           //-   br
           //-   br
+          v-toolbar(flat width="100%")
+            v-spacer
+            v-btn.mr-4(
+              color="primary"
+              @click="filterFieldsAll"
+            ) {{d.all_fields || 'All fileds'}}
+            v-flex.md4
+              v-select(
+                :items="fieldCategories"
+                item-text="title"
+                item-value="id"
+                :label="`${d.field_category}:`"
+                @change="filterFields($event)"
+              )
           v-flex.mb-4
           v-flex.md12(v-for="(field, i) in fields" :key="i")
             v-layout.mb-4
@@ -205,6 +219,13 @@ import MigxField from "@/components/Common/Migx/MigxField";
 export default {
   name: "ResourceFields",
 
+  props: {
+    resource: {
+      type: Object,
+      default: () => {}
+    }
+  },
+
   components: {
     MigxField
   },
@@ -215,7 +236,20 @@ export default {
     },
     fields() {
       return this.$store.getters["resource/getSerializedFields"];
+    },
+    fieldCategories() {
+      return this.$store.getters["fieldCategory/getAll"];
     }
+  },
+
+  async mounted() {
+    await this.$store.dispatch("fieldCategory/findAll", {
+      query: {
+        filter: {
+          order: [["createdAt", "DESC"]]
+        }
+      }
+    });
   },
 
   methods: {
@@ -281,6 +315,74 @@ export default {
                 include: ["fields"]
               },
               "additionalfields",
+              "translations",
+              "resourcetype"
+            ]
+          }
+        }
+      });
+    },
+
+    async filterFields(event) {
+      const query = {
+        filter: {
+          include: [
+            {
+              association: "layout",
+              include: [
+                {
+                  association: "fields",
+                  where: { categoryId: event }
+                }
+              ]
+            },
+            {
+              association: "additionalfields",
+              where: { categoryId: event }
+            },
+            {
+              association: "parent",
+              include: ["translations"]
+            },
+            "translations",
+            "resourcetype"
+          ]
+        }
+      };
+      if (this.resource.additionalfields.length === 0) {
+        delete query.filter.include[1].where;
+      }
+      await this.$store.dispatch("resource/findByPk", {
+        params: {
+          id: this.$route.params.id
+        },
+        query
+      });
+    },
+
+    async filterFieldsAll() {
+      await this.$store.dispatch("resource/findByPk", {
+        params: {
+          id: this.$route.params.id
+        },
+        query: {
+          filter: {
+            include: [
+              {
+                association: "layout",
+                include: [
+                  {
+                    association: "fields"
+                  }
+                ]
+              },
+              {
+                association: "additionalfields"
+              },
+              {
+                association: "parent",
+                include: ["translations"]
+              },
               "translations",
               "resourcetype"
             ]

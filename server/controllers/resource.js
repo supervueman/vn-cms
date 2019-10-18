@@ -43,6 +43,8 @@ module.exports = {
 
     const resource = await Resource.findByPk(id, filter);
 
+    console.log(resource)
+
     if (!resource) {
       res.status(404).send({
         message: 'Not found!'
