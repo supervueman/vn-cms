@@ -5,6 +5,18 @@
       v-flex
         v-toolbar(flat color="white")
           v-spacer
+          v-flex.md4.mr-4
+            v-select(
+              :items="fieldCategories"
+              item-text="title"
+              item-value="id"
+              :label="`${d.field_category}:`"
+              @change="filterFields($event)"
+            )
+          v-btn.mr-4(
+            color="primary"
+            @click="filterFieldsAll"
+          ) {{d.all_fields || 'All fileds'}}
           v-btn(
             color="primary"
             to="/field-create"
@@ -99,6 +111,10 @@ export default {
     },
     count() {
       return this.$store.getters["field/getCount"];
+    },
+
+    fieldCategories() {
+      return this.$store.getters["fieldCategory/getAll"];
     }
   },
 
@@ -115,6 +131,14 @@ export default {
     };
     await this.$store.dispatch("field/findAll", data);
     await this.$store.dispatch("field/count", data);
+
+    await this.$store.dispatch("fieldCategory/findAll", {
+      query: {
+        filter: {
+          order: [["createdAt", "DESC"]]
+        }
+      }
+    });
   },
 
   methods: {
@@ -145,6 +169,27 @@ export default {
         }
       });
       this.$store.dispatch("field/setAll", fields);
+    },
+
+    async filterFields(event) {
+      await this.$store.dispatch("field/findAll", {
+        query: {
+          filter: {
+            order: [["createdAt", "DESC"]],
+            where: { categoryId: event }
+          }
+        }
+      });
+    },
+
+    async filterFieldsAll(event) {
+      await this.$store.dispatch("field/findAll", {
+        query: {
+          filter: {
+            order: [["createdAt", "DESC"]]
+          }
+        }
+      });
     },
 
     removeDialogOpen(field) {
