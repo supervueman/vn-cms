@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "install": "(cd server && npm i) && (cd manager_dev && npm i)",
     "manager:dev:create:symlink": "cd manager_dev/public/static && ln -s ../../../files",
     "manager:dev:remove:symlink": "cd manager_dev/public/static && rm -r files",
     "manager:dev": "cd manager_dev && npm run serve",
