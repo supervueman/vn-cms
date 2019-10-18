@@ -160,6 +160,7 @@ import Resources from "@/components/Resource/Resources";
 
 // Libs
 import { required, minLength, helpers } from "vuelidate/lib/validators";
+import cyrillicToTranslit from "cyrillic-to-translit-js";
 
 const alpha = helpers.regex("alpha", /^[a-zA-Z0-9_-]*$/);
 
@@ -242,7 +243,7 @@ export default {
       if (!this.r.is_resource_create) {
         return;
       }
-
+      this.translitSlug();
       this.$v.$touch();
 
       if (!this.$v.$error) {
@@ -280,6 +281,7 @@ export default {
       if (!this.r.is_resource_update) {
         return;
       }
+      this.translitSlug();
       this.$v.$touch();
       if (!this.$v.$error) {
         await this.$store.dispatch("resource/update", {
@@ -314,6 +316,15 @@ export default {
       await this.$store.dispatch("resource/remove", {
         body: { id: this.resource.id }
       });
+    },
+
+    translitSlug(event) {
+      const translitSlug = cyrillicToTranslit({ preset: "uk" })
+        .transform(this.resource.title, "-")
+        .toLowerCase();
+      if (this.resource.slug === "") {
+        this.resource.slug = translitSlug;
+      }
     },
 
     changeLayoutConfirm(event) {
