@@ -30,6 +30,18 @@
 							)
 								v-icon add_circle_outline
 						span {{d.create_resource}}
+					v-tooltip(top v-if="r.is_resources_read")
+						template(v-slot:activator="{ on }")
+							v-btn(
+								slot="activator"
+								text
+								icon
+								color="primary"
+								v-on="on"
+								@click="reloadResources"
+							)
+								v-icon replay
+						span {{d.reload}}
 
 				v-expansion-panels
 					v-expansion-panel
@@ -111,6 +123,12 @@ export default {
   computed: {
     resources() {
       return this.$store.getters["profile/getResources"];
+    }
+  },
+
+  methods: {
+    async reloadResources() {
+      await this.$store.dispatch("profile/findByAccessToken");
     }
   }
 };
