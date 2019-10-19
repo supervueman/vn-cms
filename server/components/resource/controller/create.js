@@ -26,7 +26,7 @@ module.exports = async (req, res) => {
     createdItem.slug = `${req.body.slug}-${createdItem.id}`;
 
     createdItem = await createdItem.update({
-      slug: createdResource.slug
+      slug: createdItem.slug
     });
   }
 
