@@ -1,7 +1,5 @@
 // Models
-const AdditionalField = require('../models/additionalField');
-const Field = require('../components/field/model');
-const FieldCategory = require('../components/fieldcategory/model');
+const AdditionalField = require('../components/additionalfield/model');
 const Layout = require('../components/layout/model');
 const Resource = require('../models/resource');
 const ResourceType = require('../models/resourceType');
@@ -51,16 +49,5 @@ module.exports = async () => {
     as: 'children',
     onDelete: 'cascade',
     foreignKey: 'parentId'
-  });
-
-  // Additional field
-  AdditionalField.belongsTo(Field, {
-    onDelete: 'cascade'
-  });
-  AdditionalField.belongsTo(Resource, {
-    onDelete: 'cascade'
-  });
-  AdditionalField.belongsTo(FieldCategory, {
-    as: 'category'
   });
 }

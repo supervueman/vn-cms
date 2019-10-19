@@ -2,11 +2,11 @@ const express = require('express');
 const router = express.Router();
 
 // Controllers
-const controller = require('../controllers/additionalField');
+const controller = require('../controller');
 
 // Middleware
-const access = require('../middleware/access');
-const profileByApiKey = require('../middleware/profileByApiKey');
+const access = require('../../../middleware/access');
+const profileByApiKey = require('../../../middleware/profileByApiKey');
 
 router.get('/', profileByApiKey, controller.findAll);
 
