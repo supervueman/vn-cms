@@ -1,3 +1,4 @@
+const express = require('express');
 const bodyParser = require('body-parser');
 const createDir = require('../handlers/createDir');
 const cors = require('./cors');
@@ -12,7 +13,7 @@ module.exports = async (app) => {
     cors(req, res, next);
   });
 
-  app.use('/files', express.static('../files'));
-
   await createDir('../files');
+
+  app.use('/files', express.static('../files'));
 }

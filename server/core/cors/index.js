@@ -8,7 +8,6 @@ const {
 } = require('../core.config');
 
 module.exports = (req, res, next) => {
-  console.log(cors_access_url)
   const allowedOrigins = cors_access_url.split(', ');
   const origin = req.headers.origin;
 
