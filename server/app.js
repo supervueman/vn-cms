@@ -3,14 +3,12 @@ const sequelize = require('./core/db');
 const {
   server_port
 } = require('./core/core.config');
-require('dotenv').config();
-
 const app = express();
 const init = require('./core');
-init(app);
-
-// Routes use
 const connector = require('./connector');
+require('dotenv').config();
+
+init(app);
 connector.routes(app);
 
 async function connect() {
