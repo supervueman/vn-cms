@@ -10,7 +10,7 @@ const createDir = require('./handlers/createDir');
 const authenticateRoutes = require('./routes/authenticate');
 const profileRoutes = require('./routes/profile');
 const userRoutes = require('./routes/user');
-const roleRoutes = require('./routes/role');
+const role = require('./components/role');
 const resourceRoutes = require('./routes/resource');
 const layoutRoutes = require('./routes/layout');
 const fieldRoutes = require('./routes/field');
@@ -22,7 +22,6 @@ const systemsetting = require('./components/systemsetting');
 const dictionary = require('./components/dictionary');
 
 // Components init
-const roleInit = require('./components/role');
 const userInit = require('./components/user');
 const resourceInit = require('./components/resource');
 
@@ -73,7 +72,7 @@ app.use((req, res, next) => {
 app.use('/authenticate', authenticateRoutes);
 app.use('/profile', profileRoutes);
 app.use('/users', userRoutes);
-app.use('/roles', roleRoutes);
+app.use('/roles', role.routes);
 app.use('/resources', resourceRoutes);
 app.use('/layouts', layoutRoutes);
 app.use('/fields', fieldRoutes);
@@ -93,7 +92,7 @@ async function connect() {
     return;
   }
 
-  await roleInit();
+  await role.init();
 
   await createDir('../files');
 
