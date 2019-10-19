@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
-const sequelize = require('../util/database');
+const sequelize = require('../../../util/database');
 
-const Dictionary = sequelize.define('dictionary', {
+const Model = sequelize.define('dictionary', {
   id: {
     type: Sequelize.INTEGER,
     autoIncrement: true,
@@ -17,4 +17,4 @@ const Dictionary = sequelize.define('dictionary', {
   value: Sequelize.TEXT,
 });
 
-module.exports = Dictionary;
+module.exports = Model;

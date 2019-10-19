@@ -19,12 +19,11 @@ const additionalFieldRoutes = require('./routes/addittionalField');
 const filesystemRoutes = require('./routes/filesystem');
 const mailRoutes = require('./routes/mail');
 const systemsetting = require('./components/systemsetting');
-const dictionaryRoutes = require('./routes/dictionary');
+const dictionary = require('./components/dictionary');
 
 // Components init
 const roleInit = require('./components/role');
 const userInit = require('./components/user');
-const dictionariesInit = require('./components/dictionary');
 const resourceInit = require('./components/resource');
 
 // Association init
@@ -83,7 +82,7 @@ app.use('/additionalfields', additionalFieldRoutes);
 app.use('/filesystem', filesystemRoutes);
 app.use('/mail', mailRoutes);
 app.use('/systemsettings', systemsetting.routes);
-app.use('/dictionaries', dictionaryRoutes);
+app.use('/dictionaries', dictionary.routes);
 app.use('/files', express.static('../files'));
 
 async function connect() {
@@ -102,7 +101,7 @@ async function connect() {
 
   await systemsetting.init();
 
-  await dictionariesInit();
+  await dictionary.init();
 
   await resourceInit();
 
