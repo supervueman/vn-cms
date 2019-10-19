@@ -9,7 +9,7 @@ const createDir = require('./handlers/createDir');
 // Routes
 const authenticateRoutes = require('./routes/authenticate');
 const profileRoutes = require('./routes/profile');
-const userRoutes = require('./routes/user');
+const user = require('./components/user');
 const role = require('./components/role');
 const resource = require('./components/resource');
 const resourcetype = require('./components/resourcetype');
@@ -21,14 +21,6 @@ const filesystemRoutes = require('./routes/filesystem');
 const mailRoutes = require('./routes/mail');
 const systemsetting = require('./components/systemsetting');
 const dictionary = require('./components/dictionary');
-
-// Components init
-const userInit = require('./components/user');
-// const resourceInit = require('./components/resource');
-
-// Association init
-const associationInit = require('./associations');
-associationInit();
 
 const app = express();
 
@@ -72,7 +64,7 @@ app.use((req, res, next) => {
 // Routes use
 app.use('/authenticate', authenticateRoutes);
 app.use('/profile', profileRoutes);
-app.use('/users', userRoutes);
+app.use('/users', user.routes);
 app.use('/roles', role.routes);
 app.use('/resources', resource.routes);
 app.use('/resourcetypes', resourcetype.routes);
@@ -94,11 +86,11 @@ async function connect() {
     return;
   }
 
-  await role.init();
-
   await createDir('../files');
 
-  await userInit();
+  await role.init();
+
+  await user.init();
 
   await systemsetting.init();
 

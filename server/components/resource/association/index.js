@@ -2,7 +2,7 @@ const Model = require('../model');
 const AdditionalField = require('../../additionalfield/model');
 const Layout = require('../../layout/model');
 const ResourceType = require('../../resourcetype/model');
-const User = require('../../../models/user');
+const User = require('../../user/model');
 
 module.exports = async () => {
   Model.hasMany(AdditionalField, {

@@ -4,7 +4,7 @@ const nodemailer = require('nodemailer');
 const jwt = require('jsonwebtoken');
 
 // Models
-const User = require('../models/user');
+const User = require('../components/user/model');
 
 // Handlers
 const createDir = require('../handlers/createDir');
@@ -13,8 +13,8 @@ const removeDir = require('../handlers/removeDir');
 module.exports = {
   async findByAccessToken(req, res) {
     if (!req.profile) {
-      res.status(401).send({
-        message: 'User not found!'
+      res.status(404).send({
+        message: 'Not found!'
       });
       return;
     }

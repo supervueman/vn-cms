@@ -1,8 +1,8 @@
 const Sequelize = require('sequelize');
 const SequelizeTokenify = require('sequelize-tokenify');
-const sequelize = require('../util/database');
+const sequelize = require('../../../util/database');
 
-const User = sequelize.define('user', {
+const Model = sequelize.define('user', {
   id: {
     type: Sequelize.INTEGER,
     autoIncrement: true,
@@ -37,17 +37,17 @@ const User = sequelize.define('user', {
   },
   token: {
     type: Sequelize.STRING,
-    // unique: true
+    unique: true
   },
 });
 
-User.prototype.toJSON = function () {
+Model.prototype.toJSON = function () {
   const values = Object.assign({}, this.get());
 
   delete values.password;
   return values;
 }
 
-SequelizeTokenify.tokenify(User);
+SequelizeTokenify.tokenify(Model);
 
-module.exports = User;
+module.exports = Model;
