@@ -4,7 +4,7 @@ const Layout = require('../../layout/model');
 const ResourceType = require('../../resourcetype/model');
 const User = require('../../user/model');
 
-module.exports = async () => {
+module.exports = () => {
   Model.hasMany(AdditionalField, {
     as: 'additionalfields',
     onDelete: 'cascade'

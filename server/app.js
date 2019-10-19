@@ -3,7 +3,7 @@ const sequelize = require('./core/db');
 require('dotenv').config();
 
 // Routes
-const authenticateRoutes = require('./routes/authenticate');
+const authenticate = require('./components/authenticate');
 const profileRoutes = require('./routes/profile');
 const user = require('./components/user');
 const role = require('./components/role');
@@ -23,7 +23,7 @@ const init = require('./core');
 init(app);
 
 // Routes use
-app.use('/authenticate', authenticateRoutes);
+app.use('/authenticate', authenticate.routes);
 app.use('/profile', profileRoutes);
 app.use('/users', user.routes);
 app.use('/roles', role.routes);

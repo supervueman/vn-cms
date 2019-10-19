@@ -2,7 +2,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 // Models
-const User = require('../components/user/model');
+const User = require('../../user/model');
 
 module.exports = {
   async loginByEmail(req, res) {

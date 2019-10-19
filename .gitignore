@@ -6,7 +6,7 @@ node_modules
 /server/files
 /client
 /ansible
-data
+/data
 serializer
 /manager_dev/public/static/files
 /manager_dev/public/favicon.ico

@@ -2,7 +2,7 @@ const Model = require('../model');
 const Resource = require('../../resource/model');
 const Role = require('../../role/model');
 
-module.exports = async () => {
+module.exports = () => {
   Model.belongsTo(Role, {
     as: 'role'
   });

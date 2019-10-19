@@ -3,7 +3,7 @@ const Field = require('../../field/model');
 const FieldCategory = require('../../fieldcategory/model');
 const Resource = require('../../resource/model');
 
-module.exports = async () => {
+module.exports = () => {
   Model.belongsTo(Field, {
     onDelete: 'cascade'
   });
