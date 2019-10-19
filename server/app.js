@@ -13,10 +13,10 @@ const layout = require('./components/layout');
 const field = require('./components/field');
 const fieldcategory = require('./components/fieldcategory');
 const additionalfield = require('./components/additionalfield');
-const filesystemRoutes = require('./routes/filesystem');
-const mailRoutes = require('./routes/mail');
 const systemsetting = require('./components/systemsetting');
 const dictionary = require('./components/dictionary');
+const mailRoutes = require('./routes/mail');
+const filesystem = require('./core/components/filesystem');
 
 const app = express();
 const init = require('./core');
@@ -36,7 +36,7 @@ app.use('/additionalfields', additionalfield.routes);
 app.use('/systemsettings', systemsetting.routes);
 app.use('/dictionaries', dictionary.routes);
 app.use('/mail', mailRoutes);
-app.use('/filesystem', filesystemRoutes);
+app.use('/filesystem', filesystem.routes);
 
 async function connect() {
   const connect = await sequelize.sync();

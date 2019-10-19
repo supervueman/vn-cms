@@ -2,11 +2,11 @@ const express = require('express');
 const router = express.Router();
 
 // Controllers
-const controller = require('../controllers/filesystem');
+const controller = require('../controller');
 
 // Middleware
-const profileByAccessToken = require('../middleware/profileByAccessToken');
-const upload = require('../middleware/uploadFiles');
+const profileByAccessToken = require('../../../../middleware/profileByAccessToken');
+const upload = require('../../../../middleware/uploadFiles');
 
 router.get('/', profileByAccessToken, controller.getFilesystem);
 
