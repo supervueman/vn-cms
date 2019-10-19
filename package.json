@@ -43,6 +43,7 @@
   "homepage": "https://gitlab.com/multicms/platform-cms#readme",
   "devDependencies": {},
   "dependencies": {
+    "pluralize": "^8.0.0",
     "vue-meta": "^2.3.1"
   }
 }
