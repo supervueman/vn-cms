@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 const SequelizeTokenify = require('sequelize-tokenify');
-const sequelize = require('../../../util/database');
+const sequelize = require('../../../core/db');
 
 const Model = sequelize.define('user', {
   id: {
