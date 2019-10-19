@@ -1,6 +1,6 @@
 // Models
 const Layout = require('../model');
-const Field = require('../../../models/field');
+const Field = require('../../field/model');
 
 module.exports = async () => {
   Layout.belongsToMany(Field, {

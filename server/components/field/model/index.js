@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
-const sequelize = require('../util/database');
+const sequelize = require('../../../util/database');
 
-const Field = sequelize.define('field', {
+const Model = sequelize.define('field', {
   id: {
     type: Sequelize.INTEGER,
     autoIncrement: true,
@@ -19,4 +19,4 @@ const Field = sequelize.define('field', {
   defaultValue: Sequelize.TEXT
 });
 
-module.exports = Field;
+module.exports = Model;

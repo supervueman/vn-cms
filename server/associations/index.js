@@ -1,6 +1,6 @@
 // Models
 const AdditionalField = require('../models/additionalField');
-const Field = require('../models/field');
+const Field = require('../components/field/model');
 const FieldCategory = require('../models/fieldCategory');
 const Layout = require('../components/layout/model');
 const Resource = require('../models/resource');
@@ -20,16 +20,6 @@ module.exports = async () => {
   User.hasMany(Resource, {
     onDelete: 'cascade',
     as: 'resources'
-  });
-
-  // Field
-  Field.belongsToMany(Layout, {
-    as: 'layouts',
-    through: 'LayoutField',
-    constraints: false
-  });
-  Field.belongsTo(FieldCategory, {
-    as: 'category'
   });
 
   // Resource
