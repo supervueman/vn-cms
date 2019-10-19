@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
-const sequelize = require('../util/database');
+const sequelize = require('../../../util/database');
 
-const Layout = sequelize.define('layout', {
+const Model = sequelize.define('layout', {
   id: {
     type: Sequelize.INTEGER,
     autoIncrement: true,
@@ -16,4 +16,4 @@ const Layout = sequelize.define('layout', {
   title: Sequelize.STRING,
 });
 
-module.exports = Layout;
+module.exports = Model;

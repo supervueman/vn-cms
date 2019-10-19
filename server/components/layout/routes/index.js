@@ -2,10 +2,10 @@ const express = require('express');
 const router = express.Router();
 
 // Controllers
-const controller = require('../controllers/layout');
+const controller = require('../controller');
 
 // Middleware
-const access = require('../middleware/access');
+const access = require('../../../middleware/access');
 
 router.get('/', access, controller.findAll);
 
