@@ -1,5 +1,5 @@
 const Model = require('../model');
-const FieldCategory = require('../../../models/fieldCategory');
+const FieldCategory = require('../../fieldcategory/model');
 const Layout = require('../../layout/model');
 
 module.exports = async () => {

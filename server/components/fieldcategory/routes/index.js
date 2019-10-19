@@ -2,10 +2,10 @@ const express = require('express');
 const router = express.Router();
 
 // Controllers
-const controller = require('../controllers/fieldCategory');
+const controller = require('../controller');
 
 // Middleware
-const profileByAccessToken = require('../middleware/profileByAccessToken');
+const profileByAccessToken = require('../../../middleware/profileByAccessToken');
 
 router.get('/', profileByAccessToken, controller.findAll);
 

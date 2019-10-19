@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
-const sequelize = require('../util/database');
+const sequelize = require('../../../util/database');
 
-const FieldCategory = sequelize.define('fieldCategory', {
+const Model = sequelize.define('fieldcategory', {
   id: {
     type: Sequelize.INTEGER,
     autoIncrement: true,
@@ -16,4 +16,4 @@ const FieldCategory = sequelize.define('fieldCategory', {
   }
 });
 
-module.exports = FieldCategory;
+module.exports = Model;

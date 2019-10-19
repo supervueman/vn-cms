@@ -1,7 +1,7 @@
 // Models
 const AdditionalField = require('../models/additionalField');
 const Field = require('../components/field/model');
-const FieldCategory = require('../models/fieldCategory');
+const FieldCategory = require('../components/fieldcategory/model');
 const Layout = require('../components/layout/model');
 const Resource = require('../models/resource');
 const ResourceType = require('../models/resourceType');
