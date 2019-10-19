@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
-const sequelize = require('../util/database');
+const sequelize = require('../../../util/database');
 
-const ResourceType = sequelize.define('resourceType', {
+const Model = sequelize.define('resourcetype', {
   id: {
     type: Sequelize.INTEGER,
     autoIncrement: true,
@@ -15,4 +15,4 @@ const ResourceType = sequelize.define('resourceType', {
   title: Sequelize.STRING
 });
 
-module.exports = ResourceType;
+module.exports = Model;

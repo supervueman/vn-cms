@@ -1,6 +1,7 @@
 const routes = require('./routes');
-require('./association')();
+const init = require('./init');
 
 module.exports = {
-  routes
+  routes,
+  init
 }

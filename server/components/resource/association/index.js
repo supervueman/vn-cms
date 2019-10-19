@@ -1,8 +1,7 @@
-// Models
 const Model = require('../model');
 const AdditionalField = require('../../additionalfield/model');
 const Layout = require('../../layout/model');
-const ResourceType = require('../../../models/resourceType');
+const ResourceType = require('../../resourcetype/model');
 const User = require('../../../models/user');
 
 module.exports = async () => {

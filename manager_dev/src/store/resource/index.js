@@ -240,7 +240,7 @@ export default {
       commit
     }) {
       this.dispatch('preloader/fetch', true);
-      const data = requestDataHandler('GET', '/resources/types');
+      const data = requestDataHandler('GET', '/resourcetypes');
 
       const response = await axios(data).catch(err => {
         this.dispatch('preloader/fetch', false);

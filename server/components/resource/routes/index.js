@@ -14,8 +14,6 @@ router.get('/find/:id', profileByApiKey, controller.findByPk);
 
 router.get('/findone', profileByApiKey, controller.findOne);
 
-router.get('/types', profileByApiKey, controller.findTypes);
-
 router.post('/create', profileByAccessToken, controller.create);
 
 router.put('/update', profileByAccessToken, controller.update);

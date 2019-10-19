@@ -12,6 +12,7 @@ const profileRoutes = require('./routes/profile');
 const userRoutes = require('./routes/user');
 const role = require('./components/role');
 const resource = require('./components/resource');
+const resourcetype = require('./components/resourcetype');
 const layout = require('./components/layout');
 const field = require('./components/field');
 const fieldcategory = require('./components/fieldcategory');
@@ -74,6 +75,7 @@ app.use('/profile', profileRoutes);
 app.use('/users', userRoutes);
 app.use('/roles', role.routes);
 app.use('/resources', resource.routes);
+app.use('/resourcetypes', resourcetype.routes);
 app.use('/layouts', layout.routes);
 app.use('/fields', field.routes);
 app.use('/fieldcategories', fieldcategory.routes);
@@ -102,7 +104,7 @@ async function connect() {
 
   await dictionary.init();
 
-  await resource.init();
+  await resourcetype.init();
 
   app.listen(process.env.SERVER_PORT, () => {
     console.log(`Server listen on http://localhost:${process.env.SERVER_PORT}`);

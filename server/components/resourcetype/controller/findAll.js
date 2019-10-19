@@ -1,5 +1,4 @@
 const Model = require('../model');
-const ResourceType = require('../../../models/resourceType');
 
 module.exports = async (req, res) => {
   if (!req.rules.is_resources_read) {
@@ -9,7 +8,7 @@ module.exports = async (req, res) => {
     return;
   }
 
-  const types = await ResourceType.findAll();
+  const items = await Model.findAll();
 
-  res.status(200).send(types);
+  res.status(200).send(items);
 }
