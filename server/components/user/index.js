@@ -2,7 +2,7 @@ require('dotenv').config();
 const bcrypt = require('bcrypt');
 
 // Models
-const Role = require('../../models/role');
+const Role = require('../role/model');
 const User = require('../../models/user');
 
 // Handlers

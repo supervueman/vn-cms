@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
-const sequelize = require('../util/database');
+const sequelize = require('../../../util/database');
 
-const Resource = sequelize.define('resource', {
+const Model = sequelize.define('resource', {
   id: {
     type: Sequelize.INTEGER,
     autoIncrement: true,
@@ -21,7 +21,7 @@ const Resource = sequelize.define('resource', {
   menuindex: Sequelize.INTEGER
 });
 
-Resource.prototype.toJSON = function () {
+Model.prototype.toJSON = function () {
   const values = Object.assign({}, this.get());
 
   if (values.user) {
@@ -31,4 +31,4 @@ Resource.prototype.toJSON = function () {
   return values;
 }
 
-module.exports = Resource;
+module.exports = Model;

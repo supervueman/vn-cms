@@ -11,7 +11,7 @@ const authenticateRoutes = require('./routes/authenticate');
 const profileRoutes = require('./routes/profile');
 const userRoutes = require('./routes/user');
 const role = require('./components/role');
-const resourceRoutes = require('./routes/resource');
+const resource = require('./components/resource');
 const layout = require('./components/layout');
 const field = require('./components/field');
 const fieldcategory = require('./components/fieldcategory');
@@ -23,7 +23,7 @@ const dictionary = require('./components/dictionary');
 
 // Components init
 const userInit = require('./components/user');
-const resourceInit = require('./components/resource');
+// const resourceInit = require('./components/resource');
 
 // Association init
 const associationInit = require('./associations');
@@ -73,7 +73,7 @@ app.use('/authenticate', authenticateRoutes);
 app.use('/profile', profileRoutes);
 app.use('/users', userRoutes);
 app.use('/roles', role.routes);
-app.use('/resources', resourceRoutes);
+app.use('/resources', resource.routes);
 app.use('/layouts', layout.routes);
 app.use('/fields', field.routes);
 app.use('/fieldcategories', fieldcategory.routes);
@@ -102,7 +102,7 @@ async function connect() {
 
   await dictionary.init();
 
-  await resourceInit();
+  await resource.init();
 
   app.listen(process.env.SERVER_PORT, () => {
     console.log(`Server listen on http://localhost:${process.env.SERVER_PORT}`);

@@ -1,17 +1,8 @@
-// Models
-const ResourceType = require('../../models/resourceType');
+const routes = require('./routes');
+const init = require('./init');
+require('./association')();
 
-module.exports = async () => {
-  let document_type = await ResourceType.findOne({
-    where: {
-      slug: 'document'
-    }
-  });
-
-  if (!document_type) {
-    document_type = await ResourceType.create({
-      slug: 'document',
-      title: 'Документ',
-    });
-  }
+module.exports = {
+  routes,
+  init
 }

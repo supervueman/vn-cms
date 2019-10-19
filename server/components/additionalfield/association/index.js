@@ -1,7 +1,7 @@
 const Model = require('../model');
 const Field = require('../../field/model');
 const FieldCategory = require('../../fieldcategory/model');
-const Resource = require('../../../models/resource');
+const Resource = require('../../resource/model');
 
 module.exports = async () => {
   Model.belongsTo(Field, {
