@@ -4,7 +4,7 @@ require('dotenv').config();
 
 // Routes
 const authenticate = require('./components/authenticate');
-const profileRoutes = require('./routes/profile');
+const profile = require('./components/profile');
 const user = require('./components/user');
 const role = require('./components/role');
 const resource = require('./components/resource');
@@ -24,7 +24,7 @@ init(app);
 
 // Routes use
 app.use('/authenticate', authenticate.routes);
-app.use('/profile', profileRoutes);
+app.use('/profile', profile.routes);
 app.use('/users', user.routes);
 app.use('/roles', role.routes);
 app.use('/resources', resource.routes);
