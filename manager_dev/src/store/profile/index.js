@@ -65,7 +65,7 @@ export default {
         this.dispatch('preloader/fetch', false);
         localStorage.setItem('x-api-key', response.data.token);
 
-        const dataSystemSetting = requestDataHandler('GET', '/system-settings/findone', 'systemSetting/findAll', {
+        const dataSystemSetting = requestDataHandler('GET', '/systemsettings/findone', undefined, {
           filter: {
             where: {
               slug: 'main_lang'

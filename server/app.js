@@ -18,13 +18,12 @@ const fieldCategoriesRoutes = require('./routes/fieldCategory');
 const additionalFieldRoutes = require('./routes/addittionalField');
 const filesystemRoutes = require('./routes/filesystem');
 const mailRoutes = require('./routes/mail');
-const systemSettingRoutes = require('./routes/systemSetting');
+const systemsetting = require('./components/systemsetting');
 const dictionaryRoutes = require('./routes/dictionary');
 
 // Components init
 const roleInit = require('./components/role');
 const userInit = require('./components/user');
-const systemSettingInit = require('./components/systemSetting');
 const dictionariesInit = require('./components/dictionary');
 const resourceInit = require('./components/resource');
 
@@ -83,7 +82,7 @@ app.use('/fieldCategories', fieldCategoriesRoutes);
 app.use('/additionalfields', additionalFieldRoutes);
 app.use('/filesystem', filesystemRoutes);
 app.use('/mail', mailRoutes);
-app.use('/system-settings', systemSettingRoutes);
+app.use('/systemsettings', systemsetting.routes);
 app.use('/dictionaries', dictionaryRoutes);
 app.use('/files', express.static('../files'));
 
@@ -101,7 +100,7 @@ async function connect() {
 
   await userInit();
 
-  await systemSettingInit();
+  await systemsetting.init();
 
   await dictionariesInit();
 

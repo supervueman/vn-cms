@@ -1,36 +1,17 @@
-// Models
-const SystemSetting = require('../../models/systemSetting');
+// const express = require('express');
 
-module.exports = async () => {
-  let is_id_in_slug = await SystemSetting.findOne({
-    where: {
-      slug: 'is_id_in_slug'
-    }
-  });
+const routes = require('./routes');
+const init = require('./init');
 
-  if (!is_id_in_slug) {
-    is_id_in_slug = await SystemSetting.create({
-      slug: 'is_id_in_slug',
-      title: 'Использовать id ресурсов в псевдонимах',
-      setting: '{"value": "false"}',
-      component: 'base',
-      settingType: 'switcher'
-    });
-  }
+// const app = express();
 
-  let main_lang = await SystemSetting.findOne({
-    where: {
-      slug: 'main_lang'
-    }
-  });
+module.exports = routes;
 
-  if (!main_lang) {
-    main_lang = await SystemSetting.create({
-      slug: 'main_lang',
-      title: 'Основной язык',
-      setting: '{"value": "en"}',
-      component: 'base',
-      settingType: 'text'
-    });
-  }
+module.exports = {
+  routes,
+  init
 }
+
+// module.exports = () => {
+//   app.use('/system-settings', routes);
+// }

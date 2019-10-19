@@ -1,7 +1,7 @@
 // Models
 const Resource = require('../models/resource');
 const ResourceType = require('../models/resourceType');
-const SystemSetting = require('../models/systemSetting');
+const SystemSetting = require('../components/systemsetting/model');
 
 module.exports = {
   async findAll(req, res) {
