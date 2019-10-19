@@ -15,7 +15,7 @@ const fieldcategory = require('./components/fieldcategory');
 const additionalfield = require('./components/additionalfield');
 const systemsetting = require('./components/systemsetting');
 const dictionary = require('./components/dictionary');
-const mailRoutes = require('./routes/mail');
+const mail = require('./core/components/mail');
 const filesystem = require('./core/components/filesystem');
 
 const app = express();
@@ -35,7 +35,7 @@ app.use('/fieldcategories', fieldcategory.routes);
 app.use('/additionalfields', additionalfield.routes);
 app.use('/systemsettings', systemsetting.routes);
 app.use('/dictionaries', dictionary.routes);
-app.use('/mail', mailRoutes);
+app.use('/mail', mail.routes);
 app.use('/filesystem', filesystem.routes);
 
 async function connect() {
