@@ -38,7 +38,7 @@ module.exports = async (req, res) => {
       }
     }
 
-    const updatedItem = await resource.update(updateItem);
+    const updatedItem = await item.update(updateItem);
 
     res.status(200).send(updatedItem);
   } else {
