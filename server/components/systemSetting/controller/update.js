@@ -1,6 +1,7 @@
 const Model = require('../model');
 
 module.exports = async (req, res) => {
+
   if (!req.rules.is_system_settings_update) {
     res.status(403).send({
       message: 'Access denied!'
@@ -19,7 +20,7 @@ module.exports = async (req, res) => {
   const updateItem = req.body;
   delete updateItem.id;
 
-  const updatedItem = await Model.update(updateItem);
+  const updatedItem = await item.update(updateItem);
 
   res.status(200).send(updatedItem);
 }

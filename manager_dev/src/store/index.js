@@ -10,19 +10,6 @@ const debug = process.env.NODE_ENV !== 'production';
 import notification from './common/notification';
 import preloader from './common/preloader';
 import base from './common/base';
-// import profile from './profile';
-// import authenticate from './authenticate';
-// import resource from './resource';
-// import filesystem from './modules/filesystem.store';
-// import layout from './layout';
-// import field from './field';
-// import fieldcategory from './fieldCategory';
-// import additionalfield from './additionalField';
-// import user from './user';
-// import role from './role';
-// import systemsetting from './systemSettings';
-// import dictionary from './dictionary';
-// import mail from './mail';
 
 import modules from './modules';
 
@@ -31,21 +18,8 @@ export const store = new Vuex.Store({
     notification,
     preloader,
     base,
-    // authenticate,
-    // profile,
-    // resource,
-    // filesystem,
-    // layout,
-    // field,
-    // fieldcategory,
-    // additionalfield,
-    // user,
-    // role,
-    // systemsetting,
-    // dictionary,
-    // mail,
     ...modules
   },
-  strict: debug,
+  strict: false,
   plugins: debug ? [createLogger()] : [],
 });
