@@ -18,7 +18,7 @@ import layout from './layout';
 import field from './field';
 import fieldCategory from './fieldCategory';
 import additionalField from './additionalField';
-import user from './user';
+// import user from './user';
 import role from './role';
 import systemSetting from './systemSettings';
 import dictionary from './dictionary';
@@ -39,7 +39,7 @@ export const store = new Vuex.Store({
     field,
     fieldCategory,
     additionalField,
-    user,
+    // user,
     role,
     systemSetting,
     dictionary,
