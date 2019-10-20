@@ -15,7 +15,7 @@ import base from './common/base';
 // import resource from './resource';
 // import filesystem from './modules/filesystem.store';
 import layout from './layout';
-import field from './field';
+// import field from './field';
 import fieldCategory from './fieldCategory';
 import additionalField from './additionalField';
 // import user from './user';
@@ -36,7 +36,7 @@ export const store = new Vuex.Store({
     // resource,
     // filesystem,
     layout,
-    field,
+    // field,
     fieldCategory,
     additionalField,
     // user,
