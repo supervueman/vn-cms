@@ -16,11 +16,11 @@ import base from './common/base';
 // import filesystem from './modules/filesystem.store';
 // import layout from './layout';
 // import field from './field';
-import fieldCategory from './fieldCategory';
-import additionalField from './additionalField';
+// import fieldcategory from './fieldCategory';
+import additionalfield from './additionalField';
 // import user from './user';
 // import role from './role';
-import systemSetting from './systemSettings';
+import systemsetting from './systemSettings';
 // import dictionary from './dictionary';
 // import mail from './mail';
 
@@ -37,11 +37,11 @@ export const store = new Vuex.Store({
     // filesystem,
     // layout,
     // field,
-    fieldCategory,
-    additionalField,
+    // fieldcategory,
+    additionalfield,
     // user,
     // role,
-    systemSetting,
+    systemsetting,
     // dictionary,
     // mail,
     ...modules

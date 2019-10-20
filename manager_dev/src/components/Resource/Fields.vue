@@ -238,12 +238,12 @@ export default {
       return this.$store.getters["resource/getSerializedFields"];
     },
     fieldCategories() {
-      return this.$store.getters["fieldCategory/getAll"];
+      return this.$store.getters["fieldcategory/getAll"];
     }
   },
 
   async mounted() {
-    await this.$store.dispatch("fieldCategory/findAll", {
+    await this.$store.dispatch("fieldcategory/findAll", {
       query: {
         filter: {
           order: [["createdAt", "DESC"]]
@@ -297,9 +297,9 @@ export default {
 
       for await (let el of fields) {
         if (el.id) {
-          await this.$store.dispatch("additionalField/update", el);
+          await this.$store.dispatch("additionalfield/update", el);
         } else {
-          await this.$store.dispatch("additionalField/create", el);
+          await this.$store.dispatch("additionalfield/create", el);
         }
       }
 

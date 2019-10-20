@@ -69,10 +69,10 @@ export default {
       ];
     },
     systemSettings() {
-      return this.$store.getters["systemSetting/getAll"];
+      return this.$store.getters["systemsetting/getAll"];
     },
     count() {
-      return this.$store.getters["systemSetting/getCount"];
+      return this.$store.getters["systemsetting/getCount"];
     }
   },
 
@@ -86,8 +86,8 @@ export default {
         }
       }
     };
-    await this.$store.dispatch("systemSetting/findAll", data);
-    await this.$store.dispatch("systemSetting/count", data);
+    await this.$store.dispatch("systemsetting/findAll", data);
+    await this.$store.dispatch("systemsetting/count", data);
   },
 
   methods: {
@@ -101,7 +101,7 @@ export default {
           }
         }
       };
-      await this.$store.dispatch("systemSetting/findAll", data);
+      await this.$store.dispatch("systemsetting/findAll", data);
     },
 
     async update(item) {
@@ -109,7 +109,7 @@ export default {
         return;
       }
 
-      await this.$store.dispatch("systemSetting/update", {
+      await this.$store.dispatch("systemsetting/update", {
         body: { ...item, setting: JSON.stringify(item.setting) }
       });
     }

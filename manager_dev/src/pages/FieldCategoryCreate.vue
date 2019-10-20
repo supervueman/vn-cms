@@ -31,12 +31,12 @@ export default {
 
   computed: {
     fieldCategory() {
-      return this.$store.getters["fieldCategory/get"];
+      return this.$store.getters["fieldcategory/get"];
     }
   },
 
   beforeRouteLeave(to, from, next) {
-    this.$store.dispatch("fieldCategory/clear");
+    this.$store.dispatch("fieldcategory/clear");
     next();
   }
 };

@@ -114,7 +114,7 @@ export default {
     },
 
     fieldCategories() {
-      return this.$store.getters["fieldCategory/getAll"];
+      return this.$store.getters["fieldcategory/getAll"];
     }
   },
 
@@ -132,7 +132,7 @@ export default {
     await this.$store.dispatch("field/findAll", data);
     await this.$store.dispatch("field/count", data);
 
-    await this.$store.dispatch("fieldCategory/findAll", {
+    await this.$store.dispatch("fieldcategory/findAll", {
       query: {
         filter: {
           order: [["createdAt", "DESC"]]

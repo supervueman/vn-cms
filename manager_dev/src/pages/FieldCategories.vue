@@ -84,10 +84,10 @@ export default {
       ];
     },
     fields() {
-      return this.$store.getters["fieldCategory/getAll"];
+      return this.$store.getters["fieldcategory/getAll"];
     },
     count() {
-      return this.$store.getters["fieldCategory/getCount"];
+      return this.$store.getters["fieldcategory/getCount"];
     }
   },
 
@@ -101,8 +101,8 @@ export default {
         }
       }
     };
-    await this.$store.dispatch("fieldCategory/findAll", data);
-    await this.$store.dispatch("fieldCategory/count", data);
+    await this.$store.dispatch("fieldcategory/findAll", data);
+    await this.$store.dispatch("fieldcategory/count", data);
   },
 
   methods: {
@@ -116,14 +116,14 @@ export default {
           }
         }
       };
-      await this.$store.dispatch("fieldCategory/findAll", data);
+      await this.$store.dispatch("fieldcategory/findAll", data);
     },
 
     async remove() {
       if (!this.r.is_field_delete) {
         return;
       }
-      await this.$store.dispatch("fieldCategory/remove", {
+      await this.$store.dispatch("fieldcategory/remove", {
         body: { id: this.removeItem.id }
       });
       const fields = this.fields.filter(el => {
@@ -131,7 +131,7 @@ export default {
           return el;
         }
       });
-      this.$store.dispatch("fieldCategory/setAll", fields);
+      this.$store.dispatch("fieldcategory/setAll", fields);
     },
 
     removeDialogOpen(fieldCategory) {

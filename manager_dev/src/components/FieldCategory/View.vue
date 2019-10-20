@@ -104,7 +104,7 @@ export default {
       }
       this.$v.$touch();
       if (!this.$v.$error) {
-        await this.$store.dispatch("fieldCategory/create", {
+        await this.$store.dispatch("fieldcategory/create", {
           body: this.fieldCategory
         });
       }
@@ -116,7 +116,7 @@ export default {
       }
       this.$v.$touch();
       if (!this.$v.$error) {
-        await this.$store.dispatch("fieldCategory/update", {
+        await this.$store.dispatch("fieldcategory/update", {
           body: this.fieldCategory
         });
       }
@@ -126,7 +126,7 @@ export default {
       if (!this.r.is_field_category_delete) {
         return;
       }
-      await this.$store.dispatch("fieldCategory/remove", {
+      await this.$store.dispatch("fieldcategory/remove", {
         body: { id: this.fieldCategory.id }
       });
       this.$router.push("/fieldcategories");

@@ -33,12 +33,12 @@ export default {
 
   computed: {
     fieldCategory() {
-      return this.$store.getters["fieldCategory/get"];
+      return this.$store.getters["fieldcategory/get"];
     }
   },
 
   async mounted() {
-    await this.$store.dispatch("fieldCategory/findByPk", {
+    await this.$store.dispatch("fieldcategory/findByPk", {
       params: {
         id: this.$route.params.id
       }
@@ -46,7 +46,7 @@ export default {
   },
 
   beforeRouteLeave(to, from, next) {
-    this.$store.dispatch("fieldCategory/clear");
+    this.$store.dispatch("fieldcategory/clear");
     next();
   }
 };

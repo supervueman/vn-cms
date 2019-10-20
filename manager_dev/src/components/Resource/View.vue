@@ -347,7 +347,7 @@ export default {
       for await (let el of this.$store.getters[
         "resource/getAdditionalFields"
       ]) {
-        await this.$store.dispatch("additionalField/remove", {
+        await this.$store.dispatch("additionalfield/remove", {
           body: { id: el.id }
         });
       }
