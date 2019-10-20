@@ -1,7 +1,11 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 
+import createLogger from 'vuex/dist/logger';
+
 Vue.use(Vuex);
+
+const debug = process.env.NODE_ENV !== 'production';
 
 import notification from './common/notification';
 import preloader from './common/preloader';
@@ -9,7 +13,7 @@ import base from './common/base';
 import profile from './profile';
 import authenticate from './authenticate';
 import resource from './resource';
-import filesystem from './filesystem';
+// import filesystem from './modules/filesystem.store';
 import layout from './layout';
 import field from './field';
 import fieldCategory from './fieldCategory';
@@ -20,6 +24,8 @@ import systemSetting from './systemSettings';
 import dictionary from './dictionary';
 import mail from './mail';
 
+import modules from './modules';
+
 export const store = new Vuex.Store({
   modules: {
     notification,
@@ -28,7 +34,7 @@ export const store = new Vuex.Store({
     authenticate,
     profile,
     resource,
-    filesystem,
+    // filesystem,
     layout,
     field,
     fieldCategory,
@@ -37,6 +43,9 @@ export const store = new Vuex.Store({
     role,
     systemSetting,
     dictionary,
-    mail
-  }
+    mail,
+    ...modules
+  },
+  strict: debug,
+  plugins: debug ? [createLogger()] : [],
 });
