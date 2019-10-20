@@ -10,7 +10,7 @@ const debug = process.env.NODE_ENV !== 'production';
 import notification from './common/notification';
 import preloader from './common/preloader';
 import base from './common/base';
-import profile from './profile';
+// import profile from './profile';
 // import authenticate from './authenticate';
 import resource from './resource';
 // import filesystem from './modules/filesystem.store';
@@ -32,7 +32,7 @@ export const store = new Vuex.Store({
     preloader,
     base,
     // authenticate,
-    profile,
+    // profile,
     resource,
     // filesystem,
     layout,
