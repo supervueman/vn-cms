@@ -12,7 +12,7 @@ import preloader from './common/preloader';
 import base from './common/base';
 // import profile from './profile';
 // import authenticate from './authenticate';
-import resource from './resource';
+// import resource from './resource';
 // import filesystem from './modules/filesystem.store';
 import layout from './layout';
 import field from './field';
@@ -33,7 +33,7 @@ export const store = new Vuex.Store({
     base,
     // authenticate,
     // profile,
-    resource,
+    // resource,
     // filesystem,
     layout,
     field,

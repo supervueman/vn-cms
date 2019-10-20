@@ -1,3 +1,7 @@
+import requestDataHandler from '@/functions/requestDataHandlerWithAxios';
+import axios from 'axios';
+import router from '@/routers';
+
 import profile from '@/models/user';
 import rules from '@/models/rules_default';
 
