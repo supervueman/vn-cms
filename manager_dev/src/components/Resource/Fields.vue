@@ -219,15 +219,15 @@ import MigxField from "@/components/Common/Migx/MigxField";
 export default {
   name: "ResourceFields",
 
+  components: {
+    MigxField
+  },
+
   props: {
     resource: {
       type: Object,
       default: () => {}
     }
-  },
-
-  components: {
-    MigxField
   },
 
   computed: {
