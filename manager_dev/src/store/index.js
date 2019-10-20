@@ -22,7 +22,7 @@ import additionalField from './additionalField';
 // import role from './role';
 import systemSetting from './systemSettings';
 // import dictionary from './dictionary';
-import mail from './mail';
+// import mail from './mail';
 
 import modules from './modules';
 
@@ -43,7 +43,7 @@ export const store = new Vuex.Store({
     // role,
     systemSetting,
     // dictionary,
-    mail,
+    // mail,
     ...modules
   },
   strict: debug,
