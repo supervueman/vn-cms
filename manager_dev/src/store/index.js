@@ -17,7 +17,7 @@ import base from './common/base';
 // import layout from './layout';
 // import field from './field';
 // import fieldcategory from './fieldCategory';
-import additionalfield from './additionalField';
+// import additionalfield from './additionalField';
 // import user from './user';
 // import role from './role';
 import systemsetting from './systemSettings';
@@ -38,7 +38,7 @@ export const store = new Vuex.Store({
     // layout,
     // field,
     // fieldcategory,
-    additionalfield,
+    // additionalfield,
     // user,
     // role,
     systemsetting,
