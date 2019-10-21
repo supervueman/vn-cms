@@ -1,31 +1,31 @@
 const mutations = {
-  set(state, payload) {
+  SET(state, payload) {
     state.resource = payload;
   },
-  setAll(state, payload) {
+  SET_ALL(state, payload) {
     state.resources = payload;
   },
-  setCount(state, payload) {
+  SET_COUNT(state, payload) {
     state.count = payload;
   },
-  setLayout(state, payload) {
+  SET_LAYOUT(state, payload) {
     state.layout = payload;
   },
-  setType(state, payload) {
+  SET_TYPE(state, payload) {
     if (payload) {
       state.types = payload;
     }
   },
-  setTypes(state, payload) {
+  SET_TYPES(state, payload) {
     state.types = payload;
   },
-  setFields(state, payload) {
+  SET_FIELDS(state, payload) {
     state.fields = payload;
   },
-  setAdditionalFields(state, payload) {
+  SET_ADDITIONAL_FIELDS(state, payload) {
     state.additionalFields = payload;
   },
-  setSerializedFields(state, payload) {
+  SET_SERIALIZED_FIELDS(state, payload) {
     const serializedFields = {};
 
     const fields = state.fields.map(el => el);
@@ -97,7 +97,7 @@ const mutations = {
 
     state.serializedFields = serializedFields;
   },
-  setTranslations(state, payload) {
+  SET_TRANSLATIONS(state, payload) {
     state.translations = [{
       ...payload
     }];

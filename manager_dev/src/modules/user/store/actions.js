@@ -1,7 +1,7 @@
-import requestDataHandler from '@/functions/requestDataHandlerWithAxios';
+import requestDataHandler from '@/core/plugins/requestDataHandler';
 import axios from 'axios';
 
-import user from '@/models/user';
+import user from '../models/user';
 
 const actions = {
   async findByPk({
@@ -21,7 +21,7 @@ const actions = {
 
     if (response !== undefined && response.status === 200) {
       this.dispatch('preloader/fetch', false);
-      commit('set', response.data);
+      commit('SET', response.data);
     }
   },
 
@@ -75,7 +75,7 @@ const actions = {
         message: 'Успешно сохранено!',
         isActive: true
       });
-      commit('set', response.data);
+      commit('SET', response.data);
     }
   },
 
@@ -146,7 +146,7 @@ const actions = {
 
     if (response !== undefined && response.status === 200) {
       this.dispatch('preloader/fetch', false);
-      commit('setAll', response.data);
+      commit('SET_ALL', response.data);
     }
   },
 
@@ -167,26 +167,26 @@ const actions = {
 
     if (response !== undefined && response.status === 200) {
       this.dispatch('preloader/fetch', false);
-      commit('setCount', response.data.count);
+      commit('SET_COUNT', response.data.count);
     }
   },
 
   set({
     commit
   }, payload) {
-    commit('set', payload);
+    commit('SET', payload);
   },
 
   setAll({
     commit
   }, payload) {
-    commit('setAll', payload);
+    commit('SET_ALL', payload);
   },
 
   clear({
     commit
   }) {
-    commit('set', {
+    commit('SET', {
       ...user
     });
   },
@@ -194,7 +194,7 @@ const actions = {
   clearAll({
     commit
   }) {
-    commit('setAll', []);
+    commit('SET_ALL', []);
   },
 };
 

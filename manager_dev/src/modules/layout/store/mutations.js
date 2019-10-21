@@ -1,11 +1,11 @@
 const mutations = {
-  set(state, payload) {
+  SET(state, payload) {
     state.layout = payload;
   },
-  setAll(state, payload) {
+  SET_ALL(state, payload) {
     state.layouts = payload;
   },
-  setCount(state, payload) {
+  SET_COUNT(state, payload) {
     state.count = payload;
   }
 };

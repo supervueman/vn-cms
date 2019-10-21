@@ -1,11 +1,11 @@
 const mutations = {
-  setAll(state, payload) {
+  SET_ALL(state, payload) {
     state.systemSettings = payload.map(el => {
       el.setting = JSON.parse(el.setting);
       return el;
     });;
   },
-  setCount(state, payload) {
+  SET_COUNT(state, payload) {
     state.count = payload;
   }
 };

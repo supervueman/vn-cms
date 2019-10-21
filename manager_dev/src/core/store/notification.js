@@ -7,7 +7,7 @@ export default {
     },
   },
   mutations: {
-    set(state, payload) {
+    SE(state, payload) {
       state.notification = payload;
     },
   },
@@ -20,7 +20,7 @@ export default {
         isActive: false
       };
       setTimeout(() => {
-        commit('set', closeNotification)
+        commit('SET', closeNotification)
       }, 3000);
     },
   },

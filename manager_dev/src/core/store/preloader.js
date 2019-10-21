@@ -3,7 +3,7 @@ export default {
     preloader: false
   },
   mutations: {
-    set(state, payload) {
+    SET(state, payload) {
       state.preloader = payload;
     },
   },
@@ -11,7 +11,7 @@ export default {
     fetch({
       commit
     }, payload) {
-      commit('set', payload);
+      commit('SET', payload);
     },
   },
   getters: {

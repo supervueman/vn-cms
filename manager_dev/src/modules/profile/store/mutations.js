@@ -1,9 +1,9 @@
 const mutations = {
-  set(state, payload) {
+  SET(state, payload) {
     state.profile = payload;
   },
 
-  setRules(state, payload) {
+  SET_RULES(state, payload) {
     const rules = JSON.parse(payload);
     for (const rule in rules) {
       rules[rule] = rules[rule].value;
@@ -11,7 +11,7 @@ const mutations = {
     state.rules = rules;
   },
 
-  setResources(state, payload) {
+  SET_RESOURCES(state, payload) {
     state.resources = payload;
   }
 };

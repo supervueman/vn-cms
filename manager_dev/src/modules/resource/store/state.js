@@ -1,5 +1,5 @@
-import resource from '@/models/resource';
-import layout from '@/models/layout';
+import resource from '../models/resource';
+import layout from '../../layout/models/layout';
 
 const state = {
   resource: {

@@ -1,4 +1,4 @@
-import layout from '@/models/layout';
+import layout from '../models/layout';
 
 const state = {
   layout: {

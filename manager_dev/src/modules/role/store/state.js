@@ -1,5 +1,5 @@
-import role from '@/models/role'
-import rules from '@/models/rules_default';
+import role from '../models/role'
+import rules from '../models/rules_default';
 
 const state = {
   role: {

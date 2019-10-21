@@ -1,8 +1,8 @@
-import requestDataHandler from '@/functions/requestDataHandlerWithAxios';
+import requestDataHandler from '@/core/plugins/requestDataHandler';
 import axios from 'axios';
 import router from '@/connector/index.route.js';
 
-import layout from '@/models/layout';
+import layout from '../models/layout';
 
 const actions = {
   async findByPk({
@@ -22,14 +22,14 @@ const actions = {
 
     if (response !== undefined && response.status === 200) {
       this.dispatch('preloader/fetch', false);
-      commit('set', response.data);
+      commit('SET', response.data);
     }
   },
 
   async findOne({
     commit
   }, payload) {
-    commit('set', layout);
+    commit('SET', layout);
   },
 
   async create({
@@ -127,7 +127,7 @@ const actions = {
 
     if (response !== undefined && response.status === 200) {
       this.dispatch('preloader/fetch', false);
-      commit('setAll', response.data);
+      commit('SET_ALL', response.data);
     }
   },
 
@@ -148,27 +148,27 @@ const actions = {
 
     if (response !== undefined && response.status === 200) {
       this.dispatch('preloader/fetch', false);
-      commit('setCount', response.data.count);
+      commit('SET_COUNT', response.data.count);
     }
   },
 
   set({
     commit
   }, payload) {
-    commit('set', layout);
+    commit('SET', layout);
   },
 
   setAll({
     commit
   }, payload) {
-    commit('setAll', payload);
-    commit('setCount', payload.length);
+    commit('SET_ALL', payload);
+    commit('SET_COUNT', payload.length);
   },
 
   clear({
     commit
   }) {
-    commit('set', {
+    commit('SET', {
       ...layout
     });
   },
@@ -176,7 +176,7 @@ const actions = {
   clearAll({
     commit
   }) {
-    commit('setAll', []);
+    commit('SET_ALL', []);
   }
 };
 

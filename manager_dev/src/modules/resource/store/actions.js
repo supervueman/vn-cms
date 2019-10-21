@@ -1,10 +1,10 @@
-import requestDataHandler from '@/functions/requestDataHandlerWithAxios';
+import requestDataHandler from '@/core/plugins/requestDataHandler';
 import axios from 'axios';
 import router from '@/connector/index.route.js';
 
 // Models
-import resource from '@/models/resource';
-import layout from '@/models/layout';
+import resource from '../models/resource';
+import layout from '../../layout/models/layout';
 
 const actions = {
   async findByPk({
@@ -23,12 +23,12 @@ const actions = {
     });
 
     if (response !== undefined && response.status === 200) {
-      commit('set', response.data);
-      commit('setAdditionalFields', response.data.additionalfields);
-      commit('setLayout', response.data.layout);
-      commit('setFields', response.data.layout.fields);
-      commit('setTranslations', response.data);
-      commit('setSerializedFields');
+      commit('SET', response.data);
+      commit('SET_ADDITIONAL_FIELDS', response.data.additionalfields);
+      commit('SET_LAYOUT', response.data.layout);
+      commit('SET_FIELDS', response.data.layout.fields);
+      commit('SET_TRANSLATIONS', response.data);
+      commit('SET_ADDITIONAL_FIELDS');
 
       this.dispatch('preloader/fetch', false);
 
@@ -77,7 +77,7 @@ const actions = {
     if (response !== undefined && response.status === 200) {
       this.dispatch('preloader/fetch', false);
 
-      commit('set', response.data);
+      commit('SET', response.data);
       if (payload.body.translationId !== '' && payload.body.translationId !== null && payload.body.translationId !== undefined) {
         for await (let translation of this.getters['resource/getTranslations']) {
           await this.dispatch('resource/addTranslation', {
@@ -125,7 +125,7 @@ const actions = {
     });
 
     if (response !== undefined && response.status === 200) {
-      commit('setTypes', response.data);
+      commit('SET_TYPES', response.data);
       this.dispatch('preloader/fetch', false);
     }
   },
@@ -147,7 +147,7 @@ const actions = {
 
     if (response !== undefined && response.status === 200) {
       this.dispatch('preloader/fetch', false);
-      commit('set', response.data);
+      commit('SET', response.data);
       this.dispatch("notification/fetch", {
         type: "success",
         message: 'Успешно сохранено!',
@@ -200,8 +200,8 @@ const actions = {
 
     if (response !== undefined && response.status === 200) {
       this.dispatch('preloader/fetch', false);
-      commit('setAll', response.data);
-      commit('setCount', response.data.count);
+      commit('SET_ALL', response.data);
+      commit('SET_COUNT', response.data.count);
     }
   },
 
@@ -222,27 +222,27 @@ const actions = {
 
     if (response !== undefined && response.status === 200) {
       this.dispatch('preloader/fetch', false);
-      commit('setCount', response.data.count);
+      commit('SET_COUNT', response.data.count);
     }
   },
 
   set({
     commit
   }, payload) {
-    commit('set', payload);
+    commit('SET', payload);
   },
 
   setAll({
     commit
   }, payload) {
-    commit('setAll', payload);
-    commit('setCount', payload.length);
+    commit('SET_ALL', payload);
+    commit('SET_COUNT', payload.length);
   },
 
   clear({
     commit
   }) {
-    commit('set', {
+    commit('SET', {
       ...resource
     });
   },
@@ -250,13 +250,13 @@ const actions = {
   clearAll({
     commit
   }) {
-    commit('setAll', []);
+    commit('SET_ALL', []);
   },
 
   clearLayout({
     commit
   }) {
-    commit('setLayout', {
+    commit('SET_LAYOUT', {
       ...layout
     })
   },
@@ -264,13 +264,13 @@ const actions = {
   clearFields({
     commit
   }) {
-    commit('setFields', [])
+    commit('SET_FIELDS', [])
   },
 
   clearAdditionalFields({
     commit
   }) {
-    commit('setAdditionalFields', []);
+    commit('SET_ADDITIONAL_FIELDS', []);
   },
 
   async addTranslation({
@@ -290,7 +290,7 @@ const actions = {
 
     if (response !== undefined && response.status === 200) {
       this.dispatch('preloader/fetch', false);
-      commit('set', response.data);
+      commit('SET', response.data);
       this.dispatch("notification/fetch", {
         type: "success",
         message: 'Успешно сохранено!',

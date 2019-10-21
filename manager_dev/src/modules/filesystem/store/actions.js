@@ -1,4 +1,4 @@
-import requestDataHandler from '@/functions/requestDataHandlerWithAxios';
+import requestDataHandler from '@/core/plugins/requestDataHandler';
 import axios from 'axios';
 
 const actions = {
@@ -27,8 +27,8 @@ const actions = {
 
     if (response !== undefined && response.status === 200) {
       this.dispatch('preloader/fetch', false);
-      commit('setFilesystem', response.data);
-      commit('setFolderContent');
+      commit('SET_FILESYSTEM', response.data);
+      commit('SET_FOLDER_CONTENT');
     }
   },
 
@@ -40,7 +40,7 @@ const actions = {
   async fetchFolderContent({
     commit
   }, payload) {
-    commit('setFolderContent', payload);
+    commit('SET_FOLDER_CONTENT', payload);
   },
 
   async createDir({

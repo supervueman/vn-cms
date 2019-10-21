@@ -1,5 +1,5 @@
 const mutations = {
-  setFilesystem(state, payload) {
+  SET_FILESYSTEM(state, payload) {
     const filesystem = [payload];
 
     function recursiveFilesystem(files) {
@@ -20,7 +20,7 @@ const mutations = {
 
     state.filesystem = filesystem;
   },
-  setFolderContent(state, payload) {
+  SET_FOLDER_CONTENT(state, payload) {
     state.folderContent = payload;
   }
 };

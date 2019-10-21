@@ -1,9 +1,9 @@
-import requestDataHandler from '@/functions/requestDataHandlerWithAxios';
+import requestDataHandler from '@/core/plugins/requestDataHandler';
 import axios from 'axios';
 import router from '@/connector/index.route.js';
 
-import profile from '@/models/user';
-import rules from '@/models/rules_default';
+import profile from '../../user/models/user';
+import rules from '../../role/models/rules_default';
 
 const rulesParse = {
   ...rules
@@ -30,7 +30,7 @@ const actions = {
     });
 
     if (response !== undefined && response.status === 200) {
-      commit('setRules', response.data.role.rules);
+      commit('SET_RULES', response.data.role.rules);
       this.dispatch('preloader/fetch', false);
       localStorage.setItem('x-api-key', response.data.token);
 
@@ -86,11 +86,11 @@ const actions = {
           });
         });
 
-        commit('set', response.data);
+        commit('SET', response.data);
 
         if (responseResources !== undefined && responseResources.status === 200) {
           this.dispatch('preloader/fetch', false);
-          commit('setResources', responseResources.data);
+          commit('SET_RESOURCES', responseResources.data);
         }
       }
 
@@ -249,19 +249,19 @@ const actions = {
   set({
     commit
   }, payload) {
-    commit('set', payload);
+    commit('SET', payload);
   },
 
   setResources({
     commit
   }, payload) {
-    commit('setResources', payload);
+    commit('SET_RESOURCES', payload);
   },
 
   clear({
     commit
   }) {
-    commit('set', {
+    commit('SET', {
       ...profile
     })
   },
@@ -269,7 +269,7 @@ const actions = {
   clearRules({
     commit
   }) {
-    commit('setRules', JSON.stringify({
+    commit('SET_RULES', JSON.stringify({
       ...rulesParse
     }));
   },
@@ -277,7 +277,7 @@ const actions = {
   clearResources({
     commit
   }) {
-    commit('setResources', []);
+    commit('SET_RESOURCES', []);
   },
 };
 

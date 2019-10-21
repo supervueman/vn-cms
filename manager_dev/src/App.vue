@@ -77,7 +77,6 @@ export default {
   },
 
   async mounted() {
-    console.log(this);
     await this.$store.dispatch("dictionary/findAll", {
       query: {
         filter: {

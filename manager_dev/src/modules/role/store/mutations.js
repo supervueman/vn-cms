@@ -1,5 +1,5 @@
 const mutations = {
-  set(state, payload) {
+  SET(state, payload) {
     let role = payload;
     if (typeof payload.rules === 'string')
       role = {
@@ -10,10 +10,10 @@ const mutations = {
       };
     state.role = role;
   },
-  setAll(state, payload) {
+  SET_ALL(state, payload) {
     state.roles = payload;
   },
-  setCount(state, payload) {
+  SET_COUNT(state, payload) {
     state.count = payload;
   }
 };

@@ -1,4 +1,4 @@
-import user from '@/models/user';
+import user from '../models/user';
 
 const state = {
   user: {

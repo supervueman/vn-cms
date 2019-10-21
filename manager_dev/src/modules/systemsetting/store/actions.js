@@ -1,4 +1,4 @@
-import requestDataHandler from '@/functions/requestDataHandlerWithAxios';
+import requestDataHandler from '@/core/plugins/requestDataHandler';
 import axios from 'axios';
 
 const actions = {
@@ -44,7 +44,7 @@ const actions = {
 
     if (response !== undefined && response.status === 200) {
       this.dispatch('preloader/fetch', false);
-      commit('setAll', response.data);
+      commit('SET_ALL', response.data);
     }
   },
 
@@ -65,14 +65,14 @@ const actions = {
 
     if (response !== undefined && response.status === 200) {
       this.dispatch('preloader/fetch', false);
-      commit('setCount', response.data.count);
+      commit('SET_COUNT', response.data.count);
     }
   },
 
   clearAll({
     commit
   }) {
-    commit('setAll', []);
+    commit('SET_ALL', []);
   },
 };
 

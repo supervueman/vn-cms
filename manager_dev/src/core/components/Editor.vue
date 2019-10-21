@@ -136,7 +136,7 @@ import { Editor, EditorContent, EditorMenuBar } from "tiptap";
 import { imgFolderBasePath } from "@/config";
 
 // Functions
-import Paragraph from "@/functions/paragraph";
+import Paragraph from "@/core/plugins/editor_paragraph";
 
 // Libs extensions
 import {

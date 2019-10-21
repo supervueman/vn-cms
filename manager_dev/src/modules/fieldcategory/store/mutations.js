@@ -1,11 +1,11 @@
 const mutations = {
-  set(state, payload) {
+  SET(state, payload) {
     state.fieldCategory = payload;
   },
-  setAll(state, payload) {
+  SET_ALL(state, payload) {
     state.fieldCategories = payload;
   },
-  setCount(state, payload) {
+  SET_COUNT(state, payload) {
     state.count = payload;
   }
 };

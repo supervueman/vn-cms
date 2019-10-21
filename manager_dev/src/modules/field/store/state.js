@@ -1,4 +1,4 @@
-import field from '@/models/field';
+import field from '../models/field';
 
 const state = {
   field: {

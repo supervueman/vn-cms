@@ -1,8 +1,8 @@
-import fieldCategory from '@/models/fieldCategory';
+import fieldcategory from '../models/fieldcategory';
 
 const state = {
   fieldCategory: {
-    ...fieldCategory
+    ...fieldcategory
   },
   fieldCategories: [],
   count: 0,

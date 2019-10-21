@@ -1,14 +1,14 @@
 const mutations = {
-  set(state, payload) {
+  SET(state, payload) {
     state.field = payload;
   },
-  setAll(state, payload) {
+  SET_ALL(state, payload) {
     state.fields = payload;
   },
-  setCount(state, payload) {
+  SET_COUNT(state, payload) {
     state.count = payload;
   },
-  setLayouts(state, payload) {
+  SET_LAYOUTS(state, payload) {
     state.layouts = payload;
   }
 };

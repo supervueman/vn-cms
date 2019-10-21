@@ -1,8 +1,8 @@
-import requestDataHandler from '@/functions/requestDataHandlerWithAxios';
+import requestDataHandler from '@/core/plugins/requestDataHandler';
 import axios from 'axios';
 import router from '@/connector/index.route.js';
 
-import field from '@/models/field';
+import field from '../models/field';
 
 const actions = {
   async findAll({
@@ -22,7 +22,7 @@ const actions = {
 
     if (response !== undefined && response.status === 200) {
       this.dispatch('preloader/fetch', false);
-      commit('setAll', response.data);
+      commit('SET_ALL', response.data);
     }
   },
 
@@ -44,8 +44,8 @@ const actions = {
     if (response !== undefined && response.status === 200) {
       this.dispatch('preloader/fetch', false);
       response.data.layouts = response.data.layouts.map(el => el.id);
-      commit('set', response.data);
-      commit('setLayouts', response.data.layouts);
+      commit('SET', response.data);
+      commit('SET_LAYOUTS', response.data.layouts);
     }
   },
 
@@ -150,7 +150,7 @@ const actions = {
 
     if (response !== undefined && response.status === 200) {
       this.dispatch('preloader/fetch', false);
-      commit('setCount', response.data.count);
+      commit('SET_COUNT', response.data.count);
     }
   },
 
@@ -171,8 +171,8 @@ const actions = {
 
     if (response !== undefined && response.status === 200) {
       response.data.layouts = response.data.layouts.map(el => el.id);
-      commit('set', response.data);
-      commit('setLayouts', response.data.layouts);
+      commit('SET', response.data);
+      commit('SET_LAYOUTS', response.data.layouts);
       this.dispatch('preloader/fetch', false);
       this.dispatch('notification/fetch', {
         type: 'success',
@@ -200,8 +200,8 @@ const actions = {
     if (response !== undefined && response.status === 200) {
       this.dispatch('preloader/fetch', false);
       response.data.layouts = response.data.layouts.map(el => el.id);
-      commit('set', response.data);
-      commit('setLayouts', response.data.layouts);
+      commit('SET', response.data);
+      commit('SET_LAYOUTS', response.data.layouts);
       this.dispatch('notification/fetch', {
         type: 'success',
         message: 'Успешно сохранено!',
@@ -213,19 +213,19 @@ const actions = {
   set({
     commit
   }, payload) {
-    commit('set', payload);
+    commit('SET', payload);
   },
 
   setAll({
     commit
   }, payload) {
-    commit('setAll', payload);
+    commit('SET_ALL', payload);
   },
 
   clear({
     commit
   }) {
-    commit('set', {
+    commit('SET', {
       ...field
     });
   },
@@ -233,13 +233,13 @@ const actions = {
   clearAll({
     commit
   }) {
-    commit('setAll', []);
+    commit('SET_ALL', []);
   },
 
   clearLayouts({
     commit
   }) {
-    commit('setLayouts', []);
+    commit('SET_LAYOUTS', []);
   },
 };
 
