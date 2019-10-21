@@ -1,19 +1,20 @@
 import requestDataHandler from '@/functions/requestDataHandlerWithAxios';
 import axios from 'axios';
+import router from '@/connector/index.route.js';
 
-import user from '@/models/user';
+import layout from '@/models/layout';
 
 const actions = {
   async findByPk({
     commit
   }, payload) {
     this.dispatch('preloader/fetch', true);
-    const data = requestDataHandler('GET', `/users/find/${payload.id}`, undefined, payload.query);
+    const data = requestDataHandler('GET', `/layouts/find/${payload.params.id}`, undefined);
 
     const response = await axios(data).catch(err => {
       this.dispatch('preloader/fetch', false);
-      this.dispatch("notification/fetch", {
-        type: "error",
+      this.dispatch('notification/fetch', {
+        type: 'error',
         message: `${err}`,
         isActive: true
       });
@@ -25,23 +26,22 @@ const actions = {
     }
   },
 
-  // Test
   async findOne({
     commit
   }, payload) {
+    commit('set', layout);
+  },
+
+  async create({
+    commit
+  }, payload) {
     this.dispatch('preloader/fetch', true);
-    const data = requestDataHandler('GET', '/users/findone', undefined, {
-      filter: {
-        where: {
-          email: 'ahmed@gmail.com'
-        }
-      }
-    });
+    const data = requestDataHandler('POST', '/layouts/create', payload.body);
 
     const response = await axios(data).catch(err => {
       this.dispatch('preloader/fetch', false);
-      this.dispatch("notification/fetch", {
-        type: "error",
+      this.dispatch('notification/fetch', {
+        type: 'error',
         message: `${err}`,
         isActive: true
       });
@@ -49,7 +49,12 @@ const actions = {
 
     if (response !== undefined && response.status === 200) {
       this.dispatch('preloader/fetch', false);
-      console.log(response)
+      this.dispatch('notification/fetch', {
+        type: 'success',
+        message: 'Успешно сохранено!',
+        isActive: true
+      });
+      router.push(`/layouts/${response.data.id}`);
     }
   },
 
@@ -57,12 +62,12 @@ const actions = {
     commit
   }, payload) {
     this.dispatch('preloader/fetch', true);
-    const data = requestDataHandler('PUT', '/users/update', payload.body, payload.query);
+    const data = requestDataHandler('PUT', '/layouts/update', payload.body);
 
     const response = await axios(data).catch(err => {
       this.dispatch('preloader/fetch', false);
-      this.dispatch("notification/fetch", {
-        type: "error",
+      this.dispatch('notification/fetch', {
+        type: 'error',
         message: `${err}`,
         isActive: true
       });
@@ -70,34 +75,8 @@ const actions = {
 
     if (response !== undefined && response.status === 200) {
       this.dispatch('preloader/fetch', false);
-      this.dispatch("notification/fetch", {
-        type: "success",
-        message: 'Успешно сохранено!',
-        isActive: true
-      });
-      commit('set', response.data);
-    }
-  },
-
-  async changePassword({
-    commit
-  }, payload) {
-    this.dispatch('preloader/fetch', true);
-    const data = requestDataHandler('PUT', '/users/password-change', payload.body);
-
-    const response = await axios(data).catch(err => {
-      this.dispatch('preloader/fetch', false);
-      this.dispatch("notification/fetch", {
-        type: "error",
-        message: `${err}`,
-        isActive: true
-      });
-    });
-
-    if (response !== undefined && response.status === 200) {
-      this.dispatch('preloader/fetch', false);
-      this.dispatch("notification/fetch", {
-        type: "success",
+      this.dispatch('notification/fetch', {
+        type: 'success',
         message: 'Успешно сохранено!',
         isActive: true
       });
@@ -108,24 +87,26 @@ const actions = {
     commit
   }, payload) {
     this.dispatch('preloader/fetch', true);
-    const data = requestDataHandler('DELETE', '/users/remove', payload.body);
+    const data = requestDataHandler('DELETE', '/layouts/remove', payload.body);
 
-    const response = await axios(data);
-
-    if (response !== undefined) {
+    const response = await axios(data).catch(err => {
       this.dispatch('preloader/fetch', false);
-      this.dispatch("notification/fetch", {
-        type: "success",
-        message: 'Успешно удалено!',
+      this.dispatch('notification/fetch', {
+        type: 'error',
+        message: `${err}`,
         isActive: true
       });
-    } else {
+    });
+
+    if (response !== undefined && response.status === 200) {
       this.dispatch('preloader/fetch', false);
-      this.dispatch("notification/fetch", {
-        type: "error",
-        message: 'Произошла ошибка при удалении!',
+      this.dispatch('layout/clear');
+      this.dispatch('notification/fetch', {
+        type: 'success',
+        message: `Успешно удалено!`,
         isActive: true
       });
+      router.push('/layouts');
     }
   },
 
@@ -133,12 +114,12 @@ const actions = {
     commit
   }, payload) {
     this.dispatch('preloader/fetch', true);
-    const data = requestDataHandler('GET', '/users', undefined, payload.query);
+    const data = requestDataHandler('GET', '/layouts', undefined, payload.query);
 
     const response = await axios(data).catch(err => {
       this.dispatch('preloader/fetch', false);
-      this.dispatch("notification/fetch", {
-        type: "error",
+      this.dispatch('notification/fetch', {
+        type: 'error',
         message: `${err}`,
         isActive: true
       });
@@ -154,12 +135,12 @@ const actions = {
     commit
   }, payload) {
     this.dispatch('preloader/fetch', true);
-    const data = requestDataHandler('GET', '/users/count', undefined, payload.query);
+    const data = requestDataHandler('GET', '/layouts/count', undefined, payload.query);
 
     const response = await axios(data).catch(err => {
       this.dispatch('preloader/fetch', false);
-      this.dispatch("notification/fetch", {
-        type: "error",
+      this.dispatch('notification/fetch', {
+        type: 'error',
         message: `${err}`,
         isActive: true
       });
@@ -174,20 +155,21 @@ const actions = {
   set({
     commit
   }, payload) {
-    commit('set', payload);
+    commit('set', layout);
   },
 
   setAll({
     commit
   }, payload) {
     commit('setAll', payload);
+    commit('setCount', payload.length);
   },
 
   clear({
     commit
   }) {
     commit('set', {
-      ...user
+      ...layout
     });
   },
 
@@ -195,7 +177,7 @@ const actions = {
     commit
   }) {
     commit('setAll', []);
-  },
+  }
 };
 
 export default actions;

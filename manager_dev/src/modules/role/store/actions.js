@@ -1,14 +1,14 @@
 import requestDataHandler from '@/functions/requestDataHandlerWithAxios';
 import axios from 'axios';
-
-import user from '@/models/user';
+import role from '@/models/role'
+import rules from '@/models/rules_default';
 
 const actions = {
   async findByPk({
     commit
   }, payload) {
     this.dispatch('preloader/fetch', true);
-    const data = requestDataHandler('GET', `/users/find/${payload.id}`, undefined, payload.query);
+    const data = requestDataHandler('GET', `/roles/find/${payload.params.id}`)
 
     const response = await axios(data).catch(err => {
       this.dispatch('preloader/fetch', false);
@@ -25,18 +25,11 @@ const actions = {
     }
   },
 
-  // Test
   async findOne({
     commit
   }, payload) {
     this.dispatch('preloader/fetch', true);
-    const data = requestDataHandler('GET', '/users/findone', undefined, {
-      filter: {
-        where: {
-          email: 'ahmed@gmail.com'
-        }
-      }
-    });
+    const data = requestDataHandler('GET', '/roles/findone', undefined, payload.query);
 
     const response = await axios(data).catch(err => {
       this.dispatch('preloader/fetch', false);
@@ -49,7 +42,33 @@ const actions = {
 
     if (response !== undefined && response.status === 200) {
       this.dispatch('preloader/fetch', false);
-      console.log(response)
+      commit('set', response.data);
+    }
+  },
+
+  async create({
+    commit
+  }, payload) {
+    this.dispatch('preloader/fetch', true);
+    const data = requestDataHandler('POST', '/roles/create', payload.body);
+
+    const response = await axios(data).catch(err => {
+      this.dispatch('preloader/fetch', false);
+      this.dispatch("notification/fetch", {
+        type: "error",
+        message: `${err}`,
+        isActive: true
+      });
+    });
+
+    if (response !== undefined && response.status === 200) {
+      this.dispatch('preloader/fetch', false);
+      commit('set', response.data);
+      this.dispatch("notification/fetch", {
+        type: "success",
+        message: 'Успешно сохранено!',
+        isActive: true
+      });
     }
   },
 
@@ -57,7 +76,7 @@ const actions = {
     commit
   }, payload) {
     this.dispatch('preloader/fetch', true);
-    const data = requestDataHandler('PUT', '/users/update', payload.body, payload.query);
+    const data = requestDataHandler('PUT', `/roles/update`, payload.body);
 
     const response = await axios(data).catch(err => {
       this.dispatch('preloader/fetch', false);
@@ -69,32 +88,7 @@ const actions = {
     });
 
     if (response !== undefined && response.status === 200) {
-      this.dispatch('preloader/fetch', false);
-      this.dispatch("notification/fetch", {
-        type: "success",
-        message: 'Успешно сохранено!',
-        isActive: true
-      });
       commit('set', response.data);
-    }
-  },
-
-  async changePassword({
-    commit
-  }, payload) {
-    this.dispatch('preloader/fetch', true);
-    const data = requestDataHandler('PUT', '/users/password-change', payload.body);
-
-    const response = await axios(data).catch(err => {
-      this.dispatch('preloader/fetch', false);
-      this.dispatch("notification/fetch", {
-        type: "error",
-        message: `${err}`,
-        isActive: true
-      });
-    });
-
-    if (response !== undefined && response.status === 200) {
       this.dispatch('preloader/fetch', false);
       this.dispatch("notification/fetch", {
         type: "success",
@@ -108,22 +102,23 @@ const actions = {
     commit
   }, payload) {
     this.dispatch('preloader/fetch', true);
-    const data = requestDataHandler('DELETE', '/users/remove', payload.body);
+    const data = requestDataHandler('DELETE', '/roles/remove', payload.body);
 
-    const response = await axios(data);
-
-    if (response !== undefined) {
-      this.dispatch('preloader/fetch', false);
-      this.dispatch("notification/fetch", {
-        type: "success",
-        message: 'Успешно удалено!',
-        isActive: true
-      });
-    } else {
+    const response = await axios(data).catch(err => {
       this.dispatch('preloader/fetch', false);
       this.dispatch("notification/fetch", {
         type: "error",
-        message: 'Произошла ошибка при удалении!',
+        message: `${err}`,
+        isActive: true
+      });
+    });
+
+    if (response !== undefined && response.status === 200) {
+      this.dispatch('preloader/fetch', false);
+      this.dispatch('role/clear');
+      this.dispatch("notification/fetch", {
+        type: "success",
+        message: 'Успешно удалено!',
         isActive: true
       });
     }
@@ -133,7 +128,7 @@ const actions = {
     commit
   }, payload) {
     this.dispatch('preloader/fetch', true);
-    const data = requestDataHandler('GET', '/users', undefined, payload.query);
+    const data = requestDataHandler('GET', '/roles', undefined, payload.query);
 
     const response = await axios(data).catch(err => {
       this.dispatch('preloader/fetch', false);
@@ -154,7 +149,7 @@ const actions = {
     commit
   }, payload) {
     this.dispatch('preloader/fetch', true);
-    const data = requestDataHandler('GET', '/users/count', undefined, payload.query);
+    const data = requestDataHandler('GET', '/roles/count', undefined, payload.query);
 
     const response = await axios(data).catch(err => {
       this.dispatch('preloader/fetch', false);
@@ -187,7 +182,8 @@ const actions = {
     commit
   }) {
     commit('set', {
-      ...user
+      ...role,
+      rules
     });
   },
 

@@ -2,11 +2,11 @@ import Vue from 'vue';
 import './plugins/vuetify'
 import commonComponentsRequire from '@/functions/commonComponentsRequire';
 import App from './App.vue';
-import router from './routers';
+import router from './connector/index.route.js';
 import '@mdi/font/css/materialdesignicons.css';
 import {
   store
-} from './store';
+} from './connector/index.store.js';
 import axios from 'axios';
 import vuetify from './plugins/vuetify';
 import VueMeta from 'vue-meta'
