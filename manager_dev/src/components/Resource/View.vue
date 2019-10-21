@@ -152,7 +152,6 @@
 
 <script>
 // Mixins
-import accessMixin from "@/mixins/accessMixin";
 import { validationMixin } from "vuelidate";
 
 // Components
@@ -167,7 +166,7 @@ const alpha = helpers.regex("alpha", /^[a-zA-Z0-9_-]*$/);
 export default {
   name: "ResourceView",
 
-  mixins: [accessMixin, validationMixin],
+  mixins: [validationMixin],
 
   props: {
     resource: {

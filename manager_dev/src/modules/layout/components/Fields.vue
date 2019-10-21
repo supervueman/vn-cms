@@ -48,12 +48,8 @@
 </template>
 
 <script>
-// Mixins
-import accessMixin from "@/mixins/accessMixin";
-
 export default {
   name: "Fields",
-  mixins: [accessMixin],
 
   data() {
     return {

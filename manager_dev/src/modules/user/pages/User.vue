@@ -5,16 +5,11 @@
 </template>
 
 <script>
-// Mixins
-import accessMixin from "@/mixins/accessMixin";
-
 // Components
 import ProfileView from "@/modules/profile/components/View";
 
 export default {
   name: "UserPage",
-
-  mixins: [accessMixin],
 
   components: {
     ProfileView

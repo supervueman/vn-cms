@@ -12,9 +12,6 @@
 // Components
 import RoleView from "../components/View";
 
-// Mixins
-import accessMixin from "@/mixins/accessMixin";
-
 export default {
   name: "RoleCreatePage",
 
@@ -27,8 +24,6 @@ export default {
   components: {
     RoleView
   },
-
-  mixins: [accessMixin],
 
   computed: {
     role() {

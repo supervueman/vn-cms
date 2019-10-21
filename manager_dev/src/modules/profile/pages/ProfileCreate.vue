@@ -5,9 +5,6 @@
 </template>
 
 <script>
-// Mixins
-import accessMixin from "@/mixins/accessMixin";
-
 // Components
 import ProfileView from "../components/View";
 
@@ -23,8 +20,6 @@ export default {
   components: {
     ProfileView
   },
-
-  mixins: [accessMixin],
 
   computed: {
     profile() {

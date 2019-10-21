@@ -63,7 +63,6 @@
 
 <script>
 // Mixins
-import accessMixin from "@/mixins/accessMixin";
 import { validationMixin } from "vuelidate";
 
 // Libs
@@ -74,7 +73,7 @@ const alpha = helpers.regex("alpha", /^[a-zA-Z0-9_-]*$/);
 export default {
   name: "RoleView",
 
-  mixins: [accessMixin, validationMixin],
+  mixins: [validationMixin],
 
   props: {
     operationType: {

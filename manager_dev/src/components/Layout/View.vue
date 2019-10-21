@@ -65,12 +65,7 @@
 </template>
 
 <script>
-// Mixins
-import accessMixin from "@/mixins/accessMixin";
 import { validationMixin } from "vuelidate";
-
-// Comnponents
-// import Fields from "@/components/Layout/Fields";
 
 // Libs
 import { required, minLength, helpers } from "vuelidate/lib/validators";
@@ -84,7 +79,7 @@ export default {
   // Fields
   // },
 
-  mixins: [accessMixin, validationMixin],
+  mixins: [validationMixin],
 
   props: {
     operationType: {

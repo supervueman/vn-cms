@@ -12,9 +12,6 @@
 // Components
 import ResourceView from "../components/View";
 
-// Mixins
-import accessMixin from "@/mixins/accessMixin";
-
 export default {
   name: "ResourceCreatePage",
 
@@ -27,8 +24,6 @@ export default {
   components: {
     ResourceView
   },
-
-  mixins: [accessMixin],
 
   computed: {
     resource() {

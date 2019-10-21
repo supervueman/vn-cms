@@ -9,10 +9,6 @@
 </template>
 
 <script>
-// Mixins
-import accessMixin from "@/mixins/accessMixin";
-import panelMixin from "@/mixins/panelMixin";
-
 // Comnponents
 import Fields from "../components/Fields";
 import LayoutView from "../components/View";
@@ -30,8 +26,6 @@ export default {
     Fields,
     LayoutView
   },
-
-  mixins: [accessMixin, panelMixin],
 
   computed: {
     layout() {

@@ -37,13 +37,8 @@
 </template>
 
 <script>
-// Mixins
-import accessMixin from "@/mixins/accessMixin";
-
 export default {
   name: "App",
-
-  mixins: [accessMixin],
 
   metaInfo() {
     return {
@@ -82,6 +77,7 @@ export default {
   },
 
   async mounted() {
+    console.log(this);
     await this.$store.dispatch("dictionary/findAll", {
       query: {
         filter: {

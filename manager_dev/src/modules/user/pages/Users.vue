@@ -63,16 +63,11 @@
 </template>
 
 <script>
-// Mixins
-import accessMixin from "@/mixins/accessMixin";
-
 // Config
 import { imgFolderBasePath } from "@/config";
 
 export default {
   name: "Users",
-
-  mixins: [accessMixin],
 
   metaInfo() {
     return {

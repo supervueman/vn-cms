@@ -12,9 +12,6 @@
 // Components
 import LayoutView from "../components/View";
 
-// Mixins
-import accessMixin from "@/mixins/accessMixin";
-
 export default {
   name: "LayoutCreatePage",
 
@@ -27,8 +24,6 @@ export default {
   components: {
     LayoutView
   },
-
-  mixins: [accessMixin],
 
   computed: {
     layout() {

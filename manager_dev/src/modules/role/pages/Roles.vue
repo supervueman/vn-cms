@@ -44,13 +44,8 @@
 </template>
 
 <script>
-// Mixins
-import accessMixin from "@/mixins/accessMixin";
-
 export default {
   name: "RolesPage",
-
-  mixins: [accessMixin],
 
   metaInfo() {
     return {

@@ -87,7 +87,6 @@
 
 <script>
 // Mixins
-import accessMixin from "@/mixins/accessMixin";
 import { validationMixin } from "vuelidate";
 
 // Libs
@@ -113,7 +112,7 @@ export default {
     Fields
   },
 
-  mixins: [accessMixin, validationMixin],
+  mixins: [validationMixin],
 
   validations: {
     translationLang: { required }

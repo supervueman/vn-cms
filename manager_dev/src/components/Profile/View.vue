@@ -159,9 +159,7 @@
 
 <script>
 // Mixins
-import accessMixin from "@/mixins/accessMixin";
 import { validationMixin } from "vuelidate";
-import panelMixin from "@/mixins/panelMixin";
 
 // Components
 import PasswordChange from "@/components/Profile/PasswordChange";
@@ -190,7 +188,7 @@ export default {
     Filesystem
   },
 
-  mixins: [validationMixin, accessMixin, panelMixin],
+  mixins: [validationMixin],
 
   props: {
     profile: {

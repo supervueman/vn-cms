@@ -1,30 +1,20 @@
 import Vue from 'vue';
-import '@/core/plugins/vuetify';
-import commonComponentsRequire from '@/functions/commonComponentsRequire';
 import App from './App.vue';
 import router from './connector/index.route.js';
+import vuetify from '@/core/plugins/vuetify';
 import '@mdi/font/css/materialdesignicons.css';
+import vuemeta from 'vue-meta';
 import {
   store
 } from './connector/index.store.js';
 import axios from 'axios';
-import vuetify from './plugins/vuetify';
-import VueMeta from 'vue-meta'
+import core_mixins from '@/core/mixins'
+import commonComponentsRequire from '@/core/plugins/components';
 
-Vue.use(VueMeta);
-
-// Mixins
-import dictionaryMixin from '@/core/mixins/dictionaryMixin';
-import baseMixin from '@/core/mixins/baseMixin';
-import accessMixin from '@/core/mixins/accessMixin';
-import rulesMixin from '@/core/mixins/rules';
-
-Vue.mixin(dictionaryMixin);
-Vue.mixin(baseMixin);
-Vue.mixin(accessMixin);
-Vue.mixin(rulesMixin);
+Vue.use(vuemeta);
 
 commonComponentsRequire();
+core_mixins();
 
 Vue.config.productionTip = false;
 

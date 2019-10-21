@@ -34,13 +34,8 @@
 </template>
 
 <script>
-// Mixins
-import accessMixin from "@/mixins/accessMixin";
-
 export default {
   name: "SystemSettingsPage",
-
-  mixins: [accessMixin],
 
   metaInfo() {
     return {

@@ -8,9 +8,6 @@
 </template>
 
 <script>
-// Mixins
-import accessMixin from "@/mixins/accessMixin";
-
 // Comnponents
 import FieldView from "../components/View";
 
@@ -26,8 +23,6 @@ export default {
   components: {
     FieldView
   },
-
-  mixins: [accessMixin],
 
   computed: {
     field() {

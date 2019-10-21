@@ -133,9 +133,6 @@
 </template>
 
 <script>
-// Mixins
-import accessMixin from "@/mixins/accessMixin";
-import panelMixin from "@/mixins/panelMixin";
 import { validationMixin } from "vuelidate";
 
 // Components
@@ -148,7 +145,7 @@ const alpha = helpers.regex("alpha", /^[a-zA-Z0-9_-]*$/);
 export default {
   name: "ResourceCreate",
 
-  mixins: [accessMixin, panelMixin, validationMixin],
+  mixins: [validationMixin],
 
   validations: {
     resource: {

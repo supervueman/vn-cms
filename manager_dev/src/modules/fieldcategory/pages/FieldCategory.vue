@@ -8,9 +8,6 @@
 </template>
 
 <script>
-// Mixins
-import accessMixin from "@/mixins/accessMixin";
-
 // Comnponents
 import FieldCategoryView from "../components/View";
 
@@ -28,8 +25,6 @@ export default {
   components: {
     FieldCategoryView
   },
-
-  mixins: [accessMixin],
 
   computed: {
     fieldCategory() {

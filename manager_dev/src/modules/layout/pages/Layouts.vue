@@ -49,13 +49,8 @@
 </template>
 
 <script>
-// Mixins
-import accessMixin from "@/mixins/accessMixin";
-
 export default {
   name: "LayoutsPage",
-
-  mixins: [accessMixin],
 
   metaInfo() {
     return {

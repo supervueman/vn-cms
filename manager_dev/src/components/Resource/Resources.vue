@@ -51,13 +51,8 @@
 </template>
 
 <script>
-// Mixins
-import accessMixin from "@/mixins/accessMixin";
-
 export default {
   name: "Resources",
-
-  mixins: [accessMixin],
 
   props: {
     parentId: {

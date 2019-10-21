@@ -10,8 +10,6 @@
 
 <script>
 // Mixins
-import accessMixin from "@/mixins/accessMixin";
-import panelMixin from "@/mixins/panelMixin";
 import { validationMixin } from "vuelidate";
 
 // Comnponents
@@ -35,7 +33,7 @@ export default {
     RoleView
   },
 
-  mixins: [accessMixin, panelMixin, validationMixin],
+  mixins: [validationMixin],
 
   validations: {
     role: {

@@ -97,8 +97,6 @@
 
 <script>
 // Mixins
-import accessMixin from "@/mixins/accessMixin";
-import panelMixin from "@/mixins/panelMixin";
 import { validationMixin } from "vuelidate";
 
 // Libs
@@ -109,7 +107,7 @@ const alpha = helpers.regex("alpha", /^[a-zA-Z0-9_-]*$/);
 export default {
   name: "FieldView",
 
-  mixins: [accessMixin, panelMixin, validationMixin],
+  mixins: [validationMixin],
 
   props: {
     field: {

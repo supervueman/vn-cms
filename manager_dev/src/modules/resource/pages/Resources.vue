@@ -5,9 +5,6 @@
 </template>
 
 <script>
-// Mixins
-import accessMixin from "@/mixins/accessMixin";
-
 // Components
 import Resources from "../components/Resources";
 
@@ -22,8 +19,6 @@ export default {
 
   components: {
     Resources
-  },
-
-  mixins: [accessMixin]
+  }
 };
 </script>

@@ -98,14 +98,8 @@
 </template>
 
 <script>
-// Mixins
-import panelMixin from "@/mixins/panelMixin";
-import accessMixin from "@/mixins/accessMixin";
-
 export default {
   name: "Sidebar",
-
-  mixins: [accessMixin],
 
   props: {
     slug: {

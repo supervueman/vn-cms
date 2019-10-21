@@ -122,7 +122,6 @@
 
 <script>
 // Mixins
-import accessMixin from "@/mixins/accessMixin";
 import { validationMixin } from "vuelidate";
 
 // Libs
@@ -131,7 +130,7 @@ const alpha = helpers.regex("alpha", /^[a-zA-Z_]*$/);
 
 export default {
   name: "Dictionaries",
-  mixins: [accessMixin, validationMixin],
+  mixins: [validationMixin],
 
   validations: {
     createDictionary: {
