@@ -14,17 +14,17 @@ import VueMeta from 'vue-meta'
 Vue.use(VueMeta);
 
 // Mixins
-import dictionaryMixin from './mixins/dictionaryMixin';
-import baseMixin from './mixins/baseMixin';
-import accessMixin from './mixins/accessMixin';
-import rulesMixin from './mixins/rules';
-
-commonComponentsRequire();
+import dictionaryMixin from '@/core/mixins/dictionaryMixin';
+import baseMixin from '@/core/mixins/baseMixin';
+import accessMixin from '@/core/mixins/accessMixin';
+import rulesMixin from '@/core/mixins/rules';
 
 Vue.mixin(dictionaryMixin);
 Vue.mixin(baseMixin);
 Vue.mixin(accessMixin);
 Vue.mixin(rulesMixin);
+
+commonComponentsRequire();
 
 Vue.config.productionTip = false;
 
