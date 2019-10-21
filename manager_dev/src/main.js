@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import './plugins/vuetify'
+import '@/core/plugins/vuetify';
 import commonComponentsRequire from '@/functions/commonComponentsRequire';
 import App from './App.vue';
 import router from './connector/index.route.js';
