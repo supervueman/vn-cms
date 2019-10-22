@@ -1,5 +1,7 @@
 const User = require('../../user/model');
 
+const removeDir = require('../../../handlers/removeDir');
+
 module.exports = async (req, res) => {
   if (!req.profile) {
     res.status(404).send({

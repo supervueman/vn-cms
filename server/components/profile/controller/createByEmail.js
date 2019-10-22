@@ -1,6 +1,8 @@
 const bcrypt = require('bcrypt');
 const validator = require('validator');
 
+const createDir = require('../../../handlers/createDir');
+
 const User = require('../../user/model');
 
 module.exports = async (req, res) => {

@@ -1,10 +1,16 @@
+const removeDir = require('../../../../handlers/removeDir');
+
 module.exports = async (req, res) => {
-  if (!req.rules.is_filesystem_directory_rename) {
+  if (!req.rules.is_filesystem_directory_delete) {
     res.status(403).send({
       message: 'Access denied!'
     });
     return;
   }
 
-  res.status(200);
+  await removeDir(req.body.path);
+
+  res.status(200).send({
+    message: 'Success!'
+  });
 }
