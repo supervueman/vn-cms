@@ -164,7 +164,7 @@ import { validationMixin } from "vuelidate";
 // Components
 import PasswordChange from "../components/PasswordChange";
 import { mask } from "vue-the-mask";
-import Filesystem from "@/components/Filesystem/Filesystem";
+import Filesystem from "@/core/components/Filesystem/Filesystem";
 
 // Libs
 import {

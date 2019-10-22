@@ -2,7 +2,6 @@ const {
   readdirSync
 } = require('fs');
 
-
 module.exports = async () => {
   const getDirectories = source =>
     readdirSync(source, {

@@ -107,3 +107,6 @@ typings/
 
 /ansible/hosts.txt
 /ansible/group_vars
+
+# Modules
+shop

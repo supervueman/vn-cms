@@ -64,7 +64,7 @@
 
 <script>
 // Config
-import { imgFolderBasePath } from "@/config";
+import { imgFolderBasePath } from "@/core/config";
 
 export default {
   name: "Users",

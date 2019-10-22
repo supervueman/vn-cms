@@ -19,7 +19,7 @@ module.exports = async (req, res) => {
   }
 
   if ((req.managerAccess && String(item.userId) === String(req.profile.id)) || (!req.managerAccess && String(item.userId) === String(req.profile.userId)) || req.adminAccess) {
-    res.status(200).send(user);
+    res.status(200).send(item);
   } else {
     res.status(403).send({
       message: 'Access denied!'

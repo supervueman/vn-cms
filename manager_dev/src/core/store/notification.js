@@ -7,7 +7,7 @@ export default {
     },
   },
   mutations: {
-    SE(state, payload) {
+    SET(state, payload) {
       state.notification = payload;
     },
   },
@@ -15,7 +15,7 @@ export default {
     fetch({
       commit
     }, payload) {
-      commit('set', payload);
+      commit('SET', payload);
       const closeNotification = {
         isActive: false
       };

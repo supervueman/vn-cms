@@ -3,7 +3,7 @@ export default {
     mainLang: 'en'
   },
   mutations: {
-    SET_AMIN_LANG(state, payload) {
+    SET_ADMIN_LANG(state, payload) {
       state.mainLang = payload;
     },
   },
@@ -11,7 +11,7 @@ export default {
     setMainLang({
       commit
     }, payload) {
-      commit('SET_AMIN_LANG', payload);
+      commit('SET_ADMIN_LANG', payload);
     }
   },
   getters: {

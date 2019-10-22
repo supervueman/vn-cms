@@ -129,11 +129,11 @@
 
 <script>
 // Components
-import Filesystem from "@/components/Filesystem/Filesystem";
+import Filesystem from "@/core/components/Filesystem/Filesystem";
 import { Editor, EditorContent, EditorMenuBar } from "tiptap";
 
 // Config
-import { imgFolderBasePath } from "@/config";
+import { imgFolderBasePath } from "@/core/config";
 
 // Functions
 import Paragraph from "@/core/plugins/editor_paragraph";

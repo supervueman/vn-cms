@@ -7,10 +7,10 @@
 
 <script>
 // Config
-import config from "@/config";
+import config from "../config";
 
 // Components
-import Filesystem from "@/components/Filesystem/Filesystem";
+import Filesystem from "@/core/components/Filesystem/Filesystem";
 
 export default {
   name: "Avatar",

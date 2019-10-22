@@ -9,6 +9,7 @@ const connector = require('./connector');
 require('dotenv').config();
 
 init(app);
+connector.associations(app);
 connector.routes(app);
 
 async function connect() {

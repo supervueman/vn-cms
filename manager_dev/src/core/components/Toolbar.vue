@@ -55,7 +55,7 @@
 </template>
 
 <script>
-import { imgFolderBasePath } from "@/config";
+import { imgFolderBasePath } from "@/core/config";
 export default {
   name: "Toolbar",
 
