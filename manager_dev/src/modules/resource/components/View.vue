@@ -362,7 +362,12 @@ export default {
                 include: ["fields"]
               },
               "additionalfields",
-              "type"
+              {
+                association: "parent",
+                include: ["translations"]
+              },
+              "translations",
+              "resourcetype"
             ]
           }
         }
@@ -388,7 +393,12 @@ export default {
                 include: ["fields"]
               },
               "additionalfields",
-              "type"
+              {
+                association: "parent",
+                include: ["translations"]
+              },
+              "translations",
+              "resourcetype"
             ]
           }
         }
