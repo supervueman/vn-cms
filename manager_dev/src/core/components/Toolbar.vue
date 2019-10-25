@@ -9,6 +9,7 @@
 			)
 		v-toolbar-items.hidden-xs-and-down
 			v-btn(text to="/users" v-if="r.is_users_read") {{d.users}}
+			applications-menu
 		v-spacer
 		v-toolbar-items.hidden-xs-and-down
 			v-btn(text v-if="!isAuth" @click="$emit('openLoginDialog')") {{d.login}}
@@ -56,8 +57,16 @@
 
 <script>
 import { imgFolderBasePath } from "@/core/config";
+
+// Components
+import ApplicationsMenu from "./ApplicationsMenu";
+
 export default {
   name: "Toolbar",
+
+  components: {
+    ApplicationsMenu
+  },
 
   props: {
     profileId: {

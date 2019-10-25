@@ -271,6 +271,9 @@
     },
     "field": {
       "text": "Field"
+    },
+    "applications": {
+      "text": "Applications"
     }
   }
 }

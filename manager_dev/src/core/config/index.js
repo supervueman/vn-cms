@@ -1,3 +1,4 @@
 module.exports = {
-  imgFolderBasePath: '/static'
+  imgFolderBasePath: '/static',
+  modules: []
 };

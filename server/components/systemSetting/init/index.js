@@ -28,7 +28,7 @@ module.exports = async () => {
     main_lang = await Model.create({
       slug: 'main_lang',
       title: 'Основной язык',
-      setting: '{"value": "en"}',
+      setting: '{"value": "ru"}',
       component: 'base',
       settingType: 'text'
     });
