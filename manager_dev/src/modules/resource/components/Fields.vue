@@ -13,15 +13,13 @@
           //-   br
           v-toolbar(flat width="100%")
             v-spacer
-            v-btn.mr-4(
-              color="primary"
-              @click="filterFieldsAll"
-            ) {{d.all_fields || 'All fileds'}}
             v-flex.md4
               v-select(
                 :items="fieldCategories"
                 item-text="title"
                 item-value="id"
+                clearable
+                hide-details
                 :label="`${d.field_category}:`"
                 @change="filterFields($event)"
               )
@@ -357,37 +355,6 @@ export default {
           id: this.$route.params.id
         },
         query
-      });
-    },
-
-    async filterFieldsAll() {
-      await this.$store.dispatch("resource/findByPk", {
-        params: {
-          id: this.$route.params.id
-        },
-        query: {
-          filter: {
-            include: [
-              {
-                association: "layout",
-                include: [
-                  {
-                    association: "fields"
-                  }
-                ]
-              },
-              {
-                association: "additionalfields"
-              },
-              {
-                association: "parent",
-                include: ["translations"]
-              },
-              "translations",
-              "resourcetype"
-            ]
-          }
-        }
       });
     }
   }

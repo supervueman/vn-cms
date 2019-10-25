@@ -10,13 +10,11 @@
               :items="fieldCategories"
               item-text="title"
               item-value="id"
+              hide-details
+              clearable
               :label="`${d.field_category}:`"
               @change="filterFields($event)"
             )
-          v-btn.mr-4(
-            color="primary"
-            @click="filterFieldsAll"
-          ) {{d.all_fields || 'All fileds'}}
           v-btn(
             color="primary"
             to="/field-create"
@@ -173,16 +171,6 @@ export default {
           filter: {
             order: [["createdAt", "DESC"]],
             where: { categoryId: event }
-          }
-        }
-      });
-    },
-
-    async filterFieldsAll(event) {
-      await this.$store.dispatch("field/findAll", {
-        query: {
-          filter: {
-            order: [["createdAt", "DESC"]]
           }
         }
       });
