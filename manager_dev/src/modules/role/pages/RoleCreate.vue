@@ -1,5 +1,5 @@
 <template lang="pug">
-  v-flex(v-if="r.is_roles_create")
+  v-flex(v-if="r.is_roles_create") {{role}}
     .body-2.mb-12.mt-2 {{d.role_creation}}
     v-layout.wrap
       role-view(
@@ -27,8 +27,18 @@ export default {
 
   computed: {
     role() {
-      return this.$store.getters["role/get"];
+      const role = {
+        ...this.$store.getters["role/get"],
+        rules: {
+          ...this.$store.getters["role/getDefaultRules"]
+        }
+      };
+      return role;
     }
+  },
+
+  async mounted() {
+    await this.$store.dispatch("role/findDefaultRules");
   }
 };
 </script>

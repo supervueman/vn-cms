@@ -46,6 +46,27 @@ const actions = {
     }
   },
 
+  async findDefaultRules({
+    commit
+  }) {
+    this.dispatch('preloader/fetch', true);
+    const data = requestDataHandler('GET', '/roles/finddefault');
+
+    const response = await axios(data).catch(err => {
+      this.dispatch('preloader/fetch', false);
+      this.dispatch("notification/fetch", {
+        type: "error",
+        message: `${err}`,
+        isActive: true
+      });
+    });
+
+    if (response !== undefined && response.status === 200) {
+      this.dispatch('preloader/fetch', false);
+      commit('SET_DEFAULT_RULES', response.data);
+    }
+  },
+
   async create({
     commit
   }, payload) {

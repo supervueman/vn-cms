@@ -15,6 +15,9 @@ const mutations = {
   },
   SET_COUNT(state, payload) {
     state.count = payload;
+  },
+  SET_DEFAULT_RULES(state, payload) {
+    state.defaultRules = payload;
   }
 };
 

@@ -7,6 +7,7 @@ const state = {
     rules
   },
   roles: [],
+  defaultRules: {},
   count: 0
 }
 

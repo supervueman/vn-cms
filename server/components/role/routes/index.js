@@ -13,6 +13,8 @@ router.get('/find/:id', access, controller.findByPk);
 
 router.get('/findone', access, controller.findOne);
 
+router.get('/finddefault', access, controller.findDefault);
+
 router.post('/create', access, controller.create);
 
 router.put('/update', access, controller.update);

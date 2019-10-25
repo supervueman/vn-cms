@@ -7,6 +7,9 @@ const getters = {
   },
   getCount(state) {
     return state.count;
+  },
+  getDefaultRules(state) {
+    return state.defaultRules;
   }
 };
 
