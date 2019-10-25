@@ -24,15 +24,10 @@
 				@closeLoginDialog="isLoginDialog = false"
 			)
 		v-overlay(
-			:opacity="0.2"
+			:opacity="0"
 			:value="preloader"
 			:z-index="9998"
 		)
-			v-progress-circular(
-				indeterminate
-				size="64"
-				color="primary"
-			)
 </template>
 
 <script>
