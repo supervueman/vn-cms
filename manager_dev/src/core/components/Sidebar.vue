@@ -100,13 +100,6 @@ import panelMixin from "@/core/mixins/panelMixin";
 export default {
   name: "Sidebar",
 
-  props: {
-    slug: {
-      type: String,
-      default: ""
-    }
-  },
-
   data() {
     return {
       active: null,

@@ -15,7 +15,6 @@
 		)
 		sidebar(
 			v-if="isAuth"
-			:slug="profile.slug"
 		)
 		v-content
 			v-container(fluid)
