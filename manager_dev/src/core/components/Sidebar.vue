@@ -48,25 +48,21 @@
 								v-icon replay
 						span {{d.reload}}
 
-				v-expansion-panels
-					v-expansion-panel
-						v-expansion-panel-header {{slug}}
-						v-expansion-panel-content
-							v-list
-								v-list-item.px-0.py-0(
-									v-for="resource in resources"
-									:key="resource.id"
-									:to="`/resources/${resource.id}`"
-								)
-									v-list-item-action
-										v-icon(color="primary") library_books
-									v-list-item-content
-										v-list-item-title {{resource.title}} ({{resource.id}})
-								v-list-item.px-0.py-0(to="/resources" v-if="adminAccess")
-									v-list-item-action
-										v-icon(color="primary") library_books
-									v-list-item-content
-										v-list-item-title {{d.all_resources}}
+				v-list
+					v-list-item(
+						v-for="resource in resources"
+						:key="resource.id"
+						:to="`/resources/${resource.id}`"
+					)
+						v-list-item-action
+							v-icon(color="primary") library_books
+						v-list-item-content
+							v-list-item-title {{resource.title}} ({{resource.id}})
+					v-list-item(to="/resources" v-if="adminAccess")
+						v-list-item-action
+							v-icon(color="primary") library_books
+						v-list-item-content
+							v-list-item-title {{d.all_resources}}
 
 			v-tab(v-if="r.is_elements_access") {{d.elements}}
 			v-tab-item(v-if="r.is_elements_access")
