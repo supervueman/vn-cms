@@ -19,6 +19,7 @@
 		v-content
 			v-container(fluid)
 				router-view
+		bottom-bar
 		v-dialog(v-model="isLoginDialog" max-width="500px" min-width="320px")
 			login(
 				@closeLoginDialog="isLoginDialog = false"
