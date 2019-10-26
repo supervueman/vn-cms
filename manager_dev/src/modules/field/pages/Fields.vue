@@ -170,7 +170,8 @@ export default {
         query: {
           filter: {
             order: [["createdAt", "DESC"]],
-            where: { categoryId: event }
+            where: { categoryId: event },
+            include: ["layouts"]
           }
         }
       });
