@@ -72,16 +72,25 @@
 							v-icon(color="primary") layers
 						v-list-item-content
 							v-list-item-title {{d.layouts}}
+						v-list-item-action
+							v-btn(icon to="/layout-create")
+								v-icon(color="primary") add_circle_outline
 					v-list-item(to="/fields" v-if="r.is_fields_read")
 						v-list-item-action
 							v-icon(color="primary") playlist_add
 						v-list-item-content
 							v-list-item-title {{d.additional_fields}}
+						v-list-item-action
+							v-btn(icon to="/field-create")
+								v-icon(color="primary") add_circle_outline
 					v-list-item(to="/fieldcategories" v-if="r.is_field_categories_read")
 						v-list-item-action
 							v-icon(color="primary") folder
 						v-list-item-content
 							v-list-item-title {{d.field_categories}}
+						v-list-item-action
+							v-btn(icon to="/fieldcategory-create")
+								v-icon(color="primary") add_circle_outline
 
 			v-tab(v-if="r.is_filesystem_access") {{d.files}}
 			v-tab-item(v-if="r.is_filesystem_access")
