@@ -11,33 +11,23 @@
       width="100%"
       class="primary"
     )
-      v-divider
       v-card-text.white--text
         v-layout(justify-space-between)
           div {{ new Date().getFullYear() }} — Platform
-          div Разработка MULTIKEY
+          div Разработка
+            a.dev-link(href="https://multikey.studio/" target="_blank") MULTIKEY
 </template>
 
-
 <script>
-export default {
-  data: () => ({
-    icons: ["mdi-home", "mdi-email", "mdi-calendar", "mdi-delete"],
-    items: ["default", "absolute", "fixed"],
-    padless: false,
-    variant: "default"
-  }),
-  computed: {
-    localAttrs() {
-      const attrs = {};
+export default {};
+</script>
 
-      if (this.variant === "default") {
-        attrs.absolute = false;
-        attrs.fixed = false;
-      } else {
-        attrs[this.variant] = true;
-      }
-      return attrs;
-    }
-  }
-};
+<style lang="sass">
+  .dev-link
+    color: #fff!important
+    margin-left: 5px
+    font-weight: bold
+    border: none
+    text-decoration: none
+    letter-spacing: 2px
+</style>
