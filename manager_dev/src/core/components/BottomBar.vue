@@ -30,4 +30,17 @@ export default {};
     border: none
     text-decoration: none
     letter-spacing: 2px
+    position: relative
+    &::after
+      content: ''
+      position: absolute
+      bottom: 0
+      left: 0
+      width: 0
+      height: 1px
+      background-color: #fff
+      transition: 0.5s
+    &:hover
+      &::after
+        width: 100%
 </style>
