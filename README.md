@@ -7,11 +7,11 @@
 5. Запускаем серверную часть `npm run server:dev`
 6. Запускаем клиентскую часть `npm run manager:dev`
 
+---
+
 ## Production
 
 Для production необходим pm2
-
----
 
 1. Сборка клиентской части `npm run manager:build`
 2. Запуск серверной части `npm run server:start:pm2`
