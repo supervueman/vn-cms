@@ -7,7 +7,7 @@ import {
   store
 } from './connector/index.store.js';
 import router from './connector/index.route.js';
-import core_mixins from '@/core/mixins'
+import core_mixins from '@/core/mixins';
 import core_components from '@/core/plugins/components';
 import axios from '@/core/plugins/axios';
 
