@@ -49,7 +49,6 @@ const actions = {
 
     if (response !== undefined && response.status === 200) {
       this.dispatch('preloader/fetch', false);
-      console.log(response)
     }
   },
 

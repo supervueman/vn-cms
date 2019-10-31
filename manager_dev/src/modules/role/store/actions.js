@@ -1,7 +1,6 @@
 import requestDataHandler from '@/core/plugins/requestDataHandler';
 import axios from 'axios';
 import role from '../models/role'
-import rules from '../models/rules_default';
 
 const actions = {
   async findByPk({
@@ -199,12 +198,27 @@ const actions = {
     commit('SET_ALL', payload);
   },
 
-  clear({
+  async clear({
     commit
   }) {
+    this.dispatch('preloader/fetch', true);
+    const data = requestDataHandler('GET', '/roles/finddefault');
+
+    const response = await axios(data).catch(err => {
+      this.dispatch('preloader/fetch', false);
+      this.dispatch("notification/fetch", {
+        type: "error",
+        message: `${err}`,
+        isActive: true
+      });
+    });
+
+    if (response !== undefined && response.status === 200) {
+      this.dispatch('preloader/fetch', false);
+    }
     commit('SET', {
       ...role,
-      rules
+      rules: response.data
     });
   },
 

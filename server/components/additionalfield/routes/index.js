@@ -5,7 +5,7 @@ const router = express.Router();
 const controller = require('../controller');
 
 // Middleware
-const access = require('../../../middleware/access');
+const profileByAccessToken = require('../../../middleware/profileByAccessToken');
 const profileByApiKey = require('../../../middleware/profileByApiKey');
 
 router.get('/', profileByApiKey, controller.findAll);
@@ -14,12 +14,12 @@ router.get('/find/:id', profileByApiKey, controller.findByPk);
 
 router.get('/findone', profileByApiKey, controller.findOne);
 
-router.post('/create', access, controller.create);
+router.post('/create', profileByAccessToken, controller.create);
 
-router.put('/update', access, controller.update);
+router.put('/update', profileByAccessToken, controller.update);
 
-router.put('/update-all', access, controller.updateAll);
+router.put('/update-all', profileByAccessToken, controller.updateAll);
 
-router.delete('/remove', access, controller.remove);
+router.delete('/remove', profileByAccessToken, controller.remove);
 
 module.exports = router;

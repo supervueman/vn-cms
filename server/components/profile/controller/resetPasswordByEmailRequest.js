@@ -19,7 +19,7 @@ module.exports = async (req, res) => {
   delete user.password;
 
   const token = jwt.sign({
-    uid: user.id.toString(),
+    id: user.id,
     email: user.email
   }, process.env.SECRET_KEY_FOR_JWT, {
     expiresIn: '1h'

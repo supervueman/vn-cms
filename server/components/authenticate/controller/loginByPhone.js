@@ -26,15 +26,14 @@ module.exports = async (req, res) => {
   }
 
   const access_token = jwt.sign({
-    uid: user.id.toString(),
+    id: user.id,
     email: user.email,
-    role: user.role
   }, process.env.SECRET_KEY_FOR_JWT, {
     expiresIn: '360h'
   });
 
   res.status(200).send({
-    uid: user.id,
+    id: user.id,
     access_token
   });
 }

@@ -125,7 +125,7 @@ export default {
       const errors = [];
       if (!this.$v.role.title.$dirty) return errors;
       !this.$v.role.title.minLength &&
-        errors.push("Псевдоним должен быть не менее 3 символов!");
+        errors.push("Наименование должно быть не менее 3 символов!");
       !this.$v.role.title.required && errors.push("Обязательное поле!");
       return errors;
     }

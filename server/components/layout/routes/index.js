@@ -5,20 +5,20 @@ const router = express.Router();
 const controller = require('../controller');
 
 // Middleware
-const access = require('../../../middleware/access');
+const profileByAccessToken = require('../../../middleware/profileByAccessToken');
 
-router.get('/', access, controller.findAll);
+router.get('/', profileByAccessToken, controller.findAll);
 
-router.get('/find/:id', access, controller.findByPk);
+router.get('/find/:id', profileByAccessToken, controller.findByPk);
 
-router.get('/findone', access, controller.findOne);
+router.get('/findone', profileByAccessToken, controller.findOne);
 
-router.post('/create', access, controller.create);
+router.post('/create', profileByAccessToken, controller.create);
 
-router.put('/update', access, controller.update);
+router.put('/update', profileByAccessToken, controller.update);
 
-router.delete('/remove', access, controller.remove);
+router.delete('/remove', profileByAccessToken, controller.remove);
 
-router.get('/count', access, controller.count);
+router.get('/count', profileByAccessToken, controller.count);
 
 module.exports = router;

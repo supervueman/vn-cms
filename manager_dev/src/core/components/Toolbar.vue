@@ -138,7 +138,7 @@ export default {
       this.$store.dispatch("profile/clear");
       this.$store.dispatch("profile/clearResources");
       this.$store.dispatch("profile/clearRules");
-      this.$store.dispatch("role/clear");
+      // this.$store.dispatch("role/clear");
       this.$store.dispatch("role/clearAll");
       this.$store.dispatch("user/clear");
       this.$store.dispatch("user/clearAll");

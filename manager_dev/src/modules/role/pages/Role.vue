@@ -72,11 +72,6 @@ export default {
         id: this.$route.params.id
       }
     });
-  },
-
-  beforeRouteLeave(to, from, next) {
-    this.$store.dispatch("role/clear");
-    next();
   }
 };
 </script>

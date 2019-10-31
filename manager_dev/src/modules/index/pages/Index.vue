@@ -10,12 +10,6 @@ export default {
     return {
       title: `${this.d.main || "Main"}`
     };
-  },
-
-  computed: {
-    profile() {
-      return this.$store.getters["profile/getProfile"];
-    }
   }
 };
 </script>

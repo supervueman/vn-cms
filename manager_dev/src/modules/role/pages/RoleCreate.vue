@@ -27,18 +27,12 @@ export default {
 
   computed: {
     role() {
-      const role = {
-        ...this.$store.getters["role/get"],
-        rules: {
-          ...this.$store.getters["role/getDefaultRules"]
-        }
-      };
-      return role;
+      return this.$store.getters["role/get"];
     }
   },
 
   async mounted() {
-    await this.$store.dispatch("role/findDefaultRules");
+    await this.$store.dispatch("role/clear");
   }
 };
 </script>

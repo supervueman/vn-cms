@@ -109,11 +109,6 @@ export default {
       this.removeItem = role;
       this.isRemoveDialog = true;
     }
-  },
-
-  beforeRouteLeave(to, from, next) {
-    this.$store.dispatch("role/clear");
-    next();
   }
 };
 </script>

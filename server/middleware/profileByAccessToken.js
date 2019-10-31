@@ -23,7 +23,7 @@ module.exports = async (req, res, next) => {
       return next();
     }
 
-    const profile = await User.findByPk(decoded.uid, {
+    const profile = await User.findByPk(decoded.id, {
       include: ['role']
     });
 

@@ -19,7 +19,7 @@ const actions = {
     if (response !== undefined && response.status === 200) {
       this.dispatch('preloader/fetch', false);
       localStorage.setItem('access_token', response.data.access_token);
-      localStorage.setItem('uid', response.data.uid);
+      localStorage.setItem('id', response.data.id);
 
       await this.dispatch('profile/findByAccessToken');
     }
@@ -42,7 +42,7 @@ const actions = {
     if (response !== undefined && response.status === 200) {
       this.dispatch('preloader/fetch', false);
       localStorage.setItem('access_token', response.data.access_token);
-      localStorage.setItem('uid', response.data.uid);
+      localStorage.setItem('id', response.data.id);
 
       await this.dispatch('profile/findByAccessToken');
     }
@@ -52,7 +52,7 @@ const actions = {
     commit
   }) {
     localStorage.removeItem('access_token');
-    localStorage.removeItem('uid');
+    localStorage.removeItem('id');
     localStorage.removeItem('x-api-key');
     this.dispatch('profile/clear');
   }

@@ -35,7 +35,7 @@
                         a(:href="`mailto:${item.email}`") {{item.email}}
                       div
                         a(:href="`tel:${item.phone}`") {{item.phone}}
-                    td.text-xs-left {{item.role.slug}}
+                    td.text-xs-left {{item.role ? item.role.slug : ''}}
                     td.text-end
                       v-btn(
                         text
