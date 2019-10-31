@@ -17,9 +17,9 @@ export default {
 
   metaInfo() {
     return {
-      title: `${this.d.profile || "Profile"}: ${this.profile.firstname} ${
-        this.profile.lastname
-      }`
+      title: `${this.d.profile || "Profile"}: ${
+        this.profile ? this.profile.firstname : ""
+      } ${this.profile ? this.profile.lastname : ""}`
     };
   },
 
