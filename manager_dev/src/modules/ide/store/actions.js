@@ -77,6 +77,11 @@ const actions = {
 
     if (response !== undefined && response.status === 200) {
       this.dispatch('preloader/fetch', false);
+      this.dispatch('notification/fetch', {
+        type: 'success',
+        message: 'Success',
+        isActive: true
+      });
     }
   },
 
@@ -98,6 +103,14 @@ const actions = {
     if (response !== undefined && response.status === 200) {
       this.dispatch('preloader/fetch', false);
     }
+  },
+
+  clearComponent({
+    commit
+  }) {
+    commit('SET_COMPONENT', {
+      code: ''
+    })
   },
 
   async findPage({
@@ -157,6 +170,14 @@ const actions = {
     if (response !== undefined && response.status === 200) {
       this.dispatch('preloader/fetch', false);
     }
+  },
+
+  clearPage({
+    commit
+  }) {
+    commit('SET_PAGE', {
+      code: ''
+    })
   },
 };
 

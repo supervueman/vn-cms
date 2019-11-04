@@ -120,6 +120,11 @@ export default {
         }
       });
     }
+  },
+
+  beforeRouteLeave(to, from, next) {
+    this.$store.dispatch("ide/clearComponent");
+    next();
   }
 };
 </script>
