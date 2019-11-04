@@ -91,6 +91,22 @@
 						v-list-item-action
 							v-btn(icon to="/fieldcategory-create")
 								v-icon(color="primary") add_circle_outline
+					v-list-item(to="/components")
+						v-list-item-action
+							v-icon(color="primary") view_week
+						v-list-item-content
+							v-list-item-title {{d.components || 'Компоненты'}}
+						v-list-item-action
+							v-btn(icon to="/chunk")
+								v-icon(color="primary") add_circle_outline
+					v-list-item(to="/pages")
+						v-list-item-action
+							v-icon(color="primary") library_books
+						v-list-item-content
+							v-list-item-title {{d.pages || 'Страницы'}}
+						v-list-item-action
+							v-btn(icon to="/page")
+								v-icon(color="primary") add_circle_outline
 
 			v-tab(v-if="r.is_filesystem_access") {{d.files}}
 			v-tab-item(v-if="r.is_filesystem_access")

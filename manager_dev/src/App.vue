@@ -19,7 +19,6 @@
 		v-content
 			v-container(fluid)
 				router-view
-				//- ace(v-model="content" @init="editorInit" lang="html" theme="monokai" width="100%" height="500")
 		bottom-bar
 		v-dialog(v-model="isLoginDialog" max-width="500px" min-width="320px")
 			login(

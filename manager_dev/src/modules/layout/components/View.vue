@@ -1,58 +1,56 @@
 <template lang="pug">
   v-flex
     v-layout.wrap
-      v-flex
-        v-tabs(
-          grow
-          slider-color="primary"
-          v-model="tab"
-        )
-          v-tab {{d.common_data}}
-          //- v-tab Дополнительные поля
-          v-tab-item
-            v-flex.xs12.md12.pt-4
-              v-card
-                v-card-text {{d.common_data}}
-                v-card-text
-                  v-layout.wrap
-                    v-flex.md12
-                      v-text-field(
-                        v-model="layout.slug"
-                        :label="`${d.slug}:`"
-                        required
-                        @input="$v.layout.slug.$touch()"
-                        @blur="$v.layout.slug.$touch()"
-                        :error-messages="slugErrors"
-                      )
-                      v-text-field(
-                        v-model="layout.title"
-                        :label="`${d.name}:`"
-                        required
-                        @input="$v.layout.title.$touch()"
-                        @blur="$v.layout.title.$touch()"
-                        :error-messages="titleErrors"
-                      )
-            //- v-tab-item
-            //-   v-flex.pt-4
-            //-     v-card
-                  //- fields
-    v-card
-      v-card-actions
-        v-btn.ml-2(
-          color="primary"
-          @click="create"
-          v-if="r.is_layout_create && operationType === 'create'"
-        ) {{d.create}}
-        v-btn.ml-2(
-          color="primary"
-          @click="update"
-          v-if="r.is_layout_update && operationType === 'update'"
-        ) {{d.save}}
-        v-btn.ml-2(
-          color="error"
-          @click="isRemoveDialog = true"
-          v-if="r.is_layout_delete && operationType === 'update'"
-        ) {{d.remove}}
+      v-flex.xs12.md12.pt-4
+        v-card
+          v-card-text {{d.common_data}}
+          v-card-text
+            v-layout.wrap
+              v-flex.md12
+                v-text-field(
+                  v-model="layout.slug"
+                  :label="`${d.slug}:`"
+                  required
+                  @input="$v.layout.slug.$touch()"
+                  @blur="$v.layout.slug.$touch()"
+                  :error-messages="slugErrors"
+                )
+                v-text-field(
+                  v-model="layout.title"
+                  :label="`${d.name}:`"
+                  required
+                  @input="$v.layout.title.$touch()"
+                  @blur="$v.layout.title.$touch()"
+                  :error-messages="titleErrors"
+                )
+        v-layout
+          v-flex
+            v-card
+              v-card-text
+                ace(
+                  v-model="content.code"
+                  @init="editorInit"
+                  lang="html"
+                  theme="monokai"
+                  width="100%"
+                  height="500"
+                )
+              v-card-actions
+                v-btn.ml-2(
+                  @click="create"
+                  color="primary"
+                  v-if="operationType === 'create'"
+                ) {{d.save || "Сохранить"}}
+                v-btn.ml-2(
+                  @click="update"
+                  color="primary"
+                  v-if="operationType === 'update'"
+                ) {{d.save || "Сохранить"}}
+                v-btn(
+                  @click="remove"
+                  color="error"
+                  v-if="operationType === 'update'"
+                ) {{d.delete || "Удалить"}}
     v-dialog(
       v-model="isRemoveDialog"
       max-width="500px"
@@ -106,6 +104,9 @@ export default {
   },
 
   computed: {
+    content() {
+      return this.$store.getters["ide/getLayout"];
+    },
     slugErrors() {
       const errors = [];
       if (!this.$v.layout.slug.$dirty) return errors;
@@ -134,6 +135,7 @@ export default {
       this.$v.$touch();
       if (!this.$v.$error) {
         await this.$store.dispatch("layout/create", { body: this.layout });
+        await this.saveContent();
       }
     },
 
@@ -144,6 +146,7 @@ export default {
       this.$v.$touch();
       if (!this.$v.$error) {
         await this.$store.dispatch("layout/update", { body: this.layout });
+        await this.saveContent();
       }
     },
 
@@ -153,6 +156,15 @@ export default {
       }
       await this.$store.dispatch("layout/remove", {
         body: { id: this.layout.id }
+      });
+    },
+
+    async saveContent() {
+      await this.$store.dispatch("ide/saveLayout", {
+        body: {
+          name: this.layout.slug,
+          content: this.content.code
+        }
       });
     }
   }

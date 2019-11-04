@@ -1,15 +1,31 @@
 import requestDataHandler from '@/core/plugins/requestDataHandler';
 import axios from 'axios';
-import router from '@/connector/index.route.js';
-
-import layout from '../models/layout';
 
 const actions = {
-  async findByPk({
+  async findLayout({
     commit
   }, payload) {
     this.dispatch('preloader/fetch', true);
-    const data = requestDataHandler('GET', `/layouts/find/${payload.params.id}`, undefined);
+    const data = requestDataHandler('GET', `/ide/find-layout`, undefined, payload.query);
+
+    const response = await axios(data).catch(err => {
+      this.dispatch('preloader/fetch', false);
+      commit('SET_LAYOUT', {
+        code: ""
+      });
+    });
+
+    if (response !== undefined && response.status === 200) {
+      this.dispatch('preloader/fetch', false);
+      commit('SET_LAYOUT', response.data);
+    }
+  },
+
+  async saveLayout({
+    commit
+  }, payload) {
+    this.dispatch('preloader/fetch', true);
+    const data = requestDataHandler('POST', `/ide/save-layout`, payload.body);
 
     const response = await axios(data).catch(err => {
       this.dispatch('preloader/fetch', false);
@@ -22,26 +38,33 @@ const actions = {
 
     if (response !== undefined && response.status === 200) {
       this.dispatch('preloader/fetch', false);
-      this.dispatch('ide/findLayout', {
-        query: {
-          name: response.data.slug
-        }
-      });
-      commit('SET', response.data);
     }
   },
 
-  async findOne({
-    commit
-  }, payload) {
-    commit('SET', layout);
-  },
-
-  async create({
+  async findComponent({
     commit
   }, payload) {
     this.dispatch('preloader/fetch', true);
-    const data = requestDataHandler('POST', '/layouts/create', payload.body);
+    const data = requestDataHandler('GET', `/ide/find-component`, undefined, payload.query);
+
+    const response = await axios(data).catch(err => {
+      this.dispatch('preloader/fetch', false);
+      commit('SET_LAYOUT', {
+        code: ""
+      });
+    });
+
+    if (response !== undefined && response.status === 200) {
+      this.dispatch('preloader/fetch', false);
+      commit('SET_COMPONENT', response.data);
+    }
+  },
+
+  async saveComponent({
+    commit
+  }, payload) {
+    this.dispatch('preloader/fetch', true);
+    const data = requestDataHandler('POST', `/ide/save-component`, payload.body);
 
     const response = await axios(data).catch(err => {
       this.dispatch('preloader/fetch', false);
@@ -54,20 +77,14 @@ const actions = {
 
     if (response !== undefined && response.status === 200) {
       this.dispatch('preloader/fetch', false);
-      this.dispatch('notification/fetch', {
-        type: 'success',
-        message: 'Успешно сохранено!',
-        isActive: true
-      });
-      router.push(`/layouts/${response.data.id}`);
     }
   },
 
-  async update({
+  async removeComponent({
     commit
   }, payload) {
     this.dispatch('preloader/fetch', true);
-    const data = requestDataHandler('PUT', '/layouts/update', payload.body);
+    const data = requestDataHandler('DELETE', `/ide/remove-component`, payload.body);
 
     const response = await axios(data).catch(err => {
       this.dispatch('preloader/fetch', false);
@@ -80,19 +97,33 @@ const actions = {
 
     if (response !== undefined && response.status === 200) {
       this.dispatch('preloader/fetch', false);
-      this.dispatch('notification/fetch', {
-        type: 'success',
-        message: 'Успешно сохранено!',
-        isActive: true
-      });
     }
   },
 
-  async remove({
+  async findPage({
     commit
   }, payload) {
     this.dispatch('preloader/fetch', true);
-    const data = requestDataHandler('DELETE', '/layouts/remove', payload.body);
+    const data = requestDataHandler('GET', `/ide/find-page`, undefined, payload.query);
+
+    const response = await axios(data).catch(err => {
+      this.dispatch('preloader/fetch', false);
+      commit('SET_PAGE', {
+        code: ""
+      });
+    });
+
+    if (response !== undefined && response.status === 200) {
+      this.dispatch('preloader/fetch', false);
+      commit('SET_PAGE', response.data);
+    }
+  },
+
+  async savePage({
+    commit
+  }, payload) {
+    this.dispatch('preloader/fetch', true);
+    const data = requestDataHandler('POST', `/ide/save-page`, payload.body);
 
     const response = await axios(data).catch(err => {
       this.dispatch('preloader/fetch', false);
@@ -105,21 +136,14 @@ const actions = {
 
     if (response !== undefined && response.status === 200) {
       this.dispatch('preloader/fetch', false);
-      this.dispatch('layout/clear');
-      this.dispatch('notification/fetch', {
-        type: 'success',
-        message: `Успешно удалено!`,
-        isActive: true
-      });
-      router.push('/layouts');
     }
   },
 
-  async findAll({
+  async removePage({
     commit
   }, payload) {
     this.dispatch('preloader/fetch', true);
-    const data = requestDataHandler('GET', '/layouts', undefined, payload.query);
+    const data = requestDataHandler('DELETE', `/ide/remove-page`, payload.body);
 
     const response = await axios(data).catch(err => {
       this.dispatch('preloader/fetch', false);
@@ -132,57 +156,8 @@ const actions = {
 
     if (response !== undefined && response.status === 200) {
       this.dispatch('preloader/fetch', false);
-      commit('SET_ALL', response.data);
     }
   },
-
-  async count({
-    commit
-  }, payload) {
-    this.dispatch('preloader/fetch', true);
-    const data = requestDataHandler('GET', '/layouts/count', undefined, payload.query);
-
-    const response = await axios(data).catch(err => {
-      this.dispatch('preloader/fetch', false);
-      this.dispatch('notification/fetch', {
-        type: 'error',
-        message: `${err}`,
-        isActive: true
-      });
-    });
-
-    if (response !== undefined && response.status === 200) {
-      this.dispatch('preloader/fetch', false);
-      commit('SET_COUNT', response.data.count);
-    }
-  },
-
-  set({
-    commit
-  }, payload) {
-    commit('SET', layout);
-  },
-
-  setAll({
-    commit
-  }, payload) {
-    commit('SET_ALL', payload);
-    commit('SET_COUNT', payload.length);
-  },
-
-  clear({
-    commit
-  }) {
-    commit('SET', {
-      ...layout
-    });
-  },
-
-  clearAll({
-    commit
-  }) {
-    commit('SET_ALL', []);
-  }
 };
 
 export default actions;
