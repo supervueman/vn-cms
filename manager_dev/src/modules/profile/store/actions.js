@@ -43,7 +43,7 @@ const actions = {
       });
 
       const responseSystemSetting = await axios(dataSystemSetting).catch(err => {
-        this.dispatch('preloader/fetch', true);
+        this.dispatch('preloader/fetch', false);
         this.dispatch("notification/fetch", {
           type: "error",
           message: `${err}`,
@@ -78,7 +78,7 @@ const actions = {
         });
 
         const responseResources = await axios(dataResources).catch(err => {
-          this.dispatch('preloader/fetch', true);
+          this.dispatch('preloader/fetch', false);
           this.dispatch("notification/fetch", {
             type: "error",
             message: `${err}`,
@@ -93,7 +93,6 @@ const actions = {
           commit('SET_RESOURCES', responseResources.data);
         }
       }
-
     }
   },
 
