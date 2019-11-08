@@ -282,6 +282,7 @@ export default {
       this.$v.$touch();
       if (!this.$v.$error) {
         this.profile.password = this.password;
+        this.profile.userId = localStorage.getItem("id");
         await this.$store.dispatch("profile/createByEmail", {
           body: this.profile
         });

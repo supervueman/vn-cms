@@ -4,9 +4,39 @@ const validator = require('validator');
 const createDir = require('../../../handlers/createDir');
 
 const User = require('../../user/model');
+const Role = require('../../role/model');
+const SystemSetting = require('../../systemSetting/model');
 
 module.exports = async (req, res) => {
   if (!req.rules.is_user_create) {
+    res.status(403).send({
+      message: 'Access denied!'
+    });
+    return;
+  }
+
+  const is_context_create = await SystemSetting.findOne({
+    where: {
+      slug: 'is_context_create'
+    }
+  });
+
+  const is_admin_create = await SystemSetting.findOne({
+    where: {
+      slug: 'is_admin_create'
+    }
+  });
+
+  const role = await Role.findByPk(req.body.roleId);
+
+  if (!JSON.parse(is_context_create.setting).value && role.slug === 'manager') {
+    res.status(403).send({
+      message: 'Access denied!'
+    });
+    return;
+  }
+
+  if (!JSON.parse(is_admin_create.setting).value && role.slug === 'admin') {
     res.status(403).send({
       message: 'Access denied!'
     });
@@ -55,8 +85,7 @@ module.exports = async (req, res) => {
 
   const userCreated = {
     ...req.body,
-    password: hashedPw,
-    userId: req.profile.id
+    password: hashedPw
   }
   if (!req.managerAccess && !req.adminAccess) {
     userCreated.userId = req.profile.userId;

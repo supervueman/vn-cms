@@ -33,4 +33,36 @@ module.exports = async () => {
       settingType: 'text'
     });
   }
+
+  let is_context_create = await Model.findOne({
+    where: {
+      slug: 'is_context_create'
+    }
+  });
+
+  if (!is_context_create) {
+    is_context_create = await Model.create({
+      slug: 'is_context_create',
+      title: 'Разрешить создавать контексты',
+      setting: '{"value": true}',
+      component: 'base',
+      settingType: 'switcher'
+    });
+  }
+
+  let is_admin_create = await Model.findOne({
+    where: {
+      slug: 'is_admin_create'
+    }
+  });
+
+  if (!is_admin_create) {
+    is_admin_create = await Model.create({
+      slug: 'is_admin_create',
+      title: 'Разрешить создавать администраторов',
+      setting: '{"value": true}',
+      component: 'base',
+      settingType: 'switcher'
+    });
+  }
 }
