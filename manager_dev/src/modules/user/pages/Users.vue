@@ -29,7 +29,7 @@
                         )
                           img(:src="`${imgFolderBasePath}/${item.image}`" alt="avatar")
                     td.text-xs-left
-                      router-link(:to="`/users/${item.id}`") {{ item.lastname }} {{ item.firstname }}
+                      router-link(:to="`/users/${item.id}`") {{ item.lastname }} {{ item.firstname }} ({{item.id}})
                     td.text-xs-left
                       div
                         a(:href="`mailto:${item.email}`") {{item.email}}

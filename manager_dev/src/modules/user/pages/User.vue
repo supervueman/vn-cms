@@ -1,6 +1,6 @@
 <template lang="pug">
 	v-flex(v-if="r.is_users_read")
-		.body-2.mb-12.mt-2 {{d.profile}}: {{user.slug}}
+		.body-2.mb-12.mt-2 {{d.profile}}: {{user.slug}} ({{user.id}})
 		profile-view(:profile="user" operationType="update")
 </template>
 

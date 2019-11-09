@@ -92,13 +92,16 @@ module.exports = async (req, res) => {
   }
 
   const createdUser = await User.create(userCreated).catch(err => {});
-
   if (req.adminAccess) {
     await createDir(`../files/user-${createdUser.id}`);
   } else if (req.managerAccess) {
     await createDir(`../files/user-${req.profile.id}/user-${createdUser.id}`);
   } else {
-    await createDir(`../files/user-${req.profile.userId}/user-${createdUser.id}`);
+    if (req.profile.userId) {
+      await createDir(`../files/user-${req.profile.userId}/user-${createdUser.id}`);
+    } else {
+      await createDir(`../files/user-${createdUser.id}`);
+    }
   }
 
   res.status(200).send(createdUser);
