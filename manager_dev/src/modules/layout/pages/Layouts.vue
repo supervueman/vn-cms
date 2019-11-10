@@ -21,7 +21,7 @@
             tbody
               tr(v-for="item in items" :key="item.id")
                 td.text-xs-left
-                  router-link(:to="`/layouts/${item.id}`") {{ item.title }}
+                  router-link(:to="`/layouts/${item.id}`") {{ item.title }} ({{item.id}})
                 td.text-end
                   v-btn(
                     text
