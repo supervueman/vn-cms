@@ -76,6 +76,7 @@ const mutations = {
             ...el
           }
         }
+
         if (el.fieldType === 'select') {
           serializedFields[el.slug].interface.defaultValue = JSON.parse(el.defaultValue);
         }
