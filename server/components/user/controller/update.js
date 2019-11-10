@@ -27,7 +27,7 @@ module.exports = async (req, res) => {
 
     const filter = JSON.parse(req.query.filter || "{}");
 
-    const newItem = await User.findByPk(updatedItem.id, filter);
+    const newItem = await Model.findByPk(updatedItem.id, filter);
 
     res.status(200).send(newItem);
   } else {
