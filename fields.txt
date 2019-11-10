@@ -1,4 +1,6 @@
-{"image": {"title": "Изображение", "fieldType": "image"}}
+
+default value []
+Shema {"image": {"title": "Изображение", "fieldType": "image"}}
 
 
 brew services start postgresql - Запуск сервера постгреса
