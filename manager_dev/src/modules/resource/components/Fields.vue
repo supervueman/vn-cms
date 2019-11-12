@@ -88,10 +88,8 @@
                 v-select(
                   v-model="field.value"
                   :items="field.interface.defaultValue"
-                  label="Select"
                   multiple
                   chips
-                  hint="What are the target regions"
                   persistent-hint
                 )
 
