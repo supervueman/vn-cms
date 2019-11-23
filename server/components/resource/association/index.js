@@ -34,4 +34,4 @@ module.exports = () => {
     onDelete: 'cascade',
     foreignKey: 'parentId'
   });
-}
+};
