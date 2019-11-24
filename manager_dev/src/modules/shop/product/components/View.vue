@@ -199,7 +199,7 @@ export default {
       return this.$store.getters["layout/getAll"];
     },
     types() {
-      return this.$store.getters["shop/product/getTypes"];
+      return this.$store.getters["resource/getTypes"];
     },
     slugErrors() {
       const errors = [];
