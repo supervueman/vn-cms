@@ -7,11 +7,11 @@
         shop-toolbar
         v-container
           v-toolbar(flat)
-            //- v-spacer
-            //- v-btn(
-            //-   color="primary"
-            //-   @click="$store.dispatch('shop/order/clear'); isOpenItem = true"
-            //- ) {{d.order_create || "Создать заказ"}}
+            v-spacer
+            v-btn(
+              color="primary"
+              @click="$store.dispatch('shop/order/clear'); isOpenItem = true"
+            ) {{d.order_create || "Создать заказ"}}
           v-data-table(
             :headers="headers"
             :items="orders"

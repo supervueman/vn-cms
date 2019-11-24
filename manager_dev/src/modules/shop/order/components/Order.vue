@@ -180,7 +180,7 @@ export default {
     async create() {
       // this.$v.$touch();
       // if (!this.$v.$error) {
-      this.item.products = [{ id: 4, quantity: 2 }, { id: 5, quantity: 3 }];
+      this.item.products = [{ id: 1, quantity: 2 }, { id: 2, quantity: 3 }];
       this.item.delivery_info =
         '{"email": "chaogen2@gmail.com", "address": "ул. Московское Шоссе"}';
       await this.$store.dispatch("shop/order/create", {

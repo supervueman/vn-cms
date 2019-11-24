@@ -1,5 +1,5 @@
 const Model = require('../model');
-const Resource = require('../../../../resource/model');
+const Product = require('../../product/model');
 
 module.exports = async (req, res) => {
   if (!req.rules.is_order_create) {
@@ -19,7 +19,7 @@ module.exports = async (req, res) => {
 
   if (req.body.products && req.body.products.length > 0) {
     for await (const product of req.body.products) {
-      const productItem = await Resource.findByPk(product.id);
+      const productItem = await Product.findByPk(product.id);
 
       item.price += productItem.price * product.quantity;
     }
