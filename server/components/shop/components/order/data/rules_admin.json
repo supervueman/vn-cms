@@ -1,0 +1,18 @@
+{
+  "is_orders_read": {
+    "title": "Доступ к просмотру заказов",
+    "value": true
+  },
+  "is_order_create": {
+    "title": "Разрешить создавать заказы",
+    "value": true
+  },
+  "is_order_update": {
+    "title": "Разрешить редактировать заказы",
+    "value": true
+  },
+  "is_order_remove": {
+    "title": "Разрешить удалять заказы",
+    "value": true
+  }
+}

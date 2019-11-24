@@ -1,0 +1,30 @@
+{
+  "is_deliveries_read": {
+    "title": "Разрешить просматривать доставки",
+    "value": false
+  },
+  "is_deliveriy_create": {
+    "title": "Разрешить создавать доставки",
+    "value": false
+  },
+  "is_deliveriy_update": {
+    "title": "Разрешить редактировать доставки",
+    "value": false
+  },
+  "is_deliveriy_remove": {
+    "title": "Разрешить удалять доставки",
+    "value": false
+  },
+  "is_system_settings_read": {
+    "title": "Доступ к просмотру системных настроек",
+    "value": true
+  },
+  "is_orders_read": {
+    "title": "Доступ к просмотру заказов",
+    "value": true
+  },
+  "is_order_join": {
+    "title": "Разрешить выбирать заказ для доставки",
+    "value": true
+  }
+}
