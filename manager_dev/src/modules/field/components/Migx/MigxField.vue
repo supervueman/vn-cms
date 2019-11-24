@@ -101,6 +101,7 @@ export default {
     headers() {
       const headers = [];
       const schema = JSON.parse(this.schema);
+
       for (let key in schema) {
         headers.push({ sortable: false, text: schema[key].title });
       }

@@ -27,7 +27,7 @@ requireModule.keys().forEach(filename => {
 });
 
 
-const debug = process.env.NODE_ENV !== 'production';
+const debug = false; // process.env.NODE_ENV !== 'production';
 
 
 export const store = new Vuex.Store({

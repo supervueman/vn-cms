@@ -101,7 +101,7 @@
                   span {{field.interface.slug}}
                 migx-field(
                   :field="field.value"
-                  :schema="field.interface.schema"
+                  :schema="field.interface.shema"
                   @create="field.value.push($event)"
                   @update="field.value[$event.index] = $event.item"
                   @remove="field.value.splice($event, 1)"
