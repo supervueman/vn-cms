@@ -165,10 +165,7 @@ export default {
                 association: "products",
                 include: [
                   {
-                    association: "additionalfields",
-                    where: {
-                      slug: ["price", "weight", "article"]
-                    }
+                    association: "productfields"
                   }
                 ]
               }

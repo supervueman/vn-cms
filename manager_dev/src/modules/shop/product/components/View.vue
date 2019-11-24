@@ -30,6 +30,67 @@
                       no-resize
                     )
                   span description
+
+              v-layout
+                v-flex.md6.mr-2
+                  v-tooltip(top)
+                    template(v-slot:activator="{ on }")
+                      v-text-field(
+                        v-model="product.price"
+                        :label="`${d.price || 'Цена'}:`"
+                        v-on="on"
+                        type="number"
+                      )
+                    span description
+
+                v-flex.md6.ml-2
+                  v-tooltip(top)
+                    template(v-slot:activator="{ on }")
+                      v-text-field(
+                        v-model="product.weight"
+                        :label="`${d.weight || 'Вес'}:`"
+                        v-on="on"
+                      )
+                    span description
+
+              v-layout
+                v-flex.md6.mr-2
+                  v-tooltip(top)
+                    template(v-slot:activator="{ on }")
+                      v-text-field(
+                        v-model="product.count"
+                        :label="`${d.count || 'Количество'}:`"
+                        v-on="on"
+                        type="number"
+                      )
+                    span description
+                v-flex.md6.ml-2
+                  v-tooltip(top)
+                    template(v-slot:activator="{ on }")
+                      v-text-field(
+                        v-model="product.size"
+                        :label="`${d.size || 'Размер'}:`"
+                        v-on="on"
+                      )
+                    span size
+
+              v-layout
+                v-flex.mr-2
+                  v-checkbox(
+                    v-model="product.popular"
+                    :label="`${d.popular || 'Популярный'}`"
+                  )
+                v-flex.mr-2
+                  v-checkbox(
+                    v-model="product.new"
+                    :label="`${d.new || 'Новый'}`"
+                  )
+                v-flex.mr-2
+                  v-checkbox(
+                    v-model="product.in_stock"
+                    :label="`${d.in_stock || 'В наличии'}`"
+                  )
+
       v-flex.xs12.md5.pl-2
         v-card.mb-3
           v-card-text

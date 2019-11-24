@@ -19,16 +19,9 @@ module.exports = async (req, res) => {
 
   if (req.body.products && req.body.products.length > 0) {
     for await (const product of req.body.products) {
-      const productItem = await Resource.findByPk(product.id, {
-        include: [{
-          association: 'additionalfields',
-          where: {
-            slug: 'price'
-          }
-        }]
-      });
+      const productItem = await Resource.findByPk(product.id);
 
-      item.price += productItem.additionalfields ? productItem.additionalfields[0].value * product.quantity : 0;
+      item.price += productItem.price * product.quantity;
     }
   }
 

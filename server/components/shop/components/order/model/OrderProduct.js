@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const sequelize = require('../../../../../core/db');
 
-const Model = sequelize.define('OrderResource', {
+const Model = sequelize.define('OrderProduct', {
   quantity: {
     type: Sequelize.INTEGER
   }

@@ -10,11 +10,11 @@
           td
             router-link(:to="`/resources/${item.id}`") {{item.title}}
           td {{item.fields.article}}
-          td {{item.OrderResource.quantity}}
+          td {{item.OrderProduct.quantity}}
           td {{item.fields.price}}
           td {{item.fields.weight}}
-          td {{item.fields.weight * item.OrderResource.quantity}}
-          td {{item.fields.price * item.OrderResource.quantity}}
+          td {{item.fields.weight * item.OrderProduct.quantity}}
+          td {{item.fields.price * item.OrderProduct.quantity}}
         tr
           td {{d.total || "Итого:"}}
           td
@@ -49,8 +49,8 @@ export default {
       let summ = 0;
       if (this.products && this.products.length > 0) {
         this.products.forEach(product => {
-          if (product.fields.price) {
-            summ += product.fields.price * product.OrderResource.quantity;
+          if (product.price) {
+            summ += product.price * product.OrderProduct.quantity;
           }
         });
       }
@@ -60,8 +60,8 @@ export default {
       let summ = 0;
       if (this.products && this.products.length > 0) {
         this.products.forEach(product => {
-          if (product.fields.weight) {
-            summ += product.fields.weight * product.OrderResource.quantity;
+          if (product.weight) {
+            summ += product.weight * product.OrderProduct.quantity;
           }
         });
       }

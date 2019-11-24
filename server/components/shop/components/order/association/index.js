@@ -1,8 +1,8 @@
 const Model = require('../model');
 const User = require('../../../../user/model');
-const Resource = require('../../../../resource/model');
+const Product = require('../../product/model');
 const OrderStatus = require('../../orderstatus/model');
-const OrderResource = require('../model/OrderResource');
+const OrderProduct = require('../model/OrderProduct');
 const Delivery = require('../../delivery/model');
 
 module.exports = () => {
@@ -18,9 +18,9 @@ module.exports = () => {
     as: 'courier'
   });
 
-  Model.belongsToMany(Resource, {
+  Model.belongsToMany(Product, {
     as: 'products',
-    through: OrderResource
+    through: OrderProduct
   });
 
   Model.belongsTo(OrderStatus, {

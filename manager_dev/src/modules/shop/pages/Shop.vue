@@ -153,15 +153,7 @@ export default {
               "orderstatus",
               "delivery",
               {
-                association: "products",
-                include: [
-                  {
-                    association: "additionalfields",
-                    where: {
-                      slug: ["price", "weight", "article"]
-                    }
-                  }
-                ]
+                association: "products"
               }
             ]
           }
