@@ -1,6 +1,6 @@
 <template lang="pug">
 	v-layout(v-if="r.is_product_read")
-		v-flex {{product}}
+		v-flex
 			v-layout
 				.body-2.mb-12.mt-2 {{d.product}}: {{product.title}} 
 				v-spacer
@@ -188,7 +188,7 @@ export default {
               association: "layout",
               include: ["fields"]
             },
-            "additionalfields",
+            "productfields",
             {
               association: "parent",
               include: ["translations"]
@@ -264,7 +264,7 @@ export default {
               association: "layout",
               include: ["fields"]
             },
-            "additionalfields",
+            "productfields",
             {
               association: "parent",
               include: ["translations"]

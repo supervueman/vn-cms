@@ -3,14 +3,14 @@
     v-card-text
       v-flex
         v-layout.wrap 
-          div(v-for="(field, i) in fields" :key="i + 11") {{field}}
-            br
-            br
+          //- div(v-for="(field, i) in fields" :key="i + 11") {{field}}
+          //-   br
+          //-   br
 
-          h1 Additional fields
-          div(v-for="(field, i) in additionalFields" :key="i + 11") {{field}}
-            br
-            br
+          //- h1 Additional fields
+          //- div(v-for="(field, i) in additionalFields" :key="i + 11") {{field}}
+          //-   br
+          //-   br
           v-toolbar(flat width="100%")
             v-spacer
             v-flex.md4
@@ -293,9 +293,9 @@ export default {
 
       for await (let el of fields) {
         if (el.id) {
-          await this.$store.dispatch("additionalfield/update", el);
+          await this.$store.dispatch("shop/productfield/update", el);
         } else {
-          await this.$store.dispatch("additionalfield/create", el);
+          await this.$store.dispatch("shop/productfield/create", el);
         }
       }
 
@@ -310,7 +310,7 @@ export default {
                 association: "layout",
                 include: ["fields"]
               },
-              "additionalfields",
+              "productfields",
               "translations",
               "resourcetype"
             ]
@@ -333,7 +333,7 @@ export default {
               ]
             },
             {
-              association: "additionalfields",
+              association: "productfields",
               where: { categoryId: event }
             },
             {

@@ -24,7 +24,7 @@ const actions = {
 
     if (response !== undefined && response.status === 200) {
       commit('SET', response.data);
-      commit('SET_ADDITIONAL_FIELDS', response.data.additionalfields);
+      commit('SET_ADDITIONAL_FIELDS', response.data.productfields);
       commit('SET_LAYOUT', response.data.layout);
       commit('SET_FIELDS', response.data.layout.fields);
       commit('SET_TRANSLATIONS', response.data);

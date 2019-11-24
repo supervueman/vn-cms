@@ -342,7 +342,7 @@ export default {
       for await (let el of this.$store.getters[
         "shop/product/getAdditionalFields"
       ]) {
-        await this.$store.dispatch("additionalfield/remove", {
+        await this.$store.dispatch("shop/productfield/remove", {
           body: { id: el.id }
         });
       }
@@ -358,7 +358,7 @@ export default {
                 association: "layout",
                 include: ["fields"]
               },
-              "additionalfields",
+              "productfields",
               {
                 association: "parent",
                 include: ["translations"]

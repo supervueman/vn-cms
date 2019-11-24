@@ -6,7 +6,7 @@ const actions = {
     commit
   }, payload) {
     this.dispatch('preloader/fetch', true);
-    const data = requestDataHandler('POST', '/additionalfields/create', payload);
+    const data = requestDataHandler('POST', '/productfields/create', payload);
 
     const response = await axios(data).catch(err => {
       this.dispatch('preloader/fetch', false);
@@ -31,7 +31,7 @@ const actions = {
     commit
   }, payload) {
     this.dispatch('preloader/fetch', true);
-    const data = requestDataHandler('PUT', '/additionalfields/update', payload);
+    const data = requestDataHandler('PUT', '/productfields/update', payload);
 
     const response = await axios(data).catch(err => {
       this.dispatch('preloader/fetch', false);
@@ -56,7 +56,7 @@ const actions = {
     commit
   }, payload) {
     this.dispatch('preloader/fetch', true);
-    const data = requestDataHandler('PUT', '/additionalfields/update-all', payload);
+    const data = requestDataHandler('PUT', '/productfields/update-all', payload);
 
     const response = await axios(data).catch(err => {
       this.dispatch('preloader/fetch', false);
@@ -81,7 +81,7 @@ const actions = {
     commit
   }, payload) {
     this.dispatch('preloader/fetch', true);
-    const data = requestDataHandler('DELETE', '/additionalfields/remove', {
+    const data = requestDataHandler('DELETE', '/productfields/remove', {
       id: payload
     });
 

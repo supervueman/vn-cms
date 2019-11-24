@@ -48,7 +48,7 @@ export default {
                 association: "layout",
                 include: ["fields"]
               },
-              "additionalfields",
+              "productfields",
               {
                 association: "parent",
                 include: ["translations"]
