@@ -38,6 +38,6 @@ Model.prototype.toJSON = function () {
   }
 
   return values;
-}
+};
 
 module.exports = Model;

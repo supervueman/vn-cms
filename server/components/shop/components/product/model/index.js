@@ -15,6 +15,7 @@ const Model = sequelize.define('product', {
   title: Sequelize.STRING,
   description: Sequelize.STRING,
   content: Sequelize.TEXT,
+  article: Sequelize.STRING,
   price: Sequelize.INTEGER,
   weight: Sequelize.INTEGER,
   count: Sequelize.INTEGER,
