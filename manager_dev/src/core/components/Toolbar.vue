@@ -9,7 +9,9 @@
 			)
 		v-toolbar-items.hidden-xs-and-down
 			v-btn(text to="/users" v-if="r.is_users_read") {{d.users}}
-			applications-menu
+			applications-menu(
+				v-if="isAuth"
+			)
 		v-spacer
 		v-toolbar-items.hidden-xs-and-down
 			v-btn(text v-if="!isAuth" @click="$emit('openLoginDialog')") {{d.login}}
