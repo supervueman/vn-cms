@@ -1,12 +1,10 @@
 // Models
 const Layout = require('../../layout/model');
 const ResourceType = require('../../resourcetype/model');
-const Field = require('../../field/model');
 
 // Data
 const layoutsData = require('../data/layouts.json');
 const resourcetypesData = require('../data/resourcetypes.json');
-const fieldsData = require('../data/fields.json');
 
 // Init components
 const cartInit = require('../components/cart/init');
@@ -49,23 +47,6 @@ module.exports = async () => {
       slug: 'product'
     }
   });
-
-  for await (let item of fieldsData) {
-    const existItem = await Field.findOne({
-      where: {
-        slug: item.slug
-      }
-    });
-
-    item.layoutId = productLayout.id;
-
-    if (!existItem) {
-      const field = await Field.create({
-        ...item
-      });
-      await field.addLayout(productLayout.id);
-    }
-  }
 
   await cartInit();
   await orderstatusInit();
