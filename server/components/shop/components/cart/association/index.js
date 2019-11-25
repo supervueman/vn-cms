@@ -1,19 +1,14 @@
 const Model = require('../model');
 const User = require('../../../../user/model');
-const Resource = require('../../../../resource/model');
+const Product = require('../../product/model');
 
 module.exports = () => {
   Model.belongsTo(User, {
     as: 'owner'
   });
 
-  Model.belongsTo(User, {
-    as: 'manager'
-  });
-
-
-  Model.belongsToMany(Resource, {
+  Model.belongsToMany(Product, {
     as: 'products',
-    through: 'CartResource'
+    through: 'CartProduct'
   });
-}
+};
