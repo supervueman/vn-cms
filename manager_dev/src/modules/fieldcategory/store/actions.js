@@ -82,6 +82,7 @@ const actions = {
   async update({
     commit
   }, payload) {
+    console.log(payload)
     this.dispatch('preloader/fetch', true);
     const data = requestDataHandler('PUT', '/fieldcategories/update', payload.body);
 
