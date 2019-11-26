@@ -8,7 +8,6 @@ module.exports = () => {
   Model.hasMany(ProductField, {
     as: 'productfields',
     onDelete: 'cascade',
-    foreignKey: 'productId'
   });
   Model.belongsTo(User, {
     as: 'user',

@@ -13,4 +13,4 @@ module.exports = () => {
   Model.belongsTo(FieldCategory, {
     as: 'category'
   });
-}
+};
