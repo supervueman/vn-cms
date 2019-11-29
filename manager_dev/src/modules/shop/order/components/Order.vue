@@ -29,7 +29,8 @@
                   )
                   div.mb-4 {{d.created_date || 'Дата создания'}}: {{item.createdAt}}
                   div.mb-4 {{d.updated_date || 'Дата обновления'}}: {{item.updatedAt}}
-                  div {{d.summ || "Сумма"}}: {{item.price}}
+                  div.mb-4 {{d.delivery || 'Доставка'}}: {{item.delivery.cost}}
+                  div {{d.summ || "Сумма"}}: {{item.price + item.delivery.cost}}
             v-flex.lg12.md12
               v-layout
                 v-flex.lg12.md12.mr-2
