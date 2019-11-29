@@ -19,6 +19,9 @@ const Model = sequelize.define('delivery', {
   value: {
     type: Sequelize.TEXT,
     allowNull: false
+  },
+  cost: {
+    type: Sequelize.INTEGER
   }
 });
 

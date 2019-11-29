@@ -18,6 +18,12 @@
         @blur="$v.item.title.$touch()"
         :error-messages="titleErrors"
       )
+      v-text-field(
+        v-model="item.cost"
+        :label="`${d.cost || 'Стоимость'}:`"
+        type="number"
+        required
+      )
       v-textarea(
         v-model="item.value"
         :label="d.value || 'Значение'"
