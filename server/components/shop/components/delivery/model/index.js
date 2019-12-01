@@ -22,6 +22,30 @@ const Model = sequelize.define('delivery', {
   },
   cost: {
     type: Sequelize.INTEGER
+  },
+  country: {
+    type: Sequelize.STRING
+  },
+  city: {
+    type: Sequelize.STRING
+  },
+  region: {
+    type: Sequelize.STRING
+  },
+  district: {
+    type: Sequelize.STRING
+  },
+  street: {
+    type: Sequelize.STRING
+  },
+  house: {
+    type: Sequelize.STRING
+  },
+  apartment: {
+    type: Sequelize.STRING
+  },
+  fullAddress: {
+    type: Sequelize.STRING
   }
 });
 

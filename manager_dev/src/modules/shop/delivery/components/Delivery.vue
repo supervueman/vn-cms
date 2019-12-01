@@ -24,6 +24,46 @@
         type="number"
         required
       )
+      v-text-field(
+        v-model="item.country"
+        :label="`${d.country || 'Страна'}:`"
+        required
+      )
+      v-text-field(
+        v-model="item.city"
+        :label="`${d.city || 'Город'}:`"
+        required
+      )
+      v-text-field(
+        v-model="item.region"
+        :label="`${d.region || 'Область'}:`"
+        required
+      )
+      v-text-field(
+        v-model="item.district"
+        :label="`${d.district || 'Район'}:`"
+        required
+      )
+      v-text-field(
+        v-model="item.street"
+        :label="`${d.street || 'Улица'}:`"
+        required
+      )
+      v-text-field(
+        v-model="item.house"
+        :label="`${d.house || 'Дом'}:`"
+        required
+      )
+      v-text-field(
+        v-model="item.apartment"
+        :label="`${d.apartment || 'Квартира'}:`"
+        required
+      )
+      v-text-field(
+        v-model="item.fullAddress"
+        :label="`${d.fullAddress || 'Полный адрес'}:`"
+        required
+      )
       v-textarea(
         v-model="item.value"
         :label="d.value || 'Значение'"
