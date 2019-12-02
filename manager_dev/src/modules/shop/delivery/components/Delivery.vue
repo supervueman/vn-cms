@@ -30,13 +30,13 @@
         required
       )
       v-text-field(
-        v-model="item.city"
-        :label="`${d.city || 'Город'}:`"
+        v-model="item.region"
+        :label="`${d.region || 'Область'}:`"
         required
       )
       v-text-field(
-        v-model="item.region"
-        :label="`${d.region || 'Область'}:`"
+        v-model="item.city"
+        :label="`${d.city || 'Город'}:`"
         required
       )
       v-text-field(

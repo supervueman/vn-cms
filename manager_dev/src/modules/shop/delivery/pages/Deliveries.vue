@@ -22,7 +22,15 @@
               tbody
                 tr(v-for="item in items" :key="item.id")
                   td.text-xs-left
+                    div(@click="openDeliveryItem(item); operationType = 'update'") {{ item.slug }} ({{item.id}})
+                  td.text-xs-left
                     div(@click="openDeliveryItem(item); operationType = 'update'") {{ item.title }}
+                  td.text-xs-left
+                    div(@click="openDeliveryItem(item); operationType = 'update'") {{ item.country }}, {{item.region}}, {{item.city}}, {{item.district}}, {{item.street}}, {{item.house}}, {{item.apartment}}
+                  td.text-xs-left
+                    div(@click="openDeliveryItem(item); operationType = 'update'") {{item.fullAddress}}
+                  td.text-xs-left
+                    div(@click="openDeliveryItem(item); operationType = 'update'") {{ item.cost }}
                   td.text-end
                     v-btn(
                       text
@@ -96,8 +104,24 @@ export default {
     headers() {
       return [
         {
+          text: this.d.slug || "Псевдоним",
+          value: "slug"
+        },
+        {
           text: this.d.name || "Наименование",
           value: "title"
+        },
+        {
+          text: this.d.address || "Адрес",
+          value: "country"
+        },
+        {
+          text: this.d.full_address || "Полный адрес",
+          value: "country"
+        },
+        {
+          text: this.d.cost || "Стоимость",
+          value: "cost"
         },
         { text: "", sortable: false }
       ];

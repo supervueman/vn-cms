@@ -5,18 +5,30 @@ module.exports = async (req, res) => {
 
   if (req.rules.is_deliveries_read) {
     if (req.adminAccess) {} else if (req.managerAccess) {
-      filter.where = {
-        managerId: req.profile.id
-      };
+      if (filter.where) {
+        filter.where.managerId = req.profile.id;
+      } else {
+        filter.where = {
+          managerId: req.profile.id
+        };
+      }
     } else {
-      filter.where = {
-        managerId: req.profile.userId,
-      };
+      if (filter.where) {
+        filter.where.managerId = req.profile.userId;
+      } else {
+        filter.where = {
+          managerId: req.profile.userId,
+        };
+      }
     }
   } else if (!req.rules.is_orders_read) {
-    filter.where = {
-      ownerId: req.profile.id
-    };
+    if (filter.where) {
+      filter.where.managerId = req.profile.id;
+    } else {
+      filter.where = {
+        ownerId: req.profile.id
+      };
+    }
   }
 
   const items = await Model.findAll(filter);
