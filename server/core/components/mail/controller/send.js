@@ -18,7 +18,10 @@ module.exports = async (req, res) => {
     }
   });
 
-  const info = await transporter.sendMail(req.body).catch(err => {
+  const info = await transporter.sendMail({
+    ...req.body,
+    to: req.profile.email
+  }).catch(err => {
     res.status(500);
     res.send({
       message: 'Not send!'
@@ -28,4 +31,4 @@ module.exports = async (req, res) => {
   res.status(200).send({
     message: 'Success!'
   });
-}
+};
