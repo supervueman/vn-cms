@@ -39,6 +39,9 @@ const Model = sequelize.define('user', {
     type: Sequelize.STRING,
     unique: true
   },
+  verified: {
+    type: Sequelize.BOOLEAN
+  }
 });
 
 Model.prototype.toJSON = function () {
@@ -46,7 +49,7 @@ Model.prototype.toJSON = function () {
 
   delete values.password;
   return values;
-}
+};
 
 SequelizeTokenify.tokenify(Model);
 
