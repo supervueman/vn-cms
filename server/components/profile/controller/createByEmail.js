@@ -5,7 +5,7 @@ const createDir = require('../../../handlers/createDir');
 
 const User = require('../../user/model');
 const Role = require('../../role/model');
-const SystemSetting = require('../../systemSetting/model');
+const SystemSetting = require('../../systemsetting/model');
 
 module.exports = async (req, res) => {
   if (!req.rules.is_user_create) {
