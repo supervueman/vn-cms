@@ -6,7 +6,7 @@ const controller = require('../controller');
 
 // Middleware
 const profileByAccessToken = require('../../../../../middleware/profileByAccessToken');
-const profileByApiKey = require('../../../../../middleware/profileByapiKey');
+const profileByApiKey = require('../../../../../middleware/profileByApiKey');
 
 router.get('/', profileByAccessToken, controller.findAll);
 
