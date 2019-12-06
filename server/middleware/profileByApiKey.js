@@ -7,6 +7,7 @@ const User = require('../components/user/model');
 module.exports = async (req, res, next) => {
   const apiKey = req.headers['x-api-key'];
   const isApiKey = apiKey !== null && apiKey !== undefined && apiKey !== '' && apiKey !== 'null';
+
   if (!isApiKey) {
     return next();
   }
@@ -23,10 +24,13 @@ module.exports = async (req, res, next) => {
   }
 
   req.profile = profile;
+
   const rules = JSON.parse(profile.role.rules);
+
   for (const rule in rules) {
     rules[rule] = rules[rule].value;
   }
+
   req.rules = rules;
 
   accessHandler(req, profile.role.slug);
