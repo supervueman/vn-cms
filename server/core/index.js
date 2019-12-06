@@ -10,6 +10,7 @@ module.exports = async (app) => {
   app.use(bodyParser.urlencoded({
     extended: true
   }));
+
   app.use(bodyParser.json());
 
   app.use((req, res, next) => {
@@ -19,7 +20,6 @@ module.exports = async (app) => {
   await createDir('../files');
 
   app.use('/files', express.static('../files'));
-
   app.use('/mail', mail.routes);
   app.use('/filesystem', filesystem.routes);
 };
