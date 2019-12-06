@@ -86,7 +86,7 @@ module.exports = async (req, res) => {
   const userCreated = {
     ...req.body,
     password: hashedPw
-  }
+  };
   if (!req.managerAccess && !req.adminAccess) {
     userCreated.userId = req.profile.userId;
   }
@@ -105,4 +105,4 @@ module.exports = async (req, res) => {
   }
 
   res.status(200).send(createdUser);
-}
+};

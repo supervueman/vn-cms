@@ -60,4 +60,4 @@ module.exports = async (req, res) => {
   await createDir(`../files/${createdUser.id}`);
 
   res.status(200).send(createdUser);
-}
+};
