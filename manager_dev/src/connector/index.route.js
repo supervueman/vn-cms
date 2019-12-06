@@ -40,7 +40,7 @@ function route(path, name, component, componentPath) {
     component: () => import(
       `@/modules/${componentPath}`
     )
-  }
+  };
 }
 
 Vue.use(Router);

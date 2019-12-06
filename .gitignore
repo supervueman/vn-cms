@@ -16,6 +16,8 @@ serializer
 /manager_dev/public/static/logo.png
 /manager_dev/public/static/logo.jpg
 /manager_dev/public/static/logo.svg
+/manager_dev/src/modules/test
+/server/components/test
 
 # local env files
 .env

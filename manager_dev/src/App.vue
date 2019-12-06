@@ -18,9 +18,6 @@
 		)
 		v-content
 			v-container(fluid)
-				v-btn(
-					@click="sendSms"
-				) Send SMS
 				router-view
 		bottom-bar
 		v-dialog(v-model="isLoginDialog" max-width="500px" min-width="320px")
@@ -65,15 +62,6 @@ export default {
 
 	async beforeCreate() {
 		await this.$store.dispatch('profile/findByAccessToken');
-
-		// Тестовая функция на отправку почты
-		// await this.$store.dispatch("mail/send", {
-		//   from: "<chaogen2@example.com>", // sender address
-		//   to: "chaogen2@gmail.com", // list of receivers
-		//   subject: "Hello ✔", // Subject line
-		//   text: "Hello world?", // plain text body
-		//   html: "<b>Hello world?</b>" // html body
-		// });
 	},
 
 	async mounted() {
@@ -93,16 +81,6 @@ export default {
 							lang: localStorage.getItem('admin-panel-lang') || 'en'
 						}
 					}
-				}
-			});
-		}
-	},
-
-	methods: {
-		async sendSms() {
-			await this.$store.dispatch('authenticate/sendSms', {
-				body: {
-					phone: '89370780830'
 				}
 			});
 		}
