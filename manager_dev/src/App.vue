@@ -25,7 +25,7 @@
 				@closeLoginDialog="isLoginDialog = false"
 			)
 		v-overlay(
-			:opacity="0"
+			:opacity="0.5"
 			:value="preloader"
 			:z-index="9998"
 		)
