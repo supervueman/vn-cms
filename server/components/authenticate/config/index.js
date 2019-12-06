@@ -6,4 +6,4 @@ module.exports = {
   associations: [{
     association_dir_path: 'additoinafield/association'
   }]
-}
+};

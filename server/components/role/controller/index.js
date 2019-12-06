@@ -7,4 +7,4 @@ module.exports = {
   update: require('./update'),
   remove: require('./remove'),
   count: require('./count')
-}
+};

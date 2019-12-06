@@ -8,4 +8,4 @@ module.exports = () => {
     through: 'LayoutField',
     constraints: false
   });
-}
+};

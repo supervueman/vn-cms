@@ -1,7 +1,3 @@
-const express = require('express');
-
-const app = express();
-
 const {
   cors_access_url,
   header_authorization
@@ -37,4 +33,4 @@ module.exports = (req, res, next) => {
   } else {
     next();
   }
-}
+};

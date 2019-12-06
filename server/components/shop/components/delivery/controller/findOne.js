@@ -29,4 +29,4 @@ module.exports = async (req, res) => {
       message: 'Access denied!'
     });
   }
-}
+};

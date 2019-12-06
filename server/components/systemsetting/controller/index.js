@@ -4,4 +4,4 @@ module.exports = {
   findOne: require('./findOne'),
   update: require('./update'),
   count: require('./count')
-}
+};

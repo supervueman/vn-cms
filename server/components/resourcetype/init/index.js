@@ -14,4 +14,4 @@ module.exports = async () => {
       title: 'Документ',
     });
   }
-}
+};

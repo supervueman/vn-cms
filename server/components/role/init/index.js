@@ -33,4 +33,4 @@ module.exports = async () => {
       rules: JSON.stringify(rules_manager)
     });
   }
-}
+};

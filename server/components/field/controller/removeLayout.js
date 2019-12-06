@@ -17,7 +17,7 @@ module.exports = async (req, res) => {
     return;
   }
 
-  for await (layout of req.body.layouts) {
+  for await (const layout of req.body.layouts) {
     await item.removeLayout(layout);
   }
 
@@ -26,4 +26,4 @@ module.exports = async (req, res) => {
   });
 
   res.status(200).send(updatedItem);
-}
+};

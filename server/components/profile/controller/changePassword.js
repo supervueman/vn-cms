@@ -26,4 +26,4 @@ module.exports = async (req, res) => {
       message: 'Пароль успешно обновлен!'
     });
   }
-}
+};

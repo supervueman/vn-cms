@@ -23,4 +23,4 @@ module.exports = async (req, res) => {
   const items = await Model.findAll(filter);
 
   res.status(200).send(items);
-}
+};

@@ -1,4 +1,4 @@
-const fs = require('fs')
+const fs = require('fs');
 
 module.exports = (path) => {
   fs.stat(path, function (err) {
@@ -11,4 +11,4 @@ module.exports = (path) => {
       if (err) return console.log(err);
     });
   });
-}
+};

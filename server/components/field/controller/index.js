@@ -8,4 +8,4 @@ module.exports = {
   count: require('./count'),
   addLayout: require('./addLayout'),
   removeLayout: require('./removeLayout')
-}
+};

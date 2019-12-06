@@ -6,6 +6,6 @@ module.exports = async (path) => {
   } else {
     return {
       message: 'Directory is exist!'
-    }
+    };
   }
-}
+};

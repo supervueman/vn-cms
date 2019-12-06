@@ -22,4 +22,4 @@ module.exports = async (app) => {
 
   app.use('/mail', mail.routes);
   app.use('/filesystem', filesystem.routes);
-}
+};

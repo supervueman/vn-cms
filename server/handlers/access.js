@@ -10,4 +10,4 @@ module.exports = (req, role) => {
       req.otherAccess = true;
       break;
   }
-}
+};

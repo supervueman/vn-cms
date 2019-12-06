@@ -10,9 +10,9 @@ module.exports = async (req, res) => {
 
   const createdItem = await Model.create(req.body);
 
-  for await (layout of req.body.layouts) {
+  for await (const layout of req.body.layouts) {
     await createdItem.addLayout(layout);
   }
 
   res.status(200).send(createdItem);
-}
+};

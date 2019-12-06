@@ -20,7 +20,7 @@ module.exports = async (req, res) => {
       }, {
         $ne: 'manager'
       }]
-    }
+    };
   }
 
   const count = await Model.count(filter);
@@ -28,4 +28,4 @@ module.exports = async (req, res) => {
   res.status(200).send({
     count
   });
-}
+};

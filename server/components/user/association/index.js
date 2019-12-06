@@ -14,4 +14,4 @@ module.exports = () => {
     onDelete: 'cascade',
     as: 'resources'
   });
-}
+};

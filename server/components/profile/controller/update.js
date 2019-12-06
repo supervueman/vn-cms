@@ -22,4 +22,4 @@ module.exports = async (req, res) => {
   const newProfile = await req.profile.update(updateProfileData);
 
   res.status(200).send(newProfile);
-}
+};

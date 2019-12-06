@@ -32,4 +32,4 @@ module.exports = async (req, res, next) => {
   accessHandler(req, profile.role.slug);
 
   next();
-}
+};

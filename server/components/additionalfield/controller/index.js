@@ -6,4 +6,4 @@ module.exports = {
   update: require('./update'),
   updateAll: require('./updateAll'),
   remove: require('./remove'),
-}
+};

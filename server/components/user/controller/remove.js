@@ -17,7 +17,7 @@ module.exports = async (req, res) => {
     res.status(404).send({
       message: 'Not found!'
     });
-    retuirn;
+    return;
   }
 
   if ((req.managerAccess && String(item.userId) === String(req.profile.id)) || (!req.managerAccess && String(item.userId) === String(req.profile.userId)) || req.adminAccess) {
@@ -36,4 +36,4 @@ module.exports = async (req, res) => {
       message: 'Not found!'
     });
   }
-}
+};

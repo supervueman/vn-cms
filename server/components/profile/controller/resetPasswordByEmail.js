@@ -76,4 +76,4 @@ module.exports = async (req, res) => {
       message: 'Success!'
     });
   });
-}
+};

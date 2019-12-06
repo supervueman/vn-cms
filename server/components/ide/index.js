@@ -4,4 +4,4 @@ const init = require('./init');
 module.exports = {
   routes,
   init
-}
+};

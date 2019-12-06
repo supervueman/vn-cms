@@ -36,4 +36,4 @@ module.exports = async (req, res) => {
     id: user.id,
     access_token
   });
-}
+};

@@ -45,4 +45,4 @@ module.exports = async (req, res) => {
       message: 'Not found!'
     });
   }
-}
+};

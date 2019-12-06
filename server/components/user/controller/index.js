@@ -6,4 +6,4 @@ module.exports = {
   changePassword: require('./changePassword'),
   remove: require('./remove'),
   count: require('./count')
-}
+};

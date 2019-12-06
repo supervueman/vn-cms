@@ -7,4 +7,4 @@ module.exports = {
   remove: require('./remove'),
   count: require('./count'),
   addTranslation: require('./addTranslation')
-}
+};

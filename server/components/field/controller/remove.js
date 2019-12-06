@@ -14,7 +14,7 @@ module.exports = async (req, res) => {
     res.status(404).send({
       message: 'Not found!'
     });
-    return
+    return;
   }
 
   await Model.destroy({
@@ -26,4 +26,4 @@ module.exports = async (req, res) => {
   res.status(200).send({
     message: 'Success!'
   });
-}
+};

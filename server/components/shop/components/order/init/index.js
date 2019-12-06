@@ -1,4 +1,4 @@
-const fs = require('fs')
+const fs = require('fs');
 
 const Role = require('../../../../role/model');
 
@@ -51,4 +51,4 @@ module.exports = async () => {
   }
   const rulesDefaultJSON = JSON.stringify(rulesDefault);
   fs.writeFileSync(`./components/role/data/rules_default.json`, rulesDefaultJSON);
-}
+};

@@ -9,4 +9,4 @@ module.exports = {
   findPage: require('./findPage'),
   savePage: require('./savePage'),
   removePage: require('./removePage'),
-}
+};

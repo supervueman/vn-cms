@@ -6,4 +6,4 @@ module.exports = {
   renameFile: require('./renameFile'),
   removeDir: require('./removeDir'),
   removeFile: require('./removeFile')
-}
+};

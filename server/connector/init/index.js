@@ -15,4 +15,4 @@ module.exports = async () => {
   for await (const el of dirs) {
     await require(`../../components/${el}`).init();
   }
-}
+};

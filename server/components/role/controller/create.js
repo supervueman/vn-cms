@@ -17,4 +17,4 @@ module.exports = async (req, res) => {
 
   const createdItem = await Model.create(req.body);
   res.status(200).send(createdItem);
-}
+};
