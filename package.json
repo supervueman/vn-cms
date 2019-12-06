@@ -23,7 +23,7 @@
 		"client:start:pm2": "cd ../client && npm run start:pm2",
 		"client:restart:pm2": "cd ../client && npm run restart:pm2",
 		"client:stop:pm2": "cd ../client && npm run stop:pm2",
-		"server:dev": "cd server && npm start",
+		"server:dev": "cd server && npm run dev",
 		"server:start:pm2": "cd server && npm run start:pm2",
 		"server:restart:pm2": "cd server && npm run restart:pm2",
 		"server:stop:pm2": "cd server && npm run stop:pm2",

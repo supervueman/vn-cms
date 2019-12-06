@@ -42,7 +42,7 @@ module.exports = async (req, res) => {
   smsc.configure({
     login: process.env.SMSC_LOGIN,
     password: process.env.SMSC_PASSWORD,
-    // ssl: false,
+    ssl: process.env.NODE_ENV === 'development' ? false : true,
     charset: 'utf-8',
   });
 

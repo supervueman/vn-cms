@@ -16,5 +16,5 @@ module.exports = new Sequelize(db_name, db_user, db_password, {
   dialect: db_dialect,
   host: db_host,
   operatorsAliases,
-  logging: false
+  logging: process.env.NODE_ENV === 'development' ? true : false,
 });

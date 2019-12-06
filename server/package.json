@@ -5,8 +5,9 @@
 	"main": "app.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"start": "nodemon app.js",
-		"start:pm2": "pm2 start ecosystem.config.js",
+		"dev": "NODE_ENV=development nodemon app.js",
+		"start": "NODE_ENV=production nodemon app.js",
+		"start:pm2": "NODE_ENV=production pm2 start ecosystem.config.js",
 		"restart:pm2": "pm2 restart ecosystem.config.js",
 		"stop:pm2": "pm2 stop ecosystem.config.js",
 		"build:data": "nodemon serializer/build/index.js",
