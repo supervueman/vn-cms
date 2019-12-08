@@ -1,0 +1,9 @@
+{
+  "name": "smsc",
+  "description": "Integration with https://smsc.ru/ service",
+  "folders": [{
+    "current_path": "../installations/smsc/server",
+    "install_path": "../server/components/smsc"
+  }],
+  "packages": ["form-data", "password-generator"]
+}

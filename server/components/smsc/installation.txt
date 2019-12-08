@@ -1,9 +1,0 @@
-service https://smsc.ru/
-
-packages
-- form-data: npm install --save form-data, https://www.npmjs.com/package/form-data
-- password-generator: npm install password-generator, https://www.npmjs.com/package/password-generator
-
-process envs
-SMSC_LOGIN service account login
-SMSC_PASSWORD service account password
