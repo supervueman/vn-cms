@@ -37,17 +37,17 @@
         v-btn.ml-2(
           color="primary"
           @click="create"
-          v-if="r.is_roles_create && operationType === 'create'"
+          v-if="r.is_role_create && operationType === 'create'"
         ) {{d.create}}
         v-btn.ml-2(
           color="primary"
           @click="update"
-          v-if="r.is_roles_update && operationType === 'update' && role.slug !== 'admin'"
+          v-if="r.is_role_update && operationType === 'update' && role.slug !== 'admin'"
         ) {{d.save}}
         v-btn.ml-2(
           color="error"
           @click="isRemoveDialog = true"
-          v-if="r.is_roles_delete && operationType === 'update' && role.slug !== 'manager' && role.slug !== 'admin'"
+          v-if="r.is_role_delete && operationType === 'update' && role.slug !== 'manager' && role.slug !== 'admin'"
         ) {{d.remove}}
 
     v-dialog(
@@ -133,7 +133,7 @@ export default {
 
   methods: {
     async create() {
-      if (!this.r.is_roles_create) {
+      if (!this.r.is_role_create) {
         return;
       }
       this.$v.$touch();
@@ -150,7 +150,7 @@ export default {
     },
 
     async update() {
-      if (!this.r.is_roles_update) {
+      if (!this.r.is_role_update) {
         return;
       }
       this.$v.$touch();
@@ -165,7 +165,7 @@ export default {
     },
 
     async remove() {
-      if (!this.r.is_roles_delete) {
+      if (!this.r.is_role_delete) {
         return;
       }
       await this.$store.dispatch("role/remove", {

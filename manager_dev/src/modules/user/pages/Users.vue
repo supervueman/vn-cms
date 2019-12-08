@@ -1,5 +1,5 @@
 <template lang="pug">
-  v-layout(v-if="r.is_users_read")
+  v-layout(v-if="r.is_user_read")
     v-flex
       .body-2.mt-2 {{d.users}}
         v-layout.wrap.pt-12

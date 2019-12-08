@@ -1,7 +1,7 @@
 const Model = require('../model');
 
 module.exports = async (req, res) => {
-  if (!req.rules.is_users_read) {
+  if (!req.rules.is_user_read) {
     res.status(403).send({
       message: 'Access denied!'
     });

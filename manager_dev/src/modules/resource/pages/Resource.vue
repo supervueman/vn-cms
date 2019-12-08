@@ -1,5 +1,5 @@
 <template lang="pug">
-	v-layout(v-if="r.is_resources_read")
+	v-layout(v-if="r.is_resource_read")
 		v-flex
 			v-layout
 				.body-2.mb-12.mt-2 {{d.resource}}: {{resource.title}} 

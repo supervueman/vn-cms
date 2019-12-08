@@ -1,30 +1,49 @@
 {
-  "is_roles_read": {
-    "title": "Доступ к просмотру политик доступа",
+  "is_system_setting_read": {
+    "title": "Разрешить просматривать системные настройки",
     "value": true
   },
-  "is_roles_create": {
-    "title": "Разрешить создавать политики доступа",
-    "value": true
-  },
-  "is_roles_update": {
-    "title": "Разрешить редактировать политики доступа",
-    "value": true
-  },
-  "is_roles_delete": {
-    "title": "Разрешить удалять политики доступа",
-    "value": true
-  },
-  "is_system_settings_read": {
-    "title": "Доступ к просмотру системных настроек",
-    "value": true
-  },
-  "is_system_settings_update": {
+  "is_system_setting_update": {
     "title": "Разрешить изменять системные настройки",
     "value": true
   },
-  "is_dictionaries_read": {
-    "title": "Доступ к словарям",
+
+  "is_role_read": {
+    "title": "Разрешить просматривать политики доступа",
+    "value": true
+  },
+  "is_role_create": {
+    "title": "Разрешить создавать политики доступа",
+    "value": true
+  },
+  "is_role_update": {
+    "title": "Разрешить редактировать политики доступа",
+    "value": true
+  },
+  "is_role_delete": {
+    "title": "Разрешить удалять политики доступа",
+    "value": true
+  },
+
+  "is_user_read": {
+    "title": "Разрешить просматривать пользователей",
+    "value": true
+  },
+  "is_user_create": {
+    "title": "Разрешить создавать пользователей",
+    "value": true
+  },
+  "is_user_update": {
+    "title": "Разрешить редактировать пользователей",
+    "value": true
+  },
+  "is_user_delete": {
+    "title": "Разрешить удалять пользователей",
+    "value": true
+  },
+
+  "is_dictionary_read": {
+    "title": "Разрешить просмтаривать словари",
     "value": true
   },
   "is_dictionary_create": {
@@ -39,11 +58,8 @@
     "title": "Разрешить удалять словари",
     "value": true
   },
-  "is_elements_access": {
-    "title": "Доступ к вкладке элементы",
-    "value": true
-  },
-  "is_layouts_read": {
+
+  "is_layout_read": {
     "title": "Разрешить просматривать шаблоны",
     "value": true
   },
@@ -59,23 +75,8 @@
     "title": "Разрешить удалять шаблоны",
     "value": true
   },
-  "is_fields_read": {
-    "title": "Доступ к просмотру полей",
-    "value": true
-  },
-  "is_field_create": {
-    "title": "Разрешить создавать поля",
-    "value": true
-  },
-  "is_field_update": {
-    "title": "Разрешить редактировать поля",
-    "value": true
-  },
-  "is_field_delete": {
-    "title": "Разрешить удалять поля",
-    "value": true
-  },
-  "is_field_categories_read": {
+
+  "is_field_category_read": {
     "title": "Разрешить просматривать категории полей",
     "value": true
   },
@@ -91,6 +92,46 @@
     "title": "Разрешить удалять категории полей",
     "value": true
   },
+
+  "is_field_read": {
+    "title": "Разрешить просматривать поля",
+    "value": true
+  },
+  "is_field_create": {
+    "title": "Разрешить создавать поля",
+    "value": true
+  },
+  "is_field_update": {
+    "title": "Разрешить редактировать поля",
+    "value": true
+  },
+  "is_field_delete": {
+    "title": "Разрешить удалять поля",
+    "value": true
+  },
+
+  "is_resource_read": {
+    "title": "Разрешить просматривать ресурсы",
+    "value": true
+  },
+  "is_resource_create": {
+    "title": "Разрешить создавать ресурсы",
+    "value": true
+  },
+  "is_resource_update": {
+    "title": "Разрешить редактировать ресурсы",
+    "value": true
+  },
+  "is_resource_delete": {
+    "title": "Разрешить удалять ресурсы",
+    "value": true
+  },
+
+  "is_elements_access": {
+    "title": "Доступ к вкладке элементы",
+    "value": true
+  },
+
   "is_filesystem_access": {
     "title": "Разрешить доступ к файловой системе",
     "value": true
@@ -117,38 +158,6 @@
   },
   "is_filesystem_files_rename": {
     "title": "Разрешить переименовывать файлы",
-    "value": true
-  },
-  "is_users_read": {
-    "title": "Доступ к просмотру пользователей",
-    "value": true
-  },
-  "is_user_create": {
-    "title": "Разрешить создавать пользователей",
-    "value": true
-  },
-  "is_user_update": {
-    "title": "Разрешить редактировать пользователей",
-    "value": true
-  },
-  "is_user_delete": {
-    "title": "Разрешить удалять пользователей",
-    "value": true
-  },
-  "is_resources_read": {
-    "title": "Доступ к вкладке ресурсы",
-    "value": true
-  },
-  "is_resource_create": {
-    "title": "Разрешить создавать ресурсы",
-    "value": true
-  },
-  "is_resource_update": {
-    "title": "Разрешить редактировать ресурсы",
-    "value": true
-  },
-  "is_resource_delete": {
-    "title": "Разрешить удалять ресурсы",
     "value": true
   }
 }

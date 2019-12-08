@@ -1,7 +1,7 @@
 const defaultRules = require('../data/rules_default.json');
 
 module.exports = async (req, res) => {
-  if (!req.rules.is_roles_read) {
+  if (!req.rules.is_role_read) {
     res.status(403).send({
       message: 'Access denied!'
     });

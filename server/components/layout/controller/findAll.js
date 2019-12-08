@@ -1,7 +1,7 @@
 const Model = require('../model');
 
 module.exports = async (req, res) => {
-  if (!req.rules.is_layouts_read) {
+  if (!req.rules.is_layout_read) {
     res.status(403).send({
       message: 'Access denied!'
     });

@@ -1,5 +1,5 @@
 <template lang="pug">
-  v-flex(v-if="r.is_roles_read")
+  v-flex(v-if="r.is_role_read")
     .body-2.mb-12.mt-2 {{d.role_politic}}: {{role.title}}
     v-layout.wrap
       role-view(

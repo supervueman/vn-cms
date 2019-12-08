@@ -20,8 +20,8 @@
 			slider-color="primary"
 			grow
 		)
-			v-tab(v-if="r.is_resources_read") {{d.resources}}
-			v-tab-item(v-if="r.is_resources_read")
+			v-tab(v-if="r.is_resource_read") {{d.resources}}
+			v-tab-item(v-if="r.is_resource_read")
 				v-app-bar(flat height="50")
 					v-tooltip(top v-if="r.is_resource_create")
 						template(v-slot:activator="{ on }")
@@ -35,7 +35,7 @@
 							)
 								v-icon add_circle_outline
 						span {{d.create_resource}}
-					v-tooltip(top v-if="r.is_resources_read")
+					v-tooltip(top v-if="r.is_resource_read")
 						template(v-slot:activator="{ on }")
 							v-btn(
 								slot="activator"
@@ -67,7 +67,7 @@
 			v-tab(v-if="r.is_elements_access") {{d.elements}}
 			v-tab-item(v-if="r.is_elements_access")
 				v-list
-					v-list-item(to="/layouts" v-if="r.is_layouts_read")
+					v-list-item(to="/layouts" v-if="r.is_layout_read")
 						v-list-item-action
 							v-icon(color="primary") layers
 						v-list-item-content
@@ -75,7 +75,7 @@
 						v-list-item-action
 							v-btn(icon to="/layout-create")
 								v-icon(color="primary") add_circle_outline
-					v-list-item(to="/fields" v-if="r.is_fields_read")
+					v-list-item(to="/fields" v-if="r.is_field_read")
 						v-list-item-action
 							v-icon(color="primary") playlist_add
 						v-list-item-content
@@ -83,7 +83,7 @@
 						v-list-item-action
 							v-btn(icon to="/field-create")
 								v-icon(color="primary") add_circle_outline
-					v-list-item(to="/fieldcategories" v-if="r.is_field_categories_read")
+					v-list-item(to="/fieldcategories" v-if="r.is_field_category_read")
 						v-list-item-action
 							v-icon(color="primary") folder
 						v-list-item-content

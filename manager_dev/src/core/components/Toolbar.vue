@@ -8,7 +8,7 @@
 				@error="errorLogo($event)"
 			)
 		v-toolbar-items.hidden-xs-and-down
-			v-btn(text to="/users" v-if="r.is_users_read") {{d.users}}
+			v-btn(text to="/users" v-if="r.is_user_read") {{d.users}}
 			applications-menu(
 				v-if="isAuth"
 			)
@@ -47,11 +47,11 @@
 					)
 						v-icon settings
 				v-list
-					v-list-item(to="/roles" v-if="r.is_roles_read")
+					v-list-item(to="/roles" v-if="r.is_role_read")
 						v-list-item-title {{d.roles_politics}}
-					v-list-item(to="/system-settings" v-if="r.is_system_settings_update")
+					v-list-item(to="/system-settings" v-if="r.is_system_setting_read")
 						v-list-item-title {{d.system_settings}}
-					v-list-item(to="/dictionaries" v-if="r.is_dictionaries_read")
+					v-list-item(to="/dictionaries" v-if="r.is_dictionary_read")
 						v-list-item-title {{d.dictionaries}}
 					v-list-item(@click="logout")
 						v-list-item-title {{d.logout}}

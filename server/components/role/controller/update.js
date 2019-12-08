@@ -1,7 +1,7 @@
 const Model = require('../model');
 
 module.exports = async (req, res) => {
-  if (!req.rules.is_roles_update) {
+  if (!req.rules.is_role_update) {
     res.status(403).send({
       message: 'Access denied!'
     });

@@ -1,5 +1,5 @@
 <template lang="pug">
-  v-flex(v-if="r.is_field_categories_read")
+  v-flex(v-if="r.is_field_category_read")
     .body-2.mb-12.mt-2 {{d.field_categories}}
     v-layout.wrap
       v-flex

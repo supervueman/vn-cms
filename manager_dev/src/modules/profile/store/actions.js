@@ -114,7 +114,7 @@ const actions = {
     if (response !== undefined && response.status === 200) {
       this.dispatch('preloader/fetch', false);
       this.dispatch('user/set', response.data);
-      router.push(`/users/${response.data.id}`)
+      router.push(`/users/${response.data.id}`);
       this.dispatch("notification/fetch", {
         type: "success",
         message: 'Успешно сохранено!',
@@ -262,7 +262,7 @@ const actions = {
   }) {
     commit('SET', {
       ...profile
-    })
+    });
   },
 
   clearRules({

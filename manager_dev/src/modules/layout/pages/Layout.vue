@@ -1,5 +1,5 @@
 <template lang="pug">
-  v-flex(v-if="r.is_layouts_read")
+  v-flex(v-if="r.is_layout_read")
     .body-2.mb-12.mt-2 {{d.layout}}: {{layout.title}} ({{layout.id}})
     v-layout.wrap
       layout-view(

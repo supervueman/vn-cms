@@ -1,5 +1,5 @@
 <template lang="pug">
-	v-flex(v-if="r.is_system_settings_update")
+	v-flex(v-if="r.is_system_setting_read")
 		.body-2.mb-12.mt-2 {{d.system_settings}}
 		v-layout.wrap
 			v-flex
@@ -100,7 +100,7 @@ export default {
     },
 
     async update(item) {
-      if (!this.r.is_system_settings_update) {
+      if (!this.r.is_system_setting_update) {
         return;
       }
 

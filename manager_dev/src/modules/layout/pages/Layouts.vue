@@ -1,5 +1,5 @@
 <template lang="pug">
-  v-flex(v-if="r.is_layouts_read")
+  v-flex(v-if="r.is_layout_read")
     .body-2.mb-12.mt-2 {{d.layouts}}
     v-layout.wrap
       v-flex

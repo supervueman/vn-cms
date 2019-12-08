@@ -1,5 +1,5 @@
 <template lang="pug">
-	v-flex(v-if="r.is_dictionaries_read")
+	v-flex(v-if="r.is_dictionary_read")
 		.body-2.mb-12.mt-2 {{d.dictionaries}}
 		v-layout.wrap
 			v-flex
