@@ -1,0 +1,12 @@
+{
+  "name": "shop",
+  "description": "Shop module",
+  "folders": [{
+    "current_path": "../installations/shop/server",
+    "install_path": "../server/components/shop"
+  }, {
+    "current_path": "../installations/shop/manager",
+    "install_path": "../manager_dev/src/modules/shop"
+  }],
+  "packages": []
+}
