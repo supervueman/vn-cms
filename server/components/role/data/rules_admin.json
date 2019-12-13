@@ -8,6 +8,23 @@
     "value": true
   },
 
+  "is_context_read": {
+    "title": "Разрешить просматривать контексты",
+    "value": true
+  },
+  "is_context_create": {
+    "title": "Разрешить создавать контексты",
+    "value": true
+  },
+  "is_context_update": {
+    "title": "Разрешить изменять контексты",
+    "value": true
+  },
+  "is_context_delete": {
+    "title": "Разрешить удалять контексты",
+    "value": true
+  },
+
   "is_role_read": {
     "title": "Разрешить просматривать политики доступа",
     "value": true
@@ -128,7 +145,7 @@
   },
 
   "is_elements_access": {
-    "title": "Доступ к вкладке элементы",
+    "title": "Разрешить доступ к вкладке элементы",
     "value": true
   },
 
@@ -148,16 +165,16 @@
     "title": "Разрешить переименовывать директории",
     "value": true
   },
+  "is_filesystem_files_rename": {
+    "title": "Разрешить переименовывать файлы",
+    "value": true
+  },
   "is_filesystem_files_uploads": {
     "title": "Разрешить загружать файлы",
     "value": true
   },
   "is_filesystem_files_delete": {
     "title": "Разрешить удалять файлы",
-    "value": true
-  },
-  "is_filesystem_files_rename": {
-    "title": "Разрешить переименовывать файлы",
     "value": true
   }
 }

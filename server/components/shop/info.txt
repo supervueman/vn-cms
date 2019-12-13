@@ -1,3 +1,0 @@
-process envs
-SMSC_LOGIN service account login
-SMSC_PASSWORD service account password

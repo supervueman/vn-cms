@@ -1,39 +1,47 @@
-// Handlers
-const accessHandler = require('../handlers/access');
-
 // Models
 const User = require('../components/user/model');
 
 module.exports = async (req, res, next) => {
   const apiKey = req.headers['x-api-key'];
-  const isApiKey = apiKey !== null && apiKey !== undefined && apiKey !== '' && apiKey !== 'null';
+
+  const isApiKey = typeof apiKey === 'string' && !!apiKey;
 
   if (!isApiKey) {
-    return next();
+    res.status(403).send({
+      message: 'Forbidden'
+    });
+    return;
   }
 
   const profile = await User.findOne({
     where: {
       token: req.headers['x-api-key']
     },
-    include: ['role']
+    include: ['role', 'context']
   });
 
   if (!profile) {
-    return next();
+    res.status(404).send({
+      message: 'Not found'
+    });
+    return;
   }
 
-  req.profile = profile;
-
-  const rules = JSON.parse(profile.role.rules);
-
-  for (const rule in rules) {
-    rules[rule] = rules[rule].value;
+  // Задаем правила глобально
+  req.rules = {};
+  for (const rule in JSON.parse(profile.role.rules)) {
+    req.rules[rule] = rules[rule].value;
   }
 
-  req.rules = rules;
+  // Определяем доступ роли динамически
+  req[`${profile.role.slug}Access`] = true;
 
-  accessHandler(req, profile.role.slug);
+  req.context = profile.context;
+
+  req.email = profile.email;
+  req.phone = profile.phone;
+
+  req.isAuth = true;
 
   next();
 };

@@ -1,49 +1,56 @@
 const jwt = require('jsonwebtoken');
 
-// Handlers
-const accessHandler = require('../handlers/access');
-
 // Models
 const User = require('../components/user/model');
 
 module.exports = async (req, res, next) => {
   const accessToken = req.headers['x-access-token'];
-  const isAccessToken = accessToken !== null && accessToken !== undefined && accessToken !== '' && accessToken !== 'null' && accessToken !== 'undefined';
 
+  const isAccessToken = typeof accessToken === 'string' && !!accessToken;
+
+  // Если не верный access token то запрещено
   if (!isAccessToken) {
-    return next();
+    res.status(403).send({
+      message: 'Forbidden'
+    });
+    return;
   }
 
+  // Проверка access token на действительность
   await jwt.verify(accessToken, process.env.SECRET_KEY_FOR_JWT, async (err, decoded) => {
-    if (err) {
-      return next();
-    }
-
-    if (!decoded) {
-      return next();
+    if (err || !decoded) {
+      res.status(401).send({
+        message: 'Unauthorized'
+      });
+      return;
     }
 
     const profile = await User.findByPk(decoded.id, {
-      include: ['role']
+      include: ['role', 'context']
     });
 
     if (!profile) {
-      return next();
+      res.status(404).send({
+        message: 'Not found'
+      });
+      return;
     }
+
+    // Задаем правила глобально
+    req.rules = {};
+    for (const rule in JSON.parse(profile.role.rules)) {
+      req.rules[rule] = rules[rule].value;
+    }
+
+    // Определяем доступ роли динамически
+    req[`${profile.role.slug}Access`] = true;
+
+    req.context = profile.context;
+
+    req.email = profile.email;
+    req.phone = profile.phone;
 
     req.isAuth = true;
-
-    req.profile = profile;
-
-    const rules = JSON.parse(profile.role.rules);
-
-    for (const rule in rules) {
-      rules[rule] = rules[rule].value;
-    }
-
-    req.rules = rules;
-
-    accessHandler(req, profile.role.slug);
 
     next();
   });

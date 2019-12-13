@@ -3,15 +3,14 @@ const Resource = require('../../resource/model');
 const Role = require('../../role/model');
 
 module.exports = () => {
+  // Каждый пользователь имеет роль
   Model.belongsTo(Role, {
     as: 'role'
   });
-  Model.belongsTo(Model, {
-    onDelete: 'cascade',
-    as: 'user'
-  });
+
+  // У каждого пользователя может быть множество ресурсов
   Model.hasMany(Resource, {
-    onDelete: 'cascade',
-    as: 'resources'
+    as: 'resources',
+    onDelete: 'cascade'
   });
 };

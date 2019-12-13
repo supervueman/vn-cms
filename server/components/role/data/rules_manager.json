@@ -3,26 +3,15 @@
     "title": "Разрешить просматривать системные настройки",
     "value": true
   },
-  "is_system_setting_update": {
-    "title": "Разрешить изменять системные настройки",
-    "value": false
+
+  "is_context_read": {
+    "title": "Разрешить просматривать контексты",
+    "value": true
   },
 
   "is_role_read": {
     "title": "Разрешить просматривать политики доступа",
     "value": true
-  },
-  "is_role_create": {
-    "title": "Разрешить создавать политики доступа",
-    "value": false
-  },
-  "is_role_update": {
-    "title": "Разрешить редактировать политики доступа",
-    "value": false
-  },
-  "is_role_delete": {
-    "title": "Разрешить удалять политики доступа",
-    "value": false
   },
 
   "is_user_read": {
@@ -43,71 +32,23 @@
   },
 
   "is_dictionary_read": {
-    "title": "Разрешить просмтаривать словари",
-    "value": false
-  },
-  "is_dictionary_create": {
-    "title": "Разрешить создавать словари",
-    "value": false
-  },
-  "is_dictionary_update": {
-    "title": "Разрешить редактировать словари",
-    "value": false
-  },
-  "is_dictionary_delete": {
-    "title": "Разрешить удалять словари",
-    "value": false
+    "title": "Разрешить просматривать словари",
+    "value": true
   },
 
   "is_layout_read": {
     "title": "Разрешить просматривать шаблоны",
     "value": true
   },
-  "is_layout_create": {
-    "title": "Разрешить создавать шаблоны",
-    "value": false
-  },
-  "is_layout_update": {
-    "title": "Разрешить редактировать шаблоны",
-    "value": false
-  },
-  "is_layout_delete": {
-    "title": "Разрешить удалять шаблоны",
-    "value": false
-  },
 
   "is_field_category_read": {
     "title": "Разрешить просматривать категории полей",
     "value": true
   },
-  "is_field_category_create": {
-    "title": "Разрешить создавать категории полей",
-    "value": false
-  },
-  "is_field_category_update": {
-    "title": "Разрешить редактировать категории полей",
-    "value": false
-  },
-  "is_field_category_delete": {
-    "title": "Разрешить удалять категории полей",
-    "value": false
-  },
 
   "is_field_read": {
     "title": "Разрешить просматривать поля",
     "value": true
-  },
-  "is_field_create": {
-    "title": "Разрешить создавать поля",
-    "value": false
-  },
-  "is_field_update": {
-    "title": "Разрешить редактировать поля",
-    "value": false
-  },
-  "is_field_delete": {
-    "title": "Разрешить удалять поля",
-    "value": false
   },
 
   "is_resource_read": {
@@ -127,11 +68,6 @@
     "value": true
   },
 
-  "is_elements_access": {
-    "title": "Доступ к вкладке элементы",
-    "value": false
-  },
-
   "is_filesystem_access": {
     "title": "Разрешить доступ к файловой системе",
     "value": true
@@ -148,16 +84,16 @@
     "title": "Разрешить переименовывать директории",
     "value": true
   },
+  "is_filesystem_files_rename": {
+    "title": "Разрешить переименовывать файлы",
+    "value": true
+  },
   "is_filesystem_files_uploads": {
     "title": "Разрешить загружать файлы",
     "value": true
   },
   "is_filesystem_files_delete": {
     "title": "Разрешить удалять файлы",
-    "value": true
-  },
-  "is_filesystem_files_rename": {
-    "title": "Разрешить переименовывать файлы",
     "value": true
   }
 }

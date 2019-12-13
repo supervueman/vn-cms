@@ -8,7 +8,6 @@ module.exports = async (req, res) => {
     where: {
       phone: req.body.phone
     },
-    include: ['role']
   });
 
   if (!user) {
@@ -27,7 +26,7 @@ module.exports = async (req, res) => {
 
   const access_token = jwt.sign({
     id: user.id,
-    email: user.email,
+    phone: user.phone,
   }, process.env.SECRET_KEY_FOR_JWT, {
     expiresIn: '360h'
   });
