@@ -38,17 +38,22 @@ module.exports = async (req, res, next) => {
 
     // Задаем правила глобально
     req.rules = {};
-    for (const rule in JSON.parse(profile.role.rules)) {
+    const rules = JSON.parse(profile.role.rules);
+    for (const rule in rules) {
       req.rules[rule] = rules[rule].value;
     }
 
     // Определяем доступ роли динамически
     req[`${profile.role.slug}Access`] = true;
 
+    req.id = profile.id;
+
     req.context = profile.context;
 
     req.email = profile.email;
     req.phone = profile.phone;
+
+    req.profile = profile;
 
     req.isAuth = true;
 

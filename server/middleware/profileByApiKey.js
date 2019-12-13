@@ -29,7 +29,8 @@ module.exports = async (req, res, next) => {
 
   // Задаем правила глобально
   req.rules = {};
-  for (const rule in JSON.parse(profile.role.rules)) {
+  const rules = JSON.parse(profile.role.rules);
+  for (const rule in rules) {
     req.rules[rule] = rules[rule].value;
   }
 

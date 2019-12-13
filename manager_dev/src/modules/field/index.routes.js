@@ -10,4 +10,4 @@ export default [{
   path: '/field-create',
   name: 'field-create',
   component: 'FieldCreate'
-}]
+}];

@@ -10,4 +10,4 @@ export default [{
   path: '/resource-create',
   name: 'resource-create',
   component: 'ResourceCreate'
-}]
+}];

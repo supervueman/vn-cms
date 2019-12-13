@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 // Models
 const Model = require('../model');
 const Role = require('../../role/model');
+const Context = require('../../context/model');
 
 // Handlers
 const createDir = require('../../../handlers/createDir');
@@ -12,6 +13,12 @@ module.exports = async () => {
   const adminRole = await Role.findOne({
     where: {
       slug: 'admin'
+    }
+  });
+
+  const rootContext = await Context.findOne({
+    where: {
+      slug: 'root'
     }
   });
 
@@ -28,7 +35,8 @@ module.exports = async () => {
       slug: 'admin',
       email: process.env.ADMIN_EMAIL,
       password: passwordHw,
-      roleId: adminRole.id
+      roleId: adminRole.id,
+      contextId: rootContext.id
     });
 
     await createDir(`../files/${admin.id}`);

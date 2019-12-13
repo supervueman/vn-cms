@@ -16,7 +16,8 @@ module.exports = async () => {
     adminRole = await Model.create({
       slug: 'admin',
       title: 'Администратор',
-      rules: JSON.stringify(rules_admin)
+      rules: JSON.stringify(rules_admin),
+      rang: 9999
     });
   }
 
@@ -30,7 +31,8 @@ module.exports = async () => {
     managerRole = await Model.create({
       slug: 'manager',
       title: 'Менеджер',
-      rules: JSON.stringify(rules_manager)
+      rules: JSON.stringify(rules_manager),
+      rang: 9000
     });
   }
 };

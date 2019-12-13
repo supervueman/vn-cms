@@ -17,7 +17,11 @@ const actions = {
     commit
   }) {
     this.dispatch('preloader/fetch', true);
-    const data = requestDataHandler('GET', '/profile');
+    const data = requestDataHandler('GET', '/profile', undefined, {
+      filter: {
+        include: ['role', 'context']
+      }
+    });
 
     const response = await axios(data).catch(err => {
       this.dispatch('preloader/fetch', false);

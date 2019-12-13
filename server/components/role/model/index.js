@@ -14,7 +14,8 @@ const Model = sequelize.define('role', {
     notEmpty: true
   },
   title: Sequelize.STRING,
-  rules: Sequelize.TEXT
+  rules: Sequelize.TEXT,
+  rang: Sequelize.INTEGER
 });
 
 module.exports = Model;

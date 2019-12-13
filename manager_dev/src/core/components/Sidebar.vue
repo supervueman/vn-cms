@@ -120,8 +120,6 @@
 
 <script>
 // Mixins
-import panelMixin from "@/core/mixins/panelMixin";
-
 export default {
   name: "Sidebar",
 

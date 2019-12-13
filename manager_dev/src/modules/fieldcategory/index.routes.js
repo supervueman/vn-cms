@@ -10,4 +10,4 @@ export default [{
   path: '/fieldcategory-create',
   name: 'fieldcategory-create',
   component: 'FieldCategoryCreate'
-}]
+}];

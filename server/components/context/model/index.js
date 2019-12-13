@@ -1,5 +1,4 @@
 const Sequelize = require('sequelize');
-const SequelizeTokenify = require('sequelize-tokenify');
 const sequelize = require('../../../core/db');
 
 const Model = sequelize.define('context', {
@@ -13,7 +12,7 @@ const Model = sequelize.define('context', {
     type: Sequelize.STRING,
     unique: true,
     notEmpty: true
-  },
+  }
 });
 
 Model.prototype.toJSON = function () {
@@ -22,7 +21,5 @@ Model.prototype.toJSON = function () {
   delete values.password;
   return values;
 };
-
-SequelizeTokenify.tokenify(Model);
 
 module.exports = Model;
