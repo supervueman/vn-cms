@@ -53,7 +53,7 @@ module.exports = async (req, res, next) => {
     req.email = profile.email;
     req.phone = profile.phone;
 
-    req.profile = profile;
+    req.rang = profile.role.rang;
 
     req.isAuth = true;
 

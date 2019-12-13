@@ -37,10 +37,14 @@ module.exports = async (req, res, next) => {
   // Определяем доступ роли динамически
   req[`${profile.role.slug}Access`] = true;
 
+  req.id = profile.id;
+
   req.context = profile.context;
 
   req.email = profile.email;
   req.phone = profile.phone;
+
+  req.rang = profile.role.rang;
 
   req.isAuth = true;
 

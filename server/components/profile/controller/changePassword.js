@@ -1,29 +1,35 @@
+const Model = require('../../user/model');
+
 const bcrypt = require('bcrypt');
 
 module.exports = async (req, res) => {
-  if (!req.isAuth) {
-    res.status(403).send({
-      message: 'Access denied!'
+  // Находим профиль
+  const profile = await Model.findByPk(req.id);
+
+  if (!profile) {
+    res.status(404).send({
+      message: 'Not found'
     });
     return;
   }
 
-  const isCompare = await bcrypt.compare(req.body.oldPassword, req.profile.password);
+  // Сверяем пароли
+  const isCompare = await bcrypt.compare(req.body.oldPassword, profile.password);
 
   if (!isCompare) {
     res.status(401).send({
-      message: 'Пароли не совпадают!'
+      message: 'Unauthorized'
     });
     return;
   } else {
     const hashPw = await bcrypt.hash(req.body.newPassword, 12);
 
-    await req.profile.update({
+    await profile.update({
       password: hashPw
     });
 
     res.status(200).send({
-      message: 'Пароль успешно обновлен!'
+      message: 'OK'
     });
   }
 };
