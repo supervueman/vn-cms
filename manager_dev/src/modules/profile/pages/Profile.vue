@@ -18,6 +18,7 @@
       v-flex.xs12.md5.pl-2
         profile-avatar-data
         profile-role-data
+        profile-context-data
     v-dialog(
       v-model="isRemoveDialog"
       max-width="500px"
@@ -38,6 +39,7 @@ import ProfilePasswordChange from "../components/ProfilePasswordChange";
 import ProfileAvatarData from "../components/ProfileAvatarData";
 import ProfileAddressData from "../components/ProfileAddressData";
 import ProfileRoleData from "../components/ProfileRoleData";
+import ProfileContextData from "../components/ProfileContextData";
 
 export default {
   name: "ProfilePage",
@@ -49,7 +51,8 @@ export default {
     ProfilePasswordChange,
     ProfileAvatarData,
     ProfileAddressData,
-    ProfileRoleData
+    ProfileRoleData,
+    ProfileContextData
   },
 
   data: () => {
