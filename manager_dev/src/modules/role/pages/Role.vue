@@ -1,47 +1,47 @@
 <template lang="pug">
   v-flex(v-if="r.is_role_read")
     .body-2.mb-12.mt-2 {{d.role || 'Роль'}}: {{role.slug}} ({{role.id}})
-    v-layout.wrap
-      v-flex
-        v-card(outlined)
-          v-card-text {{d.common_data || 'Общие данные'}}
-          v-card-text
-            v-flex.md12
-              v-text-field(
-                v-model="role.slug"
-                :label="`${d.slug || 'Псевдоним'}:`"
-                @input="$v.role.slug.$touch()"
-                @blur="$v.role.slug.$touch()"
-                :error-messages="slugErrors"
-                :disabled="role.slug === 'admin'"
+    v-card(outlined)
+      v-card-text {{d.common_data || 'Общие данные'}}
+      v-card-text
+        v-flex.md12
+          v-text-field(
+            v-model="role.slug"
+            :label="`${d.slug || 'Псевдоним'}:`"
+            @input="$v.role.slug.$touch()"
+            @blur="$v.role.slug.$touch()"
+            :error-messages="slugErrors"
+            :disabled="role.slug === 'admin' || role.slug === 'default'"
+          )
+          v-text-field(
+            v-model="role.title"
+            :label="`${d.name || 'Наименование'}:`"
+            @input="$v.role.title.$touch()"
+            @blur="$v.role.title.$touch()"
+            :error-messages="titleErrors"
+            :disabled="role.slug === 'admin' || role.slug === 'default'"
+          )
+          v-text-field(
+            v-model="role.rang"
+            :label="`${d.rang || 'Ранг'}:`"
+            type="number"
+            :disabled="role.slug === 'admin' || role.slug === 'default'"
+          )
+      v-list
+        v-list-item(v-for="(rule, i) in role.rules" :key="i")
+          v-list-item-content {{rule.title}}
+          v-list-item-action
+            v-checkbox(
+              v-model="rule.value"
+              :disabled="role.slug === 'admin' || role.slug === 'default'"
               )
-              v-text-field(
-                v-model="role.title"
-                :label="`${d.name || 'Наименование'}:`"
-                @input="$v.role.title.$touch()"
-                @blur="$v.role.title.$touch()"
-                :error-messages="titleErrors"
-              )
-              v-text-field(
-                v-model="role.rang"
-                :label="`${d.rang || 'Ранг'}:`"
-                type="number"
-              )
-          v-list
-            v-list-item(v-for="(rule, i) in role.rules" :key="i")
-              v-list-item-content {{rule.title}}
-              v-list-item-action
-                v-checkbox(
-                  v-model="rule.value"
-                  :disabled="role.slug === 'admin'"
-                  )
-          v-card-actions
-            v-btn.ml-2(
-              depressed
-              color="primary"
-              @click="update"
-              v-if="r.is_role_create"
-            ) {{d.save || 'Сохранить'}}
+      v-card-actions
+        v-btn.ml-2(
+          depressed
+          color="primary"
+          @click="update"
+          v-if="r.is_role_create"
+        ) {{d.save || 'Сохранить'}}
     v-dialog(
       v-model="isRemoveDialog"
       max-width="500px"
