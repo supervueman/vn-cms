@@ -1,6 +1,6 @@
 <template lang="pug">
   v-flex(v-if="r.is_context_read")
-    .body-2.mb-12.mt-2 {{d.context_creation || 'Создание контекста'}}: {{context.title}}
+    .body-2.mb-12.mt-2 {{d.context_creation || 'Создание контекста'}}
     v-card.mb-3(outlined)
       v-card-text.pb-0 {{d.common_data || 'Общие данные'}}
       v-card-text
@@ -22,6 +22,7 @@
           @click="create"
           color="primary"
           depressed
+          :disabled="context.slug === 'root'"
         ) {{d.create || 'Создать'}}
 </template>
 

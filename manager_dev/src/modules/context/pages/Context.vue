@@ -1,6 +1,6 @@
 <template lang="pug">
   v-flex(v-if="r.is_context_read")
-    .body-2.mb-12.mt-2 {{d.context || 'Контекст'}}: {{context.title}}
+    .body-2.mb-12.mt-2 {{d.context || 'Контекст'}}: {{context.slug}} ({{context.id}})
     v-card.mb-3(outlined)
       v-card-text.pb-0 {{d.common_data || 'Общие данные'}}
       v-card-text
@@ -22,6 +22,7 @@
           @click="update"
           color="primary"
           depressed
+          :disabled="context.slug === 'root'"
         ) {{d.save || 'Сохранить'}}
     v-dialog(
       v-model="isRemoveDialog"
@@ -34,6 +35,7 @@
       )
     .d-flex.justify-center.mt-3
       v-btn(
+        :disabled="context.slug === 'root'"
         text
         color="error"
         depressed
@@ -55,7 +57,7 @@ export default {
 
   metaInfo() {
     return {
-      title: `${this.d.context || "Контекст"}: ${this.context.title}`
+      title: `${this.d.context || "Контекст"}: ${this.context.slug}`
     };
   },
 
