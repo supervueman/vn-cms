@@ -43,9 +43,6 @@
 </template>
 
 <script>
-// Components
-import RoleView from "../components/View";
-
 // Mixins
 import { validationMixin } from "vuelidate";
 

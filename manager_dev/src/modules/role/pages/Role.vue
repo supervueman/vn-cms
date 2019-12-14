@@ -64,9 +64,6 @@
 // Mixins
 import { validationMixin } from "vuelidate";
 
-// Comnponents
-import RoleView from "../components/View";
-
 // Libs
 import { required, minLength, helpers } from "vuelidate/lib/validators";
 
@@ -79,10 +76,6 @@ export default {
     return {
       title: `${this.d.role || "Role"}: ${this.role.title}`
     };
-  },
-
-  components: {
-    RoleView
   },
 
   mixins: [validationMixin],
