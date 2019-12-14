@@ -3,7 +3,7 @@
     v-layout.wrap
       v-flex.xs12.md12
         v-card
-          v-card-title {{d.common_data}}
+          v-card-text {{d.common_data}}
           v-card-text
             v-layout.wrap
               v-flex.md12
@@ -13,7 +13,7 @@
                   @input="$v.role.slug.$touch()"
                   @blur="$v.role.slug.$touch()"
                   :error-messages="slugErrors"
-                  :disabled="role.slug === 'admin' || role.slug === 'manager'"
+                  :disabled="role.slug === 'admin'"
                 )
                 v-text-field(
                   v-model="role.title"

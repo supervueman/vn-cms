@@ -13,8 +13,6 @@ router.get('/find/:id', profileByAccessToken, controller.findByPk);
 
 router.get('/findone', profileByAccessToken, controller.findOne);
 
-router.get('/finddefault', profileByAccessToken, controller.findDefault);
-
 router.post('/create', profileByAccessToken, controller.create);
 
 router.put('/update', profileByAccessToken, controller.update);

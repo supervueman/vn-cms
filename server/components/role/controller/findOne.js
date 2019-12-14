@@ -3,13 +3,18 @@ const Model = require('../model');
 module.exports = async (req, res) => {
   if (!req.rules.is_role_read) {
     res.status(403).send({
-      message: 'Access denied!'
+      message: 'Forbidden'
     });
     return;
   }
   const filter = JSON.parse(req.query.filter || "{}");
 
-  const item = await Model.findOne(filter);
+  const item = await Model.findOne(filter).catch(() => {
+    res.status(400).send({
+      message: 'Bad request'
+    });
+    return;
+  });
 
   if (!item) {
     res.status(404).send({
@@ -18,9 +23,9 @@ module.exports = async (req, res) => {
     return;
   }
 
-  if (!req.adminAccess && (item.slug === 'admin' || item.slug === 'manager')) {
+  if (item.rang > req.rang) {
     res.status(403).send({
-      message: 'Access denied!'
+      message: 'Forbidden'
     });
     return;
   }

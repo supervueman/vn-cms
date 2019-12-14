@@ -1,15 +1,11 @@
-import role from '../models/role'
-import rules from '../models/rules_default';
+import role from '../models/role';
 
 const state = {
   role: {
-    ...role,
-    rules: {
-      ...rules
-    }
+    ...role
   },
   roles: [],
-  defaultRules: {},
+  defaultRole: {},
   count: 0
 };
 

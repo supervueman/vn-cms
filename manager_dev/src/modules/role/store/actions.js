@@ -1,13 +1,19 @@
 import requestDataHandler from '@/core/plugins/requestDataHandler';
 import axios from 'axios';
-import role from '../models/role'
+import role from '../models/role';
 
 const actions = {
-  async findByPk({
+  async findDefault({
     commit
-  }, payload) {
+  }) {
     this.dispatch('preloader/fetch', true);
-    const data = requestDataHandler('GET', `/roles/find/${payload.params.id}`)
+    const data = requestDataHandler('GET', '/roles/findone', undefined, {
+      filter: {
+        where: {
+          slug: 'default'
+        }
+      }
+    });
 
     const response = await axios(data).catch(err => {
       this.dispatch('preloader/fetch', false);
@@ -18,7 +24,27 @@ const actions = {
       });
     });
 
-    if (response !== undefined && response.status === 200) {
+    if (typeof response === 'object' && response.status === 200) {
+      this.dispatch('preloader/fetch', false);
+      commit('SET_DEFAULT_ROLE', response.data);
+    }
+  },
+  async findByPk({
+    commit
+  }, payload) {
+    this.dispatch('preloader/fetch', true);
+    const data = requestDataHandler('GET', `/roles/find/${payload.params.id}`);
+
+    const response = await axios(data).catch(err => {
+      this.dispatch('preloader/fetch', false);
+      this.dispatch("notification/fetch", {
+        type: "error",
+        message: `${err}`,
+        isActive: true
+      });
+    });
+
+    if (typeof response === 'object' && response.status === 200) {
       this.dispatch('preloader/fetch', false);
       commit('SET', response.data);
     }
@@ -42,27 +68,6 @@ const actions = {
     if (response !== undefined && response.status === 200) {
       this.dispatch('preloader/fetch', false);
       commit('SET', response.data);
-    }
-  },
-
-  async findDefaultRules({
-    commit
-  }) {
-    this.dispatch('preloader/fetch', true);
-    const data = requestDataHandler('GET', '/roles/finddefault');
-
-    const response = await axios(data).catch(err => {
-      this.dispatch('preloader/fetch', false);
-      this.dispatch("notification/fetch", {
-        type: "error",
-        message: `${err}`,
-        isActive: true
-      });
-    });
-
-    if (response !== undefined && response.status === 200) {
-      this.dispatch('preloader/fetch', false);
-      commit('SET_DEFAULT_RULES', response.data);
     }
   },
 
@@ -201,24 +206,11 @@ const actions = {
   async clear({
     commit
   }) {
-    this.dispatch('preloader/fetch', true);
-    const data = requestDataHandler('GET', '/roles/finddefault');
-
-    const response = await axios(data).catch(err => {
-      this.dispatch('preloader/fetch', false);
-      this.dispatch("notification/fetch", {
-        type: "error",
-        message: `${err}`,
-        isActive: true
-      });
-    });
-
-    if (response !== undefined && response.status === 200) {
-      this.dispatch('preloader/fetch', false);
-    }
     commit('SET', {
       ...role,
-      rules: response.data
+      rules: {
+        ...JSON.parse(this.getters['role/getDefaultRole'].rules)
+      }
     });
   },
 

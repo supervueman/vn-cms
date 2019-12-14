@@ -10,18 +10,13 @@ module.exports = async (req, res) => {
 
   const filter = JSON.parse(req.query.filter || "{}");
 
-  if (!req.adminAccess) {
-    if (!filter.where) {
-      filter.where = {};
-    }
-    filter.where.slug = {
-      $and: [{
-        $ne: 'admin'
-      }, {
-        $ne: 'manager'
-      }]
-    };
+  // Возвращаем все роли у которых ранг меньше ранга роли пользователя
+  if (!filter.where) {
+    filter.where = {};
   }
+  filter.where.rang = {
+    $lte: req.rang
+  };
 
   const items = await Model.findAll(filter);
 
