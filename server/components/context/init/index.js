@@ -10,7 +10,8 @@ module.exports = async () => {
 
   if (!rootContext) {
     await Model.create({
-      slug: 'root'
+      slug: 'root',
+      title: 'Root'
     });
   }
 };

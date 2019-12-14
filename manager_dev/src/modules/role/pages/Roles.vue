@@ -1,36 +1,37 @@
 <template lang="pug">
   v-flex(v-if="r.is_role_read")
     .body-2.mb-12.mt-2 {{d.roles || 'Роли'}}
-    v-toolbar(flat color="white")
-      v-spacer
-      v-btn(
-        depressed
-        color="primary"
-        to="/role-create"
-        dark
-        v-if="r.is_role_create"
-      ) {{d.create_role || 'Создать роль'}}
-    v-data-table(
-      :headers="headers"
-      :items="roles"
-      :items-per-page-options="[limit]"
-      hide-default-footer
-    )
-      template(v-slot:body="{items}")
-        tbody
-          tr(v-for="item in items" :key="item.id")
-            td.text-xs-left
-              router-link(:to="`/roles/${item.id}`") {{ item.title }}
-            td.text-xs-left {{ item.slug }}
-            td.text-end
-              v-btn(
-                text
-                fab
-                color="primary"
-                @click="removeDialogOpen(item)"
-                v-if="r.is_role_delete && item.slug !== 'admin' && item.slug !== 'default'"
-              )
-                v-icon delete
+    v-card(outlined)
+      v-toolbar(flat color="white")
+        v-spacer
+        v-btn(
+          depressed
+          color="primary"
+          to="/role-create"
+          dark
+          v-if="r.is_role_create"
+        ) {{d.create_role || 'Создать роль'}}
+      v-data-table(
+        :headers="headers"
+        :items="roles"
+        :items-per-page-options="[limit]"
+        hide-default-footer
+      )
+        template(v-slot:body="{items}")
+          tbody
+            tr(v-for="item in items" :key="item.id")
+              td.text-xs-left
+                router-link(:to="`/roles/${item.id}`") {{ item.title }}
+              td.text-xs-left {{ item.slug }}
+              td.text-end
+                v-btn(
+                  text
+                  fab
+                  color="primary"
+                  @click="removeDialogOpen(item)"
+                  v-if="r.is_role_delete && item.slug !== 'admin' && item.slug !== 'default'"
+                )
+                  v-icon delete
     v-dialog(
       v-model="isRemoveDialog"
       max-width="500px"

@@ -1,37 +1,38 @@
 <template lang="pug">
   v-flex(v-if="r.is_context_read")
     .body-2.mb-12.mt-2 {{d.contexts || 'Контексты'}}
-    v-toolbar(flat color="white")
-      v-spacer
-      v-btn(
-        depressed
-        color="primary"
-        to="/context-create"
-        dark
-        v-if="r.is_context_create"
-      ) {{d.create_context || 'Создать контекст'}}
-    v-data-table(
-      :headers="headers"
-      :items="contexts"
-      :items-per-page-options="[limit]"
-      hide-default-footer
-    )
-      template(v-slot:body="{items}")
-        tbody
-          tr(v-for="item in items" :key="item.id")
-            td.text-xs-left
-              router-link(:to="`/contexts/${item.id}`") {{ item.slug }}
-            td.text-xs-left
-              router-link(:to="`/contexts/${item.id}`") {{ item.title }}
-            td.text-end
-              v-btn(
-                text
-                fab
-                color="primary"
-                @click="removeDialogOpen(item)"
-                v-if="r.is_context_delete && item.slug !== 'root'"
-              )
-                v-icon delete
+    v-card(outlined)
+      v-toolbar(flat color="white")
+        v-spacer
+        v-btn(
+          depressed
+          color="primary"
+          to="/context-create"
+          dark
+          v-if="r.is_context_create"
+        ) {{d.create_context || 'Создать контекст'}}
+      v-data-table(
+        :headers="headers"
+        :items="contexts"
+        :items-per-page-options="[limit]"
+        hide-default-footer
+      )
+        template(v-slot:body="{items}")
+          tbody
+            tr(v-for="item in items" :key="item.id")
+              td.text-xs-left
+                router-link(:to="`/contexts/${item.id}`") {{ item.slug }}
+              td.text-xs-left
+                router-link(:to="`/contexts/${item.id}`") {{ item.title }}
+              td.text-end
+                v-btn(
+                  text
+                  fab
+                  color="primary"
+                  @click="removeDialogOpen(item)"
+                  v-if="r.is_context_delete && item.slug !== 'root'"
+                )
+                  v-icon delete
     v-dialog(
       v-model="isRemoveDialog"
       max-width="500px"
