@@ -19,7 +19,7 @@
         profile-avatar-data
         profile-role-data
         profile-context-data
-    v-dialog(
+    v-dialog.elevation-0(
       v-model="isRemoveDialog"
       max-width="500px"
     )

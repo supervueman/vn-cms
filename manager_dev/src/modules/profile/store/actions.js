@@ -2,15 +2,7 @@ import requestDataHandler from '@/core/plugins/requestDataHandler';
 import axios from 'axios';
 import router from '@/connector/index.route.js';
 
-import profile from '../../user/models/user';
-import rules from '../../role/models/rules_default';
-
-const rulesParse = {
-  ...rules
-};
-for (const rule in rulesParse) {
-  rulesParse[rule] = rulesParse[rule].value;
-}
+import profile from '../models/profile';
 
 const actions = {
   // Получение профиля
@@ -34,9 +26,11 @@ const actions = {
     });
 
     if (typeof response === 'object' && response.status === 200) {
-      commit('SET_RULES', response.data.role.rules);
       this.dispatch('preloader/fetch', false);
+
       localStorage.setItem('x-api-key', response.data.token);
+
+      commit('SET_RULES', response.data.role.rules);
 
       const dataSystemSetting = requestDataHandler('GET', '/systemsettings/findone', undefined, {
         filter: {
@@ -71,31 +65,7 @@ const actions = {
           }
         });
 
-        const dataResources = requestDataHandler('GET', '/resources', undefined, {
-          filter: {
-            where: {
-              level: 1,
-              userId: response.data.id,
-              lang: JSON.parse(responseSystemSetting.data.setting).value
-            }
-          }
-        });
-
-        const responseResources = await axios(dataResources).catch(err => {
-          this.dispatch('preloader/fetch', false);
-          this.dispatch("notification/fetch", {
-            type: "error",
-            message: `${err}`,
-            isActive: true
-          });
-        });
-
-
-        if (responseResources !== undefined && responseResources.status === 200) {
-          this.dispatch('preloader/fetch', false);
-          commit('SET', response.data);
-          commit('SET_RESOURCES', responseResources.data);
-        }
+        commit('SET', response.data);
       }
     }
   },
@@ -142,7 +112,7 @@ const actions = {
       });
     });
 
-    if (response !== undefined && response.status === 200) {
+    if (typeof response === 'object' && response.status === 200) {
       this.dispatch('preloader/fetch', false);
       this.dispatch("notification/fetch", {
         type: "success",
@@ -167,7 +137,7 @@ const actions = {
       });
     });
 
-    if (response !== undefined && response.status === 200) {
+    if (typeof response === 'object' && response.status === 200) {
       this.dispatch('preloader/fetch', false);
       this.dispatch("notification/fetch", {
         type: "success",
@@ -242,7 +212,7 @@ const actions = {
       });
     });
 
-    if (response !== undefined && response.status === 200) {
+    if (typeof response === 'object' && response.status === 200) {
       this.dispatch('preloader/fetch', false);
       this.dispatch('authenticate/logout');
     }
@@ -252,12 +222,6 @@ const actions = {
     commit
   }, payload) {
     commit('SET', payload);
-  },
-
-  setResources({
-    commit
-  }, payload) {
-    commit('SET_RESOURCES', payload);
   },
 
   clear({
@@ -271,16 +235,8 @@ const actions = {
   clearRules({
     commit
   }) {
-    commit('SET_RULES', JSON.stringify({
-      ...rulesParse
-    }));
-  },
-
-  clearResources({
-    commit
-  }) {
-    commit('SET_RESOURCES', []);
-  },
+    commit('SET_RULES', {});
+  }
 };
 
 export default actions;

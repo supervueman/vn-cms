@@ -1,21 +1,11 @@
 import profile from '../models/profile';
-import rules from '../../role/models/rules_default';
-
-const rulesParse = {
-  ...rules
-};
-for (const rule in rulesParse) {
-  rulesParse[rule] = rulesParse[rule].value;
-}
 
 const state = {
   profile: {
     ...profile
   },
   resources: [],
-  rules: {
-    ...rulesParse
-  }
+  rules: {}
 };
 
 export default state;

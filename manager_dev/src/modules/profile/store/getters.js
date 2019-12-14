@@ -4,9 +4,6 @@ const getters = {
   },
   getRules(state) {
     return state.rules;
-  },
-  getResources(state) {
-    return state.resources;
   }
 };
 

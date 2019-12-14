@@ -1,34 +1,34 @@
 <template lang="pug">
-	v-app(light)
-		transition(name="fade")
-			notification(
-				v-if="notification.isActive"
-				:type="notification.type"
-				:message="notification.message"
-			)
-		toolbar(
-			:profileId="String(profile.id)"
-			:firstname="profile.firstname"
-			:lastname="profile.lastname"
-			:image="profile.image"
-			@openLoginDialog="isLoginDialog = true"
-		)
-		sidebar(
-			v-if="isAuth"
-		)
-		v-content
-			v-container(fluid)
-				router-view
-		bottom-bar
-		v-dialog(v-model="isLoginDialog" max-width="500px" min-width="320px")
-			login(
-				@closeLoginDialog="isLoginDialog = false"
-			)
-		v-overlay(
-			:opacity="0.5"
-			:value="preloader"
-			:z-index="9998"
-		)
+  v-app(light)
+    transition(name="fade")
+      notification(
+        v-if="notification.isActive"
+        :type="notification.type"
+        :message="notification.message"
+      )
+    toolbar(
+      :profileId="String(profile.id)"
+      :firstname="profile.firstname"
+      :lastname="profile.lastname"
+      :image="profile.image"
+      @openLoginDialog="isLoginDialog = true"
+    )
+    sidebar(
+      v-if="isAuth"
+    )
+    v-content
+      v-container(fluid)
+        router-view
+    bottom-bar
+    v-dialog(v-model="isLoginDialog" max-width="500px" min-width="320px")
+      login(
+        @closeLoginDialog="isLoginDialog = false"
+      )
+    v-overlay(
+      :opacity="0.5"
+      :value="preloader"
+      :z-index="9998"
+    )
 </template>
 
 <script>
@@ -92,10 +92,13 @@ export default {
 
 <style lang="sass">
 .fade-enter-active, .fade-leave-active
-	transition: opacity .5s
+  transition: opacity .5s
 .fade-enter, .fade-leave-to
-	opacity: 0
+  opacity: 0
 
 .v-expansion-panel__header
-	padding: 16px
+  padding: 16px
+
+.v-dialog
+  box-shadow: none!important
 </style>

@@ -36,8 +36,19 @@ export default {
   },
 
   methods: {
-    selectFile(file) {
+    async selectFile(file) {
       this.profile.image = file.path;
+      const data = {
+        body: {
+          image: file.path
+        },
+        query: {
+          filter: {
+            include: ["role"]
+          }
+        }
+      };
+      await this.$store.dispatch("profile/update", data);
     }
   }
 };

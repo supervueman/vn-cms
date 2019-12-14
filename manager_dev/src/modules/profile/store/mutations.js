@@ -9,10 +9,6 @@ const mutations = {
       rules[rule] = rules[rule].value;
     }
     state.rules = rules;
-  },
-
-  SET_RESOURCES(state, payload) {
-    state.resources = payload;
   }
 };
 
