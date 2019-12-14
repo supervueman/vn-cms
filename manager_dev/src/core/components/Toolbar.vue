@@ -1,60 +1,62 @@
 <template lang="pug">
-	v-app-bar.primary(app dark flat)
-		v-toolbar-title
-			v-img.mr-4.mobile-logo(
-				:src="logo" class="toolbar-logo"
-				max-width="40px"
-				aspect-ratio="1"
-				@error="errorLogo($event)"
-			)
-		v-toolbar-items.hidden-xs-and-down
-			v-btn(text to="/users") {{d.users}}
-			applications-menu(
-				v-if="isAuth"
-			)
-		v-spacer
-		v-toolbar-items.hidden-xs-and-down
-			v-btn(text v-if="!isAuth" @click="$emit('openLoginDialog')") {{d.login || 'Войти'}}
-		v-toolbar-items.hidden-xs-and-down
-			v-menu(offset-y)
-				template(v-slot:activator="{ on }")
-					v-btn(
-						text
-						v-on="on"
-					)
-						v-img(
-							:src="`/images/flags/${dictionary.lang || 'ru'}.svg`"
-							width="30"
-						)
-				v-list
-					v-list-item(
-						v-for="dictionary in dictionaries"
-						:key="dictionary.lang"
-						@click="changeLang(dictionary.lang)"
-					)
-						v-img.mr-2(:src="`/images/flags/${dictionary.lang || 'ru'}.svg`", width="30")
-						v-list-item-title {{dictionary.lang}}
-			v-btn(text slot="activator" to="/profile" v-if="isAuth")
-				div.body-1.mr-3 {{ firstname }} {{lastname}}
-				v-avatar.mr-3(size="40" color="grey lighten-4")
-					img(:src="`${imgFolderBasePath}/${image}`")
-			v-menu(offset-y v-if="isAuth")
-				template(v-slot:activator="{ on }")
-					v-btn(
-						text
-						icon
-						v-on="on"
-					)
-						v-icon settings
-				v-list
-					v-list-item(to="/roles")
-						v-list-item-title {{d.roles_politics}}
-					v-list-item(to="/system-settings")
-						v-list-item-title {{d.system_settings}}
-					v-list-item(to="/dictionaries")
-						v-list-item-title {{d.dictionaries}}
-					v-list-item(@click="logout")
-						v-list-item-title {{d.logout}}
+  v-app-bar.primary(app dark flat)
+    v-toolbar-title
+      v-img.mr-4.mobile-logo(
+        :src="logo" class="toolbar-logo"
+        max-width="40px"
+        aspect-ratio="1"
+        @error="errorLogo($event)"
+      )
+    v-toolbar-items.hidden-xs-and-down
+      v-btn(text to="/users") {{d.users}}
+      applications-menu(
+        v-if="isAuth"
+      )
+    v-spacer
+    v-toolbar-items.hidden-xs-and-down
+      v-btn(text v-if="!isAuth" @click="$emit('openLoginDialog')") {{d.login || 'Войти'}}
+    v-toolbar-items.hidden-xs-and-down
+      v-menu(offset-y)
+        template(v-slot:activator="{ on }")
+          v-btn(
+            text
+            v-on="on"
+          )
+            v-img(
+              :src="`/images/flags/${dictionary.lang || 'ru'}.svg`"
+              width="30"
+            )
+        v-list
+          v-list-item(
+            v-for="dictionary in dictionaries"
+            :key="dictionary.lang"
+            @click="changeLang(dictionary.lang)"
+          )
+            v-img.mr-2(:src="`/images/flags/${dictionary.lang || 'ru'}.svg`", width="30")
+            v-list-item-title {{dictionary.lang}}
+      v-btn(text slot="activator" to="/profile" v-if="isAuth")
+        div.body-1.mr-3 {{ firstname }} {{lastname}}
+        v-avatar.mr-3(size="40" color="grey lighten-4")
+          img(:src="`${imgFolderBasePath}/${image}`")
+      v-menu(offset-y v-if="isAuth")
+        template(v-slot:activator="{ on }")
+          v-btn(
+            text
+            icon
+            v-on="on"
+          )
+            v-icon settings
+        v-list
+          v-list-item(to="/roles")
+            v-list-item-title {{d.roles_politics}}
+          v-list-item(to="/system-settings")
+            v-list-item-title {{d.system_settings}}
+          v-list-item(to="/contexts" v-if="r.is_context_read")
+            v-list-item-title {{d.contexts || 'Контексты'}}
+          v-list-item(to="/dictionaries")
+            v-list-item-title {{d.dictionaries}}
+          v-list-item(@click="logout")
+            v-list-item-title {{d.logout}}
 </template>
 
 <script>
@@ -151,6 +153,6 @@ export default {
 </script>
 
 <style lang="sass">
-	.mobile-logo
-		display: none
+  .mobile-logo
+    display: none
 </style>

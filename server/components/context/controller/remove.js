@@ -1,39 +1,41 @@
 const Model = require('../model');
 
 // Helpers
-const removeDir = require('../../../handlers/removeDir');
-
 module.exports = async (req, res) => {
-  if (!req.rules.is_user_delete) {
+  if (!req.rules.is_context_delete) {
     res.status(403).send({
-      message: 'Access denied!'
+      message: 'Forbidden'
     });
     return;
   }
 
-  const item = await Model.findByPk(req.body.id);
+  // Запрет на удаление кнтекста root
+  const item = Model.findByPk(req.body.id).catch(err => {
+    res.status(400).send({
+      message: 'Bad request'
+    });
+    return;
+  });
 
-  if (!item) {
-    res.status(404).send({
-      message: 'Not found!'
+  if (item.slug === 'root') {
+    res.status(403).send({
+      message: 'Forbidden'
     });
     return;
   }
 
-  if ((req.managerAccess && String(item.userId) === String(req.profile.id)) || (!req.managerAccess && String(item.userId) === String(req.profile.userId)) || req.adminAccess) {
-    removeDir(`../files/${item.id}`);
-    await item.destroy({
-      where: {
-        id: req.body.id
-      }
+  await Model.destroy({
+    where: {
+      id: req.body.id
+    }
+  }).catch(err => {
+    res.status(400).send({
+      message: 'Bad request'
     });
+    return;
+  });
 
-    res.status(200).send({
-      message: 'Success!'
-    });
-  } else {
-    res.status(404).send({
-      message: 'Not found!'
-    });
-  }
+  res.status(200).send({
+    message: 'OK'
+  });
 };

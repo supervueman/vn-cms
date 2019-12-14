@@ -1,18 +1,18 @@
 <template lang="pug">
-  v-flex(v-if="r.is_role_read")
-    .body-2.mb-12.mt-2 {{d.roles || 'Роли'}}
+  v-flex(v-if="r.is_context_read")
+    .body-2.mb-12.mt-2 {{d.contexts || 'Контексты'}}
     v-toolbar(flat color="white")
       v-spacer
       v-btn(
         depressed
         color="primary"
-        to="/role-create"
+        to="/context-create"
         dark
-        v-if="r.is_role_create"
-      ) {{d.create_role || 'Создать роль'}}
+        v-if="r.is_context_create"
+      ) {{d.create_context || 'Создать контекст'}}
     v-data-table(
       :headers="headers"
-      :items="roles"
+      :items="contexts"
       :items-per-page-options="[limit]"
       hide-default-footer
     )
@@ -20,15 +20,16 @@
         tbody
           tr(v-for="item in items" :key="item.id")
             td.text-xs-left
-              router-link(:to="`/roles/${item.id}`") {{ item.title }}
-            td.text-xs-left {{ item.slug }}
+              router-link(:to="`/contexts/${item.id}`") {{ item.slug }}
+            td.text-xs-left
+              router-link(:to="`/contexts/${item.id}`") {{ item.title }}
             td.text-end
               v-btn(
                 text
                 fab
                 color="primary"
                 @click="removeDialogOpen(item)"
-                v-if="r.is_role_delete && item.slug !== 'admin' && item.slug !== 'default'"
+                v-if="r.is_context_delete && item.slug !== 'root'"
               )
                 v-icon delete
     v-dialog(
@@ -44,11 +45,11 @@
 
 <script>
 export default {
-  name: "RolesPage",
+  name: "ContextsPage",
 
   metaInfo() {
     return {
-      title: `${this.d.roles || "Роли"}`
+      title: `${this.d.contexts || "Контексты"}`
     };
   },
 
@@ -64,18 +65,18 @@ export default {
     headers() {
       return [
         {
-          text: `${this.d.name || "Наименование"}`,
-          value: "title"
-        },
-        {
           text: `${this.d.slug || "Псевдоним"}`,
           value: "slug"
+        },
+        {
+          text: `${this.d.name || "Наименование"}`,
+          value: "title"
         },
         { text: "", sortable: false }
       ];
     },
-    roles() {
-      return this.$store.getters["role/getAll"];
+    contexts() {
+      return this.$store.getters["context/getAll"];
     }
   },
 
@@ -87,29 +88,29 @@ export default {
         }
       }
     };
-    await this.$store.dispatch("role/findAll", data);
-    await this.$store.dispatch("role/count", data);
+    await this.$store.dispatch("context/findAll", data);
+    await this.$store.dispatch("context/count", data);
   },
 
   methods: {
     async remove() {
-      if (this.r.is_role_delete) {
-        await this.$store.dispatch("role/remove", {
+      if (this.r.is_context_delete) {
+        await this.$store.dispatch("context/remove", {
           body: { id: this.removeItem.id }
         });
         // Создаем новый массив без удаленного элемента
-        const roles = this.roles.filter(el => {
+        const contexts = this.contexts.filter(el => {
           if (el.id !== this.removeItem.id) {
             return el;
           }
         });
 
-        this.$store.dispatch("role/setAll", roles);
+        this.$store.dispatch("context/setAll", roles);
       }
     },
 
-    removeDialogOpen(role) {
-      this.removeItem = role;
+    removeDialogOpen(context) {
+      this.removeItem = context;
       this.isRemoveDialog = true;
     }
   }

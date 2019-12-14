@@ -12,6 +12,9 @@ const Model = sequelize.define('context', {
     type: Sequelize.STRING,
     unique: true,
     notEmpty: true
+  },
+  title: {
+    type: Sequelize.STRING
   }
 });
 
