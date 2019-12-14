@@ -63,8 +63,7 @@ export default {
 
   validations: {
     context: {
-      slug: { required, alpha, minLength: minLength(3) },
-      title: { required, minLength: minLength(3) }
+      slug: { required, alpha, minLength: minLength(3) }
     }
   },
 
