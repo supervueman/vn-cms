@@ -2,7 +2,8 @@ const Model = require('../model');
 
 module.exports = async (req, res) => {
   // Если есть доступ к созданию ролей или если ранг роли пользователя меньше ранга создаваемой роли то запретить
-  if (!req.rules.is_role_create || req.rang < req.body.rang) {
+  // Так же нельзя обновлять роли admin и default
+  if (!req.rules.is_role_create || req.rang < req.body.rang || req.body.slug === 'default' || req.body.slug === 'admin') {
     res.status(403).send({
       message: 'Forbidden'
     });

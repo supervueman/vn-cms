@@ -2,7 +2,8 @@ const Model = require('../model');
 
 module.exports = async (req, res) => {
   // Если нет доступа к редактированию и ранг роли пользователя ниже ранга редактируемой роли то запретить
-  if (!req.rules.is_role_update || req.rang < req.body.rang) {
+  // Так же нельзя обновлять роли admin и default
+  if (!req.rules.is_role_update || req.rang < req.body.rang || req.body.slug === 'default' || req.body.slug === 'admin') {
     res.status(403).send({
       message: 'Forbidden'
     });
@@ -19,6 +20,14 @@ module.exports = async (req, res) => {
   if (!item) {
     res.status(404).send({
       message: 'Not found'
+    });
+    return;
+  }
+
+  // Так же нельзя обновлять роли admin и default
+  if (item.slug === 'default' || item.slug === 'admin') {
+    res.status(403).send({
+      message: 'Forbidden'
     });
     return;
   }

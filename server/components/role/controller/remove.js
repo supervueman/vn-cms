@@ -2,6 +2,7 @@ const Model = require('../model');
 
 module.exports = async (req, res) => {
   // Если нет доступа для удаления и ранг роли пользователя ниже ранга удаляемой роли то запретить
+  // Так же нельзя удалять роли admin и default
   if (!req.rules.is_role_delete || req.rang < req.body.rang) {
     res.status(403).send({
       message: 'Forbidden'

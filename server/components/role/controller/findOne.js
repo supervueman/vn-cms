@@ -7,6 +7,7 @@ module.exports = async (req, res) => {
     });
     return;
   }
+
   const filter = JSON.parse(req.query.filter || "{}");
 
   const item = await Model.findOne(filter).catch(() => {
@@ -18,7 +19,7 @@ module.exports = async (req, res) => {
 
   if (!item) {
     res.status(404).send({
-      message: 'Not found!'
+      message: 'Not found'
     });
     return;
   }
