@@ -10,7 +10,7 @@ module.exports = async (req, res) => {
 
   const filter = JSON.parse(req.query.filter || "{}");
 
-  // Возвращаем все роли у которых ранг меньше ранга роли пользователя
+  // Возвращаем все роли у которых ранг меньше или равен рангу роли пользователя
   if (!filter.where) {
     filter.where = {};
   }
