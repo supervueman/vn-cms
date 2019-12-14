@@ -29,6 +29,7 @@ const actions = {
       commit('SET_DEFAULT_ROLE', response.data);
     }
   },
+
   async findByPk({
     commit
   }, payload) {
@@ -73,7 +74,7 @@ const actions = {
       });
     });
 
-    if (response !== undefined && response.status === 200) {
+    if (typeof response === 'object' && response.status === 200) {
       this.dispatch('preloader/fetch', false);
       commit('SET', response.data);
     }
@@ -94,7 +95,7 @@ const actions = {
       });
     });
 
-    if (response !== undefined && response.status === 200) {
+    if (typeof response === 'object' && response.status === 200) {
       this.dispatch('preloader/fetch', false);
       commit('SET', response.data);
       this.dispatch("notification/fetch", {
@@ -120,7 +121,7 @@ const actions = {
       });
     });
 
-    if (response !== undefined && response.status === 200) {
+    if (typeof response === 'object' && response.status === 200) {
       this.dispatch('preloader/fetch', false);
       this.dispatch("notification/fetch", {
         type: "success",
