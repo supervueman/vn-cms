@@ -1,6 +1,84 @@
 <template lang="pug">
 	v-layout.wrap
 		v-flex.xs12.md7.pr-2
+			v-card.mb-3
+				//- Общие данные
+				v-card-text {{d.common_data || 'Общие данные'}}
+				v-card-text
+					v-layout.wrap
+						v-flex.md6.pr-3
+							v-text-field(
+								v-model="profile.lastname"
+								:label="`${d.lastname}:`"
+							)
+						v-flex.md6
+							v-text-field(
+								v-model="profile.firstname"
+								:label="`${d.firstname}:`"
+							)
+						v-flex.md6.pr-3
+							v-text-field(
+								v-model="profile.middlename"
+								:label="`${d.middlename}:`"
+							)
+						v-flex.md6
+							v-text-field(
+								v-model="profile.slug"
+								:label="`${d.slug}:`"
+								@input="$v.profile.slug.$touch()"
+								@blur="$v.profile.slug.$touch()"
+								:error-messages="slugErrors"
+							)
+			//- Контакты
+			v-card.mb-3
+				v-card-text {{d.contacts || 'Контакты'}}
+				v-card-text
+					v-layout.wrap
+						v-flex.md6.pr-3
+							v-text-field(
+								v-model="profile.email"
+								label="E-mail:"
+								:error-messages="emailErrors"
+								@input="$v.profile.email.$touch()"
+								@blur="$v.profile.email.$touch()"
+							)
+						v-flex.md6
+							v-text-field(
+								v-model="profile.phone"
+								v-mask="'+7 (###) ###-##-##'"
+								:value="profile.phone"
+								:label="`${d.phone}:`"
+							)
+						v-flex.md6.pr-3
+							v-text-field(
+								v-model="profile.vkontakte"
+								:value="profile.vkontakte"
+								label="Vkontakte:"
+							)
+						v-flex.md6
+							v-text-field(
+								v-model="profile.facebook"
+								:value="profile.facebook"
+								label="Facebook:"
+							)
+						v-flex.md6.pr-3
+							v-text-field(
+								v-model="profile.instagram"
+								:value="profile.instagram"
+								label="Instagram:"
+							)
+			//- Ключи
+			v-expansion-panels(v-if="operationType === 'update'")
+				v-expansion-panel
+					v-expansion-panel-header {{d.keys || 'Ключи'}}
+					v-expansion-panel-content
+						v-flex.md12
+							div Api key: {{profile.token}}
+			//- Изменение пароля
+			password-change(
+				v-if="operationType === 'update'"
+				:userId="profile.id"
+			)
 			//- Создание пароля
 			v-card(v-if="operationType === 'create'" tag="form")
 				v-card-text
@@ -46,6 +124,15 @@
 				) {{d.remove}}
 		//- Аватар
 		v-flex.xs12.md5.pl-2
+			v-card.pt-3.mb-3(v-if="operationType === 'update'")
+				v-card-text.py-0.justify-center.d-flex
+					v-layout.justify-center
+						v-avatar(size="150" color="#fff" class="avatar")
+							img(:src="`/static/${profile.image}`")
+							div.avatar-mask(@click="isActiveDialog = true")
+								v-icon(color="#fff") add_circle_outline
+				v-card-text.text-md-center.justify-center.mt-4.pb-0 {{d.avatar}}
+				v-card-title.title.font-weight-bold.text-md-center.justify-center {{profile.lastname}} {{profile.firstname}}
 			//- Роль и ранг
 			v-card(v-if="this.$route.name !== 'profile'")
 				v-card-text
@@ -75,7 +162,7 @@
 import { validationMixin } from "vuelidate";
 
 // Components
-import PasswordChange from "./PasswordChange";
+import PasswordChange from "../../profile/components/PasswordChange";
 import { mask } from "vue-the-mask";
 import Filesystem from "@/core/components/Filesystem/Filesystem";
 

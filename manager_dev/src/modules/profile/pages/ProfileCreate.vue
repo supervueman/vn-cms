@@ -1,7 +1,11 @@
 <template lang="pug">
   v-flex(v-if="r.is_user_create")
     .body-2.mb-12.mt-2 {{d.profile_creation}}
-    profile-view(:profile="profile" operationType="create")
+    profile-view(
+      :profile="profile"
+      operationType="create"
+      @create="create"
+    )
 </template>
 
 <script>
@@ -35,6 +39,14 @@ export default {
         }
       }
     });
+  },
+
+  methods: {
+    async create() {
+      await this.$store.dispatch("profile/createByEmail", {
+        body: this.profile
+      });
+    }
   },
 
   beforeRouteLeave(to, from, next) {

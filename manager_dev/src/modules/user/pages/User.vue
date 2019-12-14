@@ -6,7 +6,7 @@
 
 <script>
 // Components
-import ProfileView from "@/modules/profile/components/View";
+import ProfileView from "../components/View";
 
 export default {
   name: "UserPage",
