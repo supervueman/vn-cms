@@ -1,18 +1,24 @@
 const Model = require('../model');
 
 module.exports = async (req, res) => {
-  if (!req.rules.is_role_delete) {
+  // Если нет доступа для удаления и ранг роли пользователя ниже ранга удаляемой роли то запретить
+  if (!req.rules.is_role_delete || req.rang < req.body.rang) {
     res.status(403).send({
-      message: 'Access denied!'
+      message: 'Forbidden'
     });
     return;
   }
 
-  const item = await Model.findByPk(req.body.id);
+  const item = await Model.findByPk(req.body.id).catch(err => {
+    res.status(400).send({
+      message: 'Bad request'
+    });
+    return;
+  });
 
-  if (item.slug === 'admin' || item.slug === 'manager') {
+  if (item.slug === 'admin' || item.slug === 'default') {
     res.status(403).send({
-      message: 'Access denied!'
+      message: 'Forbidden'
     });
     return;
   }
@@ -21,9 +27,14 @@ module.exports = async (req, res) => {
     where: {
       id: req.body.id
     }
+  }).catch(err => {
+    res.status(400).send({
+      message: 'Bad request'
+    });
+    return;
   });
 
   res.status(200).send({
-    message: 'Success remove!'
+    message: 'OK'
   });
 };

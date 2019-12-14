@@ -146,9 +146,8 @@ const actions = {
       });
     });
 
-    if (response !== undefined && response.status === 200) {
+    if (typeof response === 'object' && response.status === 200) {
       this.dispatch('preloader/fetch', false);
-      this.dispatch('role/clear');
       this.dispatch("notification/fetch", {
         type: "success",
         message: 'Успешно удалено!',
@@ -193,7 +192,7 @@ const actions = {
       });
     });
 
-    if (response !== undefined && response.status === 200) {
+    if (typeof response === 'object' && response.status === 200) {
       this.dispatch('preloader/fetch', false);
       commit('SET_COUNT', response.data.count);
     }
