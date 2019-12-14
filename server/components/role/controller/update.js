@@ -1,31 +1,24 @@
 const Model = require('../model');
 
 module.exports = async (req, res) => {
-  if (!req.rules.is_role_update) {
+  // Если нет доступа к редактированию и ранг роли пользователя ниже ранга редактируемой роли то запретить
+  if (!req.rules.is_role_update || req.rang < req.body.rang) {
     res.status(403).send({
-      message: 'Access denied!'
+      message: 'Forbidden'
     });
     return;
   }
 
-  const item = await Model.findByPk(req.body.id);
+  const item = await Model.findByPk(req.body.id).catch(() => {
+    res.status(400).send({
+      message: 'Bad request'
+    });
+    return;
+  });
 
   if (!item) {
     res.status(404).send({
-      message: 'Not found!'
-    });
-    return;
-  }
-  // Если не админ и роль равна admin или manager и при этом роль не совпадает с обновленной
-  // Если же админ и роль равна admin или manager и при этом роль не совпадает с обновленной
-  if (!req.adminAccess && (item.slug === 'admin' || item.slug === 'manager') && item.slug !== req.body.slug) {
-    res.status(403).send({
-      message: 'Access denied!'
-    });
-    return;
-  } else if (req.adminAccess && (item.slug === 'admin' || item.slug === 'manager') && item.slug !== req.body.slug) {
-    res.status(403).send({
-      message: 'Access denied!'
+      message: 'Not found'
     });
     return;
   }
@@ -33,7 +26,12 @@ module.exports = async (req, res) => {
   const updateItem = req.body;
   delete updateItem.id;
 
-  const updatedItem = await item.update(updateItem);
+  const updatedItem = await item.update(updateItem).catch(() => {
+    res.status(400).send({
+      message: 'Bad request'
+    });
+    return;
+  });
 
   res.status(200).send(updatedItem);
 };

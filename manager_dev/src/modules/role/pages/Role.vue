@@ -1,11 +1,63 @@
 <template lang="pug">
   v-flex(v-if="r.is_role_read")
-    .body-2.mb-12.mt-2 {{d.role_politic}}: {{role.title}}
+    .body-2.mb-12.mt-2 {{d.role || 'Роль'}}: {{role.slug}} ({{role.id}})
     v-layout.wrap
-      role-view(
-        :role="role"
-        operationType="update"
+      v-flex
+        v-card(outlined)
+          v-card-text {{d.common_data || 'Общие данные'}}
+          v-card-text
+            v-flex.md12
+              v-text-field(
+                v-model="role.slug"
+                :label="`${d.slug || 'Псевдоним'}:`"
+                @input="$v.role.slug.$touch()"
+                @blur="$v.role.slug.$touch()"
+                :error-messages="slugErrors"
+                :disabled="role.slug === 'admin'"
+              )
+              v-text-field(
+                v-model="role.title"
+                :label="`${d.name || 'Наименование'}:`"
+                @input="$v.role.title.$touch()"
+                @blur="$v.role.title.$touch()"
+                :error-messages="titleErrors"
+              )
+              v-text-field(
+                v-model="role.rang"
+                :label="`${d.rang || 'Ранг'}:`"
+                type="number"
+              )
+          v-list
+            v-list-item(v-for="(rule, i) in role.rules" :key="i")
+              v-list-item-content {{rule.title}}
+              v-list-item-action
+                v-checkbox(
+                  v-model="rule.value"
+                  :disabled="role.slug === 'admin'"
+                  )
+          v-card-actions
+            v-btn.ml-2(
+              depressed
+              color="primary"
+              @click="update"
+              v-if="r.is_role_create"
+            ) {{d.save || 'Сохранить'}}
+    v-dialog(
+      v-model="isRemoveDialog"
+      max-width="500px"
+    )
+      remove-confirm(
+        @remove="remove"
+        :isActive.sync="isRemoveDialog"
+        :name="role.title"
       )
+    .d-flex.justify-center.mt-3
+      v-btn(
+        text
+        color="error"
+        depressed
+        @click="isRemoveDialog = true"
+      ) {{d.remove || 'Удалить'}}
 </template>
 
 <script>
@@ -42,6 +94,12 @@ export default {
     }
   },
 
+  data: () => {
+    return {
+      isRemoveDialog: false
+    };
+  },
+
   computed: {
     role() {
       return this.$store.getters["role/get"];
@@ -67,11 +125,47 @@ export default {
   },
 
   async mounted() {
+    await this.$store.dispatch("role/findDefault");
     await this.$store.dispatch("role/findByPk", {
       params: {
         id: this.$route.params.id
       }
     });
+  },
+
+  methods: {
+    async update() {
+      this.$v.$touch();
+      if (!this.r.is_role_update || this.$v.$error) {
+        return;
+      }
+
+      // Сохраняем только те правила у которых проставлены галочки
+      const rules = {};
+      for (const key in this.role.rules) {
+        if (this.role.rules[key].value) {
+          rules[key] = this.role.rules[key];
+        }
+      }
+
+      await this.$store.dispatch("role/update", {
+        body: {
+          ...this.role,
+          rules: JSON.stringify(rules)
+        }
+      });
+    },
+
+    async remove() {
+      if (this.r.is_role_delete) {
+        await this.$store.dispatch("role/remove", {
+          body: {
+            id: this.role.id
+          }
+        });
+        this.$router.push("/roles");
+      }
+    }
   }
 };
 </script>

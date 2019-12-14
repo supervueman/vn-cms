@@ -45,8 +45,16 @@ const actions = {
     });
 
     if (typeof response === 'object' && response.status === 200) {
+      const rules = {
+        ...JSON.parse(this.getters['role/getDefaultRole'].rules),
+        ...JSON.parse(response.data.rules)
+      };
+
       this.dispatch('preloader/fetch', false);
-      commit('SET', response.data);
+      commit('SET', {
+        ...response.data,
+        rules
+      });
     }
   },
 
@@ -113,7 +121,6 @@ const actions = {
     });
 
     if (response !== undefined && response.status === 200) {
-      commit('SET', response.data);
       this.dispatch('preloader/fetch', false);
       this.dispatch("notification/fetch", {
         type: "success",

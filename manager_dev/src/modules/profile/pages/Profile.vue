@@ -8,7 +8,7 @@
         profile-address-data
         profile-keys-data.mb-3
         profile-password-change.mb-3
-        .elevation-0.d-flex.justify-center
+        .d-flex.justify-center
           v-btn(
             text
             color="error"

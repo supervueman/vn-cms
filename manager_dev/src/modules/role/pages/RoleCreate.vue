@@ -1,6 +1,6 @@
 <template lang="pug">
   v-flex(v-if="r.is_role_create")
-    .body-2.mb-12.mt-2 {{d.role_creation}}
+    .body-2.mb-12.mt-2 {{d.role_creation || 'Создание политики доступа'}}
     v-layout.wrap
       v-flex
         v-card(outlined)
@@ -9,7 +9,7 @@
             v-flex.md12
               v-text-field(
                 v-model="role.slug"
-                :label="`${d.slug}:`"
+                :label="`${d.slug || 'Псевдоним'}:`"
                 @input="$v.role.slug.$touch()"
                 @blur="$v.role.slug.$touch()"
                 :error-messages="slugErrors"
@@ -17,7 +17,7 @@
               )
               v-text-field(
                 v-model="role.title"
-                :label="`${d.name}:`"
+                :label="`${d.name || 'Наименование'}:`"
                 @input="$v.role.title.$touch()"
                 @blur="$v.role.title.$touch()"
                 :error-messages="titleErrors"
@@ -106,28 +106,27 @@ export default {
 
   methods: {
     async create() {
-      if (!this.r.is_role_create) {
+      this.$v.$touch();
+      if (!this.r.is_role_create || this.$v.$error) {
         return;
       }
-      this.$v.$touch();
-      if (!this.$v.$error) {
-        // Сохраняем только те правила у которых проставлены галочки
-        const accessRules = {};
-        for (const key in this.role.rules) {
-          if (this.role.rules[key].value) {
-            accessRules[key] = this.role.rules[key];
-          }
+
+      // Сохраняем только те правила у которых проставлены галочки
+      const rules = {};
+      for (const key in this.role.rules) {
+        if (this.role.rules[key].value) {
+          rules[key] = this.role.rules[key];
         }
-        this.role.rang = Number(this.role.rang);
-        await this.$store.dispatch("role/create", {
-          body: {
-            ...this.role,
-            rules: JSON.stringify(accessRules)
-          }
-        });
-        this.$router.push(`/roles/${this.$store.getters["role/get"].id}`);
-        this.$store.dispatch("role/clear");
       }
+      this.role.rang = Number(this.role.rang);
+      await this.$store.dispatch("role/create", {
+        body: {
+          ...this.role,
+          rules: JSON.stringify(rules)
+        }
+      });
+      this.$router.push(`/roles/${this.$store.getters["role/get"].id}`);
+      this.$store.dispatch("role/clear");
     }
   }
 };
