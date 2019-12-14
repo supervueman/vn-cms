@@ -37,7 +37,7 @@ export default {
 
   metaInfo() {
     return {
-      title: "Multikey CMS"
+      title: "SUPERVUECMS"
     };
   },
 
@@ -61,7 +61,9 @@ export default {
   },
 
   async beforeCreate() {
-    await this.$store.dispatch("profile/findByAccessToken");
+    if (!!localStorage.getItem("access_token")) {
+      await this.$store.dispatch("profile/findByAccessToken");
+    }
   },
 
   async mounted() {

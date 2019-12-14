@@ -1,4 +1,4 @@
-import profile from '../../user/models/user';
+import profile from '../models/profile';
 import rules from '../../role/models/rules_default';
 
 const rulesParse = {

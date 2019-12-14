@@ -1,5 +1,5 @@
 <template lang="pug">
-	v-app-bar.primary(app dark)
+	v-app-bar.primary(app dark flat)
 		v-toolbar-title
 			v-img.mr-4.mobile-logo(
 				:src="logo" class="toolbar-logo"

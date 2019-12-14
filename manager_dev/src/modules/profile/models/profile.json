@@ -1,0 +1,33 @@
+{
+  "id": "",
+  "slug": "",
+  "email": "",
+  "phone": "",
+  "firstname": "",
+  "lastname": "",
+  "middlename": "",
+  "birthday": "",
+  "country": "",
+  "city": "",
+  "street": "",
+  "home": "",
+  "apartment": "",
+  "image": "",
+  "facebook": "",
+  "vkontakte": "",
+  "instagram": "",
+  "password": "",
+  "token": "",
+  "verified": false,
+  "roleId": "",
+  "role": {
+    "id": "",
+    "slug": "",
+    "rules": {}
+  },
+  "contextId": "",
+  "context": {
+    "id": "",
+    "slug": ""
+  }
+}

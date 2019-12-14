@@ -17,6 +17,7 @@
           ) {{d.remove || 'Удалить'}}
       v-flex.xs12.md5.pl-2
         profile-avatar-data
+        profile-role-data
     v-dialog(
       v-model="isRemoveDialog"
       max-width="500px"
@@ -36,6 +37,7 @@ import ProfileKeysData from "../components/ProfileKeysData";
 import ProfilePasswordChange from "../components/ProfilePasswordChange";
 import ProfileAvatarData from "../components/ProfileAvatarData";
 import ProfileAddressData from "../components/ProfileAddressData";
+import ProfileRoleData from "../components/ProfileRoleData";
 
 export default {
   name: "ProfilePage",
@@ -46,7 +48,8 @@ export default {
     ProfileKeysData,
     ProfilePasswordChange,
     ProfileAvatarData,
-    ProfileAddressData
+    ProfileAddressData,
+    ProfileRoleData
   },
 
   data: () => {
@@ -57,9 +60,9 @@ export default {
 
   metaInfo() {
     return {
-      title: `${this.d.profile || "Profile"}: ${this.profile.firstname} ${
-        this.profile.lastname
-      }`
+      title: `${this.d.your_profile || "Ваш профиль"}: ${
+        this.profile.firstname
+      } ${this.profile.lastname}`
     };
   },
 
