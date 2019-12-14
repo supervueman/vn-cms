@@ -136,24 +136,22 @@ export default {
   methods: {
     async update() {
       this.$v.$touch();
-      if (!this.r.is_role_update || this.$v.$error) {
-        return;
-      }
-
-      // Сохраняем только те правила у которых проставлены галочки
-      const rules = {};
-      for (const key in this.role.rules) {
-        if (this.role.rules[key].value) {
-          rules[key] = this.role.rules[key];
+      if (this.r.is_role_update && !this.$v.$error) {
+        // Сохраняем только те правила у которых проставлены галочки
+        const rules = {};
+        for (const key in this.role.rules) {
+          if (this.role.rules[key].value) {
+            rules[key] = this.role.rules[key];
+          }
         }
-      }
 
-      await this.$store.dispatch("role/update", {
-        body: {
-          ...this.role,
-          rules: JSON.stringify(rules)
-        }
-      });
+        await this.$store.dispatch("role/update", {
+          body: {
+            ...this.role,
+            rules: JSON.stringify(rules)
+          }
+        });
+      }
     },
 
     async remove() {

@@ -1,37 +1,36 @@
 <template lang="pug">
   v-flex(v-if="r.is_role_read")
-    .body-2.mb-12.mt-2 {{d.roles_politics}}
-    v-layout.wrap
-      v-flex
-        v-toolbar(flat color="white")
-          v-spacer
-          v-btn(
-            color="primary"
-            to="/role-create"
-            dark
-            v-if="r.is_role_create"
-          ) {{d.create_role}}
-        v-data-table(
-          :headers="headers"
-          :items="roles"
-          :items-per-page-options="[limit]"
-          hide-default-footer
-        )
-          template(v-slot:body="{items}")
-            tbody
-              tr(v-for="item in items" :key="item.id")
-                td.text-xs-left
-                  router-link(:to="`/roles/${item.id}`") {{ item.title }}
-                td.text-xs-left {{ item.slug }}
-                td.text-end
-                  v-btn(
-                    text
-                    fab
-                    color="primary"
-                    @click="removeDialogOpen(item)"
-                    v-if="r.is_role_delete && item.slug !== 'admin' && item.slug !== 'manager'"
-                  )
-                    v-icon delete
+    .body-2.mb-12.mt-2 {{d.roles || 'Роли'}}
+    v-toolbar(flat color="white")
+      v-spacer
+      v-btn(
+        depressed
+        color="primary"
+        to="/role-create"
+        dark
+        v-if="r.is_role_create"
+      ) {{d.create_role || 'Создать роль'}}
+    v-data-table(
+      :headers="headers"
+      :items="roles"
+      :items-per-page-options="[limit]"
+      hide-default-footer
+    )
+      template(v-slot:body="{items}")
+        tbody
+          tr(v-for="item in items" :key="item.id")
+            td.text-xs-left
+              router-link(:to="`/roles/${item.id}`") {{ item.title }}
+            td.text-xs-left {{ item.slug }}
+            td.text-end
+              v-btn(
+                text
+                fab
+                color="primary"
+                @click="removeDialogOpen(item)"
+                v-if="r.is_role_delete && item.slug !== 'admin' && item.slug !== 'default'"
+              )
+                v-icon delete
     v-dialog(
       v-model="isRemoveDialog"
       max-width="500px"
@@ -49,7 +48,7 @@ export default {
 
   metaInfo() {
     return {
-      title: `${this.d.roles || "Roles"}`
+      title: `${this.d.roles || "Роли"}`
     };
   },
 
@@ -65,11 +64,11 @@ export default {
     headers() {
       return [
         {
-          text: this.d.name,
+          text: `${this.d.name || "Наимнеование"}`,
           value: "title"
         },
         {
-          text: this.d.slug,
+          text: `${this.d.slug || "Псевдоним"}`,
           value: "slug"
         },
         { text: "", sortable: false }
@@ -97,11 +96,13 @@ export default {
       await this.$store.dispatch("role/remove", {
         body: { id: this.removeItem.id }
       });
+      // Создаем новый массив без удаленного элемента
       const roles = this.roles.filter(el => {
         if (el.id !== this.removeItem.id) {
           return el;
         }
       });
+
       this.$store.dispatch("role/setAll", roles);
     },
 

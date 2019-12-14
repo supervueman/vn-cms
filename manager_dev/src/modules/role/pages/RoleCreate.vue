@@ -105,26 +105,24 @@ export default {
   methods: {
     async create() {
       this.$v.$touch();
-      if (!this.r.is_role_create || this.$v.$error) {
-        return;
-      }
-
-      // Сохраняем только те правила у которых проставлены галочки
-      const rules = {};
-      for (const key in this.role.rules) {
-        if (this.role.rules[key].value) {
-          rules[key] = this.role.rules[key];
+      if (this.r.is_role_create && !this.$v.$error) {
+        // Сохраняем только те правила у которых проставлены галочки
+        const rules = {};
+        for (const key in this.role.rules) {
+          if (this.role.rules[key].value) {
+            rules[key] = this.role.rules[key];
+          }
         }
+        this.role.rang = Number(this.role.rang);
+        await this.$store.dispatch("role/create", {
+          body: {
+            ...this.role,
+            rules: JSON.stringify(rules)
+          }
+        });
+        this.$router.push(`/roles/${this.$store.getters["role/get"].id}`);
+        this.$store.dispatch("role/clear");
       }
-      this.role.rang = Number(this.role.rang);
-      await this.$store.dispatch("role/create", {
-        body: {
-          ...this.role,
-          rules: JSON.stringify(rules)
-        }
-      });
-      this.$router.push(`/roles/${this.$store.getters["role/get"].id}`);
-      this.$store.dispatch("role/clear");
     }
   }
 };
