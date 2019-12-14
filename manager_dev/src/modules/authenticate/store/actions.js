@@ -20,7 +20,7 @@ const actions = {
       });
     });
 
-    if (response !== undefined && response.status === 200) {
+    if (typeof response === 'object' && response.status === 200) {
       this.dispatch('preloader/fetch', false);
       localStorage.setItem('access_token', response.data.access_token);
       localStorage.setItem('id', response.data.id);
@@ -47,7 +47,7 @@ const actions = {
       });
     });
 
-    if (response !== undefined && response.status === 200) {
+    if (typeof response === 'object' && response.status === 200) {
       this.dispatch('preloader/fetch', false);
       localStorage.setItem('access_token', response.data.access_token);
       localStorage.setItem('id', response.data.id);
