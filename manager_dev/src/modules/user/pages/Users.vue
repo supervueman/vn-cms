@@ -1,65 +1,64 @@
 <template lang="pug">
-  v-layout(v-if="r.is_user_read")
-    v-flex
-      .body-2.mt-2 {{d.users}}
-        v-layout.wrap.pt-12
-          v-flex
-            v-toolbar(flat color="white")
-              v-spacer
-              v-btn(
-                color="primary"
-                dark
-                v-if="r.is_user_create"
-                to="/profile-create"
-              ) {{d.create_user}}
-            v-data-table(
-              :headers="headers"
-              :items="users"
-              :items-per-page-options="[limit]"
-              hide-default-footer
-            )
-              template(v-slot:body="{items}")
-                tbody
-                  tr(v-for="item in items" :key="item.id")
-                    td.text-xs-left
-                      router-link(:to="`/users/${item.id}`")
-                        v-avatar(
-                          :size="40"
-                          color="grey lighten-4"
-                        )
-                          img(:src="`${imgFolderBasePath}/${item.image}`" alt="avatar")
-                    td.text-xs-left
-                      router-link(:to="`/users/${item.id}`") {{ item.lastname }} {{ item.firstname }} ({{item.id}})
-                    td.text-xs-left
-                      div
-                        a(:href="`mailto:${item.email}`") {{item.email}}
-                      div
-                        a(:href="`tel:${item.phone}`") {{item.phone}}
-                    td.text-xs-left {{item.role ? item.role.slug : ''}}
-                    td.text-end
-                      v-btn(
-                        text
-                        fab
-                        color="primary"
-                        @click="removeDialogOpen(item)"
-                        v-if="r.is_user_delete"
-                      )
-                        v-icon delete
-            div.text-xs-center.pt-2
-              pagination(
-                :itemsLength="count"
-                @getPage="getPage"
-                :limit="limit"
-              )
-        v-dialog(
-          v-model="isRemoveDialog"
-          max-width="500px"
+  v-flex(v-if="r.is_user_read")
+    .body-2.mt-2.mb-12 {{d.users || 'Пользователи'}}
+    v-card(outlined)
+      v-toolbar(flat color="white")
+        v-spacer
+        v-btn(
+          color="primary"
+          dark
+          v-if="r.is_user_create"
+          to="/user-create"
+          depressed
+        ) {{d.create_user || 'Создать пользователя'}}
+      v-data-table(
+        :headers="headers"
+        :items="users"
+        :items-per-page-options="[limit]"
+        hide-default-footer
+      )
+        template(v-slot:body="{items}")
+          tbody
+            tr(v-for="item in items" :key="item.id")
+              td.text-xs-left
+                router-link(:to="`/users/${item.id}`")
+                  v-avatar(
+                    :size="40"
+                    color="grey lighten-4"
+                  )
+                    img(:src="`${imgFolderBasePath}/${item.image}`")
+              td.text-xs-left
+                router-link(:to="`/users/${item.id}`") {{ item.lastname }} {{ item.firstname }} ({{item.id}})
+              td.text-xs-left
+                div
+                  a(:href="`mailto:${item.email}`") {{item.email}}
+                div
+                  a(:href="`tel:${item.phone}`") {{item.phone}}
+              td.text-xs-left {{item.role ? item.role.slug : ''}}
+              td.text-end
+                v-btn(
+                  text
+                  fab
+                  color="primary"
+                  @click="removeDialogOpen(item)"
+                  v-if="r.is_user_delete"
+                )
+                  v-icon delete
+      v-card-actions.text-xs-center.pt-2
+        pagination(
+          :itemsLength="count"
+          @getPage="getPage"
+          :limit="limit"
         )
-          remove-confirm(
-            @remove="remove"
-            :isActive.sync="isRemoveDialog"
-            :name="`${removeItem.lastname} ${removeItem.firstname}`"
-          )
+    v-dialog(
+      v-model="isRemoveDialog"
+      max-width="500px"
+    )
+      remove-confirm(
+        @remove="remove"
+        :isActive.sync="isRemoveDialog"
+        :name="`${removeItem.lastname} ${removeItem.firstname}`"
+      )
 </template>
 
 <script>
@@ -67,11 +66,11 @@
 import { imgFolderBasePath } from "@/core/config";
 
 export default {
-  name: "Users",
+  name: "UsersPage",
 
   metaInfo() {
     return {
-      title: `${this.d.users || "Users"}`
+      title: `${this.d.users || "Пользователи"}`
     };
   },
 
@@ -91,9 +90,13 @@ export default {
           text: "",
           sortable: false
         },
-        { text: this.d.name, sortable: true, value: "lastname" },
-        { text: this.d.contacts, sortable: false },
-        { text: this.d.role, sortable: true, value: "role.slug" },
+        { text: `${this.d.name || "Имя"}`, sortable: true, value: "lastname" },
+        { text: `${this.d.contacts || "Контакты"}`, sortable: false },
+        {
+          text: `${this.d.role || "Роль"}`,
+          sortable: true,
+          value: "role.slug"
+        },
         { text: "", sortable: false }
       ];
     },
@@ -136,25 +139,24 @@ export default {
     },
 
     async remove() {
-      if (!this.r.is_user_delete) {
-        return;
-      }
-      if (this.removeItem.id === this.$store.getters["profile/get"].id) {
-        await this.$store.dispatch("profile/remove", {
-          body: { id: this.removeItem.id }
-        });
-        await this.$store.dispatch("authenticate/logout");
-        this.$router.push("/");
-      } else {
-        await this.$store.dispatch("user/remove", {
-          body: { id: this.removeItem.id }
-        });
-        const users = this.users.filter(el => {
-          if (el.id !== this.removeItem.id) {
-            return el;
-          }
-        });
-        this.$store.dispatch("user/setAll", users);
+      if (this.r.is_user_delete) {
+        if (this.removeItem.id === this.$store.getters["profile/get"].id) {
+          await this.$store.dispatch("profile/remove", {
+            body: { id: this.removeItem.id }
+          });
+          await this.$store.dispatch("authenticate/logout");
+          this.$router.push("/");
+        } else {
+          await this.$store.dispatch("user/remove", {
+            body: { id: this.removeItem.id }
+          });
+          const users = this.users.filter(el => {
+            if (el.id !== this.removeItem.id) {
+              return el;
+            }
+          });
+          this.$store.dispatch("user/setAll", users);
+        }
       }
     },
 

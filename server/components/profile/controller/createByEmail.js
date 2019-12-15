@@ -5,60 +5,62 @@ const createDir = require('../../../handlers/createDir');
 
 const User = require('../../user/model');
 const Role = require('../../role/model');
-const SystemSetting = require('../../systemsetting/model');
 
 module.exports = async (req, res) => {
   if (!req.rules.is_user_create) {
     res.status(403).send({
-      message: 'Access denied!'
+      message: 'Forbidden'
     });
     return;
   }
 
-  const is_context_create = await SystemSetting.findOne({
-    where: {
-      slug: 'is_context_create'
-    }
-  });
-
-  const is_admin_create = await SystemSetting.findOne({
-    where: {
-      slug: 'is_admin_create'
-    }
-  });
-
-  const role = await Role.findByPk(req.body.roleId);
-
-  if (!JSON.parse(is_context_create.setting).value && role.slug === 'manager') {
-    res.status(403).send({
-      message: 'Access denied!'
-    });
-    return;
-  }
-
-  if (!JSON.parse(is_admin_create.setting).value && role.slug === 'admin') {
-    res.status(403).send({
-      message: 'Access denied!'
-    });
-    return;
-  }
-
-  const existUser = await User.findOne({
+  // Проверяем не существует ли уже такой пользователь
+  const user = await User.findOne({
     where: {
       email: req.body.email
     }
   });
 
-  if (existUser) {
-    res.status(401).send({
-      message: 'User is exist!'
+  if (user) {
+    res.status(409).send({
+      message: 'Conflict'
     });
     return;
   }
 
+  const role = await Role.findByPk(req.body.roleId).catch(err => {
+    res.status(400).send({
+      message: 'Bad request'
+    });
+    return;
+  });
+
+  // Если роль не передана или не найдена то назначить default роль
+  if (!role) {
+    const defaultRole = await Role.findOne({
+      where: {
+        slug: 'default'
+      }
+    });
+    req.body.roleId = defaultRole.id;
+  }
+
+  // Если роль найдена и присваиваемая роль по рангу выше чем ранг роли пользователя то запретить
+  if (role && role.rang > req.rang) {
+    res.status(403).send({
+      message: 'Forbidden'
+    });
+    return;
+  }
+
+  // Если контекст не валидный или не назначен то присвоить контекст пользователя
+  if ((typeof req.body.contextId !== 'string' || typeof req.body.contextId !== 'number') && !!req.body.contextId) {
+    req.body.contextId = req.context.id;
+  }
+
   if (!validator.isEmail(req.body.email)) {
-    res.status(401).send({
-      message: 'E-mail is invalid!'
+    res.status(400).send({
+      message: 'Bad request'
     });
     return;
   }
@@ -66,17 +68,8 @@ module.exports = async (req, res) => {
   if (validator.isEmpty(req.body.password) || !validator.isLength(req.body.password, {
       min: 6
     })) {
-    res.status(401).send({
-      message: 'Password is short!'
-    });
-    return;
-  }
-
-  if (validator.isEmpty(req.body.slug) || !validator.isLength(req.body.slug, {
-      min: 3
-    })) {
-    res.status(401).send({
-      message: 'Slug is short!'
+    res.status(400).send({
+      message: 'Bad request'
     });
     return;
   }
@@ -87,22 +80,16 @@ module.exports = async (req, res) => {
     ...req.body,
     password: hashedPw
   };
-  if (!req.managerAccess && !req.adminAccess) {
-    userCreated.userId = req.profile.userId;
-  }
 
-  const createdUser = await User.create(userCreated).catch(err => {});
-  if (req.adminAccess) {
-    await createDir(`../files/user-${createdUser.id}`);
-  } else if (req.managerAccess) {
-    await createDir(`../files/user-${req.profile.id}/user-${createdUser.id}`);
-  } else {
-    if (req.profile.userId) {
-      await createDir(`../files/user-${req.profile.userId}/user-${createdUser.id}`);
-    } else {
-      await createDir(`../files/user-${createdUser.id}`);
-    }
-  }
+  const createdUser = await User.create(userCreated).catch(err => {
+    res.status(400).send({
+      message: 'Bad request'
+    });
+    return;
+  });
+
+  // Создаем папку для пользователя
+  await createDir(`../files/user-${createdUser.contextId}-${createdUser.id}`);
 
   res.status(200).send(createdUser);
 };

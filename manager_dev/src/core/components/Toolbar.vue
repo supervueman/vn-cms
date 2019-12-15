@@ -8,7 +8,7 @@
         @error="errorLogo($event)"
       )
     v-toolbar-items.hidden-xs-and-down
-      v-btn(text to="/users") {{d.users}}
+      v-btn(text to="/users" v-if="r.is_user_read") {{d.users || 'Пользователи'}}
       applications-menu(
         v-if="isAuth"
       )

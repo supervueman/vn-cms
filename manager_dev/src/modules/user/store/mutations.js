@@ -8,6 +8,6 @@ const mutations = {
   SET_COUNT(state, payload) {
     state.count = payload;
   }
-}
+};
 
 export default mutations;
