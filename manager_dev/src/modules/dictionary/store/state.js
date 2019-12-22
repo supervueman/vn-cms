@@ -1,8 +1,4 @@
-const dictionary = {
-  lang: '',
-  title: '',
-  value: ''
-};
+import dictionary from '../models/dictionary.json';
 
 const state = {
   dictionary: {

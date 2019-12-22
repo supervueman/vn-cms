@@ -1,11 +1,7 @@
 import requestDataHandler from '@/core/plugins/requestDataHandler';
 import axios from 'axios';
 
-const dictionary = {
-  lang: '',
-  title: '',
-  value: ''
-};
+import dictionary from '../models/dictionary.json';
 
 const actions = {
   async findByPk({
@@ -23,7 +19,7 @@ const actions = {
       });
     });
 
-    if (response !== undefined && response.status === 200) {
+    if (typeof response === 'object' && response.status === 200) {
       this.dispatch('preloader/fetch', false);
       commit('SET', response.data);
     }
@@ -44,7 +40,7 @@ const actions = {
       });
     });
 
-    if (response !== undefined && response.status === 200) {
+    if (typeof response === 'object' && response.status === 200) {
       this.dispatch('preloader/fetch', false);
       commit('SET', response.data);
     }
@@ -65,7 +61,7 @@ const actions = {
       });
     });
 
-    if (response !== undefined && response.status === 200) {
+    if (typeof response === 'object' && response.status === 200) {
       commit('PUSH_TO_ALL', response.data);
       this.dispatch('preloader/fetch', false);
       this.dispatch('notification/fetch', {
@@ -91,7 +87,7 @@ const actions = {
       });
     });
 
-    if (response !== undefined && response.status === 200) {
+    if (typeof response === 'object' && response.status === 200) {
       this.dispatch('preloader/fetch', false);
       this.dispatch('notification/fetch', {
         type: 'success',
@@ -116,7 +112,7 @@ const actions = {
       });
     });
 
-    if (response !== undefined && response.status === 200) {
+    if (typeof response === 'object' && response.status === 204) {
       this.dispatch('preloader/fetch', false);
       this.dispatch('layout/clear');
       this.dispatch('notification/fetch', {
@@ -142,7 +138,7 @@ const actions = {
       });
     });
 
-    if (response !== undefined && response.status === 200) {
+    if (typeof response === 'object' && response.status === 200) {
       this.dispatch('preloader/fetch', false);
       commit('SET_ALL', response.data);
     }
@@ -163,7 +159,7 @@ const actions = {
       });
     });
 
-    if (response !== undefined && response.status === 200) {
+    if (typeof response === 'object' && response.status === 200) {
       this.dispatch('preloader/fetch', false);
       commit('SET_COUNT', response.data.count);
     }
