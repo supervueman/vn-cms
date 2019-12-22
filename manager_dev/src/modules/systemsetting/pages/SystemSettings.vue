@@ -3,34 +3,35 @@
 		.body-2.mb-12.mt-2 {{d.system_settings}}
 		v-layout.wrap
 			v-flex
-				v-data-table(
-					:headers="headers"
-					:items="systemSettings"
-					:items-per-page-options="[limit]"
-					hide-default-footer
-				)
-					template(v-slot:body="{items}")
-						tbody
-							tr(v-for="item in items" :key="item.id")
-								td.text-xs-left {{ item.title }}
-								td.text-xs-left {{ item.slug }}
-								td.text-end
-									v-switch(
-										v-if="item.settingType === 'switcher'"
-										v-model="item.setting.value"
-										@change="update(item)"
-									)
-									v-text-field(
-										v-if="item.settingType === 'text'"
-										v-model="item.setting.value"
-										@change="update(item)"
-									)
-				div.text-xs-center.pt-2
-					pagination(
-						:itemsLength="count"
-						@getPage="getPage"
-						:limit="limit"
+				v-card(outlined)
+					v-data-table(
+						:headers="headers"
+						:items="systemSettings"
+						:items-per-page-options="[limit]"
+						hide-default-footer
 					)
+						template(v-slot:body="{items}")
+							tbody
+								tr(v-for="item in items" :key="item.id")
+									td.text-xs-left {{ item.title }}
+									td.text-xs-left {{ item.slug }}
+									td.text-end
+										v-switch(
+											v-if="item.settingType === 'switcher'"
+											v-model="item.setting.value"
+											@change="update(item)"
+										)
+										v-text-field(
+											v-if="item.settingType === 'text'"
+											v-model="item.setting.value"
+											@change="update(item)"
+										)
+					v-card-actions.text-xs-center.pt-2
+						pagination(
+							:itemsLength="count"
+							@getPage="getPage"
+							:limit="limit"
+						)
 </template>
 
 <script>
@@ -53,11 +54,11 @@ export default {
     headers() {
       return [
         {
-          text: this.d.name,
+          text: `${this.d.name || "Наименование"}`,
           value: "title"
         },
         {
-          text: this.d.slug,
+          text: `${this.d.slug || "Псевдоним"}`,
           value: "slug"
         },
         { text: "", value: "value", sortable: false }
