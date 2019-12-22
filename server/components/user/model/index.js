@@ -27,7 +27,10 @@ const Model = sequelize.define('user', {
   firstname: Sequelize.STRING,
   lastname: Sequelize.STRING,
   middlename: Sequelize.STRING,
-  birthday: Sequelize.DATE,
+  birthday: {
+    type: Sequelize.DATE,
+    allowNull: true,
+  },
   country: Sequelize.STRING,
   city: Sequelize.STRING,
   street: Sequelize.STRING,

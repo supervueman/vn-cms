@@ -75,22 +75,25 @@ export default {
 
   methods: {
     async update() {
-      this.$v.profile.$touch();
-      const data = {
-        body: {
-          slug: this.profile.slug,
-          firstname: this.profile.firstname,
-          lastname: this.profile.lastname,
-          middlename: this.profile.middlename
-        },
-        query: {
-          filter: {
-            include: ["role"]
+      if (this.r.is_user_update) {
+        this.$v.profile.$touch();
+        const data = {
+          body: {
+            id: this.profile.id,
+            slug: this.profile.slug,
+            firstname: this.profile.firstname,
+            lastname: this.profile.lastname,
+            middlename: this.profile.middlename
+          },
+          query: {
+            filter: {
+              include: ["role", "context"]
+            }
           }
+        };
+        if (!this.$v.profile.$error) {
+          await this.$store.dispatch("user/update", data);
         }
-      };
-      if (!this.$v.profile.$error) {
-        await this.$store.dispatch("profile/update", data);
       }
     }
   }

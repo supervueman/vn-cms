@@ -7,9 +7,10 @@
 export default {
   name: "ProfileRoleData",
 
-  computed: {
-    profile() {
-      return this.$store.getters["profile/get"];
+  props: {
+    profile: {
+      type: Object,
+      default: () => {}
     }
   }
 };

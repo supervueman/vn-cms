@@ -49,21 +49,24 @@ export default {
 
   methods: {
     async update() {
-      const data = {
-        body: {
-          country: this.profile.country,
-          city: this.profile.city,
-          street: this.profile.street,
-          home: this.profile.home,
-          apartment: this.profile.apartment
-        },
-        query: {
-          filter: {
-            include: ["role"]
+      if (this.r.is_user_update) {
+        const data = {
+          body: {
+            id: this.profile.id,
+            country: this.profile.country,
+            city: this.profile.city,
+            street: this.profile.street,
+            home: this.profile.home,
+            apartment: this.profile.apartment
+          },
+          query: {
+            filter: {
+              include: ["role", "context"]
+            }
           }
-        }
-      };
-      await this.$store.dispatch("profile/update", data);
+        };
+        await this.$store.dispatch("user/update", data);
+      }
     }
   }
 };

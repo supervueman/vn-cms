@@ -19,7 +19,7 @@ const actions = {
       });
     });
 
-    if (response !== undefined && response.status === 200) {
+    if (typeof response === 'object' && response.status === 200) {
       this.dispatch('preloader/fetch', false);
       commit('SET', response.data);
     }
@@ -47,7 +47,7 @@ const actions = {
       });
     });
 
-    if (response !== undefined && response.status === 200) {
+    if (typeof response === 'object' && response.status === 200) {
       this.dispatch('preloader/fetch', false);
     }
   },
@@ -67,7 +67,7 @@ const actions = {
       });
     });
 
-    if (response !== undefined && response.status === 200) {
+    if (typeof response === 'object' && response.status === 200) {
       this.dispatch('preloader/fetch', false);
       this.dispatch("notification/fetch", {
         type: "success",
@@ -93,7 +93,7 @@ const actions = {
       });
     });
 
-    if (response !== undefined && response.status === 200) {
+    if (typeof response === 'object' && response.status === 200) {
       this.dispatch('preloader/fetch', false);
       this.dispatch("notification/fetch", {
         type: "success",
@@ -109,22 +109,24 @@ const actions = {
     this.dispatch('preloader/fetch', true);
     const data = requestDataHandler('DELETE', '/users/remove', payload.body);
 
-    const response = await axios(data);
+    const response = await axios(data).catch(err => {
+      this.dispatch('preloader/fetch', false);
+      this.dispatch("notification/fetch", {
+        type: "error",
+        message: `${err}`,
+        isActive: true
+      });
+      return false;
+    });
 
-    if (response !== undefined) {
+    if (typeof response === 'object' && response.status === 204) {
       this.dispatch('preloader/fetch', false);
       this.dispatch("notification/fetch", {
         type: "success",
         message: 'Успешно удалено!',
         isActive: true
       });
-    } else {
-      this.dispatch('preloader/fetch', false);
-      this.dispatch("notification/fetch", {
-        type: "error",
-        message: 'Произошла ошибка при удалении!',
-        isActive: true
-      });
+      return true;
     }
   },
 
@@ -143,7 +145,7 @@ const actions = {
       });
     });
 
-    if (response !== undefined && response.status === 200) {
+    if (typeof response === 'object' && response.status === 200) {
       this.dispatch('preloader/fetch', false);
       commit('SET_ALL', response.data);
     }
@@ -164,7 +166,7 @@ const actions = {
       });
     });
 
-    if (response !== undefined && response.status === 200) {
+    if (typeof response === 'object' && response.status === 200) {
       this.dispatch('preloader/fetch', false);
       commit('SET_COUNT', response.data.count);
     }

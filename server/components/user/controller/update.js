@@ -3,37 +3,53 @@ const Model = require('../model');
 module.exports = async (req, res) => {
   if (!req.rules.is_user_update) {
     res.status(403).send({
-      message: 'Access denied!'
+      message: 'Forbidden'
     });
     return;
   }
 
-  const item = await Model.findByPk(req.body.id);
+  const item = await Model.findByPk(req.body.id).catch(err => {
+    res.status(400).send({
+      message: 'Bad request'
+    });
+    return;
+  });
 
   if (!item) {
     res.status(404).send({
-      message: 'Not found!'
+      message: 'Not found'
     });
     return;
   }
 
-  const reqUser = req.body;
-  delete reqUser.id;
-  delete reqUser.password;
-  delete reqUser.token;
-
-  if ((req.managerAccess && String(item.userId) === String(req.profile.id)) || (!req.managerAccess && String(item.userId) === String(req.profile.userId)) || req.adminAccess) {
-    const updatedItem = await item.update(reqUser);
-
-    const filter = JSON.parse(req.query.filter || "{}");
-
-    const newItem = await Model.findByPk(updatedItem.id, filter);
-
-    res.status(200).send(newItem);
-  } else {
+  // Если не админ и контексты не совпадают то запретить
+  if (!req.adminAccess && item.contextId !== req.context.id) {
     res.status(403).send({
-      message: 'Access denied!'
+      message: 'Forbidden'
     });
     return;
   }
+
+  const updateUser = req.body;
+  delete updateUser.id;
+  delete updateUser.password;
+  delete updateUser.token;
+
+  const updatedItem = await item.update(updateUser).catch(err => {
+    res.status(400).send({
+      message: 'Bad request'
+    });
+    return;
+  });
+
+  const filter = JSON.parse(req.query.filter || "{}");
+
+  const newItem = await Model.findByPk(updatedItem.id, filter).catch(err => {
+    res.status(400).send({
+      message: 'Bad request'
+    });
+    return;
+  });
+
+  res.status(200).send(newItem);
 };

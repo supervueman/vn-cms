@@ -17,6 +17,30 @@
                 )
               v-flex.md12
                 v-text-field(
+                  v-model="profile.email"
+                  :label="`${d.emial || 'E-mail'}:`"
+                  @input="$v.profile.email.$touch()"
+                  @blur="$v.profile.email.$touch()"
+                  :error-messages="emailErrors"
+                )
+              v-flex.md12
+                v-select(
+                  :items="roles"
+                  item-text="title"
+                  item-value="id"
+                  v-model="profile.roleId"
+                  :label="`${d.role || 'Роль'}:`"
+                )
+              v-flex.md12
+                v-select(
+                  :items="contexts"
+                  item-text="title"
+                  item-value="id"
+                  v-model="profile.contextId"
+                  :label="`${d.context || 'Контекст'}:`"
+                )
+              v-flex.md12
+                v-text-field(
                   v-model="profile.password"
                   :label="`${d.enter_password || 'Введите пароль'}:`"
                   :type="showPassword ? 'text' : 'password'"
@@ -37,24 +61,29 @@
                   @input="$v.profile.confirmPassword.$touch()"
                   @blur="$v.profile.confirmPassword.$touch()"
                 )
+          v-card-actions
+            v-btn.ml-2(
+              depressed
+              color="primary"
+              @click="create"
+            ) {{d.create || 'Создать'}}
 </template>
 
 <script>
-// Components
-import ProfileView from "../components/View";
-
 // Mixins
 import { validationMixin } from "vuelidate";
 // Libs
-import { required, minLength, sameAs, helpers } from "vuelidate/lib/validators";
+import {
+  required,
+  minLength,
+  sameAs,
+  helpers,
+  email
+} from "vuelidate/lib/validators";
 const alpha = helpers.regex("alpha", /^[a-zA-Z0-9_-]*$/);
 
 export default {
   name: "UserCreatePage",
-
-  components: {
-    ProfileView
-  },
 
   mixins: [validationMixin],
 
@@ -65,6 +94,7 @@ export default {
         required,
         minLength: minLength(6)
       },
+      email: { required, email },
       confirmPassword: {
         required,
         minLength: minLength(6),
@@ -89,6 +119,14 @@ export default {
   computed: {
     profile() {
       return this.$store.getters["user/get"];
+    },
+
+    roles() {
+      return this.$store.getters["role/getAll"];
+    },
+
+    contexts() {
+      return this.$store.getters["context/getAll"];
     },
 
     slugErrors() {
@@ -121,6 +159,14 @@ export default {
       !this.$v.profile.confirmPassword.sameAsPassword &&
         errors.push("Пароли не совпадают!");
       return errors;
+    },
+
+    emailErrors() {
+      const errors = [];
+      if (!this.$v.profile.email.$dirty) return errors;
+      !this.$v.profile.email.email && errors.push("E-mail не валиден!");
+      !this.$v.profile.email.required && errors.push("Обязательное поле!");
+      return errors;
     }
   },
 
@@ -132,13 +178,30 @@ export default {
         }
       }
     });
+
+    await this.$store.dispatch("context/findAll", {
+      query: {
+        filter: {
+          order: [["createdAt", "DESC"]]
+        }
+      }
+    });
   },
 
   methods: {
     async create() {
-      await this.$store.dispatch("profile/createByEmail", {
-        body: this.profile
-      });
+      this.$v.$touch();
+      if (this.r.is_user_create && !this.$v.$error) {
+        await this.$store.dispatch("profile/createByEmail", {
+          body: {
+            slug: this.profile.slug,
+            email: this.profile.email,
+            roleId: Number(this.profile.roleId),
+            contextId: Number(this.profile.contextId),
+            password: this.profile.password
+          }
+        });
+      }
     }
   },
 

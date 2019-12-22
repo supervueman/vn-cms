@@ -1,13 +1,13 @@
 <template lang="pug">
-  v-expansion-panels
-    v-expansion-panel
-      v-expansion-panel-header {{d.change_password}}
-      v-expansion-panel-content
+  v-expansion-panels.elevation-0(outlined)
+    v-expansion-panel.elevation-none(outlined)
+      v-expansion-panel-header.px-4 {{d.change_password || 'Изменить пароль'}}
+      v-expansion-panel-content.px-0
         v-layout.wrap
           v-flex.md6.pr-3
             v-text-field(
               v-model="oldPassword"
-              :label="`${d.enter_old_password}:`"
+              :label="`${d.enter_old_password || 'Введите старый пароль'}:`"
               :type="showOldPassword ? 'text' : 'password'"
               :append-icon="showOldPassword ? 'visibility' : 'visibility_off'"
               @click:append="showOldPassword = !showOldPassword"
@@ -18,7 +18,7 @@
           v-flex.md6
             v-text-field(
               v-model="newPassword"
-              :label="`${d.enter_new_password}:`"
+              :label="`${d.enter_new_password || 'Введите новый пароль'}:`"
               :type="showNewPassword ? 'text' : 'password'"
               :append-icon="showNewPassword ? 'visibility' : 'visibility_off'"
               @click:append="showNewPassword = !showNewPassword"
@@ -29,7 +29,7 @@
           v-flex.md6.pr-3
             v-text-field(
               v-model="confirmNewPassword"
-              :label="`${d.confirm_password}:`"
+              :label="`${d.confirm_password || 'Подтвердите новый пароль'}:`"
               :type="showConfirmNewPassword ? 'text' : 'password'"
               :append-icon="showConfirmNewPassword ? 'visibility' : 'visibility_off'"
               @click:append="showConfirmNewPassword = !showConfirmNewPassword"
@@ -37,9 +37,9 @@
               @input="$v.confirmNewPassword.$touch()"
               @blur="$v.confirmNewPassword.$touch()"
             )
-        v-layout
-          v-btn.mr-2(color="primary" @click="changePassword") {{d.change}}
-          v-btn(color="primary" @click="clearPassword") {{d.cancel}}
+      v-expansion-panel-content.px-0
+        v-btn.mr-2(color="primary" @click="changePassword") {{d.change || 'Изменить'}}
+        v-btn(color="primary" @click="clearPassword") {{d.cancel || 'Отмена'}}
 </template>
 
 <script>
@@ -55,9 +55,9 @@ export default {
   mixins: [validationMixin],
 
   props: {
-    userId: {
-      type: Number,
-      default: 0
+    profile: {
+      type: Object,
+      default: () => {}
     }
   },
 
@@ -119,25 +119,23 @@ export default {
 
   methods: {
     async changePassword() {
-      this.$v.$touch();
+      if (this.r.is_user_update) {
+        this.$v.$touch();
 
-      if (this.$v.$error) {
-        return;
-      }
+        if (this.$v.$error) {
+          return;
+        }
 
-      const data = {
-        userId: this.userId,
-        oldPassword: this.oldPassword,
-        newPassword: this.newPassword
-      };
+        const data = {
+          id: this.profile.id,
+          oldPassword: this.oldPassword,
+          newPassword: this.newPassword
+        };
 
-      if (this.userId === this.$store.getters["profile/get"].id) {
-        await this.$store.dispatch("profile/changePassword", { body: data });
-      } else {
         await this.$store.dispatch("user/changePassword", { body: data });
-      }
 
-      this.clearPassword();
+        this.clearPassword();
+      }
     },
 
     clearPassword() {

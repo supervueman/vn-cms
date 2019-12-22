@@ -3,7 +3,7 @@ const Model = require('../model');
 module.exports = async (req, res) => {
   if (!req.rules.is_user_read) {
     res.status(403).send({
-      message: 'Access denied!'
+      message: 'Forbidden'
     });
     return;
   }
@@ -14,16 +14,16 @@ module.exports = async (req, res) => {
 
   if (!item) {
     res.status(404).send({
-      message: 'Not found!'
+      message: 'Not found'
     });
   }
 
-  if ((req.managerAccess && String(item.userId) === String(req.profile.id)) || (!req.managerAccess && String(item.userId) === String(req.profile.userId)) || req.adminAccess) {
-    res.status(200).send(item);
-  } else {
+  if (!req.adminAccess && item.contextId !== req.context.id) {
     res.status(403).send({
-      message: 'Access denied!'
+      message: 'Forbidden'
     });
     return;
   }
+
+  res.status(200).send(item);
 };

@@ -14,13 +14,17 @@ module.exports = async (req, res) => {
     filter.where = {};
   }
 
-  if (req.managerAccess) {
-    filter.where.userId = req.profile.id;
-  } else if (!req.managerAccess && !req.adminAccess) {
-    filter.where.userId = req.profile.userId;
+  // Если запрос от админа то вернуть всех а если нет то вернуть только если совпадают контексты
+  if (!req.adminAccess) {
+    filter.where.contextId = req.context.id;
   }
 
-  const count = await Model.count(filter);
+  const count = await Model.count(filter).catch(err => {
+    res.status(400).send({
+      message: 'Bad request'
+    });
+    return;
+  });
 
   res.status(200).send({
     count

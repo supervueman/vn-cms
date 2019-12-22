@@ -3,11 +3,11 @@
     .body-2.mb-12.mt-2 {{d.your_profile || 'Ваш профиль'}}: {{profile.slug}} ({{profile.id}})
     v-layout.wrap
       v-flex.xs12.md7.pr-2
-        profile-common-data
-        profile-contacts-data
-        profile-address-data
-        profile-keys-data.mb-3
-        profile-password-change.mb-3
+        profile-common-data(:profile="profile")
+        profile-contacts-data(:profile="profile")
+        profile-address-data(:profile="profile")
+        profile-keys-data.mb-3(:profile="profile")
+        profile-password-change.mb-3(:profile="profile")
         .d-flex.justify-center
           v-btn(
             text
@@ -16,9 +16,9 @@
             @click="isRemoveDialog = true"
           ) {{d.remove || 'Удалить'}}
       v-flex.xs12.md5.pl-2
-        profile-avatar-data
-        profile-role-data
-        profile-context-data
+        profile-avatar-data(:profile="profile")
+        profile-role-data(:profile="profile")
+        profile-context-data(:profile="profile")
     v-dialog.elevation-0(
       v-model="isRemoveDialog"
       max-width="500px"

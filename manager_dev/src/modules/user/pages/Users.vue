@@ -120,7 +120,7 @@ export default {
       }
     };
     await this.$store.dispatch("user/findAll", data);
-    await this.$store.dispatch("user/count", data);
+    await this.$store.dispatch("user/count", {});
   },
 
   methods: {
@@ -140,6 +140,7 @@ export default {
 
     async remove() {
       if (this.r.is_user_delete) {
+        // Если удаляемый пользователь это профиль то удаляем и разлогиниваем
         if (this.removeItem.id === this.$store.getters["profile/get"].id) {
           await this.$store.dispatch("profile/remove", {
             body: { id: this.removeItem.id }

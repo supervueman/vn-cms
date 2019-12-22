@@ -54,7 +54,7 @@ module.exports = async (req, res) => {
   }
 
   // Если контекст не валидный или не назначен то присвоить контекст пользователя
-  if ((typeof req.body.contextId !== 'string' || typeof req.body.contextId !== 'number') && !!req.body.contextId) {
+  if (typeof req.body.contextId !== 'number' && !!req.body.contextId) {
     req.body.contextId = req.context.id;
   }
 
@@ -89,7 +89,7 @@ module.exports = async (req, res) => {
   });
 
   // Создаем папку для пользователя
-  await createDir(`../files/user-${createdUser.contextId}-${createdUser.id}`);
+  await createDir(`../files/user-${createdUser.contextId}`);
 
   res.status(200).send(createdUser);
 };

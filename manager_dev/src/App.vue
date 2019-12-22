@@ -41,12 +41,10 @@ export default {
     };
   },
 
-  data() {
-    return {
-      isLoginDialog: false,
-      content: ""
-    };
-  },
+  data: () => ({
+    isLoginDialog: false,
+    content: ""
+  }),
 
   computed: {
     profile() {

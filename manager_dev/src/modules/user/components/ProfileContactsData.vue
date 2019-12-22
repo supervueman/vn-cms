@@ -88,23 +88,26 @@ export default {
 
   methods: {
     async update() {
-      this.$v.profile.$touch();
-      const data = {
-        body: {
-          email: this.profile.email,
-          phone: this.profile.phone,
-          facebook: this.profile.facebook,
-          vkontakte: this.profile.vkontakte,
-          instagram: this.profile.instagram
-        },
-        query: {
-          filter: {
-            include: ["role"]
+      if (this.r.is_user_update) {
+        this.$v.profile.$touch();
+        const data = {
+          body: {
+            id: this.profile.id,
+            email: this.profile.email,
+            phone: this.profile.phone,
+            facebook: this.profile.facebook,
+            vkontakte: this.profile.vkontakte,
+            instagram: this.profile.instagram
+          },
+          query: {
+            filter: {
+              include: ["role", "context"]
+            }
           }
+        };
+        if (!this.$v.profile.$error) {
+          await this.$store.dispatch("user/update", data);
         }
-      };
-      if (!this.$v.profile.$error) {
-        await this.$store.dispatch("profile/update", data);
       }
     }
   }
