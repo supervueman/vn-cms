@@ -192,7 +192,7 @@ export default {
     async create() {
       this.$v.$touch();
       if (this.r.is_user_create && !this.$v.$error) {
-        await this.$store.dispatch("profile/createByEmail", {
+        const bool = await this.$store.dispatch("profile/createByEmail", {
           body: {
             slug: this.profile.slug,
             email: this.profile.email,
@@ -201,6 +201,10 @@ export default {
             password: this.profile.password
           }
         });
+
+        if (bool) {
+          this.$router.push(`/users/${this.$store.getters["user/get"].id}`);
+        }
       }
     }
   },

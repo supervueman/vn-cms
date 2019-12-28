@@ -94,6 +94,7 @@ const actions = {
         message: 'Успешно сохранено!',
         isActive: true
       });
+      return true;
     }
   },
 
