@@ -17,6 +17,7 @@
 						@click="isDictionaryCreate = true"
 						v-if="r.is_dictionary_create"
 					) {{d.create_dictionary || 'Создать словарь'}}
+
 				v-layout.dictionary
 					v-flex.px-2.dictionary--list-text
 						v-flex
@@ -38,6 +39,7 @@
 								@click:append="isRemoveItem = true; removeItemSlug = key"
 								:disabled="!r.is_dictionary_update"
 							)
+
 					v-flex.px-2
 						v-tabs(
 							:grow="true"
