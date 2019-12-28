@@ -19,7 +19,7 @@
 			slider-color="primary"
 			grow
 		)
-			v-tab(v-if="r.is_resource_read") {{d.resources}}
+			v-tab(v-if="r.is_resource_read") {{d.resources || 'Ресурсы'}}
 			v-tab-item(v-if="r.is_resource_read")
 				v-app-bar(flat height="50")
 					v-tooltip(top v-if="r.is_resource_create")
@@ -33,7 +33,7 @@
 								v-on="on"
 							)
 								v-icon add_circle_outline
-						span {{d.create_resource}}
+						span {{d.create_resource || 'Создать ресурс'}}
 					v-tooltip(top v-if="r.is_resource_read")
 						template(v-slot:activator="{ on }")
 							v-btn(
@@ -45,7 +45,7 @@
 								@click="reloadResources"
 							)
 								v-icon replay
-						span {{d.reload}}
+						span {{d.reload || 'Обновить'}}
 
 				v-list
 					v-list-item(
@@ -61,16 +61,16 @@
 						v-list-item-action
 							v-icon(color="primary") library_books
 						v-list-item-content
-							v-list-item-title {{d.all_resources}}
+							v-list-item-title {{d.all_resources || 'Все ресурсы'}}
 
-			v-tab(v-if="r.is_elements_access") {{d.elements}}
+			v-tab(v-if="r.is_elements_access") {{d.develop || 'Разработка'}}
 			v-tab-item(v-if="r.is_elements_access")
 				v-list
 					v-list-item(to="/layouts" v-if="r.is_layout_read")
 						v-list-item-action
 							v-icon(color="primary") layers
 						v-list-item-content
-							v-list-item-title {{d.layouts}}
+							v-list-item-title {{d.layouts || 'Шаблоны'}}
 						v-list-item-action
 							v-btn(icon to="/layout-create")
 								v-icon(color="primary") add_circle_outline
@@ -78,7 +78,7 @@
 						v-list-item-action
 							v-icon(color="primary") playlist_add
 						v-list-item-content
-							v-list-item-title {{d.additional_fields}}
+							v-list-item-title {{d.fields || 'Поля'}}
 						v-list-item-action
 							v-btn(icon to="/field-create")
 								v-icon(color="primary") add_circle_outline
@@ -86,7 +86,7 @@
 						v-list-item-action
 							v-icon(color="primary") folder
 						v-list-item-content
-							v-list-item-title {{d.field_categories}}
+							v-list-item-title {{d.field_categories || 'Категории полей'}}
 						v-list-item-action
 							v-btn(icon to="/fieldcategory-create")
 								v-icon(color="primary") add_circle_outline
@@ -107,14 +107,14 @@
 							v-btn(icon to="/page")
 								v-icon(color="primary") add_circle_outline
 
-			v-tab(v-if="r.is_filesystem_access") {{d.files}}
+			v-tab(v-if="r.is_filesystem_access") {{d.files || 'Файлы'}}
 			v-tab-item(v-if="r.is_filesystem_access")
 				v-list
 					v-list-item(to="/filesystem")
 						v-list-item-action
 							v-icon(color="primary") folder
 						v-list-item-content
-							v-list-item-title {{d.filesystem}}
+							v-list-item-title {{d.filesystem || 'Файловая система'}}
 </template>
 
 <script>
