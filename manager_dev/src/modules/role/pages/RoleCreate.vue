@@ -34,7 +34,7 @@
               :disabled="role.slug === 'admin'"
               )
       v-card-actions
-        v-btn.ml-2(
+        v-btn.ml-2.mb-2(
           depressed
           color="primary"
           @click="create"

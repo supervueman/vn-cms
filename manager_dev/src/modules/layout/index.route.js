@@ -10,4 +10,4 @@ export default [{
   path: '/layouts',
   name: 'layouts',
   component: 'Layouts'
-}]
+}];

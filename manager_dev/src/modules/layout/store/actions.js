@@ -20,21 +20,10 @@ const actions = {
       });
     });
 
-    if (response !== undefined && response.status === 200) {
+    if (typeof response === 'object' && response.status === 200) {
       this.dispatch('preloader/fetch', false);
-      this.dispatch('ide/findLayout', {
-        query: {
-          name: response.data.slug
-        }
-      });
       commit('SET', response.data);
     }
-  },
-
-  async findOne({
-    commit
-  }, payload) {
-    commit('SET', layout);
   },
 
   async create({
@@ -52,14 +41,14 @@ const actions = {
       });
     });
 
-    if (response !== undefined && response.status === 200) {
+    if (typeof response === 'object' && response.status === 200) {
       this.dispatch('preloader/fetch', false);
       this.dispatch('notification/fetch', {
         type: 'success',
         message: 'Успешно сохранено!',
         isActive: true
       });
-      router.push(`/layouts/${response.data.id}`);
+      return true;
     }
   },
 
@@ -67,7 +56,7 @@ const actions = {
     commit
   }, payload) {
     this.dispatch('preloader/fetch', true);
-    const data = requestDataHandler('PUT', '/layouts/update', payload.body);
+    const data = requestDataHandler('PUT', `/layouts/update/${payload.params.id}`, payload.body);
 
     const response = await axios(data).catch(err => {
       this.dispatch('preloader/fetch', false);
@@ -78,7 +67,7 @@ const actions = {
       });
     });
 
-    if (response !== undefined && response.status === 200) {
+    if (typeof response === 'object' && response.status === 200) {
       this.dispatch('preloader/fetch', false);
       this.dispatch('notification/fetch', {
         type: 'success',
@@ -92,7 +81,7 @@ const actions = {
     commit
   }, payload) {
     this.dispatch('preloader/fetch', true);
-    const data = requestDataHandler('DELETE', '/layouts/remove', payload.body);
+    const data = requestDataHandler('DELETE', `/layouts/remove/${payload.params.id}`);
 
     const response = await axios(data).catch(err => {
       this.dispatch('preloader/fetch', false);
@@ -103,7 +92,7 @@ const actions = {
       });
     });
 
-    if (response !== undefined && response.status === 200) {
+    if (typeof response === 'object' && response.status === 200) {
       this.dispatch('preloader/fetch', false);
       this.dispatch('layout/clear');
       this.dispatch('notification/fetch', {
@@ -130,7 +119,7 @@ const actions = {
       });
     });
 
-    if (response !== undefined && response.status === 200) {
+    if (typeof response === 'object' && response.status === 200) {
       this.dispatch('preloader/fetch', false);
       commit('SET_ALL', response.data);
     }
@@ -151,7 +140,7 @@ const actions = {
       });
     });
 
-    if (response !== undefined && response.status === 200) {
+    if (typeof response === 'object' && response.status === 200) {
       this.dispatch('preloader/fetch', false);
       commit('SET_COUNT', response.data.count);
     }
