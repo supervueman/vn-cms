@@ -42,11 +42,16 @@ export default {
 
   methods: {
     getPage(page) {
-      this.$router.push(
-        `${this.$route.path}?offset=${page * this.offset - this.offset}&limit=${
-          this.limit
-        }`
-      );
+      let url = `${this.$route.path}?offset=${page * this.offset -
+        this.offset}&limit=${this.limit}`;
+
+      for (let key in this.$route.query) {
+        if (key !== "offset" && key !== "limit")
+          url += `&${key}=${this.$route.query[key]}`;
+      }
+
+      this.$router.push(url);
+
       this.$emit("getPage", {
         offset: Number(this.$route.query.offset),
         limit: Number(this.$route.query.limit)
@@ -55,3 +60,8 @@ export default {
   }
 };
 </script>
+
+<style lang="sass">
+  .v-pagination__item--active, .v-pagination__item, .v-pagination__navigation
+    box-shadow: none
+</style>
