@@ -1,61 +1,46 @@
 <template lang="pug">
   v-flex(v-if="r.is_field_read")
-    .body-2.mb-12.mt-2 {{d.additional_fields}}
-    v-layout.wrap
-      v-flex
-        v-toolbar(flat color="white")
-          v-spacer
-          v-flex.md4.mr-4
-            v-select(
-              :items="fieldCategories"
-              item-text="title"
-              item-value="id"
-              hide-details
-              clearable
-              :label="`${d.field_category}:`"
-              @change="filterFields($event)"
-            )
-          v-btn(
-            color="primary"
-            to="/field-create"
-            dark
-            v-if="r.is_field_create"
-          ) {{d.create_field}}
-        v-data-table(
-          :headers="headers"
-          :items="fields"
-          :items-per-page-options="[limit]"
-          hide-default-footer
+    .body-2.mb-12.mt-2 {{d.fields || 'Поля'}}
+    v-card(outlined)
+      fields-toolbar(
+        @filter="filterFields($event)"
+      )
+      v-data-table(
+        :headers="headers"
+        :items="fields"
+        :items-per-page-options="[limit]"
+        hide-default-footer
+      )
+        template(v-slot:body="{items}")
+          tbody
+            tr(v-for="item in items" :key="item.id")
+              td.text-xs-left
+                router-link(:to="`/fields/${item.id}`") {{ item.title }}
+              td.text-xs-left 
+                div(
+                  v-for="layout in item.layouts"
+                  :key="layout.id"
+                )
+                  router-link(
+                    :to="`/layouts/${layout.id}`"
+                  ) {{layout.title}}
+              td.text-xs-left {{item.fieldType}}
+              td.text-end
+                v-btn(
+                  text
+                  fab
+                  color="primary"
+                  @click="removeDialogOpen(item)"
+                  v-if="r.is_field_delete"
+                )
+                  v-icon delete
+      v-card-actions.text-xs-center.pt-2
+        pagination(
+          :itemsLength="count"
+          @getPage="getPage"
+          :limit="limit"
         )
-          template(v-slot:body="{items}")
-            tbody
-              tr(v-for="item in items" :key="item.id")
-                td.text-xs-left
-                  router-link(:to="`/fields/${item.id}`") {{ item.title }}
-                td.text-xs-left 
-                  div(
-                    v-for="layout in item.layouts"
-                    :key="layout.id"
-                  )
-                    router-link(
-                      :to="`/layouts/${layout.id}`"
-                    ) {{layout.title}}
-                td.text-xs-left {{item.fieldType}}
-                td.text-end
-                  v-btn(
-                    text
-                    fab
-                    color="primary"
-                    @click="removeDialogOpen(item)"
-                    v-if="r.is_field_delete"
-                  )
-                    v-icon delete
-        div.text-xs-center.pt-2
-          pagination(
-            :itemsLength="count"
-            @getPage="getPage"
-            :limit="limit"
-          )
+
     v-dialog(
       v-model="isRemoveDialog"
       max-width="500px"
@@ -68,12 +53,19 @@
 </template>
 
 <script>
+// Components
+import FieldsToolbar from "../components/FieldsToolbar";
+
 export default {
-  name: "Fields",
+  name: "FieldsPage",
+
+  components: {
+    FieldsToolbar
+  },
 
   metaInfo() {
     return {
-      title: `${this.d.fields || "Fields"}`
+      title: `${this.d.fields || "Поля"}`
     };
   },
 
@@ -92,11 +84,15 @@ export default {
     headers() {
       return [
         {
-          text: this.d.name,
+          text: `${this.d.name || "Наименование"}`,
           value: "title"
         },
-        { text: this.d.layout, sortable: false },
-        { text: this.d.type, value: "fieldType", sortable: true },
+        { text: `${this.d.layouts || "Шаблоны"}`, sortable: false },
+        {
+          text: `${this.d.type_type || "Тип поля"}`,
+          value: "fieldType",
+          sortable: true
+        },
         { text: "", sortable: false }
       ];
     },
@@ -105,45 +101,50 @@ export default {
     },
     count() {
       return this.$store.getters["field/getCount"];
-    },
-
-    fieldCategories() {
-      return this.$store.getters["fieldcategory/getAll"];
     }
   },
 
   async mounted() {
+    const where = {};
+    if (
+      this.$route.query.categoryId &&
+      this.$route.query.categoryId !== "undefined"
+    ) {
+      where.categoryId = this.$route.query.categoryId;
+    }
     const data = {
       query: {
         filter: {
           offset: this.$route.query.offset || 0,
           limit: this.$route.query.limit || this.limit,
           order: [["createdAt", "DESC"]],
-          include: ["layouts"]
+          include: ["layouts"],
+          where
         }
       }
     };
     await this.$store.dispatch("field/findAll", data);
-    await this.$store.dispatch("field/count", data);
-
-    await this.$store.dispatch("fieldcategory/findAll", {
-      query: {
-        filter: {
-          order: [["createdAt", "DESC"]]
-        }
-      }
-    });
+    await this.$store.dispatch("field/count", {});
   },
 
   methods: {
     async getPage({ offset, limit }) {
+      const where = {};
+      if (
+        this.$route.query.categoryId &&
+        this.$route.query.categoryId !== "undefined"
+      ) {
+        where.categoryId = this.$route.query.categoryId;
+      }
+
       const data = {
         query: {
           filter: {
             offset,
             limit,
             order: [["createdAt", "DESC"]],
-            include: ["layouts"]
+            include: ["layouts"],
+            where
           }
         }
       };
@@ -151,24 +152,39 @@ export default {
     },
 
     async remove() {
-      if (!this.r.is_field_delete) {
-        return;
+      if (this.r.is_field_delete) {
+        const layouts = this.removeItem.layouts.map(el => el.id);
+
+        await this.$store.dispatch("field/removeLayout", {
+          body: {
+            id: this.removeItem.id,
+            layouts
+          }
+        });
+
+        await this.$store.dispatch("field/remove", {
+          params: { id: this.removeItem.id }
+        });
+
+        const fields = this.fields.filter(el => {
+          if (el.id !== this.removeItem.id) {
+            return el;
+          }
+        });
+        this.$store.dispatch("field/setAll", fields);
       }
-      await this.$store.dispatch("field/remove", {
-        body: { id: this.removeItem.id }
-      });
-      const fields = this.fields.filter(el => {
-        if (el.id !== this.removeItem.id) {
-          return el;
-        }
-      });
-      this.$store.dispatch("field/setAll", fields);
     },
 
     async filterFields(event) {
+      this.$router.push(
+        `/fields?offset=${this.$route.query.offset || 0}&limit=${this.$route
+          .query.limit || this.limit}&categoryId=${event}`
+      );
       await this.$store.dispatch("field/findAll", {
         query: {
           filter: {
+            offset: this.$route.query.offset || 0,
+            limit: this.$route.query.limit || this.limit,
             order: [["createdAt", "DESC"]],
             where: { categoryId: event },
             include: ["layouts"]

@@ -31,6 +31,14 @@
               v-if="r.is_layout_create"
             ) {{d.save || 'Сохранить'}}
 
+    .d-flex.justify-center.mt-3
+      v-btn(
+        text
+        color="error"
+        depressed
+        @click="isRemoveDialog = true"
+      ) {{d.remove || 'Удалить'}}
+
     v-dialog(
       v-model="isRemoveDialog"
       max-width="500px"
@@ -40,14 +48,6 @@
         :isActive.sync="isRemoveDialog"
         :name="layout.title"
       )
-
-    .d-flex.justify-center.mt-3
-      v-btn(
-        text
-        color="error"
-        depressed
-        @click="isRemoveDialog = true"
-      ) {{d.remove || 'Удалить'}}
 </template>
 
 <script>

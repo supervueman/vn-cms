@@ -8,6 +8,7 @@ module.exports = () => {
     through: 'LayoutField',
     constraints: false
   });
+
   Model.belongsTo(FieldCategory, {
     as: 'category'
   });
