@@ -47,15 +47,15 @@
             v-icon settings
         v-list
           v-list-item(to="/roles")
-            v-list-item-title {{d.roles_politics}}
+            v-list-item-title {{d.roles_politics || 'Роли'}}
           v-list-item(to="/system-settings")
             v-list-item-title {{d.system_settings}}
           v-list-item(to="/contexts" v-if="r.is_context_read")
             v-list-item-title {{d.contexts || 'Контексты'}}
           v-list-item(to="/dictionaries")
-            v-list-item-title {{d.dictionaries}}
+            v-list-item-title {{d.dictionaries || 'Словари'}}
           v-list-item(@click="logout")
-            v-list-item-title {{d.logout}}
+            v-list-item-title {{d.logout || 'Выход'}}
 </template>
 
 <script>

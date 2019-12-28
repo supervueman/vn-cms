@@ -5,12 +5,12 @@
 			@click="$emit('triggerForUploadFile')"
 		)
 			v-icon.mr-2 vertical_align_top
-			div {{d.upload}}
+			div {{d.upload || 'Загрузить'}}
 		v-list-item(
 			v-if="currentFile.type"
 		)
 			v-icon.mr-2 vertical_align_bottom
-			a.file-download(:href="currentFile.relativePath" download) {{d.download}}
+			a.file-download(:href="currentFile.relativePath" download) {{d.download || 'Скачать'}}
 		v-list-item(
 			v-if="!currentFile.type && r.is_filesystem_directory_create"
 			@click="$emit('openDialogForCreateFolder', true)"

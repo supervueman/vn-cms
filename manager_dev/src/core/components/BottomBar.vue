@@ -14,7 +14,7 @@
       v-card-text.white--text
         v-layout(justify-space-between)
           div {{ new Date().getFullYear() }} — Platform
-          div Разработка
+          div {{d.developer || 'Разработка'}}
             a.dev-link(href="https://multikey.studio/" target="_blank") MULTIKEY
 </template>
 

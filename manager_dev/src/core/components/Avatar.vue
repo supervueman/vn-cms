@@ -1,5 +1,5 @@
 <template lang="pug">
-  div.avatar(@click="isActiveDialog = true")
+  .avatar(@click="isActiveDialog = true")
     img(:src="imagePath", alt="Avatar")
     v-dialog(v-model="isActiveDialog")
       filesystem(@selectFile="selectFile")

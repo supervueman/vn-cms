@@ -14,17 +14,17 @@
             v-on="on"
             @click="$emit('triggerForUploadFile')"
           ) vertical_align_top
-        span {{d.upload}}
+        span {{d.upload || 'Загрузить'}}
       v-tooltip(top v-if="currentFileType")
         template(v-slot:activator="{ on }")
           a.file-download(:href="currentFilePath" download v-on="on")
             v-icon.storage-control vertical_align_bottom
-        span {{d.download}}
+        span {{d.download || 'Скачать'}}
     div
       v-tooltip(top)
         template(v-slot:activator="{ on }")
           v-icon.storage-control(@click="$emit('filesystemReload')" v-on="on") replay
-        span {{d.reload}}
+        span {{d.reload || 'Обновить'}}
 </template>
 
 <script>

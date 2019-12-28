@@ -4,6 +4,7 @@
       v-btn(
         text
         v-on="on"
+        depressed
       ) {{d.applications || 'Приложения'}}
     v-list
       v-list-item(
@@ -26,3 +27,9 @@ export default {
   }
 };
 </script>
+
+<style lang="sass">
+  .v-menu__content
+    box-shadow: none
+    border: 1px solid rgba(0, 0, 0, 0.12)
+</style>
