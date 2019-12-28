@@ -108,7 +108,8 @@ export default {
     const where = {};
     if (
       this.$route.query.categoryId &&
-      this.$route.query.categoryId !== "undefined"
+      this.$route.query.categoryId !== "undefined" &&
+      this.$route.query.categoryId !== "NaN"
     ) {
       where.categoryId = this.$route.query.categoryId;
     }
@@ -132,7 +133,8 @@ export default {
       const where = {};
       if (
         this.$route.query.categoryId &&
-        this.$route.query.categoryId !== "undefined"
+        this.$route.query.categoryId !== "undefined" &&
+        this.$route.query.categoryId !== "NaN"
       ) {
         where.categoryId = this.$route.query.categoryId;
       }
