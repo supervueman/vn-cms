@@ -19,7 +19,7 @@
                   text
                   fab
                   color="primary"
-                  @click="removeItem = item; sRemoveDialog = true"
+                  @click="removeItem = item; isRemoveDialog = true"
                   v-if="r.is_layout_delete"
                 )
                   v-icon delete
