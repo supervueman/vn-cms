@@ -3,33 +3,43 @@ const Model = require('../model');
 module.exports = async (req, res) => {
   if (!req.rules.is_resource_delete) {
     res.status(403).send({
-      message: 'Access denied!'
+      message: 'Forbidden'
     });
     return;
   }
 
-  const item = await Model.findByPk(req.body.id);
+  const item = await Model.findByPk(req.params.id).catch(err => {
+    res.status(400).send({
+      message: 'Bad request'
+    });
+    return;
+  });
 
   if (!item) {
     res.status(404).send({
-      message: 'Not found!'
+      message: 'Not found'
     });
   }
 
-  // (Если это менеджер и userId ресурса совпадает с id менеджера или это админ) или (userId ресурса совпадает с userId профиля)
-  if (((req.managerAccess && item.userId === req.profile.id) || req.adminAccess) || item.userId === req.profile.userId) {
-    await Model.destroy({
-      where: {
-        id: req.body.id
-      }
-    });
-    res.status(200).send({
-      message: 'Success!'
-    });
-  } else {
+  if (req.context.slug !== 'root' && item.contextId !== req.context.id) {
     res.status(403).send({
-      message: 'Access denied!'
+      message: 'Forbidden'
     });
     return;
   }
+
+  await Model.destroy({
+    where: {
+      id: req.params.id
+    }
+  }).catch(err => {
+    res.status(400).send({
+      message: 'Bad request'
+    });
+    return;
+  });
+
+  res.status(204).send({
+    message: 'No content'
+  });
 };

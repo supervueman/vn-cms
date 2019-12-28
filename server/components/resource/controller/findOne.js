@@ -3,29 +3,33 @@ const Model = require('../model');
 module.exports = async (req, res) => {
   if (!req.rules.is_resource_read) {
     res.status(403).send({
-      message: 'Access denied!'
+      message: 'Forbidden'
     });
     return;
   }
 
   const filter = JSON.parse(req.query.filter || "{}");
 
-  const item = await Model.findOne(filter);
+  const item = await Model.findOne(filter).catch(err => {
+    res.status(400).send({
+      message: 'Bad request'
+    });
+    return;
+  });
 
   if (!item) {
     res.status(404).send({
-      message: 'Not found!'
+      message: 'Not found'
     });
     return;
   }
 
-  // (Если это менеджер и userId ресурса совпадает с id менеджера или это админ) или (userId ресурса совпадает с userId профиля)
-  if (((req.managerAccess && item.userId === req.profile.id) || req.adminAccess) || item.userId === req.profile.userId) {
-    res.status(200).send(item);
-  } else {
+  if (req.context.slug !== 'root' && item.contextId !== req.context.id) {
     res.status(403).send({
-      mesasge: 'Access denied!'
+      message: 'Forbidden'
     });
     return;
   }
+
+  res.status(200).send(item);
 };

@@ -21,14 +21,4 @@ const Model = sequelize.define('resource', {
   menuindex: Sequelize.INTEGER
 });
 
-Model.prototype.toJSON = function () {
-  const values = Object.assign({}, this.get());
-
-  if (values.user) {
-    delete values.user.dataValues.password;
-  }
-
-  return values;
-};
-
 module.exports = Model;

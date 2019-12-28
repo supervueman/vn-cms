@@ -2,19 +2,23 @@ const Model = require('../model');
 const SystemSetting = require('../../systemsetting/model');
 
 module.exports = async (req, res) => {
-  if (!req.rules.is_resource_create) {
+  if (!req.rules.is_resource_create && !req.context) {
     res.status(403).send({
-      message: 'Access denied!'
+      message: 'Forbidden'
     });
     return;
   }
 
-  req.body.userId = req.profile.id;
-  if (!req.managerAccess && !req.adminAccess) {
-    req.body.userId = req.profile.userId;
+  if (req.context.slug !== 'root') {
+    req.body.contextId = req.context.id;
   }
 
-  let createdItem = await Model.create(req.body);
+  let createdItem = await Model.create(req.body).catch(err => {
+    res.status(400).send({
+      message: 'Bad request'
+    });
+    return;
+  });
 
   const is_id_in_slug = await SystemSetting.findOne({
     where: {
@@ -27,24 +31,11 @@ module.exports = async (req, res) => {
 
     createdItem = await createdItem.update({
       slug: createdItem.slug
-    });
-  }
-
-  const main_lang = await SystemSetting.findOne({
-    where: {
-      slug: 'main_lang'
-    }
-  });
-
-  if (!main_lang) {
-    res.status(404).send({
-      message: 'Not found!'
-    });
-  }
-
-  if (JSON.parse(main_lang.dataValues.setting).value === createdItem.lang) {
-    createdItem = await createdItem.update({
-      translationId: createdItem.dataValues.id
+    }).catch(err => {
+      res.status(400).send({
+        message: 'Bad request'
+      });
+      return;
     });
   }
 

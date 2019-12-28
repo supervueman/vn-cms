@@ -3,21 +3,18 @@ const Model = require('../model');
 module.exports = async (req, res) => {
   if (!req.rules.is_resource_read) {
     res.status(403).send({
-      message: 'Access denied!'
+      message: 'Forbidden'
     });
     return;
   }
 
   const filter = JSON.parse(req.query.filter || "{}");
 
-  if (!filter.where) {
+  if (!filter.where && req.context.slug !== 'root') {
     filter.where = {};
   }
-
-  if (req.managerAccess) {
-    filter.where.userId = req.profile.id;
-  } else if (!req.managerAccess && !req.adminAccess) {
-    filter.where.userId = req.profile.userId;
+  if (req.context.slug !== 'root') {
+    filter.where.contextId = req.context.id;
   }
 
   const items = await Model.findAll(filter);

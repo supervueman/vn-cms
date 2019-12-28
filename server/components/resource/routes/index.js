@@ -16,9 +16,9 @@ router.get('/findone', profileByApiKey, controller.findOne);
 
 router.post('/create', profileByAccessToken, controller.create);
 
-router.put('/update', profileByAccessToken, controller.update);
+router.put('/update/:id', profileByAccessToken, controller.update);
 
-router.delete('/remove', profileByAccessToken, controller.remove);
+router.delete('/remove/:id', profileByAccessToken, controller.remove);
 
 router.get('/count', profileByApiKey, controller.count);
 
