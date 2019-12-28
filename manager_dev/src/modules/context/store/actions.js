@@ -1,6 +1,5 @@
 import requestDataHandler from '@/core/plugins/requestDataHandler';
 import axios from 'axios';
-import router from '@/connector/index.route.js';
 
 import context from '../models/context';
 
@@ -69,7 +68,7 @@ const actions = {
         message: 'Успешно сохранено!',
         isActive: true
       });
-      router.push(`/contexts/${response.data.id}`);
+      return true;
     }
   },
 
@@ -120,7 +119,7 @@ const actions = {
         message: 'Успешно удалено!',
         isActive: true
       });
-      router.push('/contexts');
+      return true;
     }
   },
 

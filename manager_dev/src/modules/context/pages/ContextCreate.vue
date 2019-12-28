@@ -77,12 +77,17 @@ export default {
     async create() {
       this.$v.$touch();
       if (this.r.is_context_create && !this.$v.$error) {
-        await this.$store.dispatch("context/create", {
+        const bool = await this.$store.dispatch("context/create", {
           body: {
             slug: this.context.slug,
             title: this.context.title
           }
         });
+        if (bool) {
+          this.$router.push(
+            `/contexts/${this.$store.getters["context/get"].id}`
+          );
+        }
       }
     }
   },

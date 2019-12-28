@@ -116,12 +116,14 @@ export default {
 
     async remove() {
       if (this.r.is_role_delete) {
-        await this.$store.dispatch("context/remove", {
+        const bool = await this.$store.dispatch("context/remove", {
           body: {
             id: this.context.id
           }
         });
-        this.$router.push("/contexts");
+        if (bool) {
+          this.$router.push("/contexts");
+        }
       }
     }
   },
