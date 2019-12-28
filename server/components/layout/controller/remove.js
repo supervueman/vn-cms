@@ -19,7 +19,7 @@ module.exports = async (req, res) => {
     return;
   });
 
-  res.status(200).send({
-    message: 'Success!'
+  res.status(204).send({
+    message: 'No content'
   });
 };

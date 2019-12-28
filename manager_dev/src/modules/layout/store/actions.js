@@ -92,7 +92,7 @@ const actions = {
       });
     });
 
-    if (typeof response === 'object' && response.status === 200) {
+    if (typeof response === 'object' && response.status === 204) {
       this.dispatch('preloader/fetch', false);
       this.dispatch('layout/clear');
       this.dispatch('notification/fetch', {
@@ -100,7 +100,7 @@ const actions = {
         message: `Успешно удалено!`,
         isActive: true
       });
-      router.push('/layouts');
+      return true;
     }
   },
 

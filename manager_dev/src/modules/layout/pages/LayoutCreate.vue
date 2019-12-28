@@ -6,24 +6,23 @@
         v-card(outlined)
           v-card-text {{d.common_data || 'Общие данные'}}
           v-card-text
-            v-layout.wrap
-              v-flex.md12
-                v-text-field(
-                  v-model="layout.slug"
-                  :label="`${d.slug || 'Псевдоним'}:`"
-                  required
-                  @input="$v.layout.slug.$touch()"
-                  @blur="$v.layout.slug.$touch()"
-                  :error-messages="slugErrors"
-                )
-                v-text-field(
-                  v-model="layout.title"
-                  :label="`${d.name || 'Наименование'}:`"
-                  required
-                  @input="$v.layout.title.$touch()"
-                  @blur="$v.layout.title.$touch()"
-                  :error-messages="titleErrors"
-                )
+            v-flex.md12
+              v-text-field(
+                v-model="layout.slug"
+                :label="`${d.slug || 'Псевдоним'}:`"
+                required
+                @input="$v.layout.slug.$touch()"
+                @blur="$v.layout.slug.$touch()"
+                :error-messages="slugErrors"
+              )
+              v-text-field(
+                v-model="layout.title"
+                :label="`${d.name || 'Наименование'}:`"
+                required
+                @input="$v.layout.title.$touch()"
+                @blur="$v.layout.title.$touch()"
+                :error-messages="titleErrors"
+              )
           v-card-actions
             v-btn.ml-2.mb-2(
               depressed
@@ -41,15 +40,8 @@ import { required, minLength, helpers } from "vuelidate/lib/validators";
 
 const alpha = helpers.regex("alpha", /^[a-zA-Z0-9_-]*$/);
 
-// Components
-import LayoutView from "../components/View";
-
 export default {
   name: "LayoutCreatePage",
-
-  components: {
-    LayoutView
-  },
 
   mixins: [validationMixin],
 
