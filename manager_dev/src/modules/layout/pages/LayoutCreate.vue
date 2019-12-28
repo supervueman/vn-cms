@@ -1,16 +1,16 @@
 <template lang="pug">
   v-flex(v-if="r.is_layout_create")
-    .body-2.mb-12.mt-2 {{d.layout_creation}}
+    .body-2.mb-12.mt-2 {{d.layout_creation || 'Создание шаблона'}}
     v-layout.wrap
       v-flex
         v-card(outlined)
-          v-card-text {{d.common_data}}
+          v-card-text {{d.common_data || 'Общие данные'}}
           v-card-text
             v-layout.wrap
               v-flex.md12
                 v-text-field(
                   v-model="layout.slug"
-                  :label="`${d.slug}:`"
+                  :label="`${d.slug || 'Псевдоним'}:`"
                   required
                   @input="$v.layout.slug.$touch()"
                   @blur="$v.layout.slug.$touch()"
@@ -18,7 +18,7 @@
                 )
                 v-text-field(
                   v-model="layout.title"
-                  :label="`${d.name}:`"
+                  :label="`${d.name || 'Наименование'}:`"
                   required
                   @input="$v.layout.title.$touch()"
                   @blur="$v.layout.title.$touch()"
