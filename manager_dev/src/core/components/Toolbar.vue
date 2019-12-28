@@ -2,10 +2,9 @@
   v-app-bar.primary(app dark flat)
     v-toolbar-title
       v-img.mr-4.mobile-logo(
-        :src="logo" class="toolbar-logo"
+        src="/static/dev-logo.svg" class="toolbar-logo"
         max-width="40px"
         aspect-ratio="1"
-        @error="errorLogo($event)"
       )
     v-toolbar-items.hidden-xs-and-down
       v-btn(text to="/users" v-if="r.is_user_read") {{d.users || 'Пользователи'}}
@@ -129,9 +128,7 @@ export default {
         }
       });
     },
-    errorLogo(event) {
-      this.isLogo = false;
-    },
+
     async logout() {
       await this.$store.dispatch("authenticate/logout");
       this.$store.dispatch("field/clear");

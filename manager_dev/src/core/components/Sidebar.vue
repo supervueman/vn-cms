@@ -11,9 +11,8 @@
 	)
 		v-app-bar.primary(dark)
 			v-img.mr-4(
-				:src="logo" class="toolbar-logo"
+				src="/static/dev-logo.svg" class="toolbar-logo"
 				max-width="40px"
-				@error="errorLogo($event)"
 			)
 		v-tabs(
 			v-model="active"
@@ -138,9 +137,6 @@ export default {
   computed: {
     resources() {
       return this.$store.getters["profile/getResources"];
-    },
-    logo() {
-      return this.isLogo ? "/static/logo.svg" : "/static/dev-logo.svg";
     }
   },
 

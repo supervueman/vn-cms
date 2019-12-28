@@ -8,6 +8,7 @@ module.exports = {
     sourceType: 'module'
   },
   rules: {
+    "vue/html-quotes": ["error", "double" | "single"]
     // override/add rules settings here, such as:
     // 'vue/no-unused-vars': 'error'
   },
