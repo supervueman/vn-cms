@@ -5,8 +5,7 @@ const state = {
     ...fieldcategory
   },
   fieldCategories: [],
-  count: 0,
-  layouts: []
+  count: 0
 };
 
 export default state;

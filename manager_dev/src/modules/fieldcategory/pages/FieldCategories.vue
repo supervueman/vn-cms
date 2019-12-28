@@ -1,42 +1,35 @@
 <template lang="pug">
   v-flex(v-if="r.is_field_category_read")
-    .body-2.mb-12.mt-2 {{d.field_categories}}
-    v-layout.wrap
-      v-flex
-        v-toolbar(flat color="white")
-          v-spacer
-          v-btn(
-            color="primary"
-            to="/fieldcategory-create"
-            dark
-            v-if="r.is_field_category_create"
-          ) {{d.create_field_category}}
-        v-data-table(
-          :headers="headers"
-          :items="fields"
-          :items-per-page-options="[limit]"
-          hide-default-footer
+    .body-2.mb-12.mt-2 {{d.field_categories || 'Категории полей'}}
+    v-card(outlined)
+      field-categories-toolbar
+      v-data-table(
+        :headers="headers"
+        :items="fields"
+        :items-per-page-options="[limit]"
+        hide-default-footer
+      )
+        template(v-slot:body="{items}")
+          tbody
+            tr(v-for="item in items" :key="item.id")
+              td.text-xs-left
+                router-link(:to="`/fieldcategories/${item.id}`") {{ item.title }}
+              td.text-end
+                v-btn(
+                  text
+                  fab
+                  color="primary"
+                  @click="removeDialogOpen(item)"
+                  v-if="r.is_field_category_delete"
+                )
+                  v-icon delete
+      v-card-actions.text-xs-center.pt-2
+        pagination(
+          :itemsLength="count"
+          @getPage="getPage"
+          :limit="limit"
         )
-          template(v-slot:body="{items}")
-            tbody
-              tr(v-for="item in items" :key="item.id")
-                td.text-xs-left
-                  router-link(:to="`/fieldcategories/${item.id}`") {{ item.title }}
-                td.text-end
-                  v-btn(
-                    text
-                    fab
-                    color="primary"
-                    @click="removeDialogOpen(item)"
-                    v-if="r.is_field_category_delete"
-                  )
-                    v-icon delete
-        div.text-xs-center.pt-2
-          pagination(
-            :itemsLength="count"
-            @getPage="getPage"
-            :limit="limit"
-          )
+
     v-dialog(
       v-model="isRemoveDialog"
       max-width="500px"
@@ -49,12 +42,19 @@
 </template>
 
 <script>
+// Components
+import FieldCategoriesToolbar from "../components/FieldCategoriesToolbar";
+
 export default {
   name: "Fields",
 
+  components: {
+    FieldCategoriesToolbar
+  },
+
   metaInfo() {
     return {
-      title: `${this.d.field_categories || "Fields catagories"}`
+      title: `${this.d.field_categories || "Категории полей"}`
     };
   },
 
@@ -73,7 +73,7 @@ export default {
     headers() {
       return [
         {
-          text: this.d.name,
+          text: `${this.d.name || "Наименование"}`,
           value: "title"
         },
         { text: "", sortable: false }
@@ -98,7 +98,7 @@ export default {
       }
     };
     await this.$store.dispatch("fieldcategory/findAll", data);
-    await this.$store.dispatch("fieldcategory/count", data);
+    // await this.$store.dispatch("fieldcategory/count", {});
   },
 
   methods: {
@@ -116,18 +116,17 @@ export default {
     },
 
     async remove() {
-      if (!this.r.is_field_delete) {
-        return;
+      if (this.r.is_field_delete) {
+        await this.$store.dispatch("fieldcategory/remove", {
+          params: { id: this.removeItem.id }
+        });
+        const fields = this.fields.filter(el => {
+          if (el.id !== this.removeItem.id) {
+            return el;
+          }
+        });
+        this.$store.dispatch("fieldcategory/setAll", fields);
       }
-      await this.$store.dispatch("fieldcategory/remove", {
-        body: { id: this.removeItem.id }
-      });
-      const fields = this.fields.filter(el => {
-        if (el.id !== this.removeItem.id) {
-          return el;
-        }
-      });
-      this.$store.dispatch("fieldcategory/setAll", fields);
     },
 
     removeDialogOpen(fieldCategory) {

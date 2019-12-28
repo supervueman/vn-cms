@@ -1,6 +1,5 @@
 import requestDataHandler from '@/core/plugins/requestDataHandler';
 import axios from 'axios';
-import router from '@/connector/index.route.js';
 
 import fieldCategory from '../models/fieldcategory';
 
@@ -20,7 +19,7 @@ const actions = {
       });
     });
 
-    if (response !== undefined && response.status === 200) {
+    if (typeof response === 'object' && response.status === 200) {
       this.dispatch('preloader/fetch', false);
       commit('SET_ALL', response.data);
     }
@@ -41,16 +40,10 @@ const actions = {
       });
     });
 
-    if (response !== undefined && response.status === 200) {
+    if (typeof response === 'object' && response.status === 200) {
       this.dispatch('preloader/fetch', false);
       commit('SET', response.data);
     }
-  },
-
-  async findOne({
-    commit
-  }, payload) {
-
   },
 
   async create({
@@ -68,14 +61,15 @@ const actions = {
       });
     });
 
-    if (response !== undefined && response.status === 200) {
+    if (typeof response === 'object' && response.status === 200) {
       this.dispatch('preloader/fetch', false);
       this.dispatch('notification/fetch', {
         type: 'success',
         message: 'Успешно сохранено!',
         isActive: true
       });
-      router.push(`/fieldcategories/${response.data.id}`);
+      commit('SET', response.data);
+      return true;
     }
   },
 
@@ -83,7 +77,7 @@ const actions = {
     commit
   }, payload) {
     this.dispatch('preloader/fetch', true);
-    const data = requestDataHandler('PUT', '/fieldcategories/update', payload.body);
+    const data = requestDataHandler('PUT', `/fieldcategories/update/${payload.params.id}`, payload.body);
 
     const response = await axios(data).catch(err => {
       this.dispatch('preloader/fetch', false);
@@ -94,7 +88,7 @@ const actions = {
       });
     });
 
-    if (response !== undefined && response.status === 200) {
+    if (typeof response === 'object' && response.status === 200) {
       this.dispatch('preloader/fetch', false);
       this.dispatch('notification/fetch', {
         type: 'success',
@@ -108,7 +102,7 @@ const actions = {
     commit
   }, payload) {
     this.dispatch('preloader/fetch', true);
-    const data = requestDataHandler('DELETE', '/fieldcategories/remove', payload.body);
+    const data = requestDataHandler('DELETE', `/fieldcategories/remove/${payload.params.id}`, payload.body);
 
     const response = await axios(data).catch(err => {
       this.dispatch('preloader/fetch', false);
@@ -119,14 +113,14 @@ const actions = {
       });
     });
 
-    if (response !== undefined && response.status === 200) {
+    if (typeof response === 'object' && response.status === 200) {
       this.dispatch('preloader/fetch', false);
       this.dispatch('notification/fetch', {
         type: 'success',
         message: 'Успешно удалено!',
         isActive: true
       });
-      router.push('/fieldcategories');
+      return true;
     }
   },
 
@@ -145,7 +139,7 @@ const actions = {
       });
     });
 
-    if (response !== undefined && response.status === 200) {
+    if (typeof response === 'object' && response.status === 200) {
       this.dispatch('preloader/fetch', false);
       commit('SET_COUNT', response.data.count);
     }
