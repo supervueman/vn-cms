@@ -22,11 +22,13 @@
 							:next-icon="nextIcon ? 'mdi-arrow-right-bold-box-outline' : undefined"
 						)
 							v-tabs-slider
+
 							v-tab.dictionary--tab(
 								v-for="dictionary in dictionaries"
 								:key="dictionary.lang"
 								:href="`#tab-${dictionary.lang}`"
 							) {{ dictionary.lang }}
+
 							v-tab-item.dictionary--tab-item(
 								v-for="dictionary in dictionaries"
 								:key="dictionary.lang"
@@ -39,7 +41,7 @@
 									v-model="item.text"
 									:disabled="!r.is_dictionary_update"
 								)
-								div.d-flex.justify-center
+								.d-flex.justify-center
 									v-btn.mb-4(
 										text
 										depressed
