@@ -3,42 +3,17 @@
 		.body-2.mb-12.mt-2 {{d.dictionaries || 'Словари'}}
 		v-flex
 			v-card(outlined)
-				v-toolbar(flat color="white")
-					v-spacer
-					v-btn.mr-2(
-						depressed
-						color="primary"
-						v-if="r.is_dictionary_update && dictionaries.length > 0"
-						@click="update"
-					) {{d.save || 'Сохранить'}}
-					v-btn(
-						depressed
-						color="primary"
-						@click="isDictionaryCreate = true"
-						v-if="r.is_dictionary_create"
-					) {{d.create_dictionary || 'Создать словарь'}}
+				dictionaries-toolbar(
+					:dictionariesLength="dictionaries.length"
+					@update="update"
+					@openCreateDialog="isDictionaryCreate = true"
+				)
 
 				v-layout.dictionary
-					v-flex.px-2.dictionary--list-text
-						v-flex
-							v-text-field(
-								:label="`${d.slug || 'Псевдоним'}`"
-								v-model="createSlug"
-								append-icon="add"
-								@click:append="addItem"
-								:disabled="!r.is_dictionary_update"
-							)
-						v-flex(
-							v-for="(item, key) in dictionary.value"
-							:key="key"
-						)
-							v-text-field(
-								:value="key"
-								:label="`${d.slug || 'Псевдоним'}`"
-								append-icon="remove"
-								@click:append="isRemoveItem = true; removeItemSlug = key"
-								:disabled="!r.is_dictionary_update"
-							)
+					dictionary-list(
+						@addItem="addItem($event)"
+						@removeItem="removeItem($event)"
+					)
 
 					v-flex.px-2
 						v-tabs(
@@ -84,16 +59,6 @@
 			)
 
 		v-dialog(
-			v-model="isRemoveItem"
-			max-width="500px"
-		)
-			remove-confirm(
-				@remove="removeItem"
-				:isActive.sync="isRemoveItem"
-				:name="`${removeItemSlug}`"
-			)
-
-		v-dialog(
 			v-model="isDictionaryCreate"
 			max-width="500px"
 		)
@@ -105,28 +70,29 @@
 
 <script>
 // Components
+import DictionariesToolbar from "../components/DictionariesToolbar";
 import DictionaryCreateCard from "../components/DictionaryCreateCard";
+import DictionaryList from "../components/DictionaryList";
 
 export default {
   name: "DictionariesPage",
 
   components: {
-    DictionaryCreateCard
+    DictionaryCreateCard,
+    DictionariesToolbar,
+    DictionaryList
   },
 
   metaInfo() {
     return {
-      title: `${this.d.dictionaries || "Dictionaries"}`
+      title: `${this.d.dictionaries || "Словари"}`
     };
   },
 
   data: () => ({
     isRemoveDictionary: false,
-    isRemoveItem: false,
     removeDictionary: {},
     isDictionaryCreate: false,
-    createSlug: "",
-    removeItemSlug: "",
 
     // Tabs settings
     prevIcon: false,
@@ -194,30 +160,24 @@ export default {
       }
     },
 
-    addItem() {
+    addItem(item) {
       if (this.r.is_dictionary_update) {
-        this.dictionary.value[this.createSlug] = {
-          text: ""
-        };
         this.dictionaries.forEach(el => {
-          el.value[this.createSlug] = {
+          el.value[item] = {
             text: ""
           };
         });
         this.$store.dispatch("dictionary/setAll", this.dictionaries);
-        this.$store.dispatch("dictionary/set", this.dictionary);
         this.createSlug = "";
       }
     },
 
-    removeItem() {
+    removeItem(item) {
       if (this.r.is_dictionary_update) {
-        delete this.dictionary.value[this.removeItemSlug];
         this.dictionaries.forEach(el => {
-          delete el.value[this.removeItemSlug];
+          delete el.value[item];
         });
         this.$store.dispatch("dictionary/setAll", this.dictionaries);
-        this.$store.dispatch("dictionary/set", this.dictionary);
       }
     }
   }
@@ -226,7 +186,6 @@ export default {
 
 <style lang="sass">
 	.dictionary
-		background-color: #fff
 		&--tab-item
 			margin-top: 26px
 		&--list-text
