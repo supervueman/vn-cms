@@ -33,58 +33,52 @@
 
 <script>
 export default {
-  name: "App",
+	name: 'App',
 
-  metaInfo() {
-    return {
-      title: "SUPERVUECMS"
-    };
-  },
+	data: () => ({
+		isLoginDialog: false,
+		content: ''
+	}),
 
-  data: () => ({
-    isLoginDialog: false,
-    content: ""
-  }),
+	computed: {
+		profile() {
+			return this.$store.getters['profile/get'];
+		},
+		notification() {
+			return this.$store.getters['notification/get'];
+		},
+		preloader() {
+			return this.$store.getters['preloader/get'];
+		}
+	},
 
-  computed: {
-    profile() {
-      return this.$store.getters["profile/get"];
-    },
-    notification() {
-      return this.$store.getters["notification/get"];
-    },
-    preloader() {
-      return this.$store.getters["preloader/get"];
-    }
-  },
+	async beforeCreate() {
+		if (!!localStorage.getItem('access_token')) {
+			await this.$store.dispatch('profile/findByAccessToken');
+		}
+	},
 
-  async beforeCreate() {
-    if (!!localStorage.getItem("access_token")) {
-      await this.$store.dispatch("profile/findByAccessToken");
-    }
-  },
+	async mounted() {
+		await this.$store.dispatch('dictionary/findAll', {
+			query: {
+				filter: {
+					order: [['createdAt', 'DESC']]
+				}
+			}
+		});
 
-  async mounted() {
-    await this.$store.dispatch("dictionary/findAll", {
-      query: {
-        filter: {
-          order: [["createdAt", "DESC"]]
-        }
-      }
-    });
-
-    if (!this.isAuth) {
-      await this.$store.dispatch("dictionary/findOne", {
-        query: {
-          filter: {
-            where: {
-              lang: localStorage.getItem("admin-panel-lang") || "ru"
-            }
-          }
-        }
-      });
-    }
-  }
+		if (!this.isAuth) {
+			await this.$store.dispatch('dictionary/findOne', {
+				query: {
+					filter: {
+						where: {
+							lang: localStorage.getItem('admin-panel-lang') || 'ru'
+						}
+					}
+				}
+			});
+		}
+	}
 };
 </script>
 
