@@ -1,15 +1,9 @@
 <template lang="pug">
-  div.page Main page
+  .page Main page
 </template>
 
 <script>
 export default {
-  name: "Index",
-
-  metaInfo() {
-    return {
-      title: `${this.d.main || "Main"}`
-    };
-  }
+	name: 'IndexPage'
 };
 </script>
