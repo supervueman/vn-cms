@@ -103,6 +103,7 @@ const actions = {
         message: 'Успешно сохранено!',
         isActive: true
       });
+      return true;
     }
   },
 
@@ -153,6 +154,7 @@ const actions = {
         message: 'Успешно удалено!',
         isActive: true
       });
+      return true;
     }
   },
 

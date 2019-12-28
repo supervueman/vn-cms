@@ -111,14 +111,17 @@ export default {
           }
         }
         this.role.rang = Number(this.role.rang);
-        await this.$store.dispatch("role/create", {
+        const bool = await this.$store.dispatch("role/create", {
           body: {
             ...this.role,
             rules: JSON.stringify(rules)
           }
         });
         this.$router.push(`/roles/${this.$store.getters["role/get"].id}`);
-        this.$store.dispatch("role/clear");
+
+        if (bool) {
+          this.$store.dispatch("role/clear");
+        }
       }
     }
   }
