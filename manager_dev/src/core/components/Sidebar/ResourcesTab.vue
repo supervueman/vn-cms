@@ -1,5 +1,5 @@
 <template lang="pug">
-	v-flex
+	v-flex.slidebar
 		v-app-bar(flat height="50")
 			v-tooltip(top v-if="r.is_resource_create")
 				template(v-slot:activator="{ on }")
@@ -13,6 +13,7 @@
 					)
 						v-icon add_circle_outline
 				span {{d.create_resource || 'Создать ресурс'}}
+
 			v-tooltip(top v-if="r.is_resource_read")
 				template(v-slot:activator="{ on }")
 					v-btn(
@@ -26,13 +27,15 @@
 						v-icon replay
 				span {{d.reload || 'Обновить'}}
 
-		v-list
-			v-list-item(
+		v-expansion-panels(
+			accordion
+			multiple
+		)
+			v-expansion-panel(
 				v-for="context in contexts"
 				:key="context.id"
 			)
-				v-list-item-content
-					v-list-item-title {{context.title}} ({{context.slug}})
+				v-expansion-panel-header {{context.title}} ({{context.slug}})
 </template>
 
 <script>
@@ -52,3 +55,15 @@ export default {
 	}
 };
 </script>
+
+<style lang="sass">
+.slidebar
+	.v-expansion-panel::before
+		border: none!important
+		box-shadow: none
+	.v-expansion-panel
+		border: none!important
+		background-color: lightgray!important
+	.v-expansion-panels
+		border-radius: 0!important
+</style>
