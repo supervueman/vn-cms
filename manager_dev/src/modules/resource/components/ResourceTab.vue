@@ -116,20 +116,6 @@ export default {
 			}
 		},
 
-		async remove() {
-			if (!this.r.is_resource_delete) {
-				const resources = this.$store.getters['resource/getAll'].filter(el => {
-					if (el.id !== this.removeItem.id) {
-						return el;
-					}
-				});
-
-				await this.$store.dispatch('resource/remove', {
-					params: { id: this.resource.id }
-				});
-			}
-		},
-
 		translitSlug() {
 			if (this.resource.slug === '') {
 				this.resource.slug = cyrillicToTranslit({ preset: 'uk' })

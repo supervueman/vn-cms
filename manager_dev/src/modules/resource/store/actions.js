@@ -132,7 +132,7 @@ const actions = {
     commit
   }, payload) {
     this.dispatch('preloader/fetch', true);
-    const data = requestDataHandler('DELETE', '/resources/remove', payload.body);
+    const data = requestDataHandler('DELETE', `/resources/remove/${payload.params.id}`, payload.body);
 
     const response = await axios(data).catch(err => {
       this.dispatch('preloader/fetch', false);
@@ -143,7 +143,7 @@ const actions = {
       });
     });
 
-    if (typeof response === 'object' && response.status === 200) {
+    if (typeof response === 'object' && response.status === 204) {
       this.dispatch('preloader/fetch', false);
       this.dispatch('resource/clear');
       this.dispatch("notification/fetch", {
@@ -151,7 +151,7 @@ const actions = {
         message: 'Успешно удалено!',
         isActive: true
       });
-      router.push('/resources');
+      return true;
     }
   },
 

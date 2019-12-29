@@ -9,6 +9,22 @@
 			v-tab {{d.common_data || 'Общие данные'}}
 			v-tab-item
 				resource-tab
+		.d-flex.justify-center.mt-3
+			v-btn(
+				text
+				color="error"
+				depressed
+				@click="isRemoveDialog = true"
+			) {{d.remove || 'Удалить'}}
+		v-dialog(
+				v-model="isRemoveDialog"
+				max-width="500px"
+			)
+			remove-confirm(
+				@remove="remove"
+				:isActive.sync="isRemoveDialog"
+				:name="resource.title"
+			)
 </template>
 
 <script>
@@ -30,7 +46,8 @@ export default {
 
 	data() {
 		return {
-			tab: null
+			tab: null,
+			isRemoveDialog: false
 		};
 	},
 
@@ -63,6 +80,26 @@ export default {
 				}
 			}
 		});
+	},
+
+	methods: {
+		async remove() {
+			if (this.r.is_resource_delete) {
+				const resources = this.$store.getters['resource/getAll'].filter(el => {
+					if (el.id !== this.removeItem.id) {
+						return el;
+					}
+				});
+
+				const bool = await this.$store.dispatch('resource/remove', {
+					params: { id: this.resource.id }
+				});
+
+				if (bool) {
+					this.$router.push('/');
+				}
+			}
+		}
 	},
 
 	async beforeRouteUpdate(to, from, next) {
