@@ -94,7 +94,7 @@ import { required } from 'vuelidate/lib/validators';
 
 // Components
 import ResourceView from '../components/View';
-import Fields from '../components/Fields';
+import Fields from '../components/FieldsTab';
 import Resources from '../components/Resources';
 
 export default {

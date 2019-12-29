@@ -106,10 +106,29 @@ export default {
 			if (this.r.is_resource_update && !this.$v.$error) {
 				await this.$store.dispatch('resource/update', {
 					params: { id: this.resource.id },
-					body: this.resource,
+					body: this.resource
+				});
+
+				await this.$store.dispatch('resource/findByPk', {
+					params: {
+						id: this.$route.params.id
+					},
 					query: {
 						filter: {
-							include: ['layout', 'resourcetype']
+							include: [
+								{
+									association: 'layout',
+									include: ['fields']
+								},
+								'additionalfields',
+								{
+									association: 'parent',
+									include: ['translations']
+								},
+								'translations',
+								'resourcetype',
+								'context'
+							]
 						}
 					}
 				});

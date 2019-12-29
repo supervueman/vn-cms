@@ -9,6 +9,10 @@
 			v-tab {{d.common_data || 'Общие данные'}}
 			v-tab-item
 				resource-tab
+			v-tab {{d.fields || 'Поля'}}
+			v-tab-item.mt-3
+				fields-tab
+
 		.d-flex.justify-center.mt-3
 			v-btn(
 				text
@@ -30,12 +34,14 @@
 <script>
 // Components
 import ResourceTab from '../components/ResourceTab';
+import FieldsTab from '../components/FieldsTab';
 
 export default {
 	name: 'Resource',
 
 	components: {
-		ResourceTab
+		ResourceTab,
+		FieldsTab
 	},
 
 	metaInfo() {
@@ -75,7 +81,8 @@ export default {
 							include: ['translations']
 						},
 						'translations',
-						'resourcetype'
+						'resourcetype',
+						'context'
 					]
 				}
 			}

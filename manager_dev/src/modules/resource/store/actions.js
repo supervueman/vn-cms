@@ -24,11 +24,11 @@ const actions = {
 
     if (typeof response === 'object' && response.status === 200) {
       commit('SET', response.data);
-      // commit('SET_ADDITIONAL_FIELDS', response.data.additionalfields);
+      commit('SET_ADDITIONAL_FIELDS', response.data.additionalfields);
       // commit('SET_LAYOUT', response.data.layout);
-      // commit('SET_FIELDS', response.data.layout.fields);
-      // commit('SET_TRANSLATIONS', response.data);
-      // commit('SET_SERIALIZED_FIELDS');
+      !response.data.layout ? commit('SET_FIELDS', []) : commit('SET_FIELDS', response.data.layout.fields);
+      commit('SET_TRANSLATIONS', response.data);
+      commit('SET_SERIALIZED_FIELDS');
 
       this.dispatch('preloader/fetch', false);
 
