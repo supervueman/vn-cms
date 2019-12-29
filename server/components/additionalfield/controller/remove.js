@@ -1,18 +1,9 @@
 const Model = require('../model');
 
 module.exports = async (req, res) => {
-  if (!(req.adminAccess || req.managerAccess)) {
+  if (!req.isAuth) {
     res.status(403).send({
-      message: 'Access denied!'
-    });
-    return;
-  }
-
-  const item = await Model.findByPk(req.body.id);
-
-  if (!item) {
-    res.status(404).send({
-      message: 'Not found!'
+      message: 'Forbidden'
     });
     return;
   }
@@ -21,8 +12,14 @@ module.exports = async (req, res) => {
     where: {
       id: req.body.id
     }
+  }).catch(err => {
+    res.status(400).send({
+      message: 'Bad request'
+    });
+    return;
   });
-  res.status(200).send({
-    message: 'Success!'
+
+  res.status(204).send({
+    message: 'No content'
   });
 };

@@ -1,14 +1,19 @@
 const Model = require('../model');
 
 module.exports = async (req, res) => {
-  if (!(req.adminAccess || req.managerAccess)) {
+  if (!req.isAuth) {
     res.status(403).send({
-      message: 'Access denied!'
+      message: 'Forbidden'
     });
     return;
   }
 
-  const createdItem = await Model.create(req.body);
+  const createdItem = await Model.create(req.body).catch(err => {
+    res.status(400).send({
+      message: 'Bad request'
+    });
+    return;
+  });
 
   res.status(200).send(createdItem);
 };

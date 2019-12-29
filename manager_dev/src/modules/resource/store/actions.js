@@ -1,6 +1,5 @@
 import requestDataHandler from '@/core/plugins/requestDataHandler';
 import axios from 'axios';
-import router from '@/connector/index.route.js';
 
 // Models
 import resource from '../models/resource';
@@ -25,8 +24,7 @@ const actions = {
     if (typeof response === 'object' && response.status === 200) {
       commit('SET', response.data);
       commit('SET_ADDITIONAL_FIELDS', response.data.additionalfields);
-      // commit('SET_LAYOUT', response.data.layout);
-      !response.data.layout ? commit('SET_FIELDS', []) : commit('SET_FIELDS', response.data.layout.fields);
+      !response.data.layout && !response.data.layout.fields ? commit('SET_FIELDS', []) : commit('SET_FIELDS', response.data.layout.fields);
       commit('SET_TRANSLATIONS', response.data);
       commit('SET_SERIALIZED_FIELDS');
 
