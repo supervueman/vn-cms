@@ -116,7 +116,15 @@ export default {
 			this.translitSlug();
 			this.$v.$touch();
 			if (this.r.is_resource_create && !this.$v.$error) {
-				this.resource.level = 1;
+				if (this.$route.query.level) {
+					this.resource.level = Number(this.resource.level) + 1;
+				} else {
+					this.resource.level = 1;
+				}
+
+				if (this.$route.query.parentId) {
+					this.resource.parentid = this.$route.query.parentId;
+				}
 
 				this.resource.lang = this.mainLang;
 
@@ -126,9 +134,15 @@ export default {
 					].context.id;
 				}
 
-				await this.$store.dispatch('resource/create', {
+				const bool = await this.$store.dispatch('resource/create', {
 					body: this.resource
 				});
+
+				if (bool) {
+					this.$router.push(
+						`/resources/${this.$store.getters['resource/get'].id}`
+					);
+				}
 			}
 		},
 

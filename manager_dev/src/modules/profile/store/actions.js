@@ -67,7 +67,12 @@ const actions = {
         await this.dispatch('context/findSidebarContexts', {
           query: {
             filter: {
-              include: ['resources']
+              include: [{
+                association: 'resources',
+                where: {
+                  level: 1
+                }
+              }]
             }
           }
         });
