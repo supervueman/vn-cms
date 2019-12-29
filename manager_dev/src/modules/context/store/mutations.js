@@ -7,6 +7,9 @@ const mutations = {
   },
   SET_COUNT(state, payload) {
     state.count = payload;
+  },
+  SET_SIDEBAR_CONTEXTS(state, payload) {
+    state.sidebarContexts = payload;
   }
 };
 

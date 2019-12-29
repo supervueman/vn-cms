@@ -51,7 +51,7 @@ export default {
 
 	computed: {
 		contexts() {
-			return this.$store.getters['context/getAll'];
+			return this.$store.getters['context/getSidebarContexts'];
 		}
 	},
 

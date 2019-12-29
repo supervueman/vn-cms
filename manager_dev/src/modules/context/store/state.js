@@ -5,7 +5,8 @@ const state = {
     ...context
   },
   contexts: [],
-  count: 0
+  count: 0,
+  sidebarContexts: []
 };
 
 export default state;

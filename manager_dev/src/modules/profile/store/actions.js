@@ -64,7 +64,7 @@ const actions = {
           }
         });
 
-        await this.dispatch('context/findAll', {
+        await this.dispatch('context/findSidebarContexts', {
           query: {
             filter: {
               include: ['resources']

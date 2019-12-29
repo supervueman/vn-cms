@@ -20,9 +20,29 @@ const actions = {
     });
 
     if (typeof response === 'object' && response.status === 200) {
-      console.log(response)
       this.dispatch('preloader/fetch', false);
       commit('SET_ALL', response.data);
+    }
+  },
+
+  async findSidebarContexts({
+    commit
+  }, payload) {
+    this.dispatch('preloader/fetch', true);
+    const data = requestDataHandler('GET', '/contexts', undefined, payload.query);
+
+    const response = await axios(data).catch(err => {
+      this.dispatch('preloader/fetch', false);
+      this.dispatch('notification/fetch', {
+        type: 'error',
+        message: `${err}`,
+        isActive: true
+      });
+    });
+
+    if (typeof response === 'object' && response.status === 200) {
+      this.dispatch('preloader/fetch', false);
+      commit('SET_SIDEBAR_CONTEXTS', response.data);
     }
   },
 
