@@ -36,6 +36,13 @@
 				:key="context.id"
 			)
 				v-expansion-panel-header {{context.title}} ({{context.slug}})
+				v-expansion-panel-content
+					v-list
+						v-list-item(
+							v-for="resource in context.resources"
+							:key="resource.id"
+							:to="`/resources/${resource.id}`"
+						) {{resource.title}} ({{resource.id}})
 </template>
 
 <script>
@@ -63,7 +70,8 @@ export default {
 		box-shadow: none
 	.v-expansion-panel
 		border: none!important
-		background-color: lightgray!important
 	.v-expansion-panels
 		border-radius: 0!important
+	.v-expansion-panel-header
+		background-color: lightgray!important
 </style>

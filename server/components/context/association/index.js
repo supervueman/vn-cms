@@ -4,6 +4,7 @@ const Resource = require('../../resource/model');
 module.exports = () => {
   Model.hasMany(Resource, {
     as: 'resources',
-    onDelete: 'cascade'
+    onDelete: 'cascade',
+    foreignKey: 'contextId'
   });
 };

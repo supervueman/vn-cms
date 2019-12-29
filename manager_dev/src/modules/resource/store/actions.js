@@ -24,11 +24,11 @@ const actions = {
 
     if (typeof response === 'object' && response.status === 200) {
       commit('SET', response.data);
-      commit('SET_ADDITIONAL_FIELDS', response.data.additionalfields);
-      commit('SET_LAYOUT', response.data.layout);
-      commit('SET_FIELDS', response.data.layout.fields);
-      commit('SET_TRANSLATIONS', response.data);
-      commit('SET_SERIALIZED_FIELDS');
+      // commit('SET_ADDITIONAL_FIELDS', response.data.additionalfields);
+      // commit('SET_LAYOUT', response.data.layout);
+      // commit('SET_FIELDS', response.data.layout.fields);
+      // commit('SET_TRANSLATIONS', response.data);
+      // commit('SET_SERIALIZED_FIELDS');
 
       this.dispatch('preloader/fetch', false);
 
@@ -106,7 +106,7 @@ const actions = {
     commit
   }, payload) {
     this.dispatch('preloader/fetch', true);
-    const data = requestDataHandler('PUT', '/resources/update', payload.body, payload.query);
+    const data = requestDataHandler('PUT', `/resources/update/${payload.params.id}`, payload.body, payload.query);
 
     const response = await axios(data).catch(err => {
       this.dispatch('preloader/fetch', false);
@@ -118,8 +118,8 @@ const actions = {
     });
 
     if (typeof response === 'object' && response.status === 200) {
-      this.dispatch('preloader/fetch', false);
       commit('SET', response.data);
+      this.dispatch('preloader/fetch', false);
       this.dispatch("notification/fetch", {
         type: "success",
         message: 'Успешно сохранено!',

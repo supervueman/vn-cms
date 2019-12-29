@@ -64,13 +64,13 @@ const actions = {
           }
         });
 
-        const contextsData = requestDataHandler('GET', '/contexts/findAll', undefined, {
-          filter: {
-            include: ['resources']
+        await this.dispatch('context/findAll', {
+          query: {
+            filter: {
+              include: ['resources']
+            }
           }
         });
-
-        await this.dispatch('context/findAll', contextsData);
 
         commit('SET', response.data);
       }
