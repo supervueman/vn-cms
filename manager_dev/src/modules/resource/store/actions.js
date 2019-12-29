@@ -22,7 +22,7 @@ const actions = {
       });
     });
 
-    if (response !== undefined && response.status === 200) {
+    if (typeof response === 'object' && response.status === 200) {
       commit('SET', response.data);
       commit('SET_ADDITIONAL_FIELDS', response.data.additionalfields);
       commit('SET_LAYOUT', response.data.layout);
@@ -53,12 +53,6 @@ const actions = {
     }
   },
 
-  async findOne({
-    commit
-  }, payload) {
-
-  },
-
   async create({
     commit
   }, payload) {
@@ -74,38 +68,16 @@ const actions = {
       });
     });
 
-    if (response !== undefined && response.status === 200) {
+    if (typeof response === 'object' && response.status === 200) {
       this.dispatch('preloader/fetch', false);
-
-      commit('SET', response.data);
-      if (payload.body.translationId !== '' && payload.body.translationId !== null && payload.body.translationId !== undefined) {
-        for await (let translation of this.getters['resource/getTranslations']) {
-          await this.dispatch('resource/addTranslation', {
-            body: {
-              id: response.data.id,
-              translationId: translation.id
-            }
-          });
-          await this.dispatch('resource/addTranslation', {
-            body: {
-              id: translation.id,
-              translationId: response.data.id
-            }
-          });
-        }
-      }
-
       this.dispatch("notification/fetch", {
         type: "success",
         message: 'Успешно сохранено!',
         isActive: true
       });
 
-      router.push(`/resources/${response.data.id}`);
-
-      if (response.data.level === 1 && this.getters['base/mainLang'] === response.data.lang) {
-        this.getters['profile/getResources'].push(response.data)
-      }
+      commit('SET', response.data);
+      return true;
     }
   },
 
@@ -124,7 +96,7 @@ const actions = {
       });
     });
 
-    if (response !== undefined && response.status === 200) {
+    if (typeof response === 'object' && response.status === 200) {
       commit('SET_TYPES', response.data);
       this.dispatch('preloader/fetch', false);
     }
@@ -145,7 +117,7 @@ const actions = {
       });
     });
 
-    if (response !== undefined && response.status === 200) {
+    if (typeof response === 'object' && response.status === 200) {
       this.dispatch('preloader/fetch', false);
       commit('SET', response.data);
       this.dispatch("notification/fetch", {
@@ -171,7 +143,7 @@ const actions = {
       });
     });
 
-    if (response !== undefined && response.status === 200) {
+    if (typeof response === 'object' && response.status === 200) {
       this.dispatch('preloader/fetch', false);
       this.dispatch('resource/clear');
       this.dispatch("notification/fetch", {
@@ -198,7 +170,7 @@ const actions = {
       });
     });
 
-    if (response !== undefined && response.status === 200) {
+    if (typeof response === 'object' && response.status === 200) {
       this.dispatch('preloader/fetch', false);
       commit('SET_ALL', response.data);
       commit('SET_COUNT', response.data.count);
@@ -220,7 +192,7 @@ const actions = {
       });
     });
 
-    if (response !== undefined && response.status === 200) {
+    if (typeof response === 'object' && response.status === 200) {
       this.dispatch('preloader/fetch', false);
       commit('SET_COUNT', response.data.count);
     }
@@ -258,13 +230,13 @@ const actions = {
   }) {
     commit('SET_LAYOUT', {
       ...layout
-    })
+    });
   },
 
   clearFields({
     commit
   }) {
-    commit('SET_FIELDS', [])
+    commit('SET_FIELDS', []);
   },
 
   clearAdditionalFields({

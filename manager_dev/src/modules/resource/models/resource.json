@@ -5,5 +5,9 @@
   "content": "",
   "published": false,
   "level": 1,
-  "parentId": null
+  "lang": "",
+  "menuindex": null,
+  "resourcetypeId": null,
+  "parentId": null,
+  "contextId": null
 }

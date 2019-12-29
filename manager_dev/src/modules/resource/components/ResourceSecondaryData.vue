@@ -6,28 +6,28 @@
 				:items="layouts"
 				item-text="title"
 				item-value="id"
-				:label="`${d.layout}:`"
+				:label="`${d.layout || 'Шаблон'}:`"
 			)
 			v-select(
 				v-model="resource.resourcetypeId"
 				:items="types"
 				item-text="title"
 				item-value="id"
-				:label="`${d.resource_type}:`"
+				:label="`${d.resource_type || 'Тип ресурса'}:`"
 			)
 			v-select(
 				v-model="resource.contextId"
 				:items="contexts"
 				item-text="title"
 				item-value="id"
-				:label="`${d.context}:`"
+				:label="`${d.context || 'Контекст'}:`"
 			)
 			v-flex.md12
 				v-tooltip(top)
 					template(v-slot:activator="{ on }")
 						v-checkbox(
 							v-model="resource.published"
-							:label="`${d.published}`"
+							:label="`${d.published || 'Опубликовать'}`"
 							color="primary"
 							v-on="on"
 						)

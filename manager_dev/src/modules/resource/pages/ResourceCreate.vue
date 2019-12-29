@@ -15,7 +15,6 @@
                   @input="$v.resource.slug.$touch()"
                   @blur="$v.resource.slug.$touch()"
                   :error-messages="slugErrors"
-                  required
                 )
               span slug
             v-tooltip(top)
@@ -24,7 +23,6 @@
                   v-model="resource.title"
                   :label="`${d.name || 'Наименование'}:`"
                   v-on="on"
-                  required
                   @input="$v.resource.title.$touch()"
                   @blur="$v.resource.title.$touch()"
                   :error-messages="titleErrors"
@@ -110,6 +108,7 @@ export default {
 
 	async mounted() {
 		this.$store.dispatch('resource/clear');
+		this.resource.contextId = this.$store.getters['profile/get'].context.id;
 	},
 
 	methods: {
@@ -121,18 +120,23 @@ export default {
 
 				this.resource.lang = this.mainLang;
 
-				// await this.$store.dispatch('resource/create', {
-				// 	body: this.resource
-				// });
+				if (!this.resource.contextId && this.resource.contextId === '') {
+					this.resource.contextId = this.$store.getters[
+						'profile/get'
+					].context.id;
+				}
+
+				await this.$store.dispatch('resource/create', {
+					body: this.resource
+				});
 			}
 		},
 
-		translitSlug(event) {
-			const translitSlug = cyrillicToTranslit({ preset: 'uk' })
-				.transform(this.resource.title, '-')
-				.toLowerCase();
+		translitSlug() {
 			if (this.resource.slug === '') {
-				this.resource.slug = translitSlug;
+				this.resource.slug = cyrillicToTranslit({ preset: 'uk' })
+					.transform(this.resource.title, '-')
+					.toLowerCase();
 			}
 		}
 	},
