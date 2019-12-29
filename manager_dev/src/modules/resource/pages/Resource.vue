@@ -12,6 +12,9 @@
 			v-tab {{d.fields || 'Поля'}}
 			v-tab-item.mt-3
 				fields-tab
+			v-tab {{d.resources || 'Ресурсы'}}
+			v-tab-item
+				resources-tab.mt-3
 
 		.d-flex.justify-center.mt-3
 			v-btn(
@@ -35,13 +38,15 @@
 // Components
 import ResourceTab from '../components/ResourceTab';
 import FieldsTab from '../components/FieldsTab';
+import ResourcesTab from '../components/ResourcesTab';
 
 export default {
 	name: 'Resource',
 
 	components: {
 		ResourceTab,
-		FieldsTab
+		FieldsTab,
+		ResourcesTab
 	},
 
 	metaInfo() {
@@ -110,6 +115,7 @@ export default {
 	},
 
 	async beforeRouteUpdate(to, from, next) {
+		this.$store.dispatch('resource/clear');
 		await this.$store.dispatch('resource/findByPk', {
 			params: {
 				id: to.params.id

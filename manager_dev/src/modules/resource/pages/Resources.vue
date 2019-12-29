@@ -5,20 +5,20 @@
 </template>
 
 <script>
-// Components
-import Resources from "../components/Resources";
+// Component
+import Resources from '../components/ResourcesTab';
 
 export default {
-  name: "ResourcesPage",
+	name: 'ResourcesPage',
 
-  metaInfo() {
-    return {
-      title: `${this.d.resources || "Resources"}`
-    };
-  },
+	metaInfo() {
+		return {
+			title: `${this.d.resources || 'Resources'}`
+		};
+	},
 
-  components: {
-    Resources
-  }
+	components: {
+		Resources
+	}
 };
 </script>

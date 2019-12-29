@@ -24,7 +24,9 @@ const actions = {
     if (typeof response === 'object' && response.status === 200) {
       commit('SET', response.data);
       commit('SET_ADDITIONAL_FIELDS', response.data.additionalfields);
-      !response.data.layout && !response.data.layout.fields ? commit('SET_FIELDS', []) : commit('SET_FIELDS', response.data.layout.fields);
+      if (response.data.layout) {
+        commit('SET_FIELDS', response.data.layout.fields);
+      }
       commit('SET_TRANSLATIONS', response.data);
       commit('SET_SERIALIZED_FIELDS');
 
@@ -215,6 +217,9 @@ const actions = {
     commit('SET', {
       ...resource
     });
+    commit('SET_ADDITIONAL_FIELDS', []);
+    commit('SET_FIELDS', []);
+    commit('SET_SERIALIZED_FIELDS');
   },
 
   clearAll({

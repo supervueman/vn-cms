@@ -20,15 +20,19 @@ const mutations = {
     state.types = payload;
   },
   SET_FIELDS(state, payload) {
-    state.fields = payload;
+    if (payload) {
+      state.fields = payload;
+    } else {
+      state.fields = [];
+    }
   },
   SET_ADDITIONAL_FIELDS(state, payload) {
     state.additionalFields = payload;
   },
   SET_SERIALIZED_FIELDS(state, payload) {
-    const fields_new = {};
+    const fields = {};
     state.fields.forEach(field => {
-      fields_new[field.slug] = {
+      fields[field.slug] = {
         fieldId: field.id,
         categoryId: field.categoryId,
         resourceId: state.resource.id,
@@ -45,50 +49,50 @@ const mutations = {
       };
     });
 
-    const additionalFields_new = {};
+    const additionalFields = {};
     state.additionalFields.forEach(field => {
-      additionalFields_new[field.slug] = {
+      additionalFields[field.slug] = {
         id: field.id,
         value: field.value
       };
     });
 
-    const serializedFields_new = {};
-    for (let field in fields_new) {
-      serializedFields_new[field] = {
-        ...fields_new[field],
-        ...additionalFields_new[field]
+    const serializedFields = {};
+    for (let field in fields) {
+      serializedFields[field] = {
+        ...fields[field],
+        ...additionalFields[field]
       };
 
-      const fieldType = serializedFields_new[field].interface.fieldType;
+      const fieldType = serializedFields[field].interface.fieldType;
 
       if (fieldType === 'select') {
-        serializedFields_new[field].interface.defaultValue = JSON.parse(serializedFields_new[field].interface.defaultValue);
+        serializedFields[field].interface.defaultValue = JSON.parse(serializedFields[field].interface.defaultValue);
       }
       if (fieldType === 'migx') {
-        serializedFields_new[field].interface.defaultValue = JSON.parse(serializedFields_new[field].interface.defaultValue);
+        serializedFields[field].interface.defaultValue = JSON.parse(serializedFields[field].interface.defaultValue);
 
-        if (serializedFields_new[field].value === '') {
-          serializedFields_new[field].value = serializedFields_new[field].interface.defaultValue;
+        if (serializedFields[field].value === '') {
+          serializedFields[field].value = serializedFields[field].interface.defaultValue;
         } else {
-          serializedFields_new[field].value = JSON.parse(serializedFields_new[field].value);
+          serializedFields[field].value = JSON.parse(serializedFields[field].value);
         }
       }
       if (fieldType === 'multiselect') {
-        if (serializedFields_new[field].value === '') {
-          serializedFields_new[field].value = [];
-          serializedFields_new[field].interface.defaultValue = JSON.parse(serializedFields_new[field].interface.defaultValue);
+        if (serializedFields[field].value === '') {
+          serializedFields[field].value = [];
+          serializedFields[field].interface.defaultValue = JSON.parse(serializedFields[field].interface.defaultValue);
         } else {
-          serializedFields_new[field].value = JSON.parse(serializedFields_new[field].value);
-          serializedFields_new[field].interface.defaultValue = JSON.parse(serializedFields_new[field].interface.defaultValue);
+          serializedFields[field].value = JSON.parse(serializedFields[field].value);
+          serializedFields[field].interface.defaultValue = JSON.parse(serializedFields[field].interface.defaultValue);
         }
       }
       if (fieldType === 'radio') {
-        serializedFields_new[field].interface.defaultValue = JSON.parse(serializedFields_new[field].interface.defaultValue);
+        serializedFields[field].interface.defaultValue = JSON.parse(serializedFields[field].interface.defaultValue);
       }
     }
 
-    state.serializedFields = serializedFields_new;
+    state.serializedFields = serializedFields;
   },
   SET_TRANSLATIONS(state, payload) {
     state.translations = [{

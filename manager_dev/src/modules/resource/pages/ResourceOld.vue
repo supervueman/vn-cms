@@ -93,9 +93,8 @@ import { validationMixin } from 'vuelidate';
 import { required } from 'vuelidate/lib/validators';
 
 // Components
-import ResourceView from '../components/View';
 import Fields from '../components/FieldsTab';
-import Resources from '../components/Resources';
+import Resources from '../components/ResourcesTab';
 
 export default {
 	name: 'Resource',
@@ -107,7 +106,6 @@ export default {
 	},
 
 	components: {
-		ResourceView,
 		Resources,
 		Fields
 	},
