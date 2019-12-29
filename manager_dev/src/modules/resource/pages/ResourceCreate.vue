@@ -1,70 +1,145 @@
 <template lang="pug">
   v-flex(v-if="r.is_resource_create")
-    .body-2.mt-2 {{d.resource_creation}}
-      v-layout.wrap.pt-12
-        resource-view(
-          :resource="resource"
-          operationType="create"
-        )
+    .body-2.mt-2.mb-12 {{d.resource_creation || 'Создание ресурса'}} {{resource}}
+    v-layout.wrap
+      v-flex.xs12.md7.pr-2
+        v-card.mb-3(outlined)
+          v-card-text {{d.common_data || 'Общие данные'}}
+          v-card-text
+            v-tooltip(top)
+              template(v-slot:activator="{ on }")
+                v-text-field(
+                  v-model="resource.slug"
+                  :label="`${d.slug || 'Псевдоним'}:`"
+                  v-on="on"
+                  @input="$v.resource.slug.$touch()"
+                  @blur="$v.resource.slug.$touch()"
+                  :error-messages="slugErrors"
+                  required
+                )
+              span slug
+            v-tooltip(top)
+              template(v-slot:activator="{ on }")
+                v-text-field(
+                  v-model="resource.title"
+                  :label="`${d.name || 'Наименование'}:`"
+                  v-on="on"
+                  required
+                  @input="$v.resource.title.$touch()"
+                  @blur="$v.resource.title.$touch()"
+                  :error-messages="titleErrors"
+                )
+              span title
+            v-tooltip(top)
+              template(v-slot:activator="{ on }")
+                v-textarea(
+                  v-model="resource.description"
+                  :label="`${d.description || 'Описание'}:`"
+                  v-on="on"
+                  no-resize
+                )
+              span description
+          v-card-actions.px-4.pb-4
+            v-btn(
+              color="primary"
+              depressed
+              @click="create"
+            ) {{d.create || 'Создать'}}
+
+      v-flex.xs12.md5.pl-2
+        resource-secondary-data
 </template>
 
 <script>
+import { validationMixin } from 'vuelidate';
+
+// Libs
+import { required, minLength, helpers } from 'vuelidate/lib/validators';
+import cyrillicToTranslit from 'cyrillic-to-translit-js';
+
+const alpha = helpers.regex('alpha', /^[a-zA-Z0-9_-]*$/);
+
 // Components
-import ResourceView from "../components/View";
+import ResourceSecondaryData from '../components/ResourceSecondaryData';
 
 export default {
-  name: "ResourceCreatePage",
+	name: 'ResourceCreatePage',
 
-  metaInfo() {
-    return {
-      title: `${this.d.resource_create || "Resource create"}`
-    };
-  },
+	components: {
+		ResourceSecondaryData
+	},
 
-  components: {
-    ResourceView
-  },
+	mixins: [validationMixin],
 
-  computed: {
-    resource() {
-      return this.$store.getters["resource/get"];
-    }
-  },
+	validations: {
+		resource: {
+			slug: { required, alpha, minLength: minLength(3) },
+			title: { required, minLength: minLength(3) }
+		}
+	},
 
-  async mounted() {
-    if (
-      this.$route.query.translationId !== "" &&
-      this.$route.query.translationId !== null &&
-      this.$route.query.translationId !== undefined
-    ) {
-      await this.$store.dispatch("resource/findByPk", {
-        params: {
-          id: this.$route.query.translationId
-        },
-        query: {
-          filter: {
-            include: [
-              {
-                association: "layout",
-                include: ["fields"]
-              },
-              "additionalfields",
-              {
-                association: "parent",
-                include: ["translations"]
-              },
-              "translations"
-            ]
-          }
-        }
-      });
-      this.$store.dispatch("resource/clear");
-    }
-  },
+	metaInfo() {
+		return {
+			title: `${this.d.resource_create || 'Создание ресурса'}`
+		};
+	},
 
-  beforeRouteLeave(to, from, next) {
-    this.$store.dispatch("resource/clear");
-    next();
-  }
+	computed: {
+		resource() {
+			return this.$store.getters['resource/get'];
+		},
+		slugErrors() {
+			const errors = [];
+			if (!this.$v.resource.slug.$dirty) return errors;
+			!this.$v.resource.slug.minLength &&
+				errors.push('Псевдоним должен быть не менее 3 символов!');
+			!this.$v.resource.slug.alpha &&
+				errors.push('Разрешены только английские символы!');
+			!this.$v.resource.slug.required && errors.push('Обязательное поле!');
+			return errors;
+		},
+		titleErrors() {
+			const errors = [];
+			if (!this.$v.resource.title.$dirty) return errors;
+			!this.$v.resource.title.minLength &&
+				errors.push('Псевдоним должен быть не менее 3 символов!');
+			!this.$v.resource.title.required && errors.push('Обязательное поле!');
+			return errors;
+		}
+	},
+
+	async mounted() {
+		this.$store.dispatch('resource/clear');
+	},
+
+	methods: {
+		async create() {
+			this.translitSlug();
+			this.$v.$touch();
+			if (this.r.is_resource_create && !this.$v.$error) {
+				this.resource.level = 1;
+
+				this.resource.lang = this.mainLang;
+
+				// await this.$store.dispatch('resource/create', {
+				// 	body: this.resource
+				// });
+			}
+		},
+
+		translitSlug(event) {
+			const translitSlug = cyrillicToTranslit({ preset: 'uk' })
+				.transform(this.resource.title, '-')
+				.toLowerCase();
+			if (this.resource.slug === '') {
+				this.resource.slug = translitSlug;
+			}
+		}
+	},
+
+	beforeRouteLeave(to, from, next) {
+		this.$store.dispatch('resource/clear');
+		next();
+	}
 };
 </script>
