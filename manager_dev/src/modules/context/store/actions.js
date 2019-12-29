@@ -20,6 +20,7 @@ const actions = {
     });
 
     if (typeof response === 'object' && response.status === 200) {
+      console.log(response)
       this.dispatch('preloader/fetch', false);
       commit('SET_ALL', response.data);
     }

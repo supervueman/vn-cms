@@ -17,7 +17,12 @@ module.exports = async (req, res) => {
     filter.where.contextId = req.context.id;
   }
 
-  const items = await Model.findAll(filter);
+  const items = await Model.findAll(filter).catch(err => {
+    res.status(400).send({
+      message: 'Bad request'
+    });
+    return;
+  });
 
   res.status(200).send(items);
 };

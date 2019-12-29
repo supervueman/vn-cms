@@ -48,7 +48,7 @@ const actions = {
         });
       });
 
-      if (responseSystemSetting !== undefined && responseSystemSetting.status === 200) {
+      if (typeof responseSystemSetting === 'object' && responseSystemSetting.status === 200) {
         this.dispatch('base/setMainLang', JSON.parse(responseSystemSetting.data.setting).value);
         if (!localStorage.getItem('admin-panel-lang')) {
           localStorage.setItem('admin-panel-lang', JSON.parse(responseSystemSetting.data.setting).value);
@@ -63,6 +63,14 @@ const actions = {
             }
           }
         });
+
+        const contextsData = requestDataHandler('GET', '/contexts/findAll', undefined, {
+          filter: {
+            include: ['resources']
+          }
+        });
+
+        await this.dispatch('context/findAll', contextsData);
 
         commit('SET', response.data);
       }
