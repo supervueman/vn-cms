@@ -69,6 +69,7 @@ const actions = {
     });
 
     if (typeof response === 'object' && response.status === 200) {
+      console.log(response)
       this.dispatch('preloader/fetch', false);
       this.dispatch("notification/fetch", {
         type: "success",
@@ -79,6 +80,7 @@ const actions = {
       commit('SET', response.data);
       return true;
     }
+    return false;
   },
 
   async findTypes({
@@ -252,7 +254,7 @@ const actions = {
     commit
   }, payload) {
     this.dispatch('preloader/fetch', true);
-    const data = requestDataHandler('PUT', '/resources/add-translation', payload.body, payload.query);
+    const data = requestDataHandler('PUT', '/resources/add-translation', payload.body);
 
     const response = await axios(data).catch(err => {
       this.dispatch('preloader/fetch', false);
@@ -263,15 +265,16 @@ const actions = {
       });
     });
 
-    if (response !== undefined && response.status === 200) {
+    if (typeof response === 'object' && response.status === 200) {
       this.dispatch('preloader/fetch', false);
-      commit('SET', response.data);
       this.dispatch("notification/fetch", {
         type: "success",
         message: 'Успешно сохранено!',
         isActive: true
       });
+      return true;
     }
+    return false;
   }
 };
 

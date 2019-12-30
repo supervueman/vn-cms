@@ -112,7 +112,7 @@ export default {
   },
 
   methods: {
-    async create() {
+    async createResource() {
       this.translitSlug();
       this.$v.$touch();
       if (this.r.is_resource_create && !this.$v.$error) {
@@ -143,6 +143,47 @@ export default {
             `/resources/${this.$store.getters["resource/get"].id}`
           );
         }
+      }
+    },
+
+    async createTranslation() {
+      this.translitSlug();
+      this.$v.$touch();
+      if (this.r.is_resource_create && !this.$v.$error) {
+        this.resource.level = this.$route.query.level;
+
+        // this.resource.parentId = this.$route.query.parentId;
+
+        this.resource.lang = this.$route.query.lang;
+
+        this.resource.contextId = this.$route.query.contextId;
+
+        await this.$store.dispatch("resource/create", {
+          body: this.resource
+        });
+
+        const bool = await this.$store.dispatch("resource/addTranslation", {
+          body: [
+            [
+              this.$store.getters["resource/get"].id,
+              this.$route.query.translationId
+            ]
+          ]
+        });
+
+        if (bool) {
+          this.$router.push(
+            `/resources/${this.$store.getters["resource/get"].id}`
+          );
+        }
+      }
+    },
+
+    async create() {
+      if (this.$route.query.translationId) {
+        await this.createTranslation();
+      } else {
+        await this.createResource();
       }
     },
 

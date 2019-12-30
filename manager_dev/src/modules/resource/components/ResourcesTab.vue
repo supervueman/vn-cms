@@ -51,101 +51,101 @@
 
 <script>
 export default {
-	name: 'Resources',
+  name: "Resources",
 
-	data() {
-		return {
-			isRemoveDialog: false,
-			removeItem: {},
-			limit: 10
-		};
-	},
+  data() {
+    return {
+      isRemoveDialog: false,
+      removeItem: {},
+      limit: 10
+    };
+  },
 
-	computed: {
-		headers() {
-			return [
-				{ text: `${this.d.name || 'Наименование'}`, value: 'title' },
-				{ text: `${this.d.slug || 'Псевдоним'}`, value: 'slug' },
-				{
-					text: `${this.d.date_creation || 'Дата создания'}`,
-					value: 'createdAt'
-				},
-				{ text: '', sortable: false }
-			];
-		},
-		resource() {
-			return this.$store.getters['resource/get'];
-		},
-		resources() {
-			return this.$store.getters['resource/getAll'];
-		},
-		count() {
-			return this.$store.getters['resource/getCount'];
-		}
-	},
+  computed: {
+    headers() {
+      return [
+        { text: `${this.d.name || "Наименование"}`, value: "title" },
+        { text: `${this.d.slug || "Псевдоним"}`, value: "slug" },
+        {
+          text: `${this.d.date_creation || "Дата создания"}`,
+          value: "createdAt"
+        },
+        { text: "", sortable: false }
+      ];
+    },
+    resource() {
+      return this.$store.getters["resource/get"];
+    },
+    resources() {
+      return this.$store.getters["resource/getAll"];
+    },
+    count() {
+      return this.$store.getters["resource/getCount"];
+    }
+  },
 
-	async mounted() {
-		const data = {
-			query: {
-				filter: {
-					offset: this.$route.query.offset || 0,
-					limit: this.$route.query.limit || this.limit,
-					order: [['createdAt', 'DESC']],
-					where: {
-						level: this.level + 1,
-						parentId: this.$route.params.id,
-						lang: this.$store.getters['base/getMainLang']
-					}
-				}
-			}
-		};
-		await this.$store.dispatch('resource/findAll', data);
-		await this.$store.dispatch('resource/count', {});
-	},
+  async mounted() {
+    const data = {
+      query: {
+        filter: {
+          offset: this.$route.query.offset || 0,
+          limit: this.$route.query.limit || this.limit,
+          order: [["createdAt", "DESC"]],
+          where: {
+            level: this.level + 1,
+            parentId: this.$route.params.id,
+            lang: this.$store.getters["base/getMainLang"]
+          }
+        }
+      }
+    };
+    await this.$store.dispatch("resource/findAll", data);
+    await this.$store.dispatch("resource/count", {});
+  },
 
-	methods: {
-		async getPage({ offset, limit }) {
-			await this.$store.dispatch('resource/findAll', {
-				query: {
-					filter: {
-						offset,
-						limit,
-						order: [['createdAt', 'DESC']],
-						where: {
-							level: this.level + 1,
-							parentId: this.$route.params.id
-						}
-					}
-				}
-			});
-		},
+  methods: {
+    async getPage({ offset, limit }) {
+      await this.$store.dispatch("resource/findAll", {
+        query: {
+          filter: {
+            offset,
+            limit,
+            order: [["createdAt", "DESC"]],
+            where: {
+              level: this.level + 1,
+              parentId: this.$route.params.id
+            }
+          }
+        }
+      });
+    },
 
-		async remove() {
-			if (this.r.is_resource_delete) {
-				await this.$store.dispatch('resource/remove', {
-					body: { id: this.removeItem.id }
-				});
-				const resources = this.resources.filter(el => {
-					if (el.id !== this.removeItem.id) {
-						return el;
-					}
-				});
-				const profileResources = this.$store.getters[
-					'profile/getResources'
-				].filter(el => {
-					if (el.id !== this.removeItem.id) {
-						return el;
-					}
-				});
-				this.$store.dispatch('resource/setAll', resources);
-				this.$store.dispatch('profile/setResources', profileResources);
-			}
-		},
+    async remove() {
+      if (this.r.is_resource_delete) {
+        await this.$store.dispatch("resource/remove", {
+          body: { id: this.removeItem.id }
+        });
+        const resources = this.resources.filter(el => {
+          if (el.id !== this.removeItem.id) {
+            return el;
+          }
+        });
+        const profileResources = this.$store.getters[
+          "profile/getResources"
+        ].filter(el => {
+          if (el.id !== this.removeItem.id) {
+            return el;
+          }
+        });
+        this.$store.dispatch("resource/setAll", resources);
+        this.$store.dispatch("profile/setResources", profileResources);
+      }
+    },
 
-		removeDialogOpen(resource) {
-			this.removeItem = resource;
-			this.isRemoveDialog = true;
-		}
-	}
+    removeDialogOpen(resource) {
+      this.removeItem = resource;
+      this.isRemoveDialog = true;
+    }
+  }
 };
 </script>

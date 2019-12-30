@@ -8,27 +8,29 @@ module.exports = async (req, res) => {
     return;
   }
 
-  const item = await Model.findByPk(req.body.id).catch(err => {
-    res.status(400).send({
-      message: 'Bad request'
+  for await (let arr of req.body) {
+    const item = await Model.findByPk(arr[0]).catch(err => {
+      res.status(400).send({
+        message: 'Bad request'
+      });
+      return;
     });
-    return;
-  });
 
-  if (!item) {
-    res.status(404).send({
-      message: 'Not found'
+    if (!item) {
+      res.status(404).send({
+        message: 'Not found'
+      });
+    }
+
+    await item.addTranslation(arr[1]).catch(err => {
+      res.status(400).send({
+        message: 'Bad request'
+      });
+      return;
     });
   }
 
-  const translationItem = await item.addTranslation(req.body.translationId).catch(err => {
-    res.status(400).send({
-      message: 'Bad request'
-    });
-    return;
-  });
-
   res.status(200).send({
-    translationItem
+    message: 'OK'
   });
 };

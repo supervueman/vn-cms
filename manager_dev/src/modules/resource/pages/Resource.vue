@@ -1,6 +1,9 @@
 <template lang="pug">
 	v-flex(v-if="r.is_resource_read")
-		.body-2.mt-2.mb-12 {{d.resource || 'Ресурс'}}: {{resource.title}} ({{resource.id}})
+		v-layout
+			.body-2.mt-2.mb-12 {{d.resource || 'Ресурс'}}: {{resource.title}} ({{resource.id}})
+			v-spacer
+			resource-langs-menu
 		v-tabs(
 			v-model="tab"
 			slider-color="primary"
@@ -39,6 +42,7 @@
 import ResourceTab from "../components/ResourceTab";
 import FieldsTab from "../components/FieldsTab";
 import ResourcesTab from "../components/ResourcesTab";
+import ResourceLangsMenu from "../components/ResourceLangsMenu";
 
 export default {
   name: "Resource",
@@ -46,7 +50,8 @@ export default {
   components: {
     ResourceTab,
     FieldsTab,
-    ResourcesTab
+    ResourcesTab,
+    ResourceLangsMenu
   },
 
   metaInfo() {
