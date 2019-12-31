@@ -103,6 +103,9 @@ const mutations = {
         ...el
       });
     });
+  },
+  INSERT_SIDEBAR_RESOURCES(state, payload) {
+    state.insertSidebarResources = payload;
   }
 };
 

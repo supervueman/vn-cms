@@ -157,7 +157,6 @@ const actions = {
     if (typeof response === 'object' && response.status === 200) {
       this.dispatch('preloader/fetch', false);
       commit('SET_ALL', response.data);
-      commit('SET_COUNT', response.data.count);
     }
   },
 
@@ -180,6 +179,29 @@ const actions = {
       this.dispatch('preloader/fetch', false);
       commit('SET_COUNT', response.data.count);
     }
+  },
+
+  async insertToSidebarResources({
+    commit
+  }, payload) {
+    this.dispatch('preloader/fetch', true);
+    const data = requestDataHandler('GET', '/resources', undefined, payload.query);
+
+    const response = await axios(data).catch(err => {
+      this.dispatch('preloader/fetch', false);
+      this.dispatch("notification/fetch", {
+        type: "error",
+        message: `${err}`,
+        isActive: true
+      });
+    });
+
+    if (typeof response === 'object' && response.status === 200) {
+      this.dispatch('preloader/fetch', false);
+      commit('INSERT_SIDEBAR_RESOURCES', response.data);
+      return true;
+    }
+    return false;
   },
 
   set({

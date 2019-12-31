@@ -14,7 +14,8 @@ const state = {
   serializedFields: {},
   resources: [],
   count: 0,
-  translations: []
+  translations: [],
+  insertSidebarResources: []
 };
 
 export default state;

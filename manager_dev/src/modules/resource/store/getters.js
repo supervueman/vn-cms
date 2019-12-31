@@ -25,6 +25,9 @@ const getters = {
   },
   getTranslations(state) {
     return state.translations;
+  },
+  getInsertSidebarResources(state) {
+    return state.insertSidebarResources;
   }
 };
 

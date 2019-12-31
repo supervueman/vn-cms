@@ -37,29 +37,61 @@
 			)
 				v-expansion-panel-header {{context.title}} ({{context.slug}})
 				v-expansion-panel-content
-					v-list
-						v-list-item(
-							v-for="resource in context.resources"
-							:key="resource.id"
-							:to="`/resources/${resource.id}`"
-						) {{resource.title}} ({{resource.id}})
+					v-treeview(
+						:items="context.resources"
+						transition
+						open-all
+						:key="componentKey"
+					)
+						template(v-slot:prepend="{ item, active }")
+							div.link-wrapper(@click="fetchResources(item)")
+								router-link(:to="`/resources/${item.id}`") {{item.title}} ({{item.id}})
 </template>
 
 <script>
 export default {
-	name: 'ResourcesTab',
+  name: "ResourcesTab",
 
-	computed: {
-		contexts() {
-			return this.$store.getters['context/getSidebarContexts'];
-		}
-	},
+  data: () => ({
+    active: [],
+    componentKey: 0
+  }),
 
-	methods: {
-		async reloadResources() {
-			await this.$store.dispatch('profile/findByAccessToken');
-		}
-	}
+  computed: {
+    contexts() {
+      return this.$store.getters["context/getSidebarContexts"];
+    }
+  },
+
+  methods: {
+    async reloadResources() {
+      await this.$store.dispatch("profile/findByAccessToken");
+    },
+
+    async fetchResources(item) {
+      if (!item.children) {
+        const bool = await this.$store.dispatch(
+          "resource/insertToSidebarResources",
+          {
+            query: {
+              filter: {
+                where: {
+                  parentId: item.id
+                }
+              }
+            }
+          }
+        );
+
+        if (bool) {
+          item.children = this.$store.getters[
+            "resource/getInsertSidebarResources"
+          ];
+          this.componentKey += 1;
+        }
+      }
+    }
+  }
 };
 </script>
 
@@ -74,4 +106,23 @@ export default {
 		border-radius: 0!important
 	.v-expansion-panel-header
 		background-color: lightgray!important
+	.v-expansion-panel-content__wrap
+		padding: 0
+
+	.v-treeview-node__root
+		display: flex
+	.v-treeview-node__content
+		height: 100%
+		flex: 1
+		a
+			width: 100%
+			display: block
+			padding: 5px
+			text-decoration: none
+			color: #000
+	.link-wrapper
+		width: 100%
+	.router-link-exact-active, .router-link-active
+		background-color: lightgray
+		width: 100%
 </style>
