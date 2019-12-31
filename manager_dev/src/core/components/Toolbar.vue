@@ -132,18 +132,18 @@ export default {
     async logout() {
       this.$router.push("/");
       await this.$store.dispatch("authenticate/logout");
-      this.$store.dispatch("field/clear");
-      this.$store.dispatch("field/clearAll");
-      this.$store.dispatch("field/clearLayouts");
-      this.$store.dispatch("layout/clear");
-      this.$store.dispatch("layout/clearAll");
-      this.$store.dispatch("profile/clear");
-      this.$store.dispatch("profile/clearResources");
-      this.$store.dispatch("profile/clearRules");
+      // this.$store.dispatch("field/clear");
+      // this.$store.dispatch("field/clearAll");
+      // this.$store.dispatch("field/clearLayouts");
+      // this.$store.dispatch("layout/clear");
+      // this.$store.dispatch("layout/clearAll");
+      // this.$store.dispatch("profile/clear");
+      // this.$store.dispatch("profile/clearResources");
+      // this.$store.dispatch("profile/clearRules");
       // this.$store.dispatch("role/clear");
-      this.$store.dispatch("role/clearAll");
-      this.$store.dispatch("user/clear");
-      this.$store.dispatch("user/clearAll");
+      // this.$store.dispatch("role/clearAll");
+      // this.$store.dispatch("user/clear");
+      // this.$store.dispatch("user/clearAll");
     }
   }
 };
