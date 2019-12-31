@@ -10,10 +10,11 @@
 		manual-scroll
 	)
 		v-app-bar.primary(dark)
-			v-img.mr-4(
-				src="/static/dev-logo.svg" class="toolbar-logo"
-				max-width="40px"
-			)
+			router-link(to="/")
+				v-img.mr-4(
+					src="/static/dev-logo.svg" class="toolbar-logo"
+					max-width="40px"
+				)
 
 		v-tabs(
 			v-model="active"
@@ -35,24 +36,24 @@
 
 <script>
 // Components
-import ResourcesTab from "./Sidebar/ResourcesTab";
-import DevelopmentTab from "./Sidebar/DevelopmentTab";
-import FilesTab from "./Sidebar/FilesTab";
+import ResourcesTab from './Sidebar/ResourcesTab';
+import DevelopmentTab from './Sidebar/DevelopmentTab';
+import FilesTab from './Sidebar/FilesTab';
 
 export default {
-  name: "Sidebar",
+	name: 'Sidebar',
 
-  components: {
-    ResourcesTab,
-    DevelopmentTab,
-    FilesTab
-  },
+	components: {
+		ResourcesTab,
+		DevelopmentTab,
+		FilesTab
+	},
 
-  data() {
-    return {
-      drawer: true,
-      active: null
-    };
-  }
+	data() {
+		return {
+			drawer: true,
+			active: null
+		};
+	}
 };
 </script>
