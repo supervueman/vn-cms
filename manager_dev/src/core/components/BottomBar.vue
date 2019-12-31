@@ -15,7 +15,7 @@
         v-layout(justify-space-between)
           div {{ new Date().getFullYear() }} VN-CMS
           div {{d.developer || 'Developer'}}
-            a.dev-link(href="https://www.facebook.com/rdavlikamov" target="_blank") SUPERVUEMAN
+            a.dev-link(href="https://github.com/supervueman" target="_blank") SUPERVUEMAN
 </template>
 
 <script>
