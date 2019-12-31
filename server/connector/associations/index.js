@@ -15,9 +15,13 @@ module.exports = () => {
   dirs.forEach(el => {
     if (el !== 'profile' && el !== 'authenticate') {
       const config = require(`../../components/${el}/config`);
-      config.associations.forEach(item => {
-        require(`../../components/${item.association_dir_path}`)();
-      });
+      if (config.associations) {
+        config.associations.forEach(item => {
+          if (item.association_dir_path) {
+            require(`../../components/${item.association_dir_path}`)();
+          }
+        });
+      }
     }
   });
 };

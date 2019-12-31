@@ -20,9 +20,13 @@ module.exports = (app) => {
   dirs.forEach(el => {
     if (el !== 'profile' && el !== 'authenticate') {
       const config = require(`../../components/${el}/config`);
-      config.routes.forEach(item => {
-        app.use(`/${item.base_route_name}`, require(`../../components/${item.route_dir_path}`));
-      });
+      if (config.routes) {
+        config.routes.forEach(item => {
+          if (item.base_route_name) {
+            app.use(`/${item.base_route_name}`, require(`../../components/${item.route_dir_path}`));
+          }
+        });
+      }
     }
   });
 };

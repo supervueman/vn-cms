@@ -13,6 +13,9 @@ module.exports = async () => {
   const dirs = getDirectories('./components');
 
   for await (const el of dirs) {
-    await require(`../../components/${el}`).init();
+    const init = require(`../../components/${el}`).init;
+    if (init) {
+      await init();
+    }
   }
 };
