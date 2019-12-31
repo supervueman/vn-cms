@@ -2,8 +2,8 @@ export default {
   state: () => ({
     notification: {
       isActive: false,
-      type: 'success',
-      text: 'Success'
+      type: '',
+      text: ''
     }
   }),
 

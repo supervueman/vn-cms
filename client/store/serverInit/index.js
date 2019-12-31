@@ -9,7 +9,7 @@ export default {
         params: {
           filter: {
             where: {
-              lang: 'ru'
+              lang: 'en'
             }
           }
         }

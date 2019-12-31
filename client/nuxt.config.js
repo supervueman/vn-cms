@@ -67,8 +67,6 @@ module.exports = {
       {
         UserAgent: '*',
         Host: process.env.NUXT_BASE_URL,
-        Disallow: '/',
-        Disallow: '/*',
         Disallow: '*'
       }
     ]
@@ -109,8 +107,8 @@ module.exports = {
           test: /\.(js|vue)$/,
           loader: 'eslint-loader',
           exclude: /(node_modules)/
-        })
+        });
       }
     }
   }
-}
+};

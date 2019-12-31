@@ -20,7 +20,14 @@ export default {
       });
 
       if (response) {
-        commit('SET', JSON.parse(response.value));
+        const dictionary = JSON.parse(response.value);
+        const transformDictionary = {};
+
+        for (const key in dictionary) {
+          transformDictionary[key] = dictionary[key].text;
+        }
+
+        commit('SET', transformDictionary);
       }
     }
   },

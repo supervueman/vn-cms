@@ -1,6 +1,9 @@
 <template lang="pug">
   main.main
-    section.container.section--full-screen {{dictionary}}
+    section.container.section--full-screen
+      .container
+        h1 {{dictionary.vn_cms}}
+        h3 {{dictionary.greeting}}
 </template>
 
 <script>
