@@ -1,99 +1,99 @@
 {
   "is_system_setting_read": {
-    "title": "Разрешить просматривать системные настройки",
+    "title": "Allow viewing system settings",
     "value": true
   },
 
   "is_context_read": {
-    "title": "Разрешить просматривать контексты",
+    "title": "Allow viewing contexts",
     "value": true
   },
 
   "is_role_read": {
-    "title": "Разрешить просматривать политики доступа",
+    "title": "Allow viewing access policies",
     "value": true
   },
 
   "is_user_read": {
-    "title": "Разрешить просматривать пользователей",
+    "title": "Allow users to view",
     "value": true
   },
   "is_user_create": {
-    "title": "Разрешить создавать пользователей",
+    "title": "Allow user creation",
     "value": true
   },
   "is_user_update": {
-    "title": "Разрешить редактировать пользователей",
+    "title": "Allow editing users",
     "value": true
   },
   "is_user_delete": {
-    "title": "Разрешить удалять пользователей",
+    "title": "Allow deleting users",
     "value": true
   },
 
   "is_dictionary_read": {
-    "title": "Разрешить просматривать словари",
+    "title": "Allow to view dictionaries",
     "value": true
   },
 
   "is_layout_read": {
-    "title": "Разрешить просматривать шаблоны",
+    "title": "Allow viewing templates",
     "value": true
   },
 
   "is_field_category_read": {
-    "title": "Разрешить просматривать категории полей",
+    "title": "Allow viewing field categories",
     "value": true
   },
 
   "is_field_read": {
-    "title": "Разрешить просматривать поля",
+    "title": "Allow viewing fields",
     "value": true
   },
 
   "is_resource_read": {
-    "title": "Разрешить просматривать ресурсы",
+    "title": "Allow viewing resources",
     "value": true
   },
   "is_resource_create": {
-    "title": "Разрешить создавать ресурсы",
+    "title": "Allow create resources",
     "value": true
   },
   "is_resource_update": {
-    "title": "Разрешить редактировать ресурсы",
+    "title": "Allow editing resources",
     "value": true
   },
   "is_resource_delete": {
-    "title": "Разрешить удалять ресурсы",
+    "title": "Allow deleting Resources",
     "value": true
   },
 
   "is_filesystem_access": {
-    "title": "Разрешить доступ к файловой системе",
+    "title": "Allow access to the file system",
     "value": true
   },
   "is_filesystem_directory_create": {
-    "title": "Разрешить создавать директории",
+    "title": "Allow create directories",
     "value": true
   },
   "is_filesystem_directory_delete": {
-    "title": "Разрешить удалять директории",
+    "title": "Allow delete directories",
     "value": true
   },
   "is_filesystem_directory_rename": {
-    "title": "Разрешить переименовывать директории",
+    "title": "Allow renaming directories",
     "value": true
   },
   "is_filesystem_files_rename": {
-    "title": "Разрешить переименовывать файлы",
+    "title": "Allow rename files",
     "value": true
   },
   "is_filesystem_files_uploads": {
-    "title": "Разрешить загружать файлы",
+    "title": "Allow upload files",
     "value": true
   },
   "is_filesystem_files_delete": {
-    "title": "Разрешить удалять файлы",
+    "title": "Allow deleting files",
     "value": true
   }
 }

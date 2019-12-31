@@ -1,0 +1,99 @@
+{
+  "is_system_setting_read": {
+    "title": "Разрешить просматривать системные настройки",
+    "value": true
+  },
+
+  "is_context_read": {
+    "title": "Разрешить просматривать контексты",
+    "value": true
+  },
+
+  "is_role_read": {
+    "title": "Разрешить просматривать политики доступа",
+    "value": true
+  },
+
+  "is_user_read": {
+    "title": "Разрешить просматривать пользователей",
+    "value": true
+  },
+  "is_user_create": {
+    "title": "Разрешить создавать пользователей",
+    "value": true
+  },
+  "is_user_update": {
+    "title": "Разрешить редактировать пользователей",
+    "value": true
+  },
+  "is_user_delete": {
+    "title": "Разрешить удалять пользователей",
+    "value": true
+  },
+
+  "is_dictionary_read": {
+    "title": "Разрешить просматривать словари",
+    "value": true
+  },
+
+  "is_layout_read": {
+    "title": "Разрешить просматривать шаблоны",
+    "value": true
+  },
+
+  "is_field_category_read": {
+    "title": "Разрешить просматривать категории полей",
+    "value": true
+  },
+
+  "is_field_read": {
+    "title": "Разрешить просматривать поля",
+    "value": true
+  },
+
+  "is_resource_read": {
+    "title": "Разрешить просматривать ресурсы",
+    "value": true
+  },
+  "is_resource_create": {
+    "title": "Разрешить создавать ресурсы",
+    "value": true
+  },
+  "is_resource_update": {
+    "title": "Разрешить редактировать ресурсы",
+    "value": true
+  },
+  "is_resource_delete": {
+    "title": "Разрешить удалять ресурсы",
+    "value": true
+  },
+
+  "is_filesystem_access": {
+    "title": "Разрешить доступ к файловой системе",
+    "value": true
+  },
+  "is_filesystem_directory_create": {
+    "title": "Разрешить создавать директории",
+    "value": true
+  },
+  "is_filesystem_directory_delete": {
+    "title": "Разрешить удалять директории",
+    "value": true
+  },
+  "is_filesystem_directory_rename": {
+    "title": "Разрешить переименовывать директории",
+    "value": true
+  },
+  "is_filesystem_files_rename": {
+    "title": "Разрешить переименовывать файлы",
+    "value": true
+  },
+  "is_filesystem_files_uploads": {
+    "title": "Разрешить загружать файлы",
+    "value": true
+  },
+  "is_filesystem_files_delete": {
+    "title": "Разрешить удалять файлы",
+    "value": true
+  }
+}

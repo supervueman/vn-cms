@@ -11,7 +11,7 @@ module.exports = async () => {
   if (!document_type) {
     document_type = await Model.create({
       slug: 'document',
-      title: 'Документ',
+      title: 'Document',
     });
   }
 };

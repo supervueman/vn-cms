@@ -16,7 +16,7 @@ module.exports = async () => {
   if (!defaultRole) {
     defaultRole = await Model.create({
       slug: 'default',
-      title: 'По умолчанию',
+      title: 'Default',
       rules: JSON.stringify(rules_default),
       rang: 0
     });
@@ -31,7 +31,7 @@ module.exports = async () => {
   if (!adminRole) {
     adminRole = await Model.create({
       slug: 'admin',
-      title: 'Администратор',
+      title: 'Admin',
       rules: JSON.stringify(rules_admin),
       rang: 9999
     });
@@ -46,7 +46,7 @@ module.exports = async () => {
   if (!managerRole) {
     managerRole = await Model.create({
       slug: 'manager',
-      title: 'Менеджер',
+      title: 'Manager',
       rules: JSON.stringify(rules_manager),
       rang: 9000
     });

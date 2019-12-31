@@ -10,7 +10,7 @@ module.exports = async () => {
   if (!defaultLayout) {
     await Model.create({
       slug: 'default',
-      title: 'Базовый'
+      title: 'Base'
     });
   }
 };
