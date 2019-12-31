@@ -15,7 +15,7 @@ const actions = {
     const response = await axios(data).catch(err => {
       this.dispatch('notification/fetch', {
         type: 'error',
-        message: 'Ошибка авторизации!',
+        message: 'Error',
         isActive: true
       });
     });
@@ -42,7 +42,7 @@ const actions = {
     const response = await axios(data).catch(err => {
       this.dispatch('notification/fetch', {
         type: 'error',
-        message: 'Ошибка авторизации!',
+        message: 'Error',
         isActive: true
       });
     });

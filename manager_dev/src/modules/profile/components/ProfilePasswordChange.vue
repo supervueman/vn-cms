@@ -85,27 +85,39 @@ export default {
     oldPasswordErrors() {
       const errors = [];
       if (!this.$v.oldPassword.$dirty) return errors;
-      !this.$v.oldPassword.required && errors.push("Обязательное поле");
+      !this.$v.oldPassword.required &&
+        errors.push(`${this.d.required_field || "Обязательное поле"}`);
       !this.$v.oldPassword.minLength &&
-        errors.push("Пароль должен быть не менее 6 символов");
+        errors.push(
+          `${this.d.field_must_be_have_more_six_sumbols ||
+            "Поле должено быть не менее 6 символов"}`
+        );
       return errors;
     },
     newPasswordErrors() {
       const errors = [];
       if (!this.$v.newPassword.$dirty) return errors;
-      !this.$v.newPassword.required && errors.push("Обязательное поле");
+      !this.$v.newPassword.required &&
+        errors.push(`${this.d.required_field || "Обязательное поле"}`);
       !this.$v.newPassword.minLength &&
-        errors.push("Пароль должен быть не менее 6 символов");
+        errors.push(
+          `${this.d.field_must_be_have_more_six_sumbols ||
+            "Поле должено быть не менее 6 символов"}`
+        );
       return errors;
     },
     confirmNewPasswordErrors() {
       const errors = [];
       if (!this.$v.confirmNewPassword.$dirty) return errors;
-      !this.$v.confirmNewPassword.required && errors.push("Обязательное поле");
+      !this.$v.confirmNewPassword.required &&
+        errors.push(`${this.d.required_field || "Обязательное поле"}`);
       !this.$v.confirmNewPassword.minLength &&
-        errors.push("Пароль должен быть не менее 6 символов");
+        errors.push(
+          `${this.d.field_must_be_have_more_six_sumbols ||
+            "Поле должено быть не менее 6 символов"}`
+        );
       !this.$v.confirmNewPassword.sameAsPassword &&
-        errors.push("Пароли не совпадают!");
+        errors.push(`${this.d.password_not_confirm || "Пароли не совпадают"}`);
       return errors;
     }
   },

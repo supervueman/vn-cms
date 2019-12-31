@@ -62,20 +62,28 @@ export default {
       const errors = [];
       if (!this.$v.createDictionary.lang.$dirty) return errors;
       !this.$v.createDictionary.lang.minLength &&
-        errors.push("Псевдоним должен быть не менее 2 символов!");
+        errors.push(
+          `${this.d.field_must_be_have_more_two_sumbols ||
+            "Поле должено быть не менее 2 символов"}`
+        );
       !this.$v.createDictionary.lang.alpha &&
-        errors.push("Разрешены только английские символы!");
+        errors.push(
+          `${this.d.only_en_symbols || "Разрешены только английские символы"}`
+        );
       !this.$v.createDictionary.lang.required &&
-        errors.push("Обязательное поле!");
+        errors.push(`${this.d.required_field || "Обязательное поле"}`);
       return errors;
     },
     titleErrors() {
       const errors = [];
       if (!this.$v.createDictionary.title.$dirty) return errors;
       !this.$v.createDictionary.title.minLength &&
-        errors.push("Псевдоним должен быть не менее 3 символов!");
+        errors.push(
+          `${this.d.field_must_be_have_more_three_sumbols ||
+            "Поле должено быть не менее 3 символов"}`
+        );
       !this.$v.createDictionary.title.required &&
-        errors.push("Обязательное поле!");
+        errors.push(`${this.d.required_field || "Обязательное поле"}`);
       return errors;
     }
   },

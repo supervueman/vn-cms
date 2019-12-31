@@ -68,7 +68,7 @@ const actions = {
       this.dispatch('preloader/fetch', false);
       this.dispatch('notification/fetch', {
         type: 'success',
-        message: 'Успешно сохранено!',
+        message: 'Success',
         isActive: true
       });
       commit('SET', response.data);
@@ -103,7 +103,7 @@ const actions = {
       this.dispatch('preloader/fetch', false);
       this.dispatch('notification/fetch', {
         type: 'success',
-        message: 'Успешно сохранено!',
+        message: 'Success',
         isActive: true
       });
     }
@@ -129,7 +129,7 @@ const actions = {
       this.dispatch('layout/clear');
       this.dispatch('notification/fetch', {
         type: 'success',
-        message: `Успешно удалено!`,
+        message: 'Success',
         isActive: true
       });
       return true;
@@ -179,7 +179,7 @@ const actions = {
       this.dispatch('preloader/fetch', false);
       this.dispatch('notification/fetch', {
         type: 'success',
-        message: 'Успешно сохранено!',
+        message: 'Success',
         isActive: true
       });
     }
@@ -207,7 +207,7 @@ const actions = {
       commit('SET_LAYOUTS', response.data.layouts);
       this.dispatch('notification/fetch', {
         type: 'success',
-        message: 'Успешно сохранено!',
+        message: 'Success',
         isActive: true
       });
     }

@@ -89,7 +89,7 @@ export default {
         },
         { text: `${this.d.layouts || "Шаблоны"}`, sortable: false },
         {
-          text: `${this.d.type_type || "Тип поля"}`,
+          text: `${this.d.field_type || "Тип поля"}`,
           value: "fieldType",
           sortable: true
         },

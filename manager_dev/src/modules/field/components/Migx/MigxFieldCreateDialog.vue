@@ -139,7 +139,7 @@
         color="primary"
         @click="create"
       ) {{d.create}}
-      v-btn.ml-2(@click="$emit('cancel')") {{d.cancel}}
+      v-btn.ml-2(@click="$emit('cancel')") {{d.cancel || 'Отмена'}}
 </template>
 
 <script>

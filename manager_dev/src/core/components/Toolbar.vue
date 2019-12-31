@@ -47,9 +47,9 @@
             v-icon settings
         v-list
           v-list-item(to="/roles" v-if="r.is_role_read")
-            v-list-item-title {{d.roles_politics || 'Роли'}}
+            v-list-item-title {{d.roles || 'Роли'}}
           v-list-item(to="/system-settings" v-if="r.is_system_setting_read")
-            v-list-item-title {{d.system_settings}}
+            v-list-item-title {{d.system_settings || 'Системные настройки'}}
           v-list-item(to="/contexts" v-if="r.is_context_read")
             v-list-item-title {{d.contexts || 'Контексты'}}
           v-list-item(to="/dictionaries")

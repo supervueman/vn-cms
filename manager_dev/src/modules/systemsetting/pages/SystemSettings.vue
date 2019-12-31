@@ -1,6 +1,6 @@
 <template lang="pug">
 	v-flex(v-if="r.is_system_setting_read")
-		.body-2.mb-12.mt-2 {{d.system_settings}}
+		.body-2.mb-12.mt-2 {{d.system_settings || 'Системные настройки'}}
 		v-layout.wrap
 			v-flex
 				v-card(outlined)
@@ -101,13 +101,11 @@ export default {
     },
 
     async update(item) {
-      if (!this.r.is_system_setting_update) {
-        return;
+      if (this.r.is_system_setting_update) {
+        await this.$store.dispatch("systemsetting/update", {
+          body: { ...item, setting: JSON.stringify(item.setting) }
+        });
       }
-
-      await this.$store.dispatch("systemsetting/update", {
-        body: { ...item, setting: JSON.stringify(item.setting) }
-      });
     }
   }
 };

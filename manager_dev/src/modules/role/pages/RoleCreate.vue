@@ -1,6 +1,6 @@
 <template lang="pug">
   v-flex(v-if="r.is_role_create")
-    .body-2.mb-12.mt-2 {{d.role_creation || 'Создание политики доступа'}}
+    .body-2.mb-12.mt-2 {{d.role_creation || 'Создание роли'}}
     v-card(outlined)
       v-card-text {{d.common_data || 'Общие данные'}}
       v-card-text
@@ -65,7 +65,7 @@ export default {
 
   metaInfo() {
     return {
-      title: `${this.d.role_create || "Role create"}`
+      title: `${this.d.role_create || "Создание роли"}`
     };
   },
 
@@ -78,18 +78,28 @@ export default {
       const errors = [];
       if (!this.$v.role.slug.$dirty) return errors;
       !this.$v.role.slug.minLength &&
-        errors.push("Псевдоним должен быть не менее 3 символов!");
+        errors.push(
+          `${this.d.field_must_be_have_more_three_sumbols ||
+            "Поле должено быть не менее 3 символов"}`
+        );
       !this.$v.role.slug.alpha &&
-        errors.push("Разрешены только английские символы!");
-      !this.$v.role.slug.required && errors.push("Обязательное поле!");
+        errors.push(
+          `${this.d.only_en_symbols || "Разрешены только английские символы"}`
+        );
+      !this.$v.role.slug.required &&
+        errors.push(`${this.d.required_field || "Обязательное поле"}`);
       return errors;
     },
     titleErrors() {
       const errors = [];
       if (!this.$v.role.title.$dirty) return errors;
       !this.$v.role.title.minLength &&
-        errors.push("Наименование должно быть не менее 3 символов!");
-      !this.$v.role.title.required && errors.push("Обязательное поле!");
+        errors.push(
+          `${this.d.field_must_be_have_more_three_sumbols ||
+            "Поле должено быть не менее 3 символов"}`
+        );
+      !this.$v.role.title.required &&
+        errors.push(`${this.d.required_field || "Обязательное поле"}`);
       return errors;
     }
   },

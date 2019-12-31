@@ -48,9 +48,6 @@ import { validationMixin } from "vuelidate";
 // Libs
 import { required, minLength } from "vuelidate/lib/validators";
 
-// Comnponents
-import FieldCategoryView from "../components/View";
-
 export default {
   name: "FieldCategoryCreatePage",
 
@@ -83,9 +80,12 @@ export default {
       const errors = [];
       if (!this.$v.fieldCategory.title.$dirty) return errors;
       !this.$v.fieldCategory.title.minLength &&
-        errors.push("Название должено быть не менее 3 символов!");
+        errors.push(
+          `${this.d.field_must_be_have_more_three_sumbols ||
+            "Поле должено быть не менее 3 символов"}`
+        );
       !this.$v.fieldCategory.title.required &&
-        errors.push("Обязательное поле!");
+        errors.push(`${this.d.required_field || "Обязательное поле"}`);
       return errors;
     }
   },

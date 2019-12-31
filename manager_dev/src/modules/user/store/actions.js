@@ -25,33 +25,6 @@ const actions = {
     }
   },
 
-  // Test
-  async findOne({
-    commit
-  }, payload) {
-    this.dispatch('preloader/fetch', true);
-    const data = requestDataHandler('GET', '/users/findone', undefined, {
-      filter: {
-        where: {
-          email: 'ahmed@gmail.com'
-        }
-      }
-    });
-
-    const response = await axios(data).catch(err => {
-      this.dispatch('preloader/fetch', false);
-      this.dispatch("notification/fetch", {
-        type: "error",
-        message: `${err}`,
-        isActive: true
-      });
-    });
-
-    if (typeof response === 'object' && response.status === 200) {
-      this.dispatch('preloader/fetch', false);
-    }
-  },
-
   async update({
     commit
   }, payload) {
@@ -71,7 +44,7 @@ const actions = {
       this.dispatch('preloader/fetch', false);
       this.dispatch("notification/fetch", {
         type: "success",
-        message: 'Успешно сохранено!',
+        message: 'Success',
         isActive: true
       });
       commit('SET', response.data);
@@ -97,7 +70,7 @@ const actions = {
       this.dispatch('preloader/fetch', false);
       this.dispatch("notification/fetch", {
         type: "success",
-        message: 'Успешно сохранено!',
+        message: 'Success',
         isActive: true
       });
     }
@@ -123,7 +96,7 @@ const actions = {
       this.dispatch('preloader/fetch', false);
       this.dispatch("notification/fetch", {
         type: "success",
-        message: 'Успешно удалено!',
+        message: 'Success',
         isActive: true
       });
       return true;

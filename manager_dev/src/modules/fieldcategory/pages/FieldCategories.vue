@@ -98,7 +98,7 @@ export default {
       }
     };
     await this.$store.dispatch("fieldcategory/findAll", data);
-    // await this.$store.dispatch("fieldcategory/count", {});
+    await this.$store.dispatch("fieldcategory/count", {});
   },
 
   methods: {

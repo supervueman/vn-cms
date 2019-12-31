@@ -21,7 +21,7 @@ const actions = {
       this.dispatch('preloader/fetch', false);
       this.dispatch('notification/fetch', {
         type: 'success',
-        message: 'Сообщение успешно отправлено!',
+        message: 'Success',
         isActive: true
       });
     }

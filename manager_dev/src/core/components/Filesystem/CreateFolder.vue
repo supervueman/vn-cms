@@ -44,8 +44,12 @@ export default {
       const errors = [];
       if (!this.$v.folderName.$dirty) return errors;
       !this.$v.folderName.minLength &&
-        errors.push("Directory name must be at least 3 characters");
-      !this.$v.folderName.required && errors.push("Required field");
+        errors.push(
+          `${this.d.field_must_be_have_more_three_sumbols ||
+            "Поле должно быть не менее 3 символов"}`
+        );
+      !this.$v.folderName.required &&
+        errors.push(`${this.d.required_field || "Обязательное поле"}`);
       return errors;
     }
   },

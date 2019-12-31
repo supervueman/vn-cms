@@ -1,279 +1,312 @@
 {
-  "lang": "ru",
-  "title": "Русский",
-  "value": {
-    "save": {
-      "text": "Сохранить"
-    },
-    "create": {
-      "text": "Создать"
-    },
-    "update": {
-      "text": "Обновить"
-    },
-    "remove": {
-      "text": "Удалить"
-    },
-    "change": {
-      "text": "Изменить"
-    },
-    "cancel": {
-      "text": "Отмена"
-    },
-    "login": {
-      "text": "Войти"
-    },
-    "logout": {
-      "text": "Выйти"
-    },
-    "password": {
-      "text": "Пароль"
-    },
-    "forgot_password": {
-      "text": "Забыли пароль?"
-    },
-    "resources": {
-      "text": "Ресурсы"
-    },
-    "resource": {
-      "text": "Ресурс"
-    },
-    "resource_type": {
-      "text": "Тип ресурса"
-    },
-    "elements": {
-      "text": "Элементы"
-    },
-    "files": {
-      "text": "Файлы"
-    },
-    "all_resources": {
-      "text": "Все ресурсы"
-    },
-    "users": {
-      "text": "Пользователи"
-    },
-    "layouts": {
-      "text": "Шаблоны"
-    },
-    "additional_fields": {
-      "text": "Дополнительные поля"
-    },
-    "additional_field": {
-      "text": "Дополнительное поле"
-    },
-    "filesystem": {
-      "text": "Файловая система"
-    },
-    "roles_politics": {
-      "text": "Политики доступа"
-    },
-    "role_politic": {
-      "text": "Политика доступа"
-    },
-    "system_settings": {
-      "text": "Системные настройки"
-    },
-    "common_data": {
-      "text": "Общие данные"
-    },
-    "lastname": {
-      "text": "Фамилия"
-    },
-    "firstname": {
-      "text": "Имя"
-    },
-    "middlename": {
-      "text": "Отчество"
-    },
-    "slug": {
-      "text": "Псевдоним"
-    },
-    "avatar": {
-      "text": "Аватар"
-    },
-    "contacts": {
-      "text": "Контакты"
-    },
-    "phone": {
-      "text": "Телефон"
-    },
-    "keys": {
-      "text": "Ключи"
-    },
-    "change_password": {
-      "text": "Изменить пароль"
-    },
-    "enter_old_password": {
-      "text": "Введите старый пароль"
-    },
-    "enter_new_password": {
-      "text": "Введите новый пароль"
-    },
-    "confirm_password": {
-      "text": "Повторите пароль"
-    },
-    "your_profile": {
-      "text": "Ваш профиль"
-    },
-    "role": {
-      "text": "Роль"
-    },
-    "create_user": {
-      "text": "Создать пользователя"
-    },
-    "create_role": {
-      "text": "Создать политику"
-    },
-    "create_layout": {
-      "text": "Создать шаблон"
-    },
-    "create_field": {
-      "text": "Создать поле"
-    },
-    "field_categories": {
-      "text": "Категории полей"
-    },
-    "field_category": {
-      "text": "Категория"
-    },
-    "create_field_category": {
-      "text": "Создать категорию"
-    },
-    "type": {
-      "text": "Тип"
-    },
-    "layout": {
-      "text": "Шаблон"
-    },
-    "name": {
-      "text": "Наименование"
-    },
-    "default_value": {
-      "text": "Значение по умолчанию"
-    },
-    "field_type": {
-      "text": "Тип поля"
-    },
-    "schema": {
-      "text": "Схема"
-    },
-    "role_creation": {
-      "text": "Создание политики"
-    },
-    "profile_creation": {
-      "text": "Создание профиля"
-    },
-    "profile": {
-      "text": "Профиль"
-    },
-    "layout_creation": {
-      "text": "Создание шаблона"
-    },
-    "additiopnal_fileds": {
-      "text": "Дополнительные поля"
-    },
-    "field_creation": {
-      "text": "Создание поля"
-    },
-    "fields": {
-      "text": "Поля"
-    },
-    "all_fields": {
-      "text": "Все поля"
-    },
-    "filde": {
-      "text": "Поле"
-    },
-    "current_path": {
-      "text": "Текщий путь"
-    },
-    "create_directory": {
-      "text": "Создать папку"
-    },
-    "download": {
-      "text": "Скачать"
-    },
-    "reload": {
-      "text": "Обновить"
-    },
-    "date_creation": {
-      "text": "Дата создания"
-    },
-    "create_resource": {
-      "text": "Создать ресурс"
-    },
-    "resource_creation": {
-      "text": "Создание ресурса"
-    },
-    "published": {
-      "text": "Опубликовать"
-    },
-    "content": {
-      "text": "Контент"
-    },
-    "ru": {
-      "text": "Русский"
-    },
-    "en": {
-      "text": "Английский"
-    },
-    "dictionaries": {
-      "text": "Словари"
-    },
-    "dictionary": {
-      "text": "Словарь"
-    },
-    "create_dictionary": {
-      "text": "Создать словарь"
-    },
-    "close": {
-      "text": "Закрыть"
-    },
-    "remove_confirm": {
-      "text": "Вы уверены что хотите удалить"
-    },
-    "add_element": {
-      "text": "Добавить эелемент"
-    },
-    "cancel_confirm": {
-      "text": "Вы действительно хотите сбросить изменения? Несохраненные данные будут утеряны."
-    },
-    "string_or_json": {
-      "text": "Строка или JSON"
-    },
-    "upload": {
-      "text": "Загрузить"
-    },
-    "directory": {
-      "text": "Директория"
-    },
-    "enter_dir_name": {
-      "text": "Введите название директории"
-    },
-    "enter_password": {
-      "text": "Введите пароль"
-    },
-    "description": {
-      "text": "Описание"
-    },
-    "confirm_layout_change": {
-      "text": "Вы уверены что хотите сменить шаблон?"
-    },
-    "create_translation": {
-      "text": "Создать перевод"
-    },
-    "change_lang": {
-      "text": "Выберете язык"
-    },
-    "next": {
-      "text": "Следующий шаг"
-    },
-    "field": {
-      "text": "Поле"
-    },
-    "applications": {
-      "text": "Приложения"
-    }
-  }
+	"lang": "ru",
+	"title": "Russian",
+	"value": {
+		"download": {
+			"text": "Скачать"
+		},
+		"upload": {
+			"text": "Загрузить"
+		},
+		"enter_dir_name": {
+			"text": "Введите название директории"
+		},
+		"create": {
+			"text": "Создать"
+		},
+		"cancel": {
+			"text": "Отмена"
+		},
+		"required_field": {
+			"text": "Обязательное поле"
+		},
+		"current_path": {
+			"text": "Текущий путь"
+		},
+		"create_directory": {
+			"text": "Создать директорию"
+		},
+		"reload": {
+			"text": "Обновить"
+		},
+		"layouts": {
+			"text": "Шаблоны"
+		},
+		"fields": {
+			"text": "Поля"
+		},
+		"field_categories": {
+			"text": "Категории полей"
+		},
+		"filesystem": {
+			"text": "Файловая система"
+		},
+		"create_resource": {
+			"text": "Создать ресурс"
+		},
+		"applications": {
+			"text": "Приложения"
+		},
+		"developer": {
+			"text": "Разработчик"
+		},
+		"close": {
+			"text": "Закрыть"
+		},
+		"login": {
+			"text": "Войти"
+		},
+		"forgot_password": {
+			"text": "Забыли пароль?"
+		},
+		"password": {
+			"text": "Пароль"
+		},
+		"email_is_not_valid": {
+			"text": "E-mail не валиден"
+		},
+		"remove_confirm": {
+			"text": "Вы действительно хотите удалить"
+		},
+		"resources": {
+			"text": "Ресурсы"
+		},
+		"develop": {
+			"text": "Разработка"
+		},
+		"files": {
+			"text": "Файлы"
+		},
+		"users": {
+			"text": "Пользователи"
+		},
+		"roles": {
+			"text": "Роли"
+		},
+		"system_settings": {
+			"text": "Системные настройки"
+		},
+		"dictionaries": {
+			"text": "Словари"
+		},
+		"logout": {
+			"text": "Выход"
+		},
+		"context": {
+			"text": "Контекст"
+		},
+		"common_data": {
+			"text": "Общие данные"
+		},
+		"slug": {
+			"text": "Псевдоним"
+		},
+		"name": {
+			"text": "Наименование"
+		},
+		"save": {
+			"text": "Сохранить"
+		},
+		"remove": {
+			"text": "Удалить"
+		},
+		"field_must_be_have_more_three_sumbols": {
+			"text": "Поле должено быть не менее 3 символов"
+		},
+		"field_must_be_have_more_six_sumbols": {
+			"text": "Поле должено быть не менее 6 символов"
+		},
+		"only_en_symbols": {
+			"text": "Разрешены только английские символы"
+		},
+		"context_creation": {
+			"text": "Создание контекста"
+		},
+		"create_context": {
+			"text": "Создать контекст"
+		},
+		"contexts": {
+			"text": "Контексты"
+		},
+		"create_dictionary": {
+			"text": "Создать словарь"
+		},
+		"field_must_be_have_more_two_sumbols": {
+			"text": "Поле должено быть не менее 2 символов"
+		},
+		"dictionary": {
+			"text": "Словарь"
+		},
+		"field_element": {
+			"text": "Элемент поля"
+		},
+		"field_category": {
+			"text": "Категория полей"
+		},
+		"layout": {
+			"text": "Шаблон"
+		},
+		"field_type": {
+			"text": "Тип поля"
+		},
+		"default_value": {
+			"text": "Значение по умолчанию"
+		},
+		"string_or_json": {
+			"text": "Строка или json"
+		},
+		"schema": {
+			"text": "Схема"
+		},
+		"create_field": {
+			"text": "Создать поле"
+		},
+		"field": {
+			"text": "Поле"
+		},
+		"field_creation": {
+			"text": "Создание поля"
+		},
+		"create_field_category": {
+			"text": "Создать категорию полей"
+		},
+		"field_category_creation": {
+			"text": "Создание категории полей"
+		},
+		"directory": {
+			"text": "Директория"
+		},
+		"create_layout": {
+			"text": "Создать шаблон"
+		},
+		"layout_creation": {
+			"text": "Создание шаблона"
+		},
+		"address": {
+			"text": "Адрес"
+		},
+		"country": {
+			"text": "Страна"
+		},
+		"city": {
+			"text": "Город"
+		},
+		"street": {
+			"text": "Улица"
+		},
+		"home": {
+			"text": "Дом"
+		},
+		"apartment": {
+			"text": "Квартира"
+		},
+		"avatar": {
+			"text": "Аватар"
+		},
+		"lastname": {
+			"text": "Фамилия"
+		},
+		"firstname": {
+			"text": "Имя"
+		},
+		"middlename": {
+			"text": "Отчество"
+		},
+		"contacts": {
+			"text": "Контакты"
+		},
+		"phone": {
+			"text": "Телефон"
+		},
+		"keys": {
+			"text": "Ключи"
+		},
+		"public_key": {
+			"text": "Публичный ключ"
+		},
+		"change_password": {
+			"text": "Изменить пароль"
+		},
+		"enter_old_password": {
+			"text": "Введите старый пароль"
+		},
+		"enter_new_password": {
+			"text": "Введите новый пароль"
+		},
+		"confirm_password": {
+			"text": "Подтвердите новый пароль"
+		},
+		"change": {
+			"text": "Изменить"
+		},
+		"password_not_confirm": {
+			"text": "Пароли не совпадают"
+		},
+		"role": {
+			"text": "Роль"
+		},
+		"role_slug": {
+			"text": "Псевдоним роли"
+		},
+		"your_profile": {
+			"text": "Ваш профиль"
+		},
+		"reset_password": {
+			"text": "Восстановить пароль"
+		},
+		"send_request": {
+			"text": "Отправить запрос"
+		},
+		"select_lang": {
+			"text": "Выберете язык"
+		},
+		"create_translation": {
+			"text": "Создать перевод"
+		},
+		"next_step": {
+			"text": "Следующий шаг"
+		},
+		"need_resource_with_analog_lang": {
+			"text": "Необходимо создать родительский ресурс с аналогичным языком перевода"
+		},
+		"resource_type": {
+			"text": "Тип ресурса"
+		},
+		"published": {
+			"text": "Опубликовать"
+		},
+		"menunindex": {
+			"text": "Меню-индекс"
+		},
+		"date_creation": {
+			"text": "Дата создания"
+		},
+		"description": {
+			"text": "Описание"
+		},
+		"resource": {
+			"text": "Ресурс"
+		},
+		"resource_creation": {
+			"text": "Создание ресурса"
+		},
+		"rang": {
+			"text": "Ранг"
+		},
+		"role_creation": {
+			"text": "Создание роли"
+		},
+		"create_role": {
+			"text": "Создать роль"
+		},
+		"profile": {
+			"text": "Профиль"
+		},
+		"user_creation": {
+			"text": "Создание пользователя"
+		},
+		"create_user": {
+			"text": "Создать пользователя"
+		}
+	}
 }

@@ -56,7 +56,7 @@
       remove-confirm(
         @remove="remove"
         :isActive.sync="isRemoveDialog"
-        name="элемент поля"
+        :name="`${this.d.field_element || 'Элемент поля'}`"
       )
 </template>
 

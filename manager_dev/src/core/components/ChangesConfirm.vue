@@ -3,8 +3,8 @@
     v-card
       v-card-title.title {{d.cancel_confirm}}
       v-card-actions
-        v-btn.ml-2(color="primary" @click="$emit('cancel')") {{d.cancel}}
-        v-btn(color="primary" @click="$emit('close')") {{d.close}}
+        v-btn.ml-2(color="primary" @click="$emit('cancel')") {{d.cancel || 'Отмена'}}
+        v-btn(color="primary" @click="$emit('close')") {{d.close || 'Закрыть'}}
 </template>
 
 <script>

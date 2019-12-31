@@ -22,7 +22,7 @@
 			v-if="r.is_filesystem_directory_delete"
 		)
 			v-icon.mr-2 delete
-			div {{d.remove}}
+			div {{d.remove || 'Удалить'}}
 </template>
 
 <script>

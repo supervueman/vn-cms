@@ -1,81 +1,207 @@
 {
   "lang": "en",
-  "title": "Английский",
+  "title": "English",
   "value": {
-    "save": {
-      "text": "Save"
+    "download": {
+      "text": "Downdload"
+    },
+    "upload": {
+      "text": "Upload"
+    },
+    "enter_dir_name": {
+      "text": "Enter directory name"
     },
     "create": {
       "text": "Create"
     },
-    "update": {
-      "text": "Update"
-    },
-    "remove": {
-      "text": "Remove"
-    },
-    "change": {
-      "text": "Change"
-    },
     "cancel": {
       "text": "Cancel"
     },
-    "login": {
-      "text": "Login"
+    "required_field": {
+      "text": "Required field"
     },
-    "logout": {
-      "text": "Logout"
+    "current_path": {
+      "text": "Current path"
     },
-    "password": {
-      "text": "Password"
+    "create_directory": {
+      "text": "Create directory"
     },
-    "forgot_password": {
-      "text": "Forgot your password?"
-    },
-    "resources": {
-      "text": "Resources"
-    },
-    "resource": {
-      "text": "Resource"
-    },
-    "resource_type": {
-      "text": "Resource type"
-    },
-    "elements": {
-      "text": "Elements"
-    },
-    "files": {
-      "text": "Files"
-    },
-    "all_resources": {
-      "text": "All resources"
-    },
-    "users": {
-      "text": "Users"
+    "reload": {
+      "text": "Reload"
     },
     "layouts": {
       "text": "Layouts"
     },
-    "additional_fields": {
-      "text": "Additional fields"
+    "fields": {
+      "text": "Fields"
     },
-    "additional_field": {
-      "text": "Additional field"
+    "field_categories": {
+      "text": "Fields categories"
     },
     "filesystem": {
       "text": "Filesystem"
     },
-    "roles_politics": {
-      "text": "Roles"
+    "create_resource": {
+      "text": "Create resource"
     },
-    "role_politic": {
-      "text": "Role"
+    "applications": {
+      "text": "Applications"
+    },
+    "developer": {
+      "text": "Developer"
+    },
+    "close": {
+      "text": "Close"
+    },
+    "login": {
+      "text": "Login"
+    },
+    "forgot_password": {
+      "text": "Forgot your password?"
+    },
+    "password": {
+      "text": "Password"
+    },
+    "email_is_not_valid": {
+      "text": "E-mail is not valid"
+    },
+    "remove_confirm": {
+      "text": "Are you sure you want to delete"
+    },
+    "resources": {
+      "text": "Resources"
+    },
+    "develop": {
+      "text": "Develop"
+    },
+    "files": {
+      "text": "Files"
+    },
+    "users": {
+      "text": "Users"
+    },
+    "roles": {
+      "text": "Roles"
     },
     "system_settings": {
       "text": "System settings"
     },
+    "dictionaries": {
+      "text": "Dictionaries"
+    },
+    "logout": {
+      "text": "Logout"
+    },
+    "context": {
+      "text": "Context"
+    },
     "common_data": {
       "text": "Common data"
+    },
+    "slug": {
+      "text": "Slug"
+    },
+    "name": {
+      "text": "Name"
+    },
+    "save": {
+      "text": "Save"
+    },
+    "remove": {
+      "text": "Remove"
+    },
+    "field_must_be_have_more_two_sumbols": {
+      "text": "The field must be at least 2 characters"
+    },
+    "field_must_be_have_more_three_sumbols": {
+      "text": "The field must be at least 3 characters"
+    },
+    "field_must_be_have_more_six_sumbols": {
+      "text": "The field must be at least 6 characters"
+    },
+    "only_en_symbols": {
+      "text": "Only latin characters allowed"
+    },
+    "context_creation": {
+      "text": "Context creation"
+    },
+    "create_context": {
+      "text": "Create context"
+    },
+    "contexts": {
+      "text": "Contexts"
+    },
+    "create_dictionary": {
+      "text": "Create dictionary"
+    },
+    "dictionary": {
+      "text": "Dictionary"
+    },
+    "field_element": {
+      "text": "Field element"
+    },
+    "field_category": {
+      "text": "Fields category"
+    },
+    "layout": {
+      "text": "Layout"
+    },
+    "field_type": {
+      "text": "Field type"
+    },
+    "default_value": {
+      "text": "Default value"
+    },
+    "string_or_json": {
+      "text": "String or JSON"
+    },
+    "schema": {
+      "text": "Schema"
+    },
+    "create_field": {
+      "text": "Create field"
+    },
+    "field": {
+      "text": "field"
+    },
+    "field_creation": {
+      "text": "Field creation"
+    },
+    "create_field_category": {
+      "text": "Create fields category"
+    },
+    "field_category_creation": {
+      "text": "Fields catiogory creation"
+    },
+    "directory": {
+      "text": "Directory"
+    },
+    "create_layout": {
+      "text": "Create layout"
+    },
+    "layout_creation": {
+      "text": "Layout creation"
+    },
+    "address": {
+      "text": "Address"
+    },
+    "country": {
+      "text": "Country"
+    },
+    "city": {
+      "text": "City"
+    },
+    "street": {
+      "text": "Street"
+    },
+    "home": {
+      "text": "Home"
+    },
+    "apartment": {
+      "text": "Apartment"
+    },
+    "avatar": {
+      "text": "Avatar"
     },
     "lastname": {
       "text": "Lastname"
@@ -86,12 +212,6 @@
     "middlename": {
       "text": "Middlename"
     },
-    "slug": {
-      "text": "Slug"
-    },
-    "avatar": {
-      "text": "Avatar"
-    },
     "contacts": {
       "text": "Contacts"
     },
@@ -100,6 +220,9 @@
     },
     "keys": {
       "text": "Keys"
+    },
+    "public_key": {
+      "text": "Public key"
     },
     "change_password": {
       "text": "Change password"
@@ -111,169 +234,79 @@
       "text": "Enter new password"
     },
     "confirm_password": {
-      "text": "Confirm password"
+      "text": "Confirm new password"
     },
-    "your_profile": {
-      "text": "Your profile"
+    "change": {
+      "text": "Change"
+    },
+    "password_not_confirm": {
+      "text": "Passwords do not match"
     },
     "role": {
       "text": "Role"
     },
-    "create_user": {
-      "text": "Create user"
+    "role_slug": {
+      "text": "Role slug"
     },
-    "create_role": {
-      "text": "Create role"
+    "your_profile": {
+      "text": "Your profile"
     },
-    "create_layout": {
-      "text": "Create layout"
+    "reset_password": {
+      "text": "Reset password"
     },
-    "create_field": {
-      "text": "Create field"
+    "send_request": {
+      "text": "Send request"
     },
-    "field_categories": {
-      "text": "Fields categories"
-    },
-    "field_category": {
-      "text": "Field category"
-    },
-    "create_field_category": {
-      "text": "Create field category"
-    },
-    "type": {
-      "text": "Type"
-    },
-    "layout": {
-      "text": "Layout"
-    },
-    "name": {
-      "text": "Name"
-    },
-    "default_value": {
-      "text": "Default value"
-    },
-    "field_type": {
-      "text": "Field type"
-    },
-    "schema": {
-      "text": "Schema"
-    },
-    "role_creation": {
-      "text": "Role creation"
-    },
-    "profile_creation": {
-      "text": "Profile creation"
-    },
-    "profile": {
-      "text": "Profile"
-    },
-    "layout_creation": {
-      "text": "Layout creation"
-    },
-    "additiopnal_fileds": {
-      "text": "Addtional fields"
-    },
-    "field_creation": {
-      "text": "Field creation"
-    },
-    "fields": {
-      "text": "Fields"
-    },
-    "all_fields": {
-      "text": "All fields"
-    },
-    "filde": {
-      "text": "Field"
-    },
-    "current_path": {
-      "text": "Current path"
-    },
-    "create_directory": {
-      "text": "Create folder"
-    },
-    "download": {
-      "text": "Download"
-    },
-    "reload": {
-      "text": "Reload"
-    },
-    "date_creation": {
-      "text": "Date creation"
-    },
-    "create_resource": {
-      "text": "Create resource"
-    },
-    "resource_creation": {
-      "text": "Resource creation"
-    },
-    "published": {
-      "text": "Published"
-    },
-    "content": {
-      "text": "Content"
-    },
-    "ru": {
-      "text": "Russion"
-    },
-    "en": {
-      "text": "English"
-    },
-    "dictionaries": {
-      "text": "Dictionaries"
-    },
-    "dictionary": {
-      "text": "Dictionary"
-    },
-    "create_dictionary": {
-      "text": "Create dictionary"
-    },
-    "close": {
-      "text": "Close"
-    },
-    "remove_confirm": {
-      "text": "Are you sure you want to delete"
-    },
-    "add_element": {
-      "text": "Add element"
-    },
-    "cancel_confirm": {
-      "text": "Are you sure you want to discard the changes? Unsaved data will be lost."
-    },
-    "string_or_json": {
-      "text": "String or JSON"
-    },
-    "upload": {
-      "text": "Upload"
-    },
-    "directory": {
-      "text": "Directory"
-    },
-    "enter_dir_name": {
-      "text": "Enter directory name"
-    },
-    "enter_password": {
-      "text": "Enter password"
-    },
-    "description": {
-      "text": "Description"
-    },
-    "confirm_layout_change": {
-      "text": "Are you sure you want to change the template?"
+    "select_lang": {
+      "text": "Select lang"
     },
     "create_translation": {
       "text": "Create translation"
     },
-    "change_lang": {
-      "text": "Change lang"
+    "next_step": {
+      "text": "Next step"
     },
-    "next": {
-      "text": "Next"
+    "need_resource_with_analog_lang": {
+      "text": "You must create a parent resource with the same translation language"
     },
-    "field": {
-      "text": "Field"
+    "resource_type": {
+      "text": "Resource type"
     },
-    "applications": {
-      "text": "Applications"
+    "published": {
+      "text": "Published"
+    },
+    "menunindex": {
+      "text": "Menuindex"
+    },
+    "date_creation": {
+      "text": "Date creation"
+    },
+    "description": {
+      "text": "Description"
+    },
+    "resource": {
+      "text": "Resource"
+    },
+    "resource_creation": {
+      "text": "Resource creation"
+    },
+    "rang": {
+      "text": "Rang"
+    },
+    "role_creation": {
+      "text": "Role creation"
+    },
+    "create_role": {
+      "text": "Create role"
+    },
+    "profile": {
+      "text": "Profile"
+    },
+    "user_creation": {
+      "text": "User creation"
+    },
+    "create_user": {
+      "text": "Create user"
     }
   }
 }

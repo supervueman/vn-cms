@@ -61,7 +61,7 @@ const actions = {
       this.dispatch('preloader/fetch', false);
       this.dispatch('notification/fetch', {
         type: 'success',
-        message: 'Директория успешно создана!',
+        message: 'Success',
         isActive: true
       });
     }
@@ -86,7 +86,7 @@ const actions = {
       this.dispatch('preloader/fetch', false);
       this.dispatch('notification/fetch', {
         type: 'success',
-        message: 'Файлы успешно загружены!',
+        message: 'Success',
         isActive: true
       });
     }
@@ -111,7 +111,7 @@ const actions = {
       this.dispatch('preloader/fetch', false);
       this.dispatch('notification/fetch', {
         type: 'success',
-        message: 'Файл успешно удален!',
+        message: 'Success',
         isActive: true
       });
     }
@@ -136,7 +136,7 @@ const actions = {
       this.dispatch('preloader/fetch', false);
       this.dispatch('notification/fetch', {
         type: 'success',
-        message: 'Директория успешно удалена!',
+        message: 'Success',
         isActive: true
       });
     }

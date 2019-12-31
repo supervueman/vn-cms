@@ -30,7 +30,7 @@
 			max-width="500px"
 		)
 			v-card(outlined)
-				v-card-title.title {{d.change_lang || 'Выберете язык'}}
+				v-card-title.title {{d.select_lang || 'Выберете язык'}}
 				v-card-text
 					v-select(
 						:items="langs"
@@ -115,7 +115,8 @@ export default {
     translationLangErrors() {
       const errors = [];
       if (!this.$v.translationLang.$dirty) return errors;
-      !this.$v.translationLang.required && errors.push("Обязательное поле!");
+      !this.$v.translationLang.required &&
+        errors.push(`${this.d.required_field || "Обязательное поле"}`);
       return errors;
     }
   },
@@ -138,8 +139,8 @@ export default {
         if (this.resource.level - 1 > 0 && this.translationParentId === null) {
           this.$store.dispatch("notification/fetch", {
             type: "error",
-            message:
-              "Необходимо создать родительский ресурс с аналогичным языком перевода!",
+            message: `${this.d.need_resource_with_analog_lang ||
+              "Необходимо создать родительский ресурс с аналогичным языком перевода"}`,
             isActive: true
           });
           return;

@@ -135,7 +135,7 @@
                   v-model="field.value"
                 )
     v-card-actions
-      v-btn.ml-2(@click="$emit('cancel')") {{d.close}}
+      v-btn.ml-2(@click="$emit('cancel')") {{d.close || 'Закрыть'}}
 </template>
 
 <script>

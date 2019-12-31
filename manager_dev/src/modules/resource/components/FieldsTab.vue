@@ -204,156 +204,156 @@
         @click="saveAdditionalFields"
         depressed
         v-if="r.is_resource_update"
-      ) {{d.save}}
+      ) {{d.save || 'Сохранить'}}
 </template>
 
 <script>
 // Components
-import MigxField from '../../field/components/Migx/MigxField';
+import MigxField from "../../field/components/Migx/MigxField";
 
 export default {
-	name: 'ResourceFields',
+  name: "ResourceFields",
 
-	components: {
-		MigxField
-	},
+  components: {
+    MigxField
+  },
 
-	props: {
-		resource: {
-			type: Object,
-			default: () => {}
-		}
-	},
+  props: {
+    resource: {
+      type: Object,
+      default: () => {}
+    }
+  },
 
-	computed: {
-		additionalFields() {
-			return this.$store.getters['resource/getAdditionalFields'];
-		},
-		fields() {
-			return this.$store.getters['resource/getSerializedFields'];
-		},
-		fieldCategories() {
-			return this.$store.getters['fieldcategory/getAll'];
-		}
-	},
+  computed: {
+    additionalFields() {
+      return this.$store.getters["resource/getAdditionalFields"];
+    },
+    fields() {
+      return this.$store.getters["resource/getSerializedFields"];
+    },
+    fieldCategories() {
+      return this.$store.getters["fieldcategory/getAll"];
+    }
+  },
 
-	async mounted() {
-		await this.$store.dispatch('fieldcategory/findAll', {
-			query: {
-				filter: {
-					order: [['createdAt', 'DESC']]
-				}
-			}
-		});
-	},
+  async mounted() {
+    await this.$store.dispatch("fieldcategory/findAll", {
+      query: {
+        filter: {
+          order: [["createdAt", "DESC"]]
+        }
+      }
+    });
+  },
 
-	methods: {
-		async saveAdditionalFields() {
-			if (!this.r.is_resource_update) {
-				return;
-			}
-			const fields = [];
+  methods: {
+    async saveAdditionalFields() {
+      if (!this.r.is_resource_update) {
+        return;
+      }
+      const fields = [];
 
-			for (let el in this.fields) {
-				if (this.fields[el].id) {
-					const updateField = {
-						id: this.fields[el].id,
-						slug: el,
-						value: this.fields[el].value,
-						resourceId: this.fields[el].resourceId,
-						fieldId: this.fields[el].interface.id,
-						categoryId: this.fields[el].interface.categoryId
-					};
-					if (this.fields[el].interface.fieldType === 'migx') {
-						updateField.value = JSON.stringify(this.fields[el].value);
-					}
-					if (this.fields[el].interface.fieldType === 'multiselect') {
-						updateField.value = JSON.stringify(this.fields[el].value);
-					}
-					fields.push(updateField);
-				} else {
-					const createField = {
-						slug: el,
-						value: this.fields[el].value,
-						resourceId: this.fields[el].resourceId,
-						fieldId: this.fields[el].interface.id,
-						categoryId: this.fields[el].interface.categoryId
-					};
+      for (let el in this.fields) {
+        if (this.fields[el].id) {
+          const updateField = {
+            id: this.fields[el].id,
+            slug: el,
+            value: this.fields[el].value,
+            resourceId: this.fields[el].resourceId,
+            fieldId: this.fields[el].interface.id,
+            categoryId: this.fields[el].interface.categoryId
+          };
+          if (this.fields[el].interface.fieldType === "migx") {
+            updateField.value = JSON.stringify(this.fields[el].value);
+          }
+          if (this.fields[el].interface.fieldType === "multiselect") {
+            updateField.value = JSON.stringify(this.fields[el].value);
+          }
+          fields.push(updateField);
+        } else {
+          const createField = {
+            slug: el,
+            value: this.fields[el].value,
+            resourceId: this.fields[el].resourceId,
+            fieldId: this.fields[el].interface.id,
+            categoryId: this.fields[el].interface.categoryId
+          };
 
-					if (this.fields[el].interface.fieldType === 'migx') {
-						createField.value = JSON.stringify(this.fields[el].value);
-					}
-					if (this.fields[el].interface.fieldType === 'multiselect') {
-						createField.value = JSON.stringify(this.fields[el].value);
-					}
-					fields.push(createField);
-				}
-			}
+          if (this.fields[el].interface.fieldType === "migx") {
+            createField.value = JSON.stringify(this.fields[el].value);
+          }
+          if (this.fields[el].interface.fieldType === "multiselect") {
+            createField.value = JSON.stringify(this.fields[el].value);
+          }
+          fields.push(createField);
+        }
+      }
 
-			for await (let el of fields) {
-				if (el.id) {
-					await this.$store.dispatch('additionalfield/update', el);
-				} else {
-					await this.$store.dispatch('additionalfield/create', el);
-				}
-			}
+      for await (let el of fields) {
+        if (el.id) {
+          await this.$store.dispatch("additionalfield/update", el);
+        } else {
+          await this.$store.dispatch("additionalfield/create", el);
+        }
+      }
 
-			await this.$store.dispatch('resource/findByPk', {
-				params: {
-					id: this.$route.params.id
-				},
-				query: {
-					filter: {
-						include: [
-							{
-								association: 'layout',
-								include: ['fields']
-							},
-							'additionalfields',
-							'translations',
-							'resourcetype'
-						]
-					}
-				}
-			});
-		},
+      await this.$store.dispatch("resource/findByPk", {
+        params: {
+          id: this.$route.params.id
+        },
+        query: {
+          filter: {
+            include: [
+              {
+                association: "layout",
+                include: ["fields"]
+              },
+              "additionalfields",
+              "translations",
+              "resourcetype"
+            ]
+          }
+        }
+      });
+    },
 
-		async filterFields(event) {
-			const query = {
-				filter: {
-					include: [
-						{
-							association: 'layout',
-							include: [
-								{
-									association: 'fields',
-									where: { categoryId: event }
-								}
-							]
-						},
-						{
-							association: 'additionalfields',
-							where: { categoryId: event }
-						},
-						{
-							association: 'parent',
-							include: ['translations']
-						},
-						'translations',
-						'resourcetype'
-					]
-				}
-			};
-			if (this.resource.additionalfields.length === 0) {
-				delete query.filter.include[1].where;
-			}
-			await this.$store.dispatch('resource/findByPk', {
-				params: {
-					id: this.$route.params.id
-				},
-				query
-			});
-		}
-	}
+    async filterFields(event) {
+      const query = {
+        filter: {
+          include: [
+            {
+              association: "layout",
+              include: [
+                {
+                  association: "fields",
+                  where: { categoryId: event }
+                }
+              ]
+            },
+            {
+              association: "additionalfields",
+              where: { categoryId: event }
+            },
+            {
+              association: "parent",
+              include: ["translations"]
+            },
+            "translations",
+            "resourcetype"
+          ]
+        }
+      };
+      if (this.resource.additionalfields.length === 0) {
+        delete query.filter.include[1].where;
+      }
+      await this.$store.dispatch("resource/findByPk", {
+        params: {
+          id: this.$route.params.id
+        },
+        query
+      });
+    }
+  }
 };
 </script>

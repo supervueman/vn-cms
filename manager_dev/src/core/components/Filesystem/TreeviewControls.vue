@@ -7,7 +7,7 @@
             @click="$emit('openDialogForCreateFolder', true)"
             v-on="on"
           ) create_new_folder
-        span {{d.create_directory}}
+        span {{d.create_directory || 'Создать директорию'}}
       v-tooltip(top v-if="r.is_filesystem_files_uploads")
         template(v-slot:activator="{ on }")
           v-icon.mr-2.storage-control(

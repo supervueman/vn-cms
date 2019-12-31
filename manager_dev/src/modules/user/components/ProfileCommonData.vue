@@ -65,10 +65,16 @@ export default {
       const errors = [];
       if (!this.$v.profile.slug.$dirty) return errors;
       !this.$v.profile.slug.minLength &&
-        errors.push("Псевдоним должен быть не менее 3 символов!");
+        errors.push(
+          `${this.d.field_must_be_have_more_three_sumbols ||
+            "Поле должено быть не менее 3 символов"}`
+        );
       !this.$v.profile.slug.alpha &&
-        errors.push("Разрешены только английские символы!");
-      !this.$v.profile.slug.required && errors.push("Обязательное поле!");
+        errors.push(
+          `${this.d.only_en_symbols || "Разрешены только английские символы"}`
+        );
+      !this.$v.profile.slug.required &&
+        errors.push(`${this.d.required_field || "Обязательное поле"}`);
       return errors;
     }
   },

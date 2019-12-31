@@ -45,7 +45,7 @@ const actions = {
       this.dispatch('preloader/fetch', false);
       this.dispatch('notification/fetch', {
         type: 'success',
-        message: 'Успешно сохранено!',
+        message: 'Success',
         isActive: true
       });
       return true;
@@ -71,7 +71,7 @@ const actions = {
       this.dispatch('preloader/fetch', false);
       this.dispatch('notification/fetch', {
         type: 'success',
-        message: 'Успешно сохранено!',
+        message: 'Success',
         isActive: true
       });
     }
@@ -97,7 +97,7 @@ const actions = {
       this.dispatch('layout/clear');
       this.dispatch('notification/fetch', {
         type: 'success',
-        message: `Успешно удалено!`,
+        message: 'Success',
         isActive: true
       });
       return true;

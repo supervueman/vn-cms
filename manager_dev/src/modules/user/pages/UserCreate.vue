@@ -105,7 +105,7 @@ export default {
 
   metaInfo() {
     return {
-      title: `${this.d.profile_create || "Profile create"}`
+      title: `${this.d.user_creation || "Создание пользователя"}`
     };
   },
 
@@ -133,19 +133,29 @@ export default {
       const errors = [];
       if (!this.$v.profile.slug.$dirty) return errors;
       !this.$v.profile.slug.minLength &&
-        errors.push("Псевдоним должен быть не менее 3 символов!");
+        errors.push(
+          `${this.d.field_must_be_have_more_three_sumbols ||
+            "Поле должено быть не менее 3 символов"}`
+        );
       !this.$v.profile.slug.alpha &&
-        errors.push("Разрешены только английские символы!");
-      !this.$v.profile.slug.required && errors.push("Обязательное поле!");
+        errors.push(
+          `${this.d.only_en_symbols || "Разрешены только английские символы"}`
+        );
+      !this.$v.profile.slug.required &&
+        errors.push(`${this.d.required_field || "Обязательное поле"}`);
       return errors;
     },
 
     passwordErrors() {
       const errors = [];
       if (!this.$v.profile.password.$dirty) return errors;
-      !this.$v.profile.password.required && errors.push("Обязательное поле");
+      !this.$v.profile.password.required &&
+        errors.push(`${this.d.required_field || "Обязательное поле"}`);
       !this.$v.profile.password.minLength &&
-        errors.push("Пароль должен быть не менее 6 символов");
+        errors.push(
+          `${this.d.field_must_be_have_more_six_sumbols ||
+            "Поле должено быть не менее 6 символов"}`
+        );
       return errors;
     },
 
@@ -153,19 +163,24 @@ export default {
       const errors = [];
       if (!this.$v.profile.confirmPassword.$dirty) return errors;
       !this.$v.profile.confirmPassword.required &&
-        errors.push("Обязательное поле");
+        errors.push(`${this.d.required_field || "Обязательное поле"}`);
       !this.$v.profile.confirmPassword.minLength &&
-        errors.push("Пароль должен быть не менее 6 символов");
+        errors.push(
+          `${this.d.field_must_be_have_more_six_sumbols ||
+            "Поле должено быть не менее 6 символов"}`
+        );
       !this.$v.profile.confirmPassword.sameAsPassword &&
-        errors.push("Пароли не совпадают!");
+        errors.push(`${this.d.password_not_confirm || "Пароли не совпадают!"}`);
       return errors;
     },
 
     emailErrors() {
       const errors = [];
       if (!this.$v.profile.email.$dirty) return errors;
-      !this.$v.profile.email.email && errors.push("E-mail не валиден!");
-      !this.$v.profile.email.required && errors.push("Обязательное поле!");
+      !this.$v.profile.email.email &&
+        errors.push(`${this.d.email_is_not_valid || "E-mail не валиден"}`);
+      !this.$v.profile.email.required &&
+        errors.push(`${this.d.required_field || "Обязательное поле"}`);
       return errors;
     }
   },

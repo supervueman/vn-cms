@@ -103,7 +103,7 @@ const actions = {
       this.dispatch('user/set', response.data);
       this.dispatch("notification/fetch", {
         type: "success",
-        message: 'Успешно сохранено!',
+        message: 'Success',
         isActive: true
       });
       return true;
@@ -129,7 +129,7 @@ const actions = {
       this.dispatch('preloader/fetch', false);
       this.dispatch("notification/fetch", {
         type: "success",
-        message: 'Успешно сохранено!',
+        message: 'Success',
         isActive: true
       });
     }
@@ -154,7 +154,7 @@ const actions = {
       this.dispatch('preloader/fetch', false);
       this.dispatch("notification/fetch", {
         type: "success",
-        message: 'Успешно сохранено!',
+        message: 'Success',
         isActive: true
       });
     }

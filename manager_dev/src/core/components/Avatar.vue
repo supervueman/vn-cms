@@ -1,6 +1,6 @@
 <template lang="pug">
   .avatar(@click="isActiveDialog = true")
-    img(:src="imagePath", alt="Avatar")
+    img(:src="imagePath")
     v-dialog(v-model="isActiveDialog")
       filesystem(@selectFile="selectFile")
 </template>

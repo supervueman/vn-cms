@@ -80,8 +80,10 @@ export default {
     emailErrors() {
       const errors = [];
       if (!this.$v.profile.email.$dirty) return errors;
-      !this.$v.profile.email.email && errors.push("E-mail не валиден!");
-      !this.$v.profile.email.required && errors.push("Обязательное поле!");
+      !this.$v.profile.email.email &&
+        errors.push(`${this.d.email_is_not_valid || "E-mail не валиден"}`);
+      !this.$v.profile.email.required &&
+        errors.push(`${this.d.required_field || "Обязательное поле"}`);
       return errors;
     }
   },

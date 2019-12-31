@@ -42,7 +42,7 @@
         color="primary"
         class="ml-auto mr-2 mb-2"
         v-if="!$route.query.token"
-      ) {{d.password_reset_request || 'Отправить запрос'}}
+      ) {{d.send_request || 'Отправить запрос'}}
       v-btn(
         @click="changePassword"
         color="primary"
@@ -59,7 +59,7 @@ export default {
 
   metaInfo() {
     return {
-      title: `${this.d.reset_password_create || "Password reset"}`
+      title: `${this.d.reset_password || "Восстановить пароль"}`
     };
   },
 
@@ -88,25 +88,35 @@ export default {
       const errors = [];
       if (!this.$v.password.$dirty) return errors;
       !this.$v.password.minLength &&
-        errors.push("Пароль должен быть не менее 6 символов");
-      !this.$v.password.required && errors.push("Обязательное поле");
+        errors.push(
+          `${this.d.field_must_be_have_more_six_sumbols ||
+            "Поле должено быть не менее 6 символов"}`
+        );
+      !this.$v.password.required &&
+        errors.push(`${this.d.required_field || "Обязательное поле"}`);
       return errors;
     },
     confirmPasswordErrors() {
       const errors = [];
       if (!this.$v.confirmPassword.$dirty) return errors;
-      !this.$v.confirmPassword.required && errors.push("Обязательное поле");
+      !this.$v.confirmPassword.required &&
+        errors.push(`${this.d.required_field || "Обязательное поле"}`);
       !this.$v.confirmPassword.minLength &&
-        errors.push("Пароль должен быть не менее 6 символов");
+        errors.push(
+          `${this.d.field_must_be_have_more_six_sumbols ||
+            "Поле должено быть не менее 6 символов"}`
+        );
       !this.$v.confirmPassword.sameAsPassword &&
-        errors.push("Пароли не совпадают!");
+        errors.push(`${this.d.password_not_confirm || "Пароли не совпадают!"}`);
       return errors;
     },
     emailErrors() {
       const errors = [];
       if (!this.$v.email.$dirty) return errors;
-      !this.$v.email.email && errors.push("E-mail не валиден");
-      !this.$v.email.required && errors.push("Обязательное поле");
+      !this.$v.email.email &&
+        errors.push(`${this.d.email_is_not_valid || "E-mail не валиден"}`);
+      !this.$v.email.required &&
+        errors.push(`${this.d.required_field || "Обязательное поле"}`);
       return errors;
     }
   },

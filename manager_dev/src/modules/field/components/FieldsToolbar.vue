@@ -9,7 +9,7 @@
 				hide-details
 				:value="Number($route.query.categoryId)"
 				clearable
-				:label="`${d.field_category || 'Категории полей'}:`"
+				:label="`${d.field_categories || 'Категории полей'}:`"
 				@change="$emit('filter', $event)"
 			)
 		v-btn(

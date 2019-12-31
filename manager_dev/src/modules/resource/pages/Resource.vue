@@ -91,7 +91,7 @@ export default {
             limit: this.$route.query.limit || this.limit,
             order: [["createdAt", "DESC"]],
             where: {
-              // level: this.resource.level + 1,
+              level: this.resource.level + 1,
               parentId: this.resource.id,
               lang: this.resource.lang
             }
