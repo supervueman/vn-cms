@@ -102,5 +102,13 @@ typings/
 # Modules
 /manager_dev/src/modules/test
 /server/components/test
-# shop
-# smsc
+shop
+smsc
+retail
+bitrixcrm
+ide
+paypal
+yandexmoney
+webmoney
+qiwi
+mailbox
