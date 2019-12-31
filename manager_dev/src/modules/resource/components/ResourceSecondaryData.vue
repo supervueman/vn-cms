@@ -21,6 +21,7 @@
 				item-text="title"
 				item-value="id"
 				:label="`${d.context || 'Контекст'}:`"
+				v-if="!$route.query.contextId && !$route.params.id"
 			)
 			v-flex.md12
 				v-tooltip(top)

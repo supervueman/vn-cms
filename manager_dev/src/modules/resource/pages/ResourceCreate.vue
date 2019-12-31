@@ -126,6 +126,10 @@ export default {
           this.resource.parentId = this.$route.query.parentId;
         }
 
+        if (this.$route.query.contextId) {
+          this.resource.contextId = this.$route.query.contextId;
+        }
+
         this.resource.lang = this.mainLang;
 
         if (!this.resource.contextId && this.resource.contextId === "") {
@@ -162,13 +166,14 @@ export default {
           body: this.resource
         });
 
+        const body = [];
+        this.$store.getters["resource/getTranslations"].forEach(el => {
+          body.push([el.id, this.$store.getters["resource/get"].id]);
+          body.push([this.$store.getters["resource/get"].id, el.id]);
+        });
+
         const bool = await this.$store.dispatch("resource/addTranslation", {
-          body: [
-            [
-              this.$store.getters["resource/get"].id,
-              this.$route.query.translationId
-            ]
-          ]
+          body
         });
 
         if (bool) {

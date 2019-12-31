@@ -122,16 +122,11 @@ export default {
 
   methods: {
     findTranslationParentId() {
-      if (
-        this.resource.parent !== null &&
-        this.resource.parent.translations &&
-        this.resource.parent.translations.length > 0
-      ) {
+      if (this.resource.parent !== null && this.resource.parent.translations) {
+        this.translationParentId = null;
         this.resource.parent.translations.forEach(el => {
           if (el.lang === this.translationLang) {
             this.translationParentId = el.id;
-          } else {
-            this.translationParentId = null;
           }
         });
       }
@@ -151,7 +146,7 @@ export default {
         }
 
         this.$router.push(
-          `/resource-create?translationId=${this.resource.id}&lang=${this.translationLang}&level=${this.resource.level}&parentId=${this.translationParentId}`
+          `/resource-create?translationId=${this.resource.id}&lang=${this.translationLang}&level=${this.resource.level}&parentId=${this.translationParentId}&contextId=${this.resource.contextId}`
         );
       }
     }

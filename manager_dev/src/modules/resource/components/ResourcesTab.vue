@@ -1,10 +1,10 @@
 <template lang="pug">
-  v-card(outlined) {{count}}
+  v-card(outlined)
     v-toolbar(flat color="white")
       v-spacer
       v-btn(
         color="primary"
-        :to="`/resource-create?level=${Number(resource.level) + 1}&parentId=${resource.id}`"
+        :to="`/resource-create?level=${Number(resource.level) + 1}&parentId=${resource.id}&contextId=${resource.contextId}`"
         depressed
         v-if="r.is_resource_create && mainLang === resource.lang"
       ) {{d.create_resource || 'Создать ресурс'}}
@@ -82,34 +82,6 @@ export default {
     count() {
       return this.$store.getters["resource/getCount"];
     }
-  },
-
-  async mounted() {
-    await this.$store.dispatch("resource/findAll", {
-      query: {
-        filter: {
-          offset: this.$route.query.offset || 0,
-          limit: this.$route.query.limit || this.limit,
-          order: [["createdAt", "DESC"]],
-          where: {
-            level: this.resource.level + 1,
-            parentId: this.$route.params.id,
-            lang: this.$store.getters["base/getMainLang"]
-          }
-        }
-      }
-    });
-    await this.$store.dispatch("resource/count", {
-      query: {
-        filter: {
-          where: {
-            level: this.resource.level + 1,
-            parentId: this.$route.params.id,
-            lang: this.resource.lang
-          }
-        }
-      }
-    });
   },
 
   methods: {
