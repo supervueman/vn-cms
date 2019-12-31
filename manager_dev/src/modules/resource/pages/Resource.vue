@@ -10,24 +10,25 @@
 			grow
 		)
 			v-tab {{d.common_data || 'Общие данные'}}
-			v-tab-item
+			v-tab-item.mt-3
 				resource-tab
-				.d-flex.justify-center.mt-3
-					v-btn(
-						text
-						color="error"
-						depressed
-						@click="isRemoveDialog = true"
-					) {{d.remove || 'Удалить'}}
-					v-dialog(
-						v-model="isRemoveDialog"
-						max-width="500px"
-					)
-						remove-confirm(
-							@remove="remove"
-							:isActive.sync="isRemoveDialog"
-							:name="resource.title"
+				v-flex.xs12.md7.pr-2
+					.d-flex.justify-center
+						v-btn.mb-2(
+							text
+							color="error"
+							depressed
+							@click="isRemoveDialog = true"
+						) {{d.remove || 'Удалить'}}
+						v-dialog(
+							v-model="isRemoveDialog"
+							max-width="500px"
 						)
+							remove-confirm(
+								@remove="remove"
+								:isActive.sync="isRemoveDialog"
+								:name="resource.title"
+							)
 			v-tab {{d.fields || 'Поля'}}
 			v-tab-item.mt-3
 				fields-tab
