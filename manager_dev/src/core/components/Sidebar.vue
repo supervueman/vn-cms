@@ -25,7 +25,7 @@
 				resources-tab
 
 			v-tab(v-if="r.is_development_access") {{d.develop || 'Разработка'}}
-			v-tab-item(v-if="r.is_elements_access")
+			v-tab-item(v-if="r.is_development_access")
 				development-tab
 
 			v-tab(v-if="r.is_filesystem_access") {{d.files || 'Файлы'}}
