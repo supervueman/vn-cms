@@ -70,7 +70,8 @@ const actions = {
               include: [{
                 association: 'resources',
                 where: {
-                  level: 1
+                  level: 1,
+                  lang: JSON.parse(responseSystemSetting.data.setting).value
                 }
               }]
             }
