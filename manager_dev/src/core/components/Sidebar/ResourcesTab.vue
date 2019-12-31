@@ -99,6 +99,7 @@ export default {
 	overflow: hidden
 .slidebar
 	overflow: auto
+	width: 100%
 	height: calc(100vh - 165px)
 	.v-expansion-panel::before
 		border: none!important
