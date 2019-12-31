@@ -1,17 +1,17 @@
 <template lang="pug">
   v-card
-    v-card-title {{d.directory || 'Директория'}}: {{folderName}}
+    v-card-title {{d.directory || 'Directory'}}: {{folderName}}
     v-card-text
       v-text-field(
         v-model="folderName"
-        :label="`${d.enter_dir_name || 'Введите название директории'}`"
+        :label="`${d.enter_dir_name || 'Enter directory name'}`"
         :error-messages="folderNameErrors"
         @input="$v.folderName.$touch()"
         @blur="$v.folderName.$touch()"
       )
     v-card-actions.px-4.pb-4
-      v-btn(@click="createFolder" color="primary" depressed) {{d.create || 'Создать'}}
-      v-btn(@click="cancel" depressed) {{d.cancel || 'Отмена'}}
+      v-btn(@click="createFolder" color="primary" depressed) {{d.create || 'Create'}}
+      v-btn(@click="cancel" depressed) {{d.cancel || 'Cancel'}}
 </template>
 
 <script>
@@ -46,10 +46,10 @@ export default {
       !this.$v.folderName.minLength &&
         errors.push(
           `${this.d.field_must_be_have_more_three_sumbols ||
-            "Поле должно быть не менее 3 символов"}`
+            "The field must be at least 3 characters"}`
         );
       !this.$v.folderName.required &&
-        errors.push(`${this.d.required_field || "Обязательное поле"}`);
+        errors.push(`${this.d.required_field || "Required field"}`);
       return errors;
     }
   },

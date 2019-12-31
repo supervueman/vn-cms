@@ -2,12 +2,12 @@
   v-flex(v-if="r.is_context_read")
     .body-2.mb-12.mt-2 {{d.context_creation || 'Создание контекста'}}
     v-card.mb-3(outlined)
-      v-card-text.pb-0 {{d.common_data || 'Общие данные'}}
+      v-card-text.pb-0 {{d.common_data || 'Common data'}}
       v-card-text
         v-flex
           v-text-field(
             v-model="context.slug"
-            :label="`${d.slug || 'Псевдоним'}:`"
+            :label="`${d.slug || 'Slug'}:`"
             @input="$v.context.slug.$touch()"
             @blur="$v.context.slug.$touch()"
             :error-messages="slugErrors"
@@ -63,14 +63,14 @@ export default {
       !this.$v.context.slug.minLength &&
         errors.push(
           `${this.d.field_must_be_have_more_three_sumbols ||
-            "Поле должено быть не менее 3 символов"}`
+            "The field must be at least 3 characters"}`
         );
       !this.$v.context.slug.alpha &&
         errors.push(
-          `${this.d.only_en_symbols || "Разрешены только английские символы"}`
+          `${this.d.only_en_symbols || "Only latin characters allowed"}`
         );
       !this.$v.context.slug.required &&
-        errors.push(`${this.d.require_field || "Обязательное поле"}`);
+        errors.push(`${this.d.require_field || "Required field"}`);
       return errors;
     }
   },

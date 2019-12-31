@@ -66,7 +66,7 @@ export default {
     headers() {
       return [
         {
-          text: `${this.d.slug || "Псевдоним"}`,
+          text: `${this.d.slug || "Slug"}`,
           value: "slug"
         },
         {

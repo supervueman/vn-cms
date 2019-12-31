@@ -1,23 +1,23 @@
 <template lang="pug">
   v-flex(v-if="r.is_field_read")
-    .body-2.mb-12.mt-2 {{d.field || 'Поле'}}: {{field.title}} ({{field.id}})
+    .body-2.mb-12.mt-2 {{d.field || 'Field'}}: {{field.title}} ({{field.id}})
     v-layout.wrap
       v-flex.xs12.md7.pr-2
         v-card(outlined)
-          v-card-text {{d.common_data || 'Общие данные'}}
+          v-card-text {{d.common_data || 'Common data'}}
           v-card-text
             v-layout.wrap
               v-flex.md12
                 v-text-field(
                   v-model="field.slug"
-                  :label="`${d.slug || 'Псевдоним'}:`"
+                  :label="`${d.slug || 'Slug'}:`"
                   @input="$v.field.slug.$touch()"
                   @blur="$v.field.slug.$touch()"
                   :error-messages="slugErrors"
                 )
                 v-text-field(
                   v-model="field.title"
-                  :label="`${d.name || 'Наименование'}:`"
+                  :label="`${d.name || 'Name'}:`"
                   @input="$v.field.title.$touch()"
                   @blur="$v.field.title.$touch()"
                   :error-messages="titleErrors"
@@ -33,7 +33,7 @@
               @click="update"
               depressed
               v-if="r.is_field_update"
-            ) {{d.save|| 'Сохранить'}}
+            ) {{d.save|| 'Save'}}
 
       v-flex.xs12.md7.pr-2
         .d-flex.justify-center.mt-3
@@ -42,7 +42,7 @@
             color="error"
             depressed
             @click="isRemoveDialog = true"
-          ) {{d.remove || 'Удалить'}}
+          ) {{d.remove || 'Remove'}}
 
     v-dialog(
       v-model="isRemoveDialog"
@@ -87,7 +87,7 @@ export default {
 
   metaInfo() {
     return {
-      title: `${this.d.field || "Поле"}: ${this.field.title}`
+      title: `${this.d.field || "Field"}: ${this.field.title}`
     };
   },
 
@@ -108,14 +108,14 @@ export default {
       !this.$v.field.slug.minLength &&
         errors.push(
           `${this.d.field_must_be_have_more_three_sumbols ||
-            "Поле должено быть не менее 3 символов"}`
+            "The field must be at least 3 characters"}`
         );
       !this.$v.field.slug.alpha &&
         errors.push(
-          `${this.d.only_en_symbols || "Разрешены только английские символы"}`
+          `${this.d.only_en_symbols || "Only latin characters allowed"}`
         );
       !this.$v.field.slug.required &&
-        errors.push(`${this.d.required_field || "Обязательное поле"}`);
+        errors.push(`${this.d.required_field || "Required field"}`);
       return errors;
     },
     titleErrors() {
@@ -124,10 +124,10 @@ export default {
       !this.$v.field.title.minLength &&
         errors.push(
           `${this.d.field_must_be_have_more_three_sumbols ||
-            "Поле должено быть не менее 3 символов"}`
+            "The field must be at least 3 characters"}`
         );
       !this.$v.field.title.required &&
-        errors.push(`${this.d.required_field || "Обязательное поле"}`);
+        errors.push(`${this.d.required_field || "Required field"}`);
       return errors;
     }
   },

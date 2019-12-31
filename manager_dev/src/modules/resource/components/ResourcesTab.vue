@@ -7,7 +7,7 @@
         :to="`/resource-create?level=${resource.level}&parentId=${resource.id}&contextId=${resource.contextId}`"
         depressed
         v-if="r.is_resource_create && mainLang === resource.lang"
-      ) {{d.create_resource || 'Создать ресурс'}}
+      ) {{d.create_resource || 'Create resource'}}
     v-data-table(
       :headers="headers"
       :items="resources"
@@ -64,10 +64,10 @@ export default {
   computed: {
     headers() {
       return [
-        { text: `${this.d.name || "Наименование"}`, value: "title" },
-        { text: `${this.d.slug || "Псевдоним"}`, value: "slug" },
+        { text: `${this.d.name || "Name"}`, value: "title" },
+        { text: `${this.d.slug || "Slug"}`, value: "slug" },
         {
-          text: `${this.d.date_creation || "Дата создания"}`,
+          text: `${this.d.date_creation || "Date creation"}`,
           value: "createdAt"
         },
         { text: "", sortable: false }

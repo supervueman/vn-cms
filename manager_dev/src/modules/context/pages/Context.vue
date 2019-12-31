@@ -1,13 +1,13 @@
 <template lang="pug">
   v-flex(v-if="r.is_context_read")
-    .body-2.mb-12.mt-2 {{d.context || 'Контекст'}}: {{context.slug}} ({{context.id}})
+    .body-2.mb-12.mt-2 {{d.context || 'Context'}}: {{context.slug}} ({{context.id}})
     v-card.mb-3(outlined)
-      v-card-text.pb-0 {{d.common_data || 'Общие данные'}}
+      v-card-text.pb-0 {{d.common_data || 'Common data'}}
       v-card-text
         v-flex
           v-text-field(
             v-model="context.slug"
-            :label="`${d.slug || 'Псевдоним'}:`"
+            :label="`${d.slug || 'Slug'}:`"
             @input="$v.context.slug.$touch()"
             @blur="$v.context.slug.$touch()"
             :error-messages="slugErrors"
@@ -15,7 +15,7 @@
         v-flex
           v-text-field(
             v-model="context.title"
-            :label="`${d.name || 'Наименование'}:`"
+            :label="`${d.name || 'Name'}:`"
           )
       v-card-actions.px-4.pb-4.pt-0
         v-btn(
@@ -23,7 +23,7 @@
           color="primary"
           depressed
           :disabled="context.slug === 'root'"
-        ) {{d.save || 'Сохранить'}}
+        ) {{d.save || 'Save'}}
     v-dialog(
       v-model="isRemoveDialog"
       max-width="500px"
@@ -40,7 +40,7 @@
         color="error"
         depressed
         @click="isRemoveDialog = true"
-      ) {{d.remove || 'Удалить'}}
+      ) {{d.remove || 'Remove'}}
 </template>
 
 <script>
@@ -57,7 +57,7 @@ export default {
 
   metaInfo() {
     return {
-      title: `${this.d.context || "Контекст"}: ${this.context.slug}`
+      title: `${this.d.context || "Context"}: ${this.context.slug}`
     };
   },
 
@@ -86,14 +86,14 @@ export default {
       !this.$v.context.slug.minLength &&
         errors.push(
           `${this.d.field_must_be_have_more_three_sumbols ||
-            "Поле должено быть не менее 3 символов"}`
+            "The field must be at least 3 characters"}`
         );
       !this.$v.context.slug.alpha &&
         errors.push(
-          `${this.d.only_en_symbols || "Разрешены только английские символы"}`
+          `${this.d.only_en_symbols || "Only latin characters allowed"}`
         );
       !this.$v.context.slug.required &&
-        errors.push(`${this.d.require_field || "Обязательное поле"}`);
+        errors.push(`${this.d.require_field || "Required field"}`);
       return errors;
     }
   },

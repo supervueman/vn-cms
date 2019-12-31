@@ -4,7 +4,7 @@
     tag="form"
   )
     v-card-title
-      h1(class="title") {{d.login || 'Войти'}}
+      h1(class="title") {{d.login || 'Login'}}
     v-card-text
       v-text-field(
         v-model="email"
@@ -16,7 +16,7 @@
       )
       v-text-field(
         v-model="password"
-        :label="`${d.password || 'Пароль'}:`"
+        :label="`${d.password || 'Password'}:`"
         :error-messages="passErrors"
         type="password"
         required
@@ -24,12 +24,12 @@
         @blur="$v.password.$touch()"
       )
     v-card-actions
-      router-link(to="/reset-password" class="ml-2") {{d.forgot_password || 'Забыли пароль?'}}
+      router-link(to="/reset-password" class="ml-2") {{d.forgot_password || 'Forgot your password?'}}
       v-btn(
         @click="submit"
         color="primary"
         class="ml-auto mr-2 mb-2"
-      ) {{d.login || 'Войти'}}
+      ) {{d.login || 'Login'}}
 </template>
 
 <script>
@@ -59,19 +59,19 @@ export default {
       !this.$v.password.minLength &&
         errors.push(
           `${this.d.field_must_be_have_more_six_sumbols ||
-            "Поле должено быть не менее 6 символов"}`
+            "The field must be at least 6 characters"}`
         );
       !this.$v.password.required &&
-        errors.push(`${this.d.required_field || "Обязательное поле"}`);
+        errors.push(`${this.d.required_field || "Required field"}`);
       return errors;
     },
     emailErrors() {
       const errors = [];
       if (!this.$v.email.$dirty) return errors;
       !this.$v.email.email &&
-        errors.push(`${this.d.email_is_not_valid || "E-mail не валиден"}`);
+        errors.push(`${this.d.email_is_not_valid || "E-mail не E-mail is not valid"}`);
       !this.$v.email.required &&
-        errors.push(`${this.d.required_field || "Обязательное поле"}`);
+        errors.push(`${this.d.required_field || "Required field"}`);
       return errors;
     }
   },

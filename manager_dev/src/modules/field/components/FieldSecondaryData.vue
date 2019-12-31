@@ -5,14 +5,14 @@
 				:items="fieldCategories"
 				item-text="title"
 				item-value="id"
-				:label="`${d.field_category || 'Категория полей'}:`"
+				:label="`${d.field_category || 'Field category'}:`"
 				v-model="field.categoryId"
 			)
 			v-select(
 				:items="layouts"
 				item-text="title"
 				item-value="id"
-				:label="`${d.layout || 'Шаблон'}:`"
+				:label="`${d.layout || 'Layout'}:`"
 				v-model="field.layouts"
 				multiple
 			)

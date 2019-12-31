@@ -1,13 +1,13 @@
 <template lang="pug">
   v-expansion-panels.elevation-0(outlined)
     v-expansion-panel.elevation-none(outlined)
-      v-expansion-panel-header.px-4 {{d.change_password || 'Изменить пароль'}}
+      v-expansion-panel-header.px-4 {{d.change_password || 'Change password'}}
       v-expansion-panel-content.px-0
         v-layout.wrap
           v-flex.md6.pr-3
             v-text-field(
               v-model="oldPassword"
-              :label="`${d.enter_old_password || 'Введите старый пароль'}:`"
+              :label="`${d.enter_old_password || 'Enter old password'}:`"
               :type="showOldPassword ? 'text' : 'password'"
               :append-icon="showOldPassword ? 'visibility' : 'visibility_off'"
               @click:append="showOldPassword = !showOldPassword"
@@ -18,7 +18,7 @@
           v-flex.md6
             v-text-field(
               v-model="newPassword"
-              :label="`${d.enter_new_password || 'Введите новый пароль'}:`"
+              :label="`${d.enter_new_password || 'Enter new password'}:`"
               :type="showNewPassword ? 'text' : 'password'"
               :append-icon="showNewPassword ? 'visibility' : 'visibility_off'"
               @click:append="showNewPassword = !showNewPassword"
@@ -29,7 +29,7 @@
           v-flex.md6.pr-3
             v-text-field(
               v-model="confirmNewPassword"
-              :label="`${d.confirm_password || 'Подтвердите новый пароль'}:`"
+              :label="`${d.confirm_password || 'Confirm password'}:`"
               :type="showConfirmNewPassword ? 'text' : 'password'"
               :append-icon="showConfirmNewPassword ? 'visibility' : 'visibility_off'"
               @click:append="showConfirmNewPassword = !showConfirmNewPassword"
@@ -38,8 +38,8 @@
               @blur="$v.confirmNewPassword.$touch()"
             )
       v-expansion-panel-content.px-0
-        v-btn.mr-2(color="primary" @click="changePassword") {{d.change || 'Изменить'}}
-        v-btn(color="primary" @click="clearPassword") {{d.cancel || 'Отмена'}}
+        v-btn.mr-2(color="primary" @click="changePassword") {{d.change || 'Change'}}
+        v-btn(color="primary" @click="clearPassword") {{d.cancel || 'Cancel'}}
 </template>
 
 <script>
@@ -92,27 +92,36 @@ export default {
     oldPasswordErrors() {
       const errors = [];
       if (!this.$v.oldPassword.$dirty) return errors;
-      !this.$v.oldPassword.required && errors.push("Обязательное поле");
+      !this.$v.oldPassword.required && errors.push("Required field");
       !this.$v.oldPassword.minLength &&
-        errors.push("Пароль должен быть не менее 6 символов");
+        errors.push(
+          `${this.d.field_must_be_have_more_six_sumbols ||
+            "The field must be at least 6 characters"}`
+        );
       return errors;
     },
     newPasswordErrors() {
       const errors = [];
       if (!this.$v.newPassword.$dirty) return errors;
-      !this.$v.newPassword.required && errors.push("Обязательное поле");
+      !this.$v.newPassword.required && errors.push("Required field");
       !this.$v.newPassword.minLength &&
-        errors.push("Пароль должен быть не менее 6 символов");
+        errors.push(
+          `${this.d.field_must_be_have_more_six_sumbols ||
+            "The field must be at least 6 characters"}`
+        );
       return errors;
     },
     confirmNewPasswordErrors() {
       const errors = [];
       if (!this.$v.confirmNewPassword.$dirty) return errors;
-      !this.$v.confirmNewPassword.required && errors.push("Обязательное поле");
+      !this.$v.confirmNewPassword.required && errors.push("Required field");
       !this.$v.confirmNewPassword.minLength &&
-        errors.push("Пароль должен быть не менее 6 символов");
+        errors.push(
+          `${this.d.field_must_be_have_more_six_sumbols ||
+            "The field must be at least 6 characters"}`
+        );
       !this.$v.confirmNewPassword.sameAsPassword &&
-        errors.push("Пароли не совпадают!");
+        errors.push("Passwords do not match!");
       return errors;
     }
   },

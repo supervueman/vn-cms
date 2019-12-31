@@ -7,7 +7,7 @@
 			dark
 			depressed
 			v-if="r.is_field_category_create"
-		) {{d.create_field_category || 'Создать категорию полей'}}
+		) {{d.create_field_category || 'Create fields category'}}
 </template>
 
 <script>

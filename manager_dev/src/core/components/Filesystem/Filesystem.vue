@@ -4,7 +4,7 @@
       v-card.xl12.lg12.md12(outlined)
         v-card-text.pb-0
           v-layout.column
-            div.mb-2 {{d.current_path || 'Текущий путь'}}: {{currentFullPath}}
+            div.mb-2 {{d.current_path || 'Current path'}}: {{currentFullPath}}
         v-card-text
           v-layout.filesystem--window
             v-flex.xl3.lg3.md3
@@ -289,7 +289,8 @@ export default {
       if (this.currentFullPath === this.filesystem[0].path) {
         this.$store.dispatch("notification/fetch", {
           type: "error",
-          message: "Нельзя удалять корневую директорию!",
+          message: `${this.d.cannot_delete_root_directory ||
+            "Cannot delete root directory"}`,
           isActive: true
         });
         return;

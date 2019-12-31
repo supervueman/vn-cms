@@ -1,13 +1,13 @@
 <template lang="pug">
   v-flex(v-if="r.is_role_read")
-    .body-2.mb-12.mt-2 {{d.role || 'Роль'}}: {{role.slug}} ({{role.id}})
+    .body-2.mb-12.mt-2 {{d.role || 'Role'}}: {{role.slug}} ({{role.id}})
     v-card(outlined)
-      v-card-text {{d.common_data || 'Общие данные'}}
+      v-card-text {{d.common_data || 'Common data'}}
       v-card-text
         v-flex.md12
           v-text-field(
             v-model="role.slug"
-            :label="`${d.slug || 'Псевдоним'}:`"
+            :label="`${d.slug || 'Slug'}:`"
             @input="$v.role.slug.$touch()"
             @blur="$v.role.slug.$touch()"
             :error-messages="slugErrors"
@@ -15,7 +15,7 @@
           )
           v-text-field(
             v-model="role.title"
-            :label="`${d.name || 'Наименование'}:`"
+            :label="`${d.name || 'Name'}:`"
             @input="$v.role.title.$touch()"
             @blur="$v.role.title.$touch()"
             :error-messages="titleErrors"
@@ -23,7 +23,7 @@
           )
           v-text-field(
             v-model="role.rang"
-            :label="`${d.rang || 'Ранг'}:`"
+            :label="`${d.rang || 'Rang'}:`"
             type="number"
             :disabled="role.slug === 'admin' || role.slug === 'default'"
           )
@@ -41,7 +41,7 @@
           color="primary"
           @click="update"
           v-if="r.is_role_create"
-        ) {{d.save || 'Сохранить'}}
+        ) {{d.save || 'Save'}}
     v-dialog(
       v-model="isRemoveDialog"
       max-width="500px"
@@ -57,7 +57,7 @@
         color="error"
         depressed
         @click="isRemoveDialog = true"
-      ) {{d.remove || 'Удалить'}}
+      ) {{d.remove || 'Remove'}}
 </template>
 
 <script>
@@ -74,7 +74,7 @@ export default {
 
   metaInfo() {
     return {
-      title: `${this.d.role || "Роль"}: ${this.role.title}`
+      title: `${this.d.role || "Role"}: ${this.role.title}`
     };
   },
 
@@ -103,14 +103,14 @@ export default {
       !this.$v.role.slug.minLength &&
         errors.push(
           `${this.d.field_must_be_have_more_three_sumbols ||
-            "Поле должено быть не менее 3 символов"}`
+            "The field must be at least 3 characters"}`
         );
       !this.$v.role.slug.alpha &&
         errors.push(
-          `${this.d.only_en_symbols || "Разрешены только английские символы"}`
+          `${this.d.only_en_symbols || "Only latin characters allowed"}`
         );
       !this.$v.role.slug.required &&
-        errors.push(`${this.d.required_field || "Обязательное поле"}`);
+        errors.push(`${this.d.required_field || "Required field"}`);
       return errors;
     },
     titleErrors() {
@@ -119,10 +119,10 @@ export default {
       !this.$v.role.title.minLength &&
         errors.push(
           `${this.d.field_must_be_have_more_three_sumbols ||
-            "Поле должено быть не менее 3 символов"}`
+            "The field must be at least 3 characters"}`
         );
       !this.$v.role.title.required &&
-        errors.push(`${this.d.required_field || "Обязательное поле"}`);
+        errors.push(`${this.d.required_field || "Required field"}`);
       return errors;
     }
   },

@@ -1,6 +1,6 @@
 <template lang="pug">
   v-flex(v-if="r.is_field_read")
-    .body-2.mb-12.mt-2 {{d.fields || 'Поля'}}
+    .body-2.mb-12.mt-2 {{d.fields || 'Fields'}}
     v-card(outlined)
       fields-toolbar(
         @filter="filterFields($event)"
@@ -65,7 +65,7 @@ export default {
 
   metaInfo() {
     return {
-      title: `${this.d.fields || "Поля"}`
+      title: `${this.d.fields || "Fields"}`
     };
   },
 
@@ -84,12 +84,12 @@ export default {
     headers() {
       return [
         {
-          text: `${this.d.name || "Наименование"}`,
+          text: `${this.d.name || "Name"}`,
           value: "title"
         },
-        { text: `${this.d.layouts || "Шаблоны"}`, sortable: false },
+        { text: `${this.d.layouts || "Layouts"}`, sortable: false },
         {
-          text: `${this.d.field_type || "Тип поля"}`,
+          text: `${this.d.field_type || "Field type"}`,
           value: "fieldType",
           sortable: true
         },

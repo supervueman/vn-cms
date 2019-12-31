@@ -1,15 +1,15 @@
 <template lang="pug">
   v-flex(v-if="r.is_layout_read")
-    .body-2.mb-12.mt-2 {{d.layout || 'Шаблон'}}: {{layout.title}} ({{layout.id}})
+    .body-2.mb-12.mt-2 {{d.layout || 'Layout'}}: {{layout.title}} ({{layout.id}})
     v-layout.wrap
       v-flex
         v-card(outlined)
-          v-card-text {{d.common_data || 'Общие данные'}}
+          v-card-text {{d.common_data || 'Common data'}}
           v-card-text
             v-flex.md12
               v-text-field(
                 v-model="layout.slug"
-                :label="`${d.slug || 'Псевдоним'}:`"
+                :label="`${d.slug || 'Slug'}:`"
                 required
                 @input="$v.layout.slug.$touch()"
                 @blur="$v.layout.slug.$touch()"
@@ -17,7 +17,7 @@
               )
               v-text-field(
                 v-model="layout.title"
-                :label="`${d.name || 'Наименование'}:`"
+                :label="`${d.name || 'Name'}:`"
                 required
                 @input="$v.layout.title.$touch()"
                 @blur="$v.layout.title.$touch()"
@@ -29,7 +29,7 @@
               color="primary"
               @click="update"
               v-if="r.is_layout_create"
-            ) {{d.save || 'Сохранить'}}
+            ) {{d.save || 'Create'}}
 
     .d-flex.justify-center.mt-3
       v-btn(
@@ -37,7 +37,7 @@
         color="error"
         depressed
         @click="isRemoveDialog = true"
-      ) {{d.remove || 'Удалить'}}
+      ) {{d.remove || 'Remove'}}
 
     v-dialog(
       v-model="isRemoveDialog"
@@ -65,7 +65,7 @@ export default {
 
   metaInfo() {
     return {
-      title: `${this.d.layout || "Шаблон"}: ${this.layout.title}`
+      title: `${this.d.layout || "Layout"}: ${this.layout.title}`
     };
   },
 
@@ -90,14 +90,14 @@ export default {
       !this.$v.layout.slug.minLength &&
         errors.push(
           `${this.d.field_must_be_have_more_three_sumbols ||
-            "Поле должено быть не менее 3 символов"}`
+            "The field must be at least 3 characters"}`
         );
       !this.$v.layout.slug.alpha &&
         errors.push(
-          `${this.d.only_en_symbols || "Разрешены только английские символы"}`
+          `${this.d.only_en_symbols || "Only latin characters allowed"}`
         );
       !this.$v.layout.slug.required &&
-        errors.push(`${this.d.required_field || "Обязательное поле"}`);
+        errors.push(`${this.d.required_field || "Required field"}`);
       return errors;
     },
     titleErrors() {
@@ -106,10 +106,10 @@ export default {
       !this.$v.layout.title.minLength &&
         errors.push(
           `${this.d.field_must_be_have_more_three_sumbols ||
-            "Поле должено быть не менее 3 символов"}`
+            "The field must be at least 3 characters"}`
         );
       !this.$v.layout.title.required &&
-        errors.push(`${this.d.required_field || "Обязательное поле"}`);
+        errors.push(`${this.d.required_field || "Required field"}`);
       return errors;
     }
   },

@@ -6,7 +6,7 @@
           img(:src="`/static/${profile.image}`")
           .avatar-mask(@click="isActiveDialog = true")
             v-icon(color="#fff") add_circle_outline
-    v-card-text.text-md-center.justify-center.mt-4.pb-0 {{d.avatar || 'Аватар'}}
+    v-card-text.text-md-center.justify-center.mt-4.pb-0 {{d.avatar || 'Avatar'}}
     v-card-title.title.font-weight-bold.text-md-center.justify-center {{profile.lastname}} {{profile.firstname}}
 
     v-dialog(v-model="isActiveDialog")

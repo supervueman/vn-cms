@@ -1,9 +1,9 @@
 <template lang="pug">
   v-card(outlined)
-    v-card-text.title.pt-4.px-4 {{d.remove_confirm || 'Вы действительно хотите удалить'}} {{name}}?
+    v-card-text.title.pt-4.px-4 {{d.remove_confirm || 'Are you sure you want to delete'}} {{name}}?
     v-card-actions.px-4.pt-0
-      v-btn(depressed color="error" @click="remove") {{d.remove || 'Удалить'}}
-      v-btn(depressed color="primary" @click="cancel") {{d.cancel || 'Отмена'}}
+      v-btn(depressed color="error" @click="remove") {{d.remove || 'Remove'}}
+      v-btn(depressed color="primary" @click="cancel") {{d.cancel || 'Cancel'}}
 </template>
 
 <script>

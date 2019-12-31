@@ -23,14 +23,14 @@
 			depressed
 			@click="isTranslationDialog = true"
 			v-if="mainLang === resource.lang && r.is_resource_create"
-		) {{d.create_translation || 'Создать перевод'}}
+		) {{d.create_translation || 'Create translation'}}
 
 		v-dialog(
 			v-model="isTranslationDialog"
 			max-width="500px"
 		)
 			v-card(outlined)
-				v-card-title.title {{d.select_lang || 'Выберете язык'}}
+				v-card-title.title {{d.select_lang || 'Select lang'}}
 				v-card-text
 					v-select(
 						:items="langs"
@@ -45,12 +45,12 @@
 						color="primary"
 						depressed
 						@click="locateToTranslationCreate"
-					) {{d.next_step || 'Следующий шаг'}}
+					) {{d.next_step || 'Next step'}}
 					v-btn(
 						color="primary"
 						depressed
 						@click="isTranslationDialog = false"
-					) {{d.cancel || 'Отмена'}}
+					) {{d.cancel || 'Cancel'}}
 </template>
 
 <script>
@@ -116,7 +116,7 @@ export default {
       const errors = [];
       if (!this.$v.translationLang.$dirty) return errors;
       !this.$v.translationLang.required &&
-        errors.push(`${this.d.required_field || "Обязательное поле"}`);
+        errors.push(`${this.d.required_field || "Required field"}`);
       return errors;
     }
   },
@@ -140,7 +140,7 @@ export default {
           this.$store.dispatch("notification/fetch", {
             type: "error",
             message: `${this.d.need_resource_with_analog_lang ||
-              "Необходимо создать родительский ресурс с аналогичным языком перевода"}`,
+              "You must create a parent resource with the same translation language"}`,
             isActive: true
           });
           return;

@@ -123,7 +123,7 @@
 			filesystem(@selectFile="selectFile" ref="getfile")
 			v-card
 				v-card-actions
-					v-btn.ml-2(@click="isActiveDialog = false") {{d.close || 'Закрыть'}}
+					v-btn.ml-2(@click="isActiveDialog = false") {{d.close || 'Close'}}
 
 </template>
 

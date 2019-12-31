@@ -1,6 +1,6 @@
 <template lang="pug">
   v-flex(v-if="r.is_field_category_read")
-    .body-2.mb-12.mt-2 {{d.field_categories || 'Категории полей'}}
+    .body-2.mb-12.mt-2 {{d.field_categories || 'Fields categories'}}
     v-card(outlined)
       field-categories-toolbar
       v-data-table(
@@ -54,7 +54,7 @@ export default {
 
   metaInfo() {
     return {
-      title: `${this.d.field_categories || "Категории полей"}`
+      title: `${this.d.field_categories || "Fields categories"}`
     };
   },
 
@@ -73,7 +73,7 @@ export default {
     headers() {
       return [
         {
-          text: `${this.d.name || "Наименование"}`,
+          text: `${this.d.name || "Name"}`,
           value: "title"
         },
         { text: "", sortable: false }

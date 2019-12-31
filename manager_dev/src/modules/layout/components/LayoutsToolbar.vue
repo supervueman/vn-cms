@@ -7,7 +7,7 @@
 			dark
 			v-if="r.is_layout_create"
 			depressed
-		) {{d.create_layout || 'Создать шаблон'}}
+		) {{d.create_layout || 'Create layout'}}
 </template>
 
 <script>

@@ -1,20 +1,20 @@
 <template lang="pug">
   v-card.mb-3(outlined)
-    v-card-text(v-if="!r.is_user_update") {{d.context || 'Контекст'}}: {{profile.context.slug}}
+    v-card-text(v-if="!r.is_user_update") {{d.context || 'Context'}}: {{profile.context.slug}}
     v-card-text(v-if="r.is_user_update")
       v-select(
         :items="contexts"
         item-text="title"
         item-value="id"
         v-model="profile.contextId"
-        :label="`${d.context || 'Контекст'}:`"
+        :label="`${d.context || 'Context'}:`"
       )
     v-card-actions(v-if="r.is_user_update")
       v-btn.ml-2.mb-2(
         color="primary"
         depressed
         @click="update"
-      ) {{d.save || 'Сохранить'}}
+      ) {{d.save || 'Save'}}
 </template>
 
 <script>

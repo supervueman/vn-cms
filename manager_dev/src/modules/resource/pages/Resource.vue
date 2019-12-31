@@ -1,7 +1,7 @@
 <template lang="pug">
 	v-flex(v-if="r.is_resource_read")
 		v-layout
-			.body-2.mt-2.mb-12 {{d.resource || 'Ресурс'}}: {{resource.title}} ({{resource.id}})
+			.body-2.mt-2.mb-12 {{d.resource || 'Resource'}}: {{resource.title}} ({{resource.id}})
 			v-spacer
 			resource-langs-menu
 		v-tabs(
@@ -9,7 +9,7 @@
 			slider-color="primary"
 			grow
 		)
-			v-tab {{d.common_data || 'Общие данные'}}
+			v-tab {{d.common_data || 'Common data'}}
 			v-tab-item.mt-3
 				resource-tab
 				v-flex.xs12.md7.pr-2
@@ -19,7 +19,7 @@
 							color="error"
 							depressed
 							@click="isRemoveDialog = true"
-						) {{d.remove || 'Удалить'}}
+						) {{d.remove || 'Remove'}}
 						v-dialog(
 							v-model="isRemoveDialog"
 							max-width="500px"
@@ -29,10 +29,10 @@
 								:isActive.sync="isRemoveDialog"
 								:name="resource.title"
 							)
-			v-tab {{d.fields || 'Поля'}}
+			v-tab {{d.fields || 'Fields'}}
 			v-tab-item.mt-3
 				fields-tab
-			v-tab {{d.resources || 'Ресурсы'}}
+			v-tab {{d.resources || 'Resources'}}
 			v-tab-item
 				resources-tab.mt-3
 </template>
@@ -59,7 +59,7 @@ export default {
 
   metaInfo() {
     return {
-      title: `${this.d.resource || "Ресурс"}: ${this.resource.title}`
+      title: `${this.d.resource || "Resource"}: ${this.resource.title}`
     };
   },
 

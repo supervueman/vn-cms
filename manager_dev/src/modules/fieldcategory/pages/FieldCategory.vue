@@ -1,14 +1,14 @@
 <template lang="pug">
   v-flex(v-if="r.is_field_category_create")
-    .body-2.mb-12.mt-2 {{d.field_category || 'Категория полей'}}: {{fieldCategory.title}} ({{fieldCategory.id}})
+    .body-2.mb-12.mt-2 {{d.field_category || 'Field category'}}: {{fieldCategory.title}} ({{fieldCategory.id}})
     v-card(outlined)
-      v-card-text {{d.common_data || 'Общие данные'}}
+      v-card-text {{d.common_data || 'Common data'}}
       v-card-text
         v-layout.wrap
           v-flex.md12
             v-text-field(
               v-model="fieldCategory.title"
-              :label="`${d.name || 'Наименование'}:`"
+              :label="`${d.name || 'Name'}:`"
               required
               @input="$v.fieldCategory.title.$touch()"
               @blur="$v.fieldCategory.title.$touch()"
@@ -20,7 +20,7 @@
           color="primary"
           @click="update"
           v-if="r.is_field_category_update"
-        ) {{d.save || 'Сохранить'}}
+        ) {{d.save || 'Save'}}
 
     .d-flex.justify-center.mt-3
       v-btn(
@@ -28,7 +28,7 @@
         color="error"
         depressed
         @click="isRemoveDialog = true"
-      ) {{d.remove || 'Удалить'}}
+      ) {{d.remove || 'Remove'}}
 
     v-dialog(
       v-model="isRemoveDialog"
@@ -61,7 +61,7 @@ export default {
 
   metaInfo() {
     return {
-      title: `${this.d.field_category || "Категория полей"}: ${
+      title: `${this.d.field_category || "Field category"}: ${
         this.fieldCategory.title
       }`
     };
@@ -82,10 +82,10 @@ export default {
       !this.$v.fieldCategory.title.minLength &&
         errors.push(
           `${this.d.field_must_be_have_more_three_sumbols ||
-            "Поле должено быть не менее 3 символов"}`
+            "The field must be at least 3 characters"}`
         );
       !this.$v.fieldCategory.title.required &&
-        errors.push(`${this.d.required_field || "Обязательное поле"}`);
+        errors.push(`${this.d.required_field || "Required field"}`);
       return errors;
     }
   },

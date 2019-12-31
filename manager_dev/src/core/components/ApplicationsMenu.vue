@@ -5,7 +5,7 @@
         text
         v-on="on"
         depressed
-      ) {{d.applications || 'Приложения'}}
+      ) {{d.applications || 'Applications'}}
     v-list
       v-list-item(
         v-for="(item, i) in modules"

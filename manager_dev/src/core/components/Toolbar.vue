@@ -7,13 +7,13 @@
         aspect-ratio="1"
       )
     v-toolbar-items.hidden-xs-and-down
-      v-btn(text to="/users" v-if="r.is_user_read && isAuth") {{d.users || 'Пользователи'}}
+      v-btn(text to="/users" v-if="r.is_user_read && isAuth") {{d.users || 'Users'}}
       applications-menu(
         v-if="isAuth"
       )
     v-spacer
     v-toolbar-items.hidden-xs-and-down
-      v-btn(text v-if="!isAuth" @click="$emit('openLoginDialog')") {{d.login || 'Войти'}}
+      v-btn(text v-if="!isAuth" @click="$emit('openLoginDialog')") {{d.login || 'Login'}}
     v-toolbar-items.hidden-xs-and-down
       v-menu(offset-y)
         template(v-slot:activator="{ on }")
@@ -22,7 +22,7 @@
             v-on="on"
           )
             v-img(
-              :src="`/images/flags/${dictionary.lang || 'ru'}.svg`"
+              :src="`/images/flags/${dictionary.lang || mainLang}.svg`"
               width="30"
             )
         v-list
@@ -31,7 +31,7 @@
             :key="dictionary.lang"
             @click="changeLang(dictionary.lang)"
           )
-            v-img.mr-2(:src="`/images/flags/${dictionary.lang || 'ru'}.svg`", width="30")
+            v-img.mr-2(:src="`/images/flags/${dictionary.lang || mainLang}.svg`", width="30")
             v-list-item-title {{dictionary.lang}}
       v-btn(text slot="activator" to="/profile" v-if="isAuth")
         div.body-1.mr-3 {{ firstname }} {{lastname}}
@@ -47,15 +47,15 @@
             v-icon settings
         v-list
           v-list-item(to="/roles" v-if="r.is_role_read")
-            v-list-item-title {{d.roles || 'Роли'}}
+            v-list-item-title {{d.roles || 'Roles'}}
           v-list-item(to="/system-settings" v-if="r.is_system_setting_read")
-            v-list-item-title {{d.system_settings || 'Системные настройки'}}
+            v-list-item-title {{d.system_settings || 'System settings'}}
           v-list-item(to="/contexts" v-if="r.is_context_read")
-            v-list-item-title {{d.contexts || 'Контексты'}}
+            v-list-item-title {{d.contexts || 'Contexts'}}
           v-list-item(to="/dictionaries")
-            v-list-item-title {{d.dictionaries || 'Словари'}}
+            v-list-item-title {{d.dictionaries || 'Dictionaries'}}
           v-list-item(@click="logout")
-            v-list-item-title {{d.logout || 'Выход'}}
+            v-list-item-title {{d.logout || 'Logout'}}
 </template>
 
 <script>

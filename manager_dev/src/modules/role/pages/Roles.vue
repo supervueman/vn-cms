@@ -1,6 +1,6 @@
 <template lang="pug">
   v-flex(v-if="r.is_role_read")
-    .body-2.mb-12.mt-2 {{d.roles || 'Роли'}}
+    .body-2.mb-12.mt-2 {{d.roles || 'Roles'}}
     v-card(outlined)
       v-toolbar(flat color="white")
         v-spacer
@@ -10,7 +10,7 @@
           to="/role-create"
           dark
           v-if="r.is_role_create"
-        ) {{d.create_role || 'Создать роль'}}
+        ) {{d.create_role || 'Create role'}}
       v-data-table(
         :headers="headers"
         :items="roles"
@@ -49,7 +49,7 @@ export default {
 
   metaInfo() {
     return {
-      title: `${this.d.roles || "Роли"}`
+      title: `${this.d.roles || "Roles"}`
     };
   },
 
@@ -65,11 +65,11 @@ export default {
     headers() {
       return [
         {
-          text: `${this.d.name || "Наименование"}`,
+          text: `${this.d.name || "Name"}`,
           value: "title"
         },
         {
-          text: `${this.d.slug || "Псевдоним"}`,
+          text: `${this.d.slug || "Slug"}`,
           value: "slug"
         },
         { text: "", sortable: false }

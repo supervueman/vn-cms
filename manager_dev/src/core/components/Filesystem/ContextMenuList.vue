@@ -5,12 +5,12 @@
 			@click="$emit('triggerForUploadFile')"
 		)
 			v-icon.mr-2 vertical_align_top
-			div {{d.upload || 'Загрузить'}}
+			div {{d.upload || 'Upload'}}
 		v-list-item(
 			v-if="currentFile.type"
 		)
 			v-icon.mr-2 vertical_align_bottom
-			a.file-download(:href="currentFile.relativePath" download) {{d.download || 'Скачать'}}
+			a.file-download(:href="currentFile.relativePath" download) {{d.download || 'Downdload'}}
 		v-list-item(
 			v-if="!currentFile.type && r.is_filesystem_directory_create"
 			@click="$emit('openDialogForCreateFolder', true)"
@@ -22,7 +22,7 @@
 			v-if="r.is_filesystem_directory_delete"
 		)
 			v-icon.mr-2 delete
-			div {{d.remove || 'Удалить'}}
+			div {{d.remove || 'Remove'}}
 </template>
 
 <script>

@@ -1,39 +1,39 @@
 <template lang="pug">
   v-card.mb-3(outlined)
-    v-card-text.pb-0 {{d.address || 'Адрес'}}
+    v-card-text.pb-0 {{d.address || 'Address'}}
     v-card-text
       v-layout.wrap
         v-flex.md6.pr-3
           v-text-field(
             v-model="profile.country"
-            :label="`${d.country || 'Страна'}:`"
+            :label="`${d.country || 'Country'}:`"
           )
         v-flex.md6
           v-text-field(
             v-model="profile.city"
-            :label="`${d.city || 'Город'}:`"
+            :label="`${d.city || 'City'}:`"
           )
         v-flex.md6.pr-3
           v-text-field(
             v-model="profile.street"
-            :label="`${d.street || 'Улица'}:`"
+            :label="`${d.street || 'Street'}:`"
           )
         v-flex.md6
           v-text-field(
             v-model="profile.home"
-            :label="`${d.home || 'Дом'}:`"
+            :label="`${d.home || 'Home'}:`"
           )
         v-flex.md6.pr-3
           v-text-field(
             v-model="profile.apartment"
-            :label="`${d.apartment || 'Квартира'}:`"
+            :label="`${d.apartment || 'Apartment'}:`"
           )
     v-card-actions.px-4.pb-4.pt-0
       v-btn(
         @click="update"
         color="primary"
         depressed
-      ) {{d.save || 'Сохранить'}}
+      ) {{d.save || 'Save'}}
 </template>
 
 <script>

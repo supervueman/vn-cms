@@ -1,6 +1,6 @@
 <template lang="pug">
   v-flex(v-if="r.is_user_read")
-    .body-2.mt-2.mb-12 {{d.users || 'Пользователи'}}
+    .body-2.mt-2.mb-12 {{d.users || 'Users'}}
     v-card(outlined)
       v-toolbar(flat color="white")
         v-spacer
@@ -10,7 +10,7 @@
           v-if="r.is_user_create"
           to="/user-create"
           depressed
-        ) {{d.create_user || 'Создать пользователя'}}
+        ) {{d.create_user || 'Create user'}}
       v-data-table(
         :headers="headers"
         :items="users"
@@ -70,7 +70,7 @@ export default {
 
   metaInfo() {
     return {
-      title: `${this.d.users || "Пользователи"}`
+      title: `${this.d.users || "Users"}`
     };
   },
 

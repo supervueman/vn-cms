@@ -5,7 +5,7 @@
     max-width="500px"
   )
     v-card-title
-      h1(class="title") {{d.reset_password || 'Восстановить пароль'}}
+      h1(class="title") {{d.reset_password || 'Reset password'}}
     v-card-text
       v-text-field(
         v-model="email"
@@ -18,7 +18,7 @@
       )
       v-text-field(
         v-model="password"
-        :label="`${d.password}:`"
+        :label="`${d.password || 'Password'}:`"
         :error-messages="passErrors"
         type="password"
         required
@@ -28,7 +28,7 @@
       )
       v-text-field(
         v-model="confirmPassword"
-        :label="`${d.confirm_password}:`"
+        :label="`${d.confirm_password || 'Confirm password'}:`"
         :error-messages="confirmPasswordErrors"
         type="password"
         required
@@ -42,13 +42,13 @@
         color="primary"
         class="ml-auto mr-2 mb-2"
         v-if="!$route.query.token"
-      ) {{d.send_request || 'Отправить запрос'}}
+      ) {{d.send_request || 'Send request'}}
       v-btn(
         @click="changePassword"
         color="primary"
         class="ml-auto mr-2 mb-2"
         v-if="$route.query.token"
-      ) {{d.change || 'Изменить'}}
+      ) {{d.change || 'Change'}}
 </template>
 
 <script>
@@ -59,7 +59,7 @@ export default {
 
   metaInfo() {
     return {
-      title: `${this.d.reset_password || "Восстановить пароль"}`
+      title: `${this.d.reset_password || "Reset password"}`
     };
   },
 
@@ -90,33 +90,37 @@ export default {
       !this.$v.password.minLength &&
         errors.push(
           `${this.d.field_must_be_have_more_six_sumbols ||
-            "Поле должено быть не менее 6 символов"}`
+            "The field must be at least 6 characters"}`
         );
       !this.$v.password.required &&
-        errors.push(`${this.d.required_field || "Обязательное поле"}`);
+        errors.push(`${this.d.required_field || "Required field"}`);
       return errors;
     },
     confirmPasswordErrors() {
       const errors = [];
       if (!this.$v.confirmPassword.$dirty) return errors;
       !this.$v.confirmPassword.required &&
-        errors.push(`${this.d.required_field || "Обязательное поле"}`);
+        errors.push(`${this.d.required_field || "Required field"}`);
       !this.$v.confirmPassword.minLength &&
         errors.push(
           `${this.d.field_must_be_have_more_six_sumbols ||
-            "Поле должено быть не менее 6 символов"}`
+            "The field must be at least 6 characters"}`
         );
       !this.$v.confirmPassword.sameAsPassword &&
-        errors.push(`${this.d.password_not_confirm || "Пароли не совпадают!"}`);
+        errors.push(
+          `${this.d.password_not_confirm || "Passwords do not match!"}`
+        );
       return errors;
     },
     emailErrors() {
       const errors = [];
       if (!this.$v.email.$dirty) return errors;
       !this.$v.email.email &&
-        errors.push(`${this.d.email_is_not_valid || "E-mail не валиден"}`);
+        errors.push(
+          `${this.d.email_is_not_valid || "E-mail не E-mail is not valid"}`
+        );
       !this.$v.email.required &&
-        errors.push(`${this.d.required_field || "Обязательное поле"}`);
+        errors.push(`${this.d.required_field || "Required field"}`);
       return errors;
     }
   },

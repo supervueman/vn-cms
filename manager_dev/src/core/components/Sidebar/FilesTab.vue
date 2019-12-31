@@ -4,11 +4,11 @@
 			v-list-item-action
 				v-icon(color="primary") folder
 			v-list-item-content
-				v-list-item-title {{d.filesystem || 'Файловая система'}}
+				v-list-item-title {{d.filesystem || 'Filesystem'}}
 </template>
 
 <script>
 export default {
-	name: 'FilesTab'
+  name: "FilesTab"
 };
 </script>

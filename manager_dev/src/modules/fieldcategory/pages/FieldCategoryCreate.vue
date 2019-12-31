@@ -1,14 +1,14 @@
 <template lang="pug">
   v-flex(v-if="r.is_field_category_create")
-    .body-2.mb-12.mt-2 {{d.field_category_creation || 'Создание категории полей'}}
+    .body-2.mb-12.mt-2 {{d.field_category_creation || 'Fields category creation'}}
     v-card(outlined)
-      v-card-text {{d.common_data || 'Общие данные'}}
+      v-card-text {{d.common_data || 'Common data'}}
       v-card-text
         v-layout.wrap
           v-flex.md12
             v-text-field(
               v-model="fieldCategory.title"
-              :label="`${d.name || 'Наименование'}:`"
+              :label="`${d.name || 'Name'}:`"
               required
               @input="$v.fieldCategory.title.$touch()"
               @blur="$v.fieldCategory.title.$touch()"
@@ -20,7 +20,7 @@
           color="primary"
           @click="create"
           v-if="r.is_field_category_create"
-        ) {{d.create || 'Создать'}}
+        ) {{d.create || 'Create'}}
 </template>
 
 <script>
@@ -43,7 +43,7 @@ export default {
 
   metaInfo() {
     return {
-      title: `${this.d.field_category_creation || "Создание категории полей"}`
+      title: `${this.d.field_category_creation || "Fields category creation"}`
     };
   },
 
@@ -57,10 +57,10 @@ export default {
       !this.$v.fieldCategory.title.minLength &&
         errors.push(
           `${this.d.field_must_be_have_more_three_sumbols ||
-            "Поле должено быть не менее 3 символов"}`
+            "The field must be at least 3 characters"}`
         );
       !this.$v.fieldCategory.title.required &&
-        errors.push(`${this.d.required_field || "Обязательное поле"}`);
+        errors.push(`${this.d.required_field || "Required field"}`);
       return errors;
     }
   },

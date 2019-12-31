@@ -204,7 +204,7 @@
         @click="saveAdditionalFields"
         depressed
         v-if="r.is_resource_update"
-      ) {{d.save || 'Сохранить'}}
+      ) {{d.save || 'Save'}}
 </template>
 
 <script>

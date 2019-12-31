@@ -2,7 +2,7 @@
 	v-flex.px-2.dictionary--list-text
 		v-flex
 			v-text-field(
-				:label="`${d.slug || 'Псевдоним'}`"
+				:label="`${d.slug || 'Slug'}`"
 				v-model="createSlug"
 				append-icon="add"
 				@click:append="$emit('addItem', createSlug); addItem();"
@@ -14,7 +14,7 @@
 		)
 			v-text-field(
 				:value="key"
-				:label="`${d.slug || 'Псевдоним'}`"
+				:label="`${d.slug || 'Slug'}`"
 				append-icon="remove"
 				@click:append="isRemoveItem = true; removeItemSlug = key"
 				:disabled="!r.is_dictionary_update"

@@ -1,16 +1,16 @@
 <template lang="pug">
   v-card(outlined)
-    v-card-title.px-4 {{d.create_dictionary || 'Создать словарь'}}
+    v-card-title.px-4 {{d.create_dictionary || 'Create dictionary'}}
     v-card-text.px-4
       v-text-field(
-        :label="`${d.slug || 'Псевдоним'}`"
+        :label="`${d.slug || 'Slug'}`"
         v-model="createDictionary.lang"
         :error-messages="langErrors"
         @input="$v.createDictionary.lang.$touch()"
         @blur="$v.createDictionary.lang.$touch()"
       )
       v-text-field(
-        :label="`${d.name || 'Наименование'}`"
+        :label="`${d.name || 'Name'}`"
         v-model="createDictionary.title"
         :error-messages="titleErrors"
         @input="$v.createDictionary.title.$touch()"
@@ -21,12 +21,12 @@
         color="primary"
         depressed
         @click="create"
-      ) {{d.create || 'Создать'}}
+      ) {{d.create || 'Create'}}
       v-btn(
         color="error"
         depressed
         @click="$emit('cancel', false)"
-      ) {{d.cancel || 'Отмена'}}
+      ) {{d.cancel || 'Cancel'}}
 </template>
 
 <script>
@@ -64,14 +64,14 @@ export default {
       !this.$v.createDictionary.lang.minLength &&
         errors.push(
           `${this.d.field_must_be_have_more_two_sumbols ||
-            "Поле должено быть не менее 2 символов"}`
+            "The field must be at least 2 characters"}`
         );
       !this.$v.createDictionary.lang.alpha &&
         errors.push(
-          `${this.d.only_en_symbols || "Разрешены только английские символы"}`
+          `${this.d.only_en_symbols || "Only latin characters allowed"}`
         );
       !this.$v.createDictionary.lang.required &&
-        errors.push(`${this.d.required_field || "Обязательное поле"}`);
+        errors.push(`${this.d.required_field || "Required field"}`);
       return errors;
     },
     titleErrors() {
@@ -80,10 +80,10 @@ export default {
       !this.$v.createDictionary.title.minLength &&
         errors.push(
           `${this.d.field_must_be_have_more_three_sumbols ||
-            "Поле должено быть не менее 3 символов"}`
+            "The field must be at least 3 characters"}`
         );
       !this.$v.createDictionary.title.required &&
-        errors.push(`${this.d.required_field || "Обязательное поле"}`);
+        errors.push(`${this.d.required_field || "Required field"}`);
       return errors;
     }
   },

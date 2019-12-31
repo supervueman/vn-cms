@@ -5,7 +5,7 @@
       v-btn(
         color="primary"
         @click="openCreateDialog"
-      ) {{this.d.add_element}}
+      ) {{d.add_element || 'Add element'}}
     v-data-table(
       :headers="headers"
       :items="field"
@@ -56,7 +56,7 @@
       remove-confirm(
         @remove="remove"
         :isActive.sync="isRemoveDialog"
-        :name="`${this.d.field_element || 'Элемент поля'}`"
+        :name="`${this.d.field_element || 'Field element'}`"
       )
 </template>
 

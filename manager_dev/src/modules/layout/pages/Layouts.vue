@@ -1,6 +1,6 @@
 <template lang="pug">
   v-flex(v-if="r.is_layout_read")
-    .body-2.mb-12.mt-2 {{d.layouts || 'Шаблоны'}}
+    .body-2.mb-12.mt-2 {{d.layouts || 'Layouts'}}
     v-card(outlined)
       layouts-toolbar
       v-data-table(
@@ -53,7 +53,7 @@ export default {
 
   metaInfo() {
     return {
-      title: `${this.d.layouts || "Шаблоны"}`
+      title: `${this.d.layouts || "Layouts"}`
     };
   },
 
@@ -69,7 +69,7 @@ export default {
     headers() {
       return [
         {
-          text: `${this.d.name || "Наименование"}`,
+          text: `${this.d.name || "Name"}`,
           value: "title"
         },
         { text: "", sortable: false }

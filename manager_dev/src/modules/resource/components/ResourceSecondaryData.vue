@@ -6,21 +6,21 @@
 				:items="layouts"
 				item-text="title"
 				item-value="id"
-				:label="`${d.layout || 'Шаблон'}:`"
+				:label="`${d.layout || 'Layout'}:`"
 			)
 			v-select(
 				v-model="resource.resourcetypeId"
 				:items="types"
 				item-text="title"
 				item-value="id"
-				:label="`${d.resource_type || 'Тип ресурса'}:`"
+				:label="`${d.resource_type || 'Resource type'}:`"
 			)
 			v-select(
 				v-model="resource.contextId"
 				:items="contexts"
 				item-text="title"
 				item-value="id"
-				:label="`${d.context || 'Контекст'}:`"
+				:label="`${d.context || 'Context'}:`"
 				v-if="!$route.query.contextId && !$route.params.id"
 			)
 			v-flex.md12
@@ -28,7 +28,7 @@
 					template(v-slot:activator="{ on }")
 						v-checkbox(
 							v-model="resource.published"
-							:label="`${d.published || 'Опубликовать'}`"
+							:label="`${d.published || 'Published'}`"
 							color="primary"
 							v-on="on"
 						)
@@ -37,7 +37,7 @@
 				template(v-slot:activator="{ on }")
 					v-text-field(
 						v-model="resource.menuindex"
-						:label="`${d.menunindex || 'Меню-индекс'}:`"
+						:label="`${d.menunindex || 'Menuindex'}:`"
 						v-on="on"
 					)
 				span menuindex

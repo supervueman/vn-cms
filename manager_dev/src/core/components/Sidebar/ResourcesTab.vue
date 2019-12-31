@@ -12,7 +12,7 @@
 						v-on="on"
 					)
 						v-icon add_circle_outline
-				span {{d.create_resource || 'Создать ресурс'}}
+				span {{d.create_resource || 'Create resource'}}
 
 			v-tooltip(top v-if="r.is_resource_read")
 				template(v-slot:activator="{ on }")
@@ -25,7 +25,7 @@
 						@click="reloadResources"
 					)
 						v-icon replay
-				span {{d.reload || 'Обновить'}}
+				span {{d.reload || 'Reload'}}
 		.resource--tree
 			v-expansion-panels(
 				accordion

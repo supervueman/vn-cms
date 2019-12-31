@@ -141,7 +141,7 @@
       "text": "Field element"
     },
     "field_category": {
-      "text": "Fields category"
+      "text": "Field category"
     },
     "layout": {
       "text": "Layout"
@@ -234,7 +234,7 @@
       "text": "Enter new password"
     },
     "confirm_password": {
-      "text": "Confirm new password"
+      "text": "Confirm password"
     },
     "change": {
       "text": "Change"
@@ -307,6 +307,15 @@
     },
     "create_user": {
       "text": "Create user"
+    },
+    "cannot_delete_root_directory": {
+      "text": "Cannot delete root directory"
+    },
+    "enter_password": {
+      "text": "Enter password"
+    },
+    "add_element": {
+      "text": "Add element"
     }
   }
 }

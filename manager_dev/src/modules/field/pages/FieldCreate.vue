@@ -1,23 +1,23 @@
 <template lang="pug">
   v-flex(v-if="r.is_field_create")
-    .body-2.mb-12.mt-2 {{d.field_creation || 'Создание поля'}}
+    .body-2.mb-12.mt-2 {{d.field_creation || 'Field creation'}}
     v-layout.wrap
       v-flex.xs12.md7.pr-2
         v-card(outlined)
-          v-card-text {{d.common_data || 'Общие данные'}}
+          v-card-text {{d.common_data || 'Common data'}}
           v-card-text
             v-layout.wrap
               v-flex.md12
                 v-text-field(
                   v-model="field.slug"
-                  :label="`${d.slug || 'Псевдоним'}:`"
+                  :label="`${d.slug || 'Slug'}:`"
                   @input="$v.field.slug.$touch()"
                   @blur="$v.field.slug.$touch()"
                   :error-messages="slugErrors"
                 )
                 v-text-field(
                   v-model="field.title"
-                  :label="`${d.name || 'Наименование'}:`"
+                  :label="`${d.name || 'Name'}:`"
                   @input="$v.field.title.$touch()"
                   @blur="$v.field.title.$touch()"
                   :error-messages="titleErrors"
@@ -33,7 +33,7 @@
               @click="create"
               depressed
               v-if="r.is_field_create"
-            ) {{d.create || 'Создать'}}
+            ) {{d.create || 'Create'}}
 </template>
 
 <script>
@@ -82,14 +82,14 @@ export default {
       !this.$v.field.slug.minLength &&
         errors.push(
           `${this.d.field_must_be_have_more_three_sumbols ||
-            "Поле должено быть не менее 3 символов"}`
+            "The field must be at least 3 characters"}`
         );
       !this.$v.field.slug.alpha &&
         errors.push(
-          `${this.d.only_en_symbols || "Разрешены только английские символы"}`
+          `${this.d.only_en_symbols || "Only latin characters allowed"}`
         );
       !this.$v.field.slug.required &&
-        errors.push(`${this.d.required_field || "Обязательное поле"}`);
+        errors.push(`${this.d.required_field || "Required field"}`);
       return errors;
     },
     titleErrors() {
@@ -98,10 +98,10 @@ export default {
       !this.$v.field.title.minLength &&
         errors.push(
           `${this.d.field_must_be_have_more_three_sumbols ||
-            "Поле должено быть не менее 3 символов"}`
+            "The field must be at least 3 characters"}`
         );
       !this.$v.field.title.required &&
-        errors.push(`${this.d.required_field || "Обязательное поле"}`);
+        errors.push(`${this.d.required_field || "Required field"}`);
       return errors;
     }
   },

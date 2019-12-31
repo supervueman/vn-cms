@@ -4,7 +4,7 @@
 			v-list-item-action
 				v-icon(color="primary") layers
 			v-list-item-content
-				v-list-item-title {{d.layouts || 'Шаблоны'}}
+				v-list-item-title {{d.layouts || 'Layouts'}}
 			v-list-item-action
 				v-btn(icon to="/layout-create")
 					v-icon(color="primary") add_circle_outline
@@ -12,7 +12,7 @@
 			v-list-item-action
 				v-icon(color="primary") playlist_add
 			v-list-item-content
-				v-list-item-title {{d.fields || 'Поля'}}
+				v-list-item-title {{d.fields || 'Fields'}}
 			v-list-item-action
 				v-btn(icon to="/field-create")
 					v-icon(color="primary") add_circle_outline
@@ -20,7 +20,7 @@
 			v-list-item-action
 				v-icon(color="primary") folder
 			v-list-item-content
-				v-list-item-title {{d.field_categories || 'Категории полей'}}
+				v-list-item-title {{d.field_categories || 'Fields categories'}}
 			v-list-item-action
 				v-btn(icon to="/fieldcategory-create")
 					v-icon(color="primary") add_circle_outline

@@ -1,6 +1,6 @@
 <template lang="pug">
 	v-flex(v-if="r.is_system_setting_read")
-		.body-2.mb-12.mt-2 {{d.system_settings || 'Системные настройки'}}
+		.body-2.mb-12.mt-2 {{d.system_settings || 'System settings'}}
 		v-layout.wrap
 			v-flex
 				v-card(outlined)
@@ -54,11 +54,11 @@ export default {
     headers() {
       return [
         {
-          text: `${this.d.name || "Наименование"}`,
+          text: `${this.d.name || "Name"}`,
           value: "title"
         },
         {
-          text: `${this.d.slug || "Псевдоним"}`,
+          text: `${this.d.slug || "Slug"}`,
           value: "slug"
         },
         { text: "", value: "value", sortable: false }

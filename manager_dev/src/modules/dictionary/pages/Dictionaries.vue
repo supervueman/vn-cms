@@ -1,6 +1,6 @@
 <template lang="pug">
 	v-flex(v-if="r.is_dictionary_read")
-		.body-2.mb-12.mt-2 {{d.dictionaries || 'Словари'}}
+		.body-2.mb-12.mt-2 {{d.dictionaries || 'Dictionaries'}}
 		v-flex
 			v-card(outlined)
 				dictionaries-toolbar(
@@ -57,7 +57,7 @@
 			remove-confirm(
 				@remove="remove"
 				:isActive.sync="isRemoveDictionary"
-				:name="`${removeDictionary.title} ${d.dictionary || 'Словарь'}`"
+				:name="`${removeDictionary.title} ${d.dictionary || 'Dictionary'}`"
 			)
 
 		v-dialog(
@@ -87,7 +87,7 @@ export default {
 
   metaInfo() {
     return {
-      title: `${this.d.dictionaries || "Словари"}`
+      title: `${this.d.dictionaries || "Dictionaries"}`
     };
   },
 

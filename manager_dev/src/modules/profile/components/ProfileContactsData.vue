@@ -1,6 +1,6 @@
 <template lang="pug">
   v-card.mb-3(outlined)
-    v-card-text.pb-0 {{d.contacts || 'Контакты'}}
+    v-card-text.pb-0 {{d.contacts || 'Contacts'}}
     v-card-text
       v-layout.wrap
         v-flex.md6.pr-3
@@ -16,7 +16,7 @@
             v-model="profile.phone"
             v-mask="'+7(###)###-##-##'"
             :value="profile.phone"
-            :label="`${d.phone || 'Телефон'}:`"
+            :label="`${d.phone || 'Phone'}:`"
           )
         v-flex.md6.pr-3
           v-text-field(
@@ -41,7 +41,7 @@
         @click="update"
         color="primary"
         depressed
-      ) {{d.save || 'Сохранить'}}
+      ) {{d.save || 'Save'}}
 </template>
 
 
@@ -81,9 +81,11 @@ export default {
       const errors = [];
       if (!this.$v.profile.email.$dirty) return errors;
       !this.$v.profile.email.email &&
-        errors.push(`${this.d.email_is_not_valid || "E-mail не валиден"}`);
+        errors.push(
+          `${this.d.email_is_not_valid || "E-mail не E-mail is not valid"}`
+        );
       !this.$v.profile.email.required &&
-        errors.push(`${this.d.required_field || "Обязательное поле"}`);
+        errors.push(`${this.d.required_field || "Required field"}`);
       return errors;
     }
   },

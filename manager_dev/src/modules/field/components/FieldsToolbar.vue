@@ -9,7 +9,7 @@
 				hide-details
 				:value="Number($route.query.categoryId)"
 				clearable
-				:label="`${d.field_categories || 'Категории полей'}:`"
+				:label="`${d.field_categories || 'Fields categories'}:`"
 				@change="$emit('filter', $event)"
 			)
 		v-btn(
@@ -18,7 +18,7 @@
 			dark
 			depressed
 			v-if="r.is_field_create"
-		) {{d.create_field || 'Создать поле'}}
+		) {{d.create_field || 'Create field'}}
 </template>
 
 <script>

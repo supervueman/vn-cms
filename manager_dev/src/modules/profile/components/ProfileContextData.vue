@@ -1,6 +1,6 @@
 <template lang="pug">
   v-card.mb-3(outlined)
-    v-card-text {{d.context || 'Контекст'}}: {{profile.context.slug}}
+    v-card-text {{d.context || 'Context'}}: {{profile.context.slug}}
 </template>
 
 <script>

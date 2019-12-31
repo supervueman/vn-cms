@@ -1,16 +1,16 @@
 <template lang="pug">
   v-flex(v-if="r.is_user_create")
-    .body-2.mb-12.mt-2 {{d.user_creation || 'Создание пользователя'}}
+    .body-2.mb-12.mt-2 {{d.user_creation || 'User creation'}}
     v-layout.wrap
       v-flex.xs12.md7.pr-2
         v-card.mb-3(outlined)
-          v-card-text.pb-0 {{d.common_data || 'Общие данные'}}
+          v-card-text.pb-0 {{d.common_data || 'Common data'}}
           v-card-text
             v-layout.wrap
               v-flex.md12
                 v-text-field(
                   v-model="profile.slug"
-                  :label="`${d.slug || 'Псевдоним'}:`"
+                  :label="`${d.slug || 'Slug'}:`"
                   @input="$v.profile.slug.$touch()"
                   @blur="$v.profile.slug.$touch()"
                   :error-messages="slugErrors"
@@ -29,7 +29,7 @@
                   item-text="title"
                   item-value="id"
                   v-model="profile.roleId"
-                  :label="`${d.role || 'Роль'}:`"
+                  :label="`${d.role || 'Role'}:`"
                 )
               v-flex.md12
                 v-select(
@@ -37,12 +37,12 @@
                   item-text="title"
                   item-value="id"
                   v-model="profile.contextId"
-                  :label="`${d.context || 'Контекст'}:`"
+                  :label="`${d.context || 'Context'}:`"
                 )
               v-flex.md12
                 v-text-field(
                   v-model="profile.password"
-                  :label="`${d.enter_password || 'Введите пароль'}:`"
+                  :label="`${d.enter_password || 'Enter password'}:`"
                   :type="showPassword ? 'text' : 'password'"
                   :append-icon="showPassword ? 'visibility' : 'visibility_off'"
                   @click:append="showPassword = !showPassword"
@@ -53,7 +53,7 @@
               v-flex.md12
                 v-text-field(
                   v-model="profile.confirmPassword"
-                  :label="`${d.confirm_password || 'Повторите пароль'}:`"
+                  :label="`${d.confirm_password || 'Confirm password'}:`"
                   :type="showConfirmPassword ? 'text' : 'password'"
                   :append-icon="showConfirmPassword ? 'visibility' : 'visibility_off'"
                   @click:append="showConfirmPassword = !showConfirmPassword"
@@ -66,7 +66,7 @@
               depressed
               color="primary"
               @click="create"
-            ) {{d.create || 'Создать'}}
+            ) {{d.create || 'Create'}}
 </template>
 
 <script>
@@ -105,7 +105,7 @@ export default {
 
   metaInfo() {
     return {
-      title: `${this.d.user_creation || "Создание пользователя"}`
+      title: `${this.d.user_creation || "User creation"}`
     };
   },
 
@@ -135,14 +135,14 @@ export default {
       !this.$v.profile.slug.minLength &&
         errors.push(
           `${this.d.field_must_be_have_more_three_sumbols ||
-            "Поле должено быть не менее 3 символов"}`
+            "The field must be at least 3 characters"}`
         );
       !this.$v.profile.slug.alpha &&
         errors.push(
-          `${this.d.only_en_symbols || "Разрешены только английские символы"}`
+          `${this.d.only_en_symbols || "Only latin characters allowed"}`
         );
       !this.$v.profile.slug.required &&
-        errors.push(`${this.d.required_field || "Обязательное поле"}`);
+        errors.push(`${this.d.required_field || "Required field"}`);
       return errors;
     },
 
@@ -150,11 +150,11 @@ export default {
       const errors = [];
       if (!this.$v.profile.password.$dirty) return errors;
       !this.$v.profile.password.required &&
-        errors.push(`${this.d.required_field || "Обязательное поле"}`);
+        errors.push(`${this.d.required_field || "Required field"}`);
       !this.$v.profile.password.minLength &&
         errors.push(
           `${this.d.field_must_be_have_more_six_sumbols ||
-            "Поле должено быть не менее 6 символов"}`
+            "The field must be at least 6 characters"}`
         );
       return errors;
     },
@@ -163,14 +163,16 @@ export default {
       const errors = [];
       if (!this.$v.profile.confirmPassword.$dirty) return errors;
       !this.$v.profile.confirmPassword.required &&
-        errors.push(`${this.d.required_field || "Обязательное поле"}`);
+        errors.push(`${this.d.required_field || "Required field"}`);
       !this.$v.profile.confirmPassword.minLength &&
         errors.push(
           `${this.d.field_must_be_have_more_six_sumbols ||
-            "Поле должено быть не менее 6 символов"}`
+            "The field must be at least 6 characters"}`
         );
       !this.$v.profile.confirmPassword.sameAsPassword &&
-        errors.push(`${this.d.password_not_confirm || "Пароли не совпадают!"}`);
+        errors.push(
+          `${this.d.password_not_confirm || "Passwords do not match"}`
+        );
       return errors;
     },
 
@@ -178,9 +180,11 @@ export default {
       const errors = [];
       if (!this.$v.profile.email.$dirty) return errors;
       !this.$v.profile.email.email &&
-        errors.push(`${this.d.email_is_not_valid || "E-mail не валиден"}`);
+        errors.push(
+          `${this.d.email_is_not_valid || "E-mail не E-mail is not valid"}`
+        );
       !this.$v.profile.email.required &&
-        errors.push(`${this.d.required_field || "Обязательное поле"}`);
+        errors.push(`${this.d.required_field || "Required field"}`);
       return errors;
     }
   },

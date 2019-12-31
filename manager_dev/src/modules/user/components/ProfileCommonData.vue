@@ -1,28 +1,28 @@
 <template lang="pug">
   v-card.mb-3(outlined)
-    //- Общие данные
-    v-card-text.pb-0 {{d.common_data || 'Общие данные'}}
+    //- Common data
+    v-card-text.pb-0 {{d.common_data || 'Common data'}}
     v-card-text
       v-layout.wrap
         v-flex.md6.pr-3
           v-text-field(
             v-model="profile.lastname"
-            :label="`${d.lastname || 'Фамилия'}:`"
+            :label="`${d.lastname || 'Latname'}:`"
           )
         v-flex.md6
           v-text-field(
             v-model="profile.firstname"
-            :label="`${d.firstname || 'Имя'}:`"
+            :label="`${d.firstname || 'Firstname'}:`"
           )
         v-flex.md6.pr-3
           v-text-field(
             v-model="profile.middlename"
-            :label="`${d.middlename || 'Отчество'}:`"
+            :label="`${d.middlename || 'Middlename'}:`"
           )
         v-flex.md6
           v-text-field(
             v-model="profile.slug"
-            :label="`${d.slug || 'Псевдоним'}:`"
+            :label="`${d.slug || 'Slug'}:`"
             @input="$v.profile.slug.$touch()"
             @blur="$v.profile.slug.$touch()"
             :error-messages="slugErrors"
@@ -32,7 +32,7 @@
         @click="update"
         color="primary"
         depressed
-      ) {{d.save || 'Сохранить'}}
+      ) {{d.save || 'Save'}}
 </template>
 
 <script>
@@ -67,14 +67,14 @@ export default {
       !this.$v.profile.slug.minLength &&
         errors.push(
           `${this.d.field_must_be_have_more_three_sumbols ||
-            "Поле должено быть не менее 3 символов"}`
+            "The field must be at least 3 characters"}`
         );
       !this.$v.profile.slug.alpha &&
         errors.push(
-          `${this.d.only_en_symbols || "Разрешены только английские символы"}`
+          `${this.d.only_en_symbols || "Only latin characters allowed"}`
         );
       !this.$v.profile.slug.required &&
-        errors.push(`${this.d.required_field || "Обязательное поле"}`);
+        errors.push(`${this.d.required_field || "Required field"}`);
       return errors;
     }
   },

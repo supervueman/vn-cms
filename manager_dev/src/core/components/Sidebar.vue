@@ -20,15 +20,15 @@
 			slider-color="primary"
 			grow
 		)
-			v-tab(v-if="r.is_resource_read") {{d.resources || 'Ресурсы'}}
+			v-tab(v-if="r.is_resource_read") {{d.resources || 'Resources'}}
 			v-tab-item(v-if="r.is_resource_read")
 				resources-tab
 
-			v-tab(v-if="r.is_development_access") {{d.develop || 'Разработка'}}
+			v-tab(v-if="r.is_development_access") {{d.develop || 'Develop'}}
 			v-tab-item(v-if="r.is_development_access")
 				development-tab
 
-			v-tab(v-if="r.is_filesystem_access") {{d.files || 'Файлы'}}
+			v-tab(v-if="r.is_filesystem_access") {{d.files || 'Files'}}
 			v-tab-item(v-if="r.is_filesystem_access")
 				files-tab
 </template>

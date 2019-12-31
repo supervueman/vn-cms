@@ -1,21 +1,21 @@
 <template lang="pug">
   v-card.mb-3(outlined)
-    v-card-text.pb-0(v-if="!r.is_user_update") {{d.role || 'Роль'}}: {{profile.role.title}}
-    v-card-text(v-if="!r.is_user_update") {{d.role_slug || 'Псевдоним роли'}}: {{profile.role.slug}}
+    v-card-text.pb-0(v-if="!r.is_user_update") {{d.role || 'Role'}}: {{profile.role.title}}
+    v-card-text(v-if="!r.is_user_update") {{d.role_slug || 'Role slug'}}: {{profile.role.slug}}
     v-card-text(v-if="r.is_user_update")
       v-select(
         :items="roles"
         item-text="title"
         item-value="id"
         v-model="profile.roleId"
-        :label="`${d.role || 'Роль'}:`"
+        :label="`${d.role || 'Role'}:`"
       )
     v-card-actions(v-if="r.is_user_update")
       v-btn.ml-2.mb-2(
         color="primary"
         depressed
         @click="update"
-      ) {{d.save || 'Сохранить'}}
+      ) {{d.save || 'Save'}}
 </template>
 
 <script>

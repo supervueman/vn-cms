@@ -1,6 +1,6 @@
 <template lang="pug">
 	v-flex(v-if="r.is_user_read")
-		.body-2.mb-12.mt-2 {{d.profile || 'Профиль'}}: {{profile.slug}} ({{profile.id}})
+		.body-2.mb-12.mt-2 {{d.profile || 'Profile'}}: {{profile.slug}} ({{profile.id}})
 		v-layout.wrap
 			v-flex.xs12.md7.pr-2
 				profile-common-data(:profile="profile")
@@ -14,7 +14,7 @@
 						color="error"
 						depressed
 						@click="isRemoveDialog = true"
-					) {{d.remove || 'Удалить'}}
+					) {{d.remove || 'Remove'}}
 			v-flex.xs12.md5.pl-2
 				profile-avatar-data(:profile="profile")
 				profile-role-data(:profile="profile" :roles="roles")
@@ -57,7 +57,7 @@ export default {
 
   metaInfo() {
     return {
-      title: `${this.d.profile || "Профиль"}: ${this.profile.firstname} ${
+      title: `${this.d.profile || "Profile"}: ${this.profile.firstname} ${
         this.profile.lastname
       }`
     };

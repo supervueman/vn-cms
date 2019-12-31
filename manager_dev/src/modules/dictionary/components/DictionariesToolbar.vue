@@ -6,13 +6,13 @@
 			color="primary"
 			v-if="r.is_dictionary_update && dictionariesLength > 0"
 			@click="$emit('update')"
-		) {{d.save || 'Сохранить'}}
+		) {{d.save || 'Save'}}
 		v-btn(
 			depressed
 			color="primary"
 			@click="$emit('openCreateDialog', false); isDictionaryCreate = true"
 			v-if="r.is_dictionary_create"
-		) {{d.create_dictionary || 'Создать словарь'}}
+		) {{d.create_dictionary || 'Create dictionary'}}
 </template>
 
 <script>
