@@ -1,5 +1,5 @@
 <template lang="pug">
-	v-flex(v-if="r.is_resource_read") {{resource}}
+	v-flex(v-if="r.is_resource_read")
 		v-layout
 			.body-2.mt-2.mb-12 {{d.resource || 'Ресурс'}}: {{resource.title}} ({{resource.id}})
 			v-spacer
@@ -81,8 +81,6 @@ export default {
       "resource/findByPk",
       findByPkQueryData
     );
-
-    console.log(this.resource);
 
     if (bool) {
       await this.$store.dispatch("resource/findAll", {
