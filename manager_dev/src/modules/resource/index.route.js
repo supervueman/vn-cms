@@ -1,8 +1,4 @@
 export default [{
-  path: '/resources',
-  name: 'resources',
-  component: 'Resources'
-}, {
   path: '/resources/:id',
   name: 'resource',
   component: 'Resource'

@@ -4,7 +4,7 @@
       v-spacer
       v-btn(
         color="primary"
-        :to="`/resource-create?level=${Number(resource.level) + 1}&parentId=${resource.id}&contextId=${resource.contextId}`"
+        :to="`/resource-create?level=${resource.level}&parentId=${resource.id}&contextId=${resource.contextId}`"
         depressed
         v-if="r.is_resource_create && mainLang === resource.lang"
       ) {{d.create_resource || 'Создать ресурс'}}
@@ -94,7 +94,7 @@ export default {
             order: [["createdAt", "DESC"]],
             where: {
               level: this.resource.level + 1,
-              parentId: this.$route.params.id,
+              parentId: this.resource.id,
               lang: this.resource.lang
             }
           }
@@ -112,15 +112,7 @@ export default {
             return el;
           }
         });
-        const profileResources = this.$store.getters[
-          "profile/getResources"
-        ].filter(el => {
-          if (el.id !== this.removeItem.id) {
-            return el;
-          }
-        });
         this.$store.dispatch("resource/setAll", resources);
-        this.$store.dispatch("profile/setResources", profileResources);
       }
     },
 

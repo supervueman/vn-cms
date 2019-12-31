@@ -117,7 +117,7 @@ export default {
       this.$v.$touch();
       if (this.r.is_resource_create && !this.$v.$error) {
         if (this.$route.query.level) {
-          this.resource.level = Number(this.resource.level) + 1;
+          this.resource.level = Number(this.$route.query.level) + 1;
         } else {
           this.resource.level = 1;
         }
@@ -156,7 +156,9 @@ export default {
       if (this.r.is_resource_create && !this.$v.$error) {
         this.resource.level = this.$route.query.level;
 
-        // this.resource.parentId = this.$route.query.parentId;
+        if (Number(this.$route.query.parentId)) {
+          this.resource.parentId = this.$route.query.parentId;
+        }
 
         this.resource.lang = this.$route.query.lang;
 

@@ -1,5 +1,5 @@
 <template lang="pug">
-	v-flex(v-if="r.is_resource_read")
+	v-flex(v-if="r.is_resource_read") {{resource}}
 		v-layout
 			.body-2.mt-2.mb-12 {{d.resource || 'Ресурс'}}: {{resource.title}} ({{resource.id}})
 			v-spacer
@@ -82,6 +82,8 @@ export default {
       findByPkQueryData
     );
 
+    console.log(this.resource);
+
     if (bool) {
       await this.$store.dispatch("resource/findAll", {
         query: {
@@ -90,7 +92,7 @@ export default {
             limit: this.$route.query.limit || this.limit,
             order: [["createdAt", "DESC"]],
             where: {
-              level: this.resource.level + 1,
+              // level: this.resource.level + 1,
               parentId: this.resource.id,
               lang: this.resource.lang
             }

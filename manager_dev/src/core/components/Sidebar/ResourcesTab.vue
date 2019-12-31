@@ -53,7 +53,6 @@ export default {
   name: "ResourcesTab",
 
   data: () => ({
-    active: [],
     componentKey: 0
   }),
 
