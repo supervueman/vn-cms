@@ -38,115 +38,123 @@
               @blur="$v.confirmNewPassword.$touch()"
             )
       v-expansion-panel-content.px-0
-        v-btn.mr-2(color="primary" @click="changePassword") {{d.change || 'Change'}}
-        v-btn(color="primary" @click="clearPassword") {{d.cancel || 'Cancel'}}
+        v-btn.mr-2(
+          color="primary"
+          depressed
+          @click="changePassword"
+        ) {{d.change || 'Change'}}
+        v-btn(
+          color="primary"
+          depressed
+          @click="clearPassword"
+        ) {{d.cancel || 'Cancel'}}
 </template>
 
 <script>
 // Mixins
-import { validationMixin } from "vuelidate";
+import { validationMixin } from 'vuelidate';
 
 // Libs
-import { helpers, required, sameAs, minLength } from "vuelidate/lib/validators";
+import { helpers, required, sameAs, minLength } from 'vuelidate/lib/validators';
 
 export default {
-  name: "PasswordChange",
+	name: 'PasswordChange',
 
-  mixins: [validationMixin],
+	mixins: [validationMixin],
 
-  validations: {
-    oldPassword: {
-      required,
-      minLength: minLength(6)
-    },
-    newPassword: {
-      required,
-      minLength: minLength(6)
-    },
-    confirmNewPassword: {
-      required,
-      minLength: minLength(6),
-      sameAsPassword: sameAs("newPassword")
-    }
-  },
+	validations: {
+		oldPassword: {
+			required,
+			minLength: minLength(6)
+		},
+		newPassword: {
+			required,
+			minLength: minLength(6)
+		},
+		confirmNewPassword: {
+			required,
+			minLength: minLength(6),
+			sameAsPassword: sameAs('newPassword')
+		}
+	},
 
-  data() {
-    return {
-      oldPassword: "",
-      newPassword: "",
-      confirmNewPassword: "",
-      showOldPassword: false,
-      showNewPassword: false,
-      showConfirmNewPassword: false
-    };
-  },
+	data() {
+		return {
+			oldPassword: '',
+			newPassword: '',
+			confirmNewPassword: '',
+			showOldPassword: false,
+			showNewPassword: false,
+			showConfirmNewPassword: false
+		};
+	},
 
-  computed: {
-    oldPasswordErrors() {
-      const errors = [];
-      if (!this.$v.oldPassword.$dirty) return errors;
-      !this.$v.oldPassword.required &&
-        errors.push(`${this.d.required_field || "Required field"}`);
-      !this.$v.oldPassword.minLength &&
-        errors.push(
-          `${this.d.field_must_be_have_more_six_sumbols ||
-            "The field must be at least 6 characters"}`
-        );
-      return errors;
-    },
-    newPasswordErrors() {
-      const errors = [];
-      if (!this.$v.newPassword.$dirty) return errors;
-      !this.$v.newPassword.required &&
-        errors.push(`${this.d.required_field || "Required field"}`);
-      !this.$v.newPassword.minLength &&
-        errors.push(
-          `${this.d.field_must_be_have_more_six_sumbols ||
-            "The field must be at least 6 characters"}`
-        );
-      return errors;
-    },
-    confirmNewPasswordErrors() {
-      const errors = [];
-      if (!this.$v.confirmNewPassword.$dirty) return errors;
-      !this.$v.confirmNewPassword.required &&
-        errors.push(`${this.d.required_field || "Required field"}`);
-      !this.$v.confirmNewPassword.minLength &&
-        errors.push(
-          `${this.d.field_must_be_have_more_six_sumbols ||
-            "The field must be at least 6 characters"}`
-        );
-      !this.$v.confirmNewPassword.sameAsPassword &&
-        errors.push(
-          `${this.d.password_not_confirm || "Passwords do not match"}`
-        );
-      return errors;
-    }
-  },
+	computed: {
+		oldPasswordErrors() {
+			const errors = [];
+			if (!this.$v.oldPassword.$dirty) return errors;
+			!this.$v.oldPassword.required &&
+				errors.push(`${this.d.required_field || 'Required field'}`);
+			!this.$v.oldPassword.minLength &&
+				errors.push(
+					`${this.d.field_must_be_have_more_six_sumbols ||
+						'The field must be at least 6 characters'}`
+				);
+			return errors;
+		},
+		newPasswordErrors() {
+			const errors = [];
+			if (!this.$v.newPassword.$dirty) return errors;
+			!this.$v.newPassword.required &&
+				errors.push(`${this.d.required_field || 'Required field'}`);
+			!this.$v.newPassword.minLength &&
+				errors.push(
+					`${this.d.field_must_be_have_more_six_sumbols ||
+						'The field must be at least 6 characters'}`
+				);
+			return errors;
+		},
+		confirmNewPasswordErrors() {
+			const errors = [];
+			if (!this.$v.confirmNewPassword.$dirty) return errors;
+			!this.$v.confirmNewPassword.required &&
+				errors.push(`${this.d.required_field || 'Required field'}`);
+			!this.$v.confirmNewPassword.minLength &&
+				errors.push(
+					`${this.d.field_must_be_have_more_six_sumbols ||
+						'The field must be at least 6 characters'}`
+				);
+			!this.$v.confirmNewPassword.sameAsPassword &&
+				errors.push(
+					`${this.d.password_not_confirm || 'Passwords do not match'}`
+				);
+			return errors;
+		}
+	},
 
-  methods: {
-    async changePassword() {
-      this.$v.$touch();
+	methods: {
+		async changePassword() {
+			this.$v.$touch();
 
-      if (this.$v.$error) {
-        return;
-      }
+			if (this.$v.$error) {
+				return;
+			}
 
-      const data = {
-        oldPassword: this.oldPassword,
-        newPassword: this.newPassword
-      };
+			const data = {
+				oldPassword: this.oldPassword,
+				newPassword: this.newPassword
+			};
 
-      await this.$store.dispatch("profile/changePassword", { body: data });
+			await this.$store.dispatch('profile/changePassword', { body: data });
 
-      this.clearPassword();
-    },
+			this.clearPassword();
+		},
 
-    clearPassword() {
-      this.oldPassword = "";
-      this.newPassword = "";
-      this.confirmNewPassword = "";
-    }
-  }
+		clearPassword() {
+			this.oldPassword = '';
+			this.newPassword = '';
+			this.confirmNewPassword = '';
+		}
+	}
 };
 </script>

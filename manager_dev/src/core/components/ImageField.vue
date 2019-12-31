@@ -12,41 +12,44 @@
         v-img(:src="`/static/${path}`", alt="alt" max-width="100%")
     v-dialog(v-model="isActiveDialog")
       filesystem(@selectFile="selectFile")
-      v-card
+      v-card(outlined)
         v-card-actions
-          v-btn.ml-2(@click="isActiveDialog = false") {{d.close || 'Close'}}
+          v-btn.ml-2(
+            depressed
+            @click="isActiveDialog = false"
+          ) {{d.close || 'Close'}}
 </template>
 
 <script>
 // Components
-import Filesystem from "@/core/components/Filesystem/Filesystem";
+import Filesystem from '@/core/components/Filesystem/Filesystem';
 
 export default {
-  name: "ImageField",
+	name: 'ImageField',
 
-  components: {
-    Filesystem
-  },
+	components: {
+		Filesystem
+	},
 
-  props: {
-    path: {
-      type: String,
-      default: ""
-    }
-  },
+	props: {
+		path: {
+			type: String,
+			default: ''
+		}
+	},
 
-  data() {
-    return {
-      isActiveDialog: false,
-      file: "",
-      filePath: ""
-    };
-  },
+	data() {
+		return {
+			isActiveDialog: false,
+			file: '',
+			filePath: ''
+		};
+	},
 
-  methods: {
-    selectFile(file) {
-      this.$emit("selectFile", file.path);
-    }
-  }
+	methods: {
+		selectFile(file) {
+			this.$emit('selectFile', file.path);
+		}
+	}
 };
 </script>
