@@ -26,26 +26,26 @@
 					)
 						v-icon replay
 				span {{d.reload || 'Обновить'}}
-
-		v-expansion-panels(
-			accordion
-			multiple
-		)
-			v-expansion-panel(
-				v-for="context in contexts"
-				:key="context.id"
+		.resource--tree
+			v-expansion-panels(
+				accordion
+				multiple
 			)
-				v-expansion-panel-header {{context.title}} ({{context.slug}})
-				v-expansion-panel-content
-					v-treeview(
-						:items="context.resources"
-						transition
-						open-all
-						:key="componentKey"
-					)
-						template(v-slot:prepend="{ item, active }")
-							div.link-wrapper(@click="fetchResources(item)")
-								router-link(:to="`/resources/${item.id}`") {{item.title}} ({{item.id}})
+				v-expansion-panel(
+					v-for="context in contexts"
+					:key="context.id"
+				)
+					v-expansion-panel-header {{context.title}} ({{context.slug}})
+					v-expansion-panel-content
+						v-treeview(
+							:items="context.resources"
+							transition
+							open-all
+							:key="componentKey"
+						)
+							template(v-slot:prepend="{ item, active }")
+								div.link-wrapper(@click="fetchResources(item)")
+									router-link(:to="`/resources/${item.id}`") {{item.title}} ({{item.id}})
 </template>
 
 <script>
@@ -95,7 +95,11 @@ export default {
 </script>
 
 <style lang="sass">
+.v-navigation-drawer__content
+	overflow: hidden
 .slidebar
+	overflow: auto
+	height: calc(100vh - 165px)
 	.v-expansion-panel::before
 		border: none!important
 		box-shadow: none
