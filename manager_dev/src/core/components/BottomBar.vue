@@ -13,7 +13,7 @@
     )
       v-card-text.white--text
         v-layout(justify-space-between)
-          div {{ new Date().getFullYear() }} — Platform
+          div {{ new Date().getFullYear() }} — VN-CMS
           div {{d.developer || 'Разработка'}}
             a.dev-link(href="https://www.facebook.com/rdavlikamov" target="_blank") SUPERVUEMAN
 </template>
