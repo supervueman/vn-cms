@@ -31,26 +31,9 @@ const actions = {
       commit('SET_SERIALIZED_FIELDS');
 
       this.dispatch('preloader/fetch', false);
-
-      const params = {
-        query: {
-          filter: {
-            offset: 0,
-            limit: 10,
-            order: [
-              ["createdAt", "DESC"]
-            ],
-            where: {
-              level: response.data.level + 1,
-              parentId: response.data.id
-            },
-          }
-        }
-      };
-
-      await this.dispatch("resource/findAll", params);
-      await this.dispatch('resource/count', params);
+      return true;
     }
+    return false;
   },
 
   async create({

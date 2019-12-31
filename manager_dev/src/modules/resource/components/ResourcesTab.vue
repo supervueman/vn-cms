@@ -1,5 +1,5 @@
 <template lang="pug">
-  v-card(outlined)
+  v-card(outlined) {{count}}
     v-toolbar(flat color="white")
       v-spacer
       v-btn(
@@ -85,22 +85,31 @@ export default {
   },
 
   async mounted() {
-    const data = {
+    await this.$store.dispatch("resource/findAll", {
       query: {
         filter: {
           offset: this.$route.query.offset || 0,
           limit: this.$route.query.limit || this.limit,
           order: [["createdAt", "DESC"]],
           where: {
-            level: this.level + 1,
+            level: this.resource.level + 1,
             parentId: this.$route.params.id,
             lang: this.$store.getters["base/getMainLang"]
           }
         }
       }
-    };
-    await this.$store.dispatch("resource/findAll", data);
-    await this.$store.dispatch("resource/count", {});
+    });
+    await this.$store.dispatch("resource/count", {
+      query: {
+        filter: {
+          where: {
+            level: this.resource.level + 1,
+            parentId: this.$route.params.id,
+            lang: this.resource.lang
+          }
+        }
+      }
+    });
   },
 
   methods: {
@@ -112,8 +121,9 @@ export default {
             limit,
             order: [["createdAt", "DESC"]],
             where: {
-              level: this.level + 1,
-              parentId: this.$route.params.id
+              level: this.resource.level + 1,
+              parentId: this.$route.params.id,
+              lang: this.resource.lang
             }
           }
         }
