@@ -170,3 +170,8 @@ export default {
   }
 };
 </script>
+
+<style lang="sass">
+	.theme--light.v-tabs-items
+		background-color: transparent
+</style>
