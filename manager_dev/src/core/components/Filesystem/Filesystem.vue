@@ -1,7 +1,7 @@
 <template lang="pug">
   v-layout.wrap
     v-flex.xl12.lg12.md12
-      v-card.xl12.lg12.md12
+      v-card.xl12.lg12.md12(outlined)
         v-card-text.pb-0
           v-layout.column
             div.mb-2 {{d.current_path || 'Текущий путь'}}: {{currentFullPath}}

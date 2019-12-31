@@ -9,9 +9,9 @@
         @input="$v.folderName.$touch()"
         @blur="$v.folderName.$touch()"
       )
-    v-card-actions
-      v-btn.ml-2(@click="createFolder" color="primary") {{d.create || 'Создать'}}
-      v-btn(@click="cancel") {{d.cancel || 'Отмена'}}
+    v-card-actions.px-4.pb-4
+      v-btn(@click="createFolder" color="primary" depressed) {{d.create || 'Создать'}}
+      v-btn(@click="cancel" depressed) {{d.cancel || 'Отмена'}}
 </template>
 
 <script>

@@ -57,7 +57,5 @@ module.exports = async (req, res) => {
     userId: req.profile.id
   });
 
-  await createDir(`../files/${createdUser.id}`);
-
   res.status(200).send(createdUser);
 };

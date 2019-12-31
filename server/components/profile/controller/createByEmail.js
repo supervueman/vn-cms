@@ -1,8 +1,6 @@
 const bcrypt = require('bcrypt');
 const validator = require('validator');
 
-const createDir = require('../../../handlers/createDir');
-
 const User = require('../../user/model');
 const Role = require('../../role/model');
 
@@ -87,9 +85,6 @@ module.exports = async (req, res) => {
     });
     return;
   });
-
-  // Создаем папку для пользователя
-  await createDir(`../files/user-${createdUser.contextId}`);
 
   res.status(200).send(createdUser);
 };

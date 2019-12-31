@@ -3,7 +3,7 @@ const removeDir = require('../../../../handlers/removeDir');
 module.exports = async (req, res) => {
   if (!req.rules.is_filesystem_directory_delete) {
     res.status(403).send({
-      message: 'Access denied!'
+      message: 'Forbidden'
     });
     return;
   }
@@ -11,6 +11,6 @@ module.exports = async (req, res) => {
   await removeDir(req.body.path);
 
   res.status(200).send({
-    message: 'Success!'
+    message: 'OK'
   });
 };

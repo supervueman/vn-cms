@@ -1,5 +1,7 @@
 const Model = require('../model');
 
+const createDir = require('../../../handlers/createDir');
+
 module.exports = async (req, res) => {
   // Если есть доступ к созданию или если псевдоним контекста является root то запретить
   if (!req.rules.is_context_create || req.body.slug === 'root') {
@@ -34,6 +36,8 @@ module.exports = async (req, res) => {
     });
     return;
   });
+
+  await createDir(`../files/${createdItem.slug}`);
 
   res.status(200).send(createdItem);
 };
