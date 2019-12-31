@@ -1,0 +1,123 @@
+// -----------------------------------------------------------------------------
+// This file contains all application-wide Sass mixins.
+// -----------------------------------------------------------------------------
+
+/// Event wrapper
+/// @author Harry Roberts
+/// @param {Bool} $self [false] - Whether or not to include current selector
+/// @link https://twitter.com/csswizardry/status/478938530342006784 Original tweet from Harry Roberts
+@mixin on-event($self: false)
+	@if $self
+		&,
+		&:hover,
+		&:active,
+		&:focus
+			@content
+	@else
+		&:hover,
+		&:active,
+		&:focus
+			@content
+
+/// Make a context based selector a little more friendly
+/// @author Hugo Giraudel
+/// @param {String} $context
+@mixin when-inside($context)
+	#{$context} &
+		@content
+
+
+
+// Fonts mixin
+@mixin font-face($font-family, $file-path, $weight: normal, $style: normal, $asset-pipeline: false )
+	@font-face
+		font-family: $font-family
+		font-weight: $weight
+		font-style: $style
+
+		@if $asset-pipeline == true 
+			src: font-url('#{$file-path}.eot')
+			src: font-url('#{$file-path}.eot?#iefix') format('embedded-opentype'), font-url('#{$file-path}.woff') format('woff'), font-url('#{$file-path}.ttf') format('truetype')
+		@else
+			src: url('#{$file-path}.eot')
+			src: url('#{$file-path}.eot?#iefix') format('embedded-opentype'), url('#{$file-path}.woff') format('woff'), url('#{$file-path}.ttf') format('truetype')
+
+
+
+// Media mixin
+/// Responsive breakpoint manager
+/// @access public
+/// @param {String} $breakpoint - Breakpoint
+/// @requires $breakpoints
+@mixin media($breakpoint)
+	$raw-query: map-get($breakpoints, $breakpoint)
+
+	@if $raw-query
+		$query: if(type-of($raw-query) == 'string', unquote($raw-query), inspect($raw-query))
+
+		@media (max-width: #{$query})
+			@content;
+	// @else
+	// 	@error 'No value found for `#{$breakpoint}`. '
+	// 			+ 'Please make sure it is defined in `$breakpoints` map.'
+
+
+
+/// Event wrapper
+/// @author Harry Roberts
+/// @param {Bool} $self [false] - Whether or not to include current selector
+/// @link https://twitter.com/csswizardry/status/478938530342006784 Original tweet from Harry Roberts
+@mixin on-event
+	&:hover,
+	&:active,
+	&:focus
+		@content
+
+
+
+// Button mixin colorize
+@mixin button-colorize($color, $border-color, $bg-color, $active-color, $active-border-color, $active-bg-color)
+	border-color: $border-color
+	color: $color
+	background-color: $bg-color
+	@include on-event
+		border-color: $active-border-color
+		color: $active-color
+		background-color: $active-bg-color
+
+// Input mixin colorize
+@mixin input-colorize($color, $bg-color, $border-color, $active-color, $active-bg-color, $active-border-color)
+	color: $color
+	background-color: $bg-color
+	border-color: $border-color
+	@include on-event
+		color: $active-color
+		background-color: $active-bg-color
+		border-color: $active-border-color
+
+// Link mixin colorize
+@mixin link-colorize($color, $active-color)
+	color: $color
+	&::after
+		background-color: $color
+	@include on-event
+		color: $active-color
+		&::after
+			background-color: $active-color
+
+
+
+
+@mixin absolute-location($coord-line: xy)
+	@if $coord-line == xy
+		position: absolute
+		top: 0
+		left: 0
+		bottom: 0
+		right: 0
+		margin: auto
+	@else if $coord-line == x
+		position: absolute
+		left: 0
+		right: 0
+		margin: auto

@@ -1,0 +1,19 @@
+.notification
+  position: fixed
+  top: $gap
+  right: $gap
+  width: 300px
+  padding: $gap
+  transition-timing-function: $cubic
+
+  &--success
+    background-color: green
+  &--warning
+    background-color: yellow
+  &--error
+    background-color: red
+
+  &-enter-active, &-leave-active 
+    transition: opacity 1s
+  &-enter, &-leave-to
+    opacity: 0

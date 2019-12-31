@@ -1,0 +1,16 @@
+%button
+	text-align: center
+	cursor: pointer
+	display: flex
+	align-items: center
+	justify-content: center
+	height: 40px
+	padding:
+		right: $gap
+		left: $gap
+	border: 1px solid
+	transition: border-color 1s, color 1s, background-color 1s
+	transition-timing-function: $cubic
+
+.button
+	@extend %button

@@ -3,19 +3,10 @@ node_modules
 /dist
 /manager
 /files
-/server/files
-/client
 /ansible
 /data
 serializer
 /manager_dev/public/static/files
-/manager_dev/public/favicon.ico
-/manager_dev/public/favicon.jpg
-/manager_dev/public/favicon.png
-/manager_dev/public/favicon.svg
-/manager_dev/public/static/logo.png
-/manager_dev/public/static/logo.jpg
-/manager_dev/public/static/logo.svg
 
 # local env files
 .env

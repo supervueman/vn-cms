@@ -1,0 +1,46 @@
+{
+  "name": "client",
+  "version": "1.0.0",
+  "description": "Client for platform",
+  "author": "supervueman",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate",
+    "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
+    "precommit": "npm run lint",
+    "start:pm2": "pm2 start ecosystem.config.js",
+    "restart:pm2": "pm2 restart ecosystem.config.js",
+    "stop:pm2": "pm2 stop ecosystem.config.js",
+    "create:symlink": "cd static && ln -s ../../admin-panel/files",
+    "remove:symlink": "cd static && rm -r files"
+  },
+  "dependencies": {
+    "@nuxtjs/axios": "^5.3.6",
+    "@nuxtjs/robots": "^2.4.2",
+    "cross-env": "^5.2.0",
+    "dotenv": "^8.1.0",
+    "nuxt": "^2.3.4",
+    "pug": "^2.0.4",
+    "pug-loader": "^2.4.0",
+    "pug-plain-loader": "^1.0.0"
+  },
+  "devDependencies": {
+    "@nuxtjs/eslint-config": "^0.0.1",
+    "babel-eslint": "^8.2.1",
+    "eslint": "^5.0.1",
+    "eslint-config-standard": ">=12.0.0",
+    "eslint-loader": "^2.0.0",
+    "eslint-plugin-import": ">=2.14.0",
+    "eslint-plugin-jest": ">=21.24.1",
+    "eslint-plugin-node": ">=7.0.1",
+    "eslint-plugin-promise": ">=4.0.1",
+    "eslint-plugin-standard": ">=4.0.0",
+    "eslint-plugin-vue": "^5.0.0",
+    "node-sass": "^4.12.0",
+    "nodemon": "^1.18.9",
+    "sass-loader": "^7.3.1"
+  }
+}
