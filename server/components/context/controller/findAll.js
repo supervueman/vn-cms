@@ -10,6 +10,13 @@ module.exports = async (req, res) => {
 
   const filter = JSON.parse(req.query.filter || "{}");
 
+  if (!req.adminAccess) {
+    if (!filter.where) {
+      filter.where = {};
+    }
+    filter.where.id = req.context.id;
+  }
+
   const items = await Model.findAll(filter).catch(err => {
     res.status(400).send({
       message: 'Bad request'

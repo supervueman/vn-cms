@@ -7,7 +7,7 @@
         aspect-ratio="1"
       )
     v-toolbar-items.hidden-xs-and-down
-      v-btn(text to="/users" v-if="r.is_user_read") {{d.users || 'Пользователи'}}
+      v-btn(text to="/users" v-if="r.is_user_read && isAuth") {{d.users || 'Пользователи'}}
       applications-menu(
         v-if="isAuth"
       )
@@ -130,6 +130,7 @@ export default {
     },
 
     async logout() {
+      this.$router.push("/");
       await this.$store.dispatch("authenticate/logout");
       this.$store.dispatch("field/clear");
       this.$store.dispatch("field/clearAll");
@@ -143,7 +144,6 @@ export default {
       this.$store.dispatch("role/clearAll");
       this.$store.dispatch("user/clear");
       this.$store.dispatch("user/clearAll");
-      this.$router.push("/");
     }
   }
 };
