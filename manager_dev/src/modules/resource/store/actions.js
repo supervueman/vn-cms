@@ -69,7 +69,6 @@ const actions = {
     });
 
     if (typeof response === 'object' && response.status === 200) {
-      console.log(response)
       this.dispatch('preloader/fetch', false);
       this.dispatch("notification/fetch", {
         type: "success",

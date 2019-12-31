@@ -44,33 +44,41 @@
 
 <script>
 export default {
-	name: 'ResourceSecondaryData',
+  name: "ResourceSecondaryData",
 
-	computed: {
-		resource() {
-			return this.$store.getters['resource/get'];
-		},
-		layouts() {
-			return this.$store.getters['layout/getAll'];
-		},
-		types() {
-			return this.$store.getters['resource/getTypes'];
-		},
-		contexts() {
-			return this.$store.getters['context/getAll'];
-		}
-	},
+  computed: {
+    resource() {
+      return this.$store.getters["resource/get"];
+    },
+    layouts() {
+      return this.$store.getters["layout/getAll"];
+    },
+    types() {
+      return this.$store.getters["resource/getTypes"];
+    },
+    contexts() {
+      return this.$store.getters["context/getAll"];
+    }
+  },
 
-	async mounted() {
-		await this.$store.dispatch('layout/findAll', {
-			query: {
-				filter: {
-					order: [['createdAt', 'DESC']]
-				}
-			}
-		});
+  async mounted() {
+    await this.$store.dispatch("layout/findAll", {
+      query: {
+        filter: {
+          order: [["createdAt", "DESC"]]
+        }
+      }
+    });
 
-		await this.$store.dispatch('resource/findTypes');
-	}
+    await this.$store.dispatch("context/findAll", {
+      query: {
+        filter: {
+          order: [["createdAt", "DESC"]]
+        }
+      }
+    });
+
+    await this.$store.dispatch("resource/findTypes");
+  }
 };
 </script>
