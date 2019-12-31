@@ -1,10 +1,10 @@
 <template lang="pug">
   v-layout.wrap
     v-flex.xl12.lg12.md12
-      v-card.xl12.lg12.md12
+      v-card.xl12.lg12.md12(outlined)
         v-card-text.pb-0
           v-layout.column
-            div.mb-2 {{d.current_path}}: {{currentFullPath}}
+            .mb-2 {{d.current_path}}: {{currentFullPath}}
         v-card-text
           v-layout.filesystem--window
             v-flex.xl3.lg3.md3
@@ -31,7 +31,7 @@
                     active-class="primary--text"
                   )
                     template(v-slot:prepend="{ item, open }")
-                      div.treeview-node-overlay(
+                      .treeview-node-overlay(
                         :class="{'active-treeview-node': currentFullPath === item.path}"
                         @click="fetchFolderContent(item)"
                         @contextmenu.prevent="fetchContextMenu($event, item)"
@@ -52,11 +52,13 @@
                 v-if="file.type === 'file'"
               )
                 v-card(
+                  outlined
                   @click="fetchFolderContent(file)"
                   @contextmenu.prevent="fetchContextMenu($event, file)"
                   @dblclick="selectFile(file)"
                 )
                   v-img(
+                    depressed
                     :src="`/static/${file.path}`"
                     aspect-ratio="1"
                   )

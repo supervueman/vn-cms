@@ -39,6 +39,6 @@ module.exports = async () => {
       contextId: rootContext.id
     });
 
-    await createDir(`../files/user-${rootContext.slug}-${admin.id}`);
+    await createDir(`../files/${rootContext.slug}`);
   }
 };
