@@ -33,9 +33,9 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+ssh://git@gitlab.com/multicms/platform-cms.git"
+		"url": "https://gitlab.com/multicms/platform-cms"
 	},
-	"author": "",
+	"author": "supervueman",
 	"license": "ISC",
 	"bugs": {
 		"url": "https://gitlab.com/multicms/platform-cms/issues"

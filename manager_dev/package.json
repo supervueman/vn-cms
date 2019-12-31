@@ -1,6 +1,7 @@
 {
 	"name": "manager",
 	"version": "0.1.0",
+	"author": "supervueman",
 	"private": true,
 	"scripts": {
 		"serve": "vue-cli-service serve",
