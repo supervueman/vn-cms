@@ -24,7 +24,7 @@
 			v-tab-item(v-if="r.is_resource_read")
 				resources-tab
 
-			v-tab(v-if="r.is_elements_access") {{d.develop || 'Разработка'}}
+			v-tab(v-if="r.is_development_access") {{d.develop || 'Разработка'}}
 			v-tab-item(v-if="r.is_elements_access")
 				development-tab
 
@@ -35,24 +35,24 @@
 
 <script>
 // Components
-import ResourcesTab from './Sidebar/ResourcesTab';
-import DevelopmentTab from './Sidebar/DevelopmentTab';
-import FilesTab from './Sidebar/FilesTab';
+import ResourcesTab from "./Sidebar/ResourcesTab";
+import DevelopmentTab from "./Sidebar/DevelopmentTab";
+import FilesTab from "./Sidebar/FilesTab";
 
 export default {
-	name: 'Sidebar',
+  name: "Sidebar",
 
-	components: {
-		ResourcesTab,
-		DevelopmentTab,
-		FilesTab
-	},
+  components: {
+    ResourcesTab,
+    DevelopmentTab,
+    FilesTab
+  },
 
-	data() {
-		return {
-			drawer: true,
-			active: null
-		};
-	}
+  data() {
+    return {
+      drawer: true,
+      active: null
+    };
+  }
 };
 </script>
