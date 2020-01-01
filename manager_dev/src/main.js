@@ -13,9 +13,9 @@ import core_components from '@/core/plugins/components';
 
 import axios from '@/core/plugins/axios';
 
-import DefaultLayout from './layouts/Default.vue';
+import DefaultLayout from './layouts/layout-default.vue';
 
-Vue.component('default-layout', DefaultLayout);
+Vue.component('layout-default', DefaultLayout);
 
 Vue.use(vuemeta);
 
