@@ -1,10 +1,8 @@
 module.exports = {
   imgFolderBasePath: '/static',
-  modules: [
-    //   {
-    //   slug: 'shop',
-    //   name: 'Магазин',
-    //   path: '/shop'
-    // }
-  ]
+  modules: [{
+    slug: 'shop',
+    name: 'Магазин',
+    path: '/shop'
+  }]
 };

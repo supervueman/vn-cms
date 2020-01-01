@@ -19,6 +19,6 @@ export default () => {
     Vue.component(
       componentName,
       componentConfig.default || componentConfig
-    )
+    );
   });
-}
+};

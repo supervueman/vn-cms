@@ -33,10 +33,11 @@ requireModule.keys().forEach(filename => {
  * @returns {object}
  * Функция возвращает объект роутера
  */
-function route(path, name, component, componentPath) {
+function route(path, name, component, componentPath, meta) {
   return {
     path,
     name,
+    meta,
     component: () => import(
       `@/modules/${componentPath}`
     )
@@ -45,7 +46,7 @@ function route(path, name, component, componentPath) {
 
 Vue.use(Router);
 
-const routes = paths.map(path => route(path.path, path.name, path.component, path.componentPath));
+const routes = paths.map(path => route(path.path, path.name, path.component, path.componentPath, path.meta));
 
 export default new Router({
   mode: 'history',

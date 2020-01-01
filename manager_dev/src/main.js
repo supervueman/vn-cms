@@ -7,14 +7,21 @@ import {
   store
 } from './connector/index.store.js';
 import router from './connector/index.route.js';
+import layout from './connector/index.layout.js';
 import core_mixins from '@/core/mixins';
 import core_components from '@/core/plugins/components';
+
 import axios from '@/core/plugins/axios';
+
+import DefaultLayout from './layouts/Default.vue';
+
+Vue.component('default-layout', DefaultLayout);
 
 Vue.use(vuemeta);
 
 core_components();
 core_mixins();
+layout();
 axios();
 
 Vue.config.productionTip = false;

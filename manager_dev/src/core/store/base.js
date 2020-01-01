@@ -1,6 +1,6 @@
 export default {
   state: {
-    mainLang: 'en'
+    mainLang: 'en',
   },
   mutations: {
     SET_ADMIN_LANG(state, payload) {

@@ -36,24 +36,24 @@
 
 <script>
 // Components
-import ResourcesTab from './Sidebar/ResourcesTab';
-import DevelopmentTab from './Sidebar/DevelopmentTab';
-import FilesTab from './Sidebar/FilesTab';
+import ResourcesTab from "./Sidebar/ResourcesTab";
+import DevelopmentTab from "./Sidebar/DevelopmentTab";
+import FilesTab from "./Sidebar/FilesTab";
 
 export default {
-	name: 'Sidebar',
+  name: "Sidebar",
 
-	components: {
-		ResourcesTab,
-		DevelopmentTab,
-		FilesTab
-	},
+  components: {
+    ResourcesTab,
+    DevelopmentTab,
+    FilesTab
+  },
 
-	data() {
-		return {
-			drawer: true,
-			active: null
-		};
-	}
+  data() {
+    return {
+      drawer: true,
+      active: null
+    };
+  }
 };
 </script>
