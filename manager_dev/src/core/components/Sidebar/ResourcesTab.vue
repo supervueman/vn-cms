@@ -44,7 +44,7 @@
 							:key="componentKey"
 						)
 							template(v-slot:prepend="{ item, active }")
-								div.link-wrapper(@click="fetchResources(item)")
+								.link-wrapper(@click="fetchResources(item)")
 									router-link(:to="`/resources/${item.id}`") {{item.title}} ({{item.id}})
 </template>
 
@@ -64,7 +64,21 @@ export default {
 
   methods: {
     async reloadResources() {
-      await this.$store.dispatch("profile/findByAccessToken");
+      await this.$store.dispatch("context/findSidebarContexts", {
+        query: {
+          filter: {
+            include: [
+              {
+                association: "resources",
+                where: {
+                  level: 1,
+                  lang: this.$store.getters["base/mainLang"] || "en"
+                }
+              }
+            ]
+          }
+        }
+      });
     },
 
     async fetchResources(item) {

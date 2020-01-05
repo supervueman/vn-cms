@@ -16,7 +16,36 @@ export default {
 
   async beforeCreate() {
     if (!!localStorage.getItem("access_token")) {
-      await this.$store.dispatch("profile/findByAccessToken");
+      const bool = await this.$store.dispatch("profile/findByAccessToken");
+      if (bool) {
+        await this.$store.dispatch("base/fetchMainLang");
+
+        await this.$store.dispatch("dictionary/findOne", {
+          query: {
+            filter: {
+              where: {
+                lang: localStorage.getItem("admin-panel-lang") || "en"
+              }
+            }
+          }
+        });
+
+        await this.$store.dispatch("context/findSidebarContexts", {
+          query: {
+            filter: {
+              include: [
+                {
+                  association: "resources",
+                  where: {
+                    level: 1,
+                    lang: this.$store.getters["base/getMainLang"] || "en"
+                  }
+                }
+              ]
+            }
+          }
+        });
+      }
     }
   },
 

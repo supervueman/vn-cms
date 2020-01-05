@@ -22,6 +22,7 @@ const actions = {
         message: `${err}`,
         isActive: true
       });
+      return false;
     });
 
     if (typeof response === 'object' && response.status === 200) {
@@ -30,57 +31,10 @@ const actions = {
       localStorage.setItem('x-api-key', response.data.token);
 
       commit('SET_RULES', response.data.role.rules);
-
-      const dataSystemSetting = requestDataHandler('GET', '/systemsettings/findone', undefined, {
-        filter: {
-          where: {
-            slug: 'main_lang'
-          }
-        }
-      });
-
-      const responseSystemSetting = await axios(dataSystemSetting).catch(err => {
-        this.dispatch('preloader/fetch', false);
-        this.dispatch("notification/fetch", {
-          type: "error",
-          message: `${err}`,
-          isActive: true
-        });
-      });
-
-      if (typeof responseSystemSetting === 'object' && responseSystemSetting.status === 200) {
-        this.dispatch('base/setMainLang', JSON.parse(responseSystemSetting.data.setting).value);
-        if (!localStorage.getItem('admin-panel-lang')) {
-          localStorage.setItem('admin-panel-lang', JSON.parse(responseSystemSetting.data.setting).value);
-        }
-
-        await this.dispatch("dictionary/findOne", {
-          query: {
-            filter: {
-              where: {
-                lang: localStorage.getItem("admin-panel-lang") || JSON.parse(responseSystemSetting.data.setting).value
-              }
-            }
-          }
-        });
-
-        await this.dispatch('context/findSidebarContexts', {
-          query: {
-            filter: {
-              include: [{
-                association: 'resources',
-                where: {
-                  level: 1,
-                  lang: JSON.parse(responseSystemSetting.data.setting).value
-                }
-              }]
-            }
-          }
-        });
-
-        commit('SET', response.data);
-      }
+      commit('SET', response.data);
+      return true;
     }
+    return false;
   },
 
   async createByEmail({
@@ -98,7 +52,7 @@ const actions = {
       });
     });
 
-    if (response !== undefined && response.status === 200) {
+    if (typeof response === 'object' && response.status === 200) {
       this.dispatch('preloader/fetch', false);
       this.dispatch('user/set', response.data);
       this.dispatch("notification/fetch", {
@@ -175,7 +129,7 @@ const actions = {
       });
     });
 
-    if (response !== undefined && response.status === 200) {
+    if (typeof response === 'object' && response.status === 200) {
       this.dispatch('preloader/fetch', false);
       this.dispatch("notification/fetch", {
         type: "success",
@@ -200,7 +154,7 @@ const actions = {
       });
     });
 
-    if (response !== undefined && response.status === 200) {
+    if (typeof response === 'object' && response.status === 200) {
       this.dispatch('preloader/fetch', false);
       this.dispatch("notification/fetch", {
         type: "success",
