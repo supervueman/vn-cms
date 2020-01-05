@@ -37,7 +37,7 @@
 				template(v-slot:activator="{ on }")
 					v-text-field(
 						v-model="resource.menuindex"
-						:label="`${d.menunindex || 'Menuindex'}:`"
+						:label="`${d.menuindex || 'Menuindex'}:`"
 						v-on="on"
 					)
 				span menuindex
