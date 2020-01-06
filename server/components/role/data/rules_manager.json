@@ -95,5 +95,9 @@
   "is_filesystem_files_delete": {
     "title": "Allow deleting files",
     "value": true
+  },
+  "is_resource_type_read": {
+    "title": "Allow viewing resource types",
+    "value": true
   }
 }

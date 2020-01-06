@@ -5,7 +5,6 @@
 			v-spacer
 			resource-langs-menu
 		v-tabs(
-			v-model="tab"
 			slider-color="primary"
 			grow
 		)
@@ -65,7 +64,6 @@ export default {
 
   data() {
     return {
-      tab: null,
       isRemoveDialog: false
     };
   },

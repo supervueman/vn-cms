@@ -176,5 +176,9 @@
   "is_filesystem_files_delete": {
     "title": "Разрешить удалять файлы",
     "value": true
+  },
+  "is_resource_type_read": {
+    "title": "Разрешить просматривать типы ресурсов",
+    "value": true
   }
 }

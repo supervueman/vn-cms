@@ -9,4 +9,6 @@ const profileByApiKey = require('../../../middleware/profileByApiKey');
 
 router.get('/', profileByApiKey, controller.findAll);
 
+router.get('/findone', profileByApiKey, controller.findOne);
+
 module.exports = router;
