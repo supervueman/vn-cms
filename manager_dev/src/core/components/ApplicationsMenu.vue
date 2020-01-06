@@ -12,7 +12,7 @@
         :key="i"
         :to="item.path"
       )
-        v-list-item-title {{item.name}}
+        v-list-item-title {{d[item.lexicon] || item.name}}
 </template>
 
 <script>
