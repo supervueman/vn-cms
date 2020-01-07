@@ -104,6 +104,7 @@ typings/
 /manager_dev/src/modules/test
 /server/components/test
 shop
+shop-statistic
 smsc
 retail
 bitrixcrm
