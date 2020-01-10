@@ -1,9 +1,9 @@
 const nodemailer = require('nodemailer');
 
 module.exports = async (req, res) => {
-  if (!(req.profile)) {
+  if (!req.isAuth) {
     res.status(403).send({
-      message: 'Access denied!'
+      message: 'Forbidden'
     });
     return;
   }
@@ -20,15 +20,15 @@ module.exports = async (req, res) => {
 
   const info = await transporter.sendMail({
     ...req.body,
-    to: req.profile.email
+    to: req.email
   }).catch(err => {
     res.status(500);
     res.send({
-      message: 'Not send!'
+      message: 'Server error'
     });
   });
 
   res.status(200).send({
-    message: 'Success!'
+    message: 'OK'
   });
 };
