@@ -11,10 +11,10 @@
 	)
 		v-app-bar.primary(dark)
 			router-link(to="/")
-				v-img.mr-4(
-					src="/static/dev-logo.svg" class="toolbar-logo"
-					max-width="40px"
-				)
+				// v-img.mr-4(
+				// 	src="/static/logo.svg" class="toolbar-logo"
+				// 	max-width="40px"
+				// )
 
 		v-tabs(
 			v-model="active"

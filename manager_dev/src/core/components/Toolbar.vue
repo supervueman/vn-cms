@@ -1,11 +1,11 @@
 <template lang="pug">
   v-app-bar.primary(app dark flat)
     v-toolbar-title
-      v-img.mr-4.mobile-logo(
-        src="/static/dev-logo.svg" class="toolbar-logo"
-        max-width="40px"
-        aspect-ratio="1"
-      )
+      // v-img.mr-4.mobile-logo(
+      //   src="/static/logo.svg"
+      //   max-width="40px"
+      //   aspect-ratio="1"
+      // )
     v-toolbar-items.hidden-xs-and-down
       v-btn(text to="/users" v-if="r.is_user_read && isAuth") {{d.users || 'Users'}}
       applications-menu(
