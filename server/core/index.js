@@ -40,7 +40,7 @@ module.exports = async (app) => {
 
   await createDir('../files');
 
-  app.use('/files', express.static('../files'));
   app.use('/mail', mail.routes);
   app.use('/filesystem', filesystem.routes);
+  app.use('/files', express.static('../files'));
 };
