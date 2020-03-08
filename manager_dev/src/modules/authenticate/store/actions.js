@@ -18,6 +18,7 @@ const actions = {
         message: 'Error',
         isActive: true
       });
+      return false;
     });
 
     if (typeof response === 'object' && response.status === 200) {
@@ -25,7 +26,7 @@ const actions = {
       localStorage.setItem('access_token', response.data.access_token);
       localStorage.setItem('id', response.data.id);
 
-      await this.dispatch('profile/findByAccessToken');
+      return true;
     }
   },
 

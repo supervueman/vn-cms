@@ -13,6 +13,8 @@
         required
         @input="$v.email.$touch()"
         @blur="$v.email.$touch()"
+        @click.once="getCredentials"
+        autocomplete="username email"
       )
       v-text-field(
         v-model="password"
@@ -22,6 +24,7 @@
         required
         @input="$v.password.$touch()"
         @blur="$v.password.$touch()"
+        autocomplete="password"
       )
     v-card-actions
       router-link(to="/reset-password" class="ml-2") {{d.forgot_password || 'Forgot your password?'}}
@@ -99,12 +102,56 @@ export default {
         password: this.password
       };
 
-      await this.$store.dispatch("authenticate/loginByEmail", data);
+      const bool = await this.$store.dispatch("authenticate/loginByEmail", data);
 
-      this.email = "";
-      this.password = "";
+      if (bool) {
+        await this.$store.dispatch('profile/findByAccessToken');
 
-      this.$emit("closeLoginDialog");
+        const profile = this.$store.getters['profile/get']
+
+        const credentials = await this.createCredentials({
+          id: this.email,
+          name: `${profile.lastname || ''} ${profile.firstname || ''}`,
+          iconURL: `${process.env.VUE_APP_API_BASE_URL}/${profile.image}`,
+          password: this.password
+        });
+
+        await this.saveCredentials(credentials);
+
+        this.email = "";
+        this.password = "";
+
+        this.$emit("closeLoginDialog");
+      }
+    },
+
+    async createCredentials(credentials) {
+      if (window.PasswordCredential) {
+        const createdCredentials = await navigator.credentials.create({
+          password: credentials
+        })
+
+        return createdCredentials;
+      }
+    },
+
+    async saveCredentials(Credential) {
+      if (window.PasswordCredential) {
+        const credentials = await navigator.credentials.store(Credential);
+      }
+    },
+
+    async getCredentials() {
+      if (window.PasswordCredential) {
+        const credentials = await navigator.credentials.get({
+          password: true
+        });
+
+        if (credentials) {
+          this.email = credentials.id,
+          this.password = credentials.password
+        }
+      }
     }
   }
 };
