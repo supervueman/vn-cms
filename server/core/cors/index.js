@@ -22,6 +22,8 @@ module.exports = (req, res, next) => {
     return res.sendStatus(200);
   }
 
+  console.log(req.url.indexOf('api-docs') !== 0)
+
   if (req.url.indexOf('files') <= 0) {
     if (req.headers.authorization === header_authorization) {
       next();
@@ -30,6 +32,8 @@ module.exports = (req, res, next) => {
         message: 'Not authorization!'
       });
     }
+  } else if (req.url.indexOf('api-docs') !== 0) {
+    return res.sendStatus(200);
   } else {
     next();
   }
