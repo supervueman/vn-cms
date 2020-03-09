@@ -45,7 +45,7 @@ module.exports = async (app) => {
         host: `localhost:${process.env.SERVER_PORT}`,
         basePath: '/',
       },
-      apis: ['./components/user/model/index.js', './components/user/routes/index.js', './components/role/model/index.js', './components/role/routes/index.js', './components/systemsetting/model/index.js', './components/systemsetting/routes/index.js', './components/context/model/index.js', './components/context/routes/index.js', './components/dictionary/model/index.js', './components/dictionary/routes/index.js']
+      apis: ['./components/user/model/index.js', './components/user/routes/index.js', './components/role/model/index.js', './components/role/routes/index.js', './components/systemsetting/model/index.js', './components/systemsetting/routes/index.js', './components/context/model/index.js', './components/context/routes/index.js', './components/dictionary/model/index.js', './components/dictionary/routes/index.js', './components/resourcetype/model/index.js', './components/resourcetype/routes/index.js']
     });
 
     app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec, {
