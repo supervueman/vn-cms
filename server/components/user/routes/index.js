@@ -168,6 +168,40 @@ router.get('/findone', profileByApiKey, controller.findOne);
  */
 router.put('/update', profileByAccessToken, controller.update);
 
+/**
+ * @swagger
+ * path:
+ *  /users/password-change:
+ *    put:
+ *      summary: Update user
+ *      tags: [Users]
+ *      parameters:
+ *        - in: header
+ *          name: x-access-token
+ *          required: true
+ *          schema:
+ *            type: string
+ *      requestBody:
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              properties:
+ *                id:
+ *                  type: string
+ *                oldPassword:
+ *                  type: string
+ *                newPassword:
+ *                  type: string
+ *      responses:
+ *        "200":
+ *          content:
+ *            application/json:
+ *              schema:
+ *                message: OK
+ *      security:
+ *        - basicAuth: []
+ */
 router.put('/password-change', profileByAccessToken, controller.changePassword);
 
 router.delete('/remove', profileByAccessToken, controller.remove);
