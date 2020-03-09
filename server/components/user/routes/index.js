@@ -204,8 +204,73 @@ router.put('/update', profileByAccessToken, controller.update);
  */
 router.put('/password-change', profileByAccessToken, controller.changePassword);
 
+/**
+ * @swagger
+ * path:
+ *  /users/remove:
+ *    delete:
+ *      summary: Delete user
+ *      tags: [Users]
+ *      parameters:
+ *        - in: header
+ *          name: x-access-token
+ *          required: true
+ *          schema:
+ *            type: string
+ *      requestBody:
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              properties:
+ *                id:
+ *                  type: string
+ *      responses:
+ *        "204":
+ *          content:
+ *            application/json:
+ *              schema:
+ *                message: No content
+ *      security:
+ *        - basicAuth: []
+ */
 router.delete('/remove', profileByAccessToken, controller.remove);
 
+/**
+ * @swagger
+ * path:
+ *  /users/count:
+ *    get:
+ *      summary: Get users count
+ *      tags: [Users]
+ *      parameters:
+ *        - in: header
+ *          name: x-api-key
+ *          required: true
+ *          schema:
+ *            type: string
+ *        - filterParam:
+ *          in: query
+ *          name: filter
+ *          description: See sequelize documentation https://sequelize.org/v5/manual/querying.html
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: object
+ *          example:
+ *            where:
+ *              slug: admin
+ *      responses:
+ *        "200":
+ *          description: Users count
+ *          content:
+ *            application/json:
+ *              schema:
+ *                count:
+ *                  type: number
+ *      security:
+ *        - basicAuth: []
+ */
 router.get('/count', profileByApiKey, controller.count);
 
 module.exports = router;
