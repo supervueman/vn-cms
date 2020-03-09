@@ -30,8 +30,6 @@ module.exports = (req, res, next) => {
         message: 'Not authorization!'
       });
     }
-  } else if (req.url.indexOf('api-docs') !== 0) {
-    return res.sendStatus(200);
   } else {
     next();
   }

@@ -8,6 +8,44 @@ const controller = require('../controller');
 const profileByApiKey = require('../../../middleware/profileByApiKey');
 const profileByAccessToken = require('../../../middleware/profileByAccessToken');
 
+/**
+ * @swagger
+ * tags:
+ *   name: Users
+ *   description: User management
+ */
+
+/**
+ * @swagger
+ * path:
+ *  /users:
+ *    get:
+ *      summary: Get all users
+ *      tags: [Users]
+ *      parameters:
+ *        - in: header
+ *          name: x-api-key
+ *          schema:
+ *            type: string
+ *          required: true
+ *        - filterParam:
+ *          in: query
+ *          name: filter
+ *          schema:
+ *            type: object
+ *      responses:
+ *        "200":
+ *          description: A user schema
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: array
+ *                items:
+ *                  $ref: '#/components/schemas/User'
+ *      security:
+ *        - basicAuth: []
+ */
+
 router.get('/', profileByApiKey, controller.findAll);
 
 router.get('/find/:id', profileByApiKey, controller.findByPk);
