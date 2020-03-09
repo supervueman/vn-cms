@@ -10,24 +10,9 @@ const sequelize = require('../../../core/db');
  *     User:
  *       type: object
  *       required:
- *         - id
  *         - slug
  *         - email
  *         - phone
- *         - firstname
- *         - lastname
- *         - middlename
- *         - birthday
- *         - country
- *         - city
- *         - street
- *         - home
- *         - apartment
- *         - image
- *         - facebook
- *         - vkontakte
- *         - instagram
- *         - password
  *       properties:
  *         id:
  *           type: string
@@ -73,13 +58,95 @@ const sequelize = require('../../../core/db');
  *           type: string
  *         token:
  *           type: string
- *           description: Token for the user, needs to be unique.
+ *           description: Token for the user, needs to be unique. Use for x-api-key
  *         verified:
  *           type: boolean
+ *         roleId:
+ *           type: string
+ *           description: Association name role
+ *         contextId:
+ *           type: string
+ *           description: Association name context
  *       example:
- *         name: Alexander
- *         email: fake@email.com
+ *         id: 1
+ *         slug: admin
+ *         email: admin@email.com
+ *         phone: +7 (951) 111-11-11
+ *         firstname: Admin
+ *         lastname: Manager
+ *         country: Russia
+ *         image: files/image.png
+ *         token: Dxsb23c
+ *         veryfied: true
+ *         roleId: 1
+ *         contextId: 1
  */
+
+/**
+* @swagger
+*
+* components:
+*   schemas:
+*     UserUpdate:
+*       type: object
+*       required:
+*         - id
+*         - slug
+*         - email
+*         - phone
+*       properties:
+*         id:
+*           type: string
+*         slug:
+*           type: string
+*           description: Slug for the user, needs to be unique.
+*         email:
+*           type: string
+*           format: email
+*           description: Email for the user, needs to be unique.
+*         phone:
+*           type: string
+*           format: phone
+*           description: Phone for the user, needs to be unique.
+*         firstname:
+*           type: string
+*         lastname:
+*           type: string
+*         middlename:
+*           type: string
+*         birthday:
+*           type: date
+*         country:
+*           type: string
+*         city:
+*           type: string
+*         street:
+*           type: string
+*         home:
+*           type: string
+*         apartment:
+*           type: string
+*         image:
+*           type: string
+*         facebook:
+*           type: string
+*         vkontakte:
+*           type: string
+*         instagram:
+*           type: string
+*         verified:
+*           type: boolean
+*         roleId:
+*           type: string
+*           description: Association name role
+*         contextId:
+*           type: string
+*           description: Association name context
+*       example:
+*         id: 1
+*         firstname: Admin
+*         lastname: Manager
+*/
 const Model = sequelize.define('user', {
   id: {
     type: Sequelize.INTEGER,
