@@ -140,7 +140,7 @@ router.get('/findone', profileByAccessToken, controller.findOne);
  *          content:
  *            application/json:
  *              schema:
- *                $ref: '#/components/schemas/Role'
+ *                $ref: '#/components/schemas/RoleCreate'
  *      security:
  *        - basicAuth: []
  */
