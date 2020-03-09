@@ -21,11 +21,6 @@ const profileByAccessToken = require('../../../middleware/profileByAccessToken')
  *      summary: Get all dictionaries
  *      tags: [Dictionaries]
  *      parameters:
- *        - in: header
- *          name: x-access-token
- *          required: true
- *          schema:
- *            type: string
  *        - filterParam:
  *          in: query
  *          name: filter
@@ -62,11 +57,6 @@ router.get('/', controller.findAll);
  *        - in: path
  *          name: id
  *          required: true
- *        - in: header
- *          name: x-access-token
- *          required: true
- *          schema:
- *            type: string
  *        - filterParam:
  *          in: query
  *          name: filter
@@ -98,11 +88,6 @@ router.get('/find/:id', controller.findByPk);
  *      summary: Get one dictionary
  *      tags: [Dictionaries]
  *      parameters:
- *        - in: header
- *          name: x-access-token
- *          required: true
- *          schema:
- *            type: string
  *        - filterParam:
  *          in: query
  *          name: filter
