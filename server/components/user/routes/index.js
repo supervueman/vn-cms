@@ -230,7 +230,10 @@ router.put('/password-change', profileByAccessToken, controller.changePassword);
  *          content:
  *            application/json:
  *              schema:
- *                message: No content
+ *                type: object
+ *                properties:
+ *                  message:
+ *                    type: string
  *      security:
  *        - basicAuth: []
  */
@@ -266,8 +269,10 @@ router.delete('/remove', profileByAccessToken, controller.remove);
  *          content:
  *            application/json:
  *              schema:
- *                count:
- *                  type: number
+ *                type: object
+ *                properties:
+ *                  count:
+ *                    type: number
  *      security:
  *        - basicAuth: []
  */
