@@ -3,7 +3,7 @@ const Model = require('../model');
 module.exports = async (req, res) => {
   if (!req.rules.is_role_read) {
     res.status(403).send({
-      message: 'Access denied!'
+      message: 'Access denied'
     });
     return;
   }
@@ -13,14 +13,14 @@ module.exports = async (req, res) => {
 
   if (!item) {
     res.status(404).send({
-      message: 'Not found!'
+      message: 'Not found'
     });
     return;
   }
 
   if (!req.adminAccess && (item.slug === 'admin' || item.slug === 'manager')) {
     res.status(403).send({
-      message: 'Access denied!'
+      message: 'Access denied'
     });
     return;
   }
