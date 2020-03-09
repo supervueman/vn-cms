@@ -160,11 +160,14 @@ router.post('/create', profileByAccessToken, controller.create);
 /**
  * @swagger
  * path:
- *  /layouts/update:
+ *  /layouts/update/{id}:
  *    put:
  *      summary: Update layout
  *      tags: [Layouts]
  *      parameters:
+ *        - in: path
+ *          name: id
+ *          required: true
  *        - in: header
  *          name: x-access-token
  *          required: true
@@ -190,24 +193,19 @@ router.put('/update/:id', profileByAccessToken, controller.update);
 /**
  * @swagger
  * path:
- *  /layouts/remove:
+ *  /layouts/remove/{id}:
  *    delete:
  *      summary: Delete layout
  *      tags: [Layouts]
  *      parameters:
+ *        - in: path
+ *          name: id
+ *          required: true
  *        - in: header
  *          name: x-access-token
  *          required: true
  *          schema:
  *            type: string
- *      requestBody:
- *        content:
- *          application/json:
- *            schema:
- *              type: object
- *              properties:
- *                id:
- *                  type: string
  *      responses:
  *        "204":
  *          content:
