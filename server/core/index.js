@@ -41,11 +41,6 @@ module.exports = async (app) => {
       security: {
         basicAuth: []
       },
-      // servers: [
-      //   {
-      //     url: "http://localhost:3000/api/v1"
-      //   }
-      // ],
       host: `localhost:${process.env.SERVER_PORT}`,
       basePath: '/',
     },

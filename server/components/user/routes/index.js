@@ -29,10 +29,12 @@ const profileByAccessToken = require('../../../middleware/profileByAccessToken')
  *            type: string
  *          required: true
  *        - filterParam:
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: object
  *          in: query
  *          name: filter
- *          schema:
- *            type: object
  *      responses:
  *        "200":
  *          description: A user schema
