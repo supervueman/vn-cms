@@ -1,7 +1,6 @@
 const Model = require('../model');
 
 module.exports = async (req, res) => {
-  console.log(req.body)
   if (!req.rules.is_resource_create) {
     res.status(403).send({
       message: 'Forbidden'
