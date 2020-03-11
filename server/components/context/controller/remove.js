@@ -9,14 +9,14 @@ module.exports = async (req, res) => {
     return;
   }
 
-  // Запрет на удаление кнтекста root
-  const item = await Model.findByPk(req.body.id).catch(err => {
+  const item = await Model.findByPk(req.params.id).catch(err => {
     res.status(400).send({
       message: 'Bad request'
     });
     return;
   });
 
+  // Запрет на удаление контекста root
   if (item.slug === 'root') {
     res.status(403).send({
       message: 'Forbidden'
@@ -26,7 +26,7 @@ module.exports = async (req, res) => {
 
   await Model.destroy({
     where: {
-      id: req.body.id
+      id: req.params.id
     }
   }).catch(err => {
     res.status(400).send({

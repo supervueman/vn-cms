@@ -97,7 +97,7 @@ const actions = {
     commit
   }, payload) {
     this.dispatch('preloader/fetch', true);
-    const data = requestDataHandler('PUT', '/contexts/update', payload.body);
+    const data = requestDataHandler('PUT', `/contexts/update/${payload.params.id}`, payload.body);
 
     const response = await axios(data).catch(err => {
       this.dispatch('preloader/fetch', false);
@@ -122,7 +122,7 @@ const actions = {
     commit
   }, payload) {
     this.dispatch('preloader/fetch', true);
-    const data = requestDataHandler('DELETE', '/contexts/remove', payload.body);
+    const data = requestDataHandler('DELETE', `/contexts/remove/${payload.params.id}`, payload.body);
 
     const response = await axios(data).catch(err => {
       this.dispatch('preloader/fetch', false);

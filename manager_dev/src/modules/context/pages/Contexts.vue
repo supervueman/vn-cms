@@ -97,7 +97,7 @@ export default {
     async remove() {
       if (this.r.is_context_delete) {
         await this.$store.dispatch("context/remove", {
-          body: { id: this.removeItem.id }
+          params: { id: this.removeItem.id }
         });
         // Создаем новый массив без удаленного элемента
         const contexts = this.contexts.filter(el => {

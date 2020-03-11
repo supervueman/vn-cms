@@ -160,11 +160,14 @@ router.post('/create', profileByAccessToken, controller.create);
 /**
  * @swagger
  * path:
- *  /context/update:
+ *  /context/update/{id}:
  *    put:
  *      summary: Update context
  *      tags: [Contexts]
  *      parameters:
+ *        - in: path
+ *          name: id
+ *          required: true
  *        - in: header
  *          name: x-access-token
  *          required: true
@@ -185,16 +188,19 @@ router.post('/create', profileByAccessToken, controller.create);
  *      security:
  *        - basicAuth: []
  */
-router.put('/update', profileByAccessToken, controller.update);
+router.put('/update/:id', profileByAccessToken, controller.update);
 
 /**
  * @swagger
  * path:
- *  /contexts/remove:
+ *  /contexts/remove/{id}:
  *    delete:
  *      summary: Delete context
  *      tags: [Contexts]
  *      parameters:
+ *        - in: path
+ *          name: id
+ *          required: true
  *        - in: header
  *          name: x-access-token
  *          required: true
@@ -220,7 +226,7 @@ router.put('/update', profileByAccessToken, controller.update);
  *      security:
  *        - basicAuth: []
  */
-router.delete('/remove', profileByAccessToken, controller.remove);
+router.delete('/remove/:id', profileByAccessToken, controller.remove);
 
 /**
  * @swagger

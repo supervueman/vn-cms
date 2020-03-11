@@ -111,8 +111,10 @@ export default {
       this.$v.$touch();
       if (this.r.is_context_update && !this.$v.$error) {
         await this.$store.dispatch("context/update", {
-          body: {
+          params: {
             id: this.context.id,
+          },
+          body: {
             slug: this.context.slug,
             title: this.context.title
           }
@@ -123,7 +125,7 @@ export default {
     async remove() {
       if (this.r.is_role_delete) {
         const bool = await this.$store.dispatch("context/remove", {
-          body: {
+          params: {
             id: this.context.id
           }
         });
