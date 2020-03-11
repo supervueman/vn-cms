@@ -95,8 +95,10 @@ export default {
       if (this.r.is_user_update) {
         this.$v.profile.$touch();
         const data = {
-          body: {
+          params: {
             id: this.profile.id,
+          },
+          body: {
             email: this.profile.email,
             phone: this.profile.phone,
             facebook: this.profile.facebook,

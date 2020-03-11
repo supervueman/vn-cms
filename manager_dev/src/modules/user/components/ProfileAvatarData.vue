@@ -41,8 +41,10 @@ export default {
       if (this.r.is_user_update) {
         this.profile.image = file.path;
         const data = {
+          params: {
+            id: this.profile.id
+          },
           body: {
-            id: this.profile.id,
             image: file.path
           },
           query: {

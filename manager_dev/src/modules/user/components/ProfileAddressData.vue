@@ -51,8 +51,10 @@ export default {
     async update() {
       if (this.r.is_user_update) {
         const data = {
+          params: {
+            id: this.profile.id
+          },
           body: {
-            id: this.profile.id,
             country: this.profile.country,
             city: this.profile.city,
             street: this.profile.street,

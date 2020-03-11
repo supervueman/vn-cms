@@ -149,7 +149,7 @@ export default {
           this.$router.push("/");
         } else {
           await this.$store.dispatch("user/remove", {
-            body: { id: this.removeItem.id }
+            params: { id: this.removeItem.id }
           });
           const users = this.users.filter(el => {
             if (el.id !== this.removeItem.id) {

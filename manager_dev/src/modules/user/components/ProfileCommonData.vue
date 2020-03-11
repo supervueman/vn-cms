@@ -84,8 +84,10 @@ export default {
       if (this.r.is_user_update) {
         this.$v.profile.$touch();
         const data = {
-          body: {
+          params: {
             id: this.profile.id,
+          },
+          body: {
             slug: this.profile.slug,
             firstname: this.profile.firstname,
             lastname: this.profile.lastname,

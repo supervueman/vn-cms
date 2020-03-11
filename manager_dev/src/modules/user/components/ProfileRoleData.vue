@@ -38,8 +38,10 @@ export default {
     async update() {
       if (this.r.is_user_update) {
         const data = {
-          body: {
+          params: {
             id: this.profile.id,
+          },
+          body: {
             roleId: Number(this.profile.roleId)
           },
           query: {

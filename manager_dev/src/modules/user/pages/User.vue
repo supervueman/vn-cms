@@ -112,7 +112,7 @@ export default {
     async remove() {
       if (this.r.is_user_delete) {
         const bool = await this.$store.dispatch("user/remove", {
-          body: {
+          params: {
             id: this.profile.id
           }
         });

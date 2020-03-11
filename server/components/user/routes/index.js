@@ -135,6 +135,9 @@ router.get('/findone', profileByApiKey, controller.findOne);
  *      summary: Update user
  *      tags: [Users]
  *      parameters:
+ *        - in: path
+ *          name: id
+ *          required: true
  *        - in: header
  *          name: x-access-token
  *          required: true
@@ -166,7 +169,7 @@ router.get('/findone', profileByApiKey, controller.findOne);
  *      security:
  *        - basicAuth: []
  */
-router.put('/update', profileByAccessToken, controller.update);
+router.put('/update/:id', profileByAccessToken, controller.update);
 
 /**
  * @swagger
