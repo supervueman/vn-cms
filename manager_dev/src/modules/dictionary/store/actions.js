@@ -76,7 +76,7 @@ const actions = {
     commit
   }, payload) {
     this.dispatch('preloader/fetch', true);
-    const data = requestDataHandler('PUT', '/dictionaries/update', payload.body);
+    const data = requestDataHandler('PUT', `/dictionaries/update/${payload.params.id}`, payload.body);
 
     const response = await axios(data).catch(err => {
       this.dispatch('preloader/fetch', false);
@@ -101,7 +101,7 @@ const actions = {
     commit
   }, payload) {
     this.dispatch('preloader/fetch', true);
-    const data = requestDataHandler('DELETE', '/dictionaries/remove', payload.body);
+    const data = requestDataHandler('DELETE', `/dictionaries/remove/${payload.params.id}`, payload.body);
 
     const response = await axios(data).catch(err => {
       this.dispatch('preloader/fetch', false);

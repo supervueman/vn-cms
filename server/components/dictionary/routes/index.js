@@ -144,11 +144,14 @@ router.post('/create', profileByAccessToken, controller.create);
 /**
  * @swagger
  * path:
- *  /dictionaries/update:
+ *  /dictionaries/update/{id}:
  *    put:
  *      summary: Update dictionary
  *      tags: [Dictionaries]
  *      parameters:
+ *        - filterParam:
+ *          in: query
+ *          name: filter
  *        - in: header
  *          name: x-access-token
  *          required: true
@@ -169,16 +172,19 @@ router.post('/create', profileByAccessToken, controller.create);
  *      security:
  *        - basicAuth: []
  */
-router.put('/update', profileByAccessToken, controller.update);
+router.put('/update/:id', profileByAccessToken, controller.update);
 
 /**
  * @swagger
  * path:
- *  /dictionaries/remove:
+ *  /dictionaries/remove/{id}:
  *    delete:
  *      summary: Delete dictionary
  *      tags: [Dictionaries]
  *      parameters:
+ *        - filterParam:
+ *          in: query
+ *          name: filter
  *        - in: header
  *          name: x-access-token
  *          required: true
@@ -204,7 +210,7 @@ router.put('/update', profileByAccessToken, controller.update);
  *      security:
  *        - basicAuth: []
  */
-router.delete('/remove', profileByAccessToken, controller.remove);
+router.delete('/remove/:id', profileByAccessToken, controller.remove);
 
 /**
  * @swagger

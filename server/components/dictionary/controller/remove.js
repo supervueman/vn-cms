@@ -8,7 +8,7 @@ module.exports = async (req, res) => {
     return;
   }
 
-  const item = await Model.findByPk(req.body.id).catch(err => {
+  const item = await Model.findByPk(req.params.id).catch(err => {
     res.status(400).send({
       message: 'Bad request'
     });

@@ -142,6 +142,9 @@ export default {
           };
 
           await this.$store.dispatch("dictionary/update", {
+            params: {
+              id: dictionary.id
+            },
             body: newDictionary
           });
         }
@@ -151,7 +154,7 @@ export default {
     async remove() {
       if (this.r.is_dictionary_delete) {
         await this.$store.dispatch("dictionary/remove", {
-          body: { id: this.removeDictionary.id }
+          params: { id: this.removeDictionary.id }
         });
         const dictionaries = this.dictionaries.filter(el => {
           if (el.id !== this.removeDictionary.id) {
