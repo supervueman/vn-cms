@@ -10,7 +10,7 @@ module.exports = async (req, res) => {
 
   if (!isResetToken) {
     res.status(404).send({
-      message: 'Not found!'
+      message: 'Not found'
     });
     return;
   }
@@ -18,14 +18,14 @@ module.exports = async (req, res) => {
   await jwt.verify(resetToken, process.env.SECRET_KEY_FOR_JWT, async (err, decoded) => {
     if (err) {
       res.status(404).send({
-        message: 'Not found!'
+        message: 'Not found'
       });
       return;
     }
 
     if (!decoded) {
       res.status(404).send({
-        message: 'Not found!'
+        message: 'Not found'
       });
       return;
     }
@@ -38,7 +38,7 @@ module.exports = async (req, res) => {
 
     if (!user) {
       res.status(404).send({
-        message: 'Not found!'
+        message: 'Not found'
       });
       return;
     }
@@ -68,12 +68,12 @@ module.exports = async (req, res) => {
     }).catch(err => {
       res.status(500);
       res.send({
-        message: 'Not send!'
+        message: 'Not send'
       });
     });
 
     res.status(200).send({
-      message: 'Success!'
+      message: 'OK'
     });
   });
 };

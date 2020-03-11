@@ -12,7 +12,7 @@ module.exports = async (req, res) => {
 
   if (!user) {
     res.status(404).send({
-      message: 'Not found!'
+      message: 'Not found'
     });
     return;
   }
@@ -44,12 +44,12 @@ module.exports = async (req, res) => {
   }).catch(err => {
     res.status(500);
     res.send({
-      message: 'Not send!'
+      message: 'Not send'
     });
     return;
   });
 
   res.status(200).send({
-    message: 'Success!'
+    message: 'OK'
   });
 };

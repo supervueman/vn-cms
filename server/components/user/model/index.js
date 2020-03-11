@@ -83,6 +83,78 @@ const sequelize = require('../../../core/db');
  */
 
 /**
+ * @swagger
+ *
+ * components:
+ *   schemas:
+ *     UserCreate:
+ *       type: object
+ *       required:
+ *         - slug
+ *         - email
+ *         - phone
+ *       properties:
+ *         slug:
+ *           type: string
+ *           description: Slug for the user, needs to be unique.
+ *         email:
+ *           type: string
+ *           format: email
+ *           description: Email for the user, needs to be unique.
+ *         phone:
+ *           type: string
+ *           format: phone
+ *           description: Phone for the user, needs to be unique.
+ *         firstname:
+ *           type: string
+ *         lastname:
+ *           type: string
+ *         middlename:
+ *           type: string
+ *         birthday:
+ *           type: date
+ *         country:
+ *           type: string
+ *         city:
+ *           type: string
+ *         street:
+ *           type: string
+ *         home:
+ *           type: string
+ *         apartment:
+ *           type: string
+ *         image:
+ *           type: string
+ *         facebook:
+ *           type: string
+ *         vkontakte:
+ *           type: string
+ *         instagram:
+ *           type: string
+ *         password:
+ *           type: string
+ *         verified:
+ *           type: boolean
+ *         roleId:
+ *           type: string
+ *           description: Association name role
+ *         contextId:
+ *           type: string
+ *           description: Association name context
+ *       example:
+ *         slug: admin
+ *         email: admin@email.com
+ *         phone: +7 (951) 111-11-11
+ *         firstname: Admin
+ *         lastname: Manager
+ *         country: Russia
+ *         image: files/image.png
+ *         veryfied: true
+ *         roleId: 1
+ *         contextId: 1
+ */
+
+/**
 * @swagger
 *
 * components:
