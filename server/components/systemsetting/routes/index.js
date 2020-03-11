@@ -91,7 +91,7 @@ router.get('/findone', profileByAccessToken, controller.findOne);
 /**
  * @swagger
  * path:
- *  /systemsettings/update:
+ *  /systemsettings/update/{id}:
  *    put:
  *      summary: Update system setting
  *      tags: [SystemSettings]

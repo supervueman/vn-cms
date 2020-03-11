@@ -130,7 +130,7 @@ router.get('/findone', profileByApiKey, controller.findOne);
 /**
  * @swagger
  * path:
- *  /users/update:
+ *  /users/update/{id}:
  *    put:
  *      summary: Update user
  *      tags: [Users]
@@ -210,7 +210,7 @@ router.put('/password-change', profileByAccessToken, controller.changePassword);
 /**
  * @swagger
  * path:
- *  /users/remove:
+ *  /users/remove/{id}:
  *    delete:
  *      summary: Delete user
  *      tags: [Users]
