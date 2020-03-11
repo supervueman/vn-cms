@@ -149,6 +149,9 @@ export default {
         }
 
         await this.$store.dispatch("role/update", {
+          params: {
+            id: this.role.id
+          },
           body: {
             ...this.role,
             rules: JSON.stringify(rules)
@@ -160,7 +163,7 @@ export default {
     async remove() {
       if (this.r.is_role_delete) {
         const bool = await this.$store.dispatch("role/remove", {
-          body: {
+          params: {
             id: this.role.id
           }
         });

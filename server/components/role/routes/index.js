@@ -149,11 +149,14 @@ router.post('/create', profileByAccessToken, controller.create);
 /**
  * @swagger
  * path:
- *  /roles/update:
+ *  /roles/update/{id}:
  *    put:
  *      summary: Update role
  *      tags: [Roles]
  *      parameters:
+ *        - in: path
+ *          name: id
+ *          required: true
  *        - in: header
  *          name: x-access-token
  *          required: true
@@ -174,16 +177,19 @@ router.post('/create', profileByAccessToken, controller.create);
  *      security:
  *        - basicAuth: []
  */
-router.put('/update', profileByAccessToken, controller.update);
+router.put('/update/:id', profileByAccessToken, controller.update);
 
 /**
  * @swagger
  * path:
- *  /roles/remove:
+ *  /roles/remove/{id}:
  *    delete:
  *      summary: Delete role
  *      tags: [Roles]
  *      parameters:
+ *        - in: path
+ *          name: id
+ *          required: true
  *        - in: header
  *          name: x-access-token
  *          required: true
@@ -209,7 +215,7 @@ router.put('/update', profileByAccessToken, controller.update);
  *      security:
  *        - basicAuth: []
  */
-router.delete('/remove', profileByAccessToken, controller.remove);
+router.delete('/remove/:id', profileByAccessToken, controller.remove);
 
 /**
  * @swagger

@@ -96,7 +96,7 @@ export default {
     async remove() {
       if (this.r.is_role_delete) {
         await this.$store.dispatch("role/remove", {
-          body: { id: this.removeItem.id }
+          params: { id: this.removeItem.id }
         });
         // Создаем новый массив без удаленного элемента
         const roles = this.roles.filter(el => {
