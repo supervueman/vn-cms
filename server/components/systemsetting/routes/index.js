@@ -96,6 +96,9 @@ router.get('/findone', profileByAccessToken, controller.findOne);
  *      summary: Update system setting
  *      tags: [SystemSettings]
  *      parameters:
+ *        - in: path
+ *          name: id
+ *          required: true
  *        - in: header
  *          name: x-access-token
  *          required: true
@@ -116,7 +119,7 @@ router.get('/findone', profileByAccessToken, controller.findOne);
  *      security:
  *        - basicAuth: []
  */
-router.put('/update', profileByAccessToken, controller.update);
+router.put('/update/:id', profileByAccessToken, controller.update);
 
 /**
  * @swagger

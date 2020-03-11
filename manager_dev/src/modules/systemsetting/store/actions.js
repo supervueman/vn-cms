@@ -6,7 +6,7 @@ const actions = {
     commit
   }, payload) {
     this.dispatch('preloader/fetch', true);
-    const data = requestDataHandler('PUT', '/systemsettings/update', payload.body);
+    const data = requestDataHandler('PUT', `/systemsettings/update/${payload.body.id}`, payload.body);
 
     const response = await axios(data).catch(err => {
       this.dispatch('preloader/fetch', false);

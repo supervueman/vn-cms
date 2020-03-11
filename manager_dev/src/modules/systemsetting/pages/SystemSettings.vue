@@ -103,6 +103,9 @@ export default {
     async update(item) {
       if (this.r.is_system_setting_update) {
         await this.$store.dispatch("systemsetting/update", {
+          params: {
+            id: item.id
+          },
           body: { ...item, setting: JSON.stringify(item.setting) }
         });
       }
