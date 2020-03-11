@@ -215,6 +215,9 @@ router.put('/password-change', profileByAccessToken, controller.changePassword);
  *      summary: Delete user
  *      tags: [Users]
  *      parameters:
+ *        - in: path
+ *          name: id
+ *          required: true
  *        - in: header
  *          name: x-access-token
  *          required: true
@@ -240,7 +243,7 @@ router.put('/password-change', profileByAccessToken, controller.changePassword);
  *      security:
  *        - basicAuth: []
  */
-router.delete('/remove', profileByAccessToken, controller.remove);
+router.delete('/remove/:id', profileByAccessToken, controller.remove);
 
 /**
  * @swagger
