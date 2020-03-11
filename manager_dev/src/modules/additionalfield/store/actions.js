@@ -31,7 +31,7 @@ const actions = {
     commit
   }, payload) {
     this.dispatch('preloader/fetch', true);
-    const data = requestDataHandler('PUT', '/additionalfields/update', payload);
+    const data = requestDataHandler('PUT', `/additionalfields/update/${payload.params.id}`, payload.body);
 
     const response = await axios(data).catch(err => {
       this.dispatch('preloader/fetch', false);
@@ -81,9 +81,7 @@ const actions = {
     commit
   }, payload) {
     this.dispatch('preloader/fetch', true);
-    const data = requestDataHandler('DELETE', '/additionalfields/remove', {
-      id: payload
-    });
+    const data = requestDataHandler('DELETE', `/additionalfields/remove/${payload.params.id}`);
 
     const response = await axios(data).catch(err => {
       this.dispatch('preloader/fetch', false);

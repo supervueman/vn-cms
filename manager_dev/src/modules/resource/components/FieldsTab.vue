@@ -292,7 +292,12 @@ export default {
 
       for await (let el of fields) {
         if (el.id) {
-          await this.$store.dispatch("additionalfield/update", el);
+          await this.$store.dispatch("additionalfield/update", {
+            params: {
+              id: el.id
+            },
+            body: el
+          });
         } else {
           await this.$store.dispatch("additionalfield/create", el);
         }

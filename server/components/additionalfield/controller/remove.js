@@ -10,7 +10,7 @@ module.exports = async (req, res) => {
 
   await Model.destroy({
     where: {
-      id: req.body.id
+      id: req.params.id
     }
   }).catch(err => {
     res.status(400).send({

@@ -157,11 +157,14 @@ router.post('/create', profileByAccessToken, controller.create);
 /**
  * @swagger
  * path:
- *  /additionalfields/update:
+ *  /additionalfields/update/{id}:
  *    put:
  *      summary: Update additional field
  *      tags: [AdditionalFields]
  *      parameters:
+ *        - in: path
+ *          name: id
+ *          required: true
  *        - in: header
  *          name: x-access-token
  *          required: true
@@ -182,7 +185,7 @@ router.post('/create', profileByAccessToken, controller.create);
  *      security:
  *        - basicAuth: []
  */
-router.put('/update', profileByAccessToken, controller.update);
+router.put('/update/:id', profileByAccessToken, controller.update);
 
 /**
  * @swagger
@@ -221,11 +224,14 @@ router.put('/update-all', profileByAccessToken, controller.updateAll);
 /**
  * @swagger
  * path:
- *  /additionalfields/remove:
+ *  /additionalfields/remove/{id}:
  *    delete:
  *      summary: Delete additional field
  *      tags: [AdditionalFields]
  *      parameters:
+ *        - in: path
+ *          name: id
+ *          required: true
  *        - in: header
  *          name: x-access-token
  *          required: true
@@ -243,6 +249,6 @@ router.put('/update-all', profileByAccessToken, controller.updateAll);
  *      security:
  *        - basicAuth: []
  */
-router.delete('/remove', profileByAccessToken, controller.remove);
+router.delete('/remove/:id', profileByAccessToken, controller.remove);
 
 module.exports = router;
