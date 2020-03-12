@@ -1,6 +1,7 @@
 const routes = require('./routes');
 const init = require('./init');
 const associations = require('./associations');
+const swagger = require('./swagger');
 
 module.exports = {
   routes(app) {
@@ -11,5 +12,8 @@ module.exports = {
   },
   init(app) {
     init(app);
+  },
+  swagger() {
+    return swagger();
   }
 };

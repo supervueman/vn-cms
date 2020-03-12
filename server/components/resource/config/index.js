@@ -5,5 +5,6 @@ module.exports = {
   }],
   associations: [{
     association_dir_path: 'resource/association'
-  }]
+  }],
+  swaggerPaths: ['model/index.js', 'routes/index.js']
 };
