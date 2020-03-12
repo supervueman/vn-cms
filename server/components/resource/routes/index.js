@@ -101,7 +101,7 @@ router.get('/find/:id', profileByApiKey, controller.findByPk);
  *      tags: [Layouts]
  *      parameters:
  *        - in: header
- *          name: x-access-token
+ *          name: x-api-key
  *          required: true
  *          schema:
  *            type: string
@@ -243,9 +243,6 @@ router.delete('/remove/:id', profileByAccessToken, controller.remove);
  *            application/json:
  *              schema:
  *                type: object
- *          example:
- *            where:
- *              slug: about
  *      responses:
  *        "200":
  *          description: Resources count

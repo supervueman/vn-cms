@@ -7,6 +7,7 @@ const controller = require('../controller');
 // Middleware
 const profileByAccessToken = require('../../../middleware/profileByAccessToken');
 const profileByApiKey = require('../../../middleware/profileByApiKey');
+
 /**
  * @swagger
  * tags:
