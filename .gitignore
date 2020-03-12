@@ -7,7 +7,7 @@ node_modules
 /data
 serializer
 /manager_dev/public/static/files
-/client
+client
 
 # local env files
 .env
