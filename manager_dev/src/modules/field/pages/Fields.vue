@@ -16,14 +16,15 @@
             tr(v-for="item in items" :key="item.id")
               td.text-xs-left
                 router-link(:to="`/fields/${item.id}`") {{ item.title }}
-              td.text-xs-left 
-                div(
+              td.text-xs-left(style="max-width: 200px")
+                span(
                   v-for="layout in item.layouts"
                   :key="layout.id"
                 )
                   router-link(
                     :to="`/layouts/${layout.id}`"
                   ) {{layout.title}}
+                  span , 
               td.text-xs-left {{item.fieldType}}
               td.text-end
                 v-btn(
