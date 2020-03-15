@@ -43,5 +43,6 @@
 	"homepage": "https://gitlab.com/multicms/platform-cms#readme",
 	"dependencies": {
 		"password-generator": "^2.2.3"
-	}
+	},
+	"devDependencies": {}
 }
