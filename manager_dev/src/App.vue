@@ -75,13 +75,13 @@ export default {
 
 <style lang="sass">
 .fade-enter-active, .fade-leave-active
-	transition: opacity .5s
+  transition: opacity .5s
 .fade-enter, .fade-leave-to
-	opacity: 0
+  opacity: 0
 
 .v-expansion-panel__header
-	padding: 16px
+  padding: 16px
 
 .v-dialog
-	box-shadow: none!important
+  box-shadow: none!important
 </style>

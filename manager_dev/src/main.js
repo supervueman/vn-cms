@@ -3,9 +3,7 @@ import App from './App.vue';
 import vuetify from '@/core/plugins/vuetify';
 import '@mdi/font/css/materialdesignicons.css';
 import vuemeta from 'vue-meta';
-import {
-  store
-} from './connector/index.store.js';
+import { store } from './connector/index.store.js';
 import router from './connector/index.route.js';
 import layout from './connector/index.layout.js';
 import core_mixins from '@/core/mixins';
