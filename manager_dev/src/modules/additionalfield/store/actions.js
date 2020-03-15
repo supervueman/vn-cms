@@ -2,11 +2,13 @@ import requestDataHandler from '@/core/plugins/requestDataHandler';
 import axios from 'axios';
 
 const actions = {
-  async create({
-    commit
-  }, payload) {
+  async create({ commit }, payload) {
     this.dispatch('preloader/fetch', true);
-    const data = requestDataHandler('POST', '/additionalfields/create', payload);
+    const data = requestDataHandler(
+      'POST',
+      '/additionalfields/create',
+      payload
+    );
 
     const response = await axios(data).catch(err => {
       this.dispatch('preloader/fetch', false);
@@ -27,11 +29,13 @@ const actions = {
     }
   },
 
-  async update({
-    commit
-  }, payload) {
+  async update({ commit }, payload) {
     this.dispatch('preloader/fetch', true);
-    const data = requestDataHandler('PUT', `/additionalfields/update/${payload.params.id}`, payload.body);
+    const data = requestDataHandler(
+      'PUT',
+      `/additionalfields/update/${payload.params.id}`,
+      payload.body
+    );
 
     const response = await axios(data).catch(err => {
       this.dispatch('preloader/fetch', false);
@@ -52,11 +56,13 @@ const actions = {
     }
   },
 
-  async updateAll({
-    commit
-  }, payload) {
+  async updateAll({ commit }, payload) {
     this.dispatch('preloader/fetch', true);
-    const data = requestDataHandler('PUT', '/additionalfields/update-all', payload);
+    const data = requestDataHandler(
+      'PUT',
+      '/additionalfields/update-all',
+      payload
+    );
 
     const response = await axios(data).catch(err => {
       this.dispatch('preloader/fetch', false);
@@ -77,11 +83,12 @@ const actions = {
     }
   },
 
-  async remove({
-    commit
-  }, payload) {
+  async remove({ commit }, payload) {
     this.dispatch('preloader/fetch', true);
-    const data = requestDataHandler('DELETE', `/additionalfields/remove/${payload.params.id}`);
+    const data = requestDataHandler(
+      'DELETE',
+      `/additionalfields/remove/${payload.params.id}`
+    );
 
     const response = await axios(data).catch(err => {
       this.dispatch('preloader/fetch', false);
@@ -101,7 +108,7 @@ const actions = {
         isActive: true
       });
     }
-  },
+  }
 };
 
 export default actions;
