@@ -15,7 +15,7 @@
 		"manager:start:pm2": "cd manager && pm2 serve --spa --name manager",
 		"manager:restart:pm2": "cd manager && pm2 restart manager",
 		"manager:stop:pm2": "cd manager && pm2 stop manager",
-		"client:create:symlink": "cd client/static && ln -s ../../admin-panel/files",
+		"client:create:symlink": "cd client/static && ln -s ../../files",
 		"client:remove:symlink": "cd client/static && rm -r files",
 		"client:dev": "cd client && npm run dev",
 		"client:build": "cd client && npm run build",
