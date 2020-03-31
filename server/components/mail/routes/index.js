@@ -5,7 +5,7 @@ const router = express.Router();
 const controller = require('../controller');
 
 // Middleware
-const profileByApiKey = require('../../../../middleware/profileByApiKey');
+const profileByApiKey = require('../../../middleware/profileByApiKey');
 
 /**
  * @swagger
@@ -32,6 +32,16 @@ const profileByApiKey = require('../../../../middleware/profileByApiKey');
  *          application/json:
  *            schema:
  *              type: object
+ *              properties:
+ *                subject:
+ *                  type: string
+ *                  example: Hello
+ *                text:
+ *                  type: string
+ *                  example: Hello world
+ *                html:
+ *                  type: string
+ *                  example: <h1>Hello</h1>
  *      responses:
  *        "200":
  *          content:
