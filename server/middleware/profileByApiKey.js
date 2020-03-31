@@ -2,7 +2,6 @@
 const User = require('../components/user/model');
 
 module.exports = async (req, res, next) => {
-  console.log(req.headers);
   const apiKey = req.headers['x-api-key'];
 
   const isApiKey = typeof apiKey === 'string' && !!apiKey;
