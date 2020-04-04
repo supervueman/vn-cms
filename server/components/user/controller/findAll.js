@@ -8,7 +8,7 @@ module.exports = async (req, res) => {
     return;
   }
 
-  const filter = JSON.parse(req.query.filter || "{}");
+  const filter = JSON.parse(req.query.filter || '{}');
 
   if (!filter.where) {
     filter.where = {};

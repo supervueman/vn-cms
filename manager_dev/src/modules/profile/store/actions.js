@@ -5,9 +5,7 @@ import profile from '../models/profile';
 
 const actions = {
   // Получение профиля
-  async findByAccessToken({
-    commit
-  }) {
+  async findByAccessToken({ commit }) {
     this.dispatch('preloader/fetch', true);
     const data = requestDataHandler('GET', '/profile', undefined, {
       filter: {
@@ -17,8 +15,8 @@ const actions = {
 
     const response = await axios(data).catch(err => {
       this.dispatch('preloader/fetch', false);
-      this.dispatch("notification/fetch", {
-        type: "error",
+      this.dispatch('notification/fetch', {
+        type: 'error',
         message: `${err}`,
         isActive: true
       });
@@ -37,16 +35,18 @@ const actions = {
     return false;
   },
 
-  async createByEmail({
-    commit
-  }, payload) {
+  async createByEmail({ commit }, payload) {
     this.dispatch('preloader/fetch', true);
-    const data = requestDataHandler('POST', '/profile/create-by-email', payload.body);
+    const data = requestDataHandler(
+      'POST',
+      '/profile/create-by-email',
+      payload.body
+    );
 
     const response = await axios(data).catch(err => {
       this.dispatch('preloader/fetch', false);
-      this.dispatch("notification/fetch", {
-        type: "error",
+      this.dispatch('notification/fetch', {
+        type: 'error',
         message: `${err}`,
         isActive: true
       });
@@ -55,8 +55,8 @@ const actions = {
     if (typeof response === 'object' && response.status === 200) {
       this.dispatch('preloader/fetch', false);
       this.dispatch('user/set', response.data);
-      this.dispatch("notification/fetch", {
-        type: "success",
+      this.dispatch('notification/fetch', {
+        type: 'success',
         message: 'Success',
         isActive: true
       });
@@ -64,16 +64,13 @@ const actions = {
     }
   },
 
-  async update({
-    commit
-  }, payload) {
+  async update({ commit }, payload) {
     this.dispatch('preloader/fetch', true);
     const data = requestDataHandler('PUT', '/profile/update', payload.body);
-
     const response = await axios(data).catch(err => {
       this.dispatch('preloader/fetch', false);
-      this.dispatch("notification/fetch", {
-        type: "error",
+      this.dispatch('notification/fetch', {
+        type: 'error',
         message: `${err}`,
         isActive: true
       });
@@ -81,24 +78,26 @@ const actions = {
 
     if (typeof response === 'object' && response.status === 200) {
       this.dispatch('preloader/fetch', false);
-      this.dispatch("notification/fetch", {
-        type: "success",
+      this.dispatch('notification/fetch', {
+        type: 'success',
         message: 'Success',
         isActive: true
       });
     }
   },
 
-  async changePassword({
-    commit
-  }, payload) {
+  async changePassword({ commit }, payload) {
     this.dispatch('preloader/fetch', true);
-    const data = requestDataHandler('PUT', '/profile/password-change', payload.body);
+    const data = requestDataHandler(
+      'PUT',
+      '/profile/password-change',
+      payload.body
+    );
 
     const response = await axios(data).catch(err => {
       this.dispatch('preloader/fetch', false);
-      this.dispatch("notification/fetch", {
-        type: "error",
+      this.dispatch('notification/fetch', {
+        type: 'error',
         message: `${err}`,
         isActive: true
       });
@@ -106,24 +105,26 @@ const actions = {
 
     if (typeof response === 'object' && response.status === 200) {
       this.dispatch('preloader/fetch', false);
-      this.dispatch("notification/fetch", {
-        type: "success",
+      this.dispatch('notification/fetch', {
+        type: 'success',
         message: 'Success',
         isActive: true
       });
     }
   },
 
-  async resetPasswordByEmailRequest({
-    commit
-  }, payload) {
+  async resetPasswordByEmailRequest({ commit }, payload) {
     this.dispatch('preloader/fetch', true);
-    const data = requestDataHandler('POST', '/profile/password-reset-by-email-request', payload.body);
+    const data = requestDataHandler(
+      'POST',
+      '/profile/password-reset-by-email-request',
+      payload.body
+    );
 
     const response = await axios(data).catch(err => {
       this.dispatch('preloader/fetch', false);
-      this.dispatch("notification/fetch", {
-        type: "error",
+      this.dispatch('notification/fetch', {
+        type: 'error',
         message: `${err}`,
         isActive: true
       });
@@ -131,24 +132,28 @@ const actions = {
 
     if (typeof response === 'object' && response.status === 200) {
       this.dispatch('preloader/fetch', false);
-      this.dispatch("notification/fetch", {
-        type: "success",
+      this.dispatch('notification/fetch', {
+        type: 'success',
         message: 'Success',
         isActive: true
       });
     }
   },
 
-  async resetPasswordByEmail({
-    commit
-  }, payload) {
+  async resetPasswordByEmail({ commit }, payload) {
     this.dispatch('preloader/fetch', true);
-    const data = requestDataHandler('POST', '/profile/password-reset-by-email', payload.body, undefined, payload.headers);
+    const data = requestDataHandler(
+      'POST',
+      '/profile/password-reset-by-email',
+      payload.body,
+      undefined,
+      payload.headers
+    );
 
     const response = await axios(data).catch(err => {
       this.dispatch('preloader/fetch', false);
-      this.dispatch("notification/fetch", {
-        type: "error",
+      this.dispatch('notification/fetch', {
+        type: 'error',
         message: `${err}`,
         isActive: true
       });
@@ -156,24 +161,22 @@ const actions = {
 
     if (typeof response === 'object' && response.status === 200) {
       this.dispatch('preloader/fetch', false);
-      this.dispatch("notification/fetch", {
-        type: "success",
+      this.dispatch('notification/fetch', {
+        type: 'success',
         message: 'Success',
         isActive: true
       });
     }
   },
 
-  async remove({
-    commit
-  }) {
+  async remove({ commit }) {
     this.dispatch('preloader/fetch', true);
     const data = requestDataHandler('DELETE', '/profile/remove');
 
     const response = await axios(data).catch(err => {
       this.dispatch('preloader/fetch', false);
-      this.dispatch("notification/fetch", {
-        type: "error",
+      this.dispatch('notification/fetch', {
+        type: 'error',
         message: `${err}`,
         isActive: true
       });
@@ -185,23 +188,17 @@ const actions = {
     }
   },
 
-  set({
-    commit
-  }, payload) {
+  set({ commit }, payload) {
     commit('SET', payload);
   },
 
-  clear({
-    commit
-  }) {
+  clear({ commit }) {
     commit('SET', {
       ...profile
     });
   },
 
-  clearRules({
-    commit
-  }) {
+  clearRules({ commit }) {
     commit('SET_RULES', {});
   }
 };

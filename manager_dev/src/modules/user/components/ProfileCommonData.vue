@@ -85,7 +85,7 @@ export default {
         this.$v.profile.$touch();
         const data = {
           params: {
-            id: this.profile.id,
+            id: this.profile.id
           },
           body: {
             slug: this.profile.slug,
