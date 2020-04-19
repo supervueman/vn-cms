@@ -1,11 +1,11 @@
 <template lang="pug">
-  v-card(
-    class="mx-auto"
+  v-card.mx-auto(
     tag="form"
     max-width="500px"
+    flat
   )
     v-card-title
-      h1(class="title") {{d.reset_password || 'Reset password'}}
+      h1.title {{d.reset_password || 'Reset password'}}
     v-card-text
       v-text-field(
         v-model="email"
@@ -37,17 +37,17 @@
         v-if="$route.query.token"
       )
     v-card-actions
-      v-btn(
+      v-btn.ml-auto.mr-2.mb-2(
         @click="request"
         color="primary"
-        class="ml-auto mr-2 mb-2"
         v-if="!$route.query.token"
+        depressed
       ) {{d.send_request || 'Send request'}}
-      v-btn(
+      v-btn.ml-auto.mr-2.mb-2(
         @click="changePassword"
         color="primary"
-        class="ml-auto mr-2 mb-2"
         v-if="$route.query.token"
+        depressed
       ) {{d.change || 'Change'}}
 </template>
 

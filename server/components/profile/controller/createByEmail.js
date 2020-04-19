@@ -26,7 +26,7 @@ module.exports = async (req, res) => {
     return;
   }
 
-  const role = await Role.findByPk(req.body.roleId).catch(err => {
+  const role = await Role.findByPk(req.body.roleId).catch((err) => {
     res.status(400).send({
       message: 'Bad request'
     });
@@ -63,9 +63,12 @@ module.exports = async (req, res) => {
     return;
   }
 
-  if (validator.isEmpty(req.body.password) || !validator.isLength(req.body.password, {
+  if (
+    validator.isEmpty(req.body.password) ||
+    !validator.isLength(req.body.password, {
       min: 6
-    })) {
+    })
+  ) {
     res.status(400).send({
       message: 'Bad request'
     });
@@ -76,10 +79,11 @@ module.exports = async (req, res) => {
 
   const userCreated = {
     ...req.body,
+    verified: false,
     password: hashedPw
   };
 
-  const createdUser = await User.create(userCreated).catch(err => {
+  const createdUser = await User.create(userCreated).catch((err) => {
     res.status(400).send({
       message: 'Bad request'
     });

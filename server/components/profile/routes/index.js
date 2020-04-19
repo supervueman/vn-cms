@@ -153,12 +153,6 @@ router.put('/password-change', profileByAccessToken, controller.changePassword);
  *    post:
  *      summary: Request for reset password
  *      tags: [Profile]
- *      parameters:
- *        - in: header
- *          name: x-access-token
- *          required: true
- *          schema:
- *            type: string
  *      requestBody:
  *        content:
  *          application/json:
@@ -179,7 +173,10 @@ router.put('/password-change', profileByAccessToken, controller.changePassword);
  *      security:
  *        - basicAuth: []
  */
-router.post('/password-reset-by-email-request', profileByAccessToken, controller.resetPasswordByEmailRequest);
+router.post(
+  '/password-reset-by-email-request',
+  controller.resetPasswordByEmailRequest
+);
 
 /**
  * @swagger
@@ -219,7 +216,11 @@ router.post('/password-reset-by-email-request', profileByAccessToken, controller
  *      security:
  *        - basicAuth: []
  */
-router.post('/password-reset-by-email', profileByAccessToken, controller.resetPasswordByEmail);
+router.post(
+  '/password-reset-by-email',
+  profileByAccessToken,
+  controller.resetPasswordByEmail
+);
 
 /**
  * @swagger

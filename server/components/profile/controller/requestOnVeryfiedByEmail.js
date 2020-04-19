@@ -22,7 +22,7 @@ module.exports = async (req, res) => {
 
   await jwt.verify(
     resetToken,
-    process.env.SECRET_KEY_FOR_JWT_RESET_PASSWORD,
+    process.env.SECRET_KEY_FOR_JWT,
     async (err, decoded) => {
       if (err) {
         res.status(404).send({
@@ -72,8 +72,8 @@ module.exports = async (req, res) => {
           from: '<chaogen2@example.com>', // sender address
           to: decoded.email, // list of receivers
           subject: 'Hello ✔', // Subject line
-          text: 'Ваш пароль успешно изменен', // plain text body
-          html: '<h2>Ваш пароль успешно изменен</h2>' // html body
+          text: 'Ваша ссылка на изменение пароля', // plain text body
+          html: '<h2>Ваш пароль изменен</h2>' // html body
         })
         .catch((err) => {
           res.status(500);
