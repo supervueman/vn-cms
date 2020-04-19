@@ -35,6 +35,7 @@ module.exports = async () => {
       slug: 'admin',
       email: process.env.ADMIN_EMAIL,
       password: passwordHw,
+      verified: true,
       roleId: adminRole.id,
       contextId: rootContext.id
     });
