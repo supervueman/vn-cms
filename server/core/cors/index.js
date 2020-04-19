@@ -1,7 +1,4 @@
-const {
-  cors_access_url,
-  header_authorization
-} = require('../core.config');
+const { cors_access_url, header_authorization } = require('../core.config');
 
 module.exports = (req, res, next) => {
   const allowedOrigins = cors_access_url.split(', ');
@@ -16,7 +13,10 @@ module.exports = (req, res, next) => {
     'OPTIONS, GET, POST, PUT, PATCH, DELETE'
   );
 
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, x-access-token, x-api-key, x-reset-token');
+  res.setHeader(
+    'Access-Control-Allow-Headers',
+    'Content-Type, Authorization, x-access-token, x-api-key, x-reset-token, x-verified-token'
+  );
 
   if (req.method === 'OPTIONS') {
     return res.sendStatus(200);
@@ -27,7 +27,7 @@ module.exports = (req, res, next) => {
       next();
     } else {
       res.status(401).send({
-        message: 'Not authorization!'
+        message: 'Not authorization'
       });
     }
   } else {

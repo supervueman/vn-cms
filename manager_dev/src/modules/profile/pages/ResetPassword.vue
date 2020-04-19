@@ -116,9 +116,7 @@ export default {
       const errors = [];
       if (!this.$v.email.$dirty) return errors;
       !this.$v.email.email &&
-        errors.push(
-          `${this.d.email_is_not_valid || "E-mail не E-mail is not valid"}`
-        );
+        errors.push(`${this.d.email_is_not_valid || "E-mail is not valid"}`);
       !this.$v.email.required &&
         errors.push(`${this.d.required_field || "Required field"}`);
       return errors;
@@ -141,8 +139,6 @@ export default {
       });
 
       this.email = "";
-
-      this.$emit("closeLoginDialog");
     },
 
     async changePassword() {

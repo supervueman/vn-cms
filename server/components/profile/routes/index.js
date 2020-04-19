@@ -216,6 +216,65 @@ router.post('/password-reset-by-email', controller.resetPasswordByEmail);
 /**
  * @swagger
  * path:
+ *  /profile/verified-account-by-email-request:
+ *    post:
+ *      summary: Request for verified account
+ *      tags: [Profile]
+ *      requestBody:
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              properties:
+ *                email:
+ *                  type: string
+ *      responses:
+ *        "200":
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: object
+ *                properties:
+ *                  message:
+ *                    type: string
+ *      security:
+ *        - basicAuth: []
+ */
+router.post(
+  '/verified-account-by-email-request',
+  controller.verifiedAccountByEmailRequest
+);
+
+/**
+ * @swagger
+ * path:
+ *  /profile/verified-account-by-email:
+ *    post:
+ *      summary: Verified account
+ *      tags: [Profile]
+ *      parameters:
+ *        - in: header
+ *          name: x-verified-token
+ *          required: true
+ *          schema:
+ *            type: string
+ *      responses:
+ *        "200":
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: object
+ *                properties:
+ *                  message:
+ *                    type: string
+ *      security:
+ *        - basicAuth: []
+ */
+router.post('/verified-account-by-email', controller.verifiedAccountByEmail);
+
+/**
+ * @swagger
+ * path:
  *  /profile/remove:
  *    delete:
  *      summary: Delete profile

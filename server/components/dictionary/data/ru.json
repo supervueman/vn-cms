@@ -1,327 +1,330 @@
 {
-	"lang": "ru",
-	"title": "Russian",
-	"value": {
-		"download": {
-			"text": "Скачать"
-		},
-		"upload": {
-			"text": "Загрузить"
-		},
-		"enter_dir_name": {
-			"text": "Введите название директории"
-		},
-		"create": {
-			"text": "Создать"
-		},
-		"cancel": {
-			"text": "Отмена"
-		},
-		"required_field": {
-			"text": "Обязательное поле"
-		},
-		"current_path": {
-			"text": "Текущий путь"
-		},
-		"create_directory": {
-			"text": "Создать директорию"
-		},
-		"reload": {
-			"text": "Обновить"
-		},
-		"layouts": {
-			"text": "Шаблоны"
-		},
-		"fields": {
-			"text": "Поля"
-		},
-		"field_categories": {
-			"text": "Категории полей"
-		},
-		"filesystem": {
-			"text": "Файловая система"
-		},
-		"create_resource": {
-			"text": "Создать ресурс"
-		},
-		"applications": {
-			"text": "Приложения"
-		},
-		"developer": {
-			"text": "Разработчик"
-		},
-		"close": {
-			"text": "Закрыть"
-		},
-		"login": {
-			"text": "Войти"
-		},
-		"forgot_password": {
-			"text": "Забыли пароль?"
-		},
-		"password": {
-			"text": "Пароль"
-		},
-		"email_is_not_valid": {
-			"text": "E-mail не валиден"
-		},
-		"remove_confirm": {
-			"text": "Вы действительно хотите удалить"
-		},
-		"resources": {
-			"text": "Ресурсы"
-		},
-		"develop": {
-			"text": "Разработка"
-		},
-		"files": {
-			"text": "Файлы"
-		},
-		"users": {
-			"text": "Пользователи"
-		},
-		"roles": {
-			"text": "Роли"
-		},
-		"system_settings": {
-			"text": "Системные настройки"
-		},
-		"dictionaries": {
-			"text": "Словари"
-		},
-		"logout": {
-			"text": "Выход"
-		},
-		"context": {
-			"text": "Контекст"
-		},
-		"common_data": {
-			"text": "Общие данные"
-		},
-		"slug": {
-			"text": "Псевдоним"
-		},
-		"name": {
-			"text": "Наименование"
-		},
-		"save": {
-			"text": "Сохранить"
-		},
-		"remove": {
-			"text": "Удалить"
-		},
-		"field_must_be_have_more_three_sumbols": {
-			"text": "Поле должено быть не менее 3 символов"
-		},
-		"field_must_be_have_more_six_sumbols": {
-			"text": "Поле должено быть не менее 6 символов"
-		},
-		"only_en_symbols": {
-			"text": "Разрешены только английские символы"
-		},
-		"context_creation": {
-			"text": "Создание контекста"
-		},
-		"create_context": {
-			"text": "Создать контекст"
-		},
-		"contexts": {
-			"text": "Контексты"
-		},
-		"create_dictionary": {
-			"text": "Создать словарь"
-		},
-		"field_must_be_have_more_two_sumbols": {
-			"text": "Поле должено быть не менее 2 символов"
-		},
-		"dictionary": {
-			"text": "Словарь"
-		},
-		"field_element": {
-			"text": "Элемент поля"
-		},
-		"field_category": {
-			"text": "Категория полей"
-		},
-		"layout": {
-			"text": "Шаблон"
-		},
-		"field_type": {
-			"text": "Тип поля"
-		},
-		"default_value": {
-			"text": "Значение по умолчанию"
-		},
-		"string_or_json": {
-			"text": "Строка или json"
-		},
-		"schema": {
-			"text": "Схема"
-		},
-		"create_field": {
-			"text": "Создать поле"
-		},
-		"field": {
-			"text": "Поле"
-		},
-		"field_creation": {
-			"text": "Создание поля"
-		},
-		"create_field_category": {
-			"text": "Создать категорию полей"
-		},
-		"field_category_creation": {
-			"text": "Создание категории полей"
-		},
-		"directory": {
-			"text": "Директория"
-		},
-		"create_layout": {
-			"text": "Создать шаблон"
-		},
-		"layout_creation": {
-			"text": "Создание шаблона"
-		},
-		"address": {
-			"text": "Адрес"
-		},
-		"country": {
-			"text": "Страна"
-		},
-		"city": {
-			"text": "Город"
-		},
-		"street": {
-			"text": "Улица"
-		},
-		"home": {
-			"text": "Дом"
-		},
-		"apartment": {
-			"text": "Квартира"
-		},
-		"avatar": {
-			"text": "Аватар"
-		},
-		"lastname": {
-			"text": "Фамилия"
-		},
-		"firstname": {
-			"text": "Имя"
-		},
-		"middlename": {
-			"text": "Отчество"
-		},
-		"contacts": {
-			"text": "Контакты"
-		},
-		"phone": {
-			"text": "Телефон"
-		},
-		"keys": {
-			"text": "Ключи"
-		},
-		"public_key": {
-			"text": "Публичный ключ"
-		},
-		"change_password": {
-			"text": "Изменить пароль"
-		},
-		"enter_old_password": {
-			"text": "Введите старый пароль"
-		},
-		"enter_new_password": {
-			"text": "Введите новый пароль"
-		},
-		"confirm_password": {
-			"text": "Подтвердите новый пароль"
-		},
-		"change": {
-			"text": "Изменить"
-		},
-		"password_not_confirm": {
-			"text": "Пароли не совпадают"
-		},
-		"role": {
-			"text": "Роль"
-		},
-		"role_slug": {
-			"text": "Псевдоним роли"
-		},
-		"your_profile": {
-			"text": "Ваш профиль"
-		},
-		"reset_password": {
-			"text": "Восстановить пароль"
-		},
-		"send_request": {
-			"text": "Отправить запрос"
-		},
-		"select_lang": {
-			"text": "Выберете язык"
-		},
-		"create_translation": {
-			"text": "Создать перевод"
-		},
-		"next_step": {
-			"text": "Следующий шаг"
-		},
-		"need_resource_with_analog_lang": {
-			"text": "Необходимо создать родительский ресурс с аналогичным языком перевода"
-		},
-		"resource_type": {
-			"text": "Тип ресурса"
-		},
-		"published": {
-			"text": "Опубликовать"
-		},
-		"menunindex": {
-			"text": "Меню-индекс"
-		},
-		"date_creation": {
-			"text": "Дата создания"
-		},
-		"description": {
-			"text": "Описание"
-		},
-		"resource": {
-			"text": "Ресурс"
-		},
-		"resource_creation": {
-			"text": "Создание ресурса"
-		},
-		"rang": {
-			"text": "Ранг"
-		},
-		"role_creation": {
-			"text": "Создание роли"
-		},
-		"create_role": {
-			"text": "Создать роль"
-		},
-		"profile": {
-			"text": "Профиль"
-		},
-		"user_creation": {
-			"text": "Создание пользователя"
-		},
-		"create_user": {
-			"text": "Создать пользователя"
-		},
-		"cannot_delete_root_directory": {
-			"text": "Нельзя удалять корневую директорию"
-		},
-		"enter_password": {
-			"text": "Введите пароль"
-		},
-		"add_element": {
-			"text": "Добавить элемент"
-		},
-		"vn_cms": {
-			"text": "VN-CMS"
-		},
-		"greeting": {
-			"text": "Hello {{username}}! VN-CMS use Node js (Express js) for the server side and Vue js for the client side. VN-CMS is also based on Rest API architecture for flexible request and data control."
-		}
-	}
+  "lang": "ru",
+  "title": "Russian",
+  "value": {
+    "download": {
+      "text": "Скачать"
+    },
+    "upload": {
+      "text": "Загрузить"
+    },
+    "enter_dir_name": {
+      "text": "Введите название директории"
+    },
+    "create": {
+      "text": "Создать"
+    },
+    "cancel": {
+      "text": "Отмена"
+    },
+    "required_field": {
+      "text": "Обязательное поле"
+    },
+    "current_path": {
+      "text": "Текущий путь"
+    },
+    "create_directory": {
+      "text": "Создать директорию"
+    },
+    "reload": {
+      "text": "Обновить"
+    },
+    "layouts": {
+      "text": "Шаблоны"
+    },
+    "fields": {
+      "text": "Поля"
+    },
+    "field_categories": {
+      "text": "Категории полей"
+    },
+    "filesystem": {
+      "text": "Файловая система"
+    },
+    "create_resource": {
+      "text": "Создать ресурс"
+    },
+    "applications": {
+      "text": "Приложения"
+    },
+    "developer": {
+      "text": "Разработчик"
+    },
+    "close": {
+      "text": "Закрыть"
+    },
+    "login": {
+      "text": "Войти"
+    },
+    "forgot_password": {
+      "text": "Забыли пароль?"
+    },
+    "password": {
+      "text": "Пароль"
+    },
+    "email_is_not_valid": {
+      "text": "E-mail не валиден"
+    },
+    "remove_confirm": {
+      "text": "Вы действительно хотите удалить"
+    },
+    "resources": {
+      "text": "Ресурсы"
+    },
+    "develop": {
+      "text": "Разработка"
+    },
+    "files": {
+      "text": "Файлы"
+    },
+    "users": {
+      "text": "Пользователи"
+    },
+    "roles": {
+      "text": "Роли"
+    },
+    "system_settings": {
+      "text": "Системные настройки"
+    },
+    "dictionaries": {
+      "text": "Словари"
+    },
+    "logout": {
+      "text": "Выход"
+    },
+    "context": {
+      "text": "Контекст"
+    },
+    "common_data": {
+      "text": "Общие данные"
+    },
+    "slug": {
+      "text": "Псевдоним"
+    },
+    "name": {
+      "text": "Наименование"
+    },
+    "save": {
+      "text": "Сохранить"
+    },
+    "remove": {
+      "text": "Удалить"
+    },
+    "field_must_be_have_more_three_sumbols": {
+      "text": "Поле должено быть не менее 3 символов"
+    },
+    "field_must_be_have_more_six_sumbols": {
+      "text": "Поле должено быть не менее 6 символов"
+    },
+    "only_en_symbols": {
+      "text": "Разрешены только английские символы"
+    },
+    "context_creation": {
+      "text": "Создание контекста"
+    },
+    "create_context": {
+      "text": "Создать контекст"
+    },
+    "contexts": {
+      "text": "Контексты"
+    },
+    "create_dictionary": {
+      "text": "Создать словарь"
+    },
+    "field_must_be_have_more_two_sumbols": {
+      "text": "Поле должено быть не менее 2 символов"
+    },
+    "dictionary": {
+      "text": "Словарь"
+    },
+    "field_element": {
+      "text": "Элемент поля"
+    },
+    "field_category": {
+      "text": "Категория полей"
+    },
+    "layout": {
+      "text": "Шаблон"
+    },
+    "field_type": {
+      "text": "Тип поля"
+    },
+    "default_value": {
+      "text": "Значение по умолчанию"
+    },
+    "string_or_json": {
+      "text": "Строка или json"
+    },
+    "schema": {
+      "text": "Схема"
+    },
+    "create_field": {
+      "text": "Создать поле"
+    },
+    "field": {
+      "text": "Поле"
+    },
+    "field_creation": {
+      "text": "Создание поля"
+    },
+    "create_field_category": {
+      "text": "Создать категорию полей"
+    },
+    "field_category_creation": {
+      "text": "Создание категории полей"
+    },
+    "directory": {
+      "text": "Директория"
+    },
+    "create_layout": {
+      "text": "Создать шаблон"
+    },
+    "layout_creation": {
+      "text": "Создание шаблона"
+    },
+    "address": {
+      "text": "Адрес"
+    },
+    "country": {
+      "text": "Страна"
+    },
+    "city": {
+      "text": "Город"
+    },
+    "street": {
+      "text": "Улица"
+    },
+    "home": {
+      "text": "Дом"
+    },
+    "apartment": {
+      "text": "Квартира"
+    },
+    "avatar": {
+      "text": "Аватар"
+    },
+    "lastname": {
+      "text": "Фамилия"
+    },
+    "firstname": {
+      "text": "Имя"
+    },
+    "middlename": {
+      "text": "Отчество"
+    },
+    "contacts": {
+      "text": "Контакты"
+    },
+    "phone": {
+      "text": "Телефон"
+    },
+    "keys": {
+      "text": "Ключи"
+    },
+    "public_key": {
+      "text": "Публичный ключ"
+    },
+    "change_password": {
+      "text": "Изменить пароль"
+    },
+    "enter_old_password": {
+      "text": "Введите старый пароль"
+    },
+    "enter_new_password": {
+      "text": "Введите новый пароль"
+    },
+    "confirm_password": {
+      "text": "Подтвердите новый пароль"
+    },
+    "change": {
+      "text": "Изменить"
+    },
+    "password_not_confirm": {
+      "text": "Пароли не совпадают"
+    },
+    "role": {
+      "text": "Роль"
+    },
+    "role_slug": {
+      "text": "Псевдоним роли"
+    },
+    "your_profile": {
+      "text": "Ваш профиль"
+    },
+    "reset_password": {
+      "text": "Восстановить пароль"
+    },
+    "send_request": {
+      "text": "Отправить запрос"
+    },
+    "select_lang": {
+      "text": "Выберете язык"
+    },
+    "create_translation": {
+      "text": "Создать перевод"
+    },
+    "next_step": {
+      "text": "Следующий шаг"
+    },
+    "need_resource_with_analog_lang": {
+      "text": "Необходимо создать родительский ресурс с аналогичным языком перевода"
+    },
+    "resource_type": {
+      "text": "Тип ресурса"
+    },
+    "published": {
+      "text": "Опубликовать"
+    },
+    "menunindex": {
+      "text": "Меню-индекс"
+    },
+    "date_creation": {
+      "text": "Дата создания"
+    },
+    "description": {
+      "text": "Описание"
+    },
+    "resource": {
+      "text": "Ресурс"
+    },
+    "resource_creation": {
+      "text": "Создание ресурса"
+    },
+    "rang": {
+      "text": "Ранг"
+    },
+    "role_creation": {
+      "text": "Создание роли"
+    },
+    "create_role": {
+      "text": "Создать роль"
+    },
+    "profile": {
+      "text": "Профиль"
+    },
+    "user_creation": {
+      "text": "Создание пользователя"
+    },
+    "create_user": {
+      "text": "Создать пользователя"
+    },
+    "cannot_delete_root_directory": {
+      "text": "Нельзя удалять корневую директорию"
+    },
+    "enter_password": {
+      "text": "Введите пароль"
+    },
+    "add_element": {
+      "text": "Добавить элемент"
+    },
+    "vn_cms": {
+      "text": "VN-CMS"
+    },
+    "verified_account": {
+      "text": "Поддтверждение аккаунта"
+    },
+    "greeting": {
+      "text": "Hello {{username}}! VN-CMS use Node js (Express js) for the server side and Vue js for the client side. VN-CMS is also based on Rest API architecture for flexible request and data control."
+    }
+  }
 }

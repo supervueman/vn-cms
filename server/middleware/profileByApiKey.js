@@ -27,6 +27,13 @@ module.exports = async (req, res, next) => {
     return;
   }
 
+  if (!profile.verified) {
+    res.status(403).send({
+      message: 'Account is not verified'
+    });
+    return;
+  }
+
   // Задаем правила глобально
   req.rules = {};
   const rules = JSON.parse(profile.role.rules);

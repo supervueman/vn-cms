@@ -5,5 +5,7 @@ module.exports = {
   changePassword: require('./changePassword'),
   resetPasswordByEmailRequest: require('./resetPasswordByEmailRequest'),
   resetPasswordByEmail: require('./resetPasswordByEmail'),
-  remove: require('./remove')
+  remove: require('./remove'),
+  verifiedAccountByEmailRequest: require('./veryfiedByEmailRequest'),
+  verifiedAccountByEmail: require('./verifiedByEmail')
 };

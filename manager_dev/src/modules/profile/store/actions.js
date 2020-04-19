@@ -13,7 +13,7 @@ const actions = {
       }
     });
 
-    const response = await axios(data).catch(err => {
+    const response = await axios(data).catch((err) => {
       this.dispatch('preloader/fetch', false);
       this.dispatch('notification/fetch', {
         type: 'error',
@@ -43,7 +43,7 @@ const actions = {
       payload.body
     );
 
-    const response = await axios(data).catch(err => {
+    const response = await axios(data).catch((err) => {
       this.dispatch('preloader/fetch', false);
       this.dispatch('notification/fetch', {
         type: 'error',
@@ -67,7 +67,7 @@ const actions = {
   async update({ commit }, payload) {
     this.dispatch('preloader/fetch', true);
     const data = requestDataHandler('PUT', '/profile/update', payload.body);
-    const response = await axios(data).catch(err => {
+    const response = await axios(data).catch((err) => {
       this.dispatch('preloader/fetch', false);
       this.dispatch('notification/fetch', {
         type: 'error',
@@ -94,7 +94,7 @@ const actions = {
       payload.body
     );
 
-    const response = await axios(data).catch(err => {
+    const response = await axios(data).catch((err) => {
       this.dispatch('preloader/fetch', false);
       this.dispatch('notification/fetch', {
         type: 'error',
@@ -121,7 +121,7 @@ const actions = {
       payload.body
     );
 
-    const response = await axios(data).catch(err => {
+    const response = await axios(data).catch((err) => {
       this.dispatch('preloader/fetch', false);
       this.dispatch('notification/fetch', {
         type: 'error',
@@ -150,7 +150,7 @@ const actions = {
       payload.headers
     );
 
-    const response = await axios(data).catch(err => {
+    const response = await axios(data).catch((err) => {
       this.dispatch('preloader/fetch', false);
       this.dispatch('notification/fetch', {
         type: 'error',
@@ -169,11 +169,69 @@ const actions = {
     }
   },
 
+  async verifiedAccountByEmailRequest({ commit }, payload) {
+    this.dispatch('preloader/fetch', true);
+    const data = requestDataHandler(
+      'POST',
+      '/profile/verified-account-by-email-request',
+      payload.body
+    );
+
+    const response = await axios(data).catch((err) => {
+      this.dispatch('preloader/fetch', false);
+      this.dispatch('notification/fetch', {
+        type: 'error',
+        message: `${err}`,
+        isActive: true
+      });
+    });
+
+    if (typeof response === 'object' && response.status === 200) {
+      this.dispatch('preloader/fetch', false);
+      this.dispatch('notification/fetch', {
+        type: 'success',
+        message: 'Success',
+        isActive: true
+      });
+    }
+  },
+
+  async verifiedAccountByEmail({ commit }, payload) {
+    this.dispatch('preloader/fetch', true);
+    const data = requestDataHandler(
+      'POST',
+      '/profile/verified-account-by-email',
+      undefined,
+      undefined,
+      payload.headers
+    );
+
+    const response = await axios(data).catch((err) => {
+      this.dispatch('preloader/fetch', false);
+      this.dispatch('notification/fetch', {
+        type: 'error',
+        message: `${err}`,
+        isActive: true
+      });
+    });
+
+    if (typeof response === 'object' && response.status === 200) {
+      this.dispatch('preloader/fetch', false);
+      this.dispatch('notification/fetch', {
+        type: 'success',
+        message: 'Verified',
+        isActive: true
+      });
+      return true;
+    }
+    return false;
+  },
+
   async remove({ commit }) {
     this.dispatch('preloader/fetch', true);
     const data = requestDataHandler('DELETE', '/profile/remove');
 
-    const response = await axios(data).catch(err => {
+    const response = await axios(data).catch((err) => {
       this.dispatch('preloader/fetch', false);
       this.dispatch('notification/fetch', {
         type: 'error',

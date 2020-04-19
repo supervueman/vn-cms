@@ -22,9 +22,9 @@ module.exports = async (req, res) => {
       id: user.id,
       email: user.email
     },
-    process.env.SECRET_KEY_FOR_JWT_RESET_PASSWORD,
+    process.env.SECRET_KEY_FOR_JWT_VERIFIED_PROFILE,
     {
-      expiresIn: '1h'
+      expiresIn: '24h'
     }
   );
 
@@ -42,9 +42,9 @@ module.exports = async (req, res) => {
     .sendMail({
       from: `<${process.env.MAIL_AUTH_USER}>`, // sender address
       to: req.body.email, // list of receivers
-      subject: 'Your password reset link', // Subject line
-      text: 'Your password reset link', // plain text body
-      html: `<h1 style="box-sizing: border-box;">Click this button to change the password!</h1>
+      subject: 'Your verified link', // Subject line
+      text: 'Your verified link', // plain text body
+      html: `<h1 style="box-sizing: border-box;">Click this button to verified account!</h1>
             <a 
               style="
                 box-sizing: border-box;
@@ -60,9 +60,9 @@ module.exports = async (req, res) => {
                 padding: 10px 0;
                 display: block;
               "
-              href="${req.headers.origin}/reset-password?token=${token}"
+              href="${req.headers.origin}/profile/verified?token=${token}"
             >
-              Change password
+              Verified
             </a>` // html body
     })
     .catch((err) => {
