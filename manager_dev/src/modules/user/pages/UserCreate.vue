@@ -222,6 +222,13 @@ export default {
         });
 
         if (bool) {
+          const data = {
+            email: this.profile.email
+          };
+
+          await this.$store.dispatch("profile/verifiedAccountByEmailRequest", {
+            body: data
+          });
           this.$router.push(`/users/${this.$store.getters["user/get"].id}`);
         }
       }
