@@ -108,6 +108,10 @@ export default {
         await this.$store.dispatch("profile/findByAccessToken");
 
         const profile = this.$store.getters["profile/get"];
+        console.log(profile);
+        if (!profile.verified) {
+          this.$router.push("/profile/verified");
+        }
 
         const credentials = await this.createCredentials({
           id: this.email,

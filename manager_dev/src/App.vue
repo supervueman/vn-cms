@@ -17,6 +17,7 @@ export default {
   async beforeCreate() {
     if (!!localStorage.getItem("access_token")) {
       const bool = await this.$store.dispatch("profile/findByAccessToken");
+
       if (bool) {
         await this.$store.dispatch("base/fetchMainLang");
 

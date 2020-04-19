@@ -41,13 +41,6 @@ module.exports = async (req, res, next) => {
 
       if (!profile.verified) {
         res.status(403).send({
-          message: 'Forbidden'
-        });
-        return;
-      }
-
-      if (!profile.verified) {
-        res.status(403).send({
           message: 'Account is not verified'
         });
         return;

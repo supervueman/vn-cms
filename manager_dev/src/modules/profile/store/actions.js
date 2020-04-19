@@ -1,5 +1,6 @@
 import requestDataHandler from '@/core/plugins/requestDataHandler';
 import axios from 'axios';
+import router from '@/connector/index.route.js';
 
 import profile from '../models/profile';
 
@@ -14,6 +15,12 @@ const actions = {
     });
 
     const response = await axios(data).catch((err) => {
+      if (
+        err.message === 'Request failed with status code 403' &&
+        window.location.pathname !== '/profile/verified'
+      ) {
+        router.push('/profile/verified');
+      }
       this.dispatch('preloader/fetch', false);
       this.dispatch('notification/fetch', {
         type: 'error',
@@ -30,6 +37,7 @@ const actions = {
 
       commit('SET_RULES', response.data.role.rules);
       commit('SET', response.data);
+
       return true;
     }
     return false;

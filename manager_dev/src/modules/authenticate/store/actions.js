@@ -2,9 +2,7 @@ import requestDataHandler from '@/core/plugins/requestDataHandler';
 import axios from 'axios';
 
 const actions = {
-  async loginByEmail({
-    commit
-  }, payload) {
+  async loginByEmail({ commit }, payload) {
     this.dispatch('preloader/fetch', true);
     const data = requestDataHandler(
       'POST',
@@ -12,7 +10,7 @@ const actions = {
       payload
     );
 
-    const response = await axios(data).catch(err => {
+    const response = await axios(data).catch((err) => {
       this.dispatch('notification/fetch', {
         type: 'error',
         message: 'Error',
@@ -30,9 +28,7 @@ const actions = {
     }
   },
 
-  async loginByPhone({
-    commit
-  }, payload) {
+  async loginByPhone({ commit }, payload) {
     this.dispatch('preloader/fetch', true);
     const data = requestDataHandler(
       'POST',
@@ -40,7 +36,7 @@ const actions = {
       payload
     );
 
-    const response = await axios(data).catch(err => {
+    const response = await axios(data).catch((err) => {
       this.dispatch('notification/fetch', {
         type: 'error',
         message: 'Error',
@@ -57,14 +53,12 @@ const actions = {
     }
   },
 
-  async logout({
-    commit
-  }) {
+  async logout({ commit }) {
     localStorage.removeItem('access_token');
     localStorage.removeItem('id');
     localStorage.removeItem('x-api-key');
     this.dispatch('profile/clear');
-  },
+  }
 };
 
 export default actions;
