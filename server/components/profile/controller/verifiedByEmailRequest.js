@@ -96,7 +96,7 @@ module.exports = async (req, res) => {
       return;
     });
 
-  if (req.body.email !== user.email) {
+  if (req.body.newEmail !== user.email) {
     const backtoken = jwt.sign(
       {
         id: user.id,
