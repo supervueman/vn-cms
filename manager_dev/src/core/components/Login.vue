@@ -1,10 +1,7 @@
 <template lang="pug">
-  v-card(
-    class="mx-auto"
-    tag="form"
-  )
+  v-card.mx-auto(tag="form")
     v-card-title
-      h1(class="title") {{d.login || 'Login'}}
+      h1.title {{d.login || 'Login'}}
     v-card-text
       v-text-field(
         v-model="email"
@@ -27,11 +24,11 @@
         autocomplete="password"
       )
     v-card-actions
-      router-link(to="/reset-password" class="ml-2") {{d.forgot_password || 'Forgot your password?'}}
-      v-btn(
+      router-link.ml-2(to="/reset-password") {{d.forgot_password || 'Forgot your password?'}}
+      v-btn.ml-auto.mr-2.mb-2(
         @click="submit"
         color="primary"
-        class="ml-auto mr-2 mb-2"
+        depressed
       ) {{d.login || 'Login'}}
 </template>
 
@@ -72,7 +69,7 @@ export default {
       const errors = [];
       if (!this.$v.email.$dirty) return errors;
       !this.$v.email.email &&
-        errors.push(`${this.d.email_is_not_valid || "E-mail не E-mail is not valid"}`);
+        errors.push(`${this.d.email_is_not_valid || "E-mail is not valid"}`);
       !this.$v.email.required &&
         errors.push(`${this.d.required_field || "Required field"}`);
       return errors;
@@ -83,7 +80,7 @@ export default {
     const self = this;
     const form = document.getElementById("form");
 
-    document.onkeypress = function(event) {
+    document.onkeypress = event => {
       if (event.code === "Enter") {
         self.submit();
       }
@@ -102,16 +99,19 @@ export default {
         password: this.password
       };
 
-      const bool = await this.$store.dispatch("authenticate/loginByEmail", data);
+      const bool = await this.$store.dispatch(
+        "authenticate/loginByEmail",
+        data
+      );
 
       if (bool) {
-        await this.$store.dispatch('profile/findByAccessToken');
+        await this.$store.dispatch("profile/findByAccessToken");
 
-        const profile = this.$store.getters['profile/get']
+        const profile = this.$store.getters["profile/get"];
 
         const credentials = await this.createCredentials({
           id: this.email,
-          name: `${profile.lastname || ''} ${profile.firstname || ''}`,
+          name: `${profile.lastname || ""} ${profile.firstname || ""}`,
           iconURL: `${process.env.VUE_APP_API_BASE_URL}/${profile.image}`,
           password: this.password
         });
@@ -129,7 +129,7 @@ export default {
       if (window.PasswordCredential) {
         const createdCredentials = await navigator.credentials.create({
           password: credentials
-        })
+        });
 
         return createdCredentials;
       }
@@ -148,8 +148,7 @@ export default {
         });
 
         if (credentials) {
-          this.email = credentials.id,
-          this.password = credentials.password
+          (this.email = credentials.id), (this.password = credentials.password);
         }
       }
     }

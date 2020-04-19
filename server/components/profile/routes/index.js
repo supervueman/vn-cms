@@ -187,11 +187,6 @@ router.post(
  *      tags: [Profile]
  *      parameters:
  *        - in: header
- *          name: x-access-token
- *          required: true
- *          schema:
- *            type: string
- *        - in: header
  *          name: x-reset-token
  *          required: true
  *          schema:
@@ -216,11 +211,7 @@ router.post(
  *      security:
  *        - basicAuth: []
  */
-router.post(
-  '/password-reset-by-email',
-  profileByAccessToken,
-  controller.resetPasswordByEmail
-);
+router.post('/password-reset-by-email', controller.resetPasswordByEmail);
 
 /**
  * @swagger

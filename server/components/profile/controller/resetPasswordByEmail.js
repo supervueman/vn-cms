@@ -24,14 +24,7 @@ module.exports = async (req, res) => {
     resetToken,
     process.env.SECRET_KEY_FOR_JWT_RESET_PASSWORD,
     async (err, decoded) => {
-      if (err) {
-        res.status(404).send({
-          message: 'Not found'
-        });
-        return;
-      }
-
-      if (!decoded) {
+      if (err || !decoded) {
         res.status(404).send({
           message: 'Not found'
         });
@@ -69,11 +62,11 @@ module.exports = async (req, res) => {
 
       const info = await transporter
         .sendMail({
-          from: '<chaogen2@example.com>', // sender address
+          from: `<${process.env.MAIL_AUTH_USER}>`, // sender address
           to: decoded.email, // list of receivers
-          subject: 'Hello ✔', // Subject line
-          text: 'Ваш пароль успешно изменен', // plain text body
-          html: '<h2>Ваш пароль успешно изменен</h2>' // html body
+          subject: 'Your password has been successfully changed!', // Subject line
+          text: 'Your password has been successfully changed!', // plain text body
+          html: '<h1>Your password has been successfully changed!</h1>' // html body
         })
         .catch((err) => {
           res.status(500);
