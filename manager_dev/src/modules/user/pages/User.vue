@@ -1,6 +1,11 @@
 <template lang="pug">
 	v-flex(v-if="r.is_user_read")
-		.body-2.mb-12.mt-2 {{d.profile || 'Profile'}}: {{profile.slug}} ({{profile.id}})
+		.body-2.mb-12.mt-2.d-flex.justify-space-between
+			div {{d.profile || 'Profile'}}: {{profile.slug}} ({{profile.id}})
+			v-icon(
+				v-if="profile.verified"
+				color="green"
+			) beenhere
 		v-layout.wrap
 			v-flex.xs12.md7.pr-2
 				profile-common-data(:profile="profile")
