@@ -223,7 +223,8 @@ export default {
 
         if (bool) {
           const data = {
-            email: this.profile.email
+            newEmail: this.profile.email,
+            currentEmail: this.profile.email
           };
 
           await this.$store.dispatch("profile/verifiedAccountByEmailRequest", {

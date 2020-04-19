@@ -228,6 +228,8 @@ router.post('/password-reset-by-email', controller.resetPasswordByEmail);
  *              properties:
  *                email:
  *                  type: string
+ *                currentEmail:
+ *                  type: string
  *      responses:
  *        "200":
  *          content:

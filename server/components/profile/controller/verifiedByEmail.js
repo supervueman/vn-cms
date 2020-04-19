@@ -32,7 +32,7 @@ module.exports = async (req, res) => {
 
       const user = await User.findOne({
         where: {
-          email: decoded.email
+          email: decoded.currentEmail
         }
       });
 
@@ -43,7 +43,7 @@ module.exports = async (req, res) => {
         return;
       }
 
-      if (user.verified) {
+      if (user.verified && user.email === decoded.newEmail) {
         res.status(200).send({
           message: 'OK'
         });
@@ -51,6 +51,7 @@ module.exports = async (req, res) => {
       }
 
       await user.update({
+        email: decoded.newEmail,
         verified: true
       });
 
@@ -67,7 +68,7 @@ module.exports = async (req, res) => {
       const info = await transporter
         .sendMail({
           from: `<${process.env.MAIL_AUTH_USER}>`, // sender address
-          to: decoded.email, // list of receivers
+          to: decoded.newEmail, // list of receivers
           subject: 'Your account is verified!', // Subject line
           text: 'Your account is verified!', // plain text body
           html: '<h1>Your account is verified!</h1>' // html body

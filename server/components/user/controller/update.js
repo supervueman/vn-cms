@@ -8,7 +8,7 @@ module.exports = async (req, res) => {
     return;
   }
 
-  const item = await Model.findByPk(req.params.id).catch(err => {
+  const item = await Model.findByPk(req.params.id).catch((err) => {
     res.status(400).send({
       message: 'Bad request'
     });
@@ -31,20 +31,21 @@ module.exports = async (req, res) => {
   }
 
   const updateUser = req.body;
+  delete updateUser.email;
   delete updateUser.id;
   delete updateUser.password;
   delete updateUser.token;
 
-  const updatedItem = await item.update(updateUser).catch(err => {
+  const updatedItem = await item.update(updateUser).catch((err) => {
     res.status(400).send({
       message: 'Bad request'
     });
     return;
   });
 
-  const filter = JSON.parse(req.query.filter || "{}");
+  const filter = JSON.parse(req.query.filter || '{}');
 
-  const newItem = await Model.findByPk(updatedItem.id, filter).catch(err => {
+  const newItem = await Model.findByPk(updatedItem.id, filter).catch((err) => {
     res.status(400).send({
       message: 'Bad request'
     });
