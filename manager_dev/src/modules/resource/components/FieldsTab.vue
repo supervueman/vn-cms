@@ -9,18 +9,6 @@
       //- div(v-for="(field, i) in additionalFields" :key="i + 11") {{field}}
       //-   br
       //-   br
-      v-toolbar(flat width="100%")
-        v-spacer
-        v-flex.md4
-          v-select(
-            :items="fieldCategories"
-            item-text="title"
-            item-value="id"
-            clearable
-            hide-details
-            :label="`${d.field_category}:`"
-            @change="filterFields($event)"
-          )
       v-flex.mb-4
       v-flex.md12(v-for="(field, i) in fields" :key="i")
         v-layout.mb-4
@@ -231,9 +219,6 @@ export default {
     },
     fields() {
       return this.$store.getters["resource/getSerializedFields"];
-    },
-    fieldCategories() {
-      return this.$store.getters["fieldcategory/getAll"];
     }
   },
 
