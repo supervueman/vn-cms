@@ -10,7 +10,28 @@
             :error-messages="emailErrors"
             @input="$v.profile.email.$touch()"
             @blur="$v.profile.email.$touch()"
+            disabled
           )
+          v-text-field(
+            v-model="newEmail"
+            label="E-mail:"
+            :error-messages="newEmailErrors"
+            @input="$v.newEmail.$touch()"
+            @blur="$v.newEmail.$touch()"
+            v-if="isEmailChange"
+          )
+          v-btn(
+            depressed
+            color="primary"
+            @click="isEmailChange = !isEmailChange"
+            v-if="!isEmailChange"
+          ) {{d.change || 'Change'}}
+          v-btn(
+            depressed
+            color="primary"
+            @click="changeEmail"
+            v-if="isEmailChange"
+          ) {{d.save || 'Save'}}
         v-flex.md6
           v-text-field(
             v-model="profile.phone"
@@ -73,8 +94,14 @@ export default {
   validations: {
     profile: {
       email: { required, email }
-    }
+    },
+    newEmail: { required, email }
   },
+
+  data: () => ({
+    newEmail: "",
+    isEmailChange: false
+  }),
 
   computed: {
     emailErrors() {
@@ -85,6 +112,15 @@ export default {
           `${this.d.email_is_not_valid || "E-mail не E-mail is not valid"}`
         );
       !this.$v.profile.email.required &&
+        errors.push(`${this.d.required_field || "Required field"}`);
+      return errors;
+    },
+    newEmailErrors() {
+      const errors = [];
+      if (!this.$v.newEmail.$dirty) return errors;
+      !this.$v.newEmail.email &&
+        errors.push(`${this.d.email_is_not_valid || "E-mail is not valid"}`);
+      !this.$v.newEmail.required &&
         errors.push(`${this.d.required_field || "Required field"}`);
       return errors;
     }
@@ -109,6 +145,23 @@ export default {
       };
       if (!this.$v.profile.$error) {
         await this.$store.dispatch("profile/update", data);
+      }
+    },
+
+    async changeEmail() {
+      if (this.r.is_user_update) {
+        this.$v.newEmail.$touch();
+
+        if (!this.$v.newEmail.$error) {
+          const data = {
+            newEmail: this.newEmail,
+            currentEmail: this.profile.email
+          };
+
+          await this.$store.dispatch("profile/verifiedAccountByEmailRequest", {
+            body: data
+          });
+        }
       }
     }
   }
