@@ -44,7 +44,7 @@
             )
 
           //- Image field
-          v-flex(v-else-if="field.interface.fieldType === 'image'")
+          v-flex.md6(v-else-if="field.interface.fieldType === 'image'")
             v-tooltip(left)
               template(v-slot:activator="{ on }")
                 div.mb-3(v-on="on") {{field.interface.title}}

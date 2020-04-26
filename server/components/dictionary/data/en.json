@@ -203,6 +203,9 @@
     "avatar": {
       "text": "Avatar"
     },
+    "image": {
+      "text": "Image"
+    },
     "lastname": {
       "text": "Lastname"
     },

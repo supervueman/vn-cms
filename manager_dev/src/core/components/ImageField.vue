@@ -1,55 +1,61 @@
 <template lang="pug">
-  v-flex.md6
-    v-layout.wrap
-      v-flex.md12
-        v-layout.align-center
-          v-text-field(
-            @input="$emit('update:path', $event)"
-            :value="path"
-          )
-          v-icon(@click="isActiveDialog = true") image
-      v-flex.md12(v-if="path !== ''")
-        v-img(:src="`/static/${path}`", alt="alt" max-width="100%")
-    v-dialog(v-model="isActiveDialog")
-      filesystem(@selectFile="selectFile")
-      v-card(outlined)
-        v-card-actions
-          v-btn.ml-2(
-            depressed
-            @click="isActiveDialog = false"
-          ) {{d.close || 'Close'}}
+	v-flex
+		v-layout.wrap
+			v-flex.md12
+				v-layout.align-center
+					v-text-field(
+						@input="$emit('update:path', $event)"
+						:value="path"
+						:label="label"
+					)
+					v-icon(@click="isActiveDialog = true") image
+			v-flex.md12(v-if="path !== ''")
+				v-img(:src="`/static/${path}`", alt="alt" max-width="100%")
+		v-dialog(v-model="isActiveDialog")
+			filesystem(@selectFile="selectFile")
+			v-card(outlined)
+				v-card-actions
+					v-btn.ml-2(
+						depressed
+						@click="isActiveDialog = false"
+					) {{d.close || 'Close'}}
 </template>
 
 <script>
 // Components
-import Filesystem from '@/core/components/Filesystem/Filesystem';
+import Filesystem from "@/core/components/Filesystem/Filesystem";
 
 export default {
-	name: 'ImageField',
+  name: "ImageField",
 
-	components: {
-		Filesystem
-	},
+  components: {
+    Filesystem
+  },
 
-	props: {
-		path: {
-			type: String,
-			default: ''
-		}
-	},
+  props: {
+    path: {
+      type: String,
+      default: ""
+    },
+    label: {
+      type: String,
+      default: ""
+    }
+  },
 
-	data() {
-		return {
-			isActiveDialog: false,
-			file: '',
-			filePath: ''
-		};
-	},
+  data() {
+    return {
+      isActiveDialog: false,
+      file: "",
+      filePath: ""
+    };
+  },
 
-	methods: {
-		selectFile(file) {
-			this.$emit('selectFile', file.path);
-		}
-	}
+  methods: {
+    selectFile(file) {
+      this.$emit("selectFile", file.path);
+      this.$emit("input", file.path);
+    }
+  }
 };
 </script>
