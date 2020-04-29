@@ -2,6 +2,13 @@ const readDir = require('../../../../handlers/readDir');
 
 module.exports = async (req, res) => {
   if (!req.rules.is_filesystem_access) {
+    logger(
+      'error',
+      'filesystem',
+      403,
+      'getFilesystem.js',
+      'Not rules "is_filesystem_access"'
+    );
     res.status(403).send({
       message: 'Forbidden'
     });

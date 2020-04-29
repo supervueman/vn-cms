@@ -8,6 +8,7 @@ node_modules
 serializer
 /manager_dev/public/static/files
 client
+logs
 
 # local env files
 .env

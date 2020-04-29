@@ -26,6 +26,7 @@ module.exports = (req, res, next) => {
     if (req.headers.authorization === header_authorization) {
       next();
     } else {
+      logger('error', 'cors', 401, 'index.js', 'Authorization is not valid');
       res.status(401).send({
         message: 'Not authorization'
       });

@@ -2,6 +2,7 @@ const Model = require('../model');
 
 module.exports = async (req, res) => {
   if (!req.isAuth) {
+    logger('error', 'additionalfields', 403, 'updateAll.js');
     res.status(403).send({
       message: 'Forbidden'
     });
@@ -9,7 +10,8 @@ module.exports = async (req, res) => {
   }
 
   for (let field of req.body.fields) {
-    const item = await Model.findByPk(field.id).catch(err => {
+    const item = await Model.findByPk(field.id).catch((err) => {
+      logger('error', 'additionalfields', 400, 'updateAll.js', err);
       res.status(400).send({
         message: 'Bad request'
       });
@@ -17,13 +19,15 @@ module.exports = async (req, res) => {
     });
 
     if (!item) {
+      logger('error', 'additionalfields', 404, 'updateAll.js');
       res.status(404).send({
         message: 'Not found'
       });
       return;
     }
 
-    await item.update(field).catch(err => {
+    await item.update(field).catch((err) => {
+      logger('error', 'additionalfields', 403, 'updateAll.js', err);
       res.status(400).send({
         message: 'Bad request'
       });

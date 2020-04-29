@@ -2,13 +2,15 @@ const Model = require('../model');
 
 module.exports = async (req, res) => {
   if (!req.rules.is_context_update) {
+    logger('error', 'context', 403, 'update.js');
     res.status(403).send({
       message: 'Forbidden'
     });
     return;
   }
 
-  const item = await Model.findByPk(req.params.id).catch(err => {
+  const item = await Model.findByPk(req.params.id).catch((err) => {
+    logger('error', 'context', 400, 'update.js', err);
     res.status(400).send({
       message: 'Bad request'
     });
@@ -16,6 +18,7 @@ module.exports = async (req, res) => {
   });
 
   if (!item) {
+    logger('error', 'context', 404, 'update.js');
     res.status(404).send({
       message: 'Not found'
     });
@@ -24,6 +27,7 @@ module.exports = async (req, res) => {
 
   // Запрет на обновление контекста root
   if (item.slug === 'root') {
+    logger('error', 'context', 403, 'update.js');
     res.status(403).send({
       message: 'Forbidden'
     });
@@ -32,7 +36,8 @@ module.exports = async (req, res) => {
 
   delete req.body.id;
 
-  const updatedItem = await item.update(req.body).catch(err => {
+  const updatedItem = await item.update(req.body).catch((err) => {
+    logger('error', 'context', 400, 'update.js');
     res.status(400).send({
       message: 'Bad request'
     });

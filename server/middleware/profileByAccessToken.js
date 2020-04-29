@@ -10,6 +10,13 @@ module.exports = async (req, res, next) => {
 
   // Если не верный access token то запрещено
   if (!isAccessToken) {
+    logger(
+      'error',
+      'middlware',
+      403,
+      'profileByAccessToken.js',
+      'Access token is not valid'
+    );
     res.status(403).send({
       message: 'Forbidden'
     });
@@ -22,6 +29,7 @@ module.exports = async (req, res, next) => {
     process.env.SECRET_KEY_FOR_JWT,
     async (err, decoded) => {
       if (err || !decoded) {
+        logger('error', 'middlware', 401, 'profileByAccessToken.js', err);
         res.status(401).send({
           message: 'Unauthorized'
         });
@@ -33,6 +41,13 @@ module.exports = async (req, res, next) => {
       });
 
       if (!profile) {
+        logger(
+          'error',
+          'middlware',
+          404,
+          'profileByAccessToken.js',
+          'Profile not found'
+        );
         res.status(404).send({
           message: 'Not found'
         });
@@ -40,6 +55,13 @@ module.exports = async (req, res, next) => {
       }
 
       if (!profile.verified) {
+        logger(
+          'error',
+          'middlware',
+          403,
+          'profileByAccessToken.js',
+          'Account is not verified'
+        );
         res.status(403).send({
           message: 'Account is not verified'
         });

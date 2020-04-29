@@ -2,6 +2,7 @@ const Model = require('../model');
 
 module.exports = async (req, res) => {
   if (!req.isAuth) {
+    logger('error', 'additionalfields', 403, 'remove.js');
     res.status(403).send({
       message: 'Forbidden'
     });
@@ -12,7 +13,8 @@ module.exports = async (req, res) => {
     where: {
       id: req.params.id
     }
-  }).catch(err => {
+  }).catch((err) => {
+    logger('error', 'additionalfields', 403, 'remove.js', err);
     res.status(400).send({
       message: 'Bad request'
     });

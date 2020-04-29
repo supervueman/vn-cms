@@ -7,6 +7,13 @@ module.exports = async (req, res, next) => {
   const isApiKey = typeof apiKey === 'string' && !!apiKey;
 
   if (!isApiKey) {
+    logger(
+      'error',
+      'middlware',
+      403,
+      'profileByApiKey.js',
+      'apiKey is not valid'
+    );
     res.status(403).send({
       message: 'Forbidden'
     });
@@ -18,9 +25,18 @@ module.exports = async (req, res, next) => {
       token: req.headers['x-api-key']
     },
     include: ['role', 'context']
+  }).catch((err) => {
+    logger('error', 'middlware', 400, 'profileByApiKey.js', err);
   });
 
   if (!profile) {
+    logger(
+      'error',
+      'middlware',
+      404,
+      'profileByApiKey.js',
+      'Profile not found'
+    );
     res.status(404).send({
       message: 'Not found'
     });
@@ -28,6 +44,13 @@ module.exports = async (req, res, next) => {
   }
 
   if (!profile.verified) {
+    logger(
+      'error',
+      'middlware',
+      403,
+      'profileByApiKey.js',
+      'Account is not verified'
+    );
     res.status(403).send({
       message: 'Account is not verified'
     });

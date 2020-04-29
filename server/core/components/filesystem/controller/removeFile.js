@@ -2,6 +2,13 @@ const removeFile = require('../../../../handlers/removeFile');
 
 module.exports = async (req, res) => {
   if (!req.rules.is_filesystem_files_delete) {
+    logger(
+      'error',
+      'filesystem',
+      403,
+      'removeFile.js',
+      'Not rules "is_filesystem_files_delete"'
+    );
     res.status(403).send({
       message: 'Forbidden'
     });
