@@ -2,15 +2,17 @@ const Model = require('../model');
 
 module.exports = async (req, res) => {
   if (!req.rules.is_role_read) {
+    logger('error', 'role', 403, 'findOne.js');
     res.status(403).send({
       message: 'Forbidden'
     });
     return;
   }
 
-  const filter = JSON.parse(req.query.filter || "{}");
+  const filter = JSON.parse(req.query.filter || '{}');
 
-  const item = await Model.findOne(filter).catch(() => {
+  const item = await Model.findOne(filter).catch((err) => {
+    logger('error', 'role', 400, 'findOne.js', err);
     res.status(400).send({
       message: 'Bad request'
     });
@@ -18,6 +20,7 @@ module.exports = async (req, res) => {
   });
 
   if (!item) {
+    logger('error', 'role', 404, 'findOne.js');
     res.status(404).send({
       message: 'Not found'
     });
@@ -25,6 +28,7 @@ module.exports = async (req, res) => {
   }
 
   if (item.rang > req.rang) {
+    logger('error', 'role', 403, 'findOne.js');
     res.status(403).send({
       message: 'Forbidden'
     });
