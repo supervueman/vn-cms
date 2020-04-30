@@ -12,7 +12,7 @@ module.exports = async (req, res) => {
   const filter = JSON.parse(req.query.filter || '{}');
 
   const count = await Model.count(filter).catch((err) => {
-    logger('error', 'context', 403, 'count.js', err);
+    logger('error', 'context', 400, 'count.js', err);
     res.status(400).send({
       message: 'Bad request'
     });

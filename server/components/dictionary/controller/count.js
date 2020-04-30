@@ -1,9 +1,10 @@
 const Model = require('../model');
 
 module.exports = async (req, res) => {
-  const filter = JSON.parse(req.query.filter || "{}");
+  const filter = JSON.parse(req.query.filter || '{}');
 
-  const count = await Model.count(filter).catch(err => {
+  const count = await Model.count(filter).catch((err) => {
+    logger('error', 'dictionary', 400, 'count.js', err);
     res.status(400).send({
       message: 'Bad request'
     });

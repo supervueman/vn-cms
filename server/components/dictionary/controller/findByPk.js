@@ -1,9 +1,10 @@
 const Model = require('../model');
 
 module.exports = async (req, res) => {
-  const filter = JSON.parse(req.query.filter || "{}");
+  const filter = JSON.parse(req.query.filter || '{}');
 
-  const item = await Model.findByPk(req.params.id, filter).catch(err => {
+  const item = await Model.findByPk(req.params.id, filter).catch((err) => {
+    logger('error', 'dictionary', 400, 'findByPk.js', err);
     res.status(400).send({
       message: 'Bad request'
     });
@@ -11,6 +12,7 @@ module.exports = async (req, res) => {
   });
 
   if (!item) {
+    logger('error', 'dictionary', 404, 'findByPk.js');
     res.status(404).send({
       message: 'Not found'
     });

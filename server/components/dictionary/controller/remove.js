@@ -2,13 +2,15 @@ const Model = require('../model');
 
 module.exports = async (req, res) => {
   if (!req.rules.is_dictionary_delete) {
+    logger('error', 'dictionary', 403, 'remove.js');
     res.status(403).send({
       message: 'Forbidden'
     });
     return;
   }
 
-  const item = await Model.findByPk(req.params.id).catch(err => {
+  const item = await Model.findByPk(req.params.id).catch((err) => {
+    logger('error', 'dictionary', 400, 'remove.js', err);
     res.status(400).send({
       message: 'Bad request'
     });
@@ -16,8 +18,9 @@ module.exports = async (req, res) => {
   });
 
   if (!item) {
+    logger('error', 'dictionary', 404, 'remove.js');
     res.status(404).send({
-      message: 'Not found!'
+      message: 'Not found'
     });
     return;
   }
@@ -26,7 +29,8 @@ module.exports = async (req, res) => {
     where: {
       id: req.body.id
     }
-  }).catch(err => {
+  }).catch((err) => {
+    logger('error', 'dictionary', 400, 'remove.js', err);
     res.status(400).send({
       message: 'Bad request'
     });
