@@ -2,13 +2,15 @@ const Model = require('../model');
 
 module.exports = async (req, res) => {
   if (!req.rules.is_system_setting_update) {
+    logger('error', 'systemsetting', 403, 'update.js');
     res.status(403).send({
-      message: 'Access denied!'
+      message: 'Forbidden'
     });
     return;
   }
 
-  const item = await Model.findByPk(req.params.id).catch(err => {
+  const item = await Model.findByPk(req.params.id).catch((err) => {
+    logger('error', 'systemsetting', 400, 'update.js', err);
     res.status(400).send({
       message: 'Bad request'
     });
@@ -16,15 +18,17 @@ module.exports = async (req, res) => {
   });
 
   if (!item) {
+    logger('error', 'systemsetting', 404, 'update.js');
     res.status(404).send({
-      message: 'Not found!'
+      message: 'Not found'
     });
     return;
   }
   const updateItem = req.body;
   delete updateItem.id;
 
-  const updatedItem = await item.update(updateItem).catch(err => {
+  const updatedItem = await item.update(updateItem).catch((err) => {
+    logger('error', 'systemsetting', 400, 'update.js', err);
     res.status(400).send({
       message: 'Bad request'
     });
