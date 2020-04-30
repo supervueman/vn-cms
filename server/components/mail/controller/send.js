@@ -2,6 +2,7 @@ const nodemailer = require('nodemailer');
 
 module.exports = async (req, res) => {
   if (!req.isAuth) {
+    logger('error', 'mail', 403, 'send.js');
     res.status(403).send({
       message: 'Forbidden'
     });
@@ -29,7 +30,8 @@ module.exports = async (req, res) => {
       from: process.env.MAIL_AUTH_USER,
       to: req.email
     })
-    .catch(err => {
+    .catch((err) => {
+      logger('error', 'mail', 500, 'send.js', err);
       res.status(500).send({
         message: 'Server error'
       });
