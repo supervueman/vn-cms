@@ -11,6 +11,7 @@ module.exports = async (req, res) => {
   });
 
   if (!user) {
+    logger('error', 'profile', 404, 'resetPasswordByEmailRequest.js');
     res.status(404).send({
       message: 'Not found'
     });
@@ -66,8 +67,8 @@ module.exports = async (req, res) => {
             </a>` // html body
     })
     .catch((err) => {
-      res.status(500);
-      res.send({
+      logger('error', 'profile', 500, 'resetPasswordByEmailRequest.js', err);
+      res.status(500).send({
         message: 'Not send'
       });
       return;

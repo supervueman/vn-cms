@@ -6,6 +6,7 @@ const Role = require('../../role/model');
 
 module.exports = async (req, res) => {
   if (!req.rules.is_user_create) {
+    logger('error', 'profile', 403, 'createByEmail.js');
     res.status(403).send({
       message: 'Forbidden'
     });
@@ -20,6 +21,7 @@ module.exports = async (req, res) => {
   });
 
   if (user) {
+    logger('error', 'profile', 409, 'createByEmail.js');
     res.status(409).send({
       message: 'Conflict'
     });
@@ -27,6 +29,7 @@ module.exports = async (req, res) => {
   }
 
   const role = await Role.findByPk(req.body.roleId).catch((err) => {
+    logger('error', 'profile', 400, 'createByEmail.js', err);
     res.status(400).send({
       message: 'Bad request'
     });
@@ -45,6 +48,7 @@ module.exports = async (req, res) => {
 
   // Если роль найдена и присваиваемая роль по рангу выше чем ранг роли пользователя то запретить
   if (role && role.rang > req.rang) {
+    logger('error', 'profile', 403, 'createByEmail.js');
     res.status(403).send({
       message: 'Forbidden'
     });
@@ -57,6 +61,7 @@ module.exports = async (req, res) => {
   }
 
   if (!validator.isEmail(req.body.email)) {
+    logger('error', 'profile', 400, 'createByEmail.js');
     res.status(400).send({
       message: 'Bad request'
     });
@@ -69,6 +74,7 @@ module.exports = async (req, res) => {
       min: 6
     })
   ) {
+    logger('error', 'profile', 400, 'createByEmail.js');
     res.status(400).send({
       message: 'Bad request'
     });
@@ -84,6 +90,7 @@ module.exports = async (req, res) => {
   };
 
   const createdUser = await User.create(userCreated).catch((err) => {
+    logger('error', 'profile', 400, 'createByEmail.js', err);
     res.status(400).send({
       message: 'Bad request'
     });

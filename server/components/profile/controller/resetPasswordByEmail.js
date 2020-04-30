@@ -14,6 +14,13 @@ module.exports = async (req, res) => {
     resetToken !== 'undefined';
 
   if (!isResetToken) {
+    logger(
+      'error',
+      'profile',
+      404,
+      'resetPasswordByEmail.js',
+      'reset-token not found'
+    );
     res.status(404).send({
       message: 'Not found'
     });
@@ -25,6 +32,7 @@ module.exports = async (req, res) => {
     process.env.SECRET_KEY_FOR_JWT_RESET_PASSWORD,
     async (err, decoded) => {
       if (err || !decoded) {
+        logger('error', 'profile', 404, 'resetPasswordByEmail.js', err);
         res.status(404).send({
           message: 'Not found'
         });
@@ -38,6 +46,7 @@ module.exports = async (req, res) => {
       });
 
       if (!user) {
+        logger('error', 'profile', 404, 'resetPasswordByEmail.js');
         res.status(404).send({
           message: 'Not found'
         });
@@ -69,6 +78,7 @@ module.exports = async (req, res) => {
           html: '<h1>Your password has been successfully changed!</h1>' // html body
         })
         .catch((err) => {
+          logger('error', 'profile', 500, 'resetPasswordByEmail.js', err);
           res.status(500);
           res.send({
             message: 'Not send'

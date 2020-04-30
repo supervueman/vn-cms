@@ -13,6 +13,13 @@ module.exports = async (req, res) => {
     verifiedToken !== 'undefined';
 
   if (!isVerifiedToken) {
+    logger(
+      'error',
+      'profile',
+      404,
+      'verifiedByEmail.js',
+      'verified-token is not found'
+    );
     res.status(404).send({
       message: 'Not found'
     });
@@ -24,6 +31,7 @@ module.exports = async (req, res) => {
     process.env.SECRET_KEY_FOR_JWT_VERIFIED_PROFILE,
     async (err, decoded) => {
       if (err || !decoded) {
+        logger('error', 'profile', 404, 'verifiedByEmail.js', err);
         res.status(404).send({
           message: 'Not found'
         });
@@ -37,6 +45,7 @@ module.exports = async (req, res) => {
       });
 
       if (!user) {
+        logger('error', 'profile', 404, 'verifiedByEmail.js');
         res.status(404).send({
           message: 'Not found'
         });
@@ -74,8 +83,8 @@ module.exports = async (req, res) => {
           html: '<h1>Your account is verified!</h1>' // html body
         })
         .catch((err) => {
-          res.status(500);
-          res.send({
+          logger('error', 'profile', 500, 'verifiedByEmail.js', err);
+          res.status(500).send({
             message: 'Not send'
           });
         });

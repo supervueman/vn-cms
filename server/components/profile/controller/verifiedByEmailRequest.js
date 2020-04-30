@@ -9,6 +9,7 @@ module.exports = async (req, res) => {
     !validator.isEmail(req.body.newEmail) &&
     !validator.isEmail(req.body.currentEmail)
   ) {
+    logger('error', 'profile', 400, 'verifiedByEmailRequest.js');
     res.status(400).send({
       message: 'Bad request'
     });
@@ -19,9 +20,16 @@ module.exports = async (req, res) => {
     where: {
       email: req.body.currentEmail
     }
+  }).catch((err) => {
+    logger('error', 'profile', 400, 'verifiedByEmailRequest.js', err);
+    res.status(400).send({
+      message: 'Bad request'
+    });
+    return;
   });
 
   if (!user) {
+    logger('error', 'profile', 400, 'verifiedByEmailRequest.js');
     res.status(404).send({
       message: 'Not found'
     });
@@ -89,8 +97,8 @@ module.exports = async (req, res) => {
             </a>` // html body
     })
     .catch((err) => {
-      res.status(500);
-      res.send({
+      logger('error', 'profile', 500, 'verifiedByEmailRequest.js', err);
+      res.status(500).send({
         message: 'Not send'
       });
       return;
@@ -141,8 +149,8 @@ module.exports = async (req, res) => {
             </a>` // html body
       })
       .catch((err) => {
-        res.status(500);
-        res.send({
+        logger('error', 'profile', 500, 'verifiedByEmailRequest.js', err);
+        res.status(500).send({
           message: 'Not send'
         });
         return;

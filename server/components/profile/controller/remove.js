@@ -5,6 +5,12 @@ module.exports = async (req, res) => {
     where: {
       id: req.id
     }
+  }).catch((err) => {
+    logger('error', 'profile', 400, 'remove.js', err);
+    res.status(400).send({
+      message: 'Bad request'
+    });
+    return;
   });
 
   res.status(200).send({

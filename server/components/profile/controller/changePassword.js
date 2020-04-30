@@ -7,6 +7,7 @@ module.exports = async (req, res) => {
   const profile = await Model.findByPk(req.id);
 
   if (!profile) {
+    logger('error', 'profile', 404, 'changePassword.js');
     res.status(404).send({
       message: 'Not found'
     });
@@ -14,9 +15,13 @@ module.exports = async (req, res) => {
   }
 
   // Сверяем пароли
-  const isCompare = await bcrypt.compare(req.body.oldPassword, profile.password);
+  const isCompare = await bcrypt.compare(
+    req.body.oldPassword,
+    profile.password
+  );
 
   if (!isCompare) {
+    logger('error', 'profile', 401, 'changePassword.js');
     res.status(401).send({
       message: 'Unauthorized'
     });
