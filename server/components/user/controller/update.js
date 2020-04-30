@@ -2,6 +2,7 @@ const Model = require('../model');
 
 module.exports = async (req, res) => {
   if (!req.rules.is_user_update) {
+    logger('error', 'user', 403, 'update.js');
     res.status(403).send({
       message: 'Forbidden'
     });
@@ -9,6 +10,7 @@ module.exports = async (req, res) => {
   }
 
   const item = await Model.findByPk(req.params.id).catch((err) => {
+    logger('error', 'user', 400, 'update.js', err);
     res.status(400).send({
       message: 'Bad request'
     });
@@ -16,6 +18,7 @@ module.exports = async (req, res) => {
   });
 
   if (!item) {
+    logger('error', 'user', 404, 'update.js');
     res.status(404).send({
       message: 'Not found'
     });
@@ -24,6 +27,7 @@ module.exports = async (req, res) => {
 
   // Если не админ и контексты не совпадают то запретить
   if (!req.adminAccess && item.contextId !== req.context.id) {
+    logger('error', 'user', 403, 'update.js');
     res.status(403).send({
       message: 'Forbidden'
     });
@@ -37,6 +41,7 @@ module.exports = async (req, res) => {
   delete updateUser.token;
 
   const updatedItem = await item.update(updateUser).catch((err) => {
+    logger('error', 'user', 400, 'update.js', err);
     res.status(400).send({
       message: 'Bad request'
     });
@@ -46,6 +51,7 @@ module.exports = async (req, res) => {
   const filter = JSON.parse(req.query.filter || '{}');
 
   const newItem = await Model.findByPk(updatedItem.id, filter).catch((err) => {
+    logger('error', 'user', 400, 'update.js', err);
     res.status(400).send({
       message: 'Bad request'
     });

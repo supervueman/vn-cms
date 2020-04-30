@@ -2,6 +2,7 @@ const Model = require('../model');
 
 module.exports = async (req, res) => {
   if (!req.rules.is_user_read) {
+    logger('error', 'user', 403, 'findAll.js');
     res.status(403).send({
       message: 'Forbidden'
     });
@@ -19,7 +20,8 @@ module.exports = async (req, res) => {
     filter.where.contextId = req.context.id;
   }
 
-  const items = await Model.findAll(filter).catch(err => {
+  const items = await Model.findAll(filter).catch((err) => {
+    logger('error', 'user', 400, 'findAll.js', err);
     res.status(400).send({
       message: 'Bad request'
     });

@@ -2,13 +2,14 @@ const Model = require('../model');
 
 module.exports = async (req, res) => {
   if (!req.rules.is_user_read) {
+    logger('error', 'user', 403, 'count.js');
     res.status(403).send({
-      message: 'Access denied!'
+      message: 'Forbidden'
     });
     return;
   }
 
-  const filter = JSON.parse(req.query.filter || "{}");
+  const filter = JSON.parse(req.query.filter || '{}');
 
   if (!filter.where) {
     filter.where = {};
@@ -19,7 +20,8 @@ module.exports = async (req, res) => {
     filter.where.contextId = req.context.id;
   }
 
-  const count = await Model.count(filter).catch(err => {
+  const count = await Model.count(filter).catch((err) => {
+    logger('error', 'user', 400, 'count.js', err);
     res.status(400).send({
       message: 'Bad request'
     });
