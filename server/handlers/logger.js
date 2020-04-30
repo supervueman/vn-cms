@@ -32,6 +32,5 @@ ERROR: [${errorMessage}]\n
 
   fs.appendFile(`../logs/${type}-${component}.txt`, errorLog, function (err) {
     if (err) throw err;
-    console.log('Saved!');
   });
 };
