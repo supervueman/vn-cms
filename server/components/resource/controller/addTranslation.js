@@ -2,6 +2,7 @@ const Model = require('../model');
 
 module.exports = async (req, res) => {
   if (!req.rules.is_resource_create) {
+    logger('error', 'resource', 403, 'addTranslation.js');
     res.status(403).send({
       message: 'Forbidden'
     });
@@ -9,7 +10,8 @@ module.exports = async (req, res) => {
   }
 
   for await (let arr of req.body) {
-    const item = await Model.findByPk(arr[0]).catch(err => {
+    const item = await Model.findByPk(arr[0]).catch((err) => {
+      logger('error', 'resource', 400, 'addTranslation.js', err);
       res.status(400).send({
         message: 'Bad request'
       });
@@ -17,12 +19,14 @@ module.exports = async (req, res) => {
     });
 
     if (!item) {
+      logger('error', 'resource', 404, 'addTranslation.js');
       res.status(404).send({
         message: 'Not found'
       });
     }
 
-    await item.addTranslation(arr[1]).catch(err => {
+    await item.addTranslation(arr[1]).catch((err) => {
+      logger('error', 'resource', 400, 'addTranslation.js', err);
       res.status(400).send({
         message: 'Bad request'
       });

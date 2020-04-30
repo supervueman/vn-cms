@@ -2,13 +2,15 @@ const Model = require('../model');
 
 module.exports = async (req, res) => {
   if (!req.rules.is_resource_delete) {
+    logger('error', 'resource', 403, 'remove.js');
     res.status(403).send({
       message: 'Forbidden'
     });
     return;
   }
 
-  const item = await Model.findByPk(req.params.id).catch(err => {
+  const item = await Model.findByPk(req.params.id).catch((err) => {
+    logger('error', 'resource', 400, 'remove.js', err);
     res.status(400).send({
       message: 'Bad request'
     });
@@ -16,12 +18,14 @@ module.exports = async (req, res) => {
   });
 
   if (!item) {
+    logger('error', 'resource', 404, 'remove.js');
     res.status(404).send({
       message: 'Not found'
     });
   }
 
   if (req.context.slug !== 'root' && item.contextId !== req.context.id) {
+    logger('error', 'resource', 403, 'remove.js');
     res.status(403).send({
       message: 'Forbidden'
     });
@@ -32,7 +36,8 @@ module.exports = async (req, res) => {
     where: {
       id: req.params.id
     }
-  }).catch(err => {
+  }).catch((err) => {
+    logger('error', 'resource', 400, 'remove.js', err);
     res.status(400).send({
       message: 'Bad request'
     });
