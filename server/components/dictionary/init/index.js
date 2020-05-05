@@ -1,4 +1,4 @@
-const dirTree = require("directory-tree");
+const dirTree = require('directory-tree');
 
 // Models
 const Model = require('../model');

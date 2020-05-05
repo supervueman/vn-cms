@@ -1,0 +1,438 @@
+[
+  {
+    "slug": "download",
+    "text": "Downdload"
+  },
+  {
+    "slug": "upload",
+    "text": "Upload"
+  },
+  {
+    "slug": "enter_dir_name",
+    "text": "Enter directory name"
+  },
+  {
+    "slug": "create",
+    "text": "Create"
+  },
+  {
+    "slug": "cancel",
+    "text": "Cancel"
+  },
+  {
+    "slug": "required_field",
+    "text": "Required field"
+  },
+  {
+    "slug": "current_path",
+    "text": "Current path"
+  },
+  {
+    "slug": "create_directory",
+    "text": "Create directory"
+  },
+  {
+    "slug": "reload",
+    "text": "Reload"
+  },
+  {
+    "slug": "layouts",
+    "text": "Layouts"
+  },
+  {
+    "slug": "fields",
+    "text": "Fields"
+  },
+  {
+    "slug": "field_categories",
+    "text": "Fields categories"
+  },
+  {
+    "slug": "filesystem",
+    "text": "Filesystem"
+  },
+  {
+    "slug": "create_resource",
+    "text": "Create resource"
+  },
+  {
+    "slug": "applications",
+    "text": "Applications"
+  },
+  {
+    "slug": "developer",
+    "text": "Developer"
+  },
+  {
+    "slug": "close",
+    "text": "Close"
+  },
+  {
+    "slug": "login",
+    "text": "Login"
+  },
+  {
+    "slug": "forgot_password",
+    "text": "Forgot your password?"
+  },
+  {
+    "slug": "password",
+    "text": "Password"
+  },
+  {
+    "slug": "email_is_not_valid",
+    "text": "E-mail is not valid"
+  },
+  {
+    "slug": "remove_confirm",
+    "text": "Are you sure you want to delete"
+  },
+  {
+    "slug": "resources",
+    "text": "Resources"
+  },
+  {
+    "slug": "develop",
+    "text": "Develop"
+  },
+  {
+    "slug": "files",
+    "text": "Files"
+  },
+  {
+    "slug": "users",
+    "text": "Users"
+  },
+  {
+    "slug": "roles",
+    "text": "Roles"
+  },
+  {
+    "slug": "system_settings",
+    "text": "System settings"
+  },
+  {
+    "slug": "dictionaries",
+    "text": "Dictionaries"
+  },
+  {
+    "slug": "logout",
+    "text": "Logout"
+  },
+  {
+    "slug": "context",
+    "text": "Context"
+  },
+  {
+    "slug": "common_data",
+    "text": "Common data"
+  },
+  {
+    "slug": "slug",
+    "text": "Slug"
+  },
+  {
+    "slug": "name",
+    "text": "Name"
+  },
+  {
+    "slug": "save",
+    "text": "Save"
+  },
+  {
+    "slug": "remove",
+    "text": "Remove"
+  },
+  {
+    "slug": "field_must_be_have_more_two_sumbols",
+    "text": "The field must be at least 2 characters"
+  },
+  {
+    "slug": "field_must_be_have_more_three_sumbols",
+    "text": "The field must be at least 3 characters"
+  },
+  {
+    "slug": "field_must_be_have_more_six_sumbols",
+    "text": "The field must be at least 6 characters"
+  },
+  {
+    "slug": "only_en_symbols",
+    "text": "Only latin characters allowed"
+  },
+  {
+    "slug": "context_creation",
+    "text": "Context creation"
+  },
+  {
+    "slug": "create_context",
+    "text": "Create context"
+  },
+  {
+    "slug": "contexts",
+    "text": "Contexts"
+  },
+  {
+    "slug": "create_dictionary",
+    "text": "Create dictionary"
+  },
+  {
+    "slug": "dictionary",
+    "text": "Dictionary"
+  },
+  {
+    "slug": "field_element",
+    "text": "Field element"
+  },
+  {
+    "slug": "field_category",
+    "text": "Field category"
+  },
+  {
+    "slug": "layout",
+    "text": "Layout"
+  },
+  {
+    "slug": "field_type",
+    "text": "Field type"
+  },
+  {
+    "slug": "default_value",
+    "text": "Default value"
+  },
+  {
+    "slug": "string_or_json",
+    "text": "String or JSON"
+  },
+  {
+    "slug": "schema",
+    "text": "Schema"
+  },
+  {
+    "slug": "create_field",
+    "text": "Create field"
+  },
+  {
+    "slug": "field",
+    "text": "field"
+  },
+  {
+    "slug": "field_creation",
+    "text": "Field creation"
+  },
+  {
+    "slug": "create_field_category",
+    "text": "Create fields category"
+  },
+  {
+    "slug": "field_category_creation",
+    "text": "Fields catiogory creation"
+  },
+  {
+    "slug": "directory",
+    "text": "Directory"
+  },
+  {
+    "slug": "create_layout",
+    "text": "Create layout"
+  },
+  {
+    "slug": "layout_creation",
+    "text": "Layout creation"
+  },
+  {
+    "slug": "address",
+    "text": "Address"
+  },
+  {
+    "slug": "country",
+    "text": "Country"
+  },
+  {
+    "slug": "city",
+    "text": "City"
+  },
+  {
+    "slug": "street",
+    "text": "Street"
+  },
+  {
+    "slug": "home",
+    "text": "Home"
+  },
+  {
+    "slug": "apartment",
+    "text": "Apartment"
+  },
+  {
+    "slug": "avatar",
+    "text": "Avatar"
+  },
+  {
+    "slug": "image",
+    "text": "Image"
+  },
+  {
+    "slug": "lastname",
+    "text": "Lastname"
+  },
+  {
+    "slug": "firstname",
+    "text": "Firstname"
+  },
+  {
+    "slug": "middlename",
+    "text": "Middlename"
+  },
+  {
+    "slug": "contacts",
+    "text": "Contacts"
+  },
+  {
+    "slug": "phone",
+    "text": "Phone"
+  },
+  {
+    "slug": "keys",
+    "text": "Keys"
+  },
+  {
+    "slug": "public_key",
+    "text": "Public key"
+  },
+  {
+    "slug": "change_password",
+    "text": "Change password"
+  },
+  {
+    "slug": "enter_old_password",
+    "text": "Enter old password"
+  },
+  {
+    "slug": "enter_new_password",
+    "text": "Enter new password"
+  },
+  {
+    "slug": "confirm_password",
+    "text": "Confirm password"
+  },
+  {
+    "slug": "change",
+    "text": "Change"
+  },
+  {
+    "slug": "password_not_confirm",
+    "text": "Passwords do not match"
+  },
+  {
+    "slug": "role",
+    "text": "Role"
+  },
+  {
+    "slug": "role_slug",
+    "text": "Role slug"
+  },
+  {
+    "slug": "your_profile",
+    "text": "Your profile"
+  },
+  {
+    "slug": "reset_password",
+    "text": "Reset password"
+  },
+  {
+    "slug": "send_request",
+    "text": "Send request"
+  },
+  {
+    "slug": "select_lang",
+    "text": "Select lang"
+  },
+  {
+    "slug": "create_translation",
+    "text": "Create translation"
+  },
+  {
+    "slug": "next_step",
+    "text": "Next step"
+  },
+  {
+    "slug": "need_resource_with_analog_lang",
+    "text": "You must create a parent resource with the same translation language"
+  },
+  {
+    "slug": "resource_type",
+    "text": "Resource type"
+  },
+  {
+    "slug": "published",
+    "text": "Published"
+  },
+  {
+    "slug": "menunindex",
+    "text": "Menuindex"
+  },
+  {
+    "slug": "date_creation",
+    "text": "Date creation"
+  },
+  {
+    "slug": "description",
+    "text": "Description"
+  },
+  {
+    "slug": "resource",
+    "text": "Resource"
+  },
+  {
+    "slug": "resource_creation",
+    "text": "Resource creation"
+  },
+  {
+    "slug": "rang",
+    "text": "Rang"
+  },
+  {
+    "slug": "role_creation",
+    "text": "Role creation"
+  },
+  {
+    "slug": "create_role",
+    "text": "Create role"
+  },
+  {
+    "slug": "profile",
+    "text": "Profile"
+  },
+  {
+    "slug": "user_creation",
+    "text": "User creation"
+  },
+  {
+    "slug": "create_user",
+    "text": "Create user"
+  },
+  {
+    "slug": "cannot_delete_root_directory",
+    "text": "Cannot delete root directory"
+  },
+  {
+    "slug": "enter_password",
+    "text": "Enter password"
+  },
+  {
+    "slug": "add_element",
+    "text": "Add element"
+  },
+  {
+    "slug": "vn_cms",
+    "text": "VN-CMS"
+  },
+  {
+    "slug": "verified_account",
+    "text": "Verified account"
+  },
+  {
+    "slug": "greeting",
+    "text": "Hello {{username}}! VN-CMS use Node js (Express js) for the server side and Vue js for the client side. VN-CMS is also based on Rest API architecture for flexible request and data control."
+  }
+]
