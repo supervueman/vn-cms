@@ -20,7 +20,7 @@ DATE: ${new Date().toLocaleString({
     minute: '2-digit',
     second: '2-digit'
   })}
-Module: [${module}]
+Module: [${component}]
 Status: [${status}]
 Controller: [${controller}]
 ERROR: [${errorMessage}]\n
