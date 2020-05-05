@@ -6,10 +6,25 @@ module.exports = async (lang, lexicons) => {
     where: {
       slug: lang
     },
-    include: [{ association: 'lexicons' }]
+    include: ['lexicons']
   });
 
-  if (existLang) {
-    console.log(existLang);
+  if (existLang && lexicons) {
+    const newLexicons = lexicons.filter(
+      (lexicon) =>
+        !existLang.lexicons.find(
+          (existLexicon) => lexicon.slug === existLexicon.slug
+        )
+    );
+
+    if (newLexicons.length > 0) {
+      newLexicons.forEach((el) => {
+        el.langId = existLang.id;
+      });
+
+      await Lexicon.bulkCreate(newLexicons).catch((err) => {
+        throw new Error(`${err}`);
+      });
+    }
   }
 };

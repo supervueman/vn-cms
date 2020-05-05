@@ -78,8 +78,7 @@ const Model = sequelize.define('lexicon', {
   },
   slug: {
     type: Sequelize.STRING,
-    notEmpty: true,
-    unique: true
+    notEmpty: true
   },
   value: Sequelize.STRING
 });

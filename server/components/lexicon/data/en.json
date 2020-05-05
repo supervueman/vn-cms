@@ -1,438 +1,438 @@
 [
   {
     "slug": "download",
-    "text": "Downdload"
+    "value": "Downdload"
   },
   {
     "slug": "upload",
-    "text": "Upload"
+    "value": "Upload"
   },
   {
     "slug": "enter_dir_name",
-    "text": "Enter directory name"
+    "value": "Enter directory name"
   },
   {
     "slug": "create",
-    "text": "Create"
+    "value": "Create"
   },
   {
     "slug": "cancel",
-    "text": "Cancel"
+    "value": "Cancel"
   },
   {
     "slug": "required_field",
-    "text": "Required field"
+    "value": "Required field"
   },
   {
     "slug": "current_path",
-    "text": "Current path"
+    "value": "Current path"
   },
   {
     "slug": "create_directory",
-    "text": "Create directory"
+    "value": "Create directory"
   },
   {
     "slug": "reload",
-    "text": "Reload"
+    "value": "Reload"
   },
   {
     "slug": "layouts",
-    "text": "Layouts"
+    "value": "Layouts"
   },
   {
     "slug": "fields",
-    "text": "Fields"
+    "value": "Fields"
   },
   {
     "slug": "field_categories",
-    "text": "Fields categories"
+    "value": "Fields categories"
   },
   {
     "slug": "filesystem",
-    "text": "Filesystem"
+    "value": "Filesystem"
   },
   {
     "slug": "create_resource",
-    "text": "Create resource"
+    "value": "Create resource"
   },
   {
     "slug": "applications",
-    "text": "Applications"
+    "value": "Applications"
   },
   {
     "slug": "developer",
-    "text": "Developer"
+    "value": "Developer"
   },
   {
     "slug": "close",
-    "text": "Close"
+    "value": "Close"
   },
   {
     "slug": "login",
-    "text": "Login"
+    "value": "Login"
   },
   {
     "slug": "forgot_password",
-    "text": "Forgot your password?"
+    "value": "Forgot your password?"
   },
   {
     "slug": "password",
-    "text": "Password"
+    "value": "Password"
   },
   {
     "slug": "email_is_not_valid",
-    "text": "E-mail is not valid"
+    "value": "E-mail is not valid"
   },
   {
     "slug": "remove_confirm",
-    "text": "Are you sure you want to delete"
+    "value": "Are you sure you want to delete"
   },
   {
     "slug": "resources",
-    "text": "Resources"
+    "value": "Resources"
   },
   {
     "slug": "develop",
-    "text": "Develop"
+    "value": "Develop"
   },
   {
     "slug": "files",
-    "text": "Files"
+    "value": "Files"
   },
   {
     "slug": "users",
-    "text": "Users"
+    "value": "Users"
   },
   {
     "slug": "roles",
-    "text": "Roles"
+    "value": "Roles"
   },
   {
     "slug": "system_settings",
-    "text": "System settings"
+    "value": "System settings"
   },
   {
     "slug": "dictionaries",
-    "text": "Dictionaries"
+    "value": "Dictionaries"
   },
   {
     "slug": "logout",
-    "text": "Logout"
+    "value": "Logout"
   },
   {
     "slug": "context",
-    "text": "Context"
+    "value": "Context"
   },
   {
     "slug": "common_data",
-    "text": "Common data"
+    "value": "Common data"
   },
   {
     "slug": "slug",
-    "text": "Slug"
+    "value": "Slug"
   },
   {
     "slug": "name",
-    "text": "Name"
+    "value": "Name"
   },
   {
     "slug": "save",
-    "text": "Save"
+    "value": "Save"
   },
   {
     "slug": "remove",
-    "text": "Remove"
+    "value": "Remove"
   },
   {
     "slug": "field_must_be_have_more_two_sumbols",
-    "text": "The field must be at least 2 characters"
+    "value": "The field must be at least 2 characters"
   },
   {
     "slug": "field_must_be_have_more_three_sumbols",
-    "text": "The field must be at least 3 characters"
+    "value": "The field must be at least 3 characters"
   },
   {
     "slug": "field_must_be_have_more_six_sumbols",
-    "text": "The field must be at least 6 characters"
+    "value": "The field must be at least 6 characters"
   },
   {
     "slug": "only_en_symbols",
-    "text": "Only latin characters allowed"
+    "value": "Only latin characters allowed"
   },
   {
     "slug": "context_creation",
-    "text": "Context creation"
+    "value": "Context creation"
   },
   {
     "slug": "create_context",
-    "text": "Create context"
+    "value": "Create context"
   },
   {
     "slug": "contexts",
-    "text": "Contexts"
+    "value": "Contexts"
   },
   {
     "slug": "create_dictionary",
-    "text": "Create dictionary"
+    "value": "Create dictionary"
   },
   {
     "slug": "dictionary",
-    "text": "Dictionary"
+    "value": "Dictionary"
   },
   {
     "slug": "field_element",
-    "text": "Field element"
+    "value": "Field element"
   },
   {
     "slug": "field_category",
-    "text": "Field category"
+    "value": "Field category"
   },
   {
     "slug": "layout",
-    "text": "Layout"
+    "value": "Layout"
   },
   {
     "slug": "field_type",
-    "text": "Field type"
+    "value": "Field type"
   },
   {
     "slug": "default_value",
-    "text": "Default value"
+    "value": "Default value"
   },
   {
     "slug": "string_or_json",
-    "text": "String or JSON"
+    "value": "String or JSON"
   },
   {
     "slug": "schema",
-    "text": "Schema"
+    "value": "Schema"
   },
   {
     "slug": "create_field",
-    "text": "Create field"
+    "value": "Create field"
   },
   {
     "slug": "field",
-    "text": "field"
+    "value": "field"
   },
   {
     "slug": "field_creation",
-    "text": "Field creation"
+    "value": "Field creation"
   },
   {
     "slug": "create_field_category",
-    "text": "Create fields category"
+    "value": "Create fields category"
   },
   {
     "slug": "field_category_creation",
-    "text": "Fields catiogory creation"
+    "value": "Fields catiogory creation"
   },
   {
     "slug": "directory",
-    "text": "Directory"
+    "value": "Directory"
   },
   {
     "slug": "create_layout",
-    "text": "Create layout"
+    "value": "Create layout"
   },
   {
     "slug": "layout_creation",
-    "text": "Layout creation"
+    "value": "Layout creation"
   },
   {
     "slug": "address",
-    "text": "Address"
+    "value": "Address"
   },
   {
     "slug": "country",
-    "text": "Country"
+    "value": "Country"
   },
   {
     "slug": "city",
-    "text": "City"
+    "value": "City"
   },
   {
     "slug": "street",
-    "text": "Street"
+    "value": "Street"
   },
   {
     "slug": "home",
-    "text": "Home"
+    "value": "Home"
   },
   {
     "slug": "apartment",
-    "text": "Apartment"
+    "value": "Apartment"
   },
   {
     "slug": "avatar",
-    "text": "Avatar"
+    "value": "Avatar"
   },
   {
     "slug": "image",
-    "text": "Image"
+    "value": "Image"
   },
   {
     "slug": "lastname",
-    "text": "Lastname"
+    "value": "Lastname"
   },
   {
     "slug": "firstname",
-    "text": "Firstname"
+    "value": "Firstname"
   },
   {
     "slug": "middlename",
-    "text": "Middlename"
+    "value": "Middlename"
   },
   {
     "slug": "contacts",
-    "text": "Contacts"
+    "value": "Contacts"
   },
   {
     "slug": "phone",
-    "text": "Phone"
+    "value": "Phone"
   },
   {
     "slug": "keys",
-    "text": "Keys"
+    "value": "Keys"
   },
   {
     "slug": "public_key",
-    "text": "Public key"
+    "value": "Public key"
   },
   {
     "slug": "change_password",
-    "text": "Change password"
+    "value": "Change password"
   },
   {
     "slug": "enter_old_password",
-    "text": "Enter old password"
+    "value": "Enter old password"
   },
   {
     "slug": "enter_new_password",
-    "text": "Enter new password"
+    "value": "Enter new password"
   },
   {
     "slug": "confirm_password",
-    "text": "Confirm password"
+    "value": "Confirm password"
   },
   {
     "slug": "change",
-    "text": "Change"
+    "value": "Change"
   },
   {
     "slug": "password_not_confirm",
-    "text": "Passwords do not match"
+    "value": "Passwords do not match"
   },
   {
     "slug": "role",
-    "text": "Role"
+    "value": "Role"
   },
   {
     "slug": "role_slug",
-    "text": "Role slug"
+    "value": "Role slug"
   },
   {
     "slug": "your_profile",
-    "text": "Your profile"
+    "value": "Your profile"
   },
   {
     "slug": "reset_password",
-    "text": "Reset password"
+    "value": "Reset password"
   },
   {
     "slug": "send_request",
-    "text": "Send request"
+    "value": "Send request"
   },
   {
     "slug": "select_lang",
-    "text": "Select lang"
+    "value": "Select lang"
   },
   {
     "slug": "create_translation",
-    "text": "Create translation"
+    "value": "Create translation"
   },
   {
     "slug": "next_step",
-    "text": "Next step"
+    "value": "Next step"
   },
   {
     "slug": "need_resource_with_analog_lang",
-    "text": "You must create a parent resource with the same translation language"
+    "value": "You must create a parent resource with the same translation language"
   },
   {
     "slug": "resource_type",
-    "text": "Resource type"
+    "value": "Resource type"
   },
   {
     "slug": "published",
-    "text": "Published"
+    "value": "Published"
   },
   {
     "slug": "menunindex",
-    "text": "Menuindex"
+    "value": "Menuindex"
   },
   {
     "slug": "date_creation",
-    "text": "Date creation"
+    "value": "Date creation"
   },
   {
     "slug": "description",
-    "text": "Description"
+    "value": "Description"
   },
   {
     "slug": "resource",
-    "text": "Resource"
+    "value": "Resource"
   },
   {
     "slug": "resource_creation",
-    "text": "Resource creation"
+    "value": "Resource creation"
   },
   {
     "slug": "rang",
-    "text": "Rang"
+    "value": "Rang"
   },
   {
     "slug": "role_creation",
-    "text": "Role creation"
+    "value": "Role creation"
   },
   {
     "slug": "create_role",
-    "text": "Create role"
+    "value": "Create role"
   },
   {
     "slug": "profile",
-    "text": "Profile"
+    "value": "Profile"
   },
   {
     "slug": "user_creation",
-    "text": "User creation"
+    "value": "User creation"
   },
   {
     "slug": "create_user",
-    "text": "Create user"
+    "value": "Create user"
   },
   {
     "slug": "cannot_delete_root_directory",
-    "text": "Cannot delete root directory"
+    "value": "Cannot delete root directory"
   },
   {
     "slug": "enter_password",
-    "text": "Enter password"
+    "value": "Enter password"
   },
   {
     "slug": "add_element",
-    "text": "Add element"
+    "value": "Add element"
   },
   {
     "slug": "vn_cms",
-    "text": "VN-CMS"
+    "value": "VN-CMS"
   },
   {
     "slug": "verified_account",
-    "text": "Verified account"
+    "value": "Verified account"
   },
   {
     "slug": "greeting",
-    "text": "Hello {{username}}! VN-CMS use Node js (Express js) for the server side and Vue js for the client side. VN-CMS is also based on Rest API architecture for flexible request and data control."
+    "value": "Hello {{username}}! VN-CMS use Node js (Express js) for the server side and Vue js for the client side. VN-CMS is also based on Rest API architecture for flexible request and data control."
   }
 ]

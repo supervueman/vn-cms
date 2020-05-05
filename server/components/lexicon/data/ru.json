@@ -1,438 +1,438 @@
 [
   {
     "slug": "download",
-    "text": "Скачать"
+    "value": "Скачать"
   },
   {
     "slug": "upload",
-    "text": "Загрузить"
+    "value": "Загрузить"
   },
   {
     "slug": "enter_dir_name",
-    "text": "Введите название директории"
+    "value": "Введите название директории"
   },
   {
     "slug": "create",
-    "text": "Создать"
+    "value": "Создать"
   },
   {
     "slug": "cancel",
-    "text": "Отмена"
+    "value": "Отмена"
   },
   {
     "slug": "required_field",
-    "text": "Обязательное поле"
+    "value": "Обязательное поле"
   },
   {
     "slug": "current_path",
-    "text": "Текущий путь"
+    "value": "Текущий путь"
   },
   {
     "slug": "create_directory",
-    "text": "Создать директорию"
+    "value": "Создать директорию"
   },
   {
     "slug": "reload",
-    "text": "Обновить"
+    "value": "Обновить"
   },
   {
     "slug": "layouts",
-    "text": "Шаблоны"
+    "value": "Шаблоны"
   },
   {
     "slug": "fields",
-    "text": "Поля"
+    "value": "Поля"
   },
   {
     "slug": "field_categories",
-    "text": "Категории полей"
+    "value": "Категории полей"
   },
   {
     "slug": "filesystem",
-    "text": "Файловая система"
+    "value": "Файловая система"
   },
   {
     "slug": "create_resource",
-    "text": "Создать ресурс"
+    "value": "Создать ресурс"
   },
   {
     "slug": "applications",
-    "text": "Приложения"
+    "value": "Приложения"
   },
   {
     "slug": "developer",
-    "text": "Разработчик"
+    "value": "Разработчик"
   },
   {
     "slug": "close",
-    "text": "Закрыть"
+    "value": "Закрыть"
   },
   {
     "slug": "login",
-    "text": "Войти"
+    "value": "Войти"
   },
   {
     "slug": "forgot_password",
-    "text": "Забыли пароль?"
+    "value": "Забыли пароль?"
   },
   {
     "slug": "password",
-    "text": "Пароль"
+    "value": "Пароль"
   },
   {
     "slug": "email_is_not_valid",
-    "text": "E-mail не валиден"
+    "value": "E-mail не валиден"
   },
   {
     "slug": "remove_confirm",
-    "text": "Вы действительно хотите удалить"
+    "value": "Вы действительно хотите удалить"
   },
   {
     "slug": "resources",
-    "text": "Ресурсы"
+    "value": "Ресурсы"
   },
   {
     "slug": "develop",
-    "text": "Разработка"
+    "value": "Разработка"
   },
   {
     "slug": "files",
-    "text": "Файлы"
+    "value": "Файлы"
   },
   {
     "slug": "users",
-    "text": "Пользователи"
+    "value": "Пользователи"
   },
   {
     "slug": "roles",
-    "text": "Роли"
+    "value": "Роли"
   },
   {
     "slug": "system_settings",
-    "text": "Системные настройки"
+    "value": "Системные настройки"
   },
   {
     "slug": "dictionaries",
-    "text": "Словари"
+    "value": "Словари"
   },
   {
     "slug": "logout",
-    "text": "Выход"
+    "value": "Выход"
   },
   {
     "slug": "context",
-    "text": "Контекст"
+    "value": "Контекст"
   },
   {
     "slug": "common_data",
-    "text": "Общие данные"
+    "value": "Общие данные"
   },
   {
     "slug": "slug",
-    "text": "Псевдоним"
+    "value": "Псевдоним"
   },
   {
     "slug": "name",
-    "text": "Наименование"
+    "value": "Наименование"
   },
   {
     "slug": "save",
-    "text": "Сохранить"
+    "value": "Сохранить"
   },
   {
     "slug": "remove",
-    "text": "Удалить"
+    "value": "Удалить"
   },
   {
     "slug": "field_must_be_have_more_three_sumbols",
-    "text": "Поле должено быть не менее 3 символов"
+    "value": "Поле должено быть не менее 3 символов"
   },
   {
     "slug": "field_must_be_have_more_six_sumbols",
-    "text": "Поле должено быть не менее 6 символов"
+    "value": "Поле должено быть не менее 6 символов"
   },
   {
     "slug": "only_en_symbols",
-    "text": "Разрешены только английские символы"
+    "value": "Разрешены только английские символы"
   },
   {
     "slug": "context_creation",
-    "text": "Создание контекста"
+    "value": "Создание контекста"
   },
   {
     "slug": "create_context",
-    "text": "Создать контекст"
+    "value": "Создать контекст"
   },
   {
     "slug": "contexts",
-    "text": "Контексты"
+    "value": "Контексты"
   },
   {
     "slug": "create_dictionary",
-    "text": "Создать словарь"
+    "value": "Создать словарь"
   },
   {
     "slug": "field_must_be_have_more_two_sumbols",
-    "text": "Поле должено быть не менее 2 символов"
+    "value": "Поле должено быть не менее 2 символов"
   },
   {
     "slug": "dictionary",
-    "text": "Словарь"
+    "value": "Словарь"
   },
   {
     "slug": "field_element",
-    "text": "Элемент поля"
+    "value": "Элемент поля"
   },
   {
     "slug": "field_category",
-    "text": "Категория полей"
+    "value": "Категория полей"
   },
   {
     "slug": "layout",
-    "text": "Шаблон"
+    "value": "Шаблон"
   },
   {
     "slug": "field_type",
-    "text": "Тип поля"
+    "value": "Тип поля"
   },
   {
     "slug": "default_value",
-    "text": "Значение по умолчанию"
+    "value": "Значение по умолчанию"
   },
   {
     "slug": "string_or_json",
-    "text": "Строка или json"
+    "value": "Строка или json"
   },
   {
     "slug": "schema",
-    "text": "Схема"
+    "value": "Схема"
   },
   {
     "slug": "create_field",
-    "text": "Создать поле"
+    "value": "Создать поле"
   },
   {
     "slug": "field",
-    "text": "Поле"
+    "value": "Поле"
   },
   {
     "slug": "field_creation",
-    "text": "Создание поля"
+    "value": "Создание поля"
   },
   {
     "slug": "create_field_category",
-    "text": "Создать категорию полей"
+    "value": "Создать категорию полей"
   },
   {
     "slug": "field_category_creation",
-    "text": "Создание категории полей"
+    "value": "Создание категории полей"
   },
   {
     "slug": "directory",
-    "text": "Директория"
+    "value": "Директория"
   },
   {
     "slug": "create_layout",
-    "text": "Создать шаблон"
+    "value": "Создать шаблон"
   },
   {
     "slug": "layout_creation",
-    "text": "Создание шаблона"
+    "value": "Создание шаблона"
   },
   {
     "slug": "address",
-    "text": "Адрес"
+    "value": "Адрес"
   },
   {
     "slug": "country",
-    "text": "Страна"
+    "value": "Страна"
   },
   {
     "slug": "city",
-    "text": "Город"
+    "value": "Город"
   },
   {
     "slug": "street",
-    "text": "Улица"
+    "value": "Улица"
   },
   {
     "slug": "home",
-    "text": "Дом"
+    "value": "Дом"
   },
   {
     "slug": "apartment",
-    "text": "Квартира"
+    "value": "Квартира"
   },
   {
     "slug": "avatar",
-    "text": "Аватар"
+    "value": "Аватар"
   },
   {
     "slug": "image",
-    "text": "Изображение"
+    "value": "Изображение"
   },
   {
     "slug": "lastname",
-    "text": "Фамилия"
+    "value": "Фамилия"
   },
   {
     "slug": "firstname",
-    "text": "Имя"
+    "value": "Имя"
   },
   {
     "slug": "middlename",
-    "text": "Отчество"
+    "value": "Отчество"
   },
   {
     "slug": "contacts",
-    "text": "Контакты"
+    "value": "Контакты"
   },
   {
     "slug": "phone",
-    "text": "Телефон"
+    "value": "Телефон"
   },
   {
     "slug": "keys",
-    "text": "Ключи"
+    "value": "Ключи"
   },
   {
     "slug": "public_key",
-    "text": "Публичный ключ"
+    "value": "Публичный ключ"
   },
   {
     "slug": "change_password",
-    "text": "Изменить пароль"
+    "value": "Изменить пароль"
   },
   {
     "slug": "enter_old_password",
-    "text": "Введите старый пароль"
+    "value": "Введите старый пароль"
   },
   {
     "slug": "enter_new_password",
-    "text": "Введите новый пароль"
+    "value": "Введите новый пароль"
   },
   {
     "slug": "confirm_password",
-    "text": "Подтвердите новый пароль"
+    "value": "Подтвердите новый пароль"
   },
   {
     "slug": "change",
-    "text": "Изменить"
+    "value": "Изменить"
   },
   {
     "slug": "password_not_confirm",
-    "text": "Пароли не совпадают"
+    "value": "Пароли не совпадают"
   },
   {
     "slug": "role",
-    "text": "Роль"
+    "value": "Роль"
   },
   {
     "slug": "role_slug",
-    "text": "Псевдоним роли"
+    "value": "Псевдоним роли"
   },
   {
     "slug": "your_profile",
-    "text": "Ваш профиль"
+    "value": "Ваш профиль"
   },
   {
     "slug": "reset_password",
-    "text": "Восстановить пароль"
+    "value": "Восстановить пароль"
   },
   {
     "slug": "send_request",
-    "text": "Отправить запрос"
+    "value": "Отправить запрос"
   },
   {
     "slug": "select_lang",
-    "text": "Выберете язык"
+    "value": "Выберете язык"
   },
   {
     "slug": "create_translation",
-    "text": "Создать перевод"
+    "value": "Создать перевод"
   },
   {
     "slug": "next_step",
-    "text": "Следующий шаг"
+    "value": "Следующий шаг"
   },
   {
     "slug": "need_resource_with_analog_lang",
-    "text": "Необходимо создать родительский ресурс с аналогичным языком перевода"
+    "value": "Необходимо создать родительский ресурс с аналогичным языком перевода"
   },
   {
     "slug": "resource_type",
-    "text": "Тип ресурса"
+    "value": "Тип ресурса"
   },
   {
     "slug": "published",
-    "text": "Опубликовать"
+    "value": "Опубликовать"
   },
   {
     "slug": "menunindex",
-    "text": "Меню-индекс"
+    "value": "Меню-индекс"
   },
   {
     "slug": "date_creation",
-    "text": "Дата создания"
+    "value": "Дата создания"
   },
   {
     "slug": "description",
-    "text": "Описание"
+    "value": "Описание"
   },
   {
     "slug": "resource",
-    "text": "Ресурс"
+    "value": "Ресурс"
   },
   {
     "slug": "resource_creation",
-    "text": "Создание ресурса"
+    "value": "Создание ресурса"
   },
   {
     "slug": "rang",
-    "text": "Ранг"
+    "value": "Ранг"
   },
   {
     "slug": "role_creation",
-    "text": "Создание роли"
+    "value": "Создание роли"
   },
   {
     "slug": "create_role",
-    "text": "Создать роль"
+    "value": "Создать роль"
   },
   {
     "slug": "profile",
-    "text": "Профиль"
+    "value": "Профиль"
   },
   {
     "slug": "user_creation",
-    "text": "Создание пользователя"
+    "value": "Создание пользователя"
   },
   {
     "slug": "create_user",
-    "text": "Создать пользователя"
+    "value": "Создать пользователя"
   },
   {
     "slug": "cannot_delete_root_directory",
-    "text": "Нельзя удалять корневую директорию"
+    "value": "Нельзя удалять корневую директорию"
   },
   {
     "slug": "enter_password",
-    "text": "Введите пароль"
+    "value": "Введите пароль"
   },
   {
     "slug": "add_element",
-    "text": "Добавить элемент"
+    "value": "Добавить элемент"
   },
   {
     "slug": "vn_cms",
-    "text": "VN-CMS"
+    "value": "VN-CMS"
   },
   {
     "slug": "verified_account",
-    "text": "Поддтверждение аккаунта"
+    "value": "Поддтверждение аккаунта"
   },
   {
     "slug": "greeting",
-    "text": "Hello {{username}}! VN-CMS use Node js (Express js) for the server side and Vue js for the client side. VN-CMS is also based on Rest API architecture for flexible request and data control."
+    "value": "Hello {{username}}! VN-CMS use Node js (Express js) for the server side and Vue js for the client side. VN-CMS is also based on Rest API architecture for flexible request and data control."
   }
 ]
