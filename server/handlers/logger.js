@@ -4,9 +4,9 @@ module.exports = (type, component, status, controller, error) => {
   const statusesAlias = {
     404: 'not found',
     403: 'forbidden',
-    400: 'Bad request',
-    409: 'Conflict',
-    401: 'Unauthorized'
+    400: 'bad request',
+    409: 'conflict',
+    401: 'unauthorized'
   };
 
   const errorMessage = error ? error : `${component} ${statusesAlias[status]}`;
