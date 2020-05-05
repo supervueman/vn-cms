@@ -22,17 +22,17 @@
             v-on="on"
           )
             v-img(
-              :src="`/images/flags/${dictionary.lang || mainLang}.svg`"
+              :src="`/images/flags/${adminLang}.svg`"
               width="30"
             )
         v-list
           v-list-item(
-            v-for="dictionary in dictionaries"
-            :key="dictionary.lang"
-            @click="changeLang(dictionary.lang)"
+            v-for="lang in langs"
+            :key="lang.slug"
+            @click="changeLang(lang)"
           )
-            v-img.mr-2(:src="`/images/flags/${dictionary.lang || mainLang}.svg`", width="30")
-            v-list-item-title {{dictionary.lang}}
+            v-img.mr-2(:src="`/images/flags/${lang.slug || adminLang}.svg`", width="30")
+            v-list-item-title {{lang.slug}}
       v-btn(text slot="activator" to="/profile" v-if="isAuth")
         div.body-1.mr-3 {{ firstname }} {{lastname}}
         v-avatar.mr-3(size="40" color="grey lighten-4")
@@ -102,12 +102,12 @@ export default {
       return this.$store.getters["profile/getProfile"];
     },
 
-    dictionary() {
-      return this.$store.getters["dictionary/get"];
+    lang() {
+      return this.$store.getters["base/getLang"];
     },
 
-    dictionaries() {
-      return this.$store.getters["dictionary/getAll"];
+    langs() {
+      return this.$store.getters["lang/getAll"];
     },
 
     logo() {
@@ -117,12 +117,13 @@ export default {
 
   methods: {
     async changeLang(lang) {
-      localStorage.setItem("admin-panel-lang", lang);
-      await this.$store.dispatch("dictionary/findOne", {
+      localStorage.setItem("admin-panel-lang", lang.slug);
+      this.$store.dispatch("base/setAdminLang", lang.slug);
+      await this.$store.dispatch("base/fetchLexicons", {
         query: {
           filter: {
             where: {
-              lang
+              langId: lang.id
             }
           }
         }
@@ -150,6 +151,6 @@ export default {
 </script>
 
 <style lang="sass">
-  .mobile-logo
-    display: none
+.mobile-logo
+  display: none
 </style>

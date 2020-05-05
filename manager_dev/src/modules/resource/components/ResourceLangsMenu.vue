@@ -85,8 +85,8 @@ export default {
     },
 
     langs() {
-      const dictionary = this.$store.getters["dictionary/getAll"]
-        .map(el => el.lang)
+      const dictionary = this.$store.getters["lang/getAll"]
+        .map(el => el.slug)
         .sort();
 
       let existLangs = [];

@@ -64,8 +64,6 @@ export default {
 
   methods: {
     async reloadResources() {
-      await this.$store.dispatch("base/fetchMainLang");
-
       await this.$store.dispatch("context/findSidebarContexts", {
         query: {
           filter: {
@@ -74,7 +72,7 @@ export default {
                 association: "resources",
                 where: {
                   level: 1,
-                  lang: this.$store.getters["base/getMainLang"] || "en"
+                  lang: this.$store.getters["base/getMainLang"]
                 }
               }
             ]

@@ -21,12 +21,30 @@ export default {
       if (bool) {
         await this.$store.dispatch("base/fetchMainLang");
 
-        await this.$store.dispatch("dictionary/findOne", {
+        await this.$store.dispatch("base/fetchLang", {
           query: {
             filter: {
               where: {
-                lang: localStorage.getItem("admin-panel-lang") || "en"
+                slug: this.$store.getters["base/getAdminLang"]
               }
+            }
+          }
+        });
+
+        await this.$store.dispatch("base/fetchLexicons", {
+          query: {
+            filter: {
+              where: {
+                langId: this.$store.getters["base/getLang"].id
+              }
+            }
+          }
+        });
+
+        await this.$store.dispatch("lang/findAll", {
+          query: {
+            filter: {
+              order: [["createdAt", "DESC"]]
             }
           }
         });
@@ -39,7 +57,7 @@ export default {
                   association: "resources",
                   where: {
                     level: 1,
-                    lang: this.$store.getters["base/getMainLang"] || "en"
+                    lang: this.$store.getters["base/getMainLang"]
                   }
                 }
               ]
@@ -47,28 +65,6 @@ export default {
           }
         });
       }
-    }
-  },
-
-  async mounted() {
-    await this.$store.dispatch("dictionary/findAll", {
-      query: {
-        filter: {
-          order: [["createdAt", "DESC"]]
-        }
-      }
-    });
-
-    if (!this.isAuth) {
-      await this.$store.dispatch("dictionary/findOne", {
-        query: {
-          filter: {
-            where: {
-              lang: localStorage.getItem("admin-panel-lang") || "ru"
-            }
-          }
-        }
-      });
     }
   }
 };
