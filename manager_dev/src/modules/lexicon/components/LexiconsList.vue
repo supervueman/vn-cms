@@ -1,6 +1,6 @@
 <template lang="pug">
-  v-flex(v-if="r.is_context_read")
-    .body-2.mb-12.mt-2 {{d.contexts || 'Contexts'}}
+  v-flex(v-if="r.is_lexicon_read")
+    .body-2.mb-12.mt-2 {{d.lexicons || 'Лексиконы'}}
     v-card(outlined)
       v-toolbar(flat color="white")
         v-spacer
@@ -9,8 +9,8 @@
           color="primary"
           to="/context-create"
           dark
-          v-if="r.is_context_create"
-        ) {{d.create_context || 'Create context'}}
+          v-if="r.is_lexicon_create"
+        ) {{d.create_lexicon || 'Create lexicon'}}
       v-data-table(
         :headers="headers"
         :items="contexts"
@@ -50,7 +50,7 @@ export default {
 
   metaInfo() {
     return {
-      title: `${this.d.contexts || "Contexts"}`
+      title: `${this.d.contexts || "Контексты"}`
     };
   },
 
@@ -70,7 +70,7 @@ export default {
           value: "slug"
         },
         {
-          text: `${this.d.name || "Name"}`,
+          text: `${this.d.name || "Наименование"}`,
           value: "title"
         },
         { text: "", sortable: false }

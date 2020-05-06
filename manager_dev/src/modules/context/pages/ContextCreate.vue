@@ -1,6 +1,6 @@
 <template lang="pug">
   v-flex(v-if="r.is_context_read")
-    .body-2.mb-12.mt-2 {{d.context_creation || 'Создание контекста'}}
+    .body-2.mb-12.mt-2 {{d.context_creation || 'Context creation'}}
     v-card.mb-3(outlined)
       v-card-text.pb-0 {{d.common_data || 'Common data'}}
       v-card-text
@@ -15,7 +15,7 @@
         v-flex
           v-text-field(
             v-model="context.title"
-            :label="`${d.name || 'Наименование'}:`"
+            :label="`${d.name || 'Name'}:`"
           )
       v-card-actions.px-4.pb-4.pt-0
         v-btn(
@@ -23,7 +23,7 @@
           color="primary"
           depressed
           :disabled="context.slug === 'root'"
-        ) {{d.create || 'Создать'}}
+        ) {{d.create || 'Create'}}
 </template>
 
 <script>
@@ -40,7 +40,7 @@ export default {
 
   metaInfo() {
     return {
-      title: `${this.d.context || "Контекст"}: ${this.context.title}`
+      title: `${this.d.context || "Context"}: ${this.context.title}`
     };
   },
 
