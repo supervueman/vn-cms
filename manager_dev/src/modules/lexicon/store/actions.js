@@ -132,7 +132,12 @@ const actions = {
 
   async findAll({ commit }, payload) {
     this.dispatch('preloader/fetch', true);
-    const data = requestDataHandler('GET', '/lexicons');
+    const data = requestDataHandler(
+      'GET',
+      '/lexicons',
+      undefined,
+      payload.query
+    );
 
     const response = await axios(data).catch((err) => {
       this.dispatch('preloader/fetch', false);
@@ -151,7 +156,12 @@ const actions = {
 
   async count({ commit }, payload) {
     this.dispatch('preloader/fetch', true);
-    const data = requestDataHandler('GET', '/lexicons/count');
+    const data = requestDataHandler(
+      'GET',
+      '/lexicons/count',
+      undefined,
+      payload.query
+    );
 
     const response = await axios(data).catch((err) => {
       this.dispatch('preloader/fetch', false);

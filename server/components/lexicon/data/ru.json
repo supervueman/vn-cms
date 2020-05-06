@@ -432,6 +432,18 @@
     "value": "Поддтверждение аккаунта"
   },
   {
+    "slug": "lexicon",
+    "value": "Лексикон"
+  },
+  {
+    "slug": "lexicons",
+    "value": "Лексиконы"
+  },
+  {
+    "slug": "create_lexicon",
+    "value": "Создать лексикон"
+  },
+  {
     "slug": "greeting",
     "value": "Hello {{username}}! VN-CMS use Node js (Express js) for the server side and Vue js for the client side. VN-CMS is also based on Rest API architecture for flexible request and data control."
   }
