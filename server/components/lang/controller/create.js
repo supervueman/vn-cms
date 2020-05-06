@@ -1,7 +1,7 @@
 const Model = require('../model');
 
 module.exports = async (req, res) => {
-  if (!req.rules.is_dictionary_create) {
+  if (!req.rules.is_lang_create) {
     logger('error', 'lang', 403, 'create.js');
     res.status(403).send({
       message: 'Forbidden'
