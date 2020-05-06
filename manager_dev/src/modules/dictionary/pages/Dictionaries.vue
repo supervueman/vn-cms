@@ -2,6 +2,7 @@
 	v-flex(v-if="r.is_dictionary_read")
 		.body-2.mb-12.mt-2 {{d.dictionaries || 'Dictionaries'}}
 		v-flex
+			langs-list
 			v-card(outlined)
 				dictionaries-toolbar(
 					:dictionariesLength="dictionaries.length"
@@ -72,6 +73,7 @@
 
 <script>
 // Components
+import LangsList from "../../lang/components/LangsList";
 import DictionariesToolbar from "../components/DictionariesToolbar";
 import DictionaryCreateCard from "../components/DictionaryCreateCard";
 import DictionaryList from "../components/DictionaryList";
@@ -80,6 +82,7 @@ export default {
   name: "DictionariesPage",
 
   components: {
+    LangsList,
     DictionaryCreateCard,
     DictionariesToolbar,
     DictionaryList
@@ -115,6 +118,8 @@ export default {
         }
       }
     });
+
+    await this.$store.dispatch("lang/findAll");
   },
 
   methods: {
@@ -190,9 +195,9 @@ export default {
 </script>
 
 <style lang="sass">
-	.dictionary
-		&--tab-item
-			margin-top: 26px
+.dictionary
+	&--tab-item
+		margin-top: 26px
 		&--list-text
 			max-width: 300px
 			flex: auto

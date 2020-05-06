@@ -180,5 +180,39 @@
   "is_resource_type_read": {
     "title": "Разрешить просматривать типы ресурсов",
     "value": false
+  },
+
+  "is_lang_read": {
+    "title": "Разрешить просматривать языки",
+    "value": false
+  },
+  "is_lang_create": {
+    "title": "Разрешить создавать языки",
+    "value": false
+  },
+  "is_lang_update": {
+    "title": "Разрешить редактировать языки",
+    "value": false
+  },
+  "is_lang_delete": {
+    "title": "Разрешить удалять языки",
+    "value": false
+  },
+
+  "is_lexicon_read": {
+    "title": "Разрешить просматривать лексиконы",
+    "value": false
+  },
+  "is_lexicon_create": {
+    "title": "Разрешить создавать лексиконы",
+    "value": false
+  },
+  "is_lexicon_update": {
+    "title": "Разрешить редактировать лексиконы",
+    "value": false
+  },
+  "is_lexicon_delete": {
+    "title": "Разрешить удалять лексиконы",
+    "value": false
   }
 }

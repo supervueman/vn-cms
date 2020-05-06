@@ -180,5 +180,39 @@
   "is_resource_type_read": {
     "title": "Allow viewing resource types",
     "value": true
+  },
+
+  "is_lang_read": {
+    "title": "Allow viewing langs",
+    "value": true
+  },
+  "is_lang_create": {
+    "title": "Allow create langs",
+    "value": true
+  },
+  "is_lang_update": {
+    "title": "Allow editing langs",
+    "value": true
+  },
+  "is_lang_delete": {
+    "title": "Allow delete langs",
+    "value": true
+  },
+
+  "is_lexicon_read": {
+    "title": "Allow viewing lexicons",
+    "value": true
+  },
+  "is_lexicon_create": {
+    "title": "Allow create lexicons",
+    "value": true
+  },
+  "is_lexicon_update": {
+    "title": "Allow editing lexicons",
+    "value": true
+  },
+  "is_lexicon_delete": {
+    "title": "Allow delete lexicons",
+    "value": true
   }
 }

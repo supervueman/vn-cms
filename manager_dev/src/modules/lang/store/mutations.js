@@ -7,6 +7,9 @@ const mutations = {
   },
   SET_COUNT(state, payload) {
     state.count = payload;
+  },
+  PUSH_TO_ALL(state, payload) {
+    state.langs.push(payload);
   }
 };
 
