@@ -1,7 +1,7 @@
 const Model = require('../model');
 
 module.exports = async (req, res) => {
-  if (!req.rules.is_dictionary_delete) {
+  if (!req.rules.is_lexicon_delete) {
     logger('error', 'lexicon', 403, 'remove.js');
     res.status(403).send({
       message: 'Forbidden'
@@ -27,7 +27,7 @@ module.exports = async (req, res) => {
 
   await Model.destroy({
     where: {
-      id: req.body.id
+      id: req.params.id
     }
   }).catch((err) => {
     logger('error', 'lexicon', 400, 'remove.js', err);
