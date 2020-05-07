@@ -6,10 +6,12 @@
 				v-text-field.mr-2(
 					v-model="lexiconSlug"
 					:label="`${d.slug || 'Slug'}`"
+					hide-details
 				)
 				v-text-field.mr-2(
 					v-model="lexiconValue"
 					:label="`${d.value || 'Value'}`"
+					hide-details
 				)
 				v-select.mr-2(
 					v-model="langId"
@@ -17,6 +19,7 @@
 					item-text="title"
 					item-value="id"
 					:label="`${d.lang || 'Lang'}`"
+					hide-details
 				)
 				v-btn.mr-2(text @click="search")
 					v-icon search
