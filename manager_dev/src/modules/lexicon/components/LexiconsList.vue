@@ -6,9 +6,9 @@
 				v-btn(
 					depressed
 					color="primary"
-					to="/context-create"
 					dark
 					v-if="r.is_lexicon_create"
+					@click="addLexicon"
 				) {{d.create_lexicon || 'Create lexicon'}}
 			v-data-table(
 				:headers="headers"
@@ -20,9 +20,9 @@
 					tbody
 						tr(v-for="item in items" :key="item.id")
 							td.text-xs-left
-								a {{ item.slug }}
+								a(@click="getLexicon(item.id)") {{ item.slug }}
 							td.text-xs-left
-								a {{ item.value }}
+								a(@click="getLexicon(item.id)") {{ item.value }}
 							td.text-end
 								v-btn(
 									text
@@ -47,11 +47,22 @@
 				:isActive.sync="isRemoveDialog"
 				:name="removeItem.title"
 			)
+		v-dialog(
+			v-model="isLexiconDialog"
+			max-width="500px"
+		)
+			lexicon-dialog(:operationType="operationType")
 </template>
 
 <script>
+import LexiconDialog from "./LexiconDialog";
+
 export default {
   name: "LexiconsListComponent",
+
+  components: {
+    LexiconDialog
+  },
 
   metaInfo() {
     return {
@@ -63,7 +74,9 @@ export default {
     return {
       isRemoveDialog: false,
       removeItem: {},
-      limit: 10
+      isLexiconDialog: false,
+      limit: 10,
+      operationType: "create"
     };
   },
 
@@ -157,6 +170,20 @@ export default {
         }
       };
       await this.$store.dispatch("lexicon/findAll", data);
+    },
+
+    async getLexicon(id) {
+      await this.$store.dispatch("lexicon/findByPk", {
+        params: { id }
+      });
+      this.isLexiconDialog = true;
+      this.operationType = "update";
+    },
+
+    addLexicon() {
+      this.$store.dispatch("lexicon/clear");
+      this.isLexiconDialog = true;
+      this.operationType = "create";
     }
   }
 };

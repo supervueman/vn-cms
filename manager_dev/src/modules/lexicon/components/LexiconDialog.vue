@@ -2,18 +2,24 @@
 	v-card.pt-4(outlined)
 		v-card-text.px-4
 			v-text-field(
-				v-model="lang.slug"
+				v-model="lexicon.slug"
 				:label="`${d.slug || 'Slug'}:`"
-				@input="$v.lang.slug.$touch()"
-				@blur="$v.lang.slug.$touch()"
+				@input="$v.lexicon.slug.$touch()"
+				@blur="$v.lexicon.slug.$touch()"
 				:error-messages="slugErrors"
 			)
 			v-text-field(
-				v-model="lang.title"
+				v-model="lexicon.value"
 				:label="`${d.name || 'Name'}:`"
-				@input="$v.lang.title.$touch()"
-				@blur="$v.lang.title.$touch()"
-				:error-messages="titleErrors"
+				@input="$v.lexicon.value.$touch()"
+				@blur="$v.lexicon.value.$touch()"
+				:error-messages="valueErrors"
+			)
+			v-select(
+				v-model="lexicon.langId"
+				:items="langs"
+				item-text="title"
+				item-value="id"
 			)
 		v-card-actions.px-4.pb-4
 			v-btn(
@@ -45,14 +51,14 @@ import { required, helpers } from "vuelidate/lib/validators";
 const alpha = helpers.regex("alpha", /^[a-zA-Z0-9_-]*$/);
 
 export default {
-  name: "LangDialogComponent",
+  name: "LexiconDialogComponent",
 
   mixins: [validationMixin],
 
   validations: {
-    lang: {
+    lexicon: {
       slug: { required, alpha },
-      title: { required }
+      value: { required }
     }
   },
 
@@ -64,24 +70,27 @@ export default {
   },
 
   computed: {
-    lang() {
-      return this.$store.getters["lang/get"];
+    lexicon() {
+      return this.$store.getters["lexicon/get"];
+    },
+    langs() {
+      return this.$store.getters["lang/getAll"];
     },
     slugErrors() {
       const errors = [];
-      if (!this.$v.lang.slug.$dirty) return errors;
-      !this.$v.lang.slug.alpha &&
+      if (!this.$v.lexicon.slug.$dirty) return errors;
+      !this.$v.lexicon.slug.alpha &&
         errors.push(
           `${this.d.only_en_symbols || "Only latin characters allowed"}`
         );
-      !this.$v.lang.slug.required &&
+      !this.$v.lexicon.slug.required &&
         errors.push(`${this.d.required_field || "Required field"}`);
       return errors;
     },
-    titleErrors() {
+    valueErrors() {
       const errors = [];
-      if (!this.$v.lang.title.$dirty) return errors;
-      !this.$v.lang.title.required &&
+      if (!this.$v.lexicon.value.$dirty) return errors;
+      !this.$v.lexicon.value.required &&
         errors.push(`${this.d.required_field || "Required field"}`);
       return errors;
     }
@@ -91,41 +100,41 @@ export default {
     async create() {
       this.$v.$touch();
 
-      if (!this.$v.$error && this.r.is_lang_create) {
-        await this.$store.dispatch("lang/create", {
-          body: this.lang
+      if (!this.$v.$error && this.r.is_lexicon_create) {
+        await this.$store.dispatch("lexicon/create", {
+          body: this.lexicon
         });
-        this.$emit("create", this.lang);
-        this.$store.dispatch("lang/clear");
+        this.$emit("create", this.lexicon);
+        this.$store.dispatch("lexicon/clear");
       }
     },
 
     async update() {
       this.$v.$touch();
-      if (!this.$v.$error && this.r.is_lang_update) {
-        await this.$store.dispatch("lang/update", {
+      if (!this.$v.$error && this.r.is_lexicon_update) {
+        await this.$store.dispatch("lexicon/update", {
           params: {
-            id: this.lang.id
+            id: this.lexicon.id
           },
-          body: this.lang
+          body: this.lexicon
         });
-        this.$emit("update", this.lang);
+        this.$emit("update", this.lexicon);
       }
     },
 
     async remove() {
-      if (this.r.is_lang_delete) {
-        await this.$store.dispatch("lang/remove", {
-          params: { id: this.lang.id }
+      if (this.r.is_lexicon_delete) {
+        await this.$store.dispatch("lexicon/remove", {
+          params: { id: this.lexicon.id }
         });
 
-        const langs = this.$store.getters["lang/getAll"].filter(
-          el => el.id !== this.lang.id
+        const lexicons = this.$store.getters["lexicon/getAll"].filter(
+          el => el.id !== this.lexicon.id
         );
-        this.$store.dispatch("lang/setAll", langs);
+        this.$store.dispatch("lexicon/setAll", lexicons);
 
-        this.$store.dispatch("lang/clear");
-        this.$emit("remove", this.lang);
+        this.$store.dispatch("lexicon/clear");
+        this.$emit("remove", this.lexicon);
       }
     }
   }

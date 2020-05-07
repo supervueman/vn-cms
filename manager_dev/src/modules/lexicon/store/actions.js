@@ -188,7 +188,7 @@ const actions = {
 
   clear({ commit }) {
     commit('SET', {
-      ...lang
+      ...lexicon
     });
   },
 
