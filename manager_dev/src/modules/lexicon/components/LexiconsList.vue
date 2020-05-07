@@ -3,6 +3,23 @@
 		v-card(outlined)
 			v-toolbar(flat color="white")
 				v-spacer
+				v-text-field.mr-2(
+					v-model="lexiconSlug"
+					:label="`${d.slug || 'Slug'}`"
+				)
+				v-text-field.mr-2(
+					v-model="lexiconValue"
+					:label="`${d.value || 'Value'}`"
+				)
+				v-select.mr-2(
+					v-model="langId"
+					:items="langs"
+					item-text="title"
+					item-value="id"
+					:label="`${d.lang || 'Lang'}`"
+				)
+				v-btn.mr-2(text @click="search")
+					v-icon search
 				v-btn(
 					depressed
 					color="primary"
@@ -76,7 +93,10 @@ export default {
       removeItem: {},
       isLexiconDialog: false,
       limit: 10,
-      operationType: "create"
+      operationType: "create",
+      langId: null,
+      lexiconSlug: "",
+      lexiconValue: ""
     };
   },
 
@@ -99,6 +119,9 @@ export default {
     },
     count() {
       return this.$store.getters["lexicon/getCount"];
+    },
+    langs() {
+      return this.$store.getters["lang/getAll"];
     }
   },
 
@@ -157,15 +180,25 @@ export default {
     async getPage({ offset, limit }) {
       const where = {};
 
+      if (this.langId) {
+        where.langId = this.langId;
+      } else {
+        where.langId = this.$store.getters["lang/get"].id;
+      }
+      if (this.lexiconSlug) {
+        where.slug = this.lexiconSlug;
+      }
+      if (this.lexiconValue) {
+        where.value = this.lexiconValue;
+      }
+
       const data = {
         query: {
           filter: {
             offset,
             limit,
             order: [["createdAt", "DESC"]],
-            where: {
-              langId: this.$store.getters["lang/get"].id
-            }
+            where
           }
         }
       };
@@ -184,6 +217,32 @@ export default {
       this.$store.dispatch("lexicon/clear");
       this.isLexiconDialog = true;
       this.operationType = "create";
+    },
+
+    async search() {
+      const where = {};
+
+      if (this.langId) {
+        where.langId = this.langId;
+      }
+      if (this.lexiconSlug) {
+        where.slug = this.lexiconSlug;
+      }
+      if (this.lexiconValue) {
+        where.value = this.lexiconValue;
+      }
+
+      const data = {
+        query: {
+          filter: {
+            limit: this.$route.query.limit || 10,
+            offset: this.$route.query.offset || 0,
+            order: [["createdAt", "DESC"]],
+            where
+          }
+        }
+      };
+      await this.$store.dispatch("lexicon/findAll", data);
     }
   }
 };

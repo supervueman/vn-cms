@@ -20,6 +20,7 @@
 				:items="langs"
 				item-text="title"
 				item-value="id"
+				:label="`${d.lang || 'Lang'}`"
 			)
 		v-card-actions.px-4.pb-4
 			v-btn(
