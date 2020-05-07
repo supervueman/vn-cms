@@ -224,6 +224,8 @@ export default {
 
       if (this.langId) {
         where.langId = this.langId;
+      } else {
+        where.langId = this.$store.getters["lang/get"].id;
       }
       if (this.lexiconSlug) {
         where.slug = this.lexiconSlug;

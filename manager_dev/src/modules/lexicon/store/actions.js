@@ -66,7 +66,6 @@ const actions = {
     });
 
     if (typeof response === 'object' && response.status === 200) {
-      commit('PUSH_TO_ALL', response.data);
       this.dispatch('preloader/fetch', false);
       this.dispatch('notification/fetch', {
         type: 'success',
