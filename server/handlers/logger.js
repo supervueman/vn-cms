@@ -6,7 +6,8 @@ module.exports = (type, component, status, controller, error) => {
     403: 'forbidden',
     400: 'bad request',
     409: 'conflict',
-    401: 'unauthorized'
+    401: 'unauthorized',
+    500: 'server error'
   };
 
   const errorMessage = error ? error : `${component} ${statusesAlias[status]}`;
