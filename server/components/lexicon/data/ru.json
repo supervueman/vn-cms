@@ -156,6 +156,14 @@
     "value": "Разрешены только английские символы"
   },
   {
+    "slug": "only_numbers_and_symbols",
+    "value": "Разрешены только цифры и символы"
+  },
+  {
+    "slug": "data_is_not_valid",
+    "value": "Данные заполнены не верно"
+  },
+  {
     "slug": "context_creation",
     "value": "Создание контекста"
   },

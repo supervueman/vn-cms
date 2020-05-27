@@ -160,6 +160,14 @@
     "value": "Only latin characters allowed"
   },
   {
+    "slug": "only_numbers_and_symbols",
+    "value": "Only numbers and symbols"
+  },
+  {
+    "slug": "data_is_not_valid",
+    "value": "Data is not valid"
+  },
+  {
     "slug": "context_creation",
     "value": "Context creation"
   },
