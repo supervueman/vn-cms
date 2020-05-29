@@ -7,7 +7,7 @@ module.exports = async (req, res) => {
   if (!(req.adminAccess || req.managerAccess)) {
     logger('error', 'profile', 403, 'createByPhone.js');
     res.status(403).send({
-      message: 'Access denied!'
+      message: 'Forbidden'
     });
     return;
   }
