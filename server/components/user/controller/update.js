@@ -1,7 +1,7 @@
 const Model = require('../model');
 
 // Validators
-const phoneRUValidator = require('../../../validators/phoneRUValidator');
+const phoneValidator = require('../../../validators/phoneRUValidator');
 
 module.exports = async (req, res) => {
   if (!req.rules.is_user_update) {
@@ -37,7 +37,7 @@ module.exports = async (req, res) => {
     return;
   }
 
-  const phone = phoneRUValidator(req.body.phone);
+  const phone = phoneValidator(req.body.phone);
   const updateUser = req.body;
 
   if (phone) {

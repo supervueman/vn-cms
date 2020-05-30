@@ -7,8 +7,7 @@ module.exports = async (req, res) => {
   const user = await User.findOne({
     where: {
       email: req.body.email
-    },
-    include: ['role']
+    }
   }).catch((err) => {
     logger('error', 'authenticate', 400, 'loginByEmail.js', err);
     res.status(400).send({

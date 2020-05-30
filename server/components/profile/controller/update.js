@@ -1,7 +1,7 @@
 const Model = require('../../user/model');
 
 // Validators
-const phoneRUValidator = require('../../../validators/phoneRUValidator');
+const phoneValidator = require('../../../validators/phoneRUValidator');
 
 module.exports = async (req, res) => {
   // Находим профиль
@@ -29,7 +29,7 @@ module.exports = async (req, res) => {
   delete updateProfileData.id;
   delete updateProfileData.roleId;
 
-  const phone = phoneRUValidator(req.body.phone);
+  const phone = phoneValidator(req.body.phone);
 
   if (phone) {
     updateProfileData.phone = phone;

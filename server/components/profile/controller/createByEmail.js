@@ -4,6 +4,9 @@ const validator = require('validator');
 const User = require('../../user/model');
 const Role = require('../../role/model');
 
+// Validators
+const phoneValidator = require('../../../validators/phoneRUValidator');
+
 module.exports = async (req, res) => {
   if (!req.rules.is_user_create) {
     logger('error', 'profile', 403, 'createByEmail.js');
@@ -42,15 +45,6 @@ module.exports = async (req, res) => {
   });
   req.body.roleId = defaultRole.id;
 
-  // Если роль найдена и присваиваемая роль по рангу выше чем ранг роли пользователя то запретить
-  if (role && role.rang > req.rang) {
-    logger('error', 'profile', 403, 'createByEmail.js');
-    res.status(403).send({
-      message: 'Forbidden'
-    });
-    return;
-  }
-
   // Если контекст не валидный или не назначен то присвоить контекст пользователя
   if (typeof req.body.contextId !== 'number' && !!req.body.contextId) {
     req.body.contextId = req.context.id;
@@ -78,6 +72,12 @@ module.exports = async (req, res) => {
   }
 
   const hashedPw = await bcrypt.hash(req.body.password, 12);
+
+  const phone = phoneValidator(req.body.phone);
+
+  if (phone) {
+    req.body.phone = phone;
+  }
 
   const userCreated = {
     ...req.body,
