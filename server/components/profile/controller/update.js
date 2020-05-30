@@ -1,5 +1,8 @@
 const Model = require('../../user/model');
 
+// Validators
+const phoneRUValidator = require('../../../validators/phoneRUValidator');
+
 module.exports = async (req, res) => {
   // Находим профиль
   const profile = await Model.findByPk(req.id).catch((err) => {
@@ -25,6 +28,12 @@ module.exports = async (req, res) => {
   delete updateProfileData.token;
   delete updateProfileData.id;
   delete updateProfileData.roleId;
+
+  const phone = phoneRUValidator(req.body.phone);
+
+  if (phone) {
+    updateProfileData.phone = phone;
+  }
 
   const updatedProfile = await profile.update(updateProfileData);
 

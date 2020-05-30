@@ -3,6 +3,9 @@ const validator = require('validator');
 
 const User = require('../../user/model');
 
+// Validators
+const phoneRUValidator = require('../../../validators/phoneRUValidator');
+
 module.exports = async (req, res) => {
   if (!(req.adminAccess || req.managerAccess)) {
     logger('error', 'profile', 403, 'createByPhone.js');
@@ -61,6 +64,12 @@ module.exports = async (req, res) => {
   }
 
   const hashedPw = await bcrypt.hash(req.body.password, 12);
+
+  const phone = phoneRUValidator(req.body.phone);
+
+  if (phone) {
+    req.body.phone = phone;
+  }
 
   const createdUser = await User.create({
     ...req.body,

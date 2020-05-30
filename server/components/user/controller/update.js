@@ -1,5 +1,8 @@
 const Model = require('../model');
 
+// Validators
+const phoneRUValidator = require('../../../validators/phoneRUValidator');
+
 module.exports = async (req, res) => {
   if (!req.rules.is_user_update) {
     logger('error', 'user', 403, 'update.js');
@@ -34,7 +37,13 @@ module.exports = async (req, res) => {
     return;
   }
 
+  const phone = phoneRUValidator(req.body.phone);
   const updateUser = req.body;
+
+  if (phone) {
+    updateUser.phone = phone;
+  }
+
   delete updateUser.email;
   delete updateUser.id;
   delete updateUser.password;
