@@ -28,23 +28,19 @@ module.exports = async (req, res) => {
     return;
   }
 
-  const role = await Role.findByPk(req.body.roleId).catch((err) => {
+  // назначить default роль
+  const defaultRole = await Role.findOne({
+    where: {
+      slug: 'default'
+    }
+  }).catch((err) => {
     logger('error', 'profile', 400, 'createByEmail.js', err);
     res.status(400).send({
       message: 'Bad request'
     });
     return;
   });
-
-  // Если роль не передана или не найдена то назначить default роль
-  if (!role) {
-    const defaultRole = await Role.findOne({
-      where: {
-        slug: 'default'
-      }
-    });
-    req.body.roleId = defaultRole.id;
-  }
+  req.body.roleId = defaultRole.id;
 
   // Если роль найдена и присваиваемая роль по рангу выше чем ранг роли пользователя то запретить
   if (role && role.rang > req.rang) {

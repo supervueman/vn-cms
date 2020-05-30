@@ -3,17 +3,20 @@ const Model = require('../model');
 module.exports = async (req, res) => {
   // Если нет доступа к редактированию и ранг роли пользователя ниже ранга редактируемой роли то запретить
   // Так же нельзя обновлять роли admin и default
-  if (
-    !req.rules.is_role_update ||
-    req.rang < req.body.rang ||
-    req.body.slug === 'default' ||
-    req.body.slug === 'admin'
-  ) {
+  if (!req.rules.is_role_update || req.rang < req.body.rang) {
     logger('error', 'role', 403, 'update.js');
     res.status(403).send({
       message: 'Forbidden'
     });
     return;
+  }
+
+  if (req.body.slug === 'default') {
+    delete req.body.slug;
+  }
+
+  if (req.body.slug === 'admin') {
+    delete req.body.slug;
   }
 
   const item = await Model.findByPk(req.params.id).catch((err) => {
@@ -33,7 +36,15 @@ module.exports = async (req, res) => {
   }
 
   // Так же нельзя обновлять роли admin и default
-  if (item.slug === 'default' || item.slug === 'admin') {
+  if (item.slug === 'admin') {
+    logger('error', 'role', 403, 'update.js');
+    res.status(403).send({
+      message: 'Forbidden'
+    });
+    return;
+  }
+
+  if (item.slug === 'default' && req.role !== 'admin') {
     logger('error', 'role', 403, 'update.js');
     res.status(403).send({
       message: 'Forbidden'

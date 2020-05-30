@@ -284,4 +284,42 @@ router.delete('/remove/:id', profileByAccessToken, controller.remove);
  */
 router.get('/count', profileByApiKey, controller.count);
 
+/**
+ * @swagger
+ * path:
+ *  /users/change-role:
+ *    put:
+ *      summary: Update user role
+ *      tags: [Users]
+ *      parameters:
+ *        - in: header
+ *          name: x-access-token
+ *          required: true
+ *          schema:
+ *            type: string
+ *      requestBody:
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              parameters:
+ *                userId:
+ *                  type: number
+ *                roleId:
+ *                  type: number
+ *      responses:
+ *        "200":
+ *          description: User schema
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: object
+ *                parameters:
+ *                  message:
+ *                    type: string
+ *      security:
+ *        - basicAuth: []
+ */
+router.put('/change-role', profileByAccessToken, controller.changeRole);
+
 module.exports = router;

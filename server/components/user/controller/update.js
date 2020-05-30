@@ -39,6 +39,7 @@ module.exports = async (req, res) => {
   delete updateUser.id;
   delete updateUser.password;
   delete updateUser.token;
+  delete updateUser.roleId;
 
   const updatedItem = await item.update(updateUser).catch((err) => {
     logger('error', 'user', 400, 'update.js', err);

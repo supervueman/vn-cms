@@ -33,8 +33,8 @@
           v-list-item-action
             v-checkbox(
               v-model="rule.value"
-              :disabled="role.slug === 'admin' || role.slug === 'default'"
-              )
+              :disabled="role.slug === 'admin'"
+            )
       v-card-actions
         v-btn.ml-2(
           depressed
@@ -141,11 +141,15 @@ export default {
       this.$v.$touch();
       if (this.r.is_role_update && !this.$v.$error) {
         // Сохраняем только те правила у которых проставлены галочки
-        const rules = {};
-        for (const key in this.role.rules) {
-          if (this.role.rules[key].value) {
-            rules[key] = this.role.rules[key];
+        let rules = {};
+        if (this.role.slug !== "default") {
+          for (const key in this.role.rules) {
+            if (this.role.rules[key].value) {
+              rules[key] = this.role.rules[key];
+            }
           }
+        } else {
+          rules = this.role.rules;
         }
 
         await this.$store.dispatch("role/update", {

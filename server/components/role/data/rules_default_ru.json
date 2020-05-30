@@ -58,10 +58,14 @@
     "title": "Разрешить удалять пользователей",
     "value": false
   },
+  "is_user_update_role": {
+    "title": "Разрешить изменять роль пользователя",
+    "value": false
+  },
 
   "is_dictionary_read": {
     "title": "Разрешить просмтаривать словари",
-    "value": false
+    "value": true
   },
   "is_dictionary_create": {
     "title": "Разрешить создавать словари",
@@ -129,7 +133,7 @@
 
   "is_resource_read": {
     "title": "Разрешить просматривать ресурсы",
-    "value": false
+    "value": true
   },
   "is_resource_create": {
     "title": "Разрешить создавать ресурсы",
@@ -184,7 +188,7 @@
 
   "is_lang_read": {
     "title": "Разрешить просматривать языки",
-    "value": false
+    "value": true
   },
   "is_lang_create": {
     "title": "Разрешить создавать языки",
@@ -201,7 +205,7 @@
 
   "is_lexicon_read": {
     "title": "Разрешить просматривать лексиконы",
-    "value": false
+    "value": true
   },
   "is_lexicon_create": {
     "title": "Разрешить создавать лексиконы",

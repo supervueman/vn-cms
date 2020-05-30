@@ -25,14 +25,6 @@
                 )
               v-flex.md12
                 v-select(
-                  :items="roles"
-                  item-text="title"
-                  item-value="id"
-                  v-model="profile.roleId"
-                  :label="`${d.role || 'Role'}:`"
-                )
-              v-flex.md12
-                v-select(
                   :items="contexts"
                   item-text="title"
                   item-value="id"

@@ -30,6 +30,10 @@
     "title": "Allow deleting users",
     "value": true
   },
+  "is_user_update_role": {
+    "title": "Allow change user role",
+    "value": true
+  },
 
   "is_dictionary_read": {
     "title": "Allow to view dictionaries",

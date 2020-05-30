@@ -13,7 +13,7 @@ const actions = {
       payload.query
     );
 
-    const response = await axios(data).catch(err => {
+    const response = await axios(data).catch((err) => {
       this.dispatch('preloader/fetch', false);
       this.dispatch('notification/fetch', {
         type: 'error',
@@ -37,7 +37,7 @@ const actions = {
       payload.query
     );
 
-    const response = await axios(data).catch(err => {
+    const response = await axios(data).catch((err) => {
       this.dispatch('preloader/fetch', false);
       this.dispatch('notification/fetch', {
         type: 'error',
@@ -65,7 +65,30 @@ const actions = {
       payload.body
     );
 
-    const response = await axios(data).catch(err => {
+    const response = await axios(data).catch((err) => {
+      this.dispatch('preloader/fetch', false);
+      this.dispatch('notification/fetch', {
+        type: 'error',
+        message: `${err}`,
+        isActive: true
+      });
+    });
+
+    if (typeof response === 'object' && response.status === 200) {
+      this.dispatch('preloader/fetch', false);
+      this.dispatch('notification/fetch', {
+        type: 'success',
+        message: 'Success',
+        isActive: true
+      });
+    }
+  },
+
+  async changeRole(_, payload) {
+    this.dispatch('preloader/fetch', true);
+    const data = requestDataHandler('PUT', `/users/change-role`, payload.body);
+
+    const response = await axios(data).catch((err) => {
       this.dispatch('preloader/fetch', false);
       this.dispatch('notification/fetch', {
         type: 'error',
@@ -91,7 +114,7 @@ const actions = {
       `/users/remove/${payload.params.id}`
     );
 
-    const response = await axios(data).catch(err => {
+    const response = await axios(data).catch((err) => {
       this.dispatch('preloader/fetch', false);
       this.dispatch('notification/fetch', {
         type: 'error',
@@ -116,7 +139,7 @@ const actions = {
     this.dispatch('preloader/fetch', true);
     const data = requestDataHandler('GET', '/users', undefined, payload.query);
 
-    const response = await axios(data).catch(err => {
+    const response = await axios(data).catch((err) => {
       this.dispatch('preloader/fetch', false);
       this.dispatch('notification/fetch', {
         type: 'error',
@@ -140,7 +163,7 @@ const actions = {
       payload.query
     );
 
-    const response = await axios(data).catch(err => {
+    const response = await axios(data).catch((err) => {
       this.dispatch('preloader/fetch', false);
       this.dispatch('notification/fetch', {
         type: 'error',

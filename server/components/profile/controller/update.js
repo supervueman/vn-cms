@@ -24,7 +24,7 @@ module.exports = async (req, res) => {
   delete updateProfileData.password;
   delete updateProfileData.token;
   delete updateProfileData.id;
-  delete updateProfileData.role;
+  delete updateProfileData.roleId;
 
   const updatedProfile = await profile.update(updateProfileData);
 

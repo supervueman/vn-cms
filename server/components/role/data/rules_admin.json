@@ -30,7 +30,7 @@
     "value": true
   },
   "is_role_create": {
-    "title": "Allow Create access policies",
+    "title": "Allow create access policies",
     "value": true
   },
   "is_role_update": {
@@ -56,6 +56,10 @@
   },
   "is_user_delete": {
     "title": "Allow deleting users",
+    "value": true
+  },
+  "is_user_update_role": {
+    "title": "Allow change user role",
     "value": true
   },
 

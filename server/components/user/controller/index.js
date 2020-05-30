@@ -5,5 +5,6 @@ module.exports = {
   update: require('./update'),
   changePassword: require('./changePassword'),
   remove: require('./remove'),
-  count: require('./count')
+  count: require('./count'),
+  changeRole: require('./changeRole')
 };
