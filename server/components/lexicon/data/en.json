@@ -456,6 +456,26 @@
     "value": "Lang"
   },
   {
+    "slug": "send",
+    "value": "Send"
+  },
+  {
+    "slug": "create_new",
+    "value": "Creaete new"
+  },
+  {
+    "slug": "clear",
+    "value": "Clear"
+  },
+  {
+    "slug": "create_new",
+    "value": "Create new"
+  },
+  {
+    "slug": "choose",
+    "value": "Choose"
+  },
+  {
     "slug": "greeting",
     "value": "Hello {{username}}! VN-CMS use Node js (Express js) for the server side and Vue js for the client side. VN-CMS is also based on Rest API architecture for flexible request and data control."
   }

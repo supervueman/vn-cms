@@ -21,7 +21,7 @@
     "value": true
   },
   "is_context_delete": {
-    "title": "Allow Delete Contexts",
+    "title": "Allow delete Contexts",
     "value": true
   },
 

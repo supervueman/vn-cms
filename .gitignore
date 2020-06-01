@@ -107,8 +107,9 @@ migrations
 /manager_dev/src/modules/test
 /server/components/test
 shop
-shop-statistic
 smsc
+push-notifications
+shop-statistic
 bitrixcrm
 ide
 paypal

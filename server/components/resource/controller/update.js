@@ -36,6 +36,14 @@ module.exports = async (req, res) => {
     return;
   }
 
+  if (req.context.slug === 'root' && !req.body.contextId) {
+    logger('error', 'resource', 400, 'update.js', 'Not contextId');
+    res.status(400).send({
+      message: 'Forbidden'
+    });
+    return;
+  }
+
   const is_id_in_slug = await SystemSetting.findOne({
     where: {
       slug: 'is_id_in_slug'

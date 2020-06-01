@@ -14,6 +14,14 @@ module.exports = async (req, res) => {
     req.body.contextId = req.context.id;
   }
 
+  if (req.context.slug === 'root' && !req.body.contextId) {
+    logger('error', 'resource', 400, 'create.js', 'Not contextId');
+    res.status(400).send({
+      message: 'Forbidden'
+    });
+    return;
+  }
+
   let createdItem = await Model.create(req.body).catch((err) => {
     logger('error', 'resource', 400, 'create.js', err);
     res.status(400).send({

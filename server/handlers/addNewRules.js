@@ -1,11 +1,20 @@
 const Role = require('../components/role/model');
 
-module.exports = async (roleSlug, newRules) => {
-  const role = await Role.findOne({
+module.exports = async (roleSlug, newRules, title, rang) => {
+  let role = await Role.findOne({
     where: {
       slug: roleSlug
     }
   });
+
+  if (!role) {
+    role = await Role.create({
+      slug: roleSlug,
+      title: title || roleSlug,
+      rang,
+      rules: '{}'
+    });
+  }
 
   const currentRules = JSON.parse(role.rules);
 

@@ -12,6 +12,12 @@ module.exports = {
       name: 'Smsc',
       lexicon: 'smsc',
       path: '/smsc'
+    },
+    {
+      slug: 'push_notifications',
+      name: 'Push notifications',
+      lexicon: 'push_notifications',
+      path: '/push-notification'
     }
   ]
 };
