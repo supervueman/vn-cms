@@ -11,14 +11,14 @@ require('dotenv').config();
 const logger = require('./handlers/logger');
 
 init(app);
-connector.associations(app);
+connector.associations();
 connector.routes(app);
 
 async function connect() {
   const connect = await sequelize.sync();
 
   if (!connect) {
-    errorLogWrite('db-connect', 500, 'app.js');
+    logger('error', 'db-connect', 500, 'app.js');
     console.log('Not connect!');
     return;
   }

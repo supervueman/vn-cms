@@ -1,5 +1,5 @@
 // Models
-const User = require('../components/user/model');
+const User = require('../core/modules/user/model');
 
 module.exports = async (req, res, next) => {
   const apiKey = req.headers['x-api-key'];

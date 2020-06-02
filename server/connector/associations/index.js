@@ -1,21 +1,36 @@
-const {
-  readdirSync
-} = require('fs');
+const { readdirSync } = require('fs');
 
-const getDirectories = source =>
+const lexicon = require('../../core/modules/lexicon/association');
+const context = require('../../core/modules/context/association');
+const user = require('../../core/modules/user/association');
+const field = require('../../core/modules/field/association');
+const additionalfield = require('../../core/modules/additionalfield/association');
+const layout = require('../../core/modules/layout/association');
+const rersource = require('../../core/modules/resource/association');
+
+const getDirectories = (source) =>
   readdirSync(source, {
     withFileTypes: true
   })
-  .filter(dirent => dirent.isDirectory())
-  .map(dirent => dirent.name);
+    .filter((dirent) => dirent.isDirectory())
+    .map((dirent) => dirent.name);
 
 module.exports = () => {
+  lexicon();
+  context();
+  user();
+  field();
+  additionalfield();
+  layout();
+  rersource();
+
   const dirs = getDirectories('./components');
 
-  dirs.forEach(el => {
+  dirs.forEach((el) => {
     const config = require(`../../components/${el}/config`);
+
     if (config.associations) {
-      config.associations.forEach(item => {
+      config.associations.forEach((item) => {
         if (item.association_dir_path) {
           require(`../../components/${item.association_dir_path}`)();
         }
