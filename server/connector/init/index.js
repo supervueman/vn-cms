@@ -16,6 +16,8 @@ const getDirectories = (source) =>
     .filter((dirent) => dirent.isDirectory())
     .map((dirent) => dirent.name);
 
+const dirs = getDirectories('./modules');
+
 module.exports = async () => {
   await lang();
   await lexicon();
@@ -26,10 +28,8 @@ module.exports = async () => {
   await layout();
   await resourcetype();
 
-  const dirs = getDirectories('./components');
-
   for await (const el of dirs) {
-    const init = require(`../../components/${el}`).init;
+    const init = require(`../../modules/${el}`).init;
     if (init) {
       await init();
     }

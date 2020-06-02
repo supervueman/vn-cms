@@ -7,7 +7,7 @@ const getDirectories = (source) =>
     .filter((dirent) => dirent.isDirectory())
     .map((dirent) => dirent.name);
 
-const dirs = getDirectories('./components');
+const dirs = getDirectories('./modules');
 
 const coreModulesDirs = getDirectories('./core/modules');
 
@@ -27,11 +27,11 @@ module.exports = () => {
   }
 
   for (const el of dirs) {
-    const swaggerPaths = require(`../../components/${el}/config`).swaggerPaths;
+    const swaggerPaths = require(`../../modules/${el}/config`).swaggerPaths;
 
     if (swaggerPaths) {
       const transformPaths = swaggerPaths.map(
-        (elem) => `./components/${el}/${elem}`
+        (elem) => `./modules/${el}/${elem}`
       );
       paths.push(...transformPaths);
     }

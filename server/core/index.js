@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const createDir = require('../handlers/createDir');
 const cors = require('./cors');
 
-const filesystem = require('./components/filesystem');
+const filesystem = require('./modules/filesystem');
 
 module.exports = async (app) => {
   app.use(

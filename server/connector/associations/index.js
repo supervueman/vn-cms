@@ -15,6 +15,8 @@ const getDirectories = (source) =>
     .filter((dirent) => dirent.isDirectory())
     .map((dirent) => dirent.name);
 
+const dirs = getDirectories('./modules');
+
 module.exports = () => {
   lexicon();
   context();
@@ -24,15 +26,13 @@ module.exports = () => {
   layout();
   rersource();
 
-  const dirs = getDirectories('./components');
-
   dirs.forEach((el) => {
-    const config = require(`../../components/${el}/config`);
+    const config = require(`../../modules/${el}/config`);
 
     if (config.associations) {
       config.associations.forEach((item) => {
         if (item.association_dir_path) {
-          require(`../../components/${item.association_dir_path}`)();
+          require(`../../modules/${item.association_dir_path}`)();
         }
       });
     }

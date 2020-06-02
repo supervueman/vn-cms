@@ -23,6 +23,8 @@ const getDirectories = (source) =>
     .filter((dirent) => dirent.isDirectory())
     .map((dirent) => dirent.name);
 
+const dirs = getDirectories('./modules');
+
 module.exports = async (app) => {
   app.use('/langs', lang);
   app.use('/lexicons', lexicon);
@@ -40,17 +42,15 @@ module.exports = async (app) => {
   app.use('/resourcetypes', resourcetype);
   app.use('/resources', rersource);
 
-  const dirs = getDirectories('./components');
-
   dirs.forEach((el) => {
-    const config = require(`../../components/${el}/config`);
+    const config = require(`../../modules/${el}/config`);
 
     if (config.routes) {
       config.routes.forEach((item) => {
         if (item.base_route_name) {
           app.use(
             `/${item.base_route_name}`,
-            require(`../../components/${item.route_dir_path}`)
+            require(`../../modules/${item.route_dir_path}`)
           );
         }
       });
