@@ -1,4 +1,4 @@
-const removeDir = require('../../../../handlers/removeDir');
+const removeDir = require('../handlers/removeDir');
 
 module.exports = async (req, res) => {
   if (!req.rules.is_filesystem_directory_delete) {

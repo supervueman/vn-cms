@@ -1,4 +1,4 @@
-const removeFile = require('../../../../handlers/removeFile');
+const removeFile = require('../handlers/removeFile');
 
 module.exports = async (req, res) => {
   if (!req.rules.is_filesystem_files_delete) {

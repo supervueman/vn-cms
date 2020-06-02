@@ -6,7 +6,7 @@ const controller = require('../controller');
 
 // Middleware
 const profileByAccessToken = require('../../../../middleware/profileByAccessToken');
-const upload = require('../../../../middleware/uploadFiles');
+const upload = require('../middleware/uploadFiles');
 
 /**
  * @swagger
@@ -71,7 +71,12 @@ router.get('/', profileByAccessToken, controller.getFilesystem);
  */
 router.post('/create-dir', profileByAccessToken, controller.createDir);
 
-router.post('/upload', profileByAccessToken, upload.array('file'), controller.upload);
+router.post(
+  '/upload',
+  profileByAccessToken,
+  upload.array('file'),
+  controller.upload
+);
 
 router.put('/rename-dir', profileByAccessToken, controller.renameDir);
 

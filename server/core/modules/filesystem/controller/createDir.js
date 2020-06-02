@@ -1,4 +1,4 @@
-const createDir = require('../../../../handlers/createDir');
+const createDir = require('../handlers/createDir');
 
 module.exports = async (req, res) => {
   if (!req.rules.is_filesystem_directory_create) {

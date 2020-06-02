@@ -1,7 +1,7 @@
 const Model = require('../model');
 
 // Helpers
-const removeDir = require('../../../../handlers/removeDir');
+const removeDir = require('../../filesystem/handlers/removeDir');
 
 module.exports = async (req, res) => {
   if (!req.rules.is_user_delete) {

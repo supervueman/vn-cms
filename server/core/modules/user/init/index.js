@@ -7,7 +7,7 @@ const Role = require('../../role/model');
 const Context = require('../../context/model');
 
 // Handlers
-const createDir = require('../../../../handlers/createDir');
+const createDir = require('../../filesystem/handlers/createDir');
 
 module.exports = async () => {
   const adminRole = await Role.findOne({

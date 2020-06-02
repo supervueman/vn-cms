@@ -4,7 +4,7 @@ const newRulesManager = require('../data/rules_manager.json');
 const newRulesDefault = require('../data/rules_default.json');
 
 // Healpers
-const addNewRules = require('../../../../handlers/addNewRules');
+const addNewRules = require('../handlers/addNewRules');
 
 module.exports = async () => {
   await addNewRules('default', newRulesDefault, 'Default', 0);

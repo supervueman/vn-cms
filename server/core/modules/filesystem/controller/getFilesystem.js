@@ -1,4 +1,4 @@
-const readDir = require('../../../../handlers/readDir');
+const readDir = require('../handlers/readDir');
 
 module.exports = async (req, res) => {
   if (!req.rules.is_filesystem_access) {

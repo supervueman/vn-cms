@@ -1,6 +1,6 @@
 const Model = require('../model');
 
-const createDir = require('../../../../handlers/createDir');
+const createDir = require('../../filesystem/handlers/createDir');
 
 module.exports = async (req, res) => {
   // Если есть доступ к созданию или если псевдоним контекста является root то запретить

@@ -1,4 +1,4 @@
-const Role = require('../core/modules/role/model');
+const Role = require('../model');
 
 module.exports = async (roleSlug, newRules, title, rang) => {
   let role = await Role.findOne({
