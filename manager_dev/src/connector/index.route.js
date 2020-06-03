@@ -4,21 +4,43 @@ import Router from 'vue-router';
 /**
  * Automatically imports all the modules and exports as a single module object
  */
-// const requireModule = require.context('.', false, /\.store\.js$/);
+const coreModules = {};
 const modules = {};
+
+let corePaths = [];
 let paths = [];
 
 const requireModule = require.context('../modules', true, /\.route\.js$/);
+const requireCoreModule = require.context(
+  '../core/modules',
+  true,
+  /\.route\.js$/
+);
 
-requireModule.keys().forEach(filename => {
+requireCoreModule.keys().forEach((filename) => {
   // create the module name from fileName
   // remove the store.js extension and capitalize
-  const moduleName = filename
-    .replace(/(\.\/|\/\index\.route\.js)/g, '');
+  const moduleName = filename.replace(/(\.\/|\/\index\.route\.js)/g, '');
 
-  modules[moduleName] = requireModule(filename).default || requireModule(filename);
+  coreModules[moduleName] =
+    requireCoreModule(filename).default || requireCoreModule(filename);
 
-  modules[moduleName].forEach(el => {
+  coreModules[moduleName].forEach((el) => {
+    el.componentPath = `${moduleName}/pages/${el.component}.vue`;
+  });
+
+  corePaths = corePaths.concat(coreModules[moduleName]);
+});
+
+requireModule.keys().forEach((filename) => {
+  // create the module name from fileName
+  // remove the store.js extension and capitalize
+  const moduleName = filename.replace(/(\.\/|\/\index\.route\.js)/g, '');
+
+  modules[moduleName] =
+    requireModule(filename).default || requireModule(filename);
+
+  modules[moduleName].forEach((el) => {
     el.componentPath = `${moduleName}/pages/${el.component}.vue`;
   });
 
@@ -33,22 +55,36 @@ requireModule.keys().forEach(filename => {
  * @returns {object}
  * Функция возвращает объект роутера
  */
+
+function routeCore(path, name, component, componentPath, meta) {
+  return {
+    path,
+    name,
+    meta,
+    component: () => import(`@/core/modules/${componentPath}`)
+  };
+}
+
 function route(path, name, component, componentPath, meta) {
   return {
     path,
     name,
     meta,
-    component: () => import(
-      `@/modules/${componentPath}`
-    )
+    component: () => import(`@/modules/${componentPath}`)
   };
 }
 
 Vue.use(Router);
 
-const routes = paths.map(path => route(path.path, path.name, path.component, path.componentPath, path.meta));
+const coreRoutes = corePaths.map((path) =>
+  routeCore(path.path, path.name, path.component, path.componentPath, path.meta)
+);
+
+const routes = paths.map((path) =>
+  route(path.path, path.name, path.component, path.componentPath, path.meta)
+);
 
 export default new Router({
   mode: 'history',
-  routes
+  routes: [...coreRoutes, ...routes]
 });
