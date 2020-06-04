@@ -1,48 +1,44 @@
 {
-	"name": "vn-cms",
-	"version": "1.0.0",
-	"description": "",
-	"main": "index.js",
-	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1",
-		"install": "(cd server && npm i) && (cd manager_dev && npm i) && (cd client && npm i)",
-		"manager:dev:create:symlink": "cd manager_dev/public/static && ln -s ../../../files",
-		"manager:dev:remove:symlink": "cd manager_dev/public/static && rm -r files",
-		"manager:dev": "cd manager_dev && npm run serve",
-		"manager:build": "cd manager_dev && npm run build && cd ../ && npm run manager:prod:create:symlink",
-		"manager:create:symlink": "cd manager && cd static && ln -s ../../files",
-		"manager:start:local": "serve -s manager",
-		"manager:start:pm2": "cd manager && pm2 serve --spa --name manager",
-		"manager:restart:pm2": "cd manager && pm2 restart manager",
-		"manager:stop:pm2": "cd manager && pm2 stop manager",
-		"client:create:symlink": "cd client/static && ln -s ../../files",
-		"client:remove:symlink": "cd client/static && rm -r files",
-		"client:dev": "cd client && npm run dev",
-		"client:build": "cd client && npm run build",
-		"client:start": "cd client && npm run start",
-		"client:start:pm2": "cd client && npm run start:pm2",
-		"client:restart:pm2": "cd client && npm run restart:pm2",
-		"client:stop:pm2": "cd client && npm run stop:pm2",
-		"server:dev": "cd server && npm run dev",
-		"server:start:pm2": "cd server && npm run start:pm2",
-		"server:restart:pm2": "cd server && npm run restart:pm2",
-		"server:stop:pm2": "cd server && npm run stop:pm2",
-		"app:start:pm2": "(npm run server:start:pm2) && (npm run manager:start:pm2) && (npm run client:start:pm2)",
-		"app:restart:pm2": "(npm run server:restart:pm2) && (npm run manager:restart:pm2) && (npm run client:restart:pm2)",
-		"app:stop:pm2": "(npm run server:stop:pm2) && (npm run manager:stop:pm2) && (npm run client:stop:pm2)"
-	},
-	"repository": {
-		"type": "git",
-		"url": "https://gitlab.com/multicms/platform-cms"
-	},
-	"author": "supervueman",
-	"license": "ISC",
-	"bugs": {
-		"url": "https://gitlab.com/multicms/platform-cms/issues"
-	},
-	"homepage": "https://gitlab.com/multicms/platform-cms#readme",
-	"dependencies": {
-		"password-generator": "^2.2.3"
-	},
-	"devDependencies": {}
+  "name": "vn-cms",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "install": "(cd server && npm i) && (cd manager_dev && npm i) && (cd client && npm i)",
+    "manager:dev:create:symlink": "cd manager_dev/public/static && ln -s ../../../files",
+    "manager:dev:remove:symlink": "cd manager_dev/public/static && rm -r files",
+    "manager:dev": "cd manager_dev && npm run serve",
+    "manager:build": "cd manager_dev && npm run build && cd ../ && npm run manager:prod:create:symlink",
+    "manager:create:symlink": "cd manager && cd static && ln -s ../../files",
+    "manager:start:local": "serve -s manager",
+    "manager:start:pm2": "cd manager && pm2 serve --spa --name manager",
+    "manager:restart:pm2": "cd manager && pm2 restart manager",
+    "manager:stop:pm2": "cd manager && pm2 stop manager",
+    "client:create:symlink": "cd client/static && ln -s ../../files",
+    "client:remove:symlink": "cd client/static && rm -r files",
+    "client:dev": "cd client && npm run dev",
+    "client:build": "cd client && npm run build",
+    "client:start": "cd client && npm run start",
+    "client:start:pm2": "cd client && npm run start:pm2",
+    "client:restart:pm2": "cd client && npm run restart:pm2",
+    "client:stop:pm2": "cd client && npm run stop:pm2",
+    "server:dev": "cd server && npm run dev",
+    "server:start:pm2": "cd server && npm run start:pm2",
+    "server:restart:pm2": "cd server && npm run restart:pm2",
+    "server:stop:pm2": "cd server && npm run stop:pm2",
+    "app:start:pm2": "(npm run server:start:pm2) && (npm run manager:start:pm2) && (npm run client:start:pm2)",
+    "app:restart:pm2": "(npm run server:restart:pm2) && (npm run manager:restart:pm2) && (npm run client:restart:pm2)",
+    "app:stop:pm2": "(npm run server:stop:pm2) && (npm run manager:stop:pm2) && (npm run client:stop:pm2)"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/supervueman/vn-cms.git"
+  },
+  "author": "supervueman",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/supervueman/vn-cms.git/issues"
+  },
+  "homepage": "https://github.com/supervueman/vn-cms.git#readme"
 }
