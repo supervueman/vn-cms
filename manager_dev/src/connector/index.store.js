@@ -10,7 +10,7 @@ import systemsetting from '@/core/modules/systemsetting/store/index.store';
 import lang from '@/core/modules/lang/store/index.store';
 import lexicon from '@/core/modules/lexicon/store/index.store';
 import context from '@/core/modules/context/store/index.store';
-import role from '@/core/modules/lang/store/index.store';
+import role from '@/core/modules/role/store/index.store';
 import user from '@/core/modules/user/store/index.store';
 import mail from '@/core/modules/mail/store/index.store';
 import profile from '@/core/modules/profile/store/index.store';
