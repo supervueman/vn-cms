@@ -104,17 +104,19 @@ typings/
 migrations
 
 # Modules
-/manager_dev/src/modules/test
-/server/components/test
-shop
-smsc
-push-notifications
-shop-statistic
-bitrixcrm
-ide
-paypal
-yandexmoney
-webmoney
-qiwi
-mailbox
-retailcrm
+/server/modules/**
+/manager_dev/modules/**
+# /manager_dev/src/modules/test
+# /server/components/test
+# shop
+# smsc
+# push-notifications
+# shop-statistic
+# bitrixcrm
+# ide
+# paypal
+# yandexmoney
+# webmoney
+# qiwi
+# mailbox
+# retailcrm
