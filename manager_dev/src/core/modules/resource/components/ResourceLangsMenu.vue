@@ -55,13 +55,13 @@
 
 <script>
 // Mixins
-import { validationMixin } from "vuelidate";
+import { validationMixin } from 'vuelidate';
 
 // Libs
-import { required } from "vuelidate/lib/validators";
+import { required } from 'vuelidate/lib/validators';
 
 export default {
-  name: "ResourceLangsMenu",
+  name: 'ResourceLangsMenu',
 
   mixins: [validationMixin],
 
@@ -71,28 +71,28 @@ export default {
 
   data: () => ({
     isTranslationDialog: false,
-    translationLang: "",
+    translationLang: '',
     translationParentId: null
   }),
 
   computed: {
     resource() {
-      return this.$store.getters["resource/get"];
+      return this.$store.getters['resource/get'];
     },
 
     translations() {
-      return this.$store.getters["resource/getTranslations"];
+      return this.$store.getters['resource/getTranslations'];
     },
 
     langs() {
-      const dictionary = this.$store.getters["lang/getAll"]
-        .map(el => el.slug)
+      const dictionary = this.$store.getters['lang/getAll']
+        .map((el) => el.slug)
         .sort();
 
       let existLangs = [];
 
       if (this.translations && this.translations.length > 0) {
-        existLangs = this.translations.map(el => el.lang).sort();
+        existLangs = this.translations.map((el) => el.lang).sort();
       }
 
       function notExistLangs() {
@@ -116,7 +116,7 @@ export default {
       const errors = [];
       if (!this.$v.translationLang.$dirty) return errors;
       !this.$v.translationLang.required &&
-        errors.push(`${this.d.required_field || "Required field"}`);
+        errors.push(`${this.d.required_field || 'Required field'}`);
       return errors;
     }
   },
@@ -125,7 +125,7 @@ export default {
     findTranslationParentId() {
       if (this.resource.parent !== null && this.resource.parent.translations) {
         this.translationParentId = null;
-        this.resource.parent.translations.forEach(el => {
+        this.resource.parent.translations.forEach((el) => {
           if (el.lang === this.translationLang) {
             this.translationParentId = el.id;
           }
@@ -137,10 +137,10 @@ export default {
       this.$v.$touch();
       if (this.r.is_resource_create && !this.$v.$error) {
         if (this.resource.level - 1 > 0 && this.translationParentId === null) {
-          this.$store.dispatch("notification/fetch", {
-            type: "error",
+          this.$store.dispatch('notification/fetch', {
+            type: 'error',
             message: `${this.d.need_resource_with_analog_lang ||
-              "You must create a parent resource with the same translation language"}`,
+              'You must create a parent resource with the same translation language'}`,
             isActive: true
           });
           return;

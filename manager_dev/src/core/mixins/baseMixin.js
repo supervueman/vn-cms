@@ -2,8 +2,10 @@ const mixin = {
   computed: {
     // Основной язык
     adminLang() {
-      // console.log(this.$store.getters['base/getMainLang']);
       return this.$store.getters['base/getAdminLang'];
+    },
+    mainLang() {
+      return this.$store.getters['base/getMainLang'];
     },
     // правила
     r() {
