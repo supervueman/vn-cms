@@ -4,27 +4,18 @@ const Model = require('../model');
 module.exports = async (req, res) => {
   if (!req.rules.is_context_delete) {
     logger('error', 'context', 403, 'remove.js');
-    res.status(403).send({
-      message: 'Forbidden'
-    });
-    return;
+    sendRes({ res, status: 403 });
   }
 
   const item = await Model.findByPk(req.params.id).catch((err) => {
     logger('error', 'context', 400, 'remove.js', err);
-    res.status(400).send({
-      message: 'Bad request'
-    });
-    return;
+    sendRes({ res, status: 400 });
   });
 
   // Запрет на удаление контекста root
   if (item.slug === 'root') {
     logger('error', 'context', 403, 'remove.js');
-    res.status(403).send({
-      message: 'Forbidden'
-    });
-    return;
+    sendRes({ res, status: 403 });
   }
 
   await Model.destroy({
@@ -33,13 +24,8 @@ module.exports = async (req, res) => {
     }
   }).catch((err) => {
     logger('error', 'context', 400, 'remove.js', err);
-    res.status(400).send({
-      message: 'Bad request'
-    });
-    return;
+    sendRes({ res, status: 400 });
   });
 
-  res.status(204).send({
-    message: 'No content'
-  });
+  sendRes({ res, status: 204 });
 };

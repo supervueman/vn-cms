@@ -106,7 +106,7 @@ export default {
           }
         });
 
-        this.$store.dispatch("context/setAll", roles);
+        this.$store.dispatch("context/setAll", contexts);
       }
     },
 

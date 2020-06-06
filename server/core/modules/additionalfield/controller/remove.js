@@ -3,10 +3,7 @@ const Model = require('../model');
 module.exports = async (req, res) => {
   if (!req.isAuth) {
     logger('error', 'additionalfields', 403, 'remove.js');
-    res.status(403).send({
-      message: 'Forbidden'
-    });
-    return;
+    sendRes({ res, status: 403 });
   }
 
   await Model.destroy({
@@ -14,14 +11,9 @@ module.exports = async (req, res) => {
       id: req.params.id
     }
   }).catch((err) => {
-    logger('error', 'additionalfields', 403, 'remove.js', err);
-    res.status(400).send({
-      message: 'Bad request'
-    });
-    return;
+    logger('error', 'additionalfields', 400, 'remove.js', err);
+    sendRes({ res, status: 400 });
   });
 
-  res.status(204).send({
-    message: 'No content'
-  });
+  sendRes({ res, status: 204 });
 };

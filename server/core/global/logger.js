@@ -1,16 +1,10 @@
 const fs = require('fs');
+const statusAlias = require('../helpers/statusAlias');
 
 module.exports = (type, component, status, controller, error) => {
-  const statusesAlias = {
-    404: 'not found',
-    403: 'forbidden',
-    400: 'bad request',
-    409: 'conflict',
-    401: 'unauthorized',
-    500: 'server error'
-  };
-
-  const errorMessage = error ? error : `${component} ${statusesAlias[status]}`;
+  const errorMessage = error
+    ? error
+    : `${component} ${statusAlias[status].alias}`;
 
   const errorLog = `
 DATE: ${new Date().toLocaleString({
@@ -31,7 +25,7 @@ ERROR: [${errorMessage}]\n
     fs.mkdirSync('../logs');
   }
 
-  fs.appendFile(`../logs/${type}-${component}.txt`, errorLog, function (err) {
+  fs.appendFile(`../logs/${type}-${component}.txt`, errorLog, (err) => {
     if (err) throw err;
   });
 };

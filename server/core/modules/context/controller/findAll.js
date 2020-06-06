@@ -3,10 +3,7 @@ const Model = require('../model');
 module.exports = async (req, res) => {
   if (!req.rules.is_context_read) {
     logger('error', 'context', 403, 'findAll.js');
-    res.status(403).send({
-      message: 'Forbidden'
-    });
-    return;
+    sendRes({ res, status: 403 });
   }
 
   const filter = JSON.parse(req.query.filter || '{}');
@@ -20,11 +17,8 @@ module.exports = async (req, res) => {
 
   const items = await Model.findAll(filter).catch((err) => {
     logger('error', 'context', 400, 'findAll.js', err);
-    res.status(400).send({
-      message: 'Bad request'
-    });
-    return;
+    sendRes({ res, status: 400 });
   });
 
-  res.status(200).send(items);
+  sendRes({ res, status: 200 });
 };

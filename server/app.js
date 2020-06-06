@@ -7,8 +7,9 @@ const connector = require('./connector');
 
 require('dotenv').config();
 
-// Logger
-const logger = require('./handlers/logger');
+// Globals
+const logger = require('./core/global/logger');
+const sendRes = require('./core/global/response');
 
 init(app);
 connector.associations();
@@ -27,6 +28,7 @@ async function connect() {
 
   app.listen(server_port, () => {
     global.logger = logger;
+    global.sendRes = sendRes;
     console.log(`Server listen on http://localhost:${server_port}`);
   });
 }
