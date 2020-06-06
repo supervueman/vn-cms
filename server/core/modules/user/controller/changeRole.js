@@ -26,7 +26,7 @@ module.exports = async (req, res) => {
   }
 
   // Если не админ и контексты не совпадают то запретить
-  if (item.contextId !== req.context.id) {
+  if (req.context.slug !== 'root' && item.contextId !== req.context.id) {
     logger('error', 'user', 403, 'changeRole.js');
     res.status(403).send({
       message: 'Forbidden'
