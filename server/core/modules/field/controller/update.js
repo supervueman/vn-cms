@@ -3,26 +3,17 @@ const Model = require('../model');
 module.exports = async (req, res) => {
   if (!req.rules.is_field_update) {
     logger('error', 'field', 403, 'update.js');
-    res.status(403).send({
-      message: 'Bad request'
-    });
-    return;
+    sendRes({ res, status: 403 });
   }
 
   const item = await Model.findByPk(req.body.id).catch((err) => {
     logger('error', 'field', 400, 'update.js', err);
-    res.status(400).send({
-      message: 'Bad request'
-    });
-    return;
+    sendRes({ res, status: 400 });
   });
 
   if (!item) {
     logger('error', 'field', 404, 'update.js');
-    res.status(404).send({
-      message: 'Not found'
-    });
-    return;
+    sendRes({ res, status: 404 });
   }
 
   const updateItem = req.body;
@@ -30,11 +21,8 @@ module.exports = async (req, res) => {
 
   const updatedItem = await item.update(updateItem).catch((err) => {
     logger('error', 'field', 400, 'update.js', err);
-    res.status(400).send({
-      message: 'Bad request'
-    });
-    return;
+    sendRes({ res, status: 400 });
   });
 
-  res.status(200).send(updatedItem);
+  sendRes({ res, status: 200, data: updatedItem });
 };

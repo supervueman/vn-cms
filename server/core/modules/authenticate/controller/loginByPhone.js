@@ -10,27 +10,18 @@ module.exports = async (req, res) => {
     }
   }).catch((err) => {
     logger('error', 'authenticate', 400, 'loginByPhone.js', err);
-    res.status(400).send({
-      message: 'Bad request'
-    });
-    return;
+    sendRes({ res, status: 400 });
   });
 
   if (!user) {
-    res.status(404).send({
-      message: 'Not found'
-    });
-    return;
+    sendRes({ res, status: 404 });
   }
 
   const isEqual = await bcrypt.compare(req.body.password, user.password);
 
   if (!isEqual) {
     logger('error', 'authenticate', 400, 'loginByPhone.js');
-    res.status(400).send({
-      message: 'Bad request'
-    });
-    return;
+    sendRes({ res, status: 400 });
   }
 
   const access_token = jwt.sign(
@@ -44,8 +35,12 @@ module.exports = async (req, res) => {
     }
   );
 
-  res.status(200).send({
-    id: user.id,
-    access_token
+  sendRes({
+    res,
+    status: 200,
+    data: {
+      id: user.id,
+      access_token
+    }
   });
 };

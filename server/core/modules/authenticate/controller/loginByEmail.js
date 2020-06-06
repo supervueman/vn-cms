@@ -10,17 +10,12 @@ module.exports = async (req, res) => {
     }
   }).catch((err) => {
     logger('error', 'authenticate', 400, 'loginByEmail.js', err);
-    res.status(400).send({
-      message: 'Bad request'
-    });
-    return;
+    sendRes({ res, status: 400 });
   });
 
   if (!user) {
     logger('error', 'authenticate', 404, 'loginByEmail.js');
-    res.status(404).send({
-      message: 'Not found'
-    });
+    sendRes({ res, status: 404 });
   }
 
   // Сравниваем пароли
@@ -28,10 +23,7 @@ module.exports = async (req, res) => {
 
   if (!isEqual) {
     logger('error', 'authenticate', 400, 'loginByEmail.js');
-    res.status(400).send({
-      message: 'Bad request'
-    });
-    return;
+    sendRes({ res, status: 400 });
   }
 
   const access_token = jwt.sign(
@@ -45,8 +37,12 @@ module.exports = async (req, res) => {
     }
   );
 
-  res.status(200).send({
-    id: user.id,
-    access_token
+  sendRes({
+    res,
+    status: 200,
+    data: {
+      id: user.id,
+      access_token
+    }
   });
 };
