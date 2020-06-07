@@ -20,6 +20,7 @@ import field from '@/core/modules/field/store/index.store';
 import layout from '@/core/modules/layout/store/index.store';
 import resourcetype from '@/core/modules/resourcetype/store/index.store';
 import resource from '@/core/modules/resource/store/index.store';
+import tag from '@/core/modules/tag/store/index.store';
 import additionalfield from '@/core/modules/additionalfield/store/index.store';
 import filesystem from '@/core/modules/filesystem/store/index.store';
 
@@ -62,6 +63,7 @@ export const store = new Vuex.Store({
     layout,
     resourcetype,
     resource,
+    tag,
     additionalfield,
     filesystem,
     ...modules

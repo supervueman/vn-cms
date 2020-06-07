@@ -1,14 +1,14 @@
 import requestDataHandler from '@/core/plugins/requestDataHandler';
 import axios from 'axios';
 
-import layout from '../models/layout';
+import tag from '../models/tag';
 
 const actions = {
   async findByPk({ commit }, payload) {
     this.dispatch('preloader/fetch', true);
     const data = requestDataHandler(
       'GET',
-      `/layouts/find/${payload.params.id}`,
+      `/tags/find/${payload.params.id}`,
       undefined
     );
 
@@ -29,7 +29,7 @@ const actions = {
 
   async create({ commit }, payload) {
     this.dispatch('preloader/fetch', true);
-    const data = requestDataHandler('POST', '/layouts/create', payload.body);
+    const data = requestDataHandler('POST', '/tags/create', payload.body);
 
     const response = await axios(data).catch((err) => {
       this.dispatch('preloader/fetch', false);
@@ -55,7 +55,7 @@ const actions = {
     this.dispatch('preloader/fetch', true);
     const data = requestDataHandler(
       'PUT',
-      `/layouts/update/${payload.params.id}`,
+      `/tags/update/${payload.params.id}`,
       payload.body
     );
 
@@ -82,7 +82,7 @@ const actions = {
     this.dispatch('preloader/fetch', true);
     const data = requestDataHandler(
       'DELETE',
-      `/layouts/remove/${payload.params.id}`
+      `/tags/remove/${payload.params.id}`
     );
 
     const response = await axios(data).catch((err) => {
@@ -96,7 +96,7 @@ const actions = {
 
     if (typeof response === 'object' && response.status === 204) {
       this.dispatch('preloader/fetch', false);
-      this.dispatch('layout/clear');
+      this.dispatch('tag/clear');
       this.dispatch('notification/fetch', {
         type: 'success',
         message: 'Success',
@@ -108,12 +108,7 @@ const actions = {
 
   async findAll({ commit }, payload) {
     this.dispatch('preloader/fetch', true);
-    const data = requestDataHandler(
-      'GET',
-      '/layouts',
-      undefined,
-      payload.query
-    );
+    const data = requestDataHandler('GET', '/tags', undefined, payload.query);
 
     const response = await axios(data).catch((err) => {
       this.dispatch('preloader/fetch', false);
@@ -134,7 +129,7 @@ const actions = {
     this.dispatch('preloader/fetch', true);
     const data = requestDataHandler(
       'GET',
-      '/layouts/count',
+      '/tags/count',
       undefined,
       payload.query
     );
@@ -155,7 +150,7 @@ const actions = {
   },
 
   set({ commit }, payload) {
-    commit('SET', layout);
+    commit('SET', tag);
   },
 
   setAll({ commit }, payload) {
@@ -165,7 +160,7 @@ const actions = {
 
   clear({ commit }) {
     commit('SET', {
-      ...layout
+      ...tag
     });
   },
 
