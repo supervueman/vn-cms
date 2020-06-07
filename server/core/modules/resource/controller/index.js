@@ -6,5 +6,7 @@ module.exports = {
   update: require('./update'),
   remove: require('./remove'),
   count: require('./count'),
-  addTranslation: require('./addTranslation')
+  addTranslation: require('./addTranslation'),
+  addTag: require('./addTag'),
+  removeTag: require('./removeTag')
 };

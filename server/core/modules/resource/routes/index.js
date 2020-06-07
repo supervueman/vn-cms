@@ -260,4 +260,8 @@ router.get('/count', profileByApiKey, controller.count);
 
 router.put('/add-translation', profileByAccessToken, controller.addTranslation);
 
+router.put('/add-tag', profileByAccessToken, controller.addTag);
+
+router.put('/remove-tag', profileByAccessToken, controller.removeTag);
+
 module.exports = router;

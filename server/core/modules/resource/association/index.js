@@ -3,6 +3,7 @@ const AdditionalField = require('../../additionalfield/model');
 const Layout = require('../../layout/model');
 const ResourceType = require('../../resourcetype/model');
 const Context = require('../../context/model');
+const Tag = require('../../tag/model');
 
 module.exports = () => {
   Model.hasMany(AdditionalField, {
@@ -38,5 +39,12 @@ module.exports = () => {
     as: 'children',
     onDelete: 'cascade',
     foreignKey: 'parentId'
+  });
+
+  Model.belongsToMany(Tag, {
+    as: 'tags',
+    onDelete: 'cascade',
+    through: 'ResourceTag',
+    constraints: false
   });
 };

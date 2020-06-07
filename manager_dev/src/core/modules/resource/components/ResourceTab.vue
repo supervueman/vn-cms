@@ -44,6 +44,7 @@
 
 		v-flex.xs12.md5
 			resource-secondary-data
+			resource-tags
 </template>
 
 <script>
@@ -57,12 +58,14 @@ const alpha = helpers.regex("alpha", /^[a-zA-Z0-9_-]*$/);
 
 // Components
 import ResourceSecondaryData from "./ResourceSecondaryData";
+import ResourceTags from "../components/ResourceTags";
 
 export default {
   name: "ResourceData",
 
   components: {
-    ResourceSecondaryData
+    ResourceSecondaryData,
+    ResourceTags
   },
 
   mixins: [validationMixin],

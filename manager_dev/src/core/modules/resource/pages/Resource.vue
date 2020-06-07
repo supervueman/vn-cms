@@ -107,6 +107,8 @@ export default {
           }
         }
       });
+
+      await this.$store.dispatch("tag/findAll", {});
     }
   },
 
@@ -170,6 +172,6 @@ export default {
 </script>
 
 <style lang="sass">
-	.theme--light.v-tabs-items
-		background-color: transparent
+.theme--light.v-tabs-items
+	background-color: transparent
 </style>
