@@ -14,6 +14,7 @@ const field = require('../../core/modules/field/routes');
 const additionalfield = require('../../core/modules/additionalfield/routes');
 const layout = require('../../core/modules/layout/routes');
 const resourcetype = require('../../core/modules/resourcetype/routes');
+const tag = require('../../core/modules/tag/routes');
 const rersource = require('../../core/modules/resource/routes');
 
 const getDirectories = (source) =>
@@ -40,6 +41,7 @@ module.exports = async (app) => {
   app.use('/additionalfields', additionalfield);
   app.use('/layouts', layout);
   app.use('/resourcetypes', resourcetype);
+  app.use('/tags', tag);
   app.use('/resources', rersource);
 
   dirs.forEach((el) => {

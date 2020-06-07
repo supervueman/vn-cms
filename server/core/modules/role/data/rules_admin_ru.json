@@ -218,5 +218,22 @@
   "is_lexicon_delete": {
     "title": "Разрешить удалять лексиконы",
     "value": true
+  },
+
+  "is_tag_read": {
+    "title": "Разрешить просматривать теги",
+    "value": true
+  },
+  "is_tag_create": {
+    "title": "Разрешить создавать теги",
+    "value": true
+  },
+  "is_tag_update": {
+    "title": "Разрешить редактировать теги",
+    "value": true
+  },
+  "is_tag_delete": {
+    "title": "Разрешить удалять теги",
+    "value": true
   }
 }

@@ -103,5 +103,22 @@
   "is_resource_type_read": {
     "title": "Разрешить просматривать типы ресурсов",
     "value": true
+  },
+
+  "is_tag_read": {
+    "title": "Разрешить просматривать теги",
+    "value": true
+  },
+  "is_tag_create": {
+    "title": "Разрешить создавать теги",
+    "value": false
+  },
+  "is_tag_update": {
+    "title": "Разрешить редактировать теги",
+    "value": false
+  },
+  "is_tag_delete": {
+    "title": "Разрешить удалять теги",
+    "value": false
   }
 }
