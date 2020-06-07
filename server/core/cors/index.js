@@ -27,9 +27,7 @@ module.exports = (req, res, next) => {
       next();
     } else {
       logger('error', 'cors', 401, 'index.js', 'Authorization is not valid');
-      res.status(401).send({
-        message: 'Not authorization'
-      });
+      sendRes({ res, status: 401 });
     }
   } else {
     next();
