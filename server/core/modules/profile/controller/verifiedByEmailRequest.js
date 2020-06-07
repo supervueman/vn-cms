@@ -10,10 +10,7 @@ module.exports = async (req, res) => {
     !validator.isEmail(req.body.currentEmail)
   ) {
     logger('error', 'profile', 400, 'verifiedByEmailRequest.js');
-    res.status(400).send({
-      message: 'Bad request'
-    });
-    return;
+    sendRes({ res, status: 400 });
   }
 
   const user = await User.findOne({
@@ -22,25 +19,16 @@ module.exports = async (req, res) => {
     }
   }).catch((err) => {
     logger('error', 'profile', 400, 'verifiedByEmailRequest.js', err);
-    res.status(400).send({
-      message: 'Bad request'
-    });
-    return;
+    sendRes({ res, status: 400 });
   });
 
   if (!user) {
     logger('error', 'profile', 400, 'verifiedByEmailRequest.js');
-    res.status(404).send({
-      message: 'Not found'
-    });
-    return;
+    sendRes({ res, status: 400 });
   }
 
   if (user.verified && user.email === req.body.email) {
-    res.status(200).send({
-      message: 'OK'
-    });
-    return;
+    sendRes({ res, status: 200 });
   }
 
   await user.update({
@@ -98,10 +86,7 @@ module.exports = async (req, res) => {
     })
     .catch((err) => {
       logger('error', 'profile', 500, 'verifiedByEmailRequest.js', err);
-      res.status(500).send({
-        message: 'Not send'
-      });
-      return;
+      sendRes({ res, status: 500 });
     });
 
   if (req.body.newEmail !== user.email) {
@@ -150,14 +135,9 @@ module.exports = async (req, res) => {
       })
       .catch((err) => {
         logger('error', 'profile', 500, 'verifiedByEmailRequest.js', err);
-        res.status(500).send({
-          message: 'Not send'
-        });
-        return;
+        sendRes({ res, status: 500 });
       });
   }
 
-  res.status(200).send({
-    message: 'OK'
-  });
+  sendRes({ res, status: 200 });
 };

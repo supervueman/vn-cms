@@ -9,10 +9,7 @@ module.exports = async (req, res) => {
       'getFilesystem.js',
       'Not rules "is_filesystem_access"'
     );
-    res.status(403).send({
-      message: 'Forbidden'
-    });
-    return;
+    sendRes({ res, status: 403 });
   }
 
   let filesystem = [];
@@ -23,5 +20,5 @@ module.exports = async (req, res) => {
     filesystem = readDir(req.context.slug);
   }
 
-  res.status(200).send(filesystem);
+  sendRes({ res, status: 200, data: filesystem });
 };

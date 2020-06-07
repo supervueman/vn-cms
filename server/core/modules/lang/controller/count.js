@@ -5,13 +5,8 @@ module.exports = async (req, res) => {
 
   const count = await Model.count(filter).catch((err) => {
     logger('error', 'lang', 400, 'count.js', err);
-    res.status(400).send({
-      message: 'Bad request'
-    });
-    return;
+    sendRes({ res, status: 400 });
   });
 
-  res.status(200).send({
-    count
-  });
+  sendRes({ res, status: 200, data: { count } });
 };

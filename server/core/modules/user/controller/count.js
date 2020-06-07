@@ -3,10 +3,7 @@ const Model = require('../model');
 module.exports = async (req, res) => {
   if (!req.rules.is_user_read) {
     logger('error', 'user', 403, 'count.js');
-    res.status(403).send({
-      message: 'Forbidden'
-    });
-    return;
+    sendRes({ res, status: 403 });
   }
 
   const filter = JSON.parse(req.query.filter || '{}');
@@ -22,13 +19,8 @@ module.exports = async (req, res) => {
 
   const count = await Model.count(filter).catch((err) => {
     logger('error', 'user', 400, 'count.js', err);
-    res.status(400).send({
-      message: 'Bad request'
-    });
-    return;
+    sendRes({ res, status: 400 });
   });
 
-  res.status(200).send({
-    count
-  });
+  sendRes({ res, status: 200, data: { count } });
 };

@@ -21,10 +21,7 @@ module.exports = async (req, res) => {
       'resetPasswordByEmail.js',
       'reset-token not found'
     );
-    res.status(404).send({
-      message: 'Not found'
-    });
-    return;
+    sendRes({ res, status: 404 });
   }
 
   await jwt.verify(
@@ -33,10 +30,7 @@ module.exports = async (req, res) => {
     async (err, decoded) => {
       if (err || !decoded) {
         logger('error', 'profile', 404, 'resetPasswordByEmail.js', err);
-        res.status(404).send({
-          message: 'Not found'
-        });
-        return;
+        sendRes({ res, status: 404 });
       }
 
       const user = await User.findOne({
@@ -47,10 +41,7 @@ module.exports = async (req, res) => {
 
       if (!user) {
         logger('error', 'profile', 404, 'resetPasswordByEmail.js');
-        res.status(404).send({
-          message: 'Not found'
-        });
-        return;
+        sendRes({ res, status: 404 });
       }
 
       const hashedPw = await bcrypt.hash(req.body.password, 12);
@@ -79,15 +70,10 @@ module.exports = async (req, res) => {
         })
         .catch((err) => {
           logger('error', 'profile', 500, 'resetPasswordByEmail.js', err);
-          res.status(500);
-          res.send({
-            message: 'Not send'
-          });
+          sendRes({ res, status: 500 });
         });
 
-      res.status(200).send({
-        message: 'OK'
-      });
+      sendRes({ res, status: 200 });
     }
   );
 };

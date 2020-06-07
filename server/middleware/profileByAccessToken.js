@@ -17,10 +17,7 @@ module.exports = async (req, res, next) => {
       'profileByAccessToken.js',
       'Access token is not valid'
     );
-    res.status(403).send({
-      message: 'Forbidden'
-    });
-    return;
+    sendRes({ res, status: 403 });
   }
 
   // Проверка access token на действительность
@@ -30,10 +27,7 @@ module.exports = async (req, res, next) => {
     async (err, decoded) => {
       if (err || !decoded) {
         logger('error', 'middlware', 401, 'profileByAccessToken.js', err);
-        res.status(401).send({
-          message: 'Unauthorized'
-        });
-        return;
+        sendRes({ res, status: 401 });
       }
 
       const profile = await User.findByPk(decoded.id, {
@@ -48,10 +42,7 @@ module.exports = async (req, res, next) => {
           'profileByAccessToken.js',
           'Profile not found'
         );
-        res.status(404).send({
-          message: 'Not found'
-        });
-        return;
+        sendRes({ res, status: 404 });
       }
 
       if (!profile.verified) {
@@ -62,10 +53,7 @@ module.exports = async (req, res, next) => {
           'profileByAccessToken.js',
           'Account is not verified'
         );
-        res.status(403).send({
-          message: 'Account is not verified'
-        });
-        return;
+        sendRes({ res, status: 403 });
       }
 
       // Задаем правила глобально

@@ -5,11 +5,8 @@ module.exports = async (req, res) => {
 
   const items = await Model.findAll(filter).catch((err) => {
     logger('error', 'lang', 400, 'findAll.js', err);
-    res.status(400).send({
-      message: 'Bad request'
-    });
-    return;
+    sendRes({ res, status: 400 });
   });
 
-  res.status(200).send(items);
+  sendRes({ res, status: 200, data: items });
 };

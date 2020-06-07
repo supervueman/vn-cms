@@ -5,26 +5,17 @@ module.exports = async (req, res) => {
   // Так же нельзя удалять роли admin и default
   if (!req.rules.is_role_delete || req.rang < req.body.rang) {
     logger('error', 'role', 403, 'remove.js');
-    res.status(403).send({
-      message: 'Forbidden'
-    });
-    return;
+    sendRes({ res, status: 403 });
   }
 
   const item = await Model.findByPk(req.params.id).catch((err) => {
     logger('error', 'role', 400, 'remove.js', err);
-    res.status(400).send({
-      message: 'Bad request'
-    });
-    return;
+    sendRes({ res, status: 400 });
   });
 
   if (item.slug === 'admin' || item.slug === 'default') {
     logger('error', 'role', 403, 'remove.js');
-    res.status(403).send({
-      message: 'Forbidden'
-    });
-    return;
+    sendRes({ res, status: 403 });
   }
 
   await Model.destroy({
@@ -33,13 +24,8 @@ module.exports = async (req, res) => {
     }
   }).catch((err) => {
     logger('error', 'role', 400, 'remove.js', err);
-    res.status(400).send({
-      message: 'Bad request'
-    });
-    return;
+    sendRes({ res, status: 400 });
   });
 
-  res.status(200).send({
-    message: 'OK'
-  });
+  sendRes({ res, status: 200 });
 };

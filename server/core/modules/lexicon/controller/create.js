@@ -3,10 +3,7 @@ const Model = require('../model');
 module.exports = async (req, res) => {
   if (!req.rules.is_lexicon_create) {
     logger('error', 'lexicon', 403, 'create.js');
-    res.status(403).send({
-      message: 'Forbidden'
-    });
-    return;
+    sendRes({ res, status: 403 });
   }
 
   const existItem = await Model.findOne({
@@ -14,27 +11,19 @@ module.exports = async (req, res) => {
       slug: req.body.slug
     }
   }).catch((err) => {
-    logger('error', 'lexicon', 403, 'create.js', err);
-    res.status(400).send({
-      message: 'Bad request'
-    });
-    return;
+    logger('error', 'lexicon', 400, 'create.js', err);
+    sendRes({ res, status: 400 });
   });
 
   if (existItem) {
     logger('error', 'lexicon', 409, 'create.js');
-    res.status(409).send({
-      message: 'Conflict'
-    });
+    sendRes({ res, status: 409 });
   }
 
   const createdItem = await Model.create(req.body).catch((err) => {
     logger('error', 'lexicon', 400, 'create.js', err);
-    res.status(400).send({
-      message: 'Bad request'
-    });
-    return;
+    sendRes({ res, status: 400 });
   });
 
-  res.status(200).send(createdItem);
+  sendRes({ res, status: 200, data: createdItem });
 };

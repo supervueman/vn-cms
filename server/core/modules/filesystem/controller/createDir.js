@@ -9,15 +9,10 @@ module.exports = async (req, res) => {
       'createDir.js',
       'Not rules "is_filesystem_directory_create"'
     );
-    res.status(403).send({
-      message: 'Forbidden'
-    });
-    return;
+    sendRes({ res, status: 403 });
   }
 
   await createDir(req.body.path);
 
-  res.status(200).send({
-    message: 'OK'
-  });
+  sendRes({ res, status: 200 });
 };

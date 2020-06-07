@@ -4,44 +4,29 @@ const SystemSetting = require('../../systemsetting/model');
 module.exports = async (req, res) => {
   if (!req.rules.is_resource_update) {
     logger('error', 'resource', 403, 'update.js');
-    res.status(403).send({
-      message: 'Forbidden'
-    });
-    return;
+    sendRes({ res, status: 403 });
   }
 
   const filter = JSON.parse(req.query.filter || '{}');
 
   const item = await Model.findByPk(req.params.id, filter).catch((err) => {
     logger('error', 'resource', 400, 'update.js', err);
-    res.status(400).send({
-      message: 'Bad request'
-    });
-    return;
+    sendRes({ res, status: 400 });
   });
 
   if (!item) {
     logger('error', 'resource', 404, 'update.js');
-    res.status(404).send({
-      message: 'Not found'
-    });
-    return;
+    sendRes({ res, status: 404 });
   }
 
   if (req.context.slug !== 'root' && item.contextId !== req.context.id) {
     logger('error', 'resource', 403, 'update.js');
-    res.status(403).send({
-      message: 'Forbidden'
-    });
-    return;
+    sendRes({ res, status: 403 });
   }
 
   if (req.context.slug === 'root' && !req.body.contextId) {
     logger('error', 'resource', 400, 'update.js', 'Not contextId');
-    res.status(400).send({
-      message: 'Forbidden'
-    });
-    return;
+    sendRes({ res, status: 400 });
   }
 
   const is_id_in_slug = await SystemSetting.findOne({
@@ -50,10 +35,7 @@ module.exports = async (req, res) => {
     }
   }).catch((err) => {
     logger('error', 'resource', 400, 'update.js', err);
-    res.status(400).send({
-      message: 'Bad request'
-    });
-    return;
+    sendRes({ res, status: 400 });
   });
 
   const updateItem = req.body;
@@ -70,11 +52,8 @@ module.exports = async (req, res) => {
 
   const updatedItem = await item.update(updateItem).catch((err) => {
     logger('error', 'resource', 400, 'update.js', err);
-    res.status(400).send({
-      message: 'Bad request'
-    });
-    return;
+    sendRes({ res, status: 400 });
   });
 
-  res.status(200).send(updatedItem);
+  sendRes({ res, status: 200, data: updatedItem });
 };

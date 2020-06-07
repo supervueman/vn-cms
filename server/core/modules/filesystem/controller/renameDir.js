@@ -7,13 +7,8 @@ module.exports = async (req, res) => {
       'renameDir.js',
       'Not rules "is_filesystem_directory_rename"'
     );
-    res.status(403).send({
-      message: 'Forbidden'
-    });
-    return;
+    sendRes({ res, status: 403 });
   }
 
-  res.status(200).send({
-    message: 'OK'
-  });
+  sendRes({ res, status: 200 });
 };

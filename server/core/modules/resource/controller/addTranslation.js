@@ -3,38 +3,25 @@ const Model = require('../model');
 module.exports = async (req, res) => {
   if (!req.rules.is_resource_create) {
     logger('error', 'resource', 403, 'addTranslation.js');
-    res.status(403).send({
-      message: 'Forbidden'
-    });
-    return;
+    sendRes({ res, status: 403 });
   }
 
   for await (let arr of req.body) {
     const item = await Model.findByPk(arr[0]).catch((err) => {
       logger('error', 'resource', 400, 'addTranslation.js', err);
-      res.status(400).send({
-        message: 'Bad request'
-      });
-      return;
+      sendRes({ res, status: 400 });
     });
 
     if (!item) {
       logger('error', 'resource', 404, 'addTranslation.js');
-      res.status(404).send({
-        message: 'Not found'
-      });
+      sendRes({ res, status: 404 });
     }
 
     await item.addTranslation(arr[1]).catch((err) => {
       logger('error', 'resource', 400, 'addTranslation.js', err);
-      res.status(400).send({
-        message: 'Bad request'
-      });
-      return;
+      sendRes({ res, status: 400 });
     });
   }
 
-  res.status(200).send({
-    message: 'OK'
-  });
+  sendRes({ res, status: 200 });
 };

@@ -3,10 +3,7 @@ const Model = require('../model');
 module.exports = async (req, res) => {
   if (!req.rules.is_role_read) {
     logger('error', 'role', 403, 'findByPk.js');
-    res.status(403).send({
-      message: 'Forbidden'
-    });
-    return;
+    sendRes({ res, status: 403 });
   }
   const id = req.params.id;
 
@@ -14,19 +11,13 @@ module.exports = async (req, res) => {
 
   if (!item) {
     logger('error', 'role', 404, 'findByPk.js');
-    res.status(404).send({
-      message: 'Not found'
-    });
-    return;
+    sendRes({ res, status: 404 });
   }
 
   if (!req.adminAccess && (item.slug === 'admin' || item.slug === 'manager')) {
     logger('error', 'role', 403, 'findByPk.js');
-    res.status(403).send({
-      message: 'Forbidden'
-    });
-    return;
+    sendRes({ res, status: 403 });
   }
 
-  res.status(200).send(item);
+  sendRes({ res, status: 200, data: item });
 };

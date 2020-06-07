@@ -12,10 +12,7 @@ module.exports = async (req, res) => {
 
   if (!user) {
     logger('error', 'profile', 404, 'resetPasswordByEmailRequest.js');
-    res.status(404).send({
-      message: 'Not found'
-    });
-    return;
+    sendRes({ res, status: 404 });
   }
 
   const token = jwt.sign(
@@ -68,13 +65,8 @@ module.exports = async (req, res) => {
     })
     .catch((err) => {
       logger('error', 'profile', 500, 'resetPasswordByEmailRequest.js', err);
-      res.status(500).send({
-        message: 'Not send'
-      });
-      return;
+      sendRes({ res, status: 500 });
     });
 
-  res.status(200).send({
-    message: 'OK'
-  });
+  sendRes({ res, status: 200 });
 };

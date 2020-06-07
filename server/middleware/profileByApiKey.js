@@ -14,10 +14,7 @@ module.exports = async (req, res, next) => {
       'profileByApiKey.js',
       'apiKey is not valid'
     );
-    res.status(403).send({
-      message: 'Forbidden'
-    });
-    return;
+    sendRes({ res, status: 403 });
   }
 
   const profile = await User.findOne({
@@ -27,6 +24,7 @@ module.exports = async (req, res, next) => {
     include: ['role', 'context']
   }).catch((err) => {
     logger('error', 'middlware', 400, 'profileByApiKey.js', err);
+    sendRes({ res, status: 400 });
   });
 
   if (!profile) {
@@ -37,10 +35,7 @@ module.exports = async (req, res, next) => {
       'profileByApiKey.js',
       'Profile not found'
     );
-    res.status(404).send({
-      message: 'Not found'
-    });
-    return;
+    sendRes({ res, status: 404 });
   }
 
   if (!profile.verified) {
@@ -51,10 +46,7 @@ module.exports = async (req, res, next) => {
       'profileByApiKey.js',
       'Account is not verified'
     );
-    res.status(403).send({
-      message: 'Account is not verified'
-    });
-    return;
+    sendRes({ res, status: 403 });
   }
 
   // Задаем правила глобально

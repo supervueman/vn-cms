@@ -7,13 +7,8 @@ module.exports = async (req, res) => {
     }
   }).catch((err) => {
     logger('error', 'profile', 400, 'remove.js', err);
-    res.status(400).send({
-      message: 'Bad request'
-    });
-    return;
+    sendRes({ res, status: 400 });
   });
 
-  res.status(200).send({
-    message: 'OK'
-  });
+  sendRes({ res, status: 200 });
 };

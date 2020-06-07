@@ -20,10 +20,7 @@ module.exports = async (req, res) => {
       'verifiedByEmail.js',
       'verified-token is not found'
     );
-    res.status(404).send({
-      message: 'Not found'
-    });
-    return;
+    sendRes({ res, status: 404 });
   }
 
   await jwt.verify(
@@ -32,10 +29,7 @@ module.exports = async (req, res) => {
     async (err, decoded) => {
       if (err || !decoded) {
         logger('error', 'profile', 404, 'verifiedByEmail.js', err);
-        res.status(404).send({
-          message: 'Not found'
-        });
-        return;
+        sendRes({ res, status: 404 });
       }
 
       const user = await User.findOne({
@@ -46,17 +40,11 @@ module.exports = async (req, res) => {
 
       if (!user) {
         logger('error', 'profile', 404, 'verifiedByEmail.js');
-        res.status(404).send({
-          message: 'Not found'
-        });
-        return;
+        sendRes({ res, status: 404 });
       }
 
       if (user.verified && user.email === decoded.newEmail) {
-        res.status(200).send({
-          message: 'OK'
-        });
-        return;
+        sendRes({ res, status: 200 });
       }
 
       await user.update({
@@ -84,14 +72,10 @@ module.exports = async (req, res) => {
         })
         .catch((err) => {
           logger('error', 'profile', 500, 'verifiedByEmail.js', err);
-          res.status(500).send({
-            message: 'Not send'
-          });
+          sendRes({ res, status: 500 });
         });
 
-      res.status(200).send({
-        message: 'OK'
-      });
+      sendRes({ res, status: 200 });
     }
   );
 };

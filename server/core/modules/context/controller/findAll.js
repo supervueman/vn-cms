@@ -20,5 +20,5 @@ module.exports = async (req, res) => {
     sendRes({ res, status: 400 });
   });
 
-  sendRes({ res, status: 200 });
+  sendRes({ res, status: 200, data: items });
 };

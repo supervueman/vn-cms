@@ -10,10 +10,7 @@ const phoneValidator = require('../../../../validators/phoneRUValidator');
 module.exports = async (req, res) => {
   if (!req.rules.is_user_create) {
     logger('error', 'profile', 403, 'createByEmail.js');
-    res.status(403).send({
-      message: 'Forbidden'
-    });
-    return;
+    sendRes({ res, status: 403 });
   }
 
   // Проверяем не существует ли уже такой пользователь
@@ -25,10 +22,7 @@ module.exports = async (req, res) => {
 
   if (user) {
     logger('error', 'profile', 409, 'createByEmail.js');
-    res.status(409).send({
-      message: 'Conflict'
-    });
-    return;
+    sendRes({ res, status: 409 });
   }
 
   // назначить default роль
@@ -38,10 +32,7 @@ module.exports = async (req, res) => {
     }
   }).catch((err) => {
     logger('error', 'profile', 400, 'createByEmail.js', err);
-    res.status(400).send({
-      message: 'Bad request'
-    });
-    return;
+    sendRes({ res, status: 400 });
   });
   req.body.roleId = defaultRole.id;
 
@@ -52,10 +43,7 @@ module.exports = async (req, res) => {
 
   if (!validator.isEmail(req.body.email)) {
     logger('error', 'profile', 400, 'createByEmail.js');
-    res.status(400).send({
-      message: 'Bad request'
-    });
-    return;
+    sendRes({ res, status: 400 });
   }
 
   if (
@@ -65,10 +53,7 @@ module.exports = async (req, res) => {
     })
   ) {
     logger('error', 'profile', 400, 'createByEmail.js');
-    res.status(400).send({
-      message: 'Bad request'
-    });
-    return;
+    sendRes({ res, status: 400 });
   }
 
   const hashedPw = await bcrypt.hash(req.body.password, 12);
@@ -87,11 +72,8 @@ module.exports = async (req, res) => {
 
   const createdUser = await User.create(userCreated).catch((err) => {
     logger('error', 'profile', 400, 'createByEmail.js', err);
-    res.status(400).send({
-      message: 'Bad request'
-    });
-    return;
+    sendRes({ res, status: 400 });
   });
 
-  res.status(200).send(createdUser);
+  sendRes({ res, status: 200, data: createdUser });
 };

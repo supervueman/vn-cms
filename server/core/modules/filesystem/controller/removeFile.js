@@ -9,15 +9,10 @@ module.exports = async (req, res) => {
       'removeFile.js',
       'Not rules "is_filesystem_files_delete"'
     );
-    res.status(403).send({
-      message: 'Forbidden'
-    });
-    return;
+    sendRes({ res, status: 403 });
   }
 
   await removeFile(req.body.path);
 
-  res.status(200).send({
-    message: 'OK'
-  });
+  sendRes({ res, status: 200 });
 };

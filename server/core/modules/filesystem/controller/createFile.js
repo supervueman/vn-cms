@@ -7,11 +7,8 @@ module.exports = async (req, res) => {
       'createFile.js',
       'Not rules "is_filesystem_files_create"'
     );
-    res.status(403).send({
-      message: 'Forbidden'
-    });
-    return;
+    sendRes({ res, status: 403 });
   }
 
-  res.status(200);
+  sendRes({ res, status: 200 });
 };

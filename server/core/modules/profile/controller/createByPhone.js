@@ -9,10 +9,7 @@ const phoneValidator = require('../../../../validators/phoneRUValidator');
 module.exports = async (req, res) => {
   if (!(req.adminAccess || req.managerAccess)) {
     logger('error', 'profile', 403, 'createByPhone.js');
-    res.status(403).send({
-      message: 'Forbidden'
-    });
-    return;
+    sendRes({ res, status: 403 });
   }
 
   const existUser = await User.findOne({
@@ -23,18 +20,12 @@ module.exports = async (req, res) => {
 
   if (existUser) {
     logger('error', 'profile', 409, 'createByPhone.js');
-    res.status(409).send({
-      message: 'Conflict'
-    });
-    return;
+    sendRes({ res, status: 409 });
   }
 
   if (!validator.isMobilePhone(req.body.phone, ['ru-RU', 'us-US'])) {
     logger('error', 'profile', 400, 'createByPhone.js');
-    res.status(400).send({
-      message: 'Bad request'
-    });
-    return;
+    sendRes({ res, status: 400 });
   }
 
   if (
@@ -44,10 +35,7 @@ module.exports = async (req, res) => {
     })
   ) {
     logger('error', 'profile', 400, 'createByPhone.js');
-    res.status(400).send({
-      message: 'Bad request'
-    });
-    return;
+    sendRes({ res, status: 400 });
   }
 
   if (
@@ -57,10 +45,7 @@ module.exports = async (req, res) => {
     })
   ) {
     logger('error', 'profile', 400, 'createByPhone.js');
-    res.status(400).send({
-      message: 'Bad request'
-    });
-    return;
+    sendRes({ res, status: 400 });
   }
 
   const hashedPw = await bcrypt.hash(req.body.password, 12);
@@ -77,5 +62,5 @@ module.exports = async (req, res) => {
     userId: req.profile.id
   });
 
-  res.status(200).send(createdUser);
+  sendRes({ res, status: 200, data: createdUser });
 };

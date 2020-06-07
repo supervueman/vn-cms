@@ -3,10 +3,7 @@ const Model = require('../model');
 module.exports = async (req, res) => {
   if (!req.rules.is_layout_delete) {
     logger('error', 'layout', 403, 'remove.js');
-    res.status(403).send({
-      message: 'Forbidden'
-    });
-    return;
+    sendRes({ res, status: 403 });
   }
 
   await Model.destroy({
@@ -15,13 +12,8 @@ module.exports = async (req, res) => {
     }
   }).catch((err) => {
     logger('error', 'layout', 400, 'remove.js', err);
-    res.status(400).send({
-      message: 'Bad request'
-    });
-    return;
+    sendRes({ res, status: 400 });
   });
 
-  res.status(204).send({
-    message: 'No content'
-  });
+  sendRes({ res, status: 204 });
 };

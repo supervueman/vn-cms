@@ -10,19 +10,13 @@ module.exports = async (req, res) => {
     req.body.slug === 'admin'
   ) {
     logger('error', 'role', 403, 'create.js');
-    res.status(403).send({
-      message: 'Forbidden'
-    });
-    return;
+    sendRes({ res, status: 403 });
   }
 
   const createdItem = await Model.create(req.body).catch((err) => {
     logger('error', 'role', 400, 'create.js', err);
-    res.status(400).send({
-      message: 'Bad request'
-    });
-    return;
+    sendRes({ res, status: 400 });
   });
 
-  res.status(200).send(createdItem);
+  sendRes({ res, status: 200, data: createdItem });
 };

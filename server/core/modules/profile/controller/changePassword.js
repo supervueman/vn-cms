@@ -8,10 +8,7 @@ module.exports = async (req, res) => {
 
   if (!profile) {
     logger('error', 'profile', 404, 'changePassword.js');
-    res.status(404).send({
-      message: 'Not found'
-    });
-    return;
+    sendRes({ res, status: 404 });
   }
 
   // Сверяем пароли
@@ -22,10 +19,7 @@ module.exports = async (req, res) => {
 
   if (!isCompare) {
     logger('error', 'profile', 401, 'changePassword.js');
-    res.status(401).send({
-      message: 'Unauthorized'
-    });
-    return;
+    sendRes({ res, status: 401 });
   } else {
     const hashPw = await bcrypt.hash(req.body.newPassword, 12);
 
@@ -33,8 +27,6 @@ module.exports = async (req, res) => {
       password: hashPw
     });
 
-    res.status(200).send({
-      message: 'OK'
-    });
+    sendRes({ res, status: 200 });
   }
 };

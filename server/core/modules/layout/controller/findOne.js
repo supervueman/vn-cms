@@ -3,29 +3,20 @@ const Model = require('../model');
 module.exports = async (req, res) => {
   if (!req.rules.is_layout_read) {
     logger('error', 'layout', 403, 'findOne.js');
-    res.status(403).send({
-      message: 'Forbidden'
-    });
-    return;
+    sendRes({ res, status: 403 });
   }
 
   const filter = JSON.parse(req.query.filter || '{}');
 
   const item = await Model.findOne(filter).catch((err) => {
     logger('error', 'layout', 400, 'findOne.js', err);
-    res.status(400).send({
-      message: 'Bad request'
-    });
-    return;
+    sendRes({ res, status: 400 });
   });
 
   if (!item) {
     logger('error', 'layout', 404, 'findOne.js');
-    res.status(404).send({
-      message: 'Not found'
-    });
-    return;
+    sendRes({ res, status: 404 });
   }
 
-  res.status(200).send(item);
+  sendRes({ res, status: 200, data: item });
 };

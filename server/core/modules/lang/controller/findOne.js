@@ -5,19 +5,13 @@ module.exports = async (req, res) => {
 
   const item = await Model.findOne(filter).catch((err) => {
     logger('error', 'lang', 400, 'findOne.js', err);
-    res.status(400).send({
-      message: 'Bad request'
-    });
-    return;
+    sendRes({ res, status: 400 });
   });
 
   if (!item) {
     logger('error', 'lang', 404, 'findOne.js');
-    res.status(404).send({
-      message: 'Not found'
-    });
-    return;
+    sendRes({ res, status: 404 });
   }
 
-  res.status(200).send(item);
+  sendRes({ res, status: 200, daya: item });
 };

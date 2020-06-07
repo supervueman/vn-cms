@@ -7,18 +7,12 @@ module.exports = async (req, res) => {
   // Находим профиль
   const profile = await Model.findByPk(req.id).catch((err) => {
     logger('error', 'profile', 400, 'update.js', err);
-    res.status(400).send({
-      message: 'Bad request'
-    });
-    return;
+    sendRes({ res, status: 400 });
   });
 
   if (!profile) {
     logger('error', 'profile', 404, 'update.js', err);
-    res.status(404).send({
-      message: 'Not found'
-    });
-    return;
+    sendRes({ res, status: 404 });
   }
 
   // Убираем поля которые нельзя редактировать
@@ -37,5 +31,5 @@ module.exports = async (req, res) => {
 
   const updatedProfile = await profile.update(updateProfileData);
 
-  res.status(200).send(updatedProfile);
+  sendRes({ res, status: 200, data: updatedProfile });
 };

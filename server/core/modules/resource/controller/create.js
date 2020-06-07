@@ -4,10 +4,7 @@ const SystemSetting = require('../../systemsetting/model');
 module.exports = async (req, res) => {
   if (!req.rules.is_resource_create && !req.context) {
     logger('error', 'resource', 403, 'create.js');
-    res.status(403).send({
-      message: 'Forbidden'
-    });
-    return;
+    sendRes({ res, status: 403 });
   }
 
   if (req.context.slug !== 'root') {
@@ -16,18 +13,12 @@ module.exports = async (req, res) => {
 
   if (req.context.slug === 'root' && !req.body.contextId) {
     logger('error', 'resource', 400, 'create.js', 'Not contextId');
-    res.status(400).send({
-      message: 'Forbidden'
-    });
-    return;
+    sendRes({ res, status: 400 });
   }
 
   let createdItem = await Model.create(req.body).catch((err) => {
     logger('error', 'resource', 400, 'create.js', err);
-    res.status(400).send({
-      message: 'Bad request'
-    });
-    return;
+    sendRes({ res, status: 400 });
   });
 
   const is_id_in_slug = await SystemSetting.findOne({
@@ -36,10 +27,7 @@ module.exports = async (req, res) => {
     }
   }).catch((err) => {
     logger('error', 'resource', 400, 'create.js', err);
-    res.status(400).send({
-      message: 'Bad request'
-    });
-    return;
+    sendRes({ res, status: 400 });
   });
 
   if (JSON.parse(is_id_in_slug.setting).value) {
@@ -51,12 +39,9 @@ module.exports = async (req, res) => {
       })
       .catch((err) => {
         logger('error', 'resource', 400, 'create.js', err);
-        res.status(400).send({
-          message: 'Bad request'
-        });
-        return;
+        sendRes({ res, status: 400 });
       });
   }
 
-  res.status(200).send(createdItem);
+  sendRes({ res, status: 200, data: createdItem });
 };

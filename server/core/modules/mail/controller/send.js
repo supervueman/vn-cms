@@ -3,10 +3,7 @@ const nodemailer = require('nodemailer');
 module.exports = async (req, res) => {
   if (!req.isAuth) {
     logger('error', 'mail', 403, 'send.js');
-    res.status(403).send({
-      message: 'Forbidden'
-    });
-    return;
+    sendRes({ res, status: 403 });
   }
 
   const transporter = nodemailer.createTransport({
@@ -32,12 +29,8 @@ module.exports = async (req, res) => {
     })
     .catch((err) => {
       logger('error', 'mail', 500, 'send.js', err);
-      res.status(500).send({
-        message: 'Server error'
-      });
+      sendRes({ res, status: 500 });
     });
 
-  res.status(200).send({
-    message: 'OK'
-  });
+  sendRes({ res, status: 200 });
 };
