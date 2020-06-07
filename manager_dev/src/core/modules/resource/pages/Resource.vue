@@ -173,5 +173,5 @@ export default {
 
 <style lang="sass">
 .theme--light.v-tabs-items
-	background-color: transparent
+  background-color: transparent
 </style>

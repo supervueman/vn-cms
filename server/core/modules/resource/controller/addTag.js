@@ -5,7 +5,6 @@ module.exports = async (req, res) => {
     logger('error', 'resource', 403, 'addTag.js');
     sendRes({ res, status: 403 });
   }
-  console.log(req.body);
 
   for await (let arr of req.body) {
     const item = await Model.findByPk(arr[0]).catch((err) => {

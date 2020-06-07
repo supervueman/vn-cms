@@ -1,6 +1,6 @@
 <template lang="pug">
-  v-flex(v-if="r.is_layout_create")
-    .body-2.mb-12.mt-2 {{d.layout_creation || 'Tag creation'}}
+  v-flex(v-if="r.is_tag_create")
+    .body-2.mb-12.mt-2 {{d.tag_creation || 'Tag creation'}}
     v-layout.wrap
       v-flex
         v-card(outlined)
@@ -47,7 +47,7 @@ export default {
 
   metaInfo() {
     return {
-      title: `${this.d.layout_create || "Tag create"}`
+      title: `${this.d.tag_create || "Tag create"}`
     };
   },
 
@@ -95,7 +95,7 @@ export default {
   methods: {
     async create() {
       this.$v.$touch();
-      if (this.r.is_layout_create && !this.$v.$error) {
+      if (this.r.is_tag_create && !this.$v.$error) {
         const bool = await this.$store.dispatch("tag/create", {
           body: this.tag
         });

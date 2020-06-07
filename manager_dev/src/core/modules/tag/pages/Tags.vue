@@ -1,5 +1,5 @@
 <template lang="pug">
-  v-flex(v-if="r.is_layout_read")
+  v-flex(v-if="r.is_tag_read")
     .body-2.mb-12.mt-2 {{d.tags || 'Tags'}}
     v-card(outlined)
       tags-toolbar
@@ -112,7 +112,7 @@ export default {
     },
 
     async remove() {
-      if (this.r.is_layout_delete) {
+      if (this.r.is_tag_delete) {
         await this.$store.dispatch("tag/remove", {
           params: { id: this.removeItem.id }
         });

@@ -123,7 +123,7 @@ export default {
   methods: {
     async update() {
       this.$v.$touch();
-      if (this.r.is_layout_update && !this.$v.$error) {
+      if (this.r.is_tag_update && !this.$v.$error) {
         await this.$store.dispatch("tag/update", {
           body: this.tag,
           params: { id: this.tag.id }
@@ -132,7 +132,7 @@ export default {
     },
 
     async remove() {
-      if (this.r.is_layout_delete) {
+      if (this.r.is_tag_delete) {
         const bool = await this.$store.dispatch("tag/remove", {
           params: { id: this.tag.id }
         });

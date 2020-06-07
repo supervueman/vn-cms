@@ -218,7 +218,6 @@ const actions = {
   },
 
   async addTag(_, payload) {
-    console.log(payload);
     this.dispatch('preloader/fetch', true);
     const data = requestDataHandler('PUT', '/resources/add-tag', payload.body);
 
@@ -242,7 +241,6 @@ const actions = {
   },
 
   async removeTag(_, payload) {
-    console.log(payload);
     this.dispatch('preloader/fetch', true);
     const data = requestDataHandler(
       'PUT',
