@@ -13,5 +13,5 @@ module.exports = async (req, res) => {
     sendRes({ res, status: 404 });
   }
 
-  sendRes({ res, status: 200, daya: item });
+  sendRes({ res, status: 200, data: item });
 };
