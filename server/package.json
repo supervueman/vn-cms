@@ -16,7 +16,7 @@
   "author": "supervueman",
   "license": "ISC",
   "dependencies": {
-    "bcrypt": "^3.0.6",
+    "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
     "directory-tree": "^2.2.4",
     "dotenv": "^8.0.0",
