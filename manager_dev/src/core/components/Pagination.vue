@@ -4,7 +4,7 @@
     :length="pages"
     @input="getPage"
     :value="0"
-    :total-visible="3"
+    :total-visible="10"
   )
 </template>
 
@@ -62,6 +62,6 @@ export default {
 </script>
 
 <style lang="sass">
-  .v-pagination__item--active, .v-pagination__item, .v-pagination__navigation
-    box-shadow: none
+.v-pagination__item--active, .v-pagination__item, .v-pagination__navigation
+  box-shadow: none
 </style>
