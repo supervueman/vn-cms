@@ -33,6 +33,7 @@
           )
             v-img.mr-2(:src="`/images/flags/${lang.slug || adminLang}.svg`", width="30")
             v-list-item-title {{lang.slug}}
+
       v-btn(text slot="activator" to="/profile" v-if="isAuth")
         div.body-1.mr-3 {{ firstname }} {{lastname}}
         v-avatar.mr-3(size="40" color="grey lighten-4")
