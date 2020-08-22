@@ -18,6 +18,12 @@ module.exports = {
       name: 'Push notifications',
       lexicon: 'push_notifications',
       path: '/push-notification'
+    },
+    {
+      slug: 'chat',
+      name: 'Chat',
+      lexicon: 'chat',
+      path: '/chat'
     }
   ]
 };

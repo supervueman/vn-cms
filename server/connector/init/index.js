@@ -18,20 +18,20 @@ const getDirectories = (source) =>
 
 const dirs = getDirectories('./modules');
 
-module.exports = async () => {
-  await lang();
-  await lexicon();
-  await systemsetting();
-  await context();
-  await role();
-  await user();
-  await layout();
-  await resourcetype();
+module.exports = async (server) => {
+  await lang(server);
+  await lexicon(server);
+  await systemsetting(server);
+  await context(server);
+  await role(server);
+  await user(server);
+  await layout(server);
+  await resourcetype(server);
 
   for await (const el of dirs) {
     const init = require(`../../modules/${el}`).init;
     if (init) {
-      await init();
+      await init(server);
     }
   }
 };

@@ -6,6 +6,8 @@ module.exports = (req, res, next) => {
 
   if (allowedOrigins.indexOf(origin) > -1) {
     res.setHeader('Access-Control-Allow-Origin', origin);
+  } else {
+    return res.sendStatus(403);
   }
 
   res.setHeader(
@@ -18,6 +20,8 @@ module.exports = (req, res, next) => {
     'Content-Type, Authorization, x-access-token, x-api-key, x-reset-token, x-verified-token'
   );
 
+  res.setHeader('Access-Control-Allow-Credentials', true);
+
   if (req.method === 'OPTIONS') {
     return res.sendStatus(200);
   }
@@ -27,6 +31,7 @@ module.exports = (req, res, next) => {
       next();
     } else {
       logger('error', 'cors', 401, 'index.js', 'Authorization is not valid');
+
       sendRes({ res, status: 401 });
     }
   } else {

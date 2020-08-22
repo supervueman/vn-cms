@@ -7,6 +7,12 @@ const connector = require('./connector');
 
 require('dotenv').config();
 
+module.exports = () => {
+  io.on('connection', (socket) => {
+    console.log('a user connected');
+  });
+};
+
 // Globals
 const logger = require('./core/global/logger');
 const sendRes = require('./core/global/response');
@@ -24,13 +30,13 @@ async function connect() {
     return;
   }
 
-  await connector.init();
-
-  app.listen(server_port, () => {
+  const server = app.listen(server_port, () => {
     global.logger = logger;
     global.sendRes = sendRes;
     console.log(`Server listen on http://localhost:${server_port}`);
   });
+
+  await connector.init(server);
 }
 
 connect();
