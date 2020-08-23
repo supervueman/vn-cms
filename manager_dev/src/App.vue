@@ -1,63 +1,65 @@
-<template lang="pug">
-	.app
-		component(:is="layout")
-			router-view
+<template>
+  <div class="app">
+    <component :is="layout">
+      <RouterView />
+    </component>
+  </div>
 </template>
 
 <script>
 export default {
-  name: "App",
+  name: 'App',
 
   computed: {
     layout() {
-      return this.$route.meta.layout || "layout-default";
+      return this.$route.meta.layout || 'layout-default';
     }
   },
 
   async beforeCreate() {
-    if (!!localStorage.getItem("access_token")) {
-      const bool = await this.$store.dispatch("profile/findByAccessToken");
+    if (!!localStorage.getItem('access_token')) {
+      const bool = await this.$store.dispatch('profile/findByAccessToken');
 
       if (bool) {
-        await this.$store.dispatch("base/fetchMainLang");
+        await this.$store.dispatch('base/fetchMainLang');
 
-        await this.$store.dispatch("base/fetchLang", {
+        await this.$store.dispatch('base/fetchLang', {
           query: {
             filter: {
               where: {
-                slug: this.$store.getters["base/getAdminLang"]
+                slug: this.$store.getters['base/getAdminLang']
               }
             }
           }
         });
 
-        await this.$store.dispatch("base/fetchLexicons", {
+        await this.$store.dispatch('base/fetchLexicons', {
           query: {
             filter: {
               where: {
-                langId: this.$store.getters["base/getLang"].id
+                langId: this.$store.getters['base/getLang'].id
               }
             }
           }
         });
 
-        await this.$store.dispatch("lang/findAll", {
+        await this.$store.dispatch('lang/findAll', {
           query: {
             filter: {
-              order: [["createdAt", "DESC"]]
+              order: [['createdAt', 'DESC']]
             }
           }
         });
 
-        await this.$store.dispatch("context/findSidebarContexts", {
+        await this.$store.dispatch('context/findSidebarContexts', {
           query: {
             filter: {
               include: [
                 {
-                  association: "resources",
+                  association: 'resources',
                   where: {
                     level: 1,
-                    lang: this.$store.getters["base/getMainLang"]
+                    lang: this.$store.getters['base/getMainLang']
                   }
                 }
               ]

@@ -1,24 +1,30 @@
-<template lang="pug">
-  v-menu(offset-y)
-    template(v-slot:activator="{ on }")
-      v-btn(
+<template>
+  <VMenu offset-y>
+    <template v-slot:activator="{ on }">
+      <VBtn
         text
-        v-on="on"
         depressed
-      ) {{d.applications || 'Applications'}}
-    v-list
-      v-list-item(
+        v-on="on"
+      >
+        {{ d.applications || 'Applications' }}
+      </VBtn>
+    </template>
+    <VList>
+      <VListItem
         v-for="(item, i) in modules"
         :key="i"
         :to="item.path"
-      )
-        v-list-item-title {{d[item.lexicon] || item.name}}
+      >
+        <VListItemTitle>{{ d[item.lexicon] || item.name }}</VListItemTitle>
+      </VListItem>
+    </VList>
+  </VMenu>
 </template>
 
 <script>
-import { modules } from "@/core/config";
+import { modules } from '@/core/config';
 export default {
-  name: "ApplicationsMenu",
+  name: 'ApplicationsMenu',
 
   data() {
     return {
@@ -29,7 +35,7 @@ export default {
 </script>
 
 <style lang="sass">
-  .v-menu__content
-    box-shadow: none
-    border: 1px solid rgba(0, 0, 0, 0.12)
+.v-menu__content
+  box-shadow: none
+  border: 1px solid rgba(0, 0, 0, 0.12)
 </style>

@@ -3,7 +3,17 @@ module.exports = {
   parserOptions: {
     parser: 'babel-eslint',
     ecmaVersion: 2018,
-    sourceType: 'module'
+    sourceType: 'module',
+    'vue/max-attributes-per-line': [
+      'error',
+      {
+        singleline: 1,
+        multiline: {
+          max: 1,
+          allowFirstLine: false
+        }
+      }
+    ]
   },
   rules: {
     'vue/html-quotes': ['error', 'double' | 'single']

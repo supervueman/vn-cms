@@ -1,8 +1,16 @@
-<template lang="pug">
-  .avatar(@click="isActiveDialog = true")
-    img(:src="imagePath")
-    v-dialog(v-model="isActiveDialog")
-      filesystem(@selectFile="selectFile")
+<template>
+  <div
+    class="avatar"
+    @click="isActiveDialog = true"
+  >
+    <img
+      :src="imagePath"
+      alt="Avatar"
+    >
+    <VDialog v-model="isActiveDialog">
+      <Filesystem @selectFile="selectFile" />
+    </VDialog>
+  </div>
 </template>
 
 <script>
