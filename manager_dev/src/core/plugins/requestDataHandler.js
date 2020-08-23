@@ -15,7 +15,7 @@
  */
 export default (method, url, data, params, headers) => {
   const access_token = localStorage.getItem('access_token');
-  const apiKey = localStorage.getItem('x-api-key')
+  const apiKey = localStorage.getItem('x-api-key');
   const isData = data !== '' && data !== undefined;
   const isParams = params !== '' && params !== undefined;
 
@@ -28,7 +28,7 @@ export default (method, url, data, params, headers) => {
       'x-api-key': apiKey,
       ...headers
     }
-  }
+  };
 
   if (isData) {
     requestData.data = data;
@@ -40,7 +40,12 @@ export default (method, url, data, params, headers) => {
   if (isParams) {
     requestData.params = params;
   }
-  requestData.headers.Authorization = `Basic ${Buffer.from('multikey.studio' + ':' + 'multikeypassword').toString('base64')}`;
+
+  requestData.headers.Authorization = `Basic ${Buffer.from(
+    process.env.VUE_APP_AUTHORIZATION_LOGIN +
+      ':' +
+      process.env.VUE_APP_AUTHORIZATION_PASSWORD
+  ).toString('base64')}`;
 
   return requestData;
-}
+};
