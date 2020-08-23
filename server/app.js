@@ -7,12 +7,6 @@ const connector = require('./connector');
 
 require('dotenv').config();
 
-module.exports = () => {
-  io.on('connection', (socket) => {
-    console.log('a user connected');
-  });
-};
-
 // Globals
 const logger = require('./core/global/logger');
 const sendRes = require('./core/global/response');
