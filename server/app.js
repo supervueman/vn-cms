@@ -15,22 +15,47 @@ init(app);
 connector.associations();
 connector.routes(app);
 
-async function connect() {
-  const connect = await sequelize.sync();
+sequelize
+  .authenticate()
+  .then(() => {
+    return sequelize.sync();
+  })
+  .then(connect => {
+    if (!connect) {
+      logger('error', 'db-connect', 500, 'app.js');
+      console.log('Not connect!');
+      return;
+    }
 
-  if (!connect) {
-    logger('error', 'db-connect', 500, 'app.js');
-    console.log('Not connect!');
-    return;
-  }
+    const server = app.listen(server_port, () => {
+      global.logger = logger;
+      global.sendRes = sendRes;
+      console.log(`Server listen on http://localhost:${server_port}`);
+    });
 
-  const server = app.listen(server_port, () => {
-    global.logger = logger;
-    global.sendRes = sendRes;
-    console.log(`Server listen on http://localhost:${server_port}`);
+    connector.init(server);
+  })
+  .catch(err => {
+    throw new Error(err);
   });
 
-  await connector.init(server);
-}
 
-connect();
+// async function connect() {
+//   const connect = await sequelize.sync();
+
+//   if (!connect) {
+//     logger('error', 'db-connect', 500, 'app.js');
+//     console.log('Not connect!');
+//     return;
+//   }
+
+//   const server = app.listen(server_port, () => {
+//     global.logger = logger;
+//     global.sendRes = sendRes;
+//     console.log(`Server listen on http://localhost:${server_port}`);
+//   });
+
+//   await connector.init(server);
+// }
+
+// connect();
