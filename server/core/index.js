@@ -15,6 +15,8 @@ module.exports = async (app) => {
 
   app.use(bodyParser.json());
 
+  console.log(process.env.NODE_ENV)
+
   if (process.env.NODE_ENV === 'development') {
     const connector = require('../connector').swagger();
     const swaggerUi = require('swagger-ui-express');
