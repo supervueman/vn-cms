@@ -5,7 +5,7 @@
 1. Создаем рабочую директорию и переходим в нее `mkdir ${app} && cd ${app}`
 2. Клонируем платформу `git clone https://github.com/multikey-production/platform.git ./`
 3. Запускаем установку пакетов `npm run install`
-4. Редактируем .env файлы в папках `./manager_dev` и `./server`
+4. Создаем и редактируем .env файлы в папках `./manager_dev` и `./server`, как указано в `.env_example` соответственно
 
 ---
 
@@ -13,7 +13,18 @@
 
 1. Запускаем серверную часть `npm run server:dev`
 2. Запускаем клиентскую часть `npm run manager:dev`
-3. Запускаем приложение `npm run client:dev`
+3. Запускаем приложение `npm run client:dev` (Предварительно нужно выполнить пункты указанные ниже)
+
+---
+
+## Установка клиентской части приложения
+
+1. Создаем в корне папку `client` и переходим в нее
+2. Клонируем шаблон `git clone https://github.com/supervueman/vn-client-nuxt.git ./`
+3. Устанавливаем зависимости `npm install`
+4. Создаем и редактируем .env файл, как указано в `.env_example`
+
+Данный шаблон является шаблоном для Nuxt.js с предвао=рительными настройками для работы с платформой.
 
 ---
 
@@ -21,9 +32,21 @@
 
 Для production необходим pm2
 
-1. Сборка клиентской части `npm run manager:build`
-2. Запуск серверной части `npm run server:start:pm2`
-3. Запуск клиентской части `npm run manager:start:pm2`
+1. Сборка клиентской части платформы `npm run manager:build`
+2. Запуск серверной части платформы `npm run server:start:pm2`
+3. Запуск клиентской части платформы `npm run manager:start:pm2`
+4. Запуск вашего приложения `npm run client:start:pm2`
+
+### Так же есть единая команда для запуска приложения целиком
+
+`npm run app:start:pm2`
+
+---
+
+## Примечание
+
+Для корректного отображения изображений, необходимо создать симлинки на папку files, в папках `client/static` и `manager_dev/public/static`. Для этого есть команды `npm run manager:dev:create:symlink` и `npm run client:create:symlink` соответсвенно.
+При запуске в production так же необходимо создать симлинк на files в папке собранной клиентской части платформы `manager/static`, для этого необходим выполнить команду `npm run manager:create:symlink`.
 
 ---
 
