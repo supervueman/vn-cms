@@ -38,24 +38,3 @@ sequelize
   .catch(err => {
     throw new Error(err);
   });
-
-
-// async function connect() {
-//   const connect = await sequelize.sync();
-
-//   if (!connect) {
-//     logger('error', 'db-connect', 500, 'app.js');
-//     console.log('Not connect!');
-//     return;
-//   }
-
-//   const server = app.listen(server_port, () => {
-//     global.logger = logger;
-//     global.sendRes = sendRes;
-//     console.log(`Server listen on http://localhost:${server_port}`);
-//   });
-
-//   await connector.init(server);
-// }
-
-// connect();
