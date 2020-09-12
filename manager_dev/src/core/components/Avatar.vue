@@ -7,9 +7,9 @@
       :src="imagePath"
       alt="Avatar"
     >
-    <VDialog v-model="isActiveDialog">
-      <Filesystem @selectFile="selectFile" />
-    </VDialog>
+    <v-dialog v-model="isActiveDialog">
+      <filesystem @selectFile="selectFile" />
+    </v-dialog>
   </div>
 </template>
 

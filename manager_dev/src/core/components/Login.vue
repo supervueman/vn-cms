@@ -1,35 +1,54 @@
-<template lang="pug">
-  v-card.mx-auto(tag="form")
-    v-card-title
-      h1.title {{d.login || 'Login'}}
-    v-card-text
-      v-text-field(
+<template>
+  <v-card
+    class="mx-auto"
+    tag="form"
+  >
+    <v-card-title>
+      <h1 class="title">
+        {{ d.login || 'Login' }}
+      </h1>
+    </v-card-title>
+
+    <v-card-text>
+      <v-text-field
         v-model="email"
         label="E-mail:"
         :error-messages="emailErrors"
         required
+        autocomplete="username email"
         @input="$v.email.$touch()"
         @blur="$v.email.$touch()"
         @click.once="getCredentials"
-        autocomplete="username email"
-      )
-      v-text-field(
+      />
+      <v-text-field
         v-model="password"
         :label="`${d.password || 'Password'}:`"
         :error-messages="passErrors"
         type="password"
         required
+        autocomplete="password"
         @input="$v.password.$touch()"
         @blur="$v.password.$touch()"
-        autocomplete="password"
-      )
-    v-card-actions
-      router-link.ml-2(to="/reset-password") {{d.forgot_password || 'Forgot your password?'}}
-      v-btn.ml-auto.mr-2.mb-2(
-        @click="submit"
+      />
+    </v-card-text>
+
+    <v-card-actions>
+      <router-link
+        class="ml-2"
+        to="/reset-password"
+      >
+        {{ d.forgot_password || 'Forgot your password?' }}
+      </router-link>
+      <v-btn
+        class="ml-auto mr-2 mb-2"
         color="primary"
         depressed
-      ) {{d.login || 'Login'}}
+        @click="submit"
+      >
+        {{ d.login || 'Login' }}
+      </v-btn>
+    </v-card-actions>
+  </v-card>
 </template>
 
 <script>

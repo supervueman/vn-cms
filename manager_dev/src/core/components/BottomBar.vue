@@ -1,21 +1,33 @@
-<template lang="pug">
-  v-footer(
+<template>
+  <v-footer
     padless
     color="primary"
     absolute
     app
-  )
-    v-card(
+  >
+    <v-card
       flat
       tile
       width="100%"
       class="primary"
-    )
-      v-card-text.white--text
-        v-layout(justify-space-between)
-          div {{ new Date().getFullYear() }} VN-CMS
-          div {{d.developer || 'Developer'}}
-            a.dev-link(href="https://github.com/supervueman" target="_blank") SUPERVUEMAN
+    >
+      <v-card-text class="white--text">
+        <v-layout justify-space-between>
+          <div>{{ new Date().getFullYear() }} VN-CMS</div>
+          <div>
+            {{ d.developer || 'Developer' }}
+            <a
+              class="dev-link"
+              href="https://github.com/supervueman"
+              target="_blank"
+            >
+              SUPERVUEMAN
+            </a>
+          </div>
+        </v-layout>
+      </v-card-text>
+    </v-card>
+  </v-footer>
 </template>
 
 <script>

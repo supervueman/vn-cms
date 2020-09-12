@@ -1,7 +1,10 @@
-<template lang="pug">
-  .notification(
+<template>
+  <div
+    class="notification"
     :class="{'notification-error': type === 'error', 'notification-success': type === 'success', 'notification-warning': type === 'warning'}"
-  ) {{message}}
+  >
+    {{ message }}
+  </div>
 </template>
 
 <script>

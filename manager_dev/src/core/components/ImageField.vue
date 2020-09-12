@@ -1,24 +1,45 @@
-<template lang="pug">
-	v-flex
-		v-layout.wrap
-			v-flex.md12
-				v-layout.align-center
-					v-text-field(
-						@input="$emit('update:path', $event)"
-						:value="path"
-						:label="label"
-					)
-					v-icon(@click="isActiveDialog = true") image
-			v-flex.md12(v-if="path !== ''")
-				v-img(:src="`/static/${path}`", alt="alt" max-width="100%")
-		v-dialog(v-model="isActiveDialog")
-			filesystem(@selectFile="selectFile")
-			v-card(outlined)
-				v-card-actions
-					v-btn.ml-2(
-						depressed
-						@click="isActiveDialog = false"
-					) {{d.close || 'Close'}}
+<template>
+  <v-flex>
+    <v-layout class="wrap">
+      <v-flex class="md12">
+        <v-layout class="align-center">
+          <v-text-field
+            :value="path"
+            :label="label"
+            @input="$emit('update:path', $event)"
+          />
+          <v-icon @click="isActiveDialog = true">
+            image
+          </v-icon>
+        </v-layout>
+      </v-flex>
+
+      <v-flex
+        v-if="path !== ''"
+        class="md12"
+      >
+        <v-img
+          :src="`/static/${path}`"
+          max-width="100%"
+        />
+      </v-flex>
+    </v-layout>
+
+    <v-dialog v-model="isActiveDialog">
+      <filesystem @selectFile="selectFile" />
+      <v-card outlined>
+        <v-card-actions>
+          <v-btn
+            class="ml-2"
+            depressed
+            @click="isActiveDialog = false"
+          >
+            {{ d.close || 'Close' }}
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+  </v-flex>
 </template>
 
 <script>

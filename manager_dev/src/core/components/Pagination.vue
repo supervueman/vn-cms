@@ -1,11 +1,11 @@
-<template lang="pug">
-  v-pagination(
+<template>
+  <v-pagination
     v-model="pagination.page"
     :length="pages"
-    @input="getPage"
     :value="0"
     :total-visible="10"
-  )
+    @input="getPage"
+  />
 </template>
 
 <script>

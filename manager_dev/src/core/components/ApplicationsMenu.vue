@@ -1,24 +1,24 @@
 <template>
-  <VMenu offset-y>
+  <v-menu offset-y>
     <template v-slot:activator="{ on }">
-      <VBtn
+      <v-btn
         text
         depressed
         v-on="on"
       >
         {{ d.applications || 'Applications' }}
-      </VBtn>
+      </v-btn>
     </template>
-    <VList>
-      <VListItem
+    <v-list>
+      <v-list-item
         v-for="(item, i) in modules"
         :key="i"
         :to="item.path"
       >
-        <VListItemTitle>{{ d[item.lexicon] || item.name }}</VListItemTitle>
-      </VListItem>
-    </VList>
-  </VMenu>
+        <v-list-item-title>{{ d[item.lexicon] || item.name }}</v-list-item-title>
+      </v-list-item>
+    </v-list>
+  </v-menu>
 </template>
 
 <script>
