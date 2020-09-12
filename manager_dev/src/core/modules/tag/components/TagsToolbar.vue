@@ -1,13 +1,19 @@
-<template lang="pug">
-	v-toolbar(flat color="white")
-		v-spacer
-		v-btn(
-			color="primary"
-			to="/tag-create"
-			dark
-			v-if="r.is_tag_create"
-			depressed
-		) {{d.create_tag || 'Create tag'}}
+<template>
+  <v-toolbar
+    flat
+    color="white"
+  >
+    <v-spacer />
+    <v-btn
+      v-if="r.is_tag_create"
+      color="primary"
+      to="/tag-create"
+      dark
+      depressed
+    >
+      {{ d.create_tag || 'Create tag' }}
+    </v-btn>
+  </v-toolbar>
 </template>
 
 <script>

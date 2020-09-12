@@ -1,6 +1,12 @@
-<template lang="pug">
-  v-card.mb-3(outlined)
-    v-card-text {{d.context || 'Context'}}: {{profile.context.slug}}
+<template>
+  <v-card
+    class="mb-3"
+    outlined
+  >
+    <v-card-text>
+      {{ d.context || 'Context' }}: {{ profile.context.slug }}
+    </v-card-text>
+  </v-card>
 </template>
 
 <script>

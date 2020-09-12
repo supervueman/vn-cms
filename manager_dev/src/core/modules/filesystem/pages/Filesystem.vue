@@ -1,8 +1,12 @@
-<template lang="pug">
-	v-flex(v-if="r.is_filesystem_access")
-		v-layout.justify-space-between.align-center.mb-5
-			.body-2.mt-2.mb-12 {{d.filesystem || 'Filesystem'}}
-		filesystem
+<template>
+  <v-flex v-if="r.is_filesystem_access">
+    <v-layout class="justify-space-between align-center mb-5">
+      <div class="body-2 mt-2 mb-12">
+        {{ d.filesystem || 'Filesystem' }}
+      </div>
+    </v-layout>
+    <filesystem />
+  </v-flex>
 </template>
 
 <script>

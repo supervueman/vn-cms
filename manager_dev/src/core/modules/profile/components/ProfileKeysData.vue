@@ -1,8 +1,14 @@
-<template lang="pug">
-  v-expansion-panels
-    v-expansion-panel.elevation-none
-      v-expansion-panel-header.px-4 {{d.keys || 'Keys'}}
-      v-expansion-panel-content.px-0 {{d.public_key || 'Public key'}}: {{profile.token}}
+<template>
+  <v-expansion-panels>
+    <v-expansion-panel class="elevation-none">
+      <v-expansion-panel-header class="px-4">
+        {{ d.keys || 'Keys' }}
+      </v-expansion-panel-header>
+      <v-expansion-panel-content class="px-0">
+        {{ d.public_key || 'Public key' }}: {{ profile.token }}
+      </v-expansion-panel-content>
+    </v-expansion-panel>
+  </v-expansion-panels>
 </template>
 
 <script>
