@@ -129,11 +129,15 @@
   },
   {
     "slug": "slug",
-    "value": "Псевдоним"
+    "value": "Alias"
+  },
+  {
+    "slug": "value",
+    "value": "Wartość"
   },
   {
     "slug": "name",
-    "value": "Alias"
+    "value": "Imię"
   },
   {
     "slug": "save",

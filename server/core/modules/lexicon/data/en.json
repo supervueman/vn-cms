@@ -132,6 +132,10 @@
     "value": "Slug"
   },
   {
+    "slug": "value",
+    "value": "Value"
+  },
+  {
     "slug": "name",
     "value": "Name"
   },
