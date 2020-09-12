@@ -1,435 +1,435 @@
 [
   {
     "slug": "download",
-    "value": "Downdload"
+    "value": "Pobieranie"
   },
   {
     "slug": "upload",
-    "value": "Upload"
+    "value": "Przekazać plik"
   },
   {
     "slug": "enter_dir_name",
-    "value": "Enter directory name"
+    "value": "Wprowadź nazwę katalogu"
   },
   {
     "slug": "create",
-    "value": "Create"
+    "value": "Stwórz"
   },
   {
     "slug": "cancel",
-    "value": "Cancel"
+    "value": "Anulowanie"
   },
   {
     "slug": "required_field",
-    "value": "Required field"
+    "value": "Pole wymagane"
   },
   {
     "slug": "current_path",
-    "value": "Current path"
+    "value": "Obecna ścieżka"
   },
   {
     "slug": "create_directory",
-    "value": "Create directory"
+    "value": "Utworzyć katalog"
   },
   {
     "slug": "reload",
-    "value": "Reload"
+    "value": "Odświeżać"
   },
   {
     "slug": "layouts",
-    "value": "Layouts"
+    "value": "Szablony"
   },
   {
     "slug": "fields",
-    "value": "Fields"
+    "value": "Pola"
   },
   {
     "slug": "field_categories",
-    "value": "Fields categories"
+    "value": "Kategorie pól"
   },
   {
     "slug": "filesystem",
-    "value": "Filesystem"
+    "value": "System plików"
   },
   {
     "slug": "create_resource",
-    "value": "Create resource"
+    "value": "Utwórz zasób"
   },
   {
     "slug": "applications",
-    "value": "Applications"
+    "value": "Aplikacje"
   },
   {
     "slug": "developer",
-    "value": "Developer"
+    "value": "Deweloper"
   },
   {
     "slug": "close",
-    "value": "Close"
+    "value": "Blisko"
   },
   {
     "slug": "login",
-    "value": "Login"
+    "value": "Wejść"
   },
   {
     "slug": "forgot_password",
-    "value": "Forgot your password?"
+    "value": "Zapomniałeś hasła?"
   },
   {
     "slug": "password",
-    "value": "Password"
+    "value": "Hasło"
   },
   {
     "slug": "email_is_not_valid",
-    "value": "E-mail is not valid"
+    "value": "Adres email jest nieprawidłowy"
   },
   {
     "slug": "remove_confirm",
-    "value": "Are you sure you want to delete"
+    "value": "Czy naprawdę chcesz usunąć"
   },
   {
     "slug": "resources",
-    "value": "Resources"
+    "value": "Zasoby"
   },
   {
     "slug": "develop",
-    "value": "Develop"
+    "value": "Rozwój"
   },
   {
     "slug": "files",
-    "value": "Files"
+    "value": "Pliki"
   },
   {
     "slug": "users",
-    "value": "Users"
+    "value": "Użytkownicy"
   },
   {
     "slug": "roles",
-    "value": "Roles"
-  },
-  {
-    "slug": "system_settings",
-    "value": "System settings"
-  },
-  {
-    "slug": "dictionaries",
-    "value": "Dictionaries"
-  },
-  {
-    "slug": "logout",
-    "value": "Logout"
-  },
-  {
-    "slug": "context",
-    "value": "Context"
-  },
-  {
-    "slug": "common_data",
-    "value": "Common data"
-  },
-  {
-    "slug": "slug",
-    "value": "Slug"
-  },
-  {
-    "slug": "name",
-    "value": "Name"
-  },
-  {
-    "slug": "save",
-    "value": "Save"
-  },
-  {
-    "slug": "remove",
-    "value": "Remove"
-  },
-  {
-    "slug": "field_must_be_have_more_two_sumbols",
-    "value": "The field must be at least 2 characters"
-  },
-  {
-    "slug": "field_must_be_have_more_three_sumbols",
-    "value": "The field must be at least 3 characters"
-  },
-  {
-    "slug": "field_must_be_have_more_six_sumbols",
-    "value": "The field must be at least 6 characters"
-  },
-  {
-    "slug": "only_en_symbols",
-    "value": "Only latin characters allowed"
-  },
-  {
-    "slug": "only_numbers_and_symbols",
-    "value": "Only numbers and symbols"
-  },
-  {
-    "slug": "data_is_not_valid",
-    "value": "Data is not valid"
-  },
-  {
-    "slug": "context_creation",
-    "value": "Context creation"
-  },
-  {
-    "slug": "create_context",
-    "value": "Create context"
-  },
-  {
-    "slug": "contexts",
-    "value": "Contexts"
-  },
-  {
-    "slug": "create_dictionary",
-    "value": "Create dictionary"
-  },
-  {
-    "slug": "dictionary",
-    "value": "Dictionary"
-  },
-  {
-    "slug": "field_element",
-    "value": "Field element"
-  },
-  {
-    "slug": "field_category",
-    "value": "Field category"
-  },
-  {
-    "slug": "layout",
-    "value": "Layout"
-  },
-  {
-    "slug": "field_type",
-    "value": "Field type"
-  },
-  {
-    "slug": "default_value",
-    "value": "Default value"
-  },
-  {
-    "slug": "string_or_json",
-    "value": "String or JSON"
-  },
-  {
-    "slug": "schema",
-    "value": "Schema"
-  },
-  {
-    "slug": "create_field",
-    "value": "Create field"
-  },
-  {
-    "slug": "field",
-    "value": "field"
-  },
-  {
-    "slug": "field_creation",
-    "value": "Field creation"
-  },
-  {
-    "slug": "create_field_category",
-    "value": "Create fields category"
-  },
-  {
-    "slug": "field_category_creation",
-    "value": "Fields catiogory creation"
-  },
-  {
-    "slug": "directory",
-    "value": "Directory"
-  },
-  {
-    "slug": "create_layout",
-    "value": "Create layout"
-  },
-  {
-    "slug": "layout_creation",
-    "value": "Layout creation"
-  },
-  {
-    "slug": "address",
-    "value": "Address"
-  },
-  {
-    "slug": "country",
-    "value": "Country"
-  },
-  {
-    "slug": "city",
-    "value": "City"
-  },
-  {
-    "slug": "street",
-    "value": "Street"
-  },
-  {
-    "slug": "home",
-    "value": "Home"
-  },
-  {
-    "slug": "apartment",
-    "value": "Apartment"
-  },
-  {
-    "slug": "avatar",
-    "value": "Avatar"
-  },
-  {
-    "slug": "image",
-    "value": "Image"
-  },
-  {
-    "slug": "lastname",
-    "value": "Lastname"
-  },
-  {
-    "slug": "firstname",
-    "value": "Firstname"
-  },
-  {
-    "slug": "middlename",
-    "value": "Middlename"
-  },
-  {
-    "slug": "contacts",
-    "value": "Contacts"
-  },
-  {
-    "slug": "phone",
-    "value": "Phone"
-  },
-  {
-    "slug": "keys",
-    "value": "Keys"
-  },
-  {
-    "slug": "public_key",
-    "value": "Public key"
-  },
-  {
-    "slug": "change_password",
-    "value": "Change password"
-  },
-  {
-    "slug": "enter_old_password",
-    "value": "Enter old password"
-  },
-  {
-    "slug": "enter_new_password",
-    "value": "Enter new password"
-  },
-  {
-    "slug": "confirm_password",
-    "value": "Confirm password"
-  },
-  {
-    "slug": "change",
-    "value": "Change"
-  },
-  {
-    "slug": "password_not_confirm",
-    "value": "Passwords do not match"
-  },
-  {
-    "slug": "role",
     "value": "Role"
   },
   {
+    "slug": "system_settings",
+    "value": "Ustawienia systemowe"
+  },
+  {
+    "slug": "dictionaries",
+    "value": "Słowniki"
+  },
+  {
+    "slug": "logout",
+    "value": "Wynik"
+  },
+  {
+    "slug": "context",
+    "value": "Kontekst"
+  },
+  {
+    "slug": "common_data",
+    "value": "Informacje ogólne"
+  },
+  {
+    "slug": "slug",
+    "value": "Псевдоним"
+  },
+  {
+    "slug": "name",
+    "value": "Alias"
+  },
+  {
+    "slug": "save",
+    "value": "Zapisać"
+  },
+  {
+    "slug": "remove",
+    "value": "Usunąć"
+  },
+  {
+    "slug": "field_must_be_have_more_three_sumbols",
+    "value": "Pole musi mieć co najmniej 3 znaki"
+  },
+  {
+    "slug": "field_must_be_have_more_six_sumbols",
+    "value": "Pole musi mieć co najmniej 6 znaki"
+  },
+  {
+    "slug": "only_en_symbols",
+    "value": "Dozwolone są tylko znaki angielskie"
+  },
+  {
+    "slug": "only_numbers_and_symbols",
+    "value": "Dozwolone są tylko cyfry i symbole"
+  },
+  {
+    "slug": "data_is_not_valid",
+    "value": "Dane są wypełnione nieprawidłowo"
+  },
+  {
+    "slug": "context_creation",
+    "value": "Tworzenie kontekstu"
+  },
+  {
+    "slug": "create_context",
+    "value": "Utwórz kontekst"
+  },
+  {
+    "slug": "contexts",
+    "value": "Konteksty"
+  },
+  {
+    "slug": "create_dictionary",
+    "value": "Utwórz słownik"
+  },
+  {
+    "slug": "field_must_be_have_more_two_sumbols",
+    "value": "Pole musi mieć co najmniej 2 znaki"
+  },
+  {
+    "slug": "dictionary",
+    "value": "Słownictwo"
+  },
+  {
+    "slug": "field_element",
+    "value": "Element pola"
+  },
+  {
+    "slug": "field_category",
+    "value": "Kategoria pola"
+  },
+  {
+    "slug": "layout",
+    "value": "Szablon"
+  },
+  {
+    "slug": "field_type",
+    "value": "Typ pola"
+  },
+  {
+    "slug": "default_value",
+    "value": "Domyślna wartość"
+  },
+  {
+    "slug": "string_or_json",
+    "value": "String lub json"
+  },
+  {
+    "slug": "schema",
+    "value": "Schemat"
+  },
+  {
+    "slug": "create_field",
+    "value": "Utwórz pole"
+  },
+  {
+    "slug": "field",
+    "value": "Pole"
+  },
+  {
+    "slug": "field_creation",
+    "value": "Tworzenie pola"
+  },
+  {
+    "slug": "create_field_category",
+    "value": "Utwórz kategorię pola"
+  },
+  {
+    "slug": "field_category_creation",
+    "value": "Tworzenie kategorii pola"
+  },
+  {
+    "slug": "directory",
+    "value": "Informator"
+  },
+  {
+    "slug": "create_layout",
+    "value": "Utwórz szablon"
+  },
+  {
+    "slug": "layout_creation",
+    "value": "Tworzenie szablonu"
+  },
+  {
+    "slug": "address",
+    "value": "Adres"
+  },
+  {
+    "slug": "country",
+    "value": "Kraj"
+  },
+  {
+    "slug": "city",
+    "value": "Miasto"
+  },
+  {
+    "slug": "street",
+    "value": "Na zewnątrz"
+  },
+  {
+    "slug": "home",
+    "value": "Dom"
+  },
+  {
+    "slug": "apartment",
+    "value": "Mieszkanie"
+  },
+  {
+    "slug": "avatar",
+    "value": "Awatara"
+  },
+  {
+    "slug": "image",
+    "value": "Obrazek"
+  },
+  {
+    "slug": "lastname",
+    "value": "Nazwisko"
+  },
+  {
+    "slug": "firstname",
+    "value": "Imię"
+  },
+  {
+    "slug": "middlename",
+    "value": "Drugie imię"
+  },
+  {
+    "slug": "contacts",
+    "value": "Łączność"
+  },
+  {
+    "slug": "phone",
+    "value": "Telefon"
+  },
+  {
+    "slug": "keys",
+    "value": "Klucze"
+  },
+  {
+    "slug": "public_key",
+    "value": "Klucz publiczny"
+  },
+  {
+    "slug": "change_password",
+    "value": "Zmień hasło"
+  },
+  {
+    "slug": "enter_old_password",
+    "value": "Wpisz swoje stare hasło"
+  },
+  {
+    "slug": "enter_new_password",
+    "value": "Wpisz nowe hasło"
+  },
+  {
+    "slug": "confirm_password",
+    "value": "Potwierdź nowe hasło"
+  },
+  {
+    "slug": "change",
+    "value": "Edytować"
+  },
+  {
+    "slug": "password_not_confirm",
+    "value": "Hasło różni się"
+  },
+  {
+    "slug": "role",
+    "value": "Rola"
+  },
+  {
     "slug": "role_slug",
-    "value": "Role slug"
+    "value": "Alias ​​roli"
   },
   {
     "slug": "your_profile",
-    "value": "Your profile"
+    "value": "Twój profil"
   },
   {
     "slug": "reset_password",
-    "value": "Reset password"
+    "value": "Przywróć hasło"
   },
   {
     "slug": "send_request",
-    "value": "Send request"
+    "value": "Wysłać prośbę"
   },
   {
     "slug": "select_lang",
-    "value": "Select lang"
+    "value": "Wybierz swój język"
   },
   {
     "slug": "create_translation",
-    "value": "Create translation"
+    "value": "Utwórz tłumaczenie"
   },
   {
     "slug": "next_step",
-    "value": "Next step"
+    "value": "Następny krok"
   },
   {
     "slug": "need_resource_with_analog_lang",
-    "value": "You must create a parent resource with the same translation language"
+    "value": "Musisz utworzyć zasób nadrzędny z tym samym językiem docelowym"
   },
   {
     "slug": "resource_type",
-    "value": "Resource type"
+    "value": "Rodzaj zasobu"
   },
   {
     "slug": "published",
-    "value": "Published"
+    "value": "Poczta"
   },
   {
     "slug": "menunindex",
-    "value": "Menuindex"
+    "value": "Indeks menu"
   },
   {
     "slug": "date_creation",
-    "value": "Date creation"
+    "value": "Data utworzenia"
   },
   {
     "slug": "description",
-    "value": "Description"
+    "value": "Opis"
   },
   {
     "slug": "resource",
-    "value": "Resource"
+    "value": "Ratunek"
   },
   {
     "slug": "resource_creation",
-    "value": "Resource creation"
+    "value": "Создание ресурса"
   },
   {
     "slug": "rang",
-    "value": "Rang"
+    "value": "Tworzenie zasobów"
   },
   {
     "slug": "role_creation",
-    "value": "Role creation"
+    "value": "Tworzenie ról"
   },
   {
     "slug": "create_role",
-    "value": "Create role"
+    "value": "Utwórz rolę"
   },
   {
     "slug": "profile",
-    "value": "Profile"
+    "value": "Profil"
   },
   {
     "slug": "user_creation",
-    "value": "User creation"
+    "value": "Tworzenie użytkownika"
   },
   {
     "slug": "create_user",
-    "value": "Create user"
+    "value": "Stwórz użytkownika"
   },
   {
     "slug": "cannot_delete_root_directory",
-    "value": "Cannot delete root directory"
+    "value": "Nie można usunąć katalogu głównego"
   },
   {
     "slug": "enter_password",
-    "value": "Enter password"
+    "value": "Wprowadź hasło"
   },
   {
     "slug": "add_element",
-    "value": "Add element"
+    "value": "Dodaj Przedmiot"
   },
   {
     "slug": "vn_cms",
@@ -437,47 +437,47 @@
   },
   {
     "slug": "verified_account",
-    "value": "Verified account"
+    "value": "Weryfikacja konta"
   },
   {
     "slug": "lexicon",
-    "value": "Lexicon"
+    "value": "Leksykon"
   },
   {
     "slug": "lexicons",
-    "value": "Lexicons"
+    "value": "Leksykony"
   },
   {
     "slug": "create_lexicon",
-    "value": "Create lexicon"
+    "value": "Utwórz leksykon"
   },
   {
     "slug": "lang",
-    "value": "Lang"
+    "value": "Język"
   },
   {
     "slug": "send",
-    "value": "Send"
+    "value": "Wyślij wiadomość"
   },
   {
     "slug": "create_new",
-    "value": "Creaete new"
+    "value": "Tworzyć nowe"
   },
   {
     "slug": "clear",
-    "value": "Clear"
+    "value": "Jasny"
   },
   {
     "slug": "choose",
-    "value": "Choose"
+    "value": "Wybierać"
   },
   {
     "slug": "select_tag",
-    "value": "Select tag"
+    "value": "Wybierz tag"
   },
   {
     "slug": "create_tag",
-    "value": "Create tag"
+    "value": "Utwórz tag"
   },
   {
     "slug": "tag",
@@ -485,11 +485,11 @@
   },
   {
     "slug": "tag_creation",
-    "value": "Tag creation"
+    "value": "Tworzenie tagów"
   },
   {
     "slug": "tags",
-    "value": "Tags"
+    "value": "Tagi"
   },
   {
     "slug": "greeting",
