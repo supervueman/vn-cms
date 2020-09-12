@@ -31,6 +31,7 @@
 		"vuex": "^3.1.1"
 	},
 	"devDependencies": {
+		"@babel/plugin-proposal-optional-chaining": "^7.11.0",
 		"@mdi/font": "^4.4.95",
 		"@vue/cli-plugin-babel": "^3.7.0",
 		"@vue/cli-plugin-eslint": "^3.7.0",
@@ -47,25 +48,6 @@
 		"vue-template-compiler": "^2.5.21",
 		"vue2-ace-editor": "0.0.15",
 		"vuetify-loader": "^1.2.2"
-	},
-	"eslintConfig": {
-		"root": true,
-		"env": {
-			"node": true
-		},
-		"extends": [
-			"plugin:vue/essential",
-			"eslint:recommended"
-		],
-		"rules": {},
-		"parserOptions": {
-			"parser": "babel-eslint"
-		}
-	},
-	"postcss": {
-		"plugins": {
-			"autoprefixer": {}
-		}
 	},
 	"browserslist": [
 		"> 1%",

@@ -17,6 +17,8 @@ export default {
   },
 
   async beforeCreate() {
+    const usert = {}
+    console.log(user?.age)
     if (!!localStorage.getItem('access_token')) {
       const bool = await this.$store.dispatch('profile/findByAccessToken');
 
