@@ -16,7 +16,7 @@
     sidebar(
       v-if="isAuth"
     )
-    v-content
+    v-main
       v-container(fluid)
         slot
     bottom-bar

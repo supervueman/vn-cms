@@ -6,6 +6,9 @@ module.exports = {
     sourceType: 'module'
   },
   rules: {
-    'vue/html-quotes': ['error', 'double' | 'single']
+    'vue/html-quotes': ['error', 'double' | 'single'],
+    'vue/custom-event-name-casing': 'off',
+    'vue/attribute-hyphenation': 'off',
+    'vue/no-use-v-if-with-v-for': 'off',
   }
 };

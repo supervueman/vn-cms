@@ -5,7 +5,7 @@
 		:hide-overlay="true"
 		fixed
 		app
-		mobile-break-point="600"
+		mobile-breakpoint="600"
 		stateless
 		manual-scroll
 	)

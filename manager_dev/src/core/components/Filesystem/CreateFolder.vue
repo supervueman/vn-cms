@@ -1,17 +1,35 @@
-<template lang="pug">
-  v-card
-    v-card-title {{d.directory || 'Directory'}}: {{folderName}}
-    v-card-text
-      v-text-field(
+<template>
+  <v-card>
+    <v-card-title>
+      {{ d.directory || 'Directory' }}: {{ folderName }}
+    </v-card-title>
+
+    <v-card-text>
+      <v-text-field
         v-model="folderName"
         :label="`${d.enter_dir_name || 'Enter directory name'}`"
         :error-messages="folderNameErrors"
         @input="$v.folderName.$touch()"
         @blur="$v.folderName.$touch()"
-      )
-    v-card-actions.px-4.pb-4
-      v-btn(@click="createFolder" color="primary" depressed) {{d.create || 'Create'}}
-      v-btn(@click="cancel" depressed) {{d.cancel || 'Cancel'}}
+      />
+    </v-card-text>
+
+    <v-card-actions class="px-4 pb-4">
+      <v-btn
+        color="primary"
+        depressed
+        @click="createFolder"
+      >
+        {{ d.create || 'Create' }}
+      </v-btn>
+      <v-btn
+        depressed
+        @click="cancel"
+      >
+        {{ d.cancel || 'Cancel' }}
+      </v-btn>
+    </v-card-actions>
+  </v-card>
 </template>
 
 <script>

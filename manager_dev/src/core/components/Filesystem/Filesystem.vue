@@ -1,24 +1,29 @@
-<template lang="pug">
-  v-layout.wrap
-    v-flex.xl12.lg12.md12
-      v-card.xl12.lg12.md12(outlined)
-        v-card-text.pb-0
-          v-layout.column
-            div.mb-2 {{d.current_path || 'Current path'}}: {{currentFullPath}}
-        v-card-text
-          v-layout.filesystem--window
-            v-flex.xl3.lg3.md3
-              v-layout.column.filesystem--tree
-                v-flex.mb-4
-                  treeview-controls(
+<template>
+  <v-layout class="wrap">
+    <v-flex class="xl12 lg12 md12">
+      <v-card
+        class="xl12 lg12 md12"
+        outlined
+      >
+        <v-card-text class="pb-0">
+          {{ d.current_path || 'Current path' }}: {{ currentFullPath }}
+        </v-card-text>
+
+        <v-card-text>
+          <v-layout class="filesystem--window">
+            <v-flex class="xl3 lg3 md3">
+              <v-layout class="column filesystem--tree">
+                <v-flex class="mb-4">
+                  <treeview-controls
                     :currentFileType="currentFile.type"
                     :currentFile="currentFile.relativePath"
                     @openDialogForCreateFolder="openDialogForCreateFolder"
                     @triggerForUploadFile="triggerForUploadFile"
                     @filesystemReload="filesystemReload"
-                  )
-                v-flex.xl3.lg3.md3.filesystem--tree-list
-                  v-treeview(
+                  />
+                </v-flex>
+                <v-flex class="xl3 lg3 md3 filesystem--tree-list">
+                  <v-treeview
                     v-model="tree"
                     :open.sync="open"
                     :items="filesystem"
@@ -29,72 +34,119 @@
                     hoverable
                     transition
                     active-class="primary--text"
-                  )
-                    template(v-slot:prepend="{ item, open }")
-                      div.treeview-node-overlay(
+                  >
+                    <template v-slot:prepend="{ item, open }">
+                      <div
+                        class="treeview-node-overlay"
                         :class="{'active-treeview-node': currentFullPath === item.path}"
                         @click="fetchFolderContent(item)"
                         @contextmenu.prevent="fetchContextMenu($event, item)"
-                      )
-                      v-icon(
+                      />
+                      <v-icon
                         v-if="item.type === 'directory'"
                         :color="open ? 'primary' : ''"
-                      ) {{ open ? 'mdi-folder-open' : 'mdi-folder' }}
-                      v-icon(
-                        v-else :color="open ? 'primary' : ''"
-                      ) {{ files[item.extension] }}
-            v-divider.mx-2(vertical)
-            v-layout.row.wrap(fill-height align-start justify-start)
-              v-flex.py-2.px-2(
-                xl3 lg2 md4 sm2 xs2
+                      >
+                        {{ open ? 'mdi-folder-open' : 'mdi-folder' }}
+                      </v-icon>
+                      <v-icon
+                        v-else
+                        :color="open ? 'primary' : ''"
+                      >
+                        {{ files[item.extension] }}
+                      </v-icon>
+                    </template>
+                  </v-treeview>
+                </v-flex>
+              </v-layout>
+            </v-flex>
+
+            <v-divider
+              class="mx-2"
+              vertical
+            />
+
+            <v-layout
+              class="row wrap pl-2"
+              fill-height
+              align-start
+              justify-start
+            >
+              <v-flex
                 v-for="(file, i) in folderContent"
-                :key="i"
                 v-if="file.type === 'file'"
-              )
-                v-card(
+                :key="i"
+                class="py-1 px-1"
+                lg2
+              >
+                <v-card
+                  outlined
                   @click="fetchFolderContent(file)"
                   @contextmenu.prevent="fetchContextMenu($event, file)"
                   @dblclick="selectFile(file)"
-                )
-                  v-img(
+                >
+                  <v-img
                     :src="`/static/${file.path}`"
                     aspect-ratio="1"
-                  )
-                  v-flex.px-2.file-name(
+                  />
+                  <v-flex
+                    class="px-2 file-name"
                     :class="{'active-card-file': currentFullPath === file.path}"
-                  ) {{file.path}} {{imgFolderBasePath}}
-      v-menu(
-        v-model="isContext"
-        :position-x="x"
-        :position-y="y"
-        absolute
-        offset-y
-      )
-        context-menu-list(
-          :currentFile="currentFile"
-          @triggerForUploadFile="triggerForUploadFile"
-          @openDialogForCreateFolder="openDialogForCreateFolder"
-          @openDialogForRemoveConfirm="openDialogForRemoveConfirm"
-        )
-    v-dialog(v-model="isRemoveConfirmDialog" max-width="500px")
-      remove-confirm(
-        @remove="removeFileOrFolder"
-        :name="currentFullPath"
+                  >
+                    {{ file.path }} {{ imgFolderBasePath }}
+                  </v-flex>
+                </v-card>
+              </v-flex>
+            </v-layout>
+          </v-layout>
+        </v-card-text>
+      </v-card>
+    </v-flex>
+
+    <v-menu
+      v-model="isContext"
+      :position-x="x"
+      :position-y="y"
+      absolute
+      offset-y
+    >
+      <context-menu-list
+        :currentFile="currentFile"
+        @triggerForUploadFile="triggerForUploadFile"
+        @openDialogForCreateFolder="openDialogForCreateFolder"
+        @openDialogForRemoveConfirm="openDialogForRemoveConfirm"
+      />
+    </v-menu>
+
+    <v-dialog
+      v-model="isRemoveConfirmDialog"
+      max-width="500px"
+    >
+      <remove-confirm
         :isActive.sync="isRemoveConfirmDialog"
-      )
-    v-dialog(v-model="isCreateFolderDialog" max-width="500px")
-      create-folder(
+        :name="currentFullPath"
+        @remove="removeFileOrFolder"
+      />
+    </v-dialog>
+
+    <v-dialog
+      v-model="isCreateFolderDialog"
+      max-width="500px"
+    >
+      <create-folder
         :isActive.sync="isCreateFolderDialog"
         @createFolder="createFolder"
-      )
-    input(
+      />
+    </v-dialog>
+
+    <input
+      ref="file"
       class="input-file"
       type="file"
-      ref="file"
       name="filesystemImages"
       multiple
-      v-on:change="upload"
-    )
+      @change="upload"
+    >
+  </v-layout>
 </template>
 
 <script>
