@@ -1,29 +1,25 @@
 <template>
   <v-flex>
-    <v-layout class="wrap">
-      <v-flex class="md12">
-        <v-layout class="align-center">
-          <v-text-field
-            :value="path"
-            :label="label"
-            @input="$emit('update:path', $event)"
-          />
-          <v-icon @click="isActiveDialog = true">
-            image
-          </v-icon>
-        </v-layout>
-      </v-flex>
-
-      <v-flex
-        v-if="path !== ''"
-        class="md12"
-      >
-        <v-img
-          :src="`/static/${path}`"
-          max-width="100%"
-        />
-      </v-flex>
+    <v-layout class="align-center">
+      <v-text-field
+        :value="value"
+        :label="label"
+        @input="$emit('update:path', $event)"
+      />
+      <v-icon @click="isActiveDialog = true">
+        image
+      </v-icon>
     </v-layout>
+
+    <v-flex
+      v-if="value !== ''"
+      class="md12"
+    >
+      <v-img
+        :src="`/static/${value}`"
+        max-width="100%"
+      />
+    </v-flex>
 
     <v-dialog v-model="isActiveDialog">
       <filesystem @selectFile="selectFile" />
@@ -54,9 +50,9 @@ export default {
   },
 
   props: {
-    path: {
+    value: {
       type: String,
-      default: ""
+      default: ''
     },
     label: {
       type: String,

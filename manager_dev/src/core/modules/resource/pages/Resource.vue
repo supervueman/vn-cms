@@ -1,39 +1,65 @@
-<template lang="pug">
-	v-flex(v-if="r.is_resource_read")
-		v-layout
-			.body-2.mt-2.mb-12 {{d.resource || 'Resource'}}: {{resource.title}} ({{resource.id}})
-			v-spacer
-			resource-langs-menu
-		v-tabs(
-			slider-color="primary"
-			grow
-		)
-			v-tab {{d.common_data || 'Common data'}}
-			v-tab-item.mt-3
-				resource-tab
-				v-flex.xs12.md7.pr-2
-					.d-flex.justify-center
-						v-btn.mb-2(
-							text
-							color="error"
-							depressed
-							@click="isRemoveDialog = true"
-						) {{d.remove || 'Remove'}}
-						v-dialog(
-							v-model="isRemoveDialog"
-							max-width="500px"
-						)
-							remove-confirm(
-								@remove="remove"
-								:isActive.sync="isRemoveDialog"
-								:name="resource.title"
-							)
-			v-tab {{d.fields || 'Fields'}}
-			v-tab-item.mt-3
-				fields-tab
-			v-tab {{d.resources || 'Resources'}}
-			v-tab-item
-				resources-tab.mt-3
+<template>
+  <v-flex v-if="r.is_resource_read">
+    <v-layout>
+      <div class="body-2 mt-2 mb-12">
+        {{ d.resource || 'Resource' }}: {{ resource.title }} ({{ resource.id }})
+      </div>
+
+      <v-spacer />
+
+      <ResourceLangsMenu />
+    </v-layout>
+      
+    <v-tabs
+      slider-color="primary"
+      grow
+    >
+      <v-tab>
+        {{ d.common_data || 'Common data' }}
+      </v-tab>
+      <v-tab-item class="mt-3">
+        <ResourceTab />
+
+        <v-flex class="xs12 md7 pr-2">
+          <div class="d-flex justify-center">
+            <v-btn
+              class="mb-2"
+              text
+              color="error"
+              depressed
+              @click="isRemoveDialog = true"
+            >
+              {{ d.remove || 'Remove' }}
+            </v-btn>
+            <v-dialog
+              v-model="isRemoveDialog"
+              max-width="500px"
+            >
+              <RemoveConfirm
+                :isActive.sync="isRemoveDialog"
+                :name="resource.title"
+                @remove="remove"
+              />
+            </v-dialog>
+          </div>
+        </v-flex>
+      </v-tab-item>
+
+      <v-tab>
+        {{ d.fields || 'Fields' }}
+      </v-tab>
+      <v-tab-item class="mt-3">
+        <FieldsTab />
+      </v-tab-item>
+
+      <v-tab>
+        {{ d.resources || 'Resources' }}
+      </v-tab>
+      <v-tab-item>
+        <ResourcesTab class="mt-3" />
+      </v-tab-item>
+    </v-tabs>
+  </v-flex>
 </template>
 
 <script>
