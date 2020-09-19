@@ -6,6 +6,10 @@ module.exports = async (req, res) => {
     sendRes({ res, status: 403 });
   }
 
+  if (typeof req.body.categoryId !== 'number') {
+    delete req.body.categoryId;
+  }
+
   const item = await Model.findByPk(req.body.id).catch((err) => {
     logger('error', 'field', 400, 'update.js', err);
     sendRes({ res, status: 400 });
