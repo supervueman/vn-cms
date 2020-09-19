@@ -1,130 +1,132 @@
 <template lang="pug">
-	v-flex
-		editor-menu-bar(:editor="editor" v-slot="{ commands, isActive }")
-			v-toolbar.menubar(flat height="40px")
-				v-icon.mr-2(
-					big
-					:color="!isActive.bold() ? 'black' : 'primary'"
-					@click="commands.bold"
-				) format_bold
+  v-flex
+    editor-menu-bar(
+      :editor="editor"
+      v-slot="{ commands, isActive }"
+    )
+      v-toolbar.menubar(flat height="40px")
+        v-icon.mr-2(
+          big
+          :color="!isActive.bold() ? 'black' : 'primary'"
+          @click="commands.bold"
+        ) format_bold
 
-				v-icon.mr-2(
-					big
-					:color="!isActive.italic() ? 'black' : 'primary'"
-					@click="commands.italic"
-				) format_italic
+        v-icon.mr-2(
+          big
+          :color="!isActive.italic() ? 'black' : 'primary'"
+          @click="commands.italic"
+        ) format_italic
 
-				v-icon.mr-2(
-					big
-					:color="!isActive.strike() ? 'black' : 'primary'"
-					@click="commands.strike"
-				) format_strikethrough
+        v-icon.mr-2(
+          big
+          :color="!isActive.strike() ? 'black' : 'primary'"
+          @click="commands.strike"
+        ) format_strikethrough
 
-				v-icon.mr-2(
-					big
-					:color="!isActive.underline() ? 'black' : 'primary'"
-					@click="commands.underline"
-				) format_underlined
+        v-icon.mr-2(
+          big
+          :color="!isActive.underline() ? 'black' : 'primary'"
+          @click="commands.underline"
+        ) format_underlined
 
-				v-icon.mr-2(
-					big
-					:color="!isActive.code() ? 'black' : 'primary'"
-					@click="commands.code"
-				) code
+        v-icon.mr-2(
+          big
+          :color="!isActive.code() ? 'black' : 'primary'"
+          @click="commands.code"
+        ) code
 
-				v-icon.mr-2(
-					big
-					:color="!isActive.paragraph() ? 'black' : 'primary'"
-					@click="commands.paragraph"
-				) format_textdirection_l_to_r
+        v-icon.mr-2(
+          big
+          :color="!isActive.paragraph() ? 'black' : 'primary'"
+          @click="commands.paragraph"
+        ) format_textdirection_l_to_r
 
-				button.mr-2(
-					@click="commands.heading({ level: 1 })"
-				) H1
+        button.mr-2(
+          @click="commands.heading({ level: 1 })"
+        ) H1
 
-				button.mr-2(
-					@click="commands.heading({ level: 2 })"
-				) H2
+        button.mr-2(
+          @click="commands.heading({ level: 2 })"
+        ) H2
 
-				button.mr-2(
-					@click="commands.heading({ level: 3 })"
-				) H3
+        button.mr-2(
+          @click="commands.heading({ level: 3 })"
+        ) H3
 
-				v-icon.mr-2(
-					big
-					:color="!isActive.bullet_list() ? 'black' : 'primary'"
-					@click="commands.bullet_list"
-				) format_list_bulleted
+        v-icon.mr-2(
+          big
+          :color="!isActive.bullet_list() ? 'black' : 'primary'"
+          @click="commands.bullet_list"
+        ) format_list_bulleted
 
-				v-icon.mr-2(
-					big
-					:color="!isActive.ordered_list() ? 'black' : 'primary'"
-					@click="commands.ordered_list"
-				) format_list_numbered
+        v-icon.mr-2(
+          big
+          :color="!isActive.ordered_list() ? 'black' : 'primary'"
+          @click="commands.ordered_list"
+        ) format_list_numbered
 
-				v-icon.mr-2(
-					big
-					:color="!isActive.blockquote() ? 'black' : 'primary'"
-					@click="commands.blockquote"
-				) format_quote
+        v-icon.mr-2(
+          big
+          :color="!isActive.blockquote() ? 'black' : 'primary'"
+          @click="commands.blockquote"
+        ) format_quote
 
-				v-icon.mr-2(
-					big
-					:color="!isActive.code_block() ? 'black' : 'primary'"
-					@click="commands.code_block"
-				) code
+        v-icon.mr-2(
+          big
+          :color="!isActive.code_block() ? 'black' : 'primary'"
+          @click="commands.code_block"
+        ) code
 
-				v-icon.mr-2(
-					big
-					:color="!isActive.horizontal_rule() ? 'black' : 'primary'"
-					@click="commands.horizontal_rule"
-				) remove
+        v-icon.mr-2(
+          big
+          :color="!isActive.horizontal_rule() ? 'black' : 'primary'"
+          @click="commands.horizontal_rule"
+        ) remove
 
-				v-icon.mr-2(
-					big
-					@click="commands.undo"
-				) undo
+        v-icon.mr-2(
+          big
+          @click="commands.undo"
+        ) undo
 
-				v-icon.mr-2(
-					big
-					@click="commands.redo"
-				) redo
+        v-icon.mr-2(
+          big
+          @click="commands.redo"
+        ) redo
 
-				v-icon.mr-2(
-					big
-					:color="!isActive.image() ? 'black' : 'primary'"
-					@click="showImage(commands.image, filePath)"
-				) image
+        v-icon.mr-2(
+          big
+          :color="!isActive.image() ? 'black' : 'primary'"
+          @click="showImage(commands.image, filePath)"
+        ) image
 
-				v-icon.mr-2(
-					color="black"
-					:class="{ 'v-btn--active': isActive.paragraph({ textAlign: 'left' }) }" 
-					@click="commands.paragraph({ textAlign: 'left' })"
-				) format_align_left
+        v-icon.mr-2(
+          color="black"
+          :class="{ 'v-btn--active': isActive.paragraph({ textAlign: 'left' }) }" 
+          @click="commands.paragraph({ textAlign: 'left' })"
+        ) format_align_left
 
-				v-icon.mr-2(
-					color="black"
-					:class="{ 'v-btn--active': isActive.paragraph({ textAlign: 'center' }) }"
-					@click="commands.paragraph({ textAlign: 'center' })"
-				) format_align_center
+        v-icon.mr-2(
+          color="black"
+          :class="{ 'v-btn--active': isActive.paragraph({ textAlign: 'center' }) }"
+          @click="commands.paragraph({ textAlign: 'center' })"
+        ) format_align_center
 
-				v-icon.mr-2(
-					color="black"
-					:class="{ 'v-btn--active': isActive.paragraph({ textAlign: 'right' }) }"
-					@click="commands.paragraph({ textAlign: 'right' })"
-				) format_align_right
+        v-icon.mr-2(
+          color="black"
+          :class="{ 'v-btn--active': isActive.paragraph({ textAlign: 'right' }) }"
+          @click="commands.paragraph({ textAlign: 'right' })"
+        ) format_align_right
 
-		editor-content(:editor="editor")
+    editor-content(:editor="editor")
 
-		v-flex
-			div(class="export")
-				div(v-html="html")
-		v-dialog(v-model="isActiveDialog")
-			filesystem(@selectFile="selectFile" ref="getfile")
-			v-card
-				v-card-actions
-					v-btn.ml-2(@click="isActiveDialog = false") {{d.close || 'Close'}}
-
+    v-flex
+      div(class="export")
+        div(v-html="html")
+    v-dialog(v-model="isActiveDialog")
+      filesystem(@selectFile="selectFile" ref="getfile")
+      v-card
+        v-card-actions
+          v-btn.ml-2(@click="isActiveDialog = false") {{d.close || 'Close'}}
 </template>
 
 <script>
@@ -201,8 +203,8 @@ export default {
           new Paragraph()
         ],
         content: this.content,
-        onUpdate: ({ getHTML }) => {
-          this.$emit("update", getHTML);
+        onUpdate: ({ getHTML, setContent }) => {
+          this.$emit("update", getHTML());
         }
       }),
       html: "",
@@ -211,12 +213,6 @@ export default {
       filePath: null,
       command: null
     };
-  },
-
-  watch: {
-    content() {
-      this.editor.setContent(this.content);
-    }
   },
 
   beforeDestroy() {
@@ -239,12 +235,12 @@ export default {
 
 <style lang="sass">
 .ProseMirror
-	border: 1px solid lightgrey
-	min-height: 200px
-	outline: none
-	padding: 16px
+  border: 1px solid lightgrey
+  min-height: 200px
+  outline: none
+  padding: 16px
 .menubar
-	border: 1px solid lightgrey
-	border-bottom: none
+  border: 1px solid lightgrey
+  border-bottom: none
 </style>
 
