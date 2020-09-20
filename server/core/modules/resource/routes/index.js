@@ -97,8 +97,8 @@ router.get('/find/:id', profileByApiKey, controller.findByPk);
  * path:
  *  /resources/findone:
  *    get:
- *      summary: Get one layout
- *      tags: [Layouts]
+ *      summary: Get one resource
+ *      tags: [Resources]
  *      parameters:
  *        - in: header
  *          name: x-api-key
