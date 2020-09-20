@@ -40,7 +40,7 @@
               span {{field.interface.slug}}
             editor(
               :content="field.value"
-              @update="field.value = $event()"
+              @update="field.value = $event"
             )
 
           //- Image field
