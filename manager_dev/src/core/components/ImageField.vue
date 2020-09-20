@@ -70,7 +70,6 @@ export default {
 
   methods: {
     selectFile(file) {
-      this.$emit("selectFile", file.path);
       this.$emit("input", file.path);
     }
   }

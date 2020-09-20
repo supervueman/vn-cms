@@ -43,8 +43,8 @@
                     div.mb-3(v-on="on") {{field.interface.title}}
                   span {{field.interface.slug}}
                 image-field(
-                  :path.sync="field.value"
-                  @selectFile="field.value = $event"
+                  v-model="field.value"
+                  @input="field.value = $event"
                 )
 
               //- Select field
