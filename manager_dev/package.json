@@ -14,7 +14,7 @@
 		"cyrillic-to-translit-js": "^3.0.0",
 		"emmet": "git+https://github.com/cloud9ide/emmet-core.git#41973fcc70392864c7a469cf5dcd875b88b93d4a",
 		"lodash.merge": "^4.6.2",
-		"node-sass": "^4.13.1",
+		"node-sass": "^7.0.0",
 		"pluralize": "^8.0.0",
 		"pug": "^2.0.3",
 		"sass-loader": "^7.1.0",
